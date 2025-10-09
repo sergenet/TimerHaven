@@ -191,10 +191,14 @@
         document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">Please select or enter a city.</span>';
         return;
       }
-      const apiKey = 'b2aef3d9b6b20f3ea046f8f4ddf70db0';
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&appid=${apiKey}`)
+      // Use backend proxy, NOT OpenWeatherMap directly
+      fetch(`/weather?city=${encodeURIComponent(city)}`)
         .then(r => r.json())
         .then(data => {
+          if (data.cod !== 200 && data.error) {
+            document.getElementById('weatherResult').innerHTML = `<span style="color:#b00;">${data.error}</span>`;
+            return;
+          }
           if (data.cod !== 200) {
             document.getElementById('weatherResult').innerHTML = `<span style="color:#b00;">Could not find weather for "${city}".</span>`;
             return;
@@ -245,10 +249,14 @@
       navigator.geolocation.getCurrentPosition(function(pos) {
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
-        const apiKey = 'b2aef3d9b6b20f3ea046f8f4ddf70db0';
-        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
+        // Use backend proxy for lat/lon queries
+        fetch(`/weather?lat=${lat}&lon=${lon}`)
           .then(r => r.json())
           .then(data => {
+            if (data.cod !== 200 && data.error) {
+              document.getElementById('weatherResult').innerHTML = `<span style="color:#b00;">${data.error}</span>`;
+              return;
+            }
             if (data.cod !== 200) {
               document.getElementById('weatherResult').innerHTML = `<span style="color:#b00;">Could not find weather for your location.</span>`;
               return;
