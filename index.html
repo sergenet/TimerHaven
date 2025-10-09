@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 <head>
     <meta charset="UTF-8">
     <title>TimerHaven: World Clock, Timers, Productivity Tools & More</title>
@@ -64,21 +64,26 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
 <script>
+window.initCookieConsent = function() {
+  if (typeof window.cookieconsent !== 'undefined' && typeof t === 'function') {
+    window.cookieconsent.initialise({
+      palette: {
+        popup: { background: "#1558b0" },
+        button: { background: "#ff9800" }
+      },
+      theme: "classic",
+      position: "bottom-right",
+      content: {
+        message: t('cookie.message'),
+        dismiss: t('cookie.dismiss'),
+        link: t('cookie.link'),
+        href: "/privacy-policy"
+      }
+    });
+  }
+};
 window.addEventListener("load", function(){
-  window.cookieconsent.initialise({
-    palette: {
-      popup: { background: "#1558b0" },
-      button: { background: "#ff9800" }
-    },
-    theme: "classic",
-    position: "bottom-right",
-    content: {
-      message: "This website uses cookies to ensure you get the best experience.",
-      dismiss: "Got it!",
-      link: "Learn more",
-      href: "/privacy-policy"
-    }
-  });
+  setTimeout(initCookieConsent, 500); // Delay to ensure translations are loaded
 });
 </script>
 </head>
@@ -95,8 +100,17 @@ window.addEventListener("load", function(){
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#tools">Tools</a></li>
-            <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tools" data-i18n="nav.tools">Tools</a></li>
+            <li class="nav-item"><a class="nav-link" href="#resources" data-i18n="nav.resources">Resources</a></li>
+            <li class="nav-item">
+              <select id="language-selector" class="form-select form-select-sm" style="width: auto; margin-left: 10px;" onchange="switchLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="pt">Português</option>
+              </select>
+            </li>
           </ul>
         </div>
       </div>
@@ -104,10 +118,10 @@ window.addEventListener("load", function(){
     <!-- HERO SECTION -->
     <section class="hero-section">
         <div class="container">
-            <h1>Master Your Time with TimerHaven</h1>
+            <h1 data-i18n="hero.title">Master Your Time with TimerHaven</h1>
             <p>
-                Free online world clocks, timers, alarms, weather, and currency tools.<br>
-                The simple, powerful hub for time management!
+                <span data-i18n="hero.subtitle">Free online world clocks, timers, alarms, weather, and currency tools.</span><br>
+                <span data-i18n="hero.subtitle2">The simple, powerful hub for time management!</span>
             </p>
             <div id="hero-clock" class="hero-clock"></div>
             <div class="social-share">
@@ -124,8 +138,8 @@ window.addEventListener("load", function(){
             <!-- World Clock -->
             <div class="col">
                 <div class="tool-card">
-                    <h3 class="card-title"><i class="fa fa-globe"></i> World Clock</h3>
-                    <p>Select any city and see its current time in real-time.</p>
+                    <h3 class="card-title"><i class="fa fa-globe"></i> <span data-i18n="worldclock.title">World Clock</span></h3>
+                    <p data-i18n="worldclock.description">Select any city and see its current time in real-time.</p>
                     <select id="city-select" class="form-select mb-2"></select>
                     <div id="world-clock-time" class="fs-4 fw-bold mt-2 mb-1"></div>
                 </div>
@@ -133,14 +147,14 @@ window.addEventListener("load", function(){
             <!-- Countdown Timer -->
             <div class="col">
                 <div class="tool-card">
-                    <h3 class="card-title"><i class="fa fa-hourglass-start"></i> Countdown Timer</h3>
-                    <p>Set a custom countdown and stay on track!</p>
-                    <input type="number" id="cd-mins" class="form-control mb-2" placeholder="Minutes" min="0" max="999">
-                    <input type="number" id="cd-secs" class="form-control mb-2" placeholder="Seconds" min="0" max="59">
+                    <h3 class="card-title"><i class="fa fa-hourglass-start"></i> <span data-i18n="countdown.title">Countdown Timer</span></h3>
+                    <p data-i18n="countdown.description">Set a custom countdown and stay on track!</p>
+                    <input type="number" id="cd-mins" class="form-control mb-2" data-i18n="countdown.minutes" data-i18n-attr="placeholder" placeholder="Minutes" min="0" max="999">
+                    <input type="number" id="cd-secs" class="form-control mb-2" data-i18n="countdown.seconds" data-i18n-attr="placeholder" placeholder="Seconds" min="0" max="59">
                     <div class="btn-group w-100 mb-2">
-                        <button id="btn-countdown-start" class="btn btn-primary btn-timer" onclick="startCountdown()">Start</button>
-                        <button id="btn-countdown-pause" class="btn btn-secondary btn-timer" onclick="pauseCountdown()">Pause</button>
-                        <button id="btn-countdown-reset" class="btn btn-danger btn-timer" onclick="resetCountdown()">Reset</button>
+                        <button id="btn-countdown-start" class="btn btn-primary btn-timer" onclick="startCountdown()" data-i18n="countdown.start">Start</button>
+                        <button id="btn-countdown-pause" class="btn btn-secondary btn-timer" onclick="pauseCountdown()" data-i18n="countdown.pause">Pause</button>
+                        <button id="btn-countdown-reset" class="btn btn-danger btn-timer" onclick="resetCountdown()" data-i18n="countdown.reset">Reset</button>
                     </div>
                     <div id="countdown-display" class="fs-5 fw-bold"></div>
                 </div>
@@ -148,11 +162,11 @@ window.addEventListener("load", function(){
             <!-- Alarm -->
             <div class="col">
                 <div class="tool-card">
-                    <h3 class="card-title"><i class="fa fa-bell"></i> Alarm</h3>
-                    <p>Set an alarm for any time, with sound, title, and repeat.</p>
+                    <h3 class="card-title"><i class="fa fa-bell"></i> <span data-i18n="alarm.title">Alarm</span></h3>
+                    <p data-i18n="alarm.description">Set an alarm for any time, with sound, title, and repeat.</p>
                     <div class="d-flex justify-content-center mb-2">
-                        <button class="btn btn-sm btn-primary me-2" onclick="openAlarmModal()">Set Alarm</button>
-                        <button class="btn btn-sm btn-danger" onclick="resetAlarm()" id="cancel-alarm-btn" style="display:none;">Cancel Alarm</button>
+                        <button class="btn btn-sm btn-primary me-2" onclick="openAlarmModal()" data-i18n="alarm.setAlarm">Set Alarm</button>
+                        <button class="btn btn-sm btn-danger" onclick="resetAlarm()" id="cancel-alarm-btn" style="display:none;" data-i18n="alarm.cancelAlarm">Cancel Alarm</button>
                     </div>
                     <div id="alarm-message" class="fw-medium text-center"></div>
                 </div>
@@ -160,28 +174,28 @@ window.addEventListener("load", function(){
             <!-- Stopwatch -->
             <div class="col">
                 <div class="tool-card">
-                    <h3 class="card-title"><i class="fa fa-stopwatch"></i> Stopwatch</h3>
-                    <p>Track elapsed time. Use for exercise, cooking, and more!</p>
+                    <h3 class="card-title"><i class="fa fa-stopwatch"></i> <span data-i18n="stopwatch.title">Stopwatch</span></h3>
+                    <p data-i18n="stopwatch.description">Track elapsed time. Use for exercise, cooking, and more!</p>
                     <div id="stopwatch-display" class="fs-4 fw-bold mb-2">00:00:00</div>
                     <div class="btn-group w-100 mb-2">
-                        <button class="btn btn-warning" onclick="startStopwatch()">Start</button>
-                        <button class="btn btn-secondary" onclick="stopStopwatch()">Stop</button>
-                        <button class="btn btn-danger" onclick="resetStopwatch()">Reset</button>
+                        <button class="btn btn-warning" onclick="startStopwatch()" data-i18n="stopwatch.start">Start</button>
+                        <button class="btn btn-secondary" onclick="stopStopwatch()" data-i18n="stopwatch.stop">Stop</button>
+                        <button class="btn btn-danger" onclick="resetStopwatch()" data-i18n="stopwatch.reset">Reset</button>
                     </div>
                     <ul id="lap-list" class="list-unstyled small"></ul>
-                    <button class="btn btn-outline-primary w-100" onclick="lapStopwatch()">Lap</button>
+                    <button class="btn btn-outline-primary w-100" onclick="lapStopwatch()" data-i18n="stopwatch.lap">Lap</button>
                 </div>
             </div>
             <!-- Pomodoro Timer -->
             <div class="col">
                 <div class="tool-card">
-                    <h3 class="card-title"><i class="fa fa-clock"></i> Pomodoro Timer</h3>
-                    <p>Work in focused bursts with breaks. Boost productivity!</p>
+                    <h3 class="card-title"><i class="fa fa-clock"></i> <span data-i18n="pomodoro.title">Pomodoro Timer</span></h3>
+                    <p data-i18n="pomodoro.description">Work in focused bursts with breaks. Boost productivity!</p>
                     <div id="pomodoro-display" class="fs-4 fw-bold mb-2">25:00</div>
                     <div class="btn-group w-100 mb-2">
-                        <button class="btn btn-success" onclick="startPomodoro()">Start</button>
-                        <button class="btn btn-secondary" onclick="pausePomodoro()">Pause</button>
-                        <button class="btn btn-danger" onclick="resetPomodoro()">Reset</button>
+                        <button class="btn btn-success" onclick="startPomodoro()" data-i18n="pomodoro.start">Start</button>
+                        <button class="btn btn-secondary" onclick="pausePomodoro()" data-i18n="pomodoro.pause">Pause</button>
+                        <button class="btn btn-danger" onclick="resetPomodoro()" data-i18n="pomodoro.reset">Reset</button>
                     </div>
                     <div id="pomodoro-status" class="small mt-1"></div>
                 </div>
@@ -189,24 +203,24 @@ window.addEventListener("load", function(){
             <!-- Weather -->
             <div class="col">
                 <div class="tool-card">
-                    <h3 class="card-title"><i class="fa fa-cloud-sun"></i> Weather</h3>
-                    <p>Check current weather anywhere in the world.</p>
-                    <input type="text" id="weather-city" class="form-control mb-2" placeholder="Enter city (e.g. London)">
-                    <button class="btn btn-info w-100 mb-2" onclick="fetchWeather()">Get Weather</button>
+                    <h3 class="card-title"><i class="fa fa-cloud-sun"></i> <span data-i18n="weather.title">Weather</span></h3>
+                    <p data-i18n="weather.description">Check current weather anywhere in the world.</p>
+                    <input type="text" id="weather-city" class="form-control mb-2" data-i18n="weather.placeholder" data-i18n-attr="placeholder" placeholder="Enter city (e.g. London)">
+                    <button class="btn btn-info w-100 mb-2" onclick="fetchWeather()" data-i18n="weather.getWeather">Get Weather</button>
                     <div id="weather-result" class="weather-dark small"></div>
                 </div>
             </div>
             <!-- Currency Converter -->
             <div class="col">
                 <div class="tool-card">
-                    <h3 class="card-title"><i class="fa fa-coins"></i> Currency Converter</h3>
-                    <p>Convert between currencies with live rates.</p>
-                    <input type="number" id="currency-amount" class="form-control mb-2" placeholder="Amount" min="0">
+                    <h3 class="card-title"><i class="fa fa-coins"></i> <span data-i18n="currency.title">Currency Converter</span></h3>
+                    <p data-i18n="currency.description">Convert between currencies with live rates.</p>
+                    <input type="number" id="currency-amount" class="form-control mb-2" data-i18n="currency.amount" data-i18n-attr="placeholder" placeholder="Amount" min="0">
                     <select id="currency-from" class="form-select mb-2 currency-select"></select>
                     <select id="currency-to" class="form-select mb-2 currency-select"></select>
-                    <button class="btn btn-primary w-100 mb-2" onclick="convertCurrency()">Convert</button>
+                    <button class="btn btn-primary w-100 mb-2" onclick="convertCurrency()" data-i18n="currency.convert">Convert</button>
                     <div id="currency-result" class="fw-bold"></div>
-                    <button id="retry-currencies" class="btn btn-sm btn-warning w-100 currency-retry" style="display:none;" onclick="loadCurrencies(true)">Retry Loading Currencies</button>
+                    <button id="retry-currencies" class="btn btn-sm btn-warning w-100 currency-retry" style="display:none;" onclick="loadCurrencies(true)" data-i18n="currency.retry">Retry Loading Currencies</button>
                 </div>
             </div>
         </div>
@@ -217,20 +231,20 @@ window.addEventListener("load", function(){
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content p-3">
           <div class="modal-header">
-            <h5 class="modal-title" id="alarmModalLabel"><i class="fa fa-bell"></i> Set Alarm</h5>
+            <h5 class="modal-title" id="alarmModalLabel"><i class="fa fa-bell"></i> <span data-i18n="alarm.modalTitle">Set Alarm</span></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="d-flex flex-column align-items-center justify-content-center">
               <!-- Date Picker Row (NEW) -->
               <div class="mb-3 w-100 d-flex flex-column align-items-center">
-                <label class="alarm-modal-label mb-1 text-center w-100">Date</label>
+                <label class="alarm-modal-label mb-1 text-center w-100" data-i18n="alarm.date">Date</label>
                 <input type="date" id="modal-alarm-date" class="form-control" style="max-width: 200px;">
               </div>
               <!-- Centered Time Row -->
               <div class="alarm-modal-time-row mb-3" style="width:100%; justify-content:center;">
                 <div class="alarm-modal-time-group mx-2">
-                    <label class="alarm-modal-label mb-1 text-center w-100">Hours</label>
+                    <label class="alarm-modal-label mb-1 text-center w-100" data-i18n="alarm.hours">Hours</label>
                     <div class="d-flex align-items-center">
                         <button class="alarm-modal-arrow-btn" onclick="alarmHourDown()">&#8592;</button>
                         <select id="modal-alarm-hour" class="form-select mx-1" style="width:75px;"></select>
@@ -239,7 +253,7 @@ window.addEventListener("load", function(){
                     </div>
                 </div>
                 <div class="alarm-modal-time-group mx-2">
-                    <label class="alarm-modal-label mb-1 text-center w-100">Minutes</label>
+                    <label class="alarm-modal-label mb-1 text-center w-100" data-i18n="alarm.minutes">Minutes</label>
                     <div class="d-flex align-items-center">
                         <button class="alarm-modal-arrow-btn" onclick="alarmMinuteDown()">&#8592;</button>
                         <select id="modal-alarm-minute" class="form-select mx-1" style="width:75px;"></select>
@@ -249,7 +263,7 @@ window.addEventListener("load", function(){
               </div>
               <!-- Sound and Repeat -->
               <div class="alarm-modal-sound-group mb-2 w-100 justify-content-center">
-                  <label class="alarm-modal-label me-2">Sound</label>
+                  <label class="alarm-modal-label me-2" data-i18n="alarm.sound">Sound</label>
                   <select id="modal-alarm-sound" class="form-select" style="width:auto;">
                       <option value="beep">Beep</option>
                       <option value="bells">Bells</option>
@@ -258,19 +272,19 @@ window.addEventListener("load", function(){
                   <button class="btn btn-outline-secondary btn-sm ms-2" type="button" onclick="testAlarmSound()"><i class="fa fa-play"></i> Test sound</button>
                   <div class="form-check ms-3">
                     <input class="form-check-input" type="checkbox" value="" id="modal-alarm-repeat" checked>
-                    <label class="form-check-label" for="modal-alarm-repeat">Repeat Alarm</label>
+                    <label class="form-check-label" for="modal-alarm-repeat" data-i18n="alarm.repeat">Repeat Alarm</label>
                   </div>
               </div>
               <!-- Alarm Title -->
               <div class="mb-2 w-100">
-                  <label class="alarm-modal-label mb-1">Alarm Title</label>
-                  <input type="text" class="form-control alarm-modal-title-input" id="modal-alarm-title" maxlength="32" placeholder="Alarm">
+                  <label class="alarm-modal-label mb-1" data-i18n="alarm.title.label">Alarm Title</label>
+                  <input type="text" class="form-control alarm-modal-title-input" id="modal-alarm-title" maxlength="32" data-i18n="alarm.title.placeholder" data-i18n-attr="placeholder" placeholder="Alarm">
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" data-bs-dismiss="modal" onclick="cancelAlarmModal()">Cancel</button>
-            <button class="btn btn-success" onclick="saveAlarmModal()">Start</button>
+            <button class="btn btn-secondary" data-bs-dismiss="modal" onclick="cancelAlarmModal()" data-i18n="alarm.cancelAlarm">Cancel</button>
+            <button class="btn btn-success" onclick="saveAlarmModal()" data-i18n="alarm.save">Start</button>
           </div>
         </div>
       </div>
@@ -305,33 +319,38 @@ window.addEventListener("load", function(){
     </section>
     <footer>
         <div class="footer-links">
-            <a href="#tools">Tools</a> |
-            <a href="#resources">Resources</a> |
+            <a href="#tools" data-i18n="nav.tools">Tools</a> |
+            <a href="#resources" data-i18n="nav.resources">Resources</a> |
             <a href="mailto:contact@timerhaven.com">Contact</a>
         </div>
         <div>
-            &copy; 2025 TimerHaven. All Rights Reserved.
+            &copy; 2025 TimerHaven. <span data-i18n="footer.rights">All Rights Reserved.</span>
         </div>
         <div class="small">
-            Built by <a href="https://github.com/sergenet" target="_blank">sergenet</a> | 
-            <a href="https://www.amazon.com/?tag=sergenet20-20" target="_blank" rel="nofollow sponsored">Amazon Partner</a>
+            <span data-i18n="footer.builtBy">Built by</span> <a href="https://github.com/sergenet" target="_blank">sergenet</a> | 
+            <a href="https://www.amazon.com/?tag=sergenet20-20" target="_blank" rel="nofollow sponsored" data-i18n="footer.amazonPartner">Amazon Partner</a>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+    <script src="translations.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Initialize i18n
+        initI18n();
+        
         // HERO LIVE CLOCK
         function updateHeroClock() {
             const now = new Date();
-            const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-            const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            const days = getTranslatedDays();
+            const months = getTranslatedMonths();
             const d = days[now.getDay()];
             const month = months[now.getMonth()];
             const dateStr = `${d}, ${month} ${now.getDate()}, ${now.getFullYear()} • ` +
                 now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
             document.getElementById('hero-clock').textContent = dateStr;
         }
+        window.updateHeroClock = updateHeroClock; // Make it global for i18n
         setInterval(updateHeroClock, 1000); updateHeroClock();
 
         // WORLD CLOCK (12-hour format with AM/PM)
@@ -757,10 +776,10 @@ window.addEventListener("load", function(){
         window.fetchWeather = async function() {
             const city = document.getElementById('weather-city').value.trim();
             if (!city) {
-                document.getElementById('weather-result').textContent = "Enter a city name!";
+                document.getElementById('weather-result').textContent = t('weather.enterCity');
                 return;
             }
-            document.getElementById('weather-result').textContent = "Loading...";
+            document.getElementById('weather-result').textContent = t('weather.loading');
             try {
                 const url = `https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${encodeURIComponent(city)}`;
                 const res = await fetch(url);
@@ -768,10 +787,10 @@ window.addEventListener("load", function(){
                 const data = await res.json();
                 document.getElementById('weather-result').innerHTML =
                     `<b>${data.location.name}, ${data.location.country}</b>: ${data.current.condition.text}<br>
-                     <b>Temp:</b> ${data.current.temp_c}°C (${data.current.temp_f}°F) | <b>Humidity:</b> ${data.current.humidity}%<br>
+                     <b>${t('weather.temp')}:</b> ${data.current.temp_c}°C (${data.current.temp_f}°F) | <b>${t('weather.humidity')}:</b> ${data.current.humidity}%<br>
                      <img src="https:${data.current.condition.icon}" alt="icon" style="height:38px;vertical-align:middle;">`;
             } catch (e) {
-                document.getElementById('weather-result').textContent = "Could not fetch weather.";
+                document.getElementById('weather-result').textContent = t('weather.error');
             }
         };
 
@@ -781,7 +800,7 @@ window.addEventListener("load", function(){
             const fromSel = document.getElementById('currency-from');
             const toSel = document.getElementById('currency-to');
             const retryBtn = document.getElementById('retry-currencies');
-            fromSel.innerHTML = toSel.innerHTML = '<option>Loading...</option>';
+            fromSel.innerHTML = toSel.innerHTML = `<option>${t('currency.loading')}</option>`;
             retryBtn.style.display = "none";
             try {
                 const res = await fetch('currency-proxy.php');
@@ -826,7 +845,7 @@ window.addEventListener("load", function(){
                 return;
             }
             document.getElementById('currency-result').classList.remove('currency-error');
-            document.getElementById('currency-result').textContent = "Loading...";
+            document.getElementById('currency-result').textContent = t('currency.loading');
             try {
                 const url = `currency-proxy.php?convert=1&from=${from}&to=${to}&amount=${amount}`;
                 const res = await fetch(url);
@@ -835,11 +854,11 @@ window.addEventListener("load", function(){
                     document.getElementById('currency-result').textContent =
                         `${amount} ${from} ≈ ${data.result.toFixed(2)} ${to}`;
                 } else {
-                    document.getElementById('currency-result').textContent = "Conversion failed.";
+                    document.getElementById('currency-result').textContent = t('currency.error');
                     document.getElementById('currency-result').classList.add('currency-error');
                 }
             } catch (e) {
-                document.getElementById('currency-result').textContent = "Conversion failed.";
+                document.getElementById('currency-result').textContent = t('currency.error');
                 document.getElementById('currency-result').classList.add('currency-error');
             }
         };
