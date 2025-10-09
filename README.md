@@ -27,12 +27,16 @@
 ## Multilingual Support
 
 TimerHaven is available in multiple languages:
-- 🇬🇧 English
-- 🇪🇸 Spanish (Español)
-- 🇫🇷 French (Français)
-- 🇩🇪 German (Deutsch)
-- 🇧🇷 Portuguese (Português)
+TimerHaven is available in multiple languages:
 
+- 🇺🇸 English (US)
+- 🇫🇷 French (Français)
+- 🇪🇸 Spanish (Español)
+- 🇩🇪 German (Deutsch)
+- 🇷🇺 Russian (Русский)
+- 🇬🇷 Greek (Ελληνικά)
+- 🇸🇦 Arabic (العربية)
+  
 The language selector is located in the top navigation bar. Your language preference is automatically saved in your browser's local storage.
 
 ## Deployment
