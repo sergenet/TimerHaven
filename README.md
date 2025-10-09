@@ -11,6 +11,7 @@
 - 🍅 Pomodoro Timer — Focus and break cycles for productivity
 - ☀️ Weather — Get current weather for any city
 - 💱 Currency Converter — Convert between currencies at live rates
+- 🌐 Multilingual Support — Available in English, Spanish, French, German, and Portuguese
 
 ## Getting Started
 
@@ -22,6 +23,17 @@
     ```
 
 2. Open `index.html` in your web browser.
+
+## Multilingual Support
+
+TimerHaven is available in multiple languages:
+- 🇬🇧 English
+- 🇪🇸 Spanish (Español)
+- 🇫🇷 French (Français)
+- 🇩🇪 German (Deutsch)
+- 🇧🇷 Portuguese (Português)
+
+The language selector is located in the top navigation bar. Your language preference is automatically saved in your browser's local storage.
 
 ## Deployment
 
