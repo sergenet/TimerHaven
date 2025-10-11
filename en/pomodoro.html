@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
   <title>Pomodoro Timer — TimerHaven</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Boost focus with the Pomodoro technique. Learn how to use Pomodoro Timer, get productivity tips, FAQs, and read expert articles.">
@@ -34,52 +35,77 @@
     details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
     .howto-mobile { margin-bottom: 1em; }
     .tips-mobile { margin-top: 1.5em; margin-bottom: 0.5em; }
+    .language-select { text-align: right; padding: 10px 18px 0 0; margin-bottom: 0.5em; }
   </style>
 </head>
 <body>
+  <div class="language-select">
+    <label for="lang-select"><strong id="language-label">Language:</strong></label>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+      <option value="ru">Русский</option>
+      <option value="el">Ελληνικά</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+  <div class="language-select">
+    <label for="lang-select"><strong id="language-label">Language:</strong></label>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+      <option value="ru">Русский</option>
+      <option value="el">Ελληνικά</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
   <div class="main-container">
     <div class="center-row">
       <!-- Article 1 (desktop only) -->
       <div class="article-card">
         <div>
-          <h2 style="color:#185a9d;"><i class="fa fa-apple-whole"></i> How to Use Pomodoro Timer</h2>
-          <ol>
+          <h2 id="howto-title" style="color:#185a9d;"><i class="fa fa-apple-whole"></i> How to Use Pomodoro Timer</h2>
+          <ol id="howto-steps">
             <li><b>Set timer:</b> Choose your Pomodoro duration and break length.</li>
             <li><b>Start session:</b> Click "Start" to begin focused work.</li>
             <li><b>Take breaks:</b> Use short breaks between Pomodoros for best results.</li>
           </ol>
         </div>
-        <a href="pomodoro-how-to.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;">Read Full Article</a>
+        <a href="pomodoro-how-to.html" class="btn btn-outline-primary btn-sm" id="howto-article-btn" id="howto-article-btn" style="margin-bottom:0;">Read Full Article</a>
       </div>
       <!-- Tool card -->
       <div class="tool-card">
         <details class="howto-mobile" id="howto-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;"><i class="fa fa-apple-whole"></i> How to Use</h4></summary>
-          <ol>
+          <summary><h4 id="howto-mobile-title" style="color:#185a9d;display:inline;"><i class="fa fa-apple-whole"></i> How to Use</h4></summary>
+          <ol id="howto-mobile-steps">
             <li><b>Set timer:</b> Choose your Pomodoro duration and break length.</li>
             <li><b>Start session:</b> Click "Start" to begin focused work.</li>
             <li><b>Take breaks:</b> Use short breaks between Pomodoros for best results.</li>
           </ol>
         </details>
-        <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Back to Main Menu</a>
-        <h3><i class="fa fa-apple-whole"></i> Pomodoro Timer</h3>
+        <a href="index.html" class="back-link" id="back-link"><i class="fa fa-arrow-left"></i> Back to Main Menu</a>
+        <h3 id="tool-title"><i class="fa fa-apple-whole"></i> Pomodoro Timer</h3>
         <div class="pomodoro-section">
           <div class="pomodoro-controls mb-2">
-            <label>Work (min): <input type="number" id="workLength" min="1" max="60" value="25" class="form-control" style="width:70px;display:inline-block;"></label>
-            <label>Break (min): <input type="number" id="breakLength" min="1" max="30" value="5" class="form-control" style="width:70px;display:inline-block;"></label>
+            <label id="work-label">Work (min): <input type="number" id="workLength" min="1" max="60" value="25" class="form-control" style="width:70px;display:inline-block;"></label>
+            <label id="break-label">Break (min): <input type="number" id="breakLength" min="1" max="30" value="5" class="form-control" style="width:70px;display:inline-block;"></label>
           </div>
           <div class="pomodoro-status" id="pomodoroStatus">Ready</div>
           <div class="pomodoro-display" id="pomodoroDisplay">25:00</div>
           <div class="pomodoro-btns">
-            <button id="startBtn" class="btn btn-success btn-sm"><i class="fa fa-play"></i> Start</button>
-            <button id="pauseBtn" class="btn btn-secondary btn-sm"><i class="fa fa-pause"></i> Pause</button>
-            <button id="resetBtn" class="btn btn-danger btn-sm"><i class="fa fa-refresh"></i> Reset</button>
+            <button id="startBtn" class="btn btn-success btn-sm"><i class="fa fa-play"></i> <span id="start-text">Start</span></button>
+            <button id="pauseBtn" class="btn btn-secondary btn-sm"><i class="fa fa-pause"></i> <span id="pause-text">Pause</span></button>
+            <button id="resetBtn" class="btn btn-danger btn-sm"><i class="fa fa-refresh"></i> <span id="reset-text">Reset</span></button>
           </div>
           <div id="pomodoroCycle" style="margin-top:1em;font-size:1em;color:#185a9d;"></div>
         </div>
         <details class="faq-section">
-          <summary>FAQs</summary>
-          <ul style="padding-left: 1em;">
+          <summary id="faq-title">FAQs</summary>
+          <ul id="faq-list" style="padding-left: 1em;">
             <li><b>What is Pomodoro?</b> A productivity technique using timed focus/break cycles.</li>
             <li><b>Can I adjust the timer?</b> Yes, set durations to fit your workflow.</li>
             <li><b>Does this save sessions?</b> No, sessions reset after page reload.</li>
@@ -87,8 +113,8 @@
         </details>
         
         <details class="tips-mobile" id="tips-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tips</h4></summary>
-          <ul>
+          <summary><h4 id="tips-mobile-title" style="color:#185a9d;display:inline;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tips</h4></summary>
+          <ul id="faq-list" id="tips-mobile-list">
             <li><b>Don’t skip breaks:</b> Regular rests keep you energized.</li>
             <li><b>Track sessions:</b> See how many Pomodoros you complete daily.</li>
             <li><b>Customize lengths:</b> Adjust timer for tasks that suit you.</li>
@@ -97,18 +123,325 @@
       </div>
       <div class="article-card">
         <div>
-          <h2 style="color:#185a9d;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Pomodoro Productivity Tips</h2>
-          <ul>
+          <h2 id="tips-title" style="color:#185a9d;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Pomodoro Productivity Tips</h2>
+          <ul id="tips-list">
             <li><b>Don’t skip breaks:</b> Regular rests keep you energized.</li>
             <li><b>Track sessions:</b> See how many Pomodoros you complete daily.</li>
             <li><b>Customize lengths:</b> Adjust timer for tasks that suit you.</li>
           </ul>
         </div>
-        <a href="pomodoro-tips.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;">Read Full Article</a>
+        <a href="pomodoro-tips.html" class="btn btn-outline-primary btn-sm" id="tips-article-btn" style="margin-bottom:0;">Read Full Article</a>
       </div>
     </div>
   </div>
   <script>
+    // Translation dictionary for all 7 languages
+    const translations = {
+      en: {
+        "language-label": "Language:",
+        "back-link": "Back to Main Menu",
+        "tool-title": "Pomodoro Timer",
+        "work-label": "Work (min):",
+        "break-label": "Break (min):",
+        "start-text": "Start",
+        "pause-text": "Pause",
+        "reset-text": "Reset",
+        "status-work": "Work",
+        "status-break": "Break",
+        "status-ready": "Ready",
+        "completed-cycles": "Completed cycles:",
+        "faq-title": "FAQs",
+        "faq-list": `<li><b>What is Pomodoro?</b> A productivity technique using timed focus/break cycles.</li>
+            <li><b>Can I adjust the timer?</b> Yes, set durations to fit your workflow.</li>
+            <li><b>Does this save sessions?</b> No, sessions reset after page reload.</li>`,
+        "howto-title": "<i class=\"fa fa-apple-whole\"></i> How to Use Pomodoro Timer",
+        "howto-steps": `<li><b>Set timer:</b> Choose your Pomodoro duration and break length.</li>
+            <li><b>Start session:</b> Click "Start" to begin focused work.</li>
+            <li><b>Take breaks:</b> Use short breaks between Pomodoros for best results.</li>`,
+        "howto-article-btn": "Read Full Article",
+        "howto-article-link": "pomodoro-how-to.html",
+        "howto-mobile-title": "<i class=\"fa fa-apple-whole\"></i> How to Use",
+        "tips-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Pomodoro Productivity Tips",
+        "tips-list": `<li><b>Don't skip breaks:</b> Regular rests keep you energized.</li>
+            <li><b>Track sessions:</b> See how many Pomodoros you complete daily.</li>
+            <li><b>Customize lengths:</b> Adjust timer for tasks that suit you.</li>`,
+        "tips-article-btn": "Read Full Article",
+        "tips-article-link": "pomodoro-tips.html",
+        "tips-mobile-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Tips",
+      },
+      fr: {
+        "language-label": "Langue :",
+        "back-link": "Retour au menu principal",
+        "tool-title": "Minuteur Pomodoro",
+        "work-label": "Travail (min) :",
+        "break-label": "Pause (min) :",
+        "start-text": "Démarrer",
+        "pause-text": "Pause",
+        "reset-text": "Réinitialiser",
+        "status-work": "Travail",
+        "status-break": "Pause",
+        "status-ready": "Prêt",
+        "completed-cycles": "Cycles terminés :",
+        "faq-title": "FAQ",
+        "faq-list": `<li><b>Qu'est-ce que Pomodoro ?</b> Une technique de productivité utilisant des cycles de concentration/pause chronométrés.</li>
+            <li><b>Puis-je ajuster la minuterie ?</b> Oui, définissez des durées adaptées à votre flux de travail.</li>
+            <li><b>Est-ce que cela enregistre les sessions ?</b> Non, les sessions sont réinitialisées après le rechargement de la page.</li>`,
+        "howto-title": "<i class=\"fa fa-apple-whole\"></i> Comment utiliser le minuteur Pomodoro",
+        "howto-steps": `<li><b>Réglez le minuteur :</b> Choisissez la durée de votre Pomodoro et la longueur de la pause.</li>
+            <li><b>Démarrez la session :</b> Cliquez sur "Démarrer" pour commencer un travail concentré.</li>
+            <li><b>Prenez des pauses :</b> Utilisez de courtes pauses entre les Pomodoros pour de meilleurs résultats.</li>`,
+        "howto-article-btn": "Lire l'article complet",
+        "howto-article-link": "pomodoro-how-to.html",
+        "howto-mobile-title": "<i class=\"fa fa-apple-whole\"></i> Comment utiliser",
+        "tips-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Conseils de productivité Pomodoro",
+        "tips-list": `<li><b>Ne sautez pas les pauses :</b> Les repos réguliers vous maintiennent énergisé.</li>
+            <li><b>Suivez les sessions :</b> Voyez combien de Pomodoros vous terminez quotidiennement.</li>
+            <li><b>Personnalisez les durées :</b> Ajustez le minuteur pour les tâches qui vous conviennent.</li>`,
+        "tips-article-btn": "Lire l'article complet",
+        "tips-article-link": "pomodoro-tips.html",
+        "tips-mobile-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Conseils",
+      },
+      es: {
+        "language-label": "Idioma:",
+        "back-link": "Volver al menú principal",
+        "tool-title": "Temporizador Pomodoro",
+        "work-label": "Trabajo (min):",
+        "break-label": "Descanso (min):",
+        "start-text": "Iniciar",
+        "pause-text": "Pausa",
+        "reset-text": "Reiniciar",
+        "status-work": "Trabajo",
+        "status-break": "Descanso",
+        "status-ready": "Listo",
+        "completed-cycles": "Ciclos completados:",
+        "faq-title": "Preguntas frecuentes",
+        "faq-list": `<li><b>¿Qué es Pomodoro?</b> Una técnica de productividad que utiliza ciclos de enfoque/descanso cronometrados.</li>
+            <li><b>¿Puedo ajustar el temporizador?</b> Sí, establece duraciones que se adapten a tu flujo de trabajo.</li>
+            <li><b>¿Esto guarda las sesiones?</b> No, las sesiones se reinician después de recargar la página.</li>`,
+        "howto-title": "<i class=\"fa fa-apple-whole\"></i> Cómo usar el temporizador Pomodoro",
+        "howto-steps": `<li><b>Configura el temporizador:</b> Elige la duración de tu Pomodoro y la longitud del descanso.</li>
+            <li><b>Inicia la sesión:</b> Haz clic en "Iniciar" para comenzar un trabajo enfocado.</li>
+            <li><b>Toma descansos:</b> Usa descansos cortos entre Pomodoros para obtener mejores resultados.</li>`,
+        "howto-article-btn": "Leer artículo completo",
+        "howto-article-link": "pomodoro-how-to.html",
+        "howto-mobile-title": "<i class=\"fa fa-apple-whole\"></i> Cómo usar",
+        "tips-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Consejos de productividad Pomodoro",
+        "tips-list": `<li><b>No te saltes los descansos:</b> Los descansos regulares te mantienen energizado.</li>
+            <li><b>Rastrea las sesiones:</b> Ve cuántos Pomodoros completas diariamente.</li>
+            <li><b>Personaliza las duraciones:</b> Ajusta el temporizador para las tareas que te convengan.</li>`,
+        "tips-article-btn": "Leer artículo completo",
+        "tips-article-link": "pomodoro-tips.html",
+        "tips-mobile-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Consejos",
+      },
+      de: {
+        "language-label": "Sprache:",
+        "back-link": "Zurück zum Hauptmenü",
+        "tool-title": "Pomodoro-Timer",
+        "work-label": "Arbeit (Min):",
+        "break-label": "Pause (Min):",
+        "start-text": "Start",
+        "pause-text": "Pause",
+        "reset-text": "Zurücksetzen",
+        "status-work": "Arbeit",
+        "status-break": "Pause",
+        "status-ready": "Bereit",
+        "completed-cycles": "Abgeschlossene Zyklen:",
+        "faq-title": "Häufig gestellte Fragen",
+        "faq-list": `<li><b>Was ist Pomodoro?</b> Eine Produktivitätstechnik, die zeitgesteuerte Fokus-/Pausenzyklen verwendet.</li>
+            <li><b>Kann ich den Timer anpassen?</b> Ja, legen Sie Dauern fest, die zu Ihrem Workflow passen.</li>
+            <li><b>Werden Sitzungen gespeichert?</b> Nein, Sitzungen werden nach dem Neuladen der Seite zurückgesetzt.</li>`,
+        "howto-title": "<i class=\"fa fa-apple-whole\"></i> So verwenden Sie den Pomodoro-Timer",
+        "howto-steps": `<li><b>Timer einstellen:</b> Wählen Sie Ihre Pomodoro-Dauer und Pausenlänge.</li>
+            <li><b>Sitzung starten:</b> Klicken Sie auf "Start", um fokussierte Arbeit zu beginnen.</li>
+            <li><b>Pausen einlegen:</b> Nutzen Sie kurze Pausen zwischen Pomodoros für beste Ergebnisse.</li>`,
+        "howto-article-btn": "Vollständigen Artikel lesen",
+        "howto-article-link": "pomodoro-how-to.html",
+        "howto-mobile-title": "<i class=\"fa fa-apple-whole\"></i> So verwenden",
+        "tips-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Pomodoro-Produktivitätstipps",
+        "tips-list": `<li><b>Pausen nicht überspringen:</b> Regelmäßige Pausen halten Sie energiegeladen.</li>
+            <li><b>Sitzungen verfolgen:</b> Sehen Sie, wie viele Pomodoros Sie täglich abschließen.</li>
+            <li><b>Dauern anpassen:</b> Passen Sie den Timer an Aufgaben an, die zu Ihnen passen.</li>`,
+        "tips-article-btn": "Vollständigen Artikel lesen",
+        "tips-article-link": "pomodoro-tips.html",
+        "tips-mobile-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Tipps",
+      },
+      ru: {
+        "language-label": "Язык:",
+        "back-link": "Вернуться в главное меню",
+        "tool-title": "Помодоро-таймер",
+        "work-label": "Работа (мин):",
+        "break-label": "Перерыв (мин):",
+        "start-text": "Старт",
+        "pause-text": "Пауза",
+        "reset-text": "Сброс",
+        "status-work": "Работа",
+        "status-break": "Перерыв",
+        "status-ready": "Готов",
+        "completed-cycles": "Завершенные циклы:",
+        "faq-title": "Часто задаваемые вопросы",
+        "faq-list": `<li><b>Что такое Помодоро?</b> Техника продуктивности с использованием циклов фокуса и перерывов по времени.</li>
+            <li><b>Могу ли я настроить таймер?</b> Да, установите длительность, подходящую для вашего рабочего процесса.</li>
+            <li><b>Сохраняются ли сеансы?</b> Нет, сеансы сбрасываются после перезагрузки страницы.</li>`,
+        "howto-title": "<i class=\"fa fa-apple-whole\"></i> Как использовать таймер Помодоро",
+        "howto-steps": `<li><b>Установите таймер:</b> Выберите продолжительность Помодоро и длину перерыва.</li>
+            <li><b>Начните сеанс:</b> Нажмите "Старт", чтобы начать сосредоточенную работу.</li>
+            <li><b>Делайте перерывы:</b> Используйте короткие перерывы между Помодоро для лучших результатов.</li>`,
+        "howto-article-btn": "Читать полную статью",
+        "howto-article-link": "pomodoro-how-to.html",
+        "howto-mobile-title": "<i class=\"fa fa-apple-whole\"></i> Как использовать",
+        "tips-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Советы по продуктивности Помодоро",
+        "tips-list": `<li><b>Не пропускайте перерывы:</b> Регулярные перерывы поддерживают вашу энергию.</li>
+            <li><b>Отслеживайте сеансы:</b> Смотрите, сколько Помодоро вы завершаете ежедневно.</li>
+            <li><b>Настраивайте длительность:</b> Адаптируйте таймер под задачи, которые вам подходят.</li>`,
+        "tips-article-btn": "Читать полную статью",
+        "tips-article-link": "pomodoro-tips.html",
+        "tips-mobile-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Советы",
+      },
+      el: {
+        "language-label": "Γλώσσα:",
+        "back-link": "Επιστροφή στο κύριο μενού",
+        "tool-title": "Χρονόμετρο Pomodoro",
+        "work-label": "Εργασία (λεπτά):",
+        "break-label": "Διάλειμμα (λεπτά):",
+        "start-text": "Έναρξη",
+        "pause-text": "Παύση",
+        "reset-text": "Επαναφορά",
+        "status-work": "Εργασία",
+        "status-break": "Διάλειμμα",
+        "status-ready": "Έτοιμος",
+        "completed-cycles": "Ολοκληρωμένοι κύκλοι:",
+        "faq-title": "Συχνές ερωτήσεις",
+        "faq-list": `<li><b>Τι είναι το Pomodoro;</b> Μια τεχνική παραγωγικότητας που χρησιμοποιεί χρονομετρημένους κύκλους εστίασης/διαλείμματος.</li>
+            <li><b>Μπορώ να προσαρμόσω το χρονόμετρο;</b> Ναι, ορίστε διάρκειες που ταιριάζουν στη ροή εργασίας σας.</li>
+            <li><b>Αποθηκεύονται οι συνεδρίες;</b> Όχι, οι συνεδρίες επαναφέρονται μετά την επανατόρτωση της σελίδας.</li>`,
+        "howto-title": "<i class=\"fa fa-apple-whole\"></i> Πώς να χρησιμοποιήσετε το χρονόμετρο Pomodoro",
+        "howto-steps": `<li><b>Ρυθμίστε το χρονόμετρο:</b> Επιλέξτε τη διάρκεια Pomodoro και το μήκος διαλείμματος.</li>
+            <li><b>Ξεκινήστε τη συνεδρία:</b> Κάντε κλικ στο "Έναρξη" για να ξεκινήσετε εστιασμένη εργασία.</li>
+            <li><b>Κάντε διαλείμματα:</b> Χρησιμοποιήστε σύντομα διαλείμματα μεταξύ των Pomodoro για καλύτερα αποτελέσματα.</li>`,
+        "howto-article-btn": "Διαβάστε το πλήρες άρθρο",
+        "howto-article-link": "pomodoro-how-to.html",
+        "howto-mobile-title": "<i class=\"fa fa-apple-whole\"></i> Πώς να χρησιμοποιήσετε",
+        "tips-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Συμβουλές παραγωγικότητας Pomodoro",
+        "tips-list": `<li><b>Μην παραλείπετε τα διαλείμματα:</b> Η τακτική ξεκούραση σας κρατά ενεργητικούς.</li>
+            <li><b>Παρακολουθήστε τις συνεδρίες:</b> Δείτε πόσα Pomodoro ολοκληρώνετε καθημερινά.</li>
+            <li><b>Προσαρμόστε τις διάρκειες:</b> Προσαρμόστε το χρονόμετρο για εργασίες που σας ταιριάζουν.</li>`,
+        "tips-article-btn": "Διαβάστε το πλήρες άρθρο",
+        "tips-article-link": "pomodoro-tips.html",
+        "tips-mobile-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Συμβουλές",
+      },
+      ar: {
+        "language-label": "اللغة:",
+        "back-link": "العودة إلى القائمة الرئيسية",
+        "tool-title": "مؤقت بومودورو",
+        "work-label": "العمل (دقيقة):",
+        "break-label": "استراحة (دقيقة):",
+        "start-text": "بدء",
+        "pause-text": "إيقاف مؤقت",
+        "reset-text": "إعادة تعيين",
+        "status-work": "عمل",
+        "status-break": "استراحة",
+        "status-ready": "جاهز",
+        "completed-cycles": "الدورات المكتملة:",
+        "faq-title": "الأسئلة الشائعة",
+        "faq-list": `<li><b>ما هو بومودورو؟</b> تقنية إنتاجية تستخدم دورات التركيز/الاستراحة الموقوتة.</li>
+            <li><b>هل يمكنني ضبط المؤقت؟</b> نعم، حدد المدد التي تناسب سير عملك.</li>
+            <li><b>هل يحفظ هذا الجلسات؟</b> لا، يتم إعادة تعيين الجلسات بعد إعادة تحميل الصفحة.</li>`,
+        "howto-title": "<i class=\"fa fa-apple-whole\"></i> كيفية استخدام مؤقت بومودورو",
+        "howto-steps": `<li><b>اضبط المؤقت:</b> اختر مدة بومودورو الخاصة بك وطول الاستراحة.</li>
+            <li><b>ابدأ الجلسة:</b> انقر على "بدء" لبدء العمل المركز.</li>
+            <li><b>خذ فترات راحة:</b> استخدم فترات راحة قصيرة بين بومودورو للحصول على أفضل النتائج.</li>`,
+        "howto-article-btn": "قراءة المقال الكامل",
+        "howto-article-link": "pomodoro-how-to.html",
+        "howto-mobile-title": "<i class=\"fa fa-apple-whole\"></i> كيفية الاستخدام",
+        "tips-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> نصائح إنتاجية بومودورو",
+        "tips-list": `<li><b>لا تتخطى فترات الراحة:</b> الراحة المنتظمة تبقيك نشيطًا.</li>
+            <li><b>تتبع الجلسات:</b> انظر كم عدد بومودورو التي تكملها يوميًا.</li>
+            <li><b>خصص المدد:</b> اضبط المؤقت للمهام التي تناسبك.</li>`,
+        "tips-article-btn": "قراءة المقال الكامل",
+        "tips-article-link": "pomodoro-tips.html",
+        "tips-mobile-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> نصائح",
+      }
+    };
+
+    function updateLanguage() {
+      const lang = document.getElementById("lang-select").value;
+      const t = translations[lang];
+      
+      // Store current values
+      const workValue = document.getElementById('workLength').value;
+      const breakValue = document.getElementById('breakLength').value;
+      
+      // Update all translatable elements
+      document.getElementById("language-label").textContent = t["language-label"];
+      document.getElementById("back-link").innerHTML = '<i class="fa fa-arrow-left"></i> ' + t["back-link"];
+      document.getElementById("tool-title").innerHTML = '<i class="fa fa-apple-whole"></i> ' + t["tool-title"];
+      
+      // Update labels - need to preserve input elements
+      document.getElementById('work-label').innerHTML = t["work-label"] + ' <input type="number" id="workLength" min="1" max="60" value="' + workValue + '" class="form-control" style="width:70px;display:inline-block;">';
+      document.getElementById('break-label').innerHTML = t["break-label"] + ' <input type="number" id="breakLength" min="1" max="30" value="' + breakValue + '" class="form-control" style="width:70px;display:inline-block;">';
+      
+      // Re-attach event listeners after updating innerHTML
+      document.getElementById('workLength').addEventListener('change', setLengths);
+      document.getElementById('breakLength').addEventListener('change', setLengths);
+      
+      document.getElementById("start-text").textContent = t["start-text"];
+      document.getElementById("pause-text").textContent = t["pause-text"];
+      document.getElementById("reset-text").textContent = t["reset-text"];
+      
+      if (document.getElementById("faq-title")) {
+        document.getElementById("faq-title").textContent = t["faq-title"];
+      }
+      if (document.getElementById("faq-list")) {
+        document.getElementById("faq-list").innerHTML = t["faq-list"];
+      }
+      if (document.getElementById("howto-title")) {
+        document.getElementById("howto-title").innerHTML = t["howto-title"];
+      }
+      if (document.getElementById("howto-steps")) {
+        document.getElementById("howto-steps").innerHTML = t["howto-steps"];
+      }
+      if (document.getElementById("howto-article-btn")) {
+        document.getElementById("howto-article-btn").textContent = t["howto-article-btn"];
+        document.getElementById("howto-article-btn").href = t["howto-article-link"];
+      }
+      if (document.getElementById("howto-mobile-title")) {
+        document.getElementById("howto-mobile-title").innerHTML = t["howto-mobile-title"];
+      }
+      if (document.getElementById("howto-mobile-steps")) {
+        document.getElementById("howto-mobile-steps").innerHTML = t["howto-steps"];
+      }
+      if (document.getElementById("tips-title")) {
+        document.getElementById("tips-title").innerHTML = t["tips-title"];
+      }
+      if (document.getElementById("tips-list")) {
+        document.getElementById("tips-list").innerHTML = t["tips-list"];
+      }
+      if (document.getElementById("tips-article-btn")) {
+        document.getElementById("tips-article-btn").textContent = t["tips-article-btn"];
+        document.getElementById("tips-article-btn").href = t["tips-article-link"];
+      }
+      if (document.getElementById("tips-mobile-title")) {
+        document.getElementById("tips-mobile-title").innerHTML = t["tips-mobile-title"];
+      }
+      if (document.getElementById("tips-mobile-list")) {
+        document.getElementById("tips-mobile-list").innerHTML = t["tips-list"];
+      }
+      
+      // Update status display with correct language
+      updateDisplay();
+    }
+
+    document.getElementById("lang-select").addEventListener("change", function() {
+      localStorage.setItem('timerhavenLang', this.value);
+      updateLanguage();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedLang = localStorage.setItem('timerhavenLang') || 'en';
+      document.getElementById('lang-select').value = savedLang;
+      updateLanguage();
+    });
+
     // Pomodoro Timer logic
     let timer = null;
     let isWork = true;
@@ -121,8 +454,11 @@
       const sec = timeLeft % 60;
       document.getElementById('pomodoroDisplay').textContent = 
         String(min).padStart(2,'0')+":"+String(sec).padStart(2,'0');
-      document.getElementById('pomodoroStatus').textContent = isWork ? "Work" : "Break";
-      document.getElementById('pomodoroCycle').textContent = "Completed cycles: "+cycleCount;
+      
+      const lang = document.getElementById("lang-select") ? document.getElementById("lang-select").value : 'en';
+      const t = translations[lang] || translations['en'];
+      document.getElementById('pomodoroStatus').textContent = isWork ? t["status-work"] : t["status-break"];
+      document.getElementById('pomodoroCycle').textContent = t["completed-cycles"] + " " + cycleCount;
     }
     function setLengths() {
       if(isWork) {
