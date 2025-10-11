@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
   <title>Notes — TimerHaven</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Take quick notes and organize your thoughts. Learn how to use Notes, get productivity tips, FAQs, and read expert articles.">
@@ -36,9 +37,23 @@
     .note-meta { font-size: 0.9em; color: #888; margin-right: 1em; }
     .note-btn { font-size: 0.9em; margin-left: 0.6em; }
     .note-pinned { font-weight: bold; color: #185a9d; margin-right: 0.6em; }
+    .language-select { text-align: right; padding: 10px 18px 0 0; margin-bottom: 0.5em; }
   </style>
 </head>
 <body>
+  <div class="language-select">
+    <label for="lang-select"><strong id="language-label">Language:</strong></label>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+      <option value="ru">Русский</option>
+      <option value="el">Ελληνικά</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
   <div class="main-container">
     <div class="center-row">
       <!-- Article 1 (desktop only) -->
