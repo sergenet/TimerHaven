@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
   <title>Global Weather — TimerHaven</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Check weather for cities worldwide instantly.">
@@ -92,9 +93,23 @@
     footer a:hover {
       text-decoration: underline;
     }
+    .language-select { text-align: right; padding: 10px 18px 0 0; margin-bottom: 0.5em; }
   </style>
 </head>
 <body>
+  <div class="language-select">
+    <label for="lang-select"><strong id="language-label">Language:</strong></label>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+      <option value="ru">Русский</option>
+      <option value="el">Ελληνικά</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
   <div class="main-container">
     <div class="center-row">
       <!-- Article 1 (desktop only) -->

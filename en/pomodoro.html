@@ -437,7 +437,7 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
-      const savedLang = localStorage.setItem('timerhavenLang') || 'en';
+      const savedLang = localStorage.getItem('timerhavenLang') || 'en';
       document.getElementById('lang-select').value = savedLang;
       updateLanguage();
     });
