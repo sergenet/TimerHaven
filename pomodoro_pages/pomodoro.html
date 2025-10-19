@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Pomodoro Timer — TimerHaven</title>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0;url=pomodoro-en.html">
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; padding: 2rem; background:#f7f9fb; color:#0b2545; }
+    .box { max-width:720px; margin:3rem auto; background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 6px 18px rgba(11,37,69,0.06); }
+    a { color:#0d6efd; text-decoration:none; }
+  </style>
+  <script>
+    (function(){
+      var map = {
+        'en': 'pomodoro-en.html',
+        'fr': 'pomodoro-fr.html',
+        'es': 'pomodoro-es.html',
+        'de': 'pomodoro-de.html',
+        'ru': 'pomodoro-ru.html',
+        'el': 'pomodoro-el.html',
+        'ar': 'pomodoro-ar.html'
+      };
+      function getQueryLang() {
+        try {
+          var m = location.search.match(/[?&]lang=([a-z]{2})/i);
+          return m ? m[1].toLowerCase() : null;
+        } catch (e) { return null; }
+      }
+      function pickByNavigator() {
+        var langs = [];
+        try {
+          if (navigator.languages) langs = langs.concat(navigator.languages);
+          if (navigator.language) langs.push(navigator.language);
+          if (navigator.userLanguage) langs.push(navigator.userLanguage);
+        } catch (e) {}
+        for (var i=0;i<langs.length;i++) {
+          if (!langs[i]) continue;
+          var code = String(langs[i]).toLowerCase().split('-')[0];
+          if (map[code]) return code;
+        }
+        return null;
+      }
+      var q = getQueryLang();
+      if (q && map[q]) { window.location.replace(map[q]); return; }
+      var d = pickByNavigator();
+      if (d && map[d]) { window.location.replace(map[d]); return; }
+      window.location.replace(map['en']);
+    })();
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h1>Pomodoro Timer — TimerHaven</h1>
+    <p>If you are not redirected automatically, choose a language:</p>
+    <ul>
+      <li><a href="pomodoro-en.html">English</a></li>
+      <li><a href="pomodoro-fr.html">Français</a></li>
+      <li><a href="pomodoro-es.html">Español</a></li>
+      <li><a href="pomodoro-de.html">Deutsch</a></li>
+      <li><a href="pomodoro-ru.html">Русский</a></li>
+      <li><a href="pomodoro-el.html">Ελληνικά</a></li>
+      <li><a href="pomodoro-ar.html">العربية</a></li>
+    </ul>
+  </div>
+</body>
+</html>

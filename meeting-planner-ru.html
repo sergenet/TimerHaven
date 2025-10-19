@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Планировщик встреч</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Найдите лучшее время для встречи для всех, где бы вы ни были.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      min-width: 220px;
+      max-width: 340px;
+      width: 340px;
+      min-height: 500px;
+      flex: 1 1 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 2em 1.3em 1em 1.3em;
+      margin: 0;
+      box-sizing: border-box;
+      text-align: left;
+      overflow: hidden;
+    }
+    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .back-link:hover { text-decoration: underline; }
+    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
+    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
+    .language-selector-row { margin-bottom: 1em; }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="center-row">
+      <div class="tool-card">
+        <div class="language-selector-row">
+          <label for="languageSelector">Язык</label>
+          <select id="languageSelector" class="form-select" onchange="onLanguageChange()">
+            <option value="en">Английский</option><option value="fr">Французский</option><option value="de">Немецкий</option><option value="ru">Русский</option><option value="el">Греческий</option><option value="es">Испанский</option><option value="ar">العربية</option>
+          </select>
+        </div>
+        <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Назад в главное меню</a>
+        <h3><i class="fa fa-users"></i> Планировщик встреч</h3>
+        <form id="meetingForm">
+          <div class="meeting-form-row">
+            <label for="participantName">Имя участника</label>
+            <input type="text" id="participantName" class="form-control" placeholder="Введите имя (например, Иван)" autocomplete="off">
+          </div>
+          <div class="meeting-form-row">
+            <label for="participantCity">Часовой пояс / город</label>
+            <select id="participantCity" class="form-select" autocomplete="off">
+              <option value="" disabled selected>Выберите город или часовой пояс</option>
+              <option value="America/New_York">Нью-Йорк 🇺🇸</option><option value="America/Chicago">Чикаго 🇺🇸</option><option value="America/Los_Angeles">Лос-Анджелес 🇺🇸</option><option value="America/Toronto">Торонто 🇨🇦</option><option value="Europe/London">Лондон 🇬🇧</option><option value="Europe/Paris">Париж 🇫🇷</option><option value="Europe/Berlin">Берлин 🇩🇪</option><option value="Europe/Moscow">Москва 🇷🇺</option><option value="Europe/Istanbul">Стамбул 🇹🇷</option><option value="Asia/Dubai">Дубай 🇦🇪</option><option value="Asia/Kolkata">Калькутта 🇮🇳</option><option value="Asia/Shanghai">Шанхай 🇨🇳</option><option value="Asia/Tokyo">Токио 🇯🇵</option><option value="Asia/Singapore">Сингапур 🇸🇬</option><option value="Asia/Jakarta">Джакарта 🇮🇩</option><option value="Australia/Sydney">Сидней 🇦🇺</option><option value="Pacific/Auckland">Окленд 🇳🇿</option><option value="America/Sao_Paulo">Сан-Паулу 🇧🇷</option><option value="America/Mexico_City">Мехико 🇲🇽</option><option value="Africa/Johannesburg">Йоханнесбург 🇿🇦</option><option value="Africa/Cairo">Каир 🇪🇬</option><option value="Africa/Nairobi">Найроби 🇰🇪</option><option value="Asia/Seoul">Сеул 🇰🇷</option><option value="Asia/Hong_Kong">Гонконг 🇭🇰</option><option value="Asia/Bangkok">Бангкок 🇹🇭</option><option value="Asia/Manila">Манила 🇵🇭</option><option value="Europe/Madrid">Мадрид 🇪🇸</option><option value="Europe/Rome">Рим 🇮🇹</option><option value="Europe/Warsaw">Варшава 🇵🇱</option><option value="Europe/Amsterdam">Амстердам 🇳🇱</option><option value="Europe/Athens">Афины 🇬🇷</option><option value="America/Vancouver">Ванкувер 🇨🇦</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-success btn-participant" id="addParticipant"><i class="fa fa-plus"></i> Добавить участника</button>
+        </form>
+        <div class="participant-list" id="participantList"></div>
+        <div class="meeting-form-row">
+          <label for="meetingDate">Выберите дату встречи</label>
+          <input type="date" id="meetingDate" class="form-control">
+        </div>
+        <div class="meeting-form-row">
+          <label for="meetingTime">Выберите время встречи</label>
+          <input type="time" id="meetingTime" class="form-control">
+          <button type="button" class="btn btn-primary btn-sm" style="margin-top:0.6em;" id="calcTimes"><i class="fa fa-clock"></i> Показать время</button>
+        </div>
+        <div>
+          <div id="meetingTimes"></div>
+        </div>
+        <details class="faq-section">
+          <summary>Частые вопросы</summary>
+          <ul style="padding-left: 1em;">
+            <li><b>Сколько участников?</b> Добавьте столько, сколько нужно.</li><li><b>Какие часовые пояса?</b> Выберите из 30+ популярных городов и зон.</li><li><b>Как поделиться?</b> Скопируйте время встречи и поделитесь с участниками.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+  <script>
+    function onLanguageChange() {
+      var lang = document.getElementById("languageSelector").value;
+      window.location.href = "meeting-planner-" + lang + ".html";
+    }
+  </script>
+</body>
+</html>
