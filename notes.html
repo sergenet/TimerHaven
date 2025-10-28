@@ -113,6 +113,7 @@
         notesTitle: "Notes",
         addNoteBtn: "Add Note",
         noteInputPlaceholder: "Type your note...",
+        noNotesYet: "No notes yet.",
         faqTitle: "FAQs",
         faqItems: [
           "<b>Are notes saved?</b> Yes, in your browser until you clear them.",
@@ -141,6 +142,7 @@
         notesTitle: "Notes",
         addNoteBtn: "Ajouter une note",
         noteInputPlaceholder: "Tapez votre note...",
+        noNotesYet: "Aucune note pour le moment.",
         faqTitle: "FAQs",
         faqItems: [
           "<b>Les notes sont-elles sauvegardées ?</b> Oui, dans votre navigateur jusqu’à suppression.",
@@ -169,6 +171,7 @@
         notesTitle: "Notas",
         addNoteBtn: "Agregar nota",
         noteInputPlaceholder: "Escribe tu nota...",
+        noNotesYet: "No hay notas todavía.",
         faqTitle: "FAQs",
         faqItems: [
           "<b>¿Se guardan las notas?</b> Sí, en tu navegador hasta que las elimines.",
@@ -197,6 +200,7 @@
         notesTitle: "Notizen",
         addNoteBtn: "Notiz hinzufügen",
         noteInputPlaceholder: "Notiz eingeben...",
+        noNotesYet: "Noch keine Notizen.",
         faqTitle: "FAQs",
         faqItems: [
           "<b>Werden Notizen gespeichert?</b> Ja, im Browser bis Sie sie löschen.",
@@ -225,6 +229,7 @@
         notesTitle: "Заметки",
         addNoteBtn: "Добавить заметку",
         noteInputPlaceholder: "Введите заметку...",
+        noNotesYet: "Заметок пока нет.",
         faqTitle: "FAQs",
         faqItems: [
           "<b>Заметки сохраняются?</b> Да, в вашем браузере до удаления.",
@@ -253,6 +258,7 @@
         notesTitle: "Σημειώσεις",
         addNoteBtn: "Προσθήκη σημείωσης",
         noteInputPlaceholder: "Γράψτε τη σημείωσή σας...",
+        noNotesYet: "Δεν υπάρχουν σημειώσεις ακόμα.",
         faqTitle: "FAQs",
         faqItems: [
           "<b>Αποθηκεύονται οι σημειώσεις;</b> Ναι, στον browser μέχρι να διαγραφούν.",
@@ -281,6 +287,7 @@
         notesTitle: "الملاحظات",
         addNoteBtn: "أضف ملاحظة",
         noteInputPlaceholder: "اكتب ملاحظتك...",
+        noNotesYet: "لا توجد ملاحظات بعد.",
         faqTitle: "الأسئلة الشائعة",
         faqItems: [
           "<b>هل تحفظ الملاحظات؟</b> نعم، في المتصفح حتى يتم حذفها.",
@@ -374,7 +381,9 @@
       if (!list) return;
       list.innerHTML = '';
       if (!notes || notes.length === 0) {
-        list.innerHTML = '<div style="color:#888;">No notes yet.</div>';
+        const lang = getLang();
+        const t = translations[lang] || translations['en'];
+        list.innerHTML = `<div style="color:#888;">${escapeHtml(t.noNotesYet || 'No notes yet.')}</div>`;
         return;
       }
       notes.forEach((note, idx) => {
