@@ -20,11 +20,32 @@
     .timer-controls label { margin-right: 0.5em; }
     .timer-display { font-size: 2em; font-weight: bold; margin: 1em 0; text-align: center; }
     .timer-btns button { margin: 0 0.3em 0.3em 0; }
-    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
-    .back-link:hover { text-decoration: underline; }
+    .back-link { display: inline-block; margin-bottom: 1em; color: #185a9d; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .back-link:hover { text-decoration: underline; color: #43cea2; }
     .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
     .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
     .tip-section { margin-top: 0.5em; text-align: center; font-size: 1.08em; color: #43cea2; background: #f6fbfa; padding: 0.6em; border-radius: 8px; font-weight: 500; min-height: 2em; word-break: break-word; }
+
+    /* Non-editable language indicator (top-right) */
+    .language-indicator {
+      position: fixed;
+      right: 18px;
+      top: 16px;
+      z-index: 12000;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:#185a9d;
+      font-weight:600;
+      background: rgba(255,255,255,0.95);
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(8,20,40,0.06);
+      font-size: 0.98em;
+    }
+    .language-indicator .lang-label { margin-right: 6px; }
+    .language-indicator .lang-name { background: linear-gradient(90deg,#43cea2 0%,#185a9d 100%); color:#fff; padding:6px 10px; border-radius:8px; font-weight:700; box-shadow: 0 2px 8px #e0e7ef; }
+
     @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
     @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; } }
     @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; } }
@@ -36,92 +57,401 @@
   </style>
 </head>
 <body>
+  <!-- Non-editable language indicator (reads timerhavenLang set by main index) -->
+  <div class="language-indicator" id="language-indicator" role="status" aria-live="polite" title="Selected language from main menu">
+    <span class="lang-label" id="language-label">Language:</span>
+    <span class="lang-name" id="language-name">English</span>
+  </div>
+
   <div class="main-container">
     <div class="center-row">
       <div class="article-card">
         <div>
-          <h2 style="color:#185a9d;"><i class="fa fa-hourglass-half"></i> How to Use Task Timer</h2>
-          <ol>
-            <li><b>Set timer:</b> Choose a duration for your work session.</li>
-            <li><b>Start the timer:</b> Click "Start" to begin timing.</li>
-            <li><b>Take breaks:</b> Use short breaks between sessions.</li>
-          </ol>
+          <h2 style="color:#185a9d;" id="howto-title"></h2>
+          <ol id="howto-steps"></ol>
         </div>
-        <a href="timer-how-to.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;">Read Full Article</a>
+        <a href="timer-how-to.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" id="howto-link"></a>
       </div>
       <div class="tool-card">
         <details class="howto-mobile" id="howto-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;"><i class="fa fa-hourglass-half"></i> How to Use</h4></summary>
-          <ol>
-            <li><b>Set timer:</b> Choose a duration for your work session.</li>
-            <li><b>Start the timer:</b> Click "Start" to begin timing.</li>
-            <li><b>Take breaks:</b> Use short breaks between sessions.</li>
-          </ol>
+          <summary><h4 style="color:#185a9d;display:inline;" id="howto-mobile-title"></h4></summary>
+          <ol id="howto-mobile-steps"></ol>
         </details>
-        <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Back to Main Menu</a>
-        <h3><i class="fa fa-hourglass-half"></i> Task Timer</h3>
+        <a href="index.html" class="back-link" id="back-link"></a>
+        <h3 id="tool-title"></h3>
         <div class="timer-section">
           <div class="timer-controls mb-2">
-            <label>Minutes: <input type="number" id="minutes" min="0" max="999" value="25" class="form-control" style="width:70px;display:inline-block;"></label>
-            <label>Seconds: <input type="number" id="seconds" min="0" max="59" value="0" class="form-control" style="width:70px;display:inline-block;"></label>
+            <label id="minutes-label"></label>
+            <label id="seconds-label"></label>
           </div>
           <div class="timer-display" id="timerDisplay">25:00</div>
           <div class="timer-btns">
-            <button id="startBtn" class="btn btn-success btn-sm"><i class="fa fa-play"></i> Start</button>
-            <button id="pauseBtn" class="btn btn-secondary btn-sm"><i class="fa fa-pause"></i> Pause</button>
-            <button id="resetBtn" class="btn btn-danger btn-sm"><i class="fa fa-refresh"></i> Reset</button>
+            <button id="startBtn" class="btn btn-success btn-sm"></button>
+            <button id="pauseBtn" class="btn btn-secondary btn-sm"></button>
+            <button id="resetBtn" class="btn btn-danger btn-sm"></button>
           </div>
         </div>
         <details class="faq-section">
-          <summary>FAQs</summary>
-          <ul style="padding-left: 1em;">
-            <li><b>Can I set custom durations?</b> Yes, choose any time period.</li>
-            <li><b>Will the timer persist?</b> No, resets after page reload.</li>
-            <li><b>Is this free?</b> Yes, all TimerHaven tools are free.</li>
-          </ul>
+          <summary id="faq-title"></summary>
+          <ul style="padding-left: 1em;" id="faq-list"></ul>
         </details>
-        <div class="tip-section">
-          <i class="fa fa-bookmark"></i> <b>Bookmark this page:</b> Press <b>Ctrl+D</b> (<b>Cmd+D</b> on Mac) or use your browser’s bookmark menu!
-        </div>
+        <div class="tip-section" id="tip-section"></div>
         <details class="tips-mobile" id="tips-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tips</h4></summary>
-          <ul>
-            <li><b>Time your focus:</b> Use the timer for deep work blocks.</li>
-            <li><b>Take breaks:</b> Step away when the timer ends.</li>
-            <li><b>Review results:</b> Track how many sessions you complete.</li>
-          </ul>
+          <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
+          <ul id="tips-mobile-list"></ul>
         </details>
       </div>
       <div class="article-card">
         <div>
-          <h2 style="color:#185a9d;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Task Timer Productivity Tips</h2>
-          <ul>
-            <li><b>Time your focus:</b> Use the timer for deep work blocks.</li>
-            <li><b>Take breaks:</b> Step away when the timer ends.</li>
-            <li><b>Review results:</b> Track how many sessions you complete.</li>
-          </ul>
+          <h2 style="color:#185a9d;" id="tips-title"></h2>
+          <ul id="tips-list"></ul>
         </div>
-        <a href="timer-tips.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;">Read Full Article</a>
+        <a href="timer-tips.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" id="tips-link"></a>
       </div>
     </div>
   </div>
+
   <script>
+    // Translations object
+    const translations = {
+      en: {
+        "language-label": "Language:",
+        howtoTitle: '<i class="fa fa-hourglass-half"></i> How to Use Task Timer',
+        howtoLink: "Read Full Article",
+        howtoSteps: [
+          "<b>Set timer:</b> Choose a duration for your work session.",
+          "<b>Start the timer:</b> Click \"Start\" to begin timing.",
+          "<b>Take breaks:</b> Use short breaks between sessions."
+        ],
+        howtoMobileTitle: '<i class="fa fa-hourglass-half"></i> How to Use',
+        backLink: '<i class="fa fa-arrow-left"></i> Back to Main Menu',
+        toolTitle: '<i class="fa fa-hourglass-half"></i> Task Timer',
+        minutesLabel: 'Minutes: <input type="number" id="minutes" min="0" max="999" value="25" class="form-control" style="width:70px;display:inline-block;">',
+        secondsLabel: 'Seconds: <input type="number" id="seconds" min="0" max="59" value="0" class="form-control" style="width:70px;display:inline-block;">',
+        startBtn: '<i class="fa fa-play"></i> Start',
+        pauseBtn: '<i class="fa fa-pause"></i> Pause',
+        resetBtn: '<i class="fa fa-refresh"></i> Reset',
+        faqTitle: "FAQs",
+        faqList: [
+          "<b>Can I set custom durations?</b> Yes, choose any time period.",
+          "<b>Will the timer persist?</b> No, resets after page reload.",
+          "<b>Is this free?</b> Yes, all TimerHaven tools are free."
+        ],
+        tipSection: '<i class="fa fa-bookmark"></i> <b>Bookmark this page:</b> Press <b>Ctrl+D</b> (<b>Cmd+D</b> on Mac) or use your browser\'s bookmark menu!',
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Task Timer Productivity Tips',
+        tipsLink: "Read Full Article",
+        tipsList: [
+          "<b>Time your focus:</b> Use the timer for deep work blocks.",
+          "<b>Take breaks:</b> Step away when the timer ends.",
+          "<b>Review results:</b> Track how many sessions you complete."
+        ],
+        tipsMobileTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tips',
+        alertEnd: "Time's up!"
+      },
+      fr: {
+        "language-label": "Langue :",
+        howtoTitle: '<i class="fa fa-hourglass-half"></i> Comment utiliser le Minuteur',
+        howtoLink: "Lire l'article",
+        howtoSteps: [
+          "<b>Réglez le minuteur :</b> Choisissez la durée de votre session de travail.",
+          "<b>Démarrez :</b> Cliquez sur \"Démarrer\" pour commencer.",
+          "<b>Prenez des pauses :</b> Utilisez de courtes pauses entre les sessions."
+        ],
+        howtoMobileTitle: '<i class="fa fa-hourglass-half"></i> Comment utiliser',
+        backLink: '<i class="fa fa-arrow-left"></i> Retour au menu principal',
+        toolTitle: '<i class="fa fa-hourglass-half"></i> Minuteur de tâche',
+        minutesLabel: 'Minutes: <input type="number" id="minutes" min="0" max="999" value="25" class="form-control" style="width:70px;display:inline-block;">',
+        secondsLabel: 'Secondes: <input type="number" id="seconds" min="0" max="59" value="0" class="form-control" style="width:70px;display:inline-block;">',
+        startBtn: '<i class="fa fa-play"></i> Démarrer',
+        pauseBtn: '<i class="fa fa-pause"></i> Pause',
+        resetBtn: '<i class="fa fa-refresh"></i> Réinitialiser',
+        faqTitle: "FAQs",
+        faqList: [
+          "<b>Puis-je définir des durées personnalisées ?</b> Oui, choisissez n'importe quelle période.",
+          "<b>Le minuteur persiste-t-il ?</b> Non, il se réinitialise après le rechargement.",
+          "<b>Est-ce gratuit ?</b> Oui, tous les outils TimerHaven sont gratuits."
+        ],
+        tipSection: '<i class="fa fa-bookmark"></i> <b>Marquez cette page :</b> Appuyez sur <b>Ctrl+D</b> (<b>Cmd+D</b> sur Mac) ou utilisez le menu des favoris!',
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils Minuteur',
+        tipsLink: "Lire l'article",
+        tipsList: [
+          "<b>Utilisez pour les pauses :</b> Chronométrez vos périodes de repos.",
+          "<b>Suivez les sessions :</b> Surveillez la durée de chaque tâche.",
+          "<b>Redémarrez :</b> Réinitialisez entre les activités pour des enregistrements précis."
+        ],
+        tipsMobileTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils',
+        alertEnd: "Temps écoulé!"
+      },
+      es: {
+        "language-label": "Idioma:",
+        howtoTitle: '<i class="fa fa-hourglass-half"></i> Cómo usar el Temporizador de tareas',
+        howtoLink: "Leer el artículo completo",
+        howtoSteps: [
+          "<b>Configurar temporizador:</b> Elige una duración para tu sesión de trabajo.",
+          "<b>Iniciar:</b> Haz clic en \"Iniciar\" para comenzar.",
+          "<b>Tomar descansos:</b> Usa descansos cortos entre sesiones."
+        ],
+        howtoMobileTitle: '<i class="fa fa-hourglass-half"></i> Cómo usar',
+        backLink: '<i class="fa fa-arrow-left"></i> Volver al menú principal',
+        toolTitle: '<i class="fa fa-hourglass-half"></i> Temporizador de tareas',
+        minutesLabel: 'Minutos: <input type="number" id="minutes" min="0" max="999" value="25" class="form-control" style="width:70px;display:inline-block;">',
+        secondsLabel: 'Segundos: <input type="number" id="seconds" min="0" max="59" value="0" class="form-control" style="width:70px;display:inline-block;">',
+        startBtn: '<i class="fa fa-play"></i> Iniciar',
+        pauseBtn: '<i class="fa fa-pause"></i> Pausa',
+        resetBtn: '<i class="fa fa-refresh"></i> Restablecer',
+        faqTitle: "FAQs",
+        faqList: [
+          "<b>¿Puedo configurar duraciones personalizadas?</b> Sí, elige cualquier período de tiempo.",
+          "<b>¿Se guarda el temporizador?</b> No, se restablece después de recargar la página.",
+          "<b>¿Es gratuito?</b> Sí, todas las herramientas de TimerHaven son gratuitas."
+        ],
+        tipSection: '<i class="fa fa-bookmark"></i> <b>Marca esta página:</b> Presiona <b>Ctrl+D</b> (<b>Cmd+D</b> en Mac) o usa el menú de marcadores!',
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos del Temporizador',
+        tipsLink: "Leer el artículo completo",
+        tipsList: [
+          "<b>Usa para descansos:</b> Cronometra tus períodos de descanso.",
+          "<b>Seguimiento de sesiones:</b> Controla cuánto dura cada tarea.",
+          "<b>Reinicia:</b> Reinicia entre actividades para registros precisos."
+        ],
+        tipsMobileTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos',
+        alertEnd: "¡Se acabó el tiempo!"
+      },
+      de: {
+        "language-label": "Sprache:",
+        howtoTitle: '<i class="fa fa-hourglass-half"></i> So nutzen Sie den Aufgaben-Timer',
+        howtoLink: "Vollständigen Artikel lesen",
+        howtoSteps: [
+          "<b>Timer einstellen:</b> Wählen Sie eine Dauer für Ihre Arbeitssitzung.",
+          "<b>Timer starten:</b> Klicken Sie auf \"Start\".",
+          "<b>Pausen machen:</b> Nutzen Sie kurze Pausen zwischen den Sitzungen."
+        ],
+        howtoMobileTitle: '<i class="fa fa-hourglass-half"></i> So nutzen Sie',
+        backLink: '<i class="fa fa-arrow-left"></i> Zurück zum Hauptmenü',
+        toolTitle: '<i class="fa fa-hourglass-half"></i> Aufgaben-Timer',
+        minutesLabel: 'Minuten: <input type="number" id="minutes" min="0" max="999" value="25" class="form-control" style="width:70px;display:inline-block;">',
+        secondsLabel: 'Sekunden: <input type="number" id="seconds" min="0" max="59" value="0" class="form-control" style="width:70px;display:inline-block;">',
+        startBtn: '<i class="fa fa-play"></i> Start',
+        pauseBtn: '<i class="fa fa-pause"></i> Pause',
+        resetBtn: '<i class="fa fa-refresh"></i> Zurücksetzen',
+        faqTitle: "FAQs",
+        faqList: [
+          "<b>Kann ich benutzerdefinierte Dauern einstellen?</b> Ja, wählen Sie einen beliebigen Zeitraum.",
+          "<b>Bleibt der Timer bestehen?</b> Nein, er wird nach dem Neuladen der Seite zurückgesetzt.",
+          "<b>Ist das kostenlos?</b> Ja, alle TimerHaven-Tools sind kostenlos."
+        ],
+        tipSection: '<i class="fa fa-bookmark"></i> <b>Seite als Lesezeichen speichern:</b> Drücken Sie <b>Strg+D</b> (<b>Cmd+D</b> auf Mac)!',
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Timer-Tipps',
+        tipsLink: "Vollständigen Artikel lesen",
+        tipsList: [
+          "<b>Für Pausen nutzen:</b> Zeitnehmen Sie Ihre Ruhephasen.",
+          "<b>Sitzungen verfolgen:</b> Überwachen Sie, wie lange jede Aufgabe dauert.",
+          "<b>Neu starten:</b> Setzen Sie zwischen Aktivitäten zurück für genaue Aufzeichnungen."
+        ],
+        tipsMobileTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps',
+        alertEnd: "Zeit ist abgelaufen!"
+      },
+      ru: {
+        "language-label": "Язык:",
+        howtoTitle: '<i class="fa fa-hourglass-half"></i> Как использовать Таймер задач',
+        howtoLink: "Читать всю статью",
+        howtoSteps: [
+          "<b>Установить таймер:</b> Выберите продолжительность рабочей сессии.",
+          "<b>Запустить таймер:</b> Нажмите \"Старт\".",
+          "<b>Делайте перерывы:</b> Используйте короткие перерывы между сессиями."
+        ],
+        howtoMobileTitle: '<i class="fa fa-hourglass-half"></i> Как использовать',
+        backLink: '<i class="fa fa-arrow-left"></i> Назад в главное меню',
+        toolTitle: '<i class="fa fa-hourglass-half"></i> Таймер задач',
+        minutesLabel: 'Минуты: <input type="number" id="minutes" min="0" max="999" value="25" class="form-control" style="width:70px;display:inline-block;">',
+        secondsLabel: 'Секунды: <input type="number" id="seconds" min="0" max="59" value="0" class="form-control" style="width:70px;display:inline-block;">',
+        startBtn: '<i class="fa fa-play"></i> Старт',
+        pauseBtn: '<i class="fa fa-pause"></i> Пауза',
+        resetBtn: '<i class="fa fa-refresh"></i> Сброс',
+        faqTitle: "Частые вопросы",
+        faqList: [
+          "<b>Могу ли я установить пользовательскую продолжительность?</b> Да, выберите любой период времени.",
+          "<b>Сохраняется ли таймер?</b> Нет, он сбрасывается после перезагрузки страницы.",
+          "<b>Это бесплатно?</b> Да, все инструменты TimerHaven бесплатны."
+        ],
+        tipSection: '<i class="fa fa-bookmark"></i> <b>Добавьте страницу в закладки:</b> Нажмите <b>Ctrl+D</b> (<b>Cmd+D</b> на Mac)!',
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по Таймеру',
+        tipsLink: "Читать всю статью",
+        tipsList: [
+          "<b>Используйте для перерывов:</b> Засекайте время для отдыха.",
+          "<b>Отслеживайте сессии:</b> Наблюдайте, сколько длится каждая задача.",
+          "<b>Перезапускайте:</b> Сбрасывайте между действиями для точных записей."
+        ],
+        tipsMobileTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы',
+        alertEnd: "Время вышло!"
+      },
+      el: {
+        "language-label": "Γλώσσα:",
+        howtoTitle: '<i class="fa fa-hourglass-half"></i> Πώς να χρησιμοποιήσετε το Χρονόμετρο Εργασιών',
+        howtoLink: "Διαβάστε ολόκληρο το άρθρο",
+        howtoSteps: [
+          "<b>Ορίστε χρονόμετρο:</b> Επιλέξτε διάρκεια για τη συνεδρία εργασίας.",
+          "<b>Εκκινήστε το χρονόμετρο:</b> Κάντε κλικ στο \"Έναρξη\".",
+          "<b>Κάντε διαλείμματα:</b> Χρησιμοποιήστε σύντομα διαλείμματα μεταξύ των συνεδριών."
+        ],
+        howtoMobileTitle: '<i class="fa fa-hourglass-half"></i> Πώς να χρησιμοποιήσετε',
+        backLink: '<i class="fa fa-arrow-left"></i> Επιστροφή στο κύριο μενού',
+        toolTitle: '<i class="fa fa-hourglass-half"></i> Χρονόμετρο Εργασιών',
+        minutesLabel: 'Λεπτά: <input type="number" id="minutes" min="0" max="999" value="25" class="form-control" style="width:70px;display:inline-block;">',
+        secondsLabel: 'Δευτερόλεπτα: <input type="number" id="seconds" min="0" max="59" value="0" class="form-control" style="width:70px;display:inline-block;">',
+        startBtn: '<i class="fa fa-play"></i> Έναρξη',
+        pauseBtn: '<i class="fa fa-pause"></i> Παύση',
+        resetBtn: '<i class="fa fa-refresh"></i> Επαναφορά',
+        faqTitle: "Συχνές Ερωτήσεις",
+        faqList: [
+          "<b>Μπορώ να ορίσω προσαρμοσμένες διάρκειες;</b> Ναι, επιλέξτε οποιαδήποτε χρονική περίοδο.",
+          "<b>Διατηρείται το χρονόμετρο;</b> Όχι, επαναφέρεται μετά την επαναφόρτωση της σελίδας.",
+          "<b>Είναι δωρεάν;</b> Ναι, όλα τα εργαλεία του TimerHaven είναι δωρεάν."
+        ],
+        tipSection: '<i class="fa fa-bookmark"></i> <b>Προσθέστε σελιδοδείκτη:</b> Πατήστε <b>Ctrl+D</b> (<b>Cmd+D</b> σε Mac)!',
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές Χρονομέτρου',
+        tipsLink: "Διαβάστε ολόκληρο το άρθρο",
+        tipsList: [
+          "<b>Χρησιμοποιήστε για διαλείμματα:</b> Χρονομετρήστε τις περιόδους ανάπαυσης.",
+          "<b>Παρακολουθήστε συνεδρίες:</b> Ελέγξτε πόσο διαρκεί κάθε εργασία.",
+          "<b>Επανεκκινήστε:</b> Επαναφέρετε μεταξύ δραστηριοτήτων για ακριβή αρχεία."
+        ],
+        tipsMobileTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές',
+        alertEnd: "Τέλος χρόνου!"
+      },
+      ar: {
+        "language-label": "اللغة:",
+        howtoTitle: '<i class="fa fa-hourglass-half"></i> كيفية استخدام مؤقت المهام',
+        howtoLink: "اقرأ المقال الكامل",
+        howtoSteps: [
+          "<b>ضبط المؤقت:</b> اختر مدة لجلسة العمل الخاصة بك.",
+          "<b>ابدأ المؤقت:</b> انقر على \"ابدأ\".",
+          "<b>خذ استراحات:</b> استخدم فترات راحة قصيرة بين الجلسات."
+        ],
+        howtoMobileTitle: '<i class="fa fa-hourglass-half"></i> كيفية الاستخدام',
+        backLink: '<i class="fa fa-arrow-right"></i> العودة إلى القائمة الرئيسية',
+        toolTitle: '<i class="fa fa-hourglass-half"></i> مؤقت المهام',
+        minutesLabel: 'دقائق: <input type="number" id="minutes" min="0" max="999" value="25" class="form-control" style="width:70px;display:inline-block;">',
+        secondsLabel: 'ثواني: <input type="number" id="seconds" min="0" max="59" value="0" class="form-control" style="width:70px;display:inline-block;">',
+        startBtn: '<i class="fa fa-play"></i> ابدأ',
+        pauseBtn: '<i class="fa fa-pause"></i> إيقاف مؤقت',
+        resetBtn: '<i class="fa fa-refresh"></i> إعادة ضبط',
+        faqTitle: "الأسئلة الشائعة",
+        faqList: [
+          "<b>هل يمكنني ضبط مدة مخصصة?</b> نعم، اختر أي فترة زمنية.",
+          "<b>هل سيستمر المؤقت؟</b> لا، يتم إعادة ضبطه بعد إعادة تحميل الصفحة.",
+          "<b>هل هذا مجاني؟</b> نعم، جميع أدوات TimerHaven مجانية."
+        ],
+        tipSection: '<i class="fa fa-bookmark"></i> <b>ضع إشارة مرجعية:</b> اضغط <b>Ctrl+D</b> (<b>Cmd+D</b> على Mac)!',
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح المؤقت',
+        tipsLink: "اقرأ المقال الكامل",
+        tipsList: [
+          "<b>استخدم للاستراحات:</b> حدد وقت فترات الراحة.",
+          "<b>تتبع الجلسات:</b> راقب مدة كل مهمة.",
+          "<b>أعد التشغيل:</b> أعد الضبط بين الأنشطة للحصول على سجلات دقيقة."
+        ],
+        tipsMobileTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح',
+        alertEnd: "انتهى الوقت!"
+      }
+    };
+
+    const langNames = { en: "English", fr: "Français", es: "Español", de: "Deutsch", ru: "Русский", el: "Ελληνικά", ar: "العربية" };
+
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'en';
+        return (l && l.slice(0,2)) || 'en';
+      } catch (e) {
+        return 'en';
+      }
+    }
+
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0,2);
+      const t = translations[lang] || translations['en'];
+
+      // RTL support
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      // language indicator
+      const labelEl = document.getElementById('language-label');
+      const nameEl = document.getElementById('language-name');
+      if (labelEl) labelEl.textContent = t['language-label'] || 'Language:';
+      if (nameEl) nameEl.textContent = langNames[lang] || lang;
+
+      // Article 1 (left)
+      document.getElementById('howto-title').innerHTML = t.howtoTitle || '';
+      document.getElementById('howto-steps').innerHTML = (t.howtoSteps || []).map(s => `<li>${s}</li>`).join('');
+      document.getElementById('howto-link').textContent = t.howtoLink || '';
+      document.getElementById('howto-link').href = (lang === 'en') ? 'timer-how-to.html' : `timer-how-to-${lang}.html`;
+
+      // How-to mobile
+      document.getElementById('howto-mobile-title').innerHTML = t.howtoMobileTitle || '';
+      document.getElementById('howto-mobile-steps').innerHTML = (t.howtoSteps || []).map(s => `<li>${s}</li>`).join('');
+
+      // Back link and tool title
+      document.getElementById('back-link').innerHTML = t.backLink || '';
+      document.getElementById('tool-title').innerHTML = t.toolTitle || '';
+
+      // Form labels
+      document.getElementById('minutes-label').innerHTML = t.minutesLabel || '';
+      document.getElementById('seconds-label').innerHTML = t.secondsLabel || '';
+
+      // Buttons
+      document.getElementById('startBtn').innerHTML = t.startBtn || '';
+      document.getElementById('pauseBtn').innerHTML = t.pauseBtn || '';
+      document.getElementById('resetBtn').innerHTML = t.resetBtn || '';
+
+      // FAQ
+      document.getElementById('faq-title').textContent = t.faqTitle || '';
+      document.getElementById('faq-list').innerHTML = (t.faqList || []).map(s => `<li>${s}</li>`).join('');
+
+      // Tip section
+      document.getElementById('tip-section').innerHTML = t.tipSection || '';
+
+      // Tips mobile
+      document.getElementById('tips-mobile-title').innerHTML = t.tipsMobileTitle || '';
+      document.getElementById('tips-mobile-list').innerHTML = (t.tipsList || []).map(s => `<li>${s}</li>`).join('');
+
+      // Article 2 (right)
+      document.getElementById('tips-title').innerHTML = t.tipsTitle || '';
+      document.getElementById('tips-list').innerHTML = (t.tipsList || []).map(s => `<li>${s}</li>`).join('');
+      document.getElementById('tips-link').textContent = t.tipsLink || '';
+      document.getElementById('tips-link').href = (lang === 'en') ? 'timer-tips.html' : `timer-tips-${lang}.html`;
+    }
+
+    // listen for main-menu language changes
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        applyLanguage((e.newValue || 'en').slice(0,2));
+      }
+    });
+
+    // initialize after DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // apply language from main site
+      applyLanguage(getLang());
+    });
+
     // Task Timer logic
     let timer = null;
     let totalSeconds = 25*60;
     let running = false;
+
     function updateTimerDisplay() {
       const min = Math.floor(totalSeconds/60);
       const sec = totalSeconds % 60;
       document.getElementById('timerDisplay').textContent =
         String(min).padStart(2,'0')+":"+String(sec).padStart(2,'0');
     }
+
     function setTimerLengths() {
       const min = parseInt(document.getElementById('minutes').value,10) || 0;
       const sec = parseInt(document.getElementById('seconds').value,10) || 0;
       totalSeconds = min*60 + sec;
       updateTimerDisplay();
     }
+
     document.getElementById('minutes').addEventListener('change', setTimerLengths);
     document.getElementById('seconds').addEventListener('change', setTimerLengths);
 
@@ -135,21 +465,27 @@
         } else {
           clearInterval(timer);
           running = false;
-          alert("Time's up!");
+          const lang = getLang();
+          const t = translations[lang] || translations['en'];
+          try { alert(t.alertEnd || "Time's up!"); } catch(e){}
         }
       },1000);
     };
+
     document.getElementById('pauseBtn').onclick = function() {
       if(timer) clearInterval(timer);
       running = false;
     };
+
     document.getElementById('resetBtn').onclick = function() {
       if(timer) clearInterval(timer);
       running = false;
       setTimerLengths();
     };
+
     setTimerLengths();
   </script>
+
 <footer>
   &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
   <a href="privacy.html">Privacy Policy</a> &bull;

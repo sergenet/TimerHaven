@@ -1,68 +1,437 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="UTF-8">
   <title>Stopwatch — TimerHaven</title>
-  <meta name="robots" content="noindex">
-  <meta http-equiv="refresh" content="0;url=stopwatch-en.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Measure elapsed time for any activity. Learn how to use Stopwatch, get productivity tips, FAQs, and read expert articles.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; padding: 2rem; background:#f7f9fb; color:#0b2545; }
-    .box { max-width:720px; margin:3rem auto; background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 6px 18px rgba(11,37,69,0.06); }
-    a { color:#0d6efd; text-decoration:none; }
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; padding: 0 1rem; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
+    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 340px; min-width: 200px; min-height: 340px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
+    .article-card h2 { font-size: 1.25em; font-weight: 700; margin-bottom: 0.6em; color: #185a9d; }
+    .article-card ul, .article-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; color: #374151; }
+    .article-card .btn { align-self: stretch; font-weight: 600; border-radius: 8px; margin-top: 0.6em; box-sizing: border-box; }
+    .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 340px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: left; position: relative; z-index: 1; }
+    .tool-card h3 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.5em; color: #185a9d; }
+    .stopwatch-display { font-weight: 700; font-size: 1.25rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
+    .controls-row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem; }
+    .lap-list { margin-top: 0.8rem; }
+    .back-link { display: block; margin-bottom: 0.5em; color: #185a9d; text-decoration: none; font-weight: 600; font-size: 1em; }
+    .back-link:hover { text-decoration: underline; color: #43cea2; }
+    .faq-section { margin-top: 1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
+    .faq-section summary { font-weight: bold; font-size: 1em; cursor: pointer; margin-bottom: 0.5em; }
+    .btn-small { padding: 0.35rem 0.7rem; font-size: 0.9rem; }
+
+    /* Non-editable language indicator (top-right) */
+    .language-indicator {
+      position: fixed;
+      right: 18px;
+      top: 16px;
+      z-index: 12000;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:#185a9d;
+      font-weight:600;
+      background: rgba(255,255,255,0.95);
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(8,20,40,0.06);
+      font-size: 0.98em;
+    }
+    .language-indicator .lang-label { margin-right: 6px; }
+    .language-indicator .lang-name { background: linear-gradient(90deg,#43cea2 0%,#185a9d 100%); color:#fff; padding:6px 10px; border-radius:8px; font-weight:700; box-shadow: 0 2px 8px #e0e7ef; }
+
+    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
+    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } }
   </style>
-  <script>
-    (function(){
-      var map = {
-        'en': 'stopwatch-en.html',
-        'fr': 'stopwatch-fr.html',
-        'es': 'stopwatch-es.html',
-        'de': 'stopwatch-de.html',
-        'ru': 'stopwatch-ru.html',
-        'el': 'stopwatch-el.html',
-        'ar': 'stopwatch-ar.html'
-      };
-      function getQueryLang() {
-        try {
-          var m = location.search.match(/[?&]lang=([a-z]{2})/i);
-          return m ? m[1].toLowerCase() : null;
-        } catch (e) { return null; }
-      }
-      function pickByNavigator() {
-        var langs = [];
-        try {
-          if (navigator.languages) langs = langs.concat(navigator.languages);
-          if (navigator.language) langs.push(navigator.language);
-          if (navigator.userLanguage) langs.push(navigator.userLanguage);
-        } catch (e) {}
-        for (var i=0;i<langs.length;i++) {
-          if (!langs[i]) continue;
-          var code = String(langs[i]).toLowerCase().split('-')[0];
-          if (map[code]) return code;
-        }
-        return null;
-      }
-      var q = getQueryLang();
-      if (q && map[q]) { window.location.replace(map[q]); return; }
-      var d = pickByNavigator();
-      if (d && map[d]) { window.location.replace(map[d]); return; }
-      window.location.replace(map['en']);
-    })();
-  </script>
 </head>
 <body>
-  <div class="box">
-    <h1>Stopwatch — TimerHaven</h1>
-    <p>If you are not redirected automatically, choose a language:</p>
-    <ul>
-      <li><a href="stopwatch-en.html">English</a></li>
-      <li><a href="stopwatch-fr.html">Français</a></li>
-      <li><a href="stopwatch-es.html">Español</a></li>
-      <li><a href="stopwatch-de.html">Deutsch</a></li>
-      <li><a href="stopwatch-ru.html">Русский</a></li>
-      <li><a href="stopwatch-el.html">Ελληνικά</a></li>
-      <li><a href="stopwatch-ar.html">العربية</a></li>
-    </ul>
+  <!-- Non-editable language indicator (reads timerhavenLang set by main index) -->
+  <div class="language-indicator" id="language-indicator" role="status" aria-live="polite" title="Selected language from main menu">
+    <span class="lang-label" id="language-label">Language:</span>
+    <span class="lang-name" id="language-name">English</span>
   </div>
+
+  <div class="main-container">
+    <div class="center-row">
+      <div class="article-card">
+        <div>
+          <h2 id="howto-title"></h2>
+          <ol id="howto-steps" style="padding-left: 1.1rem;"></ol>
+        </div>
+        <a href="stopwatch-how-to.html" class="btn btn-outline-primary btn-sm" id="howto-link"></a>
+      </div>
+      <div class="tool-card" role="region" aria-label="Stopwatch">
+        <a href="index.html" class="back-link" id="back-link"></a>
+        <h3 id="tool-title"></h3>
+        <div class="stopwatch-section" aria-live="polite">
+          <div id="swDisplay" class="stopwatch-display">00:00:00</div>
+          <div class="controls-row">
+            <button id="swStartBtn" class="btn btn-success btn-small"></button>
+            <button id="swPauseBtn" class="btn btn-secondary btn-small"></button>
+            <button id="swResetBtn" class="btn btn-danger btn-small"></button>
+            <button id="swLapBtn" class="btn btn-info btn-small"></button>
+          </div>
+          <div id="lapList" class="lap-list"></div>
+          <details class="faq-section">
+            <summary id="faq-title"></summary>
+            <ul style="padding-left: 1.1rem;" id="faq-list"></ul>
+          </details>
+        </div>
+      </div>
+      <div class="article-card">
+        <div>
+          <h2 id="tips-title"></h2>
+          <ul id="tips-list" style="padding-left: 1.1rem;"></ul>
+        </div>
+        <a href="stopwatch-tips.html" class="btn btn-outline-primary btn-sm" id="tips-link"></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Translations
+    const translations = {
+      en: {
+        "language-label": "Language:",
+        howtoTitle: '<i class="fa fa-clock"></i> How to Use Stopwatch',
+        howtoSteps: [
+          "<b>Start the timer:</b> Click <strong>Start</strong> to begin tracking time.",
+          "<b>Pause or reset:</b> Use <strong>Pause</strong> and <strong>Reset</strong> as needed.",
+          "<b>Track laps:</b> Click <strong>Lap</strong> to record split times."
+        ],
+        howtoLink: "Read Full Article",
+        backLink: "&larr; Back to Main Menu",
+        toolTitle: '<i class="fa fa-clock"></i> Stopwatch',
+        startBtn: "Start",
+        pauseBtn: "Pause",
+        resetBtn: "Reset",
+        lapBtn: "Lap",
+        faqTitle: "FAQs",
+        faqList: [
+          "<b>Can I track multiple laps?</b> Yes, use the lap button.",
+          "<b>Will the time persist?</b> No, it resets after page reload.",
+          "<b>Is this free?</b> Yes, all TimerHaven tools are free."
+        ],
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Stopwatch Tips',
+        tipsLink: "Read Full Article",
+        tipsList: [
+          "<b>Use laps for intervals:</b> Track split times in workouts or sets.",
+          "<b>Pause and resume:</b> Useful for rest periods or interruptions.",
+          "<b>Reset between activities:</b> Start fresh each session."
+        ],
+        lapLabel: "Lap"
+      },
+      fr: {
+        "language-label": "Langue :",
+        howtoTitle: '<i class="fa fa-clock"></i> Comment utiliser le Chronomètre',
+        howtoSteps: [
+          "<b>Démarrez le minuteur :</b> Cliquez sur <strong>Démarrer</strong>.",
+          "<b>Pause / Réinitialiser :</b> Utilisez <strong>Pause</strong> et <strong>Réinitialiser</strong>.",
+          "<b>Enregistrez des tours :</b> Cliquez sur <strong>Tour</strong>."
+        ],
+        howtoLink: "Lire l'article",
+        backLink: "&larr; Retour au menu principal",
+        toolTitle: '<i class="fa fa-clock"></i> Chronomètre',
+        startBtn: "Démarrer",
+        pauseBtn: "Pause",
+        resetBtn: "Réinitialiser",
+        lapBtn: "Tour",
+        faqTitle: "FAQs",
+        faqList: [
+          "<b>Puis-je suivre plusieurs tours ?</b> Oui, utilisez le bouton Tour.",
+          "<b>Le temps persiste-t-il ?</b> Non, il est réinitialisé au rechargement.",
+          "<b>Est-ce gratuit ?</b> Oui, tous les outils TimerHaven sont gratuits."
+        ],
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils Chronomètre',
+        tipsLink: "Lire l'article",
+        tipsList: [
+          "<b>Utilisez les tours :</b> Suivez les temps partiels pour l'entraînement.",
+          "<b>Pause et reprise :</b> Pratique pour les interruptions.",
+          "<b>Réinitialisez :</b> Pour des sessions séparées."
+        ],
+        lapLabel: "Tour"
+      },
+      es: {
+        "language-label": "Idioma:",
+        howtoTitle: '<i class="fa fa-clock"></i> Cómo usar el Cronómetro',
+        howtoSteps: [
+          "<b>Iniciar el temporizador:</b> Haz clic en <strong>Iniciar</strong>.",
+          "<b>Pausar o restablecer:</b> Usa <strong>Pausa</strong> y <strong>Restablecer</strong>.",
+          "<b>Registrar vueltas:</b> Haz clic en <strong>Vuelta</strong>."
+        ],
+        howtoLink: "Leer artículo completo",
+        backLink: "&larr; Volver al menú principal",
+        toolTitle: '<i class="fa fa-clock"></i> Cronómetro',
+        startBtn: "Iniciar",
+        pauseBtn: "Pausa",
+        resetBtn: "Restablecer",
+        lapBtn: "Vuelta",
+        faqTitle: "FAQs",
+        faqList: [
+          "<b>¿Puedo registrar múltiples vueltas?</b> Sí, usa el botón Vuelta.",
+          "<b>¿Se guarda el tiempo?</b> No, se restablece después de recargar.",
+          "<b>¿Es gratuito?</b> Sí, todas las herramientas de TimerHaven son gratuitas."
+        ],
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos del Cronómetro',
+        tipsLink: "Leer artículo completo",
+        tipsList: [
+          "<b>Usa vueltas para intervalos:</b> Registra tiempos parciales en entrenamientos.",
+          "<b>Pausa y reanuda:</b> Útil para descansos o interrupciones.",
+          "<b>Restablece entre actividades:</b> Comienza fresco cada sesión."
+        ],
+        lapLabel: "Vuelta"
+      },
+      de: {
+        "language-label": "Sprache:",
+        howtoTitle: '<i class="fa fa-clock"></i> So nutzen Sie die Stoppuhr',
+        howtoSteps: [
+          "<b>Timer starten:</b> Klicken Sie auf <strong>Start</strong>.",
+          "<b>Pause / Zurücksetzen:</b> Nutzen Sie <strong>Pause</strong> und <strong>Zurücksetzen</strong>.",
+          "<b>Runden aufzeichnen:</b> Klicken Sie auf <strong>Runde</strong>."
+        ],
+        howtoLink: "Vollständigen Artikel lesen",
+        backLink: "&larr; Zurück zum Hauptmenü",
+        toolTitle: '<i class="fa fa-clock"></i> Stoppuhr',
+        startBtn: "Start",
+        pauseBtn: "Pause",
+        resetBtn: "Zurücksetzen",
+        lapBtn: "Runde",
+        faqTitle: "FAQs",
+        faqList: [
+          "<b>Kann ich mehrere Runden tracken?</b> Ja, nutzen Sie den Runden-Button.",
+          "<b>Bleibt die Zeit gespeichert?</b> Nein, sie wird beim Neuladen zurückgesetzt.",
+          "<b>Ist das kostenlos?</b> Ja, alle TimerHaven-Tools sind kostenlos."
+        ],
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Stoppuhr-Tipps',
+        tipsLink: "Vollständigen Artikel lesen",
+        tipsList: [
+          "<b>Nutzen Sie Runden für Intervalle:</b> Verfolgen Sie Zwischenzeiten beim Training.",
+          "<b>Pause und Fortsetzen:</b> Nützlich für Unterbrechungen.",
+          "<b>Zwischen Aktivitäten zurücksetzen:</b> Für saubere Aufzeichnungen."
+        ],
+        lapLabel: "Runde"
+      },
+      ru: {
+        "language-label": "Язык:",
+        howtoTitle: '<i class="fa fa-clock"></i> Как использовать Секундомер',
+        howtoSteps: [
+          "<b>Запустите таймер:</b> Нажмите <strong>Старт</strong>.",
+          "<b>Пауза / Сброс:</b> Используйте <strong>Пауза</strong> и <strong>Сброс</strong>.",
+          "<b>Записывайте круги:</b> Нажмите <strong>Круг</strong>."
+        ],
+        howtoLink: "Читать всю статью",
+        backLink: "&larr; Назад в главное меню",
+        toolTitle: '<i class="fa fa-clock"></i> Секундомер',
+        startBtn: "Старт",
+        pauseBtn: "Пауза",
+        resetBtn: "Сброс",
+        lapBtn: "Круг",
+        faqTitle: "Частые вопросы",
+        faqList: [
+          "<b>Можно ли записывать несколько кругов?</b> Да, используйте кнопку Круг.",
+          "<b>Сохраняется ли время?</b> Нет, сбрасывается после перезагрузки.",
+          "<b>Это бесплатно?</b> Да, все инструменты TimerHaven бесплатны."
+        ],
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по Секундомеру',
+        tipsLink: "Читать всю статью",
+        tipsList: [
+          "<b>Используйте круги для интервалов:</b> Отслеживайте промежуточное время при тренировках.",
+          "<b>Пауза и продолжение:</b> Полезно для перерывов.",
+          "<b>Сбрасывайте между активностями:</b> Начинайте заново каждую сессию."
+        ],
+        lapLabel: "Круг"
+      },
+      el: {
+        "language-label": "Γλώσσα:",
+        howtoTitle: '<i class="fa fa-clock"></i> Πώς να χρησιμοποιήσετε το Χρονόμετρο',
+        howtoSteps: [
+          "<b>Εκκινήστε το χρονόμετρο:</b> Κάντε κλικ στο <strong>Έναρξη</strong>.",
+          "<b>Παύση / Επαναφορά:</b> Χρησιμοποιήστε <strong>Παύση</strong> και <strong>Επαναφορά</strong>.",
+          "<b>Καταγράψτε γύρους:</b> Κάντε κλικ στο <strong>Γύρος</strong>."
+        ],
+        howtoLink: "Διαβάστε ολόκληρο το άρθρο",
+        backLink: "&larr; Επιστροφή στο κύριο μενού",
+        toolTitle: '<i class="fa fa-clock"></i> Χρονόμετρο',
+        startBtn: "Έναρξη",
+        pauseBtn: "Παύση",
+        resetBtn: "Επαναφορά",
+        lapBtn: "Γύρος",
+        faqTitle: "Συχνές Ερωτήσεις",
+        faqList: [
+          "<b>Μπορώ να καταγράψω πολλούς γύρους;</b> Ναι, χρησιμοποιήστε το κουμπί Γύρος.",
+          "<b>Διατηρείται ο χρόνος;</b> Όχι, επαναφέρεται μετά την επαναφόρτωση.",
+          "<b>Είναι δωρεάν;</b> Ναι, όλα τα εργαλεία του TimerHaven είναι δωρεάν."
+        ],
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές Χρονομέτρου',
+        tipsLink: "Διαβάστε ολόκληρο το άρθρο",
+        tipsList: [
+          "<b>Χρησιμοποιήστε γύρους για διαστήματα:</b> Παρακολουθήστε ενδιάμεσους χρόνους.",
+          "<b>Παύση και συνέχεια:</b> Χρήσιμο για διαλείμματα.",
+          "<b>Επαναφορά μεταξύ δραστηριοτήτων:</b> Ξεκινήστε καθαρά κάθε συνεδρία."
+        ],
+        lapLabel: "Γύρος"
+      },
+      ar: {
+        "language-label": "اللغة:",
+        howtoTitle: '<i class="fa fa-clock"></i> كيفية استخدام الموقت',
+        howtoSteps: [
+          "<b>ابدأ المؤقت:</b> اضغط <strong>ابدأ</strong>.",
+          "<b>إيقاف/إعادة ضبط:</b> استخدم <strong>إيقاف مؤقت</strong> و <strong>إعادة ضبط</strong>.",
+          "<b>سجل لفات:</b> اضغط <strong>لفة</strong>."
+        ],
+        howtoLink: "اقرأ المقالة",
+        backLink: "&larr; العودة إلى القائمة الرئيسية",
+        toolTitle: '<i class="fa fa-clock"></i> الموقت',
+        startBtn: "ابدأ",
+        pauseBtn: "إيقاف مؤقت",
+        resetBtn: "إعادة ضبط",
+        lapBtn: "لفة",
+        faqTitle: "الأسئلة الشائعة",
+        faqList: [
+          "<b>هل يمكن تسجيل لفات متعددة؟</b> نعم، استخدم زر اللفة.",
+          "<b>هل يبقى الوقت محفوظاً؟</b> لا، يعاد عند إعادة التحميل.",
+          "<b>هل هو مجاني؟</b> نعم، جميع أدوات TimerHaven مجانية."
+        ],
+        tipsTitle: '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح الموقت',
+        tipsLink: "اقرأ المقالة",
+        tipsList: [
+          "<b>استخدم اللفات للفترات:</b> سجل الأوقات الجزئية.",
+          "<b>إيقاف مؤقت واستئناف:</b> مفيد عند المقاطعات.",
+          "<b>إعادة ضبط بين الجلسات:</b> للحفاظ على سجلات نظيفة."
+        ],
+        lapLabel: "لفة"
+      }
+    };
+
+    const langNames = { en: "English", fr: "Français", es: "Español", de: "Deutsch", ru: "Русский", el: "Ελληνικά", ar: "العربية" };
+
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'en';
+        return (l && l.slice(0,2)) || 'en';
+      } catch (e) {
+        return 'en';
+      }
+    }
+
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0,2);
+      const t = translations[lang] || translations['en'];
+
+      // RTL support
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      // language indicator
+      const labelEl = document.getElementById('language-label');
+      const nameEl = document.getElementById('language-name');
+      if (labelEl) labelEl.textContent = t['language-label'] || 'Language:';
+      if (nameEl) nameEl.textContent = langNames[lang] || lang;
+
+      // Article 1 (left)
+      document.getElementById('howto-title').innerHTML = t.howtoTitle || '';
+      document.getElementById('howto-steps').innerHTML = (t.howtoSteps || []).map(s => `<li>${s}</li>`).join('');
+      document.getElementById('howto-link').textContent = t.howtoLink || '';
+      document.getElementById('howto-link').href = (lang === 'en') ? 'stopwatch-how-to.html' : `stopwatch-how-to-${lang}.html`;
+
+      // Tool card
+      document.getElementById('back-link').innerHTML = t.backLink || '';
+      document.getElementById('tool-title').innerHTML = t.toolTitle || '';
+
+      // Buttons
+      document.getElementById('swStartBtn').textContent = t.startBtn || '';
+      document.getElementById('swPauseBtn').textContent = t.pauseBtn || '';
+      document.getElementById('swResetBtn').textContent = t.resetBtn || '';
+      document.getElementById('swLapBtn').textContent = t.lapBtn || '';
+
+      // FAQ
+      document.getElementById('faq-title').textContent = t.faqTitle || '';
+      document.getElementById('faq-list').innerHTML = (t.faqList || []).map(s => `<li>${s}</li>`).join('');
+
+      // Article 2 (right)
+      document.getElementById('tips-title').innerHTML = t.tipsTitle || '';
+      document.getElementById('tips-list').innerHTML = (t.tipsList || []).map(s => `<li>${s}</li>`).join('');
+      document.getElementById('tips-link').textContent = t.tipsLink || '';
+      document.getElementById('tips-link').href = (lang === 'en') ? 'stopwatch-tips.html' : `stopwatch-tips-${lang}.html`;
+    }
+
+    // listen for main-menu language changes
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        applyLanguage((e.newValue || 'en').slice(0,2));
+      }
+    });
+
+    // Stopwatch logic
+    let swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
+
+    function swFormat(ms) {
+      const t = Math.floor(ms / 1000);
+      const h = Math.floor(t / 3600);
+      const m = Math.floor((t % 3600) / 60);
+      const s = t % 60;
+      return String(h).padStart(2,'0')+":"+String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+    }
+
+    function renderLaps() {
+      const lapList = document.getElementById('lapList');
+      const lang = getLang();
+      const t = translations[lang] || translations['en'];
+      lapList.innerHTML = laps.map((l,i) => {
+        return `<div class="lap-item">${t.lapLabel || 'Lap'} ${i+1}: ${swFormat(l)}</div>`;
+      }).join('');
+    }
+
+    function swUpdateDisplay() {
+      document.getElementById('swDisplay').textContent = swFormat(swElapsed);
+      renderLaps();
+    }
+
+    // initialize after DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // apply language from main site
+      applyLanguage(getLang());
+
+      document.getElementById('swStartBtn').onclick = function() {
+        if (swRunning) return;
+        swRunning = true;
+        swStart = Date.now() - swElapsed;
+        swTimer = setInterval(function(){
+          swElapsed = Date.now() - swStart;
+          swUpdateDisplay();
+        }, 100);
+      };
+
+      document.getElementById('swPauseBtn').onclick = function() {
+        swRunning = false;
+        clearInterval(swTimer);
+      };
+
+      document.getElementById('swResetBtn').onclick = function() {
+        swRunning = false;
+        clearInterval(swTimer);
+        swElapsed = 0;
+        laps = [];
+        swUpdateDisplay();
+      };
+
+      document.getElementById('swLapBtn').onclick = function() {
+        if (swRunning) laps.push(swElapsed);
+        swUpdateDisplay();
+      };
+
+      swUpdateDisplay();
+    });
+  </script>
+
+<footer style="text-align:center; margin-top:1.5rem; color:#6b7280;">
+  &copy; 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>
+</footer>
 </body>
 </html>
