@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clipboard Manager — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Save, manage, and organize multiple clipboard snippets." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="/mobile-enhancements.css">
+  <style>
+    :root {
+      --card-bg: #fff;
+      --page-bg: #f4f7fb;
+      --accent: #185a9d;
+      --accent-2: #43cea2;
+      --lang-gradient: linear-gradient(90deg,#43cea2,#185a9d);
+    }
+    html,body { height: 100%; margin:0; }
+    body { background: var(--page-bg); font-family: 'Montserrat', Arial, sans-serif; color:#1f2937; }
+
+    /* Top language indicator: fixed top-right so it never reflows with the page */
+    .top-bar {
+      position: fixed;
+      right: 18px;
+      top: 16px;
+      z-index: 12000;
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+    }
+
+    /* Non-editable language indicator */
+    .language-indicator {
+      text-align: right;
+      padding: 8px 12px;
+      margin-bottom: 0.0rem;
+      position: relative;
+      z-index: 5;
+      color: #185a9d;
+      font-weight: 600;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.98em;
+      background: rgba(255,255,255,0.92);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(24,90,157,0.06);
+    }
+    .language-indicator .lang-label { margin-right: 6px; }
+    .language-indicator .lang-name {
+      background: var(--lang-gradient);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #e0e7ef;
+      font-weight: 700;
+      font-size: 0.98em;
+    }
+
+    /* Card/grid styles (unchanged) */
+    .main-container { max-width: 1200px; margin: 1.5em auto; padding: 0 12px; box-sizing: border-box; }
+    .center-row { display:flex; gap:1.5em; align-items: stretch; }
+    .center-row > .col { flex: 1 1 0; display:flex; min-width: 220px; }
+
+    .card-base {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(224,231,239,1);
+      padding: 1.6em;
+      display:flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      width:100%;
+    }
+
+    .article-card, .tool-card { min-height: 360px; }
+    .card-inner { display:flex; flex-direction:column; flex:1 1 auto; }
+    .card-content { flex: 1 1 auto; }
+    .card-actions { margin-top: 1rem; }
+
+    h2, h3 { color: var(--accent); margin: 0 0 0.5rem 0; font-weight:700; }
+    .article-card h2, .tool-card h3 { font-size:1.4rem; line-height:1.05; display:flex; gap:.4rem; align-items:center; }
+
+    .clips-section { display:flex; flex-direction:column; gap:.6rem; }
+    .clips-form { display:flex; gap:.6rem; align-items:center; }
+    .clips-form input[type="text"] { flex:1 1 auto; min-width:0; }
+
+    .clips-list { margin-top: .4rem; max-height:260px; overflow-y:auto; padding-right:6px; }
+
+    .clip-item { background:#f7fafc; border-radius:8px; padding:.6rem; margin-bottom:.6rem; display:flex; gap:.6rem; align-items:center; }
+    .clip-text { flex:1; word-break:break-word; }
+
+    .faq-section { margin-top:8px; background:#fbfdff; border-radius:8px; padding:.8rem; box-shadow: inset 0 1px 0 rgba(0,0,0,0.02); }
+    details[open] summary::after { content: " ▲"; }
+    details summary::after { content: " ▼"; }
+    details summary { cursor:pointer; font-weight:600; }
+
+    .back-link { color:var(--accent); font-weight:700; text-decoration:none; display:inline-block; margin-bottom:.6rem; }
+    .back-link i { margin-right:.35rem; }
+
+    .btn-outline-primary { border-radius:10px; padding: .55rem 1rem; }
+    .btn-success { border-radius:8px; padding:.45rem .85rem; }
+
+    footer { text-align:center; color:#666; padding: 1.4rem 0 2rem; font-size:.9rem; }
+
+    .tool-top-actions {
+      display:flex;
+      gap:.5rem;
+      margin: .5rem 0 0.75rem 0;
+      align-items:center;
+      justify-content:center;
+    }
+    .tool-top-actions .btn {
+      flex: 0 0 auto;
+      padding: .45rem .6rem;
+      border-radius: 10px;
+      font-weight:700;
+    }
+    .tool-top-actions .btn.about { background: #fff; border: 1px solid #dbe7f2; color:#185a9d; }
+
+    .tool-info {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .28s ease, padding .28s ease, margin .28s ease;
+      padding: 0;
+      margin: 0;
+      background: #fbfdff;
+      border-radius: 10px;
+      box-shadow: inset 0 1px 0 rgba(0,0,0,0.02);
+      color: #334155;
+    }
+    .tool-info.open {
+      padding: 0.8rem;
+      margin: 0.8rem 0 1rem;
+      max-height: 1200px;
+    }
+
+    @media (max-width: 900px) {
+      .center-row { flex-direction: column; }
+      .center-row > .col { min-width: auto; }
+      .language-indicator { padding: 6px 8px; font-size: 0.92em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar" aria-hidden="false">
+    <!-- Non-editable language indicator reads the chosen language from main index (timerhavenLang) -->
+    <div class="language-indicator" id="language-indicator" role="status" aria-live="polite" title="Selected language from main menu">
+      <span class="lang-label" id="language-label">Language:</span>
+      <span class="lang-name" id="language-name">English</span>
+    </div>
+  </div>
+
+  <div class="main-container" id="page-main">
+    <div class="center-row">
+      <div class="col">
+        <article class="card-base article-card" id="left-article">
+          <div class="card-inner">
+            <header class="card-content">
+              <h2 id="howto-title"><i class="fa fa-clipboard"></i> How to Use Clipboard Manager</h2>
+              <ol id="howto-steps">
+                <li><b>Add a clip:</b> Type or paste your text, then click <b>Add Clip</b>.</li>
+                <li><b>Copy a clip:</b> Click the <b>Copy</b> button next to any clip to copy instantly.</li>
+                <li><b>Remove/Pin:</b> Use <b>Remove</b> or <b>Pin</b> to manage your clips.</li>
+                <li><b>Clips are saved:</b> All your clips are stored in your browser and remain after reload.</li>
+              </ol>
+            </header>
+            <div class="card-actions">
+              <a id="left-article-btn" class="btn btn-outline-primary w-100" href="clipboard-how-to.html">Read Full Article</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col tool-col">
+        <section class="card-base tool-card" id="tool-card" aria-labelledby="tool-title">
+          <div class="card-inner">
+            <div class="card-content">
+              <a class="back-link" id="back-link" href="index.html"><i class="fa fa-arrow-left"></i><span id="back-link-text">Back to Main Menu</span></a>
+              <h3 id="tool-title"><i class="fa fa-clipboard"></i> Clipboard Manager</h3>
+
+              <div class="tool-top-actions" role="toolbar" aria-label="Tool actions">
+                <button id="btn-about" class="btn about" type="button" aria-controls="tool-info" aria-expanded="false">About the Clipboard Manager</button>
+              </div>
+
+              <article class="tool-info" id="tool-info" aria-hidden="true">
+                <h2 style="margin-top:0; margin-bottom:0.4rem; font-size:1.1rem; color:var(--accent);">About the Clipboard Manager</h2>
+                <p style="margin-bottom:0.6rem;">
+                  The Clipboard Manager is a lightweight, privacy‑first tool for storing and reusing text snippets. It’s designed for quick repetition tasks — email signatures, short code fragments, addresses, and commonly used phrases — without installing extra software. Everything you save here is stored in your browser (localStorage) so you remain in control of your data.
+                </p>
+                <h3 style="margin:0 0 .4rem 0; font-size:1rem; color:var(--accent);">How it helps</h3>
+                <p style="margin-bottom:0.6rem;">
+                  Instead of searching through documents or typing the same content repeatedly, keep frequent snippets ready with a single click. Use pinning to keep important items at the top, and the built‑in copy action to instantly move text to your system clipboard.
+                </p>
+
+                <h3 style="margin:0 0 .4rem 0; font-size:1rem; color:var(--accent);">Quick usage</h3>
+                <ol style="margin:0 0 .6rem 1.2rem;">
+                  <li>Paste or type text into the input field and click <strong>Add Clip</strong>.</li>
+                  <li>Click the <strong>Copy</strong> button next to any clip to copy it to your device clipboard.</li>
+                  <li>Click <strong>Pin</strong> to keep a clip at the top, or <strong>Remove</strong> to delete it.</li>
+                </ol>
+
+                <h3 style="margin:0 0 .4rem 0; font-size:1rem; color:var(--accent);">Practical tips</h3>
+                <ul style="margin:0 0 .6rem 1.2rem;">
+                  <li>Keep clips short and descriptive — that makes finding the right snippet quicker.</li>
+                  <li>Create categories mentally (e.g., Signatures, Code, Addresses) and prefix items (SIG:, CODE:) for easy scanning.</li>
+                  <li>Avoid storing passwords or highly sensitive data here; use a secure password manager instead.</li>
+                </ul>
+
+                <h3 style="margin:0 0 .4rem 0; font-size:1rem; color:var(--accent);">FAQ</h3>
+                <dl style="margin:0 0 .4rem 0;">
+                  <dt style="font-weight:700;">Is my data uploaded to your servers?</dt>
+                  <dd>No. By default clips are saved locally in your browser and are not transmitted to the server unless you explicitly export or copy them elsewhere.</dd>
+
+                  <dt style="font-weight:700; margin-top:.4rem;">Will clips persist across browsers or devices?</dt>
+                  <dd>Not automatically. Clips persist in the same browser on the same device. To move clips between devices, export and import, or use a sync feature if you set one up externally.</dd>
+                </dl>
+              </article>
+
+              <div class="clips-section">
+                <form id="clipboardForm" class="clips-form" aria-label="Add clip form">
+                  <input type="text" id="clipInput" class="form-control" placeholder="Type or paste clip..." />
+                  <button type="submit" class="btn btn-success" id="add-btn">Add Clip</button>
+                </form>
+
+                <div id="clipsList" class="clips-list" aria-live="polite"></div>
+
+                <details class="faq-section" id="faq-details">
+                  <summary id="faq-summary">FAQs</summary>
+                  <ul id="faq-list" style="padding-left:1em;">
+                    <li><b>Are my notes saved?</b> Yes! Notes are saved in your browser and remain until you clear them.</li>
+                  </ul>
+                </details>
+              </div>
+            </div>
+
+            <div class="card-actions" aria-hidden="true"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col">
+        <aside class="card-base article-card" id="right-article">
+          <div class="card-inner">
+            <header class="card-content">
+              <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:var(--accent-2)"></i> Clipboard Tips</h2>
+              <ul id="tips-list">
+                <li><b>Keep clips short:</b> Easier to scan and reuse.</li>
+                <li><b>Pin important:</b> Keep frequent items on top.</li>
+                <li><b>Remove old:</b> Clean up outdated clips regularly.</li>
+              </ul>
+            </header>
+
+            <div class="card-actions">
+              <a id="right-article-btn" class="btn btn-outline-primary w-100" href="clipboard-tips.html">Read Full Article</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br />
+    <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>
+  </footer>
+
+  <!-- Panel overlay -->
+  <div id="tool-panel-overlay" role="dialog" aria-hidden="true">
+    <div id="tool-panel" aria-live="polite">
+      <div class="panel-header">
+        <h4 id="panel-title">Panel</h4>
+        <div>
+          <button id="panel-open-external" class="btn btn-sm btn-outline-secondary" style="margin-right:.5rem;display:none;">Open page</button>
+          <button id="panel-close" class="btn btn-sm btn-outline-danger">Close</button>
+        </div>
+      </div>
+      <div class="panel-body" id="panel-body"></div>
+    </div>
+  </div>
+
+  <script>
+    // Translation dictionary (kept as before) — keys remain the same
+    const T = {
+      en: {
+        back_link: "Back to Main Menu",
+        tool_title: "Clipboard Manager",
+        howto_title: "How to Use Clipboard Manager",
+        howto_steps: `<li><b>Add a clip:</b> Type or paste your text, then click <b>Add Clip</b>.</li>
+          <li><b>Copy a clip:</b> Click the <b>Copy</b> button next to any clip to copy instantly.</li>
+          <li><b>Remove/Pin:</b> Use <b>Remove</b> or <b>Pin</b> to manage your clips.</li>
+          <li><b>Clips are saved:</b> All your clips are stored in your browser and remain after reload.</li>`,
+        howto_article_btn: "Read Full Article",
+        howto_article_link: "clipboard-how-to.html",
+        tips_title: "Clipboard Tips",
+        tips_list: `<li><b>Keep clips short:</b> Easier to scan and reuse.</li>
+          <li><b>Pin important:</b> Keep frequent items on top.</li>
+          <li><b>Remove old:</b> Clean up outdated clips regularly.</li>`,
+        tips_article_link: "clipboard-tips.html",
+        faq_list: `<li><b>Are my notes saved?</b> Yes! Notes are saved in your browser and remain until you clear them.</li>
+           <li><b>Can I copy a note?</b> Yes, click the <b>Copy</b> button next to any note.</li>
+           <li><b>How do I remove a note?</b> Click the <b>Remove</b> button next to it.</li>`,
+        clipboardInput: "Type or paste clip...",
+        add_btn: "Add Clip",
+        no_clips: "No clips yet.",
+        footer_credit: "Built by <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+      },
+      fr: {
+        back_link: "Retour au menu principal",
+        tool_title: "Gestionnaire de Presse-papiers",
+        howto_title: "Comment utiliser le Gestionnaire de Presse-papiers",
+        howto_steps: `<li><b>Ajouter une note :</b> Tapez ou collez le texte, puis cliquez sur Ajouter.</li>
+          <li><b>Copier une note :</b> Cliquez sur Copier pour l'ajouter au presse-papiers.</li>
+          <li><b>Supprimer une note :</b> Cliquez sur Supprimer pour la retirer.</li>
+          <li><b>Les notes sont enregistrées :</b> Elles restent dans votre navigateur même après fermeture.</li>`,
+        howto_article_btn: "Lire l'article complet",
+        howto_article_link: "clipboard-how-to.html",
+        tips_title: "Conseils",
+        tips_list: `<li><b>Gardez les notes courtes:</b> Plus facile à scanner.</li>
+          <li><b>Épingler:</b> Conservez les éléments importants en haut.</li>
+          <li><b>Supprimer:</b> Nettoyez les anciennes notes régulièrement.</li>`,
+        tips_article_link: "clipboard-tips.html",
+        faq_list: `<li><b>Mes notes sont-elles sauvegardées?</b> Oui, dans votre navigateur.</li>
+           <li><b>Puis-je copier une note?</b> Oui, cliquez sur Copier.</li>`,
+        clipboardInput: "Tapez ou collez votre note...",
+        add_btn: "Ajouter",
+        no_clips: "Aucune note.",
+        footer_credit: "Développé par <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+      }
+      // other languages fall back to English when keys missing
+    };
+
+    // Map short language code to a display name for the indicator
+    const langNames = {
+      en: "English",
+      fr: "Français",
+      de: "Deutsch",
+      ru: "Русский",
+      el: "Ελληνικά",
+      es: "Español",
+      ar: "العربية"
+    };
+
+    // Read language from main index (source-of-truth)
+    function getLang() {
+      try {
+        return localStorage.getItem('timerhavenLang') || (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+      } catch(e) {
+        return (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+      }
+    }
+
+    // Update the UI strings for the chosen language (does NOT persist a preference here)
+    function updateUI(lang) {
+      lang = (lang || getLang()).slice(0,2);
+      const tr = T[lang] || T.en;
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      if (document.getElementById('back-link-text')) document.getElementById('back-link-text').textContent = tr.back_link || T.en.back_link;
+      if (document.getElementById('tool-title')) document.getElementById('tool-title').textContent = tr.tool_title || T.en.tool_title;
+      if (document.getElementById('howto-title')) document.getElementById('howto-title').textContent = tr.howto_title || T.en.howto_title;
+      if (document.getElementById('howto-steps')) document.getElementById('howto-steps').innerHTML = tr.howto_steps || T.en.howto_steps;
+      if (document.getElementById('left-article-btn')) { document.getElementById('left-article-btn').textContent = tr.howto_article_btn || T.en.howto_article_btn; document.getElementById('left-article-btn').href = tr.howto_article_link || T.en.howto_article_link; }
+      if (document.getElementById('tips-title')) document.getElementById('tips-title').textContent = tr.tips_title || T.en.tips_title;
+      if (document.getElementById('tips-list')) document.getElementById('tips-list').innerHTML = tr.tips_list || T.en.tips_list;
+      if (document.getElementById('right-article-btn')) { document.getElementById('right-article-btn').textContent = tr.howto_article_btn || T.en.howto_article_btn; document.getElementById('right-article-btn').href = tr.tips_article_link || T.en.tips_article_link; }
+      if (document.getElementById('faq-list')) document.getElementById('faq-list').innerHTML = tr.faq_list || T.en.faq_list;
+      if (document.getElementById('clipInput')) document.getElementById('clipInput').placeholder = tr.clipboardInput || T.en.clipboardInput;
+      if (document.getElementById('add-btn')) document.getElementById('add-btn').textContent = tr.add_btn || T.en.add_btn;
+
+      // Update language indicator
+      const labelEl = document.getElementById('language-label');
+      if (labelEl) labelEl.textContent = ( (tr && tr.language_label) ? tr.language_label : 'Language:' );
+      const nameEl = document.getElementById('language-name');
+      if (nameEl) nameEl.textContent = langNames[lang] || lang;
+
+      // Update footer credit if present
+      try {
+        const fc = document.getElementById('footer-credit');
+        if (fc) fc.innerHTML = tr.footer_credit || T.en.footer_credit;
+      } catch(e) {}
+
+      // Recalculate heights after translation is applied
+      setTimeout(equalizeCardHeights, 120);
+    }
+
+    // React to language changes made in other tabs/windows (index.html or elsewhere)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        const newVal = (e.newValue || 'en').slice(0,2);
+        updateUI(newVal);
+      }
+    });
+
+    // Initialize UI on load using timerhavenLang
+    document.addEventListener('DOMContentLoaded', function(){
+      const lang = (getLang() || 'en').slice(0,2);
+      updateUI(lang);
+    });
+
+    // --- Clips persistence & UI (unchanged logic except uses document.documentElement.lang for language) ---
+    (function(){
+      function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+      function safeSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ return false; } }
+
+      window.clips = JSON.parse(safeGet('clipboardClips') || '[]');
+      var clips = window.clips || [];
+
+      function escapeHtml(s){ return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+      function renderClips(){
+        var list = document.getElementById('clipsList');
+        if (!list) return;
+        list.innerHTML = '';
+        var lang = (document.documentElement.lang || 'en').slice(0,2);
+        var noClipsText = ( (typeof T[lang] !== 'undefined' && T[lang].no_clips) ? T[lang].no_clips : T.en.no_clips );
+        if (!clips || clips.length === 0) {
+          list.innerHTML = '<div style="color:#888;">' + noClipsText + '</div>';
+          return;
+        }
+        for (var i=0;i<clips.length;i++){
+          var c = clips[i];
+          var div = document.createElement('div');
+          div.className = 'clip-item';
+          var pinned = c.pinned ? '<span style="font-weight:700;color:var(--accent);margin-right:.5em;"><i class="fa fa-thumbtack"></i></span>' : '';
+          div.innerHTML = '<div class="clip-text">' + pinned + escapeHtml(c.text) + (c.date ? (' <span class="clip-meta" style="color:#888;margin-left:.6em;">' + escapeHtml(c.date) + '</span>') : '') + '</div>'
+                        + '<div style="display:flex;gap:.4rem;align-items:center;">'
+                        +   '<button class="btn btn-outline-info btn-sm" data-idx="'+i+'" data-action="pin" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>'
+                        +   '<button class="btn btn-outline-success btn-sm" data-idx="'+i+'" data-action="copy" title="Copy"><i class="fa fa-copy"></i></button>'
+                        +   '<button class="btn btn-outline-danger btn-sm" data-idx="'+i+'" data-action="remove" title="Remove"><i class="fa fa-trash"></i></button>'
+                        + '</div>';
+          list.appendChild(div);
+        }
+
+        Array.from(list.querySelectorAll('button[data-idx]')).forEach(function(btn){
+          var idx = parseInt(btn.getAttribute('data-idx'), 10);
+          var action = btn.getAttribute('data-action');
+          btn.onclick = function(){
+            if (action === 'copy') {
+              try { navigator.clipboard.writeText(clips[idx].text); } catch(e){}
+            } else if (action === 'remove') {
+              clips.splice(idx,1); window.clips = clips; safeSet('clipboardClips', JSON.stringify(clips)); renderClips();
+            } else if (action === 'pin') {
+              clips[idx].pinned = !clips[idx].pinned;
+              if (clips[idx].pinned) { var p = clips.splice(idx,1)[0]; clips.unshift(p); }
+              safeSet('clipboardClips', JSON.stringify(clips)); renderClips();
+            }
+          };
+        });
+      }
+
+      function addClipFromInput(){
+        var input = document.getElementById('clipInput');
+        var text = (input && input.value || '').trim();
+        if (!text) return;
+        clips = clips || [];
+        clips.unshift({ text: text, date: new Date().toLocaleString(), pinned: false });
+        window.clips = clips;
+        safeSet('clipboardClips', JSON.stringify(clips));
+        if (input) input.value = '';
+        renderClips();
+      }
+
+      var form = document.getElementById('clipboardForm');
+      if (form) {
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          addClipFromInput();
+        });
+      }
+
+      window.addClipFromInput = addClipFromInput;
+      window.lhShowClips = function(){ console.log('window.clips', window.clips); return window.clips; };
+
+      window.addEventListener('pagehide', function(){ safeSet('clipboardClips', JSON.stringify(window.clips || [])); });
+      window.addEventListener('beforeunload', function(){ safeSet('clipboardClips', JSON.stringify(window.clips || [])); });
+
+      document.addEventListener('DOMContentLoaded', function(){ clips = window.clips || []; renderClips(); });
+    })();
+
+    // --- Utility: equalize heights (unchanged) ---
+    function equalizeCardHeights(){
+      var cols = Array.from(document.querySelectorAll('.center-row > .col'));
+      if (!cols.length) return;
+      cols.forEach(function(col){ var card = col.querySelector('.card-base'); if (card) card.style.height = ''; });
+      var maxh = 0;
+      cols.forEach(function(col){
+        var card = col.querySelector('.card-base');
+        if (card) {
+          var h = card.getBoundingClientRect().height;
+          if (h > maxh) maxh = h;
+        }
+      });
+      if (maxh > 0) {
+        cols.forEach(function(col){
+          var card = col.querySelector('.card-base');
+          if (card) card.style.height = Math.round(maxh) + 'px';
+        });
+      }
+    }
+    window.addEventListener('load', function(){ setTimeout(equalizeCardHeights, 80); });
+    window.addEventListener('resize', function(){ setTimeout(equalizeCardHeights, 80); });
+
+    // --- Panel (tips/howto) logic (unchanged) ---
+    (function(){
+      const overlay = document.getElementById('tool-panel-overlay');
+      const panel = document.getElementById('tool-panel');
+      const body = document.getElementById('panel-body');
+      const title = document.getElementById('panel-title');
+      const closeBtn = document.getElementById('panel-close');
+      const openExternalBtn = document.getElementById('panel-open-external');
+
+      function openPanel(kind) {
+        title.textContent = (kind === 'tips') ? 'Tips' : 'How‑to';
+        body.innerHTML = '<div style="padding:.6rem;color:#666">Loading…</div>';
+        overlay.style.display = 'flex';
+        requestAnimationFrame(()=> panel.classList.add('open'));
+        overlay.setAttribute('aria-hidden','false');
+
+        const target = (kind === 'tips') ? '/clipboard-tips.html' : '/clipboard-how-to.html';
+        fetch(target, { method: 'GET' }).then(resp => {
+          if (!resp.ok) throw new Error('Not found');
+          return resp.text();
+        }).then(html => {
+          let extracted = '';
+          try {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const candidate = doc.querySelector('.card-content') || doc.querySelector('.main-container') || doc.body;
+            extracted = candidate ? candidate.innerHTML : doc.body.innerHTML;
+          } catch(e) {
+            extracted = html;
+          }
+          body.innerHTML = extracted;
+          openExternalBtn.style.display = 'inline-block';
+          openExternalBtn.onclick = () => { window.location.href = target + window.location.search; };
+        }).catch(err => {
+          body.innerHTML = '<div style="padding:.6rem;color:#666">Full page not available inline — opening page.</div>';
+          openExternalBtn.style.display = 'inline-block';
+          openExternalBtn.onclick = () => { window.location.href = target + window.location.search; };
+        });
+      }
+
+      function closePanel(){
+        panel.classList.remove('open');
+        overlay.setAttribute('aria-hidden','true');
+        setTimeout(()=>{ overlay.style.display = 'none'; body.innerHTML = ''; openExternalBtn.style.display = 'none'; }, 280);
+      }
+
+      const btnTips = document.getElementById('btn-tips');
+      if (btnTips) btnTips.addEventListener('click', function(){ openPanel('tips'); this.setAttribute('aria-expanded','true'); });
+
+      const btnHowto = document.getElementById('btn-howto');
+      if (btnHowto) btnHowto.addEventListener('click', function(){ openPanel('howto'); this.setAttribute('aria-expanded','true'); });
+
+      if (closeBtn) closeBtn.addEventListener('click', closePanel);
+      if (overlay) overlay.addEventListener('click', function(e){ if (e.target === overlay) closePanel(); });
+
+      document.addEventListener('keydown', function(e){ if (e.key === 'Escape') { if (overlay.style.display === 'flex') closePanel(); } });
+    })();
+
+    // --- About toggle (unchanged) ---
+    (function(){
+      const aboutBtn = document.getElementById('btn-about');
+      const toolInfo = document.getElementById('tool-info');
+      if (!aboutBtn || !toolInfo) return;
+
+      function setAboutLabel(open) {
+        aboutBtn.textContent = open ? 'Hide Info' : 'About the Clipboard Manager';
+      }
+
+      aboutBtn.addEventListener('click', function(){
+        const opening = !toolInfo.classList.contains('open');
+        if (opening) {
+          toolInfo.classList.add('open');
+          toolInfo.setAttribute('aria-hidden', 'false');
+          this.setAttribute('aria-expanded', 'true');
+          setAboutLabel(true);
+          setTimeout(()=> {
+            toolInfo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(equalizeCardHeights, 320);
+          }, 20);
+        } else {
+          toolInfo.classList.remove('open');
+          toolInfo.setAttribute('aria-hidden', 'true');
+          this.setAttribute('aria-expanded', 'false');
+          setAboutLabel(false);
+          setTimeout(equalizeCardHeights, 320);
+        }
+      });
+
+      document.addEventListener('DOMContentLoaded', function(){
+        toolInfo.classList.remove('open');
+        toolInfo.setAttribute('aria-hidden', 'true');
+        aboutBtn.setAttribute('aria-expanded', 'false');
+        setAboutLabel(false);
+        setTimeout(equalizeCardHeights, 80);
+      });
+    })();
+  </script>
+</body>
+</html>
