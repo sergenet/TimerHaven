@@ -26,7 +26,7 @@
       <button id="reset" class="btn" data-i18n="reset">Reset</button>
     </div>
 
-    <div id="laps" style="margin-top:12px;"></div>
+    <div id="laps" style="margin-top:12px;" aria-live="polite"></div>
 
     <details style="margin-top:12px;">
       <summary data-i18n="faqs">FAQs</summary>
@@ -85,16 +85,17 @@
     /* i18n layer */
     const translations = {
       en: { pageTitle: "Stopwatch — TimerHaven", back: "Back", toolTitle: "Stopwatch", start: "Start", pause: "Pause", lap: "Lap", reset: "Reset", faqs: "FAQs", faqA1: "The stopwatch runs in your browser only and will stop if the page is reloaded." },
-      fr: { pageTitle: "Chronomètre — TimerHaven", back: "Retour", toolTitle: "Chronomètre", start: "Démarrer", pause: "Pause", lap: "Tour", reset: "Réinitialiser", faqs: "FAQ", faqA1: "Ο χρονισμός λειτουργεί μόνο στο πρόγραμμα περιήγησής σας και θα σταματήσει αν φορτωθεί ξανά η σελίδα." },
+      fr: { pageTitle: "Chronomètre — TimerHaven", back: "Retour", toolTitle: "Chronomètre", start: "Démarrer", pause: "Pause", lap: "Tour", reset: "Réinitialiser", faqs: "FAQ", faqA1: "Le chronomètre fonctionne uniquement dans votre navigateur et s'arrêtera si la page est rechargée." },
       es: { pageTitle: "Cronómetro — TimerHaven", back: "Atrás", toolTitle: "Cronómetro", start: "Iniciar", pause: "Pausa", lap: "Vuelta", reset: "Restablecer", faqs: "Preguntas frecuentes", faqA1: "El cronómetro funciona solo en tu navegador y se detendrá si se recarga la página." },
       de: { pageTitle: "Stoppuhr — TimerHaven", back: "Zurück", toolTitle: "Stoppuhr", start: "Start", pause: "Pause", lap: "Runde", reset: "Zurücksetzen", faqs: "FAQ", faqA1: "Die Stoppuhr läuft nur in Ihrem Browser und stoppt beim Neuladen." },
       ru: { pageTitle: "Секундомер — TimerHaven", back: "Назад", toolTitle: "Секундомер", start: "Старт", pause: "Пауза", lap: "Круг", reset: "Сброс", faqs: "Вопросы", faqA1: "Секундомер работает только в браузере и остановится при перезагрузке страницы." },
-      el: { pageTitle: "Χρονόμετρο — TimerHaven", back: "Πίσω", toolTitle: "Χρονόμετρο", start: "Έναρξη", pause: "Παύση", lap: "Γύρος", reset: "Επαναφορά", faqs: "Συχνές ερωτήσεις", faqA1: "Το χρονόμετρο λειτουργεί μόνο στο πρόγραμμα περιήγησής σας και θα σταματήσει αν γίνει επαναφόρτωση." },
+      el: { pageTitle: "Χρονόμετρο — TimerHaven", back: "Πίσω", toolTitle: "Χρονόμετρο", start: "Έναρξη", pause: "Παύση", lap: "Γύρος", reset: "Επαναφορά", faqs: "Συχνές ερωτήσεις", faqA1: "Το χρονόμετρο λειτουργεί μόνο στον περιηγητή σας και θα σταματήσει αν γίνει επαναφόρτωση της σελίδας." },
       ar: { pageTitle: "الإيقاف — TimerHaven", back: "رجوع", toolTitle: "الإيقاف", start: "ابدأ", pause: "إيقاف مؤقت", lap: "لفة", reset: "إعادة", faqs: "الأسئلة الشائعة", faqA1: "يعمل المؤقت فقط في متصفحك وسيتوقف عند إعادة تحميل الصفحة." }
     };
 
     function getLang() { const l = localStorage.getItem('timerhavenLang') || 'en'; return translations[l] ? l : 'en'; }
     function setDirectionForLang(lang) { if (lang === 'ar') document.documentElement.dir = 'rtl'; else document.documentElement.dir = 'ltr'; }
+
     function applyLanguage(lang) {
       if (!translations[lang]) lang = 'en';
       const dict = translations[lang];
