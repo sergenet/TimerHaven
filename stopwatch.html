@@ -3,66 +3,114 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Stopwatch — TimerHaven</title>
+  <title data-i18n="pageTitle">Stopwatch — TimerHaven</title>
   <meta name="robots" content="noindex">
-  <meta http-equiv="refresh" content="0;url=stopwatch-en.html">
   <style>
     body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; padding: 2rem; background:#f7f9fb; color:#0b2545; }
     .box { max-width:720px; margin:3rem auto; background:#fff; padding:1.5rem; border-radius:10px; box-shadow:0 6px 18px rgba(11,37,69,0.06); }
-    a { color:#0d6efd; text-decoration:none; }
+    .controls { display:flex; gap:8px; margin-top:12px; }
+    .display { font-size:2.2rem; font-weight:700; text-align:center; margin:1rem 0; }
+    .back { display:inline-block; margin-bottom:8px; color:#0d6efd; text-decoration:none; }
   </style>
-  <script>
-    (function(){
-      var map = {
-        'en': 'stopwatch-en.html',
-        'fr': 'stopwatch-fr.html',
-        'es': 'stopwatch-es.html',
-        'de': 'stopwatch-de.html',
-        'ru': 'stopwatch-ru.html',
-        'el': 'stopwatch-el.html',
-        'ar': 'stopwatch-ar.html'
-      };
-      function getQueryLang() {
-        try {
-          var m = location.search.match(/[?&]lang=([a-z]{2})/i);
-          return m ? m[1].toLowerCase() : null;
-        } catch (e) { return null; }
-      }
-      function pickByNavigator() {
-        var langs = [];
-        try {
-          if (navigator.languages) langs = langs.concat(navigator.languages);
-          if (navigator.language) langs.push(navigator.language);
-          if (navigator.userLanguage) langs.push(navigator.userLanguage);
-        } catch (e) {}
-        for (var i=0;i<langs.length;i++) {
-          if (!langs[i]) continue;
-          var code = String(langs[i]).toLowerCase().split('-')[0];
-          if (map[code]) return code;
-        }
-        return null;
-      }
-      var q = getQueryLang();
-      if (q && map[q]) { window.location.replace(map[q]); return; }
-      var d = pickByNavigator();
-      if (d && map[d]) { window.location.replace(map[d]); return; }
-      window.location.replace(map['en']);
-    })();
-  </script>
 </head>
 <body>
   <div class="box">
-    <h1>Stopwatch — TimerHaven</h1>
-    <p>If you are not redirected automatically, choose a language:</p>
-    <ul>
-      <li><a href="stopwatch-en.html">English</a></li>
-      <li><a href="stopwatch-fr.html">Français</a></li>
-      <li><a href="stopwatch-es.html">Español</a></li>
-      <li><a href="stopwatch-de.html">Deutsch</a></li>
-      <li><a href="stopwatch-ru.html">Русский</a></li>
-      <li><a href="stopwatch-el.html">Ελληνικά</a></li>
-      <li><a href="stopwatch-ar.html">العربية</a></li>
-    </ul>
+    <a href="index.html" class="back" data-i18n="back">Back</a>
+    <h1 data-i18n="toolTitle">Stopwatch</h1>
+    <div class="display" id="display">00:00:00.00</div>
+
+    <div class="controls">
+      <button id="start" class="btn" data-i18n="start">Start</button>
+      <button id="pause" class="btn" data-i18n="pause">Pause</button>
+      <button id="lap" class="btn" data-i18n="lap">Lap</button>
+      <button id="reset" class="btn" data-i18n="reset">Reset</button>
+    </div>
+
+    <div id="laps" style="margin-top:12px;" aria-live="polite"></div>
+
+    <details style="margin-top:12px;">
+      <summary data-i18n="faqs">FAQs</summary>
+      <div>
+        <p data-i18n="faqA1">The stopwatch runs in your browser only and will stop if the page is reloaded.</p>
+      </div>
+    </details>
   </div>
+
+  <script>
+    // Simple stopwatch logic (keeps behavior client-side)
+    let running = false, startTs = 0, elapsed = 0, raf = null;
+    const display = document.getElementById('display'), lapsEl = document.getElementById('laps');
+
+    function fmt(ms) {
+      const totalSeconds = Math.floor(ms/1000);
+      const h = Math.floor(totalSeconds/3600);
+      const m = Math.floor((totalSeconds%3600)/60);
+      const s = totalSeconds%60;
+      const cs = Math.floor((ms%1000)/10);
+      return String(h).padStart(2,'0')+":"+String(m).padStart(2,'0')+":"+String(s).padStart(2,'0')+"."+String(cs).padStart(2,'0');
+    }
+
+    function tick() {
+      const now = Date.now();
+      const ms = elapsed + (now - startTs);
+      display.textContent = fmt(ms);
+      raf = requestAnimationFrame(tick);
+    }
+
+    document.getElementById('start').addEventListener('click', () => {
+      if (running) return;
+      running = true;
+      startTs = Date.now();
+      raf = requestAnimationFrame(tick);
+    });
+    document.getElementById('pause').addEventListener('click', () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(raf);
+      elapsed += Date.now() - startTs;
+    });
+    document.getElementById('reset').addEventListener('click', () => {
+      running = false;
+      cancelAnimationFrame(raf);
+      elapsed = 0;
+      display.textContent = "00:00:00.00";
+      lapsEl.innerHTML = '';
+    });
+    document.getElementById('lap').addEventListener('click', () => {
+      const el = document.createElement('div');
+      el.textContent = display.textContent;
+      lapsEl.appendChild(el);
+    });
+
+    /* i18n layer */
+    const translations = {
+      en: { pageTitle: "Stopwatch — TimerHaven", back: "Back", toolTitle: "Stopwatch", start: "Start", pause: "Pause", lap: "Lap", reset: "Reset", faqs: "FAQs", faqA1: "The stopwatch runs in your browser only and will stop if the page is reloaded." },
+      fr: { pageTitle: "Chronomètre — TimerHaven", back: "Retour", toolTitle: "Chronomètre", start: "Démarrer", pause: "Pause", lap: "Tour", reset: "Réinitialiser", faqs: "FAQ", faqA1: "Le chronomètre fonctionne uniquement dans votre navigateur et s'arrêtera si la page est rechargée." },
+      es: { pageTitle: "Cronómetro — TimerHaven", back: "Atrás", toolTitle: "Cronómetro", start: "Iniciar", pause: "Pausa", lap: "Vuelta", reset: "Restablecer", faqs: "Preguntas frecuentes", faqA1: "El cronómetro funciona solo en tu navegador y se detendrá si se recarga la página." },
+      de: { pageTitle: "Stoppuhr — TimerHaven", back: "Zurück", toolTitle: "Stoppuhr", start: "Start", pause: "Pause", lap: "Runde", reset: "Zurücksetzen", faqs: "FAQ", faqA1: "Die Stoppuhr läuft nur in Ihrem Browser und stoppt beim Neuladen." },
+      ru: { pageTitle: "Секундомер — TimerHaven", back: "Назад", toolTitle: "Секундомер", start: "Старт", pause: "Пауза", lap: "Круг", reset: "Сброс", faqs: "Вопросы", faqA1: "Секундомер работает только в браузере и остановится при перезагрузке страницы." },
+      el: { pageTitle: "Χρονόμετρο — TimerHaven", back: "Πίσω", toolTitle: "Χρονόμετρο", start: "Έναρξη", pause: "Παύση", lap: "Γύρος", reset: "Επαναφορά", faqs: "Συχνές ερωτήσεις", faqA1: "Το χρονόμετρο λειτουργεί μόνο στον περιηγητή σας και θα σταματήσει αν γίνει επαναφόρτωση της σελίδας." },
+      ar: { pageTitle: "الإيقاف — TimerHaven", back: "رجوع", toolTitle: "الإيقاف", start: "ابدأ", pause: "إيقاف مؤقت", lap: "لفة", reset: "إعادة", faqs: "الأسئلة الشائعة", faqA1: "يعمل المؤقت فقط في متصفحك وسيتوقف عند إعادة تحميل الصفحة." }
+    };
+
+    function getLang() { const l = localStorage.getItem('timerhavenLang') || 'en'; return translations[l] ? l : 'en'; }
+    function setDirectionForLang(lang) { if (lang === 'ar') document.documentElement.dir = 'rtl'; else document.documentElement.dir = 'ltr'; }
+
+    function applyLanguage(lang) {
+      if (!translations[lang]) lang = 'en';
+      const dict = translations[lang];
+      document.documentElement.lang = lang;
+      setDirectionForLang(lang);
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.textContent = dict[key];
+      });
+      document.title = dict.pageTitle || document.title;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => applyLanguage(getLang()));
+    window.addEventListener('storage', (e) => { if (e.key === 'timerhavenLang') applyLanguage(e.newValue || 'en'); });
+    window._applyTimerHavenLang = function(lang) { localStorage.setItem('timerhavenLang', lang); applyLanguage(lang); };
+  </script>
 </body>
 </html>
