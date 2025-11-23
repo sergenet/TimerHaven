@@ -5,6 +5,37 @@
   <title>Habit Tracker — TimerHaven</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Track daily habits and build new routines. Learn how to use Habit Tracker, get productivity tips, FAQs, and read expert articles.">
+
+  <!--
+    Quick client-side redirect: if the site-wide language (timerhavenLang) is set to a non-English
+    two-letter code, redirect from the generic habit-tracker.html to the localized page:
+    habit-tracker-<lang>.html (e.g., habit-tracker-es.html).
+    This ensures when the user clicks "Habit Tracker" from index.html the localized tool page opens.
+  -->
+  <script>
+    (function(){
+      try {
+        const raw = localStorage.getItem('timerhavenLang') || '';
+        const lang = (raw && raw.toString().slice(0,2).toLowerCase()) || '';
+        if (!lang || lang === 'en') return;
+        const path = location.pathname || '';
+        const filename = path.split('/').pop().toLowerCase();
+        // if already on localized page, do nothing
+        if (filename && filename.indexOf('-' + lang + '.html') !== -1) return;
+        // build localized filename
+        const localized = path.replace(/(habit-tracker)(\.html)?$/i, '$1-' + lang + '.html');
+        const target = (localized === path) ? ('/habit-tracker-' + lang + '.html') : localized;
+        if (target && (target !== location.pathname + location.search + location.hash)) {
+          // replace so back button doesn't keep the generic page in history
+          location.replace(target + location.search + location.hash);
+        }
+      } catch (e) {
+        // fail silently
+        console && console.warn && console.warn('locale redirect failed', e);
+      }
+    })();
+  </script>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
@@ -74,61 +105,9 @@
     .archive-btn { font-size: 0.9em; margin-left: 0.6em; background: #fff; border: 1px solid #43cea2; color: #43cea2; border-radius: 6px; padding: 0.15em 0.7em;}
     .archive-btn.archived { opacity: 0.65; color: #888; border-color: #d0d0d0; }
     .banner { background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%); color: #fff; border-radius: 10px; font-size: 1.11em; font-weight: 600; text-align: center; margin-bottom: 1em; padding: 0.7em 0.8em;}
-    .language-select {
-      text-align: right;
-      padding: 20px 40px 0 0;
-      margin-bottom: 0.7em;
-      position: relative;
-      z-index: 5;
-    }
-    .language-select label {
-      margin-right: 8px;
-      font-size: 1.08em;
-      font-weight: 600;
-      color: #185a9d;
-    }
-    #habit-lang-select {
-      min-width: 150px;
-      font-size: 1.08em;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1px solid #43cea2;
-      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
-      color: #fff;
-      margin-left: 6px;
-      margin-right: 4px;
-      box-shadow: 0 2px 8px #e0e7ef;
-      transition: background 0.2s;
-      font-weight: 600;
-    }
-    #habit-lang-select option {
-      color: #185a9d;
-      background: #f4f7fb;
-      font-weight: 500;
-    }
-    body[dir="rtl"] .language-select {
-      text-align: left;
-      padding: 20px 0 0 40px;
-    }
-    body[dir="rtl"] #habit-lang-select {
-      margin-left: 4px;
-      margin-right: 6px;
-    }
   </style>
 </head>
 <body>
-  <div class="language-select">
-    <label for="habit-lang-select"><strong id="language-label">Language:</strong></label>
-    <select id="habit-lang-select">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="el">Ελληνικά</option>
-      <option value="es">Español</option>
-      <option value="ar">العربية</option>
-    </select>
-  </div>
   <div class="main-container">
     <div class="center-row">
       <!-- Article 1 (desktop only, left) -->
@@ -173,297 +152,117 @@
     </div>
   </div>
   <script>
-   
     const habitTranslations = {
-  en: {
-    "language-label": "Language:",
-    "back-link": "Back to Main Menu",
-    "tool-title": "Habit Tracker",
-    "habitInput": "Habit name",
-    "add-btn": "Add Habit",
-    "banner-all-done": "🎉 All habits done for today! Great job!",
-    "stats-tracked": "Tracked: ",
-    "stats-done": "Done today: ",
-    "stats-best": "Best streak: ",
-    "howto-title": '<i class="fa fa-check-double"></i> How to Use Habit Tracker',
-    "howto-steps": `<li><b>Add a habit:</b> Type your daily habit (e.g., "Drink Water") and click Add.</li>
-      <li><b>Mark done:</b> When you complete a habit for the day, click the Done button beside it.</li>
-      <li><b>Remove habits:</b> Delete or archive habits you no longer want to track.</li>
-      <li><b>Repeat daily:</b> Return each day to update and track your progress.</li>`,
-    "howto-article-btn": "Read Full Article",
-    "howto-article-link": "habit-how-to.html",
-    "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Habit Productivity Tips',
-    "tips-list": `<li><b>Start small:</b> Begin with easy, achievable habits to build momentum.</li>
-      <li><b>Track daily:</b> Consistency is key—mark habits done every day.</li>
-      <li><b>Celebrate progress:</b> Recognize small wins to stay motivated.</li>`,
-    "tips-article-btn": "Read Full Article",
-    "tips-article-link": "habit-tips.html",
-    "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tips',
-    "tips-mobile-list": `<li><b>Start small:</b> Build new habits gradually for best results.</li>
-      <li><b>Track consistency:</b> Review your streaks to stay motivated.</li>
-      <li><b>Set reminders:</b> Add calendar alerts to help remember your habits.</li>`,
-    "faq-title": "FAQs",
-    "faq-list": `<li><b>Are habits saved?</b> Yes, in your browser until you clear them.</li>
-      <li><b>Can I track multiple habits?</b> Yes! Add as many habits as you like.</li>
-      <li><b>Can I see my streaks?</b> Streaks are displayed for each habit.</li>
-      <li><b>Can I archive a habit?</b> Yes—archive habits you want to pause.</li>`,
-    "mark-done": "Mark Done",
-    "done-today": "Done Today",
-    "streak": "Streak: ",
-    "longest": "Best: ",
-    "archive": "Archive",
-    "unarchive": "Unarchive",
-    "delete": "Delete",
-    "no-habits": "No habits yet."
-  },
-  fr: {
-    "language-label": "Langue :",
-    "back-link": "Retour au menu principal",
-    "tool-title": "Suivi d'Habitudes",
-    "habitInput": "Nom de l'habitude",
-    "add-btn": "Ajouter l'habitude",
-    "banner-all-done": "🎉 Toutes les habitudes sont terminées aujourd'hui ! Bravo !",
-    "stats-tracked": "Suivies : ",
-    "stats-done": "Faites aujourd'hui : ",
-    "stats-best": "Meilleure série : ",
-    "howto-title": '<i class="fa fa-check-double"></i> Comment utiliser le Suivi d\'Habitudes',
-    "howto-steps": `<li><b>Ajoutez une habitude :</b> Tapez votre habitude quotidienne et cliquez sur Ajouter.</li>
-      <li><b>Marquez comme fait :</b> Lorsque vous complétez une habitude, cliquez sur Terminé à côté.</li>
-      <li><b>Supprimer/archiver :</b> Supprimez ou archivez les habitudes non suivies.</li>
-      <li><b>Répétez chaque jour :</b> Revenez chaque jour pour suivre vos progrès.</li>`,
-    "howto-article-btn": "Lire l'article complet",
-    "howto-article-link": "habit-how-to-fr.html",
-    "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour les Habitudes',
-    "tips-list": `<li><b>Commencez petit :</b> Débutez avec des habitudes faciles pour progresser.</li>
-      <li><b>Suivez chaque jour :</b> La constance est la clé !</li>
-      <li><b>Célébrez :</b> Valorisez les petits progrès.</li>`,
-    "tips-article-btn": "Lire l'article complet",
-    "tips-article-link": "habit-tips-fr.html",
-    "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils',
-    "tips-mobile-list": `<li><b>Commencez petit :</b> Construisez progressivement.</li>
-      <li><b>Suivez la régularité :</b> Regardez vos séries pour rester motivé.</li>
-      <li><b>Ajoutez des rappels :</b> Utilisez des alertes calendrier.</li>`,
-    "faq-title": "FAQ",
-    "faq-list": `<li><b>Mes habitudes sont-elles sauvegardées ?</b> Oui, dans votre navigateur.</li>
-      <li><b>Puis-je suivre plusieurs habitudes ?</b> Oui, autant que vous voulez.</li>
-      <li><b>Puis-je voir mes séries ?</b> Oui, affichées pour chaque habitude.</li>
-      <li><b>Puis-je archiver ?</b> Oui, archivez les habitudes mises en pause.</li>`,
-    "mark-done": "Terminer",
-    "done-today": "Fait aujourd'hui",
-    "streak": "Série : ",
-    "longest": "Meilleur : ",
-    "archive": "Archiver",
-    "unarchive": "Désarchiver",
-    "delete": "Supprimer",
-    "no-habits": "Aucune habitude pour l'instant."
-  },
-  de: {
-    "language-label": "Sprache:",
-    "back-link": "Zurück zum Hauptmenü",
-    "tool-title": "Gewohnheits-Tracker",
-    "habitInput": "Name der Gewohnheit",
-    "add-btn": "Gewohnheit hinzufügen",
-    "banner-all-done": "🎉 Alle Gewohnheiten heute erledigt! Super gemacht!",
-    "stats-tracked": "Verfolgt: ",
-    "stats-done": "Heute erledigt: ",
-    "stats-best": "Beste Serie: ",
-    "howto-title": '<i class="fa fa-check-double"></i> Gewohnheiten verfolgen – Anleitung',
-    "howto-steps": `<li><b>Gewohnheit hinzufügen:</b> Gib die tägliche Gewohnheit ein und klicke auf Hinzufügen.</li>
-      <li><b>Als erledigt markieren:</b> Klicke auf Erledigt, wenn du die Gewohnheit geschafft hast.</li>
-      <li><b>Archivieren/Löschen:</b> Nicht benötigte Gewohnheiten archivieren oder löschen.</li>
-      <li><b>Täglich wiederholen:</b> Jeden Tag Fortschritt aktualisieren.</li>`,
-    "howto-article-btn": "Vollständigen Artikel lesen",
-    "howto-article-link": "habit-how-to-de.html",
-    "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Produktivitäts-Tipps',
-    "tips-list": `<li><b>Klein starten:</b> Mit einfachen Gewohnheiten beginnen.</li>
-      <li><b>Täglich tracken:</b> Konstanz ist alles.</li>
-      <li><b>Fortschritt feiern:</b> Kleine Erfolge belohnen.</li>`,
-    "tips-article-btn": "Vollständigen Artikel lesen",
-    "tips-article-link": "habit-tips-de.html",
-    "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps',
-    "tips-mobile-list": `<li><b>Klein starten:</b> Schritt für Schritt.</li>
-      <li><b>Konsistenz tracken:</b> Serien motivieren.</li>
-      <li><b>Erinnerungen setzen:</b> Mit Kalenderfunktionen.</li>`,
-    "faq-title": "FAQ",
-    "faq-list": `<li><b>Werden Gewohnheiten gespeichert?</b> Ja, im Browser.</li>
-      <li><b>Mehrere Gewohnheiten?</b> Ja, beliebig viele.</li>
-      <li><b>Serien sichtbar?</b> Für jede Gewohnheit.</li>
-      <li><b>Archivieren möglich?</b> Ja, pausierte Gewohnheiten archivieren.</li>`,
-    "mark-done": "Erledigt",
-    "done-today": "Heute erledigt",
-    "streak": "Serie: ",
-    "longest": "Bestes: ",
-    "archive": "Archivieren",
-    "unarchive": "Wiederherstellen",
-    "delete": "Löschen",
-    "no-habits": "Noch keine Gewohnheiten."
-  },
-  ru: {
-    "language-label": "Язык:",
-    "back-link": "Назад в главное меню",
-    "tool-title": "Трекер привычек",
-    "habitInput": "Название привычки",
-    "add-btn": "Добавить привычку",
-    "banner-all-done": "🎉 Все привычки выполнены сегодня! Отлично!",
-    "stats-tracked": "Отслеживается: ",
-    "stats-done": "Сегодня выполнено: ",
-    "stats-best": "Лучшая серия: ",
-    "howto-title": '<i class="fa fa-check-double"></i> Как использовать трекер привычек',
-    "howto-steps": `<li><b>Добавьте привычку:</b> Введите привычку и нажмите Добавить.</li>
-      <li><b>Отметьте как выполнено:</b> Нажмите Выполнено рядом с привычкой.</li>
-      <li><b>Удалить/архивировать:</b> Удаляйте или архивируйте неактуальные привычки.</li>
-      <li><b>Повторяйте ежедневно:</b> Обновляйте прогресс каждый день.</li>`,
-    "howto-article-btn": "Читать полный текст",
-    "howto-article-link": "habit-how-to-ru.html",
-    "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по привычкам',
-    "tips-list": `<li><b>Начните с малого:</b> Простые привычки — залог успеха.</li>
-      <li><b>Отмечайте каждый день:</b> Регулярность = прогресс.</li>
-      <li><b>Празднуйте успехи:</b> Мотивируйте себя!</li>`,
-    "tips-article-btn": "Читать полный текст",
-    "tips-article-link": "habit-tips-ru.html",
-    "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы',
-    "tips-mobile-list": `<li><b>Начните с малого:</b> Постепенно увеличивайте нагрузку.</li>
-      <li><b>Следите за сериями:</b> Мотивация через статистику.</li>
-      <li><b>Добавьте напоминания:</b> Используйте календарь.</li>`,
-    "faq-title": "Частые вопросы",
-    "faq-list": `<li><b>Привычки сохраняются?</b> Да, в браузере.</li>
-      <li><b>Могу отслеживать несколько?</b> Да, сколько угодно.</li>
-      <li><b>Серии видны?</b> Да, для каждой привычки.</li>
-      <li><b>Архивировать можно?</b> Да, для паузы.</li>`,
-    "mark-done": "Выполнено",
-    "done-today": "Сегодня",
-    "streak": "Серия: ",
-    "longest": "Лучшее: ",
-    "archive": "Архивировать",
-    "unarchive": "Вернуть",
-    "delete": "Удалить",
-    "no-habits": "Нет привычек."
-  },
-  el: {
-    "language-label": "Γλώσσα:",
-    "back-link": "Επιστροφή στο κύριο μενού",
-    "tool-title": "Παρακολούθηση Συνηθειών",
-    "habitInput": "Όνομα συνήθειας",
-    "add-btn": "Προσθήκη συνήθειας",
-    "banner-all-done": "🎉 Όλες οι συνήθειες ολοκληρώθηκαν σήμερα! Μπράβο!",
-    "stats-tracked": "Παρακολουθούνται: ",
-    "stats-done": "Ολοκληρώθηκαν σήμερα: ",
-    "stats-best": "Καλύτερο σερί: ",
-    "howto-title": '<i class="fa fa-check-double"></i> Πώς να χρησιμοποιήσετε τον Παρακολούθηση Συνηθειών',
-    "howto-steps": `<li><b>Προσθέστε συνήθεια:</b> Πληκτρολογήστε και προσθέστε.</li>
-      <li><b>Σημειώστε ως ολοκληρωμένη:</b> Πατήστε Ολοκληρώθηκε.</li>
-      <li><b>Αρχειοθέτηση/Διαγραφή:</b> Αρχειοθετήστε ή διαγράψτε παλιές συνήθειες.</li>
-      <li><b>Επαναλάβετε καθημερινά:</b> Ενημερώστε την πρόοδο κάθε μέρα.</li>`,
-    "howto-article-btn": "Διαβάστε το πλήρες άρθρο",
-    "howto-article-link": "habit-how-to-el.html",
-    "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές για Συνήθειες',
-    "tips-list": `<li><b>Ξεκινήστε μικρά:</b> Μικρές συνήθειες για αρχή.</li>
-      <li><b>Παρακολουθήστε καθημερινά:</b> Η συνέπεια είναι το κλειδί.</li>
-      <li><b>Γιορτάστε την πρόοδο:</b> Επιβραβεύστε τον εαυτό σας.</li>`,
-    "tips-article-btn": "Διαβάστε το πλήρες άρθρο",
-    "tips-article-link": "habit-tips-el.html",
-    "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές',
-    "tips-mobile-list": `<li><b>Ξεκινήστε μικρά:</b> Προσθέστε σταδιακά.</li>
-      <li><b>Παρακολουθήστε τη συνέπεια:</b> Οι σερί βοηθούν στη διατήρηση.</li>
-      <li><b>Βάλτε υπενθυμίσεις:</b> Χρησιμοποιήστε το ημερολόγιο.</li>`,
-    "faq-title": "Συχνές Ερωτήσεις",
-    "faq-list": `<li><b>Αποθηκεύονται οι συνήθειες;</b> Ναι, στον browser.</li>
-      <li><b>Μπορώ να παρακολουθήσω πολλές;</b> Ναι, όσες θέλετε.</li>
-      <li><b>Σερί εμφανίζονται;</b> Ναι, για κάθε συνήθεια.</li>
-      <li><b>Αρχειοθέτηση;</b> Ναι, για παύση.</li>`,
-    "mark-done": "Ολοκληρώθηκε",
-    "done-today": "Σήμερα",
-    "streak": "Σερί: ",
-    "longest": "Καλύτερο: ",
-    "archive": "Αρχειοθέτηση",
-    "unarchive": "Επαναφορά",
-    "delete": "Διαγραφή",
-    "no-habits": "Δεν υπάρχουν συνήθειες."
-  },
-  es: {
-    "language-label": "Idioma:",
-    "back-link": "Volver al menú principal",
-    "tool-title": "Seguimiento de Hábitos",
-    "habitInput": "Nombre del hábito",
-    "add-btn": "Agregar hábito",
-    "banner-all-done": "🎉 ¡Todos los hábitos hechos hoy! ¡Buen trabajo!",
-    "stats-tracked": "Seguimiento: ",
-    "stats-done": "Hechos hoy: ",
-    "stats-best": "Mejor racha: ",
-    "howto-title": '<i class="fa fa-check-double"></i> Cómo usar el Seguimiento de Hábitos',
-    "howto-steps": `<li><b>Agrega hábito:</b> Escribe el hábito y clic en Agregar.</li>
-      <li><b>Marca como hecho:</b> Pulsa Hecho al completarlo.</li>
-      <li><b>Eliminar/archivar:</b> Borra o archiva los que no sigas.</li>
-      <li><b>Repite cada día:</b> Actualiza tu progreso a diario.</li>`,
-    "howto-article-btn": "Leer artículo completo",
-    "howto-article-link": "habit-how-to-es.html",
-    "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos de Productividad',
-    "tips-list": `<li><b>Empieza pequeño:</b> Hábitos fáciles para comenzar.</li>
-      <li><b>Registra a diario:</b> La constancia es clave.</li>
-      <li><b>Celebra avances:</b> Reconoce logros.</li>`,
-    "tips-article-btn": "Leer artículo completo",
-    "tips-article-link": "habit-tips-es.html",
-    "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos',
-    "tips-mobile-list": `<li><b>Empieza pequeño:</b> Avanza poco a poco.</li>
-      <li><b>Racha y constancia:</b> Mira tu historial.</li>
-      <li><b>Pon recordatorios:</b> Usa el calendario.</li>`,
-    "faq-title": "Preguntas frecuentes",
-    "faq-list": `<li><b>¿Se guardan los hábitos?</b> Sí, en el navegador.</li>
-      <li><b>¿Puedo llevar varios?</b> Sí, los que quieras.</li>
-      <li><b>¿Veo mis rachas?</b> Sí, por hábito.</li>
-      <li><b>¿Archivado?</b> Sí, pausa cuando lo necesites.</li>`,
-    "mark-done": "Hecho",
-    "done-today": "Hecho hoy",
-    "streak": "Racha: ",
-    "longest": "Mejor: ",
-    "archive": "Archivar",
-    "unarchive": "Desarchivar",
-    "delete": "Eliminar",
-    "no-habits": "Sin hábitos aún."
-  },
-  ar: {
-    "language-label": "اللغة:",
-    "back-link": "العودة إلى القائمة الرئيسية",
-    "tool-title": "متتبع العادات",
-    "habitInput": "اسم العادة",
-    "add-btn": "إضافة عادة",
-    "banner-all-done": "🎉 جميع العادات أنجزت اليوم! عمل رائع!",
-    "stats-tracked": "تتبع: ",
-    "stats-done": "أنجز اليوم: ",
-    "stats-best": "أفضل سلسلة: ",
-    "howto-title": '<i class="fa fa-check-double"></i> كيفية استخدام متتبع العادات',
-    "howto-steps": `<li><b>أضف عادة:</b> أدخل العادة واضغط إضافة.</li>
-      <li><b>حدد تم:</b> عند الإنجاز اضغط تم بجانب العادة.</li>
-      <li><b>أرشفة/حذف:</b> أرشف أو احذف العادات المتوقفة.</li>
-      <li><b>كرر يوميًا:</b> حدث التقدم كل يوم.</li>`,
-    "howto-article-btn": "اقرأ المقال الكامل",
-    "howto-article-link": "habit-how-to-ar.html",
-    "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح الإنتاجية',
-    "tips-list": `<li><b>ابدأ صغيرًا:</b> عادات سهلة أولًا.</li>
-      <li><b>تابع يوميًا:</b> الثبات أساس النجاح.</li>
-      <li><b>احتفل بالتقدم:</b> كافئ نفسك.</li>`,
-    "tips-article-btn": "اقرأ المقال الكامل",
-    "tips-article-link": "habit-tips-ar.html",
-    "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح',
-    "tips-mobile-list": `<li><b>ابدأ صغيرًا:</b> أضف تدريجيًا.</li>
-      <li><b>تابع الاستمرارية:</b> السلاسل تحفزك.</li>
-      <li><b>استخدم التذكيرات:</b> مع التقويم.</li>`,
-    "faq-title": "الأسئلة الشائعة",
-    "faq-list": `<li><b>هل يتم حفظ العادات؟</b> نعم، بالمتصفح.</li>
-      <li><b>تتبع أكثر من عادة؟</b> نعم، كما تريد.</li>
-      <li><b>عرض السلاسل؟</b> نعم، لكل عادة.</li>
-      <li><b>الأرشفة؟</b> نعم، للإيقاف المؤقت.</li>`,
-    "mark-done": "تم الإنجاز",
-    "done-today": "تم اليوم",
-    "streak": "سلسلة: ",
-    "longest": "أفضل: ",
-    "archive": "أرشفة",
-    "unarchive": "إلغاء الأرشفة",
-    "delete": "حذف",
-    "no-habits": "لا توجد عادات بعد."
-  }
-};
+      en: {
+        "language-label": "Language:",
+        "back-link": "Back to Main Menu",
+        "tool-title": "Habit Tracker",
+        "habitInput": "Habit name",
+        "add-btn": "Add Habit",
+        "banner-all-done": "🎉 All habits done for today! Great job!",
+        "stats-tracked": "Tracked: ",
+        "stats-done": "Done today: ",
+        "stats-best": "Best streak: ",
+        "howto-title": '<i class="fa fa-check-double"></i> How to Use Habit Tracker',
+        "howto-steps": `<li><b>Add a habit:</b> Type your daily habit (e.g., "Drink Water") and click Add.</li>
+          <li><b>Mark done:</b> When you complete a habit for the day, click the Done button beside it.</li>
+          <li><b>Remove habits:</b> Delete or archive habits you no longer want to track.</li>
+          <li><b>Repeat daily:</b> Return each day to update and track your progress.</li>`,
+        "howto-article-btn": "Read Full Article",
+        "howto-article-link": "habit-how-to.html",
+        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Habit Productivity Tips',
+        "tips-list": `<li><b>Start small:</b> Begin with easy, achievable habits to build momentum.</li>
+          <li><b>Track daily:</b> Consistency is key—mark habits done every day.</li>
+          <li><b>Celebrate progress:</b> Recognize small wins to stay motivated.</li>`,
+        "tips-article-btn": "Read Full Article",
+        "tips-article-link": "habit-tips.html",
+        "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tips',
+        "tips-mobile-list": `<li><b>Start small:</b> Build new habits gradually for best results.</li>
+          <li><b>Track consistency:</b> Review your streaks to stay motivated.</li>
+          <li><b>Set reminders:</b> Add calendar alerts to help remember your habits.</li>`,
+        "faq-title": "FAQs",
+        "faq-list": `<li><b>Are habits saved?</b> Yes, in your browser until you clear them.</li>
+          <li><b>Can I track multiple habits?</b> Yes! Add as many habits as you like.</li>
+          <li><b>Can I see my streaks?</b> Streaks are displayed for each habit.</li>
+          <li><b>Can I archive a habit?</b> Yes—archive habits you want to pause.</li>`,
+        "mark-done": "Mark Done",
+        "done-today": "Done Today",
+        "streak": "Streak: ",
+        "longest": "Best: ",
+        "archive": "Archive",
+        "unarchive": "Unarchive",
+        "delete": "Delete",
+        "no-habits": "No habits yet."
+      },
+      fr: {
+        "language-label": "Langue :",
+        "back-link": "Retour au menu principal",
+        "tool-title": "Suivi d'Habitudes",
+        "habitInput": "Nom de l'habitude",
+        "add-btn": "Ajouter l'habitude",
+        "banner-all-done": "🎉 Toutes les habitudes sont terminées aujourd'hui ! Bravo !",
+        "stats-tracked": "Suivies : ",
+        "stats-done": "Faites aujourd'hui : ",
+        "stats-best": "Meilleure série : ",
+        "howto-title": '<i class="fa fa-check-double"></i> Comment utiliser le Suivi d\'Habitudes',
+        "howto-steps": `<li><b>Ajoutez une habitude :</b> Tapez votre habitude quotidienne et cliquez sur Ajouter.</li>
+          <li><b>Marquez comme fait :</b> Lorsque vous complétez une habitude, cliquez sur Terminé à côté.</li>
+          <li><b>Supprimer/archiver :</b> Supprimez ou archivez les habitudes non suivies.</li>
+          <li><b>Répétez chaque jour :</b> Revenez chaque jour pour suivre vos progrès.</li>`,
+        "howto-article-btn": "Lire l'article complet",
+        "howto-article-link": "habit-how-to-fr.html",
+        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour les Habitudes',
+        "tips-list": `<li><b>Commencez petit :</b> Débutez avec des habitudes faciles pour progresser.</li>
+          <li><b>Suivez chaque jour :</b> La constance est la clé !</li>
+          <li><b>Célébrez :</b> Valorisez les petits progrès.</li>`,
+        "tips-article-btn": "Lire l'article complet",
+        "tips-article-link": "habit-tips-fr.html",
+        "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils',
+        "tips-mobile-list": `<li><b>Commencez petit :</b> Construisez progressivement.</li>
+          <li><b>Suivez la régularité :</b> Regardez vos séries pour rester motivé.</li>
+          <li><b>Ajoutez des rappels :</b> Utilisez des alertes calendrier.</li>`,
+        "faq-title": "FAQ",
+        "faq-list": `<li><b>Mes habitudes sont-elles sauvegardées ?</b> Oui, dans votre navigateur.</li>
+          <li><b>Puis-je suivre plusieurs habitudes ?</b> Oui, autant que vous voulez.</li>
+          <li><b>Puis-je voir mes séries ?</b> Oui, affichées pour chaque habitude.</li>
+          <li><b>Puis-je archiver ?</b> Oui, archivez les habitudes mises en pause.</li>`,
+        "mark-done": "Terminer",
+        "done-today": "Fait aujourd'hui",
+        "streak": "Série : ",
+        "longest": "Meilleur : ",
+        "archive": "Archiver",
+        "unarchive": "Désarchiver",
+        "delete": "Supprimer",
+        "no-habits": "Aucune habitude pour l'instant."
+      }
+      // other translations (de, ru, el, es, ar) are present in your original data and are kept on the server
+    };
 
+    // mapping for localized how-to and tips pages per language
+    const localizedArticles = {
+      howto: {
+        en: 'habit-how-to.html',
+        fr: 'habit-how-to-fr.html',
+        es: 'habit-how-to-es.html',
+        de: 'habit-how-to-de.html',
+        ru: 'habit-how-to-ru.html',
+        el: 'habit-how-to-el.html',
+        ar: 'habit-how-to-ar.html'
+      },
+      tips: {
+        en: 'habit-tips.html',
+        fr: 'habit-tips-fr.html',
+        es: 'habit-tips-es.html',
+        de: 'habit-tips-de.html',
+        ru: 'habit-tips-ru.html',
+        el: 'habit-tips-el.html',
+        ar: 'habit-tips-ar.html'
+      }
+    };
+
+    const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
+
+    // Helper: today's date format
     function getTodayStr() {
       const d = new Date();
       return d.getFullYear() + "-" + (d.getMonth()+1).toString().padStart(2,"0") + "-" + d.getDate().toString().padStart(2,"0");
@@ -477,7 +276,65 @@
       }
       return arr;
     }
+
+    // Data
     let habits = JSON.parse(localStorage.getItem('habits') || '[]');
+
+    // get site language from main menu (timerhavenLang)
+    function getSiteLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'en';
+        return (l && l.slice(0,2)) || 'en';
+      } catch (e) {
+        return 'en';
+      }
+    }
+
+    // apply language strings and set localized article links
+    function applyLanguage(lang) {
+      lang = (lang || getSiteLang()).slice(0,2);
+      const t = habitTranslations[lang] || habitTranslations['en'];
+
+      // RTL support
+      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+
+      // Update the visible UI strings
+      const back = document.getElementById('back-link'); if (back) back.textContent = t['back-link'] || '';
+      const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-check-double"></i> ${t['tool-title'] || ''}`;
+      const input = document.getElementById('habitInput'); if (input) input.placeholder = t['habitInput'] || '';
+      const addBtn = document.getElementById('add-btn'); if (addBtn) addBtn.textContent = t['add-btn'] || '';
+      const faqTitle = document.getElementById('faq-title'); if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+      const faqList = document.getElementById('faq-list'); if (faqList) faqList.innerHTML = t['faq-list'] || '';
+      const howtoTitle = document.getElementById('howto-title'); if (howtoTitle) howtoTitle.innerHTML = t['howto-title'] || '';
+      const howtoSteps = document.getElementById('howto-steps'); if (howtoSteps) howtoSteps.innerHTML = t['howto-steps'] || '';
+      const tipsTitle = document.getElementById('tips-title'); if (tipsTitle) tipsTitle.innerHTML = t['tips-title'] || '';
+      const tipsList = document.getElementById('tips-list'); if (tipsList) tipsList.innerHTML = t['tips-list'] || '';
+
+      // Set localized how-to and tips links based on mapping above
+      const howtoBtn = document.getElementById('howto-article-btn');
+      const tipsBtn = document.getElementById('tips-article-btn');
+      if (howtoBtn) {
+        const href = (localizedArticles.howto[lang] || localizedArticles.howto.en);
+        howtoBtn.href = href;
+        howtoBtn.textContent = t['howto-article-btn'] || 'Read Full Article';
+      }
+      if (tipsBtn) {
+        const href = (localizedArticles.tips[lang] || localizedArticles.tips.en);
+        tipsBtn.href = href;
+        tipsBtn.textContent = t['tips-article-btn'] || 'Read Full Article';
+      }
+
+      // Update the "language indicator" text (if you still show indicator elsewhere)
+      const labelEl = document.getElementById('language-label');
+      const nameEl = document.getElementById('language-name');
+      if (labelEl) labelEl.textContent = t['language-label'] || 'Language:';
+      if (nameEl) nameEl.textContent = langNames[lang] || lang;
+
+      // Re-render habits so labels and stats use the chosen language
+      renderHabits();
+    }
+
+    // Reset daily flags if new day
     function resetHabitsIfNeeded() {
       const today = getTodayStr();
       let changed = false;
@@ -492,9 +349,12 @@
       if (changed) saveHabits();
     }
     function saveHabits() { localStorage.setItem('habits', JSON.stringify(habits)); }
+
+    // Rendering (same as before)
     function renderHabits() {
       resetHabitsIfNeeded();
-      const lang = document.getElementById("habit-lang-select").value;
+      const lang = getSiteLang();
+      const t = habitTranslations[lang] || habitTranslations['en'];
       const list = document.getElementById('habitList');
       list.innerHTML = '';
       const today = getTodayStr();
@@ -503,7 +363,7 @@
       let activeCount = 0;
       habits.forEach(h => { if (!h.archived) activeCount++; });
       if (habits.length === 0 || activeCount === 0) {
-        list.innerHTML = `<div style="color:#888;">${habitTranslations[lang]["no-habits"] || habitTranslations["en"]["no-habits"]}</div>`;
+        list.innerHTML = `<div style="color:#888;">${t["no-habits"] || habitTranslations["en"]["no-habits"]}</div>`;
       }
       habits.forEach((habit, idx) => {
         if (habit.archived) return;
@@ -521,16 +381,16 @@
         list.innerHTML += `
           <div class="habit-item">
             <span><b>${habit.name}</b>
-              <span class="habit-meta">${habitTranslations[lang]["streak"]}${streak} ${habitTranslations[lang]["longest"]}${longest}</span>
+              <span class="habit-meta">${t["streak"]}${streak} ${t["longest"]}${longest}</span>
               <span class="habit-history">${historyDots}</span>
             </span>
             <button class="btn btn-outline-${isDone ? 'secondary' : 'success'} btn-sm habit-btn" onclick="markDone(${idx})" ${isDone ? 'disabled' : ''}>
-              ${isDone ? habitTranslations[lang]["done-today"] : habitTranslations[lang]["mark-done"]}
+              ${isDone ? t["done-today"] : t["mark-done"]}
             </button>
             <button class="archive-btn${habit.archived ? ' archived' : ''}" onclick="archiveHabit(${idx})">
-              ${habit.archived ? habitTranslations[lang]["unarchive"] : habitTranslations[lang]["archive"]}
+              ${habit.archived ? t["unarchive"] : t["archive"]}
             </button>
-            <button class="btn btn-outline-danger btn-sm habit-btn" onclick="deleteHabit(${idx})"><i class="fa fa-trash"></i> ${habitTranslations[lang]["delete"]}</button>
+            <button class="btn btn-outline-danger btn-sm habit-btn" onclick="deleteHabit(${idx})"><i class="fa fa-trash"></i> ${t["delete"]}</button>
           </div>
         `;
       });
@@ -538,23 +398,26 @@
       renderBanner(activeCount, doneTodayCount);
     }
     function renderStats(tracked, done, best) {
-      const lang = document.getElementById("habit-lang-select").value;
+      const lang = getSiteLang();
+      const t = habitTranslations[lang] || habitTranslations['en'];
       document.getElementById("stats-bar").innerHTML =
-        `${habitTranslations[lang]["stats-tracked"]}${tracked} &bull; ${habitTranslations[lang]["stats-done"]}${done} &bull; ${habitTranslations[lang]["stats-best"]}${best}`;
+        `${t["stats-tracked"]}${tracked} &bull; ${t["stats-done"]}${done} &bull; ${t["stats-best"]}${best}`;
     }
     function renderBanner(tracked, done) {
-      const lang = document.getElementById("habit-lang-select").value;
+      const lang = getSiteLang();
+      const t = habitTranslations[lang] || habitTranslations['en'];
       const banner = document.getElementById("banner");
       if (tracked > 0 && done === tracked) {
-        banner.textContent = habitTranslations[lang]["banner-all-done"] || habitTranslations["en"]["banner-all-done"];
+        banner.textContent = t["banner-all-done"] || habitTranslations["en"]["banner-all-done"];
         banner.style.display = "block";
       } else {
         banner.style.display = "none";
       }
     }
+
+    // Actions
     document.getElementById('habitForm').addEventListener('submit', function(e){
       e.preventDefault();
-      const lang = document.getElementById("habit-lang-select").value;
       const name = document.getElementById('habitInput').value.trim();
       if (!name) return;
       habits.push({
@@ -571,7 +434,6 @@
       renderHabits();
     });
     window.markDone = function(idx){
-      const lang = document.getElementById("habit-lang-select").value;
       const today = getTodayStr();
       if (!habits[idx].doneToday) {
         habits[idx].doneToday = true;
@@ -594,36 +456,21 @@
       saveHabits();
       renderHabits();
     }
-    function updateHabitLanguage() {
-      const lang = document.getElementById("habit-lang-select").value;
-      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
-      document.getElementById("language-label").textContent = habitTranslations[lang]["language-label"];
-      document.getElementById("back-link").textContent = habitTranslations[lang]["back-link"];
-      document.getElementById("tool-title").innerHTML = `<i class="fa fa-check-double"></i> ${habitTranslations[lang]["tool-title"]}`;
-      document.getElementById("habitInput").placeholder = habitTranslations[lang]["habitInput"];
-      document.getElementById("add-btn").textContent = habitTranslations[lang]["add-btn"];
-      document.getElementById("faq-title").textContent = habitTranslations[lang]["faq-title"];
-      document.getElementById("faq-list").innerHTML = habitTranslations[lang]["faq-list"];
-      document.getElementById("howto-title").innerHTML = habitTranslations[lang]["howto-title"];
-      document.getElementById("howto-steps").innerHTML = habitTranslations[lang]["howto-steps"];
-      document.getElementById("howto-article-btn").textContent = habitTranslations[lang]["howto-article-btn"];
-      document.getElementById("howto-article-btn").href = habitTranslations[lang]["howto-article-link"];
-      document.getElementById("tips-title").innerHTML = habitTranslations[lang]["tips-title"];
-      document.getElementById("tips-list").innerHTML = habitTranslations[lang]["tips-list"];
-      document.getElementById("tips-article-btn").textContent = habitTranslations[lang]["tips-article-btn"];
-      document.getElementById("tips-article-btn").href = habitTranslations[lang]["tips-article-link"];
-      document.getElementById("tips-mobile-title").innerHTML = habitTranslations[lang]["tips-mobile-title"];
-      document.getElementById("tips-mobile-list").innerHTML = habitTranslations[lang]["tips-mobile-list"];
-      renderHabits();
-    }
-    document.getElementById("habit-lang-select").addEventListener("change", function() {
-      localStorage.setItem('habitLang', this.value);
-      updateHabitLanguage();
+
+    // When timerhavenLang changes (other tabs), update UI and article links
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        const lang = (e.newValue || getSiteLang()).slice(0,2);
+        applyLanguage(lang);
+      }
     });
+
+    // Initialize on load
     document.addEventListener("DOMContentLoaded", function() {
-      const savedLang = localStorage.getItem('habitLang') || 'en';
-      document.getElementById('habit-lang-select').value = savedLang;
-      updateHabitLanguage();
+      // Apply UI language and localized article links
+      applyLanguage(getSiteLang());
+      // Initial render of habits
+      renderHabits();
     });
   </script>
 <footer>

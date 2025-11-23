@@ -1,461 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Clipboard Manager — TimerHaven</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Save, manage, and organize multiple clipboard snippets in any language.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- Redirect (unchanged) -->
+  <script>
+    (function(){
+      try {
+        const langRaw = localStorage.getItem('timerhavenLang') || '';
+        const lang = (langRaw || '').toString().slice(0,2).toLowerCase();
+        if (!lang || lang === 'en') return;
+        const path = location.pathname || '';
+        const filename = path.split('/').pop().toLowerCase();
+        if (filename && filename.includes('-' + lang + '.html')) return;
+        const localized = path.replace(/(clipboard-manager)(\.html)?$/i, '$1-' + lang + '.html');
+        const localizedUrl = (localized === path) ? ('/clipboard-manager-' + lang + '.html') : localized;
+        if (localizedUrl && localizedUrl !== location.pathname + location.search + location.hash) {
+          location.replace(localizedUrl + location.search + location.hash);
+        }
+      } catch (e) {
+        console && console.warn && console.warn('locale redirect failed', e);
+      }
+    })();
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Save, manage, and organize multiple clipboard snippets." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
-    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
-    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
-    .article-card, .tool-card {
-      background: #fff;
+    :root {
+      --card-bg: #fff;
+      --page-bg: #f4f7fb;
+      --accent: #185a9d;
+      --accent-2: #43cea2;
+    }
+    html,body { height: 100%; margin:0; }
+    body { background: var(--page-bg); font-family: 'Montserrat', Arial, sans-serif; color:#1f2937; }
+
+    /* Ensure the language indicator is always hidden (forceful) */
+    .language-indicator { display: none !important; visibility: hidden !important; opacity: 0 !important; height: 0 !important; width: 0 !important; }
+
+    .main-container { max-width: 1200px; margin: 1.5em auto; padding: 0 12px; box-sizing: border-box; }
+    .center-row { display:flex; gap:1.5em; align-items: stretch; }
+    .center-row > .col { flex: 1 1 0; display:flex; min-width: 220px; }
+
+    /* Make each card stretch to full column height via flexbox */
+    .card-base {
+      background: var(--card-bg);
       border-radius: 16px;
-      box-shadow: 0 2px 12px #e0e7ef;
-      min-width: 220px;
-      max-width: 340px;
-      width: 340px;
-      min-height: 500px;
-      flex: 1 1 340px;
-      display: flex;
+      box-shadow: 0 2px 12px rgba(224,231,239,1);
+      padding: 1.6em;
+      display:flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      padding: 2em 1.3em 1em 1.3em;
-      margin: 0;
       box-sizing: border-box;
-      text-align: left;
-      overflow: hidden;
+      width:100%;
+      height: 100%;
     }
-    .article-card h2, .tool-card h3 {
-      font-size: 1.35em;
-      font-weight: 700;
-      margin-bottom: 0.4em;
-      display: flex;
-      align-items: center;
-      gap: 0.3em;
+
+    .card-inner { display:flex; flex-direction:column; flex:1 1 auto; }
+    .card-content { flex: 1 1 auto; }
+    .card-actions { margin-top: 1rem; }
+
+    h2, h3 { color: var(--accent); margin: 0 0 0.5rem 0; font-weight:700; }
+    .article-card h2, .tool-card h3 { font-size:1.4rem; line-height:1.05; display:flex; gap:.4rem; align-items:center; }
+
+    .clips-section { display:flex; flex-direction:column; gap:.6rem; }
+    .clips-form { display:flex; gap:.6rem; align-items:center; }
+    .clips-form input[type="text"] { flex:1 1 auto; min-width:0; }
+
+    .clips-list { margin-top: .4rem; max-height:260px; overflow-y:auto; padding-right:6px; }
+
+    .clip-item { background:#f7fafc; border-radius:8px; padding:.6rem; margin-bottom:.6rem; display:flex; gap:.6rem; align-items:center; }
+    .clip-text { flex:1; word-break:break-word; }
+
+    .faq-section { margin-top:8px; background:#fbfdff; border-radius:8px; padding:.8rem; box-shadow: inset 0 1px 0 rgba(0,0,0,0.02); }
+    details[open] summary::after { content: " ▲"; }
+    details summary::after { content: " ▼"; }
+    details summary { cursor:pointer; font-weight:600; }
+
+    .back-link { color:var(--accent); font-weight:700; text-decoration:none; display:inline-block; margin-bottom:.6rem; }
+    .back-link i { margin-right:.35rem; }
+
+    .btn-outline-primary { border-radius:10px; padding: .55rem 1rem; }
+    .btn-success { border-radius:8px; padding:.45rem .85rem; }
+
+    footer { text-align:center; color:#666; padding: 1.4rem 0 2rem; font-size:.9rem; }
+
+    @media (max-width: 900px) {
+      .center-row { flex-direction: column; }
+      .center-row > .col { min-width: auto; }
     }
-    .article-card .btn, .tool-card .btn { 
-      align-self: stretch;
-      font-weight: 600; 
-      border-radius: 8px; 
-      margin-top: 0.2em; 
-      margin-bottom: 0; 
-      box-sizing: border-box;
-    }
-    .clipboard-form { margin-bottom: 1em; }
-    .clipboard-form textarea { width: 100%; min-height: 50px; border-radius: 7px; border: 1px solid #e0e7ef; padding: 8px; font-size: 1em; margin-bottom: 0.5em; resize: vertical; }
-    .clipboard-form .btn { font-weight: 600; border-radius: 7px; padding: 0.4em 1.3em; margin-bottom: 6px; }
-    .clips-list {
-      margin-bottom: 1em;
-      margin-top: 0.5em;
-      max-height: 220px;
-      overflow-y: auto;
-      padding-right: 2px;
-    }
-    .clips-list::-webkit-scrollbar { width: 8px; }
-    .clips-list::-webkit-scrollbar-thumb { background: #e0e7ef; border-radius: 4px; }
-    .clip-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display: flex; align-items: center; justify-content: space-between; word-break: break-word; }
-    .clip-text { flex-grow: 1; margin-right: 1em; font-size: 1em; }
-    .clip-actions .btn { font-size: 0.95em; padding: 0.15em 0.7em; border-radius: 5px; margin-left: 0.2em; }
-    .help-section { margin-bottom: 1em; font-size: 1em; }
-    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
-    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
-    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
-    .back-link:hover { text-decoration: underline; }
-    .language-select {
-      text-align: right;
-      padding: 20px 40px 0 0;
-      margin-bottom: 0.7em;
-      position: relative;
-      z-index: 5;
-    }
-    .language-select label {
-      margin-right: 8px;
-      font-size: 1.08em;
-      font-weight: 600;
-      color: #185a9d;
-    }
-    #clipboard-lang-select {
-      min-width: 150px;
-      font-size: 1.08em;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1px solid #43cea2;
-      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
-      color: #fff;
-      margin-left: 6px;
-      margin-right: 4px;
-      box-shadow: 0 2px 8px #e0e7ef;
-      transition: background 0.2s;
-      font-weight: 600;
-    }
-    #clipboard-lang-select option {
-      color: #185a9d;
-      background: #f4f7fb;
-      font-weight: 500;
-    }
-    body[dir="rtl"] .language-select {
-      text-align: left;
-      padding: 20px 0 0 40px;
-    }
-    body[dir="rtl"] #clipboard-lang-select {
-      margin-left: 4px;
-      margin-right: 6px;
-    }
-    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } }
-    details[open] summary::after { content: " ▲"; font-size: 0.9em; }
-    details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
-    details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
   </style>
 </head>
 <body>
-  <div class="language-select">
-    <label for="clipboard-lang-select"><strong id="language-label">Language:</strong></label>
-    <select id="clipboard-lang-select">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="el">Ελληνικά</option>
-      <option value="es">Español</option>
-      <option value="ar">العربية</option>
-    </select>
-  </div>
-  <div class="main-container">
+  <div class="main-container" id="page-main">
     <div class="center-row">
-      <!-- Article Card (left) -->
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
+      <div class="col">
+        <article class="card-base article-card" id="left-article">
+          <div class="card-inner">
+            <header class="card-content">
+              <h2 id="howto-title"><i class="fa fa-clipboard"></i> How to Use Clipboard Manager</h2>
+              <ol id="howto-steps">
+                <li><b>Add a clip:</b> Type or paste your text, then click <b>Add Clip</b>.</li>
+                <li><b>Copy a clip:</b> Click the <b>Copy</b> button next to any clip to copy instantly.</li>
+                <li><b>Remove/Pin:</b> Use <b>Remove</b> or <b>Pin</b> to manage your clips.</li>
+                <li><b>Clips are saved:</b> All your clips are stored in your browser and remain after reload.</li>
+              </ol>
+            </header>
+            <div class="card-actions">
+              <a id="left-article-btn" class="btn btn-outline-primary w-100" href="clipboard-how-to.html">Read Full Article</a>
+            </div>
+          </div>
+        </article>
       </div>
-      <!-- Tool card (center) -->
-      <div class="tool-card">
-        <a href="index.html" class="back-link" id="back-link"></a>
-        <h3 id="tool-title"></h3>
-        <div class="help-section" id="tool-help"></div>
-        <form class="clipboard-form" id="clipboardForm">
-          <textarea id="clipboardInput" class="form-control" rows="3" placeholder=""></textarea>
-          <button type="submit" class="btn btn-success w-100" id="add-btn"></button>
-        </form>
-        <div class="clips-list" id="clips-list"></div>
-        <details class="faq-section mt-2">
-          <summary id="faq-title"></summary>
-          <ul id="faq-list" style="padding-left:1em;"></ul>
-        </details>
+
+      <div class="col tool-col">
+        <section class="card-base tool-card" id="tool-card" aria-labelledby="tool-title">
+          <div class="card-inner">
+            <div class="card-content">
+              <a class="back-link" id="back-link" href="index.html"><i class="fa fa-arrow-left"></i><span id="back-link-text">Back to Main Menu</span></a>
+              <h3 id="tool-title"><i class="fa fa-clipboard"></i> Clipboard Manager</h3>
+
+              <div class="tool-top-actions" role="toolbar" aria-label="Tool actions">
+                <button id="btn-about" class="btn about" type="button" aria-controls="tool-info" aria-expanded="false">About the Clipboard Manager</button>
+              </div>
+
+              <article class="tool-info" id="tool-info" aria-hidden="true">
+                <h2 style="margin-top:0; margin-bottom:0.4rem; font-size:1.1rem; color:var(--accent);">About the Clipboard Manager</h2>
+                <p style="margin-bottom:0.6rem;">
+                  The Clipboard Manager is a lightweight, privacy‑first tool for storing and reusing text snippets.
+                </p>
+              </article>
+
+              <div class="clips-section">
+                <form id="clipboardForm" class="clips-form" aria-label="Add clip form">
+                  <input type="text" id="clipInput" class="form-control" placeholder="Type or paste clip..." />
+                  <button type="submit" class="btn btn-success" id="add-btn">Add Clip</button>
+                </form>
+
+                <div id="clipsList" class="clips-list" aria-live="polite"></div>
+
+                <details class="faq-section" id="faq-details">
+                  <summary id="faq-summary">FAQs</summary>
+                  <ul id="faq-list" style="padding-left:1em;">
+                    <li><b>Are my notes saved?</b> Yes! Notes are saved in your browser and remain until you clear them.</li>
+                  </ul>
+                </details>
+              </div>
+            </div>
+
+            <div class="card-actions" aria-hidden="true"></div>
+          </div>
+        </section>
       </div>
-      <!-- Article Card (right) -->
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
+
+      <div class="col">
+        <aside class="card-base article-card" id="right-article">
+          <div class="card-inner">
+            <header class="card-content">
+              <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:var(--accent-2)"></i> Clipboard Tips</h2>
+              <ul id="tips-list">
+                <li><b>Keep clips short:</b> Easier to scan and reuse.</li>
+                <li><b>Pin important:</b> Keep frequent items on top.</li>
+                <li><b>Remove old:</b> Clean up outdated clips regularly.</li>
+              </ul>
+            </header>
+
+            <div class="card-actions">
+              <a id="right-article-btn" class="btn btn-outline-primary w-100" href="clipboard-tips.html">Read Full Article</a>
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   </div>
+
+  <footer>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br />
+    <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>
+  </footer>
+
   <script>
-    // FULL TRANSLATION OBJECT — keys now match JS!
-    const clipboardTranslations = {
-      en: {
-        "language-label": "Language:",
-        "back-link": "Back to Main Menu",
-        "tool-title": "Clipboard Manager",
-        "tool-help": "Quickly jot down and manage multiple clipboard notes. Use this tool to copy, organize, and remove multiple text snippets during your workflow.",
-        "faq-title": "FAQs",
-        "faq-list": `<li><b>Are my notes saved?</b> Yes! Notes are saved in your browser and remain until you clear them.</li>
-          <li><b>Can I copy a note?</b> Yes, click the <b>Copy</b> button next to any note.</li>
-          <li><b>How do I remove a note?</b> Click the <b>Remove</b> button next to it.</li>
-          <li><b>How do I clear all notes?</b> Remove each note individually.</li>`,
-        "howto-title": '<i class="fa fa-clipboard"></i> How to Use Clipboard Manager',
-        "howto-steps": `<li><b>Add a note:</b> Type or paste any text into the box, then click <b>Add</b>. Your note will appear in the list below.</li>
-          <li><b>Copy a note:</b> Click the <b>Copy</b> button next to any clip to instantly copy it to your system clipboard.</li>
-          <li><b>Remove a note:</b> Click <b>Remove</b> to delete any clip you no longer need.</li>
-          <li><b>Clips are saved:</b> All your clips are stored in your browser, so they stay even if you leave or reload the page.</li>`,
-        "howto-article-btn": "Read Full Article",
-        "howto-article-link": "clipboard-how-to.html",
-        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Clipboard Productivity Tips',
-        "tips-list": `<li><b>Group notes:</b> Keep similar info together for quick access.</li>
-          <li><b>Copy important info:</b> Save time by storing commonly used text.</li>
-          <li><b>Remove old clips:</b> Delete outdated notes regularly.</li>`,
-        "tips-article-btn": "Read Full Article",
-        "tips-article-link": "clipboard-tips.html",
-        "clipboardInput": "Type or paste your note here...",
-        "add-btn": "Add",
-        "clip-copy": "Copy",
-        "clip-delete": "Remove",
-        "no-clips": "No clips yet."
-      },
-      fr: {
-        "language-label": "Langue :",
-        "back-link": "Retour au menu principal",
-        "tool-title": "Gestionnaire de Presse-papiers",
-        "tool-help": "Notez rapidement et gérez plusieurs extraits de texte. Utilisez cet outil pour copier, organiser et supprimer des notes.",
-        "faq-title": "FAQ",
-        "faq-list": `<li><b>Mes notes sont-elles sauvegardées ?</b> Oui ! Elles restent dans votre navigateur jusqu'à suppression.</li>
-          <li><b>Puis-je copier une note ?</b> Oui, cliquez sur <b>Copier</b> à côté de la note.</li>
-          <li><b>Comment supprimer une note ?</b> Cliquez sur <b>Supprimer</b> à côté de la note.</li>
-          <li><b>Comment tout effacer ?</b> Supprimez chaque note individuellement.</li>`,
-        "howto-title": '<i class="fa fa-clipboard"></i> Comment utiliser le Gestionnaire de Presse-papiers',
-        "howto-steps": `<li><b>Ajouter une note :</b> Tapez ou collez le texte, puis cliquez sur <b>Ajouter</b>. Votre note apparaîtra dans la liste.</li>
-          <li><b>Copier une note :</b> Cliquez sur <b>Copier</b> pour l'ajouter au presse-papiers.</li>
-          <li><b>Supprimer une note :</b> Cliquez sur <b>Supprimer</b> pour retirer la note.</li>
-          <li><b>Les notes sont enregistrées :</b> Elles restent dans votre navigateur même après fermeture.</li>`,
-        "howto-article-btn": "Lire l'article complet",
-        "howto-article-link": "clipboard-how-to-fr.html",
-        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour le Gestionnaire de Presse-papiers',
-        "tips-list": `<li><b>Groupez les notes :</b> Gardez les informations similaires ensemble.</li>
-          <li><b>Copiez les infos importantes :</b> Gagnez du temps en stockant les textes courants.</li>
-          <li><b>Supprimez les anciennes notes :</b> Nettoyez régulièrement vos notes obsolètes.</li>`,
-        "tips-article-btn": "Lire l'article complet",
-        "tips-article-link": "clipboard-tips-fr.html",
-        "clipboardInput": "Tapez ou collez votre note ici...",
-        "add-btn": "Ajouter",
-        "clip-copy": "Copier",
-        "clip-delete": "Supprimer",
-        "no-clips": "Aucune note ajoutée pour le moment."
-      },
-      de: {
-        "language-label": "Sprache:",
-        "back-link": "Zurück zum Hauptmenü",
-        "tool-title": "Zwischenablage-Manager",
-        "tool-help": "Notiere schnell und verwalte mehrere Textschnipsel. Nutze das Tool, um Textbausteine zu kopieren, organisieren und löschen.",
-        "faq-title": "FAQ",
-        "faq-list": `<li><b>Werden meine Notizen gespeichert?</b> Ja! Sie bleiben im Browser, bis du sie löschst.</li>
-          <li><b>Kann ich eine Notiz kopieren?</b> Ja, klicke auf <b>Kopieren</b> neben der Notiz.</li>
-          <li><b>Wie entferne ich eine Notiz?</b> Klicke auf <b>Entfernen</b> daneben.</li>
-          <li><b>Wie lösche ich alles?</b> Entferne jede Notiz einzeln.</li>`,
-        "howto-title": '<i class="fa fa-clipboard"></i> So nutzt du den Zwischenablage-Manager',
-        "howto-steps": `<li><b>Notiz hinzufügen:</b> Text eingeben/einfügen und <b>Hinzufügen</b> klicken. Die Notiz erscheint unten.</li>
-          <li><b>Notiz kopieren:</b> Klicke auf <b>Kopieren</b> neben dem Clip.</li>
-          <li><b>Notiz entfernen:</b> Klicke auf <b>Entfernen</b>.</li>
-          <li><b>Notizen sind gespeichert:</b> Bleiben im Browser, auch nach dem Schließen.</li>`,
-        "howto-article-btn": "Vollständigen Artikel lesen",
-        "howto-article-link": "clipboard-how-to-de.html",
-        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps für die Zwischenablage',
-        "tips-list": `<li><b>Farbcodes für deine Notizen:</b> Emojis oder Tags für schnelle visuelle Organisation.</li>
-          <li><b>Regelmäßig prüfen:</b> Überprüfe und lösche veraltete Notizen.</li>
-          <li><b>Im Voraus planen:</b> Füge Notizen für zukünftige Termine hinzu!</li>`,
-        "tips-article-btn": "Vollständigen Artikel lesen",
-        "tips-article-link": "clipboard-tips-de.html",
-        "clipboardInput": "Text hier eingeben oder einfügen...",
-        "add-btn": "Hinzufügen",
-        "clip-copy": "Kopieren",
-        "clip-delete": "Entfernen",
-        "no-clips": "Noch keine Notizen hinzugefügt."
-      },
-      ru: {
-        "language-label": "Язык:",
-        "back-link": "Назад в главное меню",
-        "tool-title": "Менеджер буфера обмена",
-        "tool-help": "Быстро записывайте и управляйте несколькими заметками. Используйте инструмент для копирования, организации и удаления текстовых фрагментов.",
-        "faq-title": "Частые вопросы",
-        "faq-list": `<li><b>Сохраняются ли мои заметки?</b> Да! Они остаются в браузере до удаления.</li>
-          <li><b>Можно ли скопировать заметку?</b> Да, нажмите <b>Копировать</b> рядом с заметкой.</li>
-          <li><b>Как удалить заметку?</b> Нажмите <b>Удалить</b> рядом с ней.</li>
-          <li><b>Как удалить все заметки?</b> Удаляйте их по одной.</li>`,
-        "howto-title": '<i class="fa fa-clipboard"></i> Как пользоваться Менеджером буфера обмена',
-        "howto-steps": `<li><b>Добавьте заметку:</b> Введите/вставьте текст и нажмите <b>Добавить</b>. Заметка появится ниже.</li>
-          <li><b>Скопировать заметку:</b> Нажмите <b>Копировать</b> рядом с фрагментом.</li>
-          <li><b>Удалить заметку:</b> Нажмите <b>Удалить</b> рядом с заметкой.</li>
-          <li><b>Заметки сохраняются:</b> Они остаются в браузере даже после выхода.</li>`,
-        "howto-article-btn": "Читать полный текст",
-        "howto-article-link": "clipboard-how-to-ru.html",
-        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по Менеджеру буфера обмена',
-        "tips-list": `<li><b>Группируйте заметки:</b> Похожая информация вместе.</li>
-          <li><b>Копируйте важное:</b> Экономьте время с часто используемым текстом.</li>
-          <li><b>Удаляйте старые заметки:</b> Регулярно чистите устаревшее.</li>`,
-        "tips-article-btn": "Читать полный текст",
-        "tips-article-link": "clipboard-tips-ru.html",
-        "clipboardInput": "Введите или вставьте заметку...",
-        "add-btn": "Добавить",
-        "clip-copy": "Копировать",
-        "clip-delete": "Удалить",
-        "no-clips": "Заметок пока нет."
-      },
-      el: {
-        "language-label": "Γλώσσα:",
-        "back-link": "Επιστροφή στο κύριο μενού",
-        "tool-title": "Διαχειριστής Πρόχειρου",
-        "tool-help": "Σημειώστε γρήγορα και διαχειριστείτε πολλές σημειώσεις. Χρησιμοποιήστε το εργαλείο για αντιγραφή, οργάνωση και διαγραφή κειμένων.",
-        "faq-title": "Συχνές Ερωτήσεις",
-        "faq-list": `<li><b>Αποθηκεύονται οι σημειώσεις μου;</b> Ναι! Παραμένουν στον browser μέχρι να διαγραφούν.</li>
-          <li><b>Μπορώ να αντιγράψω σημείωση;</b> Ναι, πατήστε <b>Αντιγραφή</b> δίπλα στη σημείωση.</li>
-          <li><b>Πώς διαγράφω σημείωση;</b> Πατήστε <b>Διαγραφή</b> δίπλα στη σημείωση.</li>
-          <li><b>Πώς διαγράφω όλες τις σημειώσεις;</b> Διαγράψτε μία-μία.</li>`,
-        "howto-title": '<i class="fa fa-clipboard"></i> Πώς να χρησιμοποιήσετε τον Διαχειριστή Πρόχειρου',
-        "howto-steps": `<li><b>Προσθέστε σημείωση:</b> Πληκτρολογήστε/επικολλήστε κείμενο και πατήστε <b>Προσθήκη</b>. Θα εμφανιστεί παρακάτω.</li>
-          <li><b>Αντιγραφή σημείωσης:</b> Πατήστε <b>Αντιγραφή</b> δίπλα στο κλιπ.</li>
-          <li><b>Διαγραφή σημείωσης:</b> Πατήστε <b>Διαγραφή</b> δίπλα στη σημείωση.</li>
-          <li><b>Οι σημειώσεις αποθηκεύονται:</b> Παραμένουν στον browser ακόμα και μετά το κλείσιμο.</li>`,
-        "howto-article-btn": "Διαβάστε το πλήρες άρθρο",
-        "howto-article-link": "clipboard-how-to-el.html",
-        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές για το Πρόχειρο',
-        "tips-list": `<li><b>Ομαδοποιήστε σημειώσεις:</b> Παρόμοιες πληροφορίες μαζί.</li>
-          <li><b>Αντιγράψτε σημαντικά:</b> Εξοικονομήστε χρόνο με συχνά κείμενα.</li>
-          <li><b>Διαγράψτε παλιές σημειώσεις:</b> Καθαρίζετε τακτικά τις παλιές σημειώσεις.</li>`,
-        "tips-article-btn": "Διαβάστε το πλήρες άρθρο",
-        "tips-article-link": "clipboard-tips-el.html",
-        "clipboardInput": "Πληκτρολογήστε ή επικολλήστε εδώ τη σημείωση...",
-        "add-btn": "Προσθήκη",
-        "clip-copy": "Αντιγραφή",
-        "clip-delete": "Διαγραφή",
-        "no-clips": "Δεν έχουν προστεθεί σημειώσεις."
-      },
-      es: {
-        "language-label": "Idioma:",
-        "back-link": "Volver al menú principal",
-        "tool-title": "Gestor de Portapapeles",
-        "tool-help": "Anota rápido y gestiona varias notas. Usa la herramienta para copiar, organizar y eliminar fragmentos de texto.",
-        "faq-title": "Preguntas frecuentes",
-        "faq-list": `<li><b>¿Se guardan mis notas?</b> ¡Sí! Permanecen en tu navegador hasta que las elimines.</li>
-          <li><b>¿Puedo copiar una nota?</b> Sí, pulsa <b>Copiar</b> junto a la nota.</li>
-          <li><b>¿Cómo elimino una nota?</b> Pulsa <b>Eliminar</b> junto a la nota.</li>
-          <li><b>¿Cómo borro todas las notas?</b> Elimina una a una.</li>`,
-        "howto-title": '<i class="fa fa-clipboard"></i> Cómo utilizar el Gestor de Portapapeles',
-        "howto-steps": `<li><b>Agregar una nota:</b> Escribe/pega el texto y pulsa <b>Agregar</b>. Aparecerá en la lista.</li>
-          <li><b>Copiar una nota:</b> Pulsa <b>Copiar</b> junto al clip.</li>
-          <li><b>Eliminar una nota:</b> Pulsa <b>Eliminar</b> para quitar la nota.</li>
-          <li><b>Las notas se guardan:</b> Permanecen en el navegador incluso tras cerrar la página.</li>`,
-        "howto-article-btn": "Leer artículo completo",
-        "howto-article-link": "clipboard-how-to-es.html",
-        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos para el Portapapeles',
-        "tips-list": `<li><b>Agrupa notas:</b> Junta información similar.</li>
-          <li><b>Copia información importante:</b> Ahorra tiempo con textos frecuentes.</li>
-          <li><b>Elimina clips antiguos:</b> Borra notas obsoletas regularmente.</li>`,
-        "tips-article-btn": "Leer artículo completo",
-        "tips-article-link": "clipboard-tips-es.html",
-        "clipboardInput": "Escribe o pega tu nota aquí...",
-        "add-btn": "Agregar",
-        "clip-copy": "Copiar",
-        "clip-delete": "Eliminar",
-        "no-clips": "No se han añadido notas."
-      },
-      ar: {
-        "language-label": "اللغة:",
-        "back-link": "العودة إلى القائمة الرئيسية",
-        "tool-title": "مدير الحافظة",
-        "tool-help": "دوّن بسرعة وأدر عدة ملاحظات. استخدم الأداة لنسخ وترتيب وحذف النصوص.",
-        "faq-title": "الأسئلة الشائعة",
-        "faq-list": `<li><b>هل يتم حفظ ملاحظاتي؟</b> نعم! تبقى في المتصفح حتى يتم حذفها.</li>
-          <li><b>هل يمكنني نسخ ملاحظة؟</b> نعم، اضغط <b>نسخ</b> بجانب الملاحظة.</li>
-          <li><b>كيف أحذف ملاحظة؟</b> اضغط <b>حذف</b> بجانب الملاحظة.</li>
-          <li><b>كيف أحذف جميع الملاحظات؟</b> احذفها واحدة واحدة.</li>`,
-        "howto-title": '<i class="fa fa-clipboard"></i> كيفية استخدام مدير الحافظة',
-        "howto-steps": `<li><b>أضف ملاحظة:</b> اكتب أو الصق النص ثم اضغط <b>إضافة</b>. ستظهر الملاحظة في القائمة.</li>
-          <li><b>نسخ ملاحظة:</b> اضغط <b>نسخ</b> بجانب الملاحظة.</li>
-          <li><b>حذف ملاحظة:</b> اضغط <b>حذف</b> لإزالة الملاحظة.</li>
-          <li><b>الملاحظات محفوظة:</b> تبقى في المتصفح حتى بعد إغلاق الصفحة.</li>`,
-        "howto-article-btn": "اقرأ المقال الكامل",
-        "howto-article-link": "clipboard-how-to-ar.html",
-        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح للحافظة',
-        "tips-list": `<li><b>اجمع الملاحظات:</b> ضع المعلومات المتشابهة معًا.</li>
-          <li><b>انسخ المعلومات المهمة:</b> وفر الوقت بحفظ النصوص المتكررة.</li>
-          <li><b>احذف الملاحظات القديمة:</b> نظف الحافظة بانتظام.</li>`,
-        "tips-article-btn": "اقرأ المقال الكامل",
-        "tips-article-link": "clipboard-tips-ar.html",
-        "clipboardInput": "اكتب أو الصق ملاحظتك هنا...",
-        "add-btn": "إضافة",
-        "clip-copy": "نسخ",
-        "clip-delete": "حذف",
-        "no-clips": "لا توجد ملاحظات حتى الآن."
-      }
+    // update article links based on timerhavenLang (unchanged mapping approach)
+    const articleMap = {
+      howto: { en:'clipboard-how-to.html', fr:'clipboard-how-to-fr.html', de:'clipboard-how-to-de.html', es:'clipboard-how-to-es.html', ru:'clipboard-how-to-ru.html', el:'clipboard-how-to-el.html', ar:'clipboard-how-to-ar.html' },
+      tips:  { en:'clipboard-tips.html',     fr:'clipboard-tips-fr.html',    de:'clipboard-tips-de.html',    es:'clipboard-tips-es.html',    ru:'clipboard-tips-ru.html',    el:'clipboard-tips-el.html',    ar:'clipboard-tips-ar.html' }
     };
 
-    let clips = JSON.parse(localStorage.getItem('clipboardClips') || '[]');
+    function getLang(){ try { return (localStorage.getItem('timerhavenLang')||'en').slice(0,2); } catch(e){ return 'en'; } }
 
-    function updateClipboardLanguage() {
-      const lang = document.getElementById("clipboard-lang-select").value;
-      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
-      document.getElementById("language-label").textContent = clipboardTranslations[lang]["language-label"] || clipboardTranslations["en"]["language-label"];
-      document.getElementById("back-link").textContent = clipboardTranslations[lang]["back-link"] || clipboardTranslations["en"]["back-link"];
-      document.getElementById("tool-title").innerHTML = `<i class="fa fa-clipboard"></i> ${clipboardTranslations[lang]["tool-title"] || clipboardTranslations["en"]["tool-title"]}`;
-      document.getElementById("tool-help").textContent = clipboardTranslations[lang]["tool-help"] || clipboardTranslations["en"]["tool-help"];
-      document.getElementById("faq-title").textContent = clipboardTranslations[lang]["faq-title"] || clipboardTranslations["en"]["faq-title"];
-      document.getElementById("faq-list").innerHTML = clipboardTranslations[lang]["faq-list"] || clipboardTranslations["en"]["faq-list"];
-      document.getElementById("howto-title").innerHTML = clipboardTranslations[lang]["howto-title"] || clipboardTranslations["en"]["howto-title"];
-      document.getElementById("howto-steps").innerHTML = clipboardTranslations[lang]["howto-steps"] || clipboardTranslations["en"]["howto-steps"];
-      document.getElementById("howto-article-btn").textContent = clipboardTranslations[lang]["howto-article-btn"] || clipboardTranslations["en"]["howto-article-btn"];
-      document.getElementById("howto-article-btn").href = clipboardTranslations[lang]["howto-article-link"] || clipboardTranslations["en"]["howto-article-link"];
-      document.getElementById("tips-title").innerHTML = clipboardTranslations[lang]["tips-title"] || clipboardTranslations["en"]["tips-title"];
-      document.getElementById("tips-list").innerHTML = clipboardTranslations[lang]["tips-list"] || clipboardTranslations["en"]["tips-list"];
-      document.getElementById("tips-article-btn").textContent = clipboardTranslations[lang]["tips-article-btn"] || clipboardTranslations["en"]["tips-article-btn"];
-      document.getElementById("tips-article-btn").href = clipboardTranslations[lang]["tips-article-link"] || clipboardTranslations["en"]["tips-article-link"];
-      document.getElementById("clipboardInput").placeholder = clipboardTranslations[lang]["clipboardInput"] || clipboardTranslations["en"]["clipboardInput"];
-      document.getElementById("add-btn").textContent = clipboardTranslations[lang]["add-btn"] || clipboardTranslations["en"]["add-btn"];
-      renderClips();
+    function updateArticleLinks(){
+      const lang = getLang();
+      const howto = (articleMap.howto[lang] || articleMap.howto.en);
+      const tips = (articleMap.tips[lang] || articleMap.tips.en);
+      const leftBtn = document.getElementById('left-article-btn');
+      const rightBtn = document.getElementById('right-article-btn');
+      if (leftBtn) leftBtn.href = howto;
+      if (rightBtn) rightBtn.href = tips;
     }
 
-    document.getElementById("clipboard-lang-select").addEventListener("change", function() {
-      localStorage.setItem('clipboardLang', this.value);
-      updateClipboardLanguage();
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-      const savedLang = localStorage.getItem('clipboardLang') || 'en';
-      document.getElementById('clipboard-lang-select').value = savedLang;
-      updateClipboardLanguage();
-    });
-
-    function renderClips() {
-      const lang = document.getElementById("clipboard-lang-select").value;
-      const list = document.getElementById('clips-list');
-      list.innerHTML = '';
-      if (!clips.length) {
-        list.innerHTML = `<div style="color:#888;">${clipboardTranslations[lang]["no-clips"] || clipboardTranslations["en"]["no-clips"]}</div>`;
-        return;
-      }
-      clips.forEach((clip, idx) => {
-        list.innerHTML += `
-          <div class="clip-item">
-            <span class="clip-text">${clip.text}</span>
-            <div class="clip-actions">
-              <button class="btn btn-success btn-sm" onclick="copyClip(${idx})" title="${clipboardTranslations[lang]["clip-copy"] || clipboardTranslations["en"]["clip-copy"]}">
-                <i class="fa fa-copy"></i> ${clipboardTranslations[lang]["clip-copy"] || clipboardTranslations["en"]["clip-copy"]}
-              </button>
-              <button class="btn btn-danger btn-sm" onclick="deleteClip(${idx})" title="${clipboardTranslations[lang]["clip-delete"] || clipboardTranslations["en"]["clip-delete"]}">
-                <i class="fa fa-trash"></i> ${clipboardTranslations[lang]["clip-delete"] || clipboardTranslations["en"]["clip-delete"]}
-              </button>
-            </div>
-          </div>
-        `;
+    // Equalize card heights robustly:
+    function equalizeCardHeights(){
+      const cols = Array.from(document.querySelectorAll('.center-row > .col'));
+      if (!cols.length) return;
+      cols.forEach(col => { const card = col.querySelector('.card-base'); if (card) card.style.height = ''; });
+      let maxh = 0;
+      cols.forEach(col => {
+        const card = col.querySelector('.card-base');
+        if (card) {
+          const h = Math.round(card.getBoundingClientRect().height);
+          if (h > maxh) maxh = h;
+        }
       });
+      if (maxh > 0) {
+        cols.forEach(col => {
+          const card = col.querySelector('.card-base');
+          if (card) card.style.height = maxh + 'px';
+        });
+      }
     }
 
-    window.copyClip = function(idx) {
-      navigator.clipboard.writeText(clips[idx].text)
-        .then(() => {
-          // Optional: Add a visual feedback
-        });
-    };
-    window.deleteClip = function(idx) {
-      clips.splice(idx, 1);
-      localStorage.setItem('clipboardClips', JSON.stringify(clips));
-      renderClips();
-    };
+    // MutationObserver to detect language/content changes and re-run equalize
+    (function(){
+      const container = document.getElementById('page-main');
+      if (!container) return;
 
-    document.getElementById('clipboardForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const text = document.getElementById('clipboardInput').value.trim();
-      if (!text) return;
-      clips.unshift({ text });
-      localStorage.setItem('clipboardClips', JSON.stringify(clips));
-      document.getElementById('clipboardInput').value = '';
-      renderClips();
-    });
+      // resume equalize for a short period after mutations to catch async text replacement
+      let retryTimer = null;
+      const runEqualizeWithRetries = () => {
+        equalizeCardHeights();
+        // do a couple of delayed retries to handle fonts/async rendering
+        clearTimeout(retryTimer);
+        retryTimer = setTimeout(equalizeCardHeights, 120);
+        setTimeout(equalizeCardHeights, 420);
+      };
+
+      const observer = new MutationObserver((mutations) => {
+        runEqualizeWithRetries();
+      });
+      observer.observe(container, { childList: true, subtree: true, characterData: true });
+
+      // run on load and language changes
+      window.addEventListener('load', runEqualizeWithRetries);
+      window.addEventListener('resize', runEqualizeWithRetries);
+      window.addEventListener('storage', function(e){
+        if (e.key === 'timerhavenLang') {
+          // update links, direction, and re-run equalize after DOM updates
+          const lang = (e.newValue || 'en').slice(0,2);
+          document.documentElement.lang = lang;
+          document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+          updateArticleLinks();
+          runEqualizeWithRetries();
+        }
+      });
+
+      // also trigger once on DOMContentLoaded
+      document.addEventListener('DOMContentLoaded', function(){
+        // apply UI direction and links for current selection
+        const lang = getLang();
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+        updateArticleLinks();
+        runEqualizeWithRetries();
+      });
+    })();
+
+    // Clips logic (unchanged)
+    (function(){
+      function safeGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+      function safeSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ return false; } }
+
+      window.clips = JSON.parse(safeGet('clipboardClips') || '[]');
+      var clips = window.clips || [];
+
+      function escapeHtml(s){ return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+      function renderClips(){
+        var list = document.getElementById('clipsList');
+        if (!list) return;
+        list.innerHTML = '';
+        var noClipsText = 'No clips yet.';
+        if (!clips || clips.length === 0) {
+          list.innerHTML = '<div style="color:#888;">' + noClipsText + '</div>';
+          return;
+        }
+        for (var i=0;i<clips.length;i++){
+          var c = clips[i];
+          var div = document.createElement('div');
+          div.className = 'clip-item';
+          var pinned = c.pinned ? '<span style="font-weight:700;color:var(--accent);margin-right:.5em;"><i class="fa fa-thumbtack"></i></span>' : '';
+          div.innerHTML = '<div class="clip-text">' + pinned + escapeHtml(c.text) + (c.date ? (' <span class="clip-meta" style="color:#888;margin-left:.6em;">' + escapeHtml(c.date) + '</span>') : '') + '</div>'
+                        + '<div style="display:flex;gap:.4rem;align-items:center;">'
+                        +   '<button class="btn btn-outline-info btn-sm" data-idx="'+i+'" data-action="pin" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>'
+                        +   '<button class="btn btn-outline-success btn-sm" data-idx="'+i+'" data-action="copy" title="Copy"><i class="fa fa-copy"></i></button>'
+                        +   '<button class="btn btn-outline-danger btn-sm" data-idx="'+i+'" data-action="remove" title="Remove"><i class="fa fa-trash"></i></button>'
+                        + '</div>';
+          list.appendChild(div);
+        }
+
+        Array.from(list.querySelectorAll('button[data-idx]')).forEach(function(btn){
+          var idx = parseInt(btn.getAttribute('data-idx'), 10);
+          var action = btn.getAttribute('data-action');
+          btn.onclick = function(){
+            if (action === 'copy') {
+              try { navigator.clipboard.writeText(clips[idx].text); } catch(e){}
+            } else if (action === 'remove') {
+              clips.splice(idx,1); window.clips = clips; safeSet('clipboardClips', JSON.stringify(clips)); renderClips();
+            } else if (action === 'pin') {
+              clips[idx].pinned = !clips[idx].pinned;
+              if (clips[idx].pinned) { var p = clips.splice(idx,1)[0]; clips.unshift(p); }
+              safeSet('clipboardClips', JSON.stringify(clips)); renderClips();
+            }
+          };
+        });
+      }
+
+      function addClipFromInput(){
+        var input = document.getElementById('clipInput');
+        var text = (input && input.value || '').trim();
+        if (!text) return;
+        clips = clips || [];
+        clips.unshift({ text: text, date: new Date().toLocaleString(), pinned: false });
+        window.clips = clips;
+        safeSet('clipboardClips', JSON.stringify(clips));
+        if (input) input.value = '';
+        renderClips();
+      }
+
+      var form = document.getElementById('clipboardForm');
+      if (form) {
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          addClipFromInput();
+        });
+      }
+
+      window.addClipFromInput = addClipFromInput;
+      window.lhShowClips = function(){ console.log('window.clips', window.clips); return window.clips; };
+
+      window.addEventListener('pagehide', function(){ safeSet('clipboardClips', JSON.stringify(window.clips || [])); });
+      window.addEventListener('beforeunload', function(){ safeSet('clipboardClips', JSON.stringify(window.clips || [])); });
+
+      document.addEventListener('DOMContentLoaded', function(){ clips = window.clips || []; renderClips(); });
+    })();
   </script>
-<footer>
-  &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
-  <a href="privacy.html">Privacy Policy</a> &bull;
-  <a href="terms.html">Terms</a> &bull;
-  <a href="contact.html">Contact</a>
-</footer>
 </body>
 </html>

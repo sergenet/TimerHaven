@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Calendar — Test (single-file)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{ --brand:#0b63a0; --muted:#6b7c89; --bg:#f4f7fb; --card:#fff; --text:#102a43; }
+    html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,Arial,Helvetica,sans-serif;color:var(--text);}
+    .wrap{max-width:900px;margin:28px auto;padding:12px;box-sizing:border-box;}
+    .card{width:420px;margin:0 auto;background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    .back{color:var(--brand);text-decoration:none;font-weight:700;display:inline-block;margin-bottom:8px;}
+    h3{margin:0 0 .5rem 0;color:var(--brand);display:flex;align-items:center;gap:.4rem;}
+    .read{display:inline-block;background:var(--brand);color:#fff;padding:.45rem .75rem;border-radius:8px;text-decoration:none;font-weight:700;margin:.4rem 0 .9rem 0;}
+    .small-muted{color:var(--muted);font-size:.95rem;margin-bottom:.6rem;}
+    .calendar-header{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.6rem;}
+    .calendar-nav{display:flex;gap:.25rem;align-items:center;}
+    .btn{padding:.3rem .5rem;border-radius:6px;border:1px solid #d9e6f1;background:#fff;cursor:pointer;}
+    .btn:active{transform:translateY(1px);}
+    .select{border-radius:8px;padding:.18rem .32rem;border:1px solid #e4edf5;background:#fff;}
+    table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:8px;overflow:hidden;min-height:260px;}
+    thead th{font-weight:700;padding:.6rem .3rem;border-bottom:1px solid #eef2f6;text-align:center;}
+    tbody td{padding:.5rem .25rem;text-align:center;vertical-align:middle;height:52px;}
+    .day-cell{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:6px;margin:0 auto;cursor:pointer;transition:background .12s;}
+    .day-cell:hover{background:#eef6fb;}
+    .calendar-today{width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,#e6f7ff,#cfefff);color:#004e73;font-weight:700;border:1px solid rgba(0,126,204,0.18);box-shadow:0 4px 12px rgba(24,144,255,0.08);display:inline-flex;align-items:center;justify-content:center;}
+    .note-list{list-style:none;padding:0;margin:0;}
+    .debug{font-family:monospace;margin-top:12px;background:#fbfdff;border:1px solid #eef5fb;padding:.6rem;border-radius:8px;white-space:pre-wrap;}
+    footer{margin-top:18px;text-align:center;color:var(--muted);font-size:.9rem;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" id="card">
+      <a class="back" href="#">← Back to Main Menu</a>
+      <h3><span>📅</span> Calendar</h3>
+      <a class="read" href="calendar-how-to.html">Read full guide</a>
+      <p class="small-muted">Click a day to open a note modal. This is a self-contained test page to confirm calendar rendering.</p>
+
+      <div class="calendar-header" aria-label="Calendar controls">
+        <div class="calendar-nav" role="toolbar">
+          <button id="prev-year" class="btn">«</button>
+          <button id="prev-month" class="btn">‹</button>
+          <button id="today" class="btn">Today</button>
+          <button id="next-month" class="btn">›</button>
+          <button id="next-year" class="btn">»</button>
+        </div>
+
+        <div style="display:flex;gap:.4rem;align-items:center;">
+          <select id="monthSelect" class="select"></select>
+          <select id="yearSelect" class="select"></select>
+        </div>
+      </div>
+
+      <table id="calendarTable" role="grid" aria-label="Calendar"></table>
+
+      <details style="margin-top:.6rem;">
+        <summary style="font-weight:700;">Debug</summary>
+        <div class="debug" id="debug">Debug output appears here.</div>
+      </details>
+    </div>
+
+    <!-- Note modal (simple) -->
+    <div id="modal" style="display:none;position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,0.35);align-items:center;justify-content:center;">
+      <div style="background:#fff;padding:16px;border-radius:10px;max-width:440px;width:90%;">
+        <h4 id="modalDate">Date</h4>
+        <textarea id="modalNotes" rows="6" style="width:100%;box-sizing:border-box;"></textarea>
+        <div style="display:flex;gap:.5rem;justify-content:flex-end;margin-top:.6rem;">
+          <button id="modalCancel" class="btn">Cancel</button>
+          <button id="modalSave" class="btn" style="background:#0b63a0;color:#fff;border:none;">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>Local test file — nothing is uploaded.</footer>
+  </div>
+
+  <script>
+    // Self-contained calendar logic (minimal, robust)
+    (function(){
+      const debugEl = document.getElementById('debug');
+      function dbg(s){ try{ debugEl.textContent = s; console.log(s); }catch(e){} }
+
+      // local storage key
+      const KEY = 'calendarNotes_test_v1';
+
+      function safeGetNotes(){
+        try { return JSON.parse(localStorage.getItem(KEY) || '{}'); }
+        catch(e){ dbg('notes parse error: '+e.message); return {}; }
+      }
+      function safeSetNotes(n){ try{ localStorage.setItem(KEY, JSON.stringify(n)); }catch(e){ dbg('notes save error: '+e.message); } }
+
+      let notes = safeGetNotes();
+      let current = new Date();
+      let currentYear = current.getFullYear();
+      let currentMonth = current.getMonth();
+
+      const monthSelect = document.getElementById('monthSelect');
+      const yearSelect = document.getElementById('yearSelect');
+      const table = document.getElementById('calendarTable');
+
+      function populateControls(year, month){
+        monthSelect.innerHTML = '';
+        const mf = new Intl.DateTimeFormat('en', {month:'long'});
+        for(let m=0;m<12;m++){
+          const opt = document.createElement('option'); opt.value = m; opt.textContent = mf.format(new Date(2000,m,1));
+          if(m===month) opt.selected = true;
+          monthSelect.appendChild(opt);
+        }
+        yearSelect.innerHTML = '';
+        const now = new Date();
+        const base = now.getFullYear();
+        for(let y=base-5;y<=base+5;y++){
+          const o = document.createElement('option'); o.value=y; o.textContent=y;
+          if(y===year) o.selected=true;
+          yearSelect.appendChild(o);
+        }
+      }
+
+      function renderCalendar(year, month){
+        currentYear = year; currentMonth = month;
+        dbg('renderCalendar '+year+'-'+(month+1));
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month+1, 0).getDate();
+
+        let html = '<thead><tr>';
+        ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d=>html += '<th>'+d+'</th>');
+        html += '</tr></thead><tbody><tr>';
+
+        for(let i=0;i<firstDay;i++) html += '<td></td>';
+
+        const now = new Date(); const tY=now.getFullYear(), tM=now.getMonth(), tD=now.getDate();
+
+        for(let d=1; d<=daysInMonth; d++){
+          const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+          const dayNotes = notes[dateStr] || [];
+          const hasNote = dayNotes.length>0;
+          if(((firstDay + d -1) % 7) === 0 && d!==1) html += '</tr><tr>';
+          const isToday = (d===tD && month===tM && year===tY);
+          const cls = 'day-cell' + (hasNote ? ' has-note':'' ) + (isToday ? ' calendar-today':'');
+          html += `<td data-date="${dateStr}"><div class="${cls}">${d}${hasNote ? ' 📝':''}</div></td>`;
+        }
+        html += '</tr></tbody>';
+        table.innerHTML = html;
+
+        // attach handlers
+        document.querySelectorAll('#calendarTable .day-cell').forEach(el=>{
+          el.addEventListener('click', (ev)=>{
+            const td = el.closest('td');
+            if(!td) return;
+            openModal(td.getAttribute('data-date'));
+          });
+        });
+      }
+
+      function openModal(dateStr){
+        const modal = document.getElementById('modal');
+        document.getElementById('modalDate').textContent = dateStr;
+        document.getElementById('modalNotes').value = (notes[dateStr] && notes[dateStr].map(n=>n.text).join('\\n---\\n')) || '';
+        modal.style.display = 'flex';
+        document.getElementById('modalNotes').focus();
+      }
+
+      function closeModal(){ document.getElementById('modal').style.display='none'; }
+
+      document.getElementById('modalCancel').addEventListener('click', function(){ closeModal(); });
+      document.getElementById('modalSave').addEventListener('click', function(){
+        const dateStr = document.getElementById('modalDate').textContent;
+        const text = document.getElementById('modalNotes').value.trim();
+        if(!text){ delete notes[dateStr]; } else { notes[dateStr] = [{text: text, ts: Date.now()}]; }
+        safeSetNotes(notes);
+        closeModal();
+        renderCalendar(currentYear, currentMonth);
+      });
+
+      // controls
+      document.getElementById('prev-year').addEventListener('click', ()=> renderCalendar(currentYear-1, currentMonth));
+      document.getElementById('next-year').addEventListener('click', ()=> renderCalendar(currentYear+1, currentMonth));
+      document.getElementById('prev-month').addEventListener('click', ()=> { let y=currentYear,m=currentMonth-1; if(m<0){m=11;y--;} renderCalendar(y,m); });
+      document.getElementById('next-month').addEventListener('click', ()=> { let y=currentYear,m=currentMonth+1; if(m>11){m=0;y++;} renderCalendar(y,m); });
+      document.getElementById('today').addEventListener('click', ()=> { const n=new Date(); renderCalendar(n.getFullYear(), n.getMonth()); });
+
+      monthSelect.addEventListener('change', ()=> renderCalendar(parseInt(yearSelect.value,10), parseInt(monthSelect.value,10)));
+      yearSelect.addEventListener('change', ()=> renderCalendar(parseInt(yearSelect.value,10), parseInt(monthSelect.value,10)));
+
+      // initialize
+      try{
+        populateControls(currentYear, currentMonth);
+        renderCalendar(currentYear, currentMonth);
+        dbg('Calendar test loaded. Notes entries: ' + Object.keys(notes).length);
+      }catch(e){
+        dbg('Init error: ' + (e && e.message ? e.message : e));
+      }
+
+    })();
+  </script>
+</body>
+</html>

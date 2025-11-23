@@ -12,84 +12,249 @@
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
     .tool-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #e0e7ef;
-      min-width: 220px;
-      max-width: 340px;
-      width: 340px;
-      min-height: 500px;
-      flex: 1 1 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      padding: 2em 1.3em 1em 1.3em;
-      margin: 0;
-      box-sizing: border-box;
-      text-align: left;
-      overflow: hidden;
+      background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef;
+      min-width: 220px; max-width: 340px; width: 340px; min-height: 500px;
+      flex: 1 1 340px; display:flex; flex-direction:column; justify-content:flex-start; align-items:stretch;
+      padding: 2em 1.3em 1em 1.3em; margin:0; box-sizing:border-box; text-align:left; overflow:hidden;
     }
-    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
-    .back-link:hover { text-decoration: underline; }
-    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
-    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
-    .language-selector-row { margin-bottom: 1em; }
+    .article-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef; padding:1.2em; width:340px; box-sizing:border-box; }
+    .back-link { display:inline-block; margin-bottom:1em; color:#007bff; text-decoration:none; font-weight:bold; font-size:1em; }
+    .back-link:hover { text-decoration:underline; }
+    .faq-section { margin-top:1.1em; margin-bottom:0.3em; font-size:1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; }
+    .article-links { display:flex; flex-direction:column; gap:.5rem; margin-top:.6rem; }
   </style>
 </head>
 <body>
   <div class="main-container">
     <div class="center-row">
-      <div class="tool-card">
-        <div class="language-selector-row">
-          <label for="languageSelector">Sprache</label>
-          <select id="languageSelector" class="form-select" onchange="onLanguageChange()">
-            <option value="en">Englisch</option><option value="fr">Französisch</option><option value="de">Deutsch</option><option value="ru">Russisch</option><option value="el">Griechisch</option><option value="es">Spanisch</option><option value="ar">Arabisch</option>
-          </select>
+
+      <!-- Left article card: How-to -->
+      <div class="article-card" aria-labelledby="howto-heading">
+        <h2 id="howto-heading">Wie man den Meeting-Planer nutzt</h2>
+        <ol>
+          <li>Fügen Sie Teilnehmer und ihre Zeitzonen hinzu.</li>
+          <li>Wählen Sie ein Datum und eine vorgeschlagene Uhrzeit.</li>
+          <li>Überprüfen Sie lokale Zeiten und teilen Sie die endgültige Uhrzeit.</li>
+        </ol>
+        <div class="article-links">
+          <a id="howto-article-link" class="btn btn-outline-primary btn-sm" href="meeting-how-to-de.html">Vollständigen Artikel lesen</a>
         </div>
+      </div>
+
+      <!-- Center tool card -->
+      <div class="tool-card" id="tool-card">
+        <!-- language selector removed; language controlled by main menu -->
         <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Zurück zum Hauptmenü</a>
         <h3><i class="fa fa-users"></i> Meeting-Planer</h3>
-        <form id="meetingForm">
-          <div class="meeting-form-row">
+
+        <form id="meetingForm" onsubmit="return false;">
+          <div class="meeting-form-row mb-2">
             <label for="participantName">Teilnehmername</label>
             <input type="text" id="participantName" class="form-control" placeholder="Name eingeben (z. B. Anna)" autocomplete="off">
           </div>
-          <div class="meeting-form-row">
+
+          <div class="meeting-form-row mb-2">
             <label for="participantCity">Zeitzone / Stadt</label>
-            <select id="participantCity" class="form-select" autocomplete="off">
-              <option value="" disabled selected>Wählen Sie eine Stadt/Zeitzone</option>
-              <option value="America/New_York">New York 🇺🇸</option><option value="America/Chicago">Chicago 🇺🇸</option><option value="America/Los_Angeles">Los Angeles 🇺🇸</option><option value="America/Toronto">Toronto 🇨🇦</option><option value="Europe/London">London 🇬🇧</option><option value="Europe/Paris">Paris 🇫🇷</option><option value="Europe/Berlin">Berlin 🇩🇪</option><option value="Europe/Moscow">Moskau 🇷🇺</option><option value="Europe/Istanbul">Istanbul 🇹🇷</option><option value="Asia/Dubai">Dubai 🇦🇪</option><option value="Asia/Kolkata">Kolkata 🇮🇳</option><option value="Asia/Shanghai">Shanghai 🇨🇳</option><option value="Asia/Tokyo">Tokio 🇯🇵</option><option value="Asia/Singapore">Singapur 🇸🇬</option><option value="Asia/Jakarta">Jakarta 🇮🇩</option><option value="Australia/Sydney">Sydney 🇦🇺</option><option value="Pacific/Auckland">Auckland 🇳🇿</option><option value="America/Sao_Paulo">São Paulo 🇧🇷</option><option value="America/Mexico_City">Mexiko-Stadt 🇲🇽</option><option value="Africa/Johannesburg">Johannesburg 🇿🇦</option><option value="Africa/Cairo">Kairo 🇪🇬</option><option value="Africa/Nairobi">Nairobi 🇰🇪</option><option value="Asia/Seoul">Seoul 🇰🇷</option><option value="Asia/Hong_Kong">Hongkong 🇭🇰</option><option value="Asia/Bangkok">Bangkok 🇹🇭</option><option value="Asia/Manila">Manila 🇵🇭</option><option value="Europe/Madrid">Madrid 🇪🇸</option><option value="Europe/Rome">Rom 🇮🇹</option><option value="Europe/Warsaw">Warschau 🇵🇱</option><option value="Europe/Amsterdam">Amsterdam 🇳🇱</option><option value="Europe/Athens">Athen 🇬🇷</option><option value="America/Vancouver">Vancouver 🇨🇦</option>
-            </select>
+            <select id="participantCity" class="form-select" autocomplete="off"></select>
           </div>
-          <button type="button" class="btn btn-success btn-participant" id="addParticipant"><i class="fa fa-plus"></i> Teilnehmer hinzufügen</button>
+
+          <div class="mb-2 d-flex gap-2">
+            <button type="button" class="btn btn-success btn-participant" id="addParticipant"><i class="fa fa-plus"></i> Teilnehmer hinzufügen</button>
+            <button type="button" class="btn btn-outline-secondary" id="clearParticipants" title="Teilnehmer löschen"><i class="fa fa-eraser"></i></button>
+          </div>
         </form>
-        <div class="participant-list" id="participantList"></div>
-        <div class="meeting-form-row">
+
+        <div class="participant-list mb-3" id="participantList"></div>
+
+        <div class="meeting-form-row mb-2">
           <label for="meetingDate">Meeting-Datum wählen</label>
           <input type="date" id="meetingDate" class="form-control">
         </div>
-        <div class="meeting-form-row">
+
+        <div class="meeting-form-row mb-2">
           <label for="meetingTime">Meeting-Zeit wählen</label>
           <input type="time" id="meetingTime" class="form-control">
-          <button type="button" class="btn btn-primary btn-sm" style="margin-top:0.6em;" id="calcTimes"><i class="fa fa-clock"></i> Zeiten anzeigen</button>
+          <button type="button" class="btn btn-primary btn-sm mt-2" id="calcTimes"><i class="fa fa-clock"></i> Zeiten anzeigen</button>
         </div>
-        <div>
-          <div id="meetingTimes"></div>
-        </div>
-        <details class="faq-section">
-          <summary>FAQs</summary>
-          <ul style="padding-left: 1em;">
-            <li><b>Wie viele Teilnehmer?</b> So viele Sie möchten.</li><li><b>Welche Zeitzonen?</b> Wählen Sie aus über 30 beliebten Städten/Zeitzonen.</li><li><b>Wie teilen?</b> Kopieren Sie die Zeiten und teilen Sie sie mit den Teilnehmern.</li>
+
+        <div id="meetingTimes" aria-live="polite" class="mt-2"></div>
+
+        <details class="faq-section mt-3">
+          <summary id="faq-heading">Häufig gestellte Fragen
+</summary>
+          <ul id="faq-list" style="padding-left: 1em;">
+            <li><b>Wie viele Teilnehmer?</b> So viele Sie möchten.</li>
+            <li><b>Welche Zeitzonen?</b> Wählen Sie aus über 30 beliebten Städten/Zeitzonen.</li>
+            <li><b>Wie teilen?</b> Kopieren Sie die Zeiten und teilen Sie sie mit den Teilnehmern.</li>
           </ul>
         </details>
+
+        <!-- "Tipps lesen" link removed from the bottom of the tool card per request -->
+
       </div>
+
+      <!-- Right article card: Tips -->
+      <div class="article-card" aria-labelledby="tips-heading">
+        <h2 id="tips-heading">Tipps für produktive Meetings</h2>
+        <ul>
+          <li>Plane im Voraus, um Zeiten zu finden, die für alle passen.</li>
+          <li>Sende Kalendereinladungen, um Verwirrung zu vermeiden.</li>
+          <li>Überprüfe die Zeitzonen vor dem Einladen.</li>
+        </ul>
+        <div class="article-links">
+          <a class="btn btn-outline-primary btn-sm" href="meeting-tips-de.html">Vollständigen Artikel lesen</a>
+        </div>
+      </div>
+
     </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
   <script>
-    function onLanguageChange() {
-      var lang = document.getElementById("languageSelector").value;
-      window.location.href = "meeting-planner-" + lang + ".html";
+    const cities = [
+      {value:"", label:"Wählen Sie eine Stadt/Zeitzone"},
+      {value:"America/New_York", label:"New York 🇺🇸"},
+      {value:"America/Chicago", label:"Chicago 🇺🇸"},
+      {value:"America/Los_Angeles", label:"Los Angeles 🇺🇸"},
+      {value:"America/Toronto", label:"Toronto 🇨🇦"},
+      {value:"Europe/London", label:"London 🇬🇧"},
+      {value:"Europe/Paris", label:"Paris 🇫🇷"},
+      {value:"Europe/Berlin", label:"Berlin 🇩🇪"},
+      {value:"Europe/Moscow", label:"Moscow 🇷🇺"},
+      {value:"Europe/Istanbul", label:"Istanbul 🇹🇷"},
+      {value:"Asia/Dubai", label:"Dubai 🇦🇪"},
+      {value:"Asia/Kolkata", label:"Kolkata 🇮🇳"},
+      {value:"Asia/Shanghai", label:"Shanghai 🇨🇳"},
+      {value:"Asia/Tokyo", label:"Tokyo 🇯🇵"},
+      {value:"Asia/Singapore", label:"Singapore 🇸🇬"},
+      {value:"Asia/Jakarta", label:"Jakarta 🇮🇩"},
+      {value:"Australia/Sydney", label:"Sydney 🇦🇺"},
+      {value:"Pacific/Auckland", label:"Auckland 🇳🇿"},
+      {value:"America/Sao_Paulo", label:"São Paulo 🇧🇷"},
+      {value:"America/Mexico_City", label:"Mexico City 🇲🇽"},
+      {value:"Africa/Johannesburg", label:"Johannesburg 🇿🇦"},
+      {value:"Africa/Cairo", label:"Cairo 🇪🇬"},
+      {value:"Africa/Nairobi", label:"Nairobi 🇰🇪"},
+      {value:"Asia/Seoul", label:"Seoul 🇰🇷"},
+      {value:"Asia/Hong_Kong", label:"Hong Kong 🇭🇰"},
+      {value:"Asia/Bangkok", label:"Bangkok 🇹🇭"},
+      {value:"Asia/Manila", label:"Manila 🇵🇭"},
+      {value:"Europe/Madrid", label:"Madrid 🇪🇸"},
+      {value:"Europe/Rome", label:"Rome 🇮🇹"},
+      {value:"Europe/Warsaw", label:"Warsaw 🇵🇱"},
+      {value:"Europe/Amsterdam", label:"Amsterdam 🇳🇱"},
+      {value:"Europe/Athens", label:"Athens 🇬🇷"},
+      {value:"America/Vancouver", label:"Vancouver 🇨🇦"}
+    ];
+
+    function populateCities() {
+      const sel = document.getElementById('participantCity');
+      sel.innerHTML = '';
+      cities.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.value;
+        opt.textContent = c.label;
+        sel.appendChild(opt);
+      });
     }
+
+    const LS_KEY = 'meetingPlannerParticipants';
+    function loadParticipants() {
+      try { const raw = localStorage.getItem(LS_KEY); window.participants = raw ? JSON.parse(raw) : []; } catch(e){ window.participants = []; }
+    }
+    function saveParticipants() { try { localStorage.setItem(LS_KEY, JSON.stringify(window.participants || [])); } catch(e){} }
+    function renderParticipants() {
+      const container = document.getElementById('participantList');
+      container.innerHTML = '';
+      if (!window.participants || window.participants.length === 0) {
+        container.innerHTML = '<div style="color:#888;">Noch keine Teilnehmer.</div>';
+        return;
+      }
+      window.participants.forEach((p, idx) => {
+        const el = document.createElement('div');
+        el.className = 'participant-item';
+        el.innerHTML = `<div style="min-width:0;"><div style="font-weight:700;">${escapeHtml(p.name)}</div><div style="font-size:.9em;color:#666;">${escapeHtml(p.city)}</div></div>
+          <div style="display:flex;gap:.5rem;"><button class="btn btn-outline-danger btn-sm" onclick="removeParticipant(${idx})" aria-label="Teilnehmer entfernen"><i class="fa fa-trash"></i></button></div>`;
+        container.appendChild(el);
+      });
+    }
+    function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
+
+    document.getElementById('addParticipant').addEventListener('click', function(){
+      const name = document.getElementById('participantName').value.trim();
+      const city = document.getElementById('participantCity').value;
+      if (!name) { alert('Bitte geben Sie einen Teilnehmernamen ein.'); return; }
+      if (!city) { alert('Bitte wählen Sie eine Stadt/Zeitzone.'); return; }
+      window.participants = window.participants || [];
+      window.participants.push({ name, city });
+      saveParticipants();
+      document.getElementById('participantName').value = '';
+      document.getElementById('participantCity').selectedIndex = 0;
+      renderParticipants();
+      updateMeetingTimes();
+    });
+
+    document.getElementById('clearParticipants').addEventListener('click', function(){
+      if (!window.participants || window.participants.length === 0) return;
+      if (!confirm('Alle Teilnehmer löschen?')) return;
+      window.participants = [];
+      saveParticipants();
+      renderParticipants();
+      updateMeetingTimes();
+    });
+
+    window.removeParticipant = function(idx){
+      if (!window.participants) return;
+      window.participants.splice(idx,1);
+      saveParticipants();
+      renderParticipants();
+      updateMeetingTimes();
+    };
+
+    const { DateTime } = luxon;
+    function updateMeetingTimes(){
+      const date = document.getElementById('meetingDate').value;
+      const time = document.getElementById('meetingTime').value;
+      const out = document.getElementById('meetingTimes');
+      const tlang = {
+        noDateTime: "Bitte wählen Sie Datum und Uhrzeit.",
+        noParticipants: "Noch keine Teilnehmer.",
+        heading: "Meeting-Zeiten (Organisator lokal → Teilnehmer lokal)"
+      };
+      if (!date || !time) { out.innerHTML = `<div style="color:#888;">${tlang.noDateTime}</div>`; return; }
+      if (!window.participants || window.participants.length === 0) { out.innerHTML = `<div style="color:#888;">${tlang.noParticipants}</div>`; return; }
+      const localISO = `${date}T${time}`;
+      let organizer = DateTime.fromISO(localISO);
+      if (!organizer.isValid) { out.innerHTML = `<div style="color:#b00;">${tlang.noDateTime}</div>`; return; }
+      let html = `<div style="font-weight:700;margin-bottom:.4rem;">${tlang.heading}</div><div class="meeting-times-grid">`;
+      html += `<div class="time-suggestion"><div><b>Organisator</b> (${escapeHtml(organizer.zoneName)})</div><div>${escapeHtml(organizer.toLocaleString(DateTime.DATETIME_FULL))}</div></div>`;
+      window.participants.forEach(p => {
+        let dt;
+        try { dt = organizer.setZone(p.city); } catch(e) { dt = null; }
+        const label = dt ? dt.toLocaleString(DateTime.DATETIME_FULL) : 'Ungültige Zone';
+        html += `<div class="time-suggestion"><div><b>${escapeHtml(p.name)}</b> <span style="color:#666;">(${escapeHtml(p.city)})</span></div><div>${escapeHtml(label)}</div></div>`;
+      });
+      html += `</div>`;
+      out.innerHTML = html;
+    }
+
+    document.getElementById('calcTimes').addEventListener('click', updateMeetingTimes);
+
+    document.addEventListener('DOMContentLoaded', function(){
+      populateCities();
+      loadParticipants();
+      renderParticipants();
+      try {
+        const savedDate = localStorage.getItem('meetingPlannerDate');
+        const savedTime = localStorage.getItem('meetingPlannerTime');
+        if (savedDate) document.getElementById('meetingDate').value = savedDate;
+        if (savedTime) document.getElementById('meetingTime').value = savedTime;
+      } catch(e){}
+    });
+
+    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){} });
+    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){} });
+
   </script>
 </body>
 </html>

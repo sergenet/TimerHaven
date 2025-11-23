@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Task Timer — Measure Time, Improve Estimates | TimerHaven</title>
+  <meta name="description" content="How to use Task Timer to measure true task durations, analyze interruptions, and improve estimates. Includes HowTo, FAQ, downloadable CSV template, and structured data.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="https://timerhaven.com/en/task-timer-index.html">
+  <meta name="author" content="Serge Shammas">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Record and analyze task time with Task Timer",
+    "description": "A workflow to measure actual time spent on tasks, account for interruptions, and use that data for better planning.",
+    "image": "/assets/images/tasktimer-snapshot.png"
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}.
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Task Timer — Measure Time, Improve Estimates</h1>
+
+      <div class="author" role="articleauthor" aria-label="Article author">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="56" height="56" alt="Serge Shammas — productivity writer and UX researcher" loading="lazy">
+        <div>
+          <div class="byline"><strong>By Serge Shammas</strong> — productivity writer and UX researcher</div>
+          <div class="meta">Published: 2025-10-25 · Last updated: 2025-11-21 · Reading time: 7–10 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Task Timer helps you record real time spent on tasks so you can spot underestimated work, measure interruptions, and improve planning. This guide covers setup, logging practice, CSV export and analysis recipes.</p>
+
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#setup">Setup</a>
+        <a href="#howto">How to record</a>
+        <a href="#analysis">Export & analyze</a>
+        <a href="#download">Download CSV</a>
+        <a href="#case-studies">Case studies</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section class="section" id="setup" aria-labelledby="setup">
+        <h2 id="setup">Setup & Naming</h2>
+        <p>Use clear task names and include a short expected duration in parentheses (e.g., <em>Write unit tests (45m)</em>). Add tags for project and type. This consistency makes exported CSVs easier to analyze — tags should be short and consistent (project-alpha, meeting, review).</p>
+      </section>
+
+      <section class="section" id="howto" aria-labelledby="howto">
+        <h2>How to record a session</h2>
+        <div class="workflow">
+          <strong>Record</strong>
+          <ol>
+            <li>Create the task entry with expected time and tags.</li>
+            <li>Start the Task Timer when you begin working; note interruptions in the notes field.</li>
+            <li>Stop the timer when you finish and add a short summary of what was done.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="analysis" aria-labelledby="analysis">
+        <h2>Export & analyze</h2>
+        <p>Export weekly CSVs and compute averages per tag or project. Key metrics: average time per task, median (less sensitive to outliers), and interruption rate (% of sessions with interruptions).</p>
+
+        <div class="workflow">
+          <strong>Recipe — weekly review</strong>
+          <ol>
+            <li>Export sessions for the week as CSV.</li>
+            <li>In a spreadsheet, compute average durations by tag and sort longest tasks to refine estimates.</li>
+            <li>Use insights to re-balance upcoming Pomodoro blocks and calendar events.</li>
+          </ol>
+        </div>
+
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">Spreadsheet example</h3>
+          <table class="sample" aria-hidden="false">
+            <thead><tr><th>Date</th><th>Task</th><th>Actual (min)</th><th>Interruptions</th></tr></thead>
+            <tbody>
+              <tr><td>2025-11-03</td><td>Code review</td><td>60</td><td>1</td></tr>
+              <tr><td>2025-11-04</td><td>Feature X</td><td>120</td><td>0</td></tr>
+              <tr><td>2025-11-06</td><td>Bugfix</td><td>45</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="download" aria-labelledby="download">
+        <h2>Download — Task timer CSV template</h2>
+        <p class="muted">Use this CSV to manually seed sessions or to test import/export flows.</p>
+        <p><a href="#" id="downloadTaskCsv" class="cta" aria-label="Download Task Timer CSV template">Download CSV template</a></p>
+        <pre id="taskCsvTemplate" class="template" aria-hidden="true">date,task,tag,expected_minutes,actual_minutes,interruptions,notes
+2025-11-01,Write feature X,project-alpha,45,50,1,"Interruption: meeting"</pre>
+        <script>
+          document.getElementById('downloadTaskCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('taskCsvTemplate').textContent;
+            var blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'tasktimer-template-en.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section class="section" id="case-studies" aria-labelledby="case-studies">
+        <h2>Case studies & tips</h2>
+        <div class="workflow">
+          <strong>Developer — Paolo</strong>
+          <p>After 2 weeks of tracking, Paolo discovered code review overhead accounted for 20% of his day. He scheduled dedicated review blocks and reduced fragmented context switching.</p>
+        </div>
+        <div class="workflow">
+          <strong>Consultant — Rina</strong>
+          <p>Rina tracked client calls as interruptions; she now buffers focus blocks and logs expected meeting time to avoid overcommitment.</p>
+        </div>
+      </section>
+
+      <section class="section" id="faq" aria-labelledby="faq">
+        <h2 id="faq">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> Can Task Timer run alongside Pomodoro?<br><strong>A:</strong> Yes — use Task Timer for detailed logging and Pomodoro for focused blocks; link a Task Timer entry to a Pomodoro before starting for cleaner data.</p>
+          <p><strong>Q:</strong> Is there an offline export?<br><strong>A:</strong> CSV export is client-side and works offline; save files locally for backups or transfer.</p>
+          <p><strong>Q:</strong> Can I import CSVs from other tools?<br><strong>A:</strong> The template fields are simple (date, task, tag, expected_minutes, actual_minutes, interruptions, notes). Map fields from other exports into these columns to import or seed your dataset.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Related tools: <a href="/notes-en.html">Notes</a> · <a href="/pomodoro-en.html">Pomodoro</a> · <a href="/calendar-en.html">Calendar</a></p>
+
+      <p style="margin-top:1.2rem;"><a href="/timer.html#startBtn" class="cta" aria-label="Open Task Timer tool" rel="help">Open Task Timer tool</a></p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions or feedback? Contact us at <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Read our <a href="/privacy/">Privacy Policy</a>.</p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>

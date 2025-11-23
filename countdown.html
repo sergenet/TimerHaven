@@ -58,46 +58,34 @@
     .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
     .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
     .back-link:hover { text-decoration: underline; }
-    .language-select {
-      text-align: right;
-      padding: 20px 40px 0 0;
-      margin-bottom: 0.7em;
-      position: relative;
-      z-index: 5;
+
+    /* Non-editable language indicator (top-right) */
+    .language-indicator {
+      position: fixed;
+      right: 18px;
+      top: 16px;
+      z-index: 12000;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:700;
+      color:#185a9d;
+      background: rgba(255,255,255,0.95);
+      padding:8px 12px;
+      border-radius:10px;
+      box-shadow: 0 6px 18px rgba(8,20,40,0.06);
+      font-size:0.98em;
     }
-    .language-select label {
-      margin-right: 8px;
-      font-size: 1.08em;
-      font-weight: 600;
-      color: #185a9d;
-    }
-    #timer-lang-select {
-      min-width: 150px;
-      font-size: 1.08em;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1px solid #43cea2;
-      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
-      color: #fff;
-      margin-left: 6px;
-      margin-right: 4px;
+    .language-indicator .lang-label { margin-right:6px; }
+    .language-indicator .lang-name {
+      background: linear-gradient(90deg,#43cea2 0%,#185a9d 100%);
+      color:#fff;
+      padding:6px 10px;
+      border-radius:8px;
+      font-weight:700;
       box-shadow: 0 2px 8px #e0e7ef;
-      transition: background 0.2s;
-      font-weight: 600;
     }
-    #timer-lang-select option {
-      color: #185a9d;
-      background: #f4f7fb;
-      font-weight: 500;
-    }
-    body[dir="rtl"] .language-select {
-      text-align: left;
-      padding: 20px 0 0 40px;
-    }
-    body[dir="rtl"] #timer-lang-select {
-      margin-left: 4px;
-      margin-right: 6px;
-    }
+
     @media (max-width: 1100px) {
       .main-container{padding:0 8px;}
       .center-row, .card-row{gap:1em;}
@@ -115,18 +103,12 @@
   </style>
 </head>
 <body>
-  <div class="language-select">
-    <label for="timer-lang-select"><strong id="language-label">Language:</strong></label>
-    <select id="timer-lang-select">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="el">Ελληνικά</option>
-      <option value="es">Español</option>
-      <option value="ar">العربية</option>
-    </select>
+  <!-- Non-editable language indicator: reads the chosen language from main index (timerhavenLang) -->
+  <div class="language-indicator" id="language-indicator" role="status" aria-live="polite" title="Selected language from main menu">
+    <span class="lang-label" id="language-label">Language:</span>
+    <span class="lang-name" id="language-name">English</span>
   </div>
+
 <div class="main-container">
   <div class="center-row">
     <!-- Article 1 (desktop only) -->
@@ -156,11 +138,7 @@
         <summary id="faq-title"></summary>
         <ul id="faq-list" style="padding-left: 1em;"></ul>
       </details>
-      <!-- Tips (mobile only, collapsible) -->
-      <details class="tips-mobile" id="tips-mobile">
-        <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
-        <ul id="tips-mobile-list"></ul>
-      </details>
+      <!-- removed tips-mobile (Countdown Productivity Tips removed from bottom of middle card) -->
     </div>
     <!-- Article 2 (desktop only) -->
     <div class="article-card">
@@ -172,8 +150,9 @@
     </div>
   </div>
 </div>
+
 <script>
-  // PASTE THE FULL TRANSLATION OBJECT FROM EARLIER HERE!
+  // translations object (kept intact)
   const countdownTranslations = {
   en: {
     "language-label": "Language:",
@@ -387,7 +366,95 @@
   }
 };
 
+  // small mapping for indicator
+  const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
 
+  // helper: source-of-truth language from main index
+  function getLang() {
+    try {
+      const l = localStorage.getItem('timerhavenLang') || 'en';
+      return (l && l.slice(0,2)) || 'en';
+    } catch (e) {
+      return 'en';
+    }
+  }
+
+  // apply translations to UI
+  function applyLanguage(lang) {
+    lang = (lang || getLang()).slice(0,2);
+    const t = countdownTranslations[lang] || countdownTranslations['en'];
+
+    // direction
+    document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    // indicator
+    const labelEl = document.getElementById('language-label');
+    const nameEl = document.getElementById('language-name');
+    if (labelEl) labelEl.textContent = t['language-label'] || 'Language:';
+    if (nameEl) nameEl.textContent = langNames[lang] || lang;
+
+    // main UI strings
+    const back = document.getElementById('back-link');
+    if (back) back.textContent = t['back-link'] || '';
+
+    const toolTitle = document.getElementById('tool-title');
+    if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-stopwatch-20"></i> ${t['tool-title'] || ''}`;
+
+    const help = document.getElementById('tool-help');
+    if (help) help.textContent = t['tool-help'] || '';
+
+    // placeholders
+    const mins = document.getElementById('minutes');
+    const secs = document.getElementById('seconds');
+    if (mins) mins.placeholder = t['minutes'] || '';
+    if (secs) secs.placeholder = t['seconds'] || '';
+
+    // buttons
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    if (startBtn) startBtn.textContent = t['start'] || 'Start';
+    if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Pause';
+    if (resetBtn) resetBtn.textContent = t['reset'] || 'Reset';
+
+    // faq & howto & tips (right article kept)
+    const faqTitle = document.getElementById('faq-title');
+    if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+    const faqList = document.getElementById('faq-list');
+    if (faqList) faqList.innerHTML = t['faq-list'] || '';
+
+    const howtoTitle = document.getElementById('howto-title');
+    const howtoSteps = document.getElementById('howto-steps');
+    if (howtoTitle) howtoTitle.innerHTML = t['howto-title'] || '';
+    if (howtoSteps) howtoSteps.innerHTML = t['howto-steps'] || '';
+
+    const howtoBtn = document.getElementById('howto-article-btn');
+    if (howtoBtn) {
+      howtoBtn.textContent = t['howto-article-btn'] || '';
+      howtoBtn.href = t['howto-article-link'] || '';
+    }
+
+    // right-column tips (article)
+    const tipsTitle = document.getElementById('tips-title');
+    const tipsList = document.getElementById('tips-list');
+    const tipsBtn = document.getElementById('tips-article-btn');
+    if (tipsTitle) tipsTitle.innerHTML = t['tips-title'] || '';
+    if (tipsList) tipsList.innerHTML = t['tips-list'] || '';
+    if (tipsBtn) { tipsBtn.textContent = t['tips-article-btn'] || ''; tipsBtn.href = t['tips-article-link'] || ''; }
+
+    // display initial
+    const disp = document.getElementById('display');
+    if (disp) disp.textContent = t['display'] || '00:00';
+  }
+
+  // ensure the page updates when main index changes language in other tabs
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'timerhavenLang') {
+      applyLanguage((e.newValue || 'en').slice(0,2));
+    }
+  });
+
+  // timer logic
   let timerInterval = null;
   let totalSeconds = 0;
   let paused = false;
@@ -399,87 +466,68 @@
       String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
   }
 
-  function updateDropdownDirection() {
-    const lang = document.getElementById("timer-lang-select").value;
-    document.querySelector('.language-select').style.textAlign = (lang === "ar") ? "left" : "right";
-  }
-
-  function updateCountdownLanguage() {
-    const lang = document.getElementById("timer-lang-select").value;
-    document.body.dir = (lang === "ar") ? "rtl" : "ltr";
-    updateDropdownDirection();
-    document.getElementById("language-label").textContent = countdownTranslations[lang]["language-label"];
-    document.getElementById("back-link").textContent = countdownTranslations[lang]["back-link"];
-    document.getElementById("tool-title").innerHTML = `<i class="fa fa-stopwatch-20"></i> ${countdownTranslations[lang]["tool-title"]}`;
-    document.getElementById("tool-help").textContent = countdownTranslations[lang]["tool-help"];
-    document.getElementById('minutes').placeholder = countdownTranslations[lang]["minutes"];
-    document.getElementById('seconds').placeholder = countdownTranslations[lang]["seconds"];
-    document.getElementById('startBtn').textContent = countdownTranslations[lang]["start"];
-    document.getElementById('pauseBtn').textContent = countdownTranslations[lang]["pause"];
-    document.getElementById('resetBtn').textContent = countdownTranslations[lang]["reset"];
-    document.getElementById("faq-title").textContent = countdownTranslations[lang]["faq-title"];
-    document.getElementById("faq-list").innerHTML = countdownTranslations[lang]["faq-list"];
-    document.getElementById("howto-title").innerHTML = countdownTranslations[lang]["howto-title"];
-    document.getElementById("howto-steps").innerHTML = countdownTranslations[lang]["howto-steps"];
-    document.getElementById("howto-article-btn").textContent = countdownTranslations[lang]["howto-article-btn"];
-    document.getElementById("howto-article-btn").href = countdownTranslations[lang]["howto-article-link"];
-    document.getElementById("tips-title").innerHTML = countdownTranslations[lang]["tips-title"];
-    document.getElementById("tips-list").innerHTML = countdownTranslations[lang]["tips-list"];
-    document.getElementById("tips-article-btn").textContent = countdownTranslations[lang]["tips-article-btn"];
-    document.getElementById("tips-article-btn").href = countdownTranslations[lang]["tips-article-link"];
-    document.getElementById("display").textContent = countdownTranslations[lang]["display"];
-    document.getElementById("tips-mobile-title").innerHTML = countdownTranslations[lang]["tips-title"];
-    document.getElementById("tips-mobile-list").innerHTML = countdownTranslations[lang]["tips-list"];
-  }
-
-  document.getElementById("timer-lang-select").addEventListener("change", function() {
-    localStorage.setItem('countdownLang', this.value);
-    updateCountdownLanguage();
-  });
-
   document.addEventListener("DOMContentLoaded", function() {
-    const savedLang = localStorage.getItem('countdownLang') || 'en';
-    document.getElementById('timer-lang-select').value = savedLang;
-    updateCountdownLanguage();
+    // apply language from main index
+    applyLanguage(getLang());
+
+    // init display
     totalSeconds = 0;
     updateDisplay();
-  });
 
-  document.getElementById('startBtn').onclick = function() {
-    if (timerInterval) return; // Already running
-    let minutes = parseInt(document.getElementById('minutes').value) || 0;
-    let seconds = parseInt(document.getElementById('seconds').value) || 0;
-    totalSeconds = minutes * 60 + seconds;
-    updateDisplay();
-    if (totalSeconds <= 0) return;
-    timerInterval = setInterval(function() {
-      if (!paused && totalSeconds > 0) {
-        totalSeconds--;
+    // bind controls (start, pause, reset)
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    if (startBtn) {
+      startBtn.addEventListener('click', function() {
+        if (timerInterval) return; // already running
+        let minutes = parseInt(document.getElementById('minutes').value) || 0;
+        let seconds = parseInt(document.getElementById('seconds').value) || 0;
+        totalSeconds = minutes * 60 + seconds;
         updateDisplay();
-      } else if (totalSeconds <= 0) {
+        if (totalSeconds <= 0) return;
+        timerInterval = setInterval(function() {
+          if (!paused && totalSeconds > 0) {
+            totalSeconds--;
+            updateDisplay();
+          }
+          if (totalSeconds <= 0) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            const lang = getLang();
+            const t = countdownTranslations[lang] || countdownTranslations['en'];
+            try { alert(t['alert-end'] || "Time's up!"); } catch(e){}
+          }
+        }, 1000);
+      });
+    }
+
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function() {
+        paused = !paused;
+        const lang = getLang();
+        const t = countdownTranslations[lang] || countdownTranslations['en'];
+        this.textContent = paused ? (t['resume'] || 'Resume') : (t['pause'] || 'Pause');
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
         clearInterval(timerInterval);
         timerInterval = null;
-        alert(countdownTranslations[document.getElementById("timer-lang-select").value]["alert-end"]);
-      }
-    }, 1000);
-  };
-
-  document.getElementById('pauseBtn').onclick = function() {
-    paused = !paused;
-    const lang = document.getElementById("timer-lang-select").value;
-    this.textContent = paused ? countdownTranslations[lang]["resume"] : countdownTranslations[lang]["pause"];
-  };
-
-  document.getElementById('resetBtn').onclick = function() {
-    clearInterval(timerInterval);
-    timerInterval = null;
-    totalSeconds = 0;
-    updateDisplay();
-    const lang = document.getElementById("timer-lang-select").value;
-    document.getElementById('pauseBtn').textContent = countdownTranslations[lang]["pause"];
-    paused = false;
-  };
+        totalSeconds = 0;
+        updateDisplay();
+        const lang = getLang();
+        const t = countdownTranslations[lang] || countdownTranslations['en'];
+        const pauseBtnEl = document.getElementById('pauseBtn');
+        if (pauseBtnEl) pauseBtnEl.textContent = t['pause'] || 'Pause';
+        paused = false;
+      });
+    }
+  });
 </script>
+
 <footer>
   &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
   <a href="privacy.html">Privacy Policy</a> &bull;

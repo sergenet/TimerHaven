@@ -14,37 +14,40 @@
       margin: 0;
       min-height: 100vh;
       background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    }
+
     .language-select {
-  text-align: right;
-  padding: 10px 18px 0 0;
-  margin-bottom: 0.5em;
-}
+      text-align: right;
+      padding: 10px 18px 0 0;
+      margin-bottom: 0.5em;
+    }
 
-#language-label {
-  color: #185a9d;
-  font-weight: bold;
-  font-size: 1.08em;
-  margin-right: 0.5em;
-  letter-spacing: 0.02em;
-}
+    #language-label {
+      color: #185a9d;
+      font-weight: bold;
+      font-size: 1.08em;
+      margin-right: 0.5em;
+      letter-spacing: 0.02em;
+    }
 
-#lang-select {
-  border: 2px solid #43cea2;
-  background: linear-gradient(90deg, #f4f7fb 60%, #e0f7fa 100%);
-  color: #185a9d;
-  font-weight: 600;
-  border-radius: 7px;
-  padding: 7px 16px;
-  font-size: 1em;
-  box-shadow: 0 2px 8px #e0e7ef;
-  outline: none;
-  transition: border 0.2s, background 0.2s;
-}
+    #lang-select {
+      border: 2px solid #43cea2;
+      background: linear-gradient(90deg, #f4f7fb 60%, #e0f7fa 100%);
+      color: #185a9d;
+      font-weight: 600;
+      border-radius: 7px;
+      padding: 7px 16px;
+      font-size: 1em;
+      box-shadow: 0 2px 8px #e0e7ef;
+      outline: none;
+      transition: border 0.2s, background 0.2s;
+    }
 
-#lang-select:focus {
-  border-color: #185a9d;
-  background: linear-gradient(90deg, #e0f7fa 60%, #43cea2 100%);
-}
+    #lang-select:focus {
+      border-color: #185a9d;
+      background: linear-gradient(90deg, #e0f7fa 60%, #43cea2 100%);
+    }
+
     .main-header {
       text-align: center;
       margin: 2em 0 1em;
@@ -104,11 +107,13 @@
       color: #fff;
       box-shadow: 0 1px 4px #c9e2e2;
     }
+    /* Ensure menu titles are visible (explicit color to avoid CSS inheritance issues) */
     .menu-title {
       font-size: 1em;
       font-weight: bold;
       margin-bottom: 0.13em;
       letter-spacing: 0.5px;
+      color: #0a2540; /* explicit dark color so text is visible */
     }
     .menu-description {
       color: #555;
@@ -146,7 +151,27 @@
       color: #444;
       font-size: 0.95em;
     }
+	/* responsive reserve for leaderboard-style ad to avoid layout shift */
+.ad-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* desktop/tablet reserve */
+@media (min-width: 900px) {
+  .ad-wrapper { min-height: 90px; }   /* reserve approx 728x90 leaderboard */
+}
+
+/* mobile reserve */
+@media (max-width: 899px) {
+  .ad-wrapper { min-height: 50px; }   /* reserve approx 320x50 mobile banner */
+}
   </style>
+  <script>window.__timerhaven_ad_client = "ca-pub-0467059729557007";</script>
 </head>
 <body>
   <div class="language-select">
@@ -165,85 +190,94 @@
     <h1 id="header-title">🕒 TimerHaven Productivity Suite</h1>
     <p id="header-desc">Choose a tool below to boost your productivity!</p>
   </header>
-  <nav>
-    <ul class="nav nav-pills justify-content-center mb-4">
-      <li class="nav-item"><a id="nav-tools" class="nav-link active" href="#tools"></a></li>
-      <li class="nav-item"><a id="nav-resources" class="nav-link" href="#resources"></a></li>
-    </ul>
-  </nav>
+<!-- Homepage Leaderboard Ad — paste IMMEDIATELY AFTER </header> -->
+<div class="ad-wrapper" style="max-width:900px;margin:0 auto;padding:0 1rem;min-height:0;display:flex;align-items:center;justify-content:center;">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007"
+       crossorigin="anonymous"></script>
+
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-0467059729557007"
+       data-ad-slot="8923180236"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
   <main>
     <div class="tool-grid" id="tools">
-      <a href="calendar.html" class="menu-card card-calendar text-decoration-none text-dark">
+      <a href="calendar-en.html" class="menu-card card-calendar text-decoration-none text-dark" data-tool="calendar-en">
         <div class="menu-icon"><i class="fa fa-calendar-days"></i></div>
         <div class="menu-title" id="tool-calendar-title"></div>
         <div class="menu-description" id="tool-calendar-desc"></div>
       </a>
-      <a href="clipboard-manager.html" class="menu-card card-clipboard text-decoration-none text-dark">
+      <a href="clipboard-manager-en.html" class="menu-card card-clipboard text-decoration-none text-dark" data-tool="clipboard-manager-en">
         <div class="menu-icon"><i class="fa fa-clipboard-list"></i></div>
         <div class="menu-title" id="tool-clipboard-title"></div>
         <div class="menu-description" id="tool-clipboard-desc"></div>
       </a>
-      <a href="countdown.html" class="menu-card card-countdown text-decoration-none text-dark">
+      <a href="countdown-en.html" class="menu-card card-countdown text-decoration-none text-dark" data-tool="countdown-en">
         <div class="menu-icon"><i class="fa fa-stopwatch-20"></i></div>
         <div class="menu-title" id="tool-countdown-title"></div>
         <div class="menu-description" id="tool-countdown-desc"></div>
       </a>
-      <a href="currency.html" class="menu-card card-currency text-decoration-none text-dark">
+      <a href="currency-en.html" class="menu-card card-currency text-decoration-none text-dark" data-tool="currency-en">
         <div class="menu-icon"><i class="fa fa-dollar-sign"></i></div>
         <div class="menu-title" id="tool-currency-title"></div>
         <div class="menu-description" id="tool-currency-desc"></div>
       </a>
-      <a href="focus-music.html" class="menu-card card-focus text-decoration-none text-dark">
+      <a href="focus-music-en.html" class="menu-card card-focus text-decoration-none text-dark" data-tool="focus-music-en">
         <div class="menu-icon"><i class="fa fa-music"></i></div>
         <div class="menu-title" id="tool-focus-title"></div>
         <div class="menu-description" id="tool-focus-desc"></div>
       </a>
-      <a href="habit-tracker.html" class="menu-card card-habit text-decoration-none text-dark">
+      <a href="habit-tracker-en.html" class="menu-card card-habit text-decoration-none text-dark" data-tool="habit-tracker-en">
         <div class="menu-icon"><i class="fa fa-check-double"></i></div>
         <div class="menu-title" id="tool-habit-title"></div>
         <div class="menu-description" id="tool-habit-desc"></div>
       </a>
-      <a href="meeting-planner.html" class="menu-card card-meeting text-decoration-none text-dark">
+      <a href="meeting-planner-en.html" class="menu-card card-meeting text-decoration-none text-dark" data-tool="meeting-planner-en">
         <div class="menu-icon"><i class="fa fa-users"></i></div>
         <div class="menu-title" id="tool-meeting-title"></div>
         <div class="menu-description" id="tool-meeting-desc"></div>
       </a>
-      <a href="notes.html" class="menu-card card-notes text-decoration-none text-dark">
+      <a href="notes-en.html" class="menu-card card-notes text-decoration-none text-dark" data-tool="notes-en">
         <div class="menu-icon"><i class="fa fa-note-sticky"></i></div>
         <div class="menu-title" id="tool-notes-title"></div>
         <div class="menu-description" id="tool-notes-desc"></div>
       </a>
-      <a href="password-generator.html" class="menu-card card-password text-decoration-none text-dark">
+      <a href="password-generator-en.html" class="menu-card card-password text-decoration-none text-dark" data-tool="password-generator-en">
         <div class="menu-icon"><i class="fa fa-key"></i></div>
         <div class="menu-title" id="tool-password-title"></div>
         <div class="menu-description" id="tool-password-desc"></div>
       </a>
-      <a href="pomodoro.html" class="menu-card card-pomodoro text-decoration-none text-dark">
+      <a href="pomodoro-en.html" class="menu-card card-pomodoro text-decoration-none text-dark" data-tool="pomodoro-en">
         <div class="menu-icon"><i class="fa fa-apple-whole"></i></div>
         <div class="menu-title" id="tool-pomodoro-title"></div>
         <div class="menu-description" id="tool-pomodoro-desc"></div>
       </a>
-      <a href="stopwatch.html" class="menu-card card-stopwatch text-decoration-none text-dark">
+      <a href="stopwatch-en.html" class="menu-card card-stopwatch text-decoration-none text-dark" data-tool="stopwatch-en">
         <div class="menu-icon"><i class="fa fa-clock"></i></div>
         <div class="menu-title" id="tool-stopwatch-title"></div>
         <div class="menu-description" id="tool-stopwatch-desc"></div>
       </a>
-      <a href="timer.html" class="menu-card card-task text-decoration-none text-dark">
+      <a href="timer-en.html" class="menu-card card-task text-decoration-none text-dark" data-tool="timer-en">
         <div class="menu-icon"><i class="fa fa-hourglass-half"></i></div>
         <div class="menu-title" id="tool-task-title"></div>
         <div class="menu-description" id="tool-task-desc"></div>
       </a>
-      <a href="unit-converter.html" class="menu-card card-unit text-decoration-none text-dark">
+      <a href="unit-converter-en.html" class="menu-card card-unit text-decoration-none text-dark" data-tool="unit-converter-en">
         <div class="menu-icon"><i class="fa fa-ruler-combined"></i></div>
         <div class="menu-title" id="tool-unit-title"></div>
         <div class="menu-description" id="tool-unit-desc"></div>
       </a>
-      <a href="weather.html" class="menu-card card-weather text-decoration-none text-dark">
+      <a href="weather-en.html" class="menu-card card-weather text-decoration-none text-dark" data-tool="weather-en">
         <div class="menu-icon"><i class="fa fa-cloud-sun"></i></div>
         <div class="menu-title" id="tool-weather-title"></div>
         <div class="menu-description" id="tool-weather-desc"></div>
       </a>
-      <a href="world-clock.html" class="menu-card card-world text-decoration-none text-dark">
+      <a href="world-clock-en.html" class="menu-card card-world text-decoration-none text-dark" data-tool="world-clock-en">
         <div class="menu-icon"><i class="fa fa-globe"></i></div>
         <div class="menu-title" id="tool-world-title"></div>
         <div class="menu-description" id="tool-world-desc"></div>
@@ -254,14 +288,14 @@
   <footer>
     <div id="footer-copyright"></div>
     <div id="footer-links">
-      <a href="#tools" id="footer-tools"></a> |
-      <a href="#resources" id="footer-resources"></a> |
+      <a href="/about.html" id="footer-about"></a> |
+      <a href="/privacy.html" id="footer-privacy"></a> |
       <a href="mailto:contact@timerhaven.com" id="footer-contact"></a>
     </div>
     <div class="small" id="footer-credit"></div>
   </footer>
   <script>
-    // Translation dictionary
+    // TRANSLATIONS & INITIALIZATION
     const translations = {
       en: {
         "page-title": "TimerHaven: Productivity Suite",
@@ -307,8 +341,8 @@
         "resources-keyboard-desc": "– Write anywhere, stay productive!",
         "resources-affiliate": "As an Amazon Associate, TimerHaven earns from qualifying purchases. Thanks for your support!",
         "footer-copyright": "&copy; 2025 TimerHaven. All tools are free and privacy-friendly.",
-        "footer-tools": "Tools",
-        "footer-resources": "Resources",
+        "footer-about": "About",
+        "footer-privacy": "Privacy",
         "footer-contact": "Contact",
         "footer-credit": "Built by <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Amazon Partner</a>"
       },
@@ -356,12 +390,12 @@
   "resources-keyboard-desc": "– Écrivez partout, restez productif !",
   "resources-affiliate": "En tant qu'associé Amazon, TimerHaven gagne sur les achats qualifiés. Merci pour votre soutien !",
   "footer-copyright": "&copy; 2025 TimerHaven. Tous les outils sont gratuits et respectueux de la vie privée.",
-  "footer-tools": "Outils",
-  "footer-resources": "Ressources",
+  "footer-about": "À propos",
+  "footer-privacy": "Confidentialité",
   "footer-contact": "Contact",
   "footer-credit": "Développé par <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Partenaire Amazon</a>"
 },
-	  es: {
+      es: {
   "page-title": "TimerHaven: Suite de Productividad",
   "language-label": "Idioma:",
   "header-title": "🕒 Suite de Productividad TimerHaven",
@@ -405,10 +439,10 @@
   "resources-keyboard-desc": "– ¡Escribe en cualquier lugar, mantente productivo!",
   "resources-affiliate": "Como asociado de Amazon, TimerHaven gana con compras elegibles. ¡Gracias por tu apoyo!",
   "footer-copyright": "&copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan tu privacidad.",
-  "footer-tools": "Herramientas",
-  "footer-resources": "Recursos",
+  "footer-about": "Acerca de",
+  "footer-privacy": "Privacidad",
   "footer-contact": "Contacto",
-  "footer-credit": "Creado por <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Socio de Amazon</a>"
+  "footer-credit": "Creado por <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
 },
       de: {
   "page-title": "TimerHaven: Produktivitätssuite",
@@ -454,10 +488,10 @@
   "resources-keyboard-desc": "– Überall schreiben, produktiv bleiben!",
   "resources-affiliate": "Als Amazon-Partner verdient TimerHaven an qualifizierten Käufen. Vielen Dank für deine Unterstützung!",
   "footer-copyright": "&copy; 2025 TimerHaven. Alle Werkzeuge sind kostenlos und datenschutzfreundlich.",
-  "footer-tools": "Werkzeuge",
-  "footer-resources": "Ressourcen",
+  "footer-about": "Über",
+  "footer-privacy": "Datenschutz",
   "footer-contact": "Kontakt",
-  "footer-credit": "Erstellt von <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Amazon-Partner</a>"
+  "footer-credit": "Erstellt von <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
 },
       ru: {
   "page-title": "TimerHaven: Набор инструментов для продуктивности",
@@ -503,10 +537,10 @@
   "resources-keyboard-desc": "– Работайте где угодно, оставайтесь продуктивными!",
   "resources-affiliate": "Как партнёр Amazon, TimerHaven получает доход с соответствующих покупок. Спасибо за вашу поддержку!",
   "footer-copyright": "&copy; 2025 TimerHaven. Все инструменты бесплатны и уважают вашу конфиденциальность.",
-  "footer-tools": "Инструменты",
-  "footer-resources": "Ресурсы",
+  "footer-about": "О сайте",
+  "footer-privacy": "Конфиденциальность",
   "footer-contact": "Контакт",
-  "footer-credit": "Создано <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Партнёр Amazon</a>"
+  "footer-credit": "Создано <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
 },
       el: {
   "page-title": "TimerHaven: Σουίτα Παραγωγικότητας",
@@ -552,10 +586,10 @@
   "resources-keyboard-desc": "– Γράψτε παντού, παραμείνετε παραγωγικοί!",
   "resources-affiliate": "Ως συνεργάτης του Amazon, το TimerHaven κερδίζει από κατάλληλες αγορές. Ευχαριστούμε για την υποστήριξή σας!",
   "footer-copyright": "&copy; 2025 TimerHaven. Όλα τα εργαλεία είναι δωρεάν και φιλικά προς το απόρρητο.",
-  "footer-tools": "Εργαλεία",
-  "footer-resources": "Πόροι",
+  "footer-about": "Σχετικά",
+  "footer-privacy": "Απόρρητο",
   "footer-contact": "Επικοινωνία",
-  "footer-credit": "Δημιουργήθηκε από <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Συνεργάτης Amazon</a>"
+  "footer-credit": "Δημιουργήθηκε από <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
 },
       ar: {
   "page-title": "تايمرهافن: مجموعة أدوات الإنتاجية",
@@ -599,46 +633,168 @@
   "resources-book-desc": "– الكتاب الكلاسيكي حول التركيز والإنتاجية.",
   "resources-planner-desc": "– نظم حياتك مع هذا المخطط الورقي الأسطوري.",
   "resources-keyboard-desc": "– اكتب في أي مكان، وكن منتجًا!",
-  "resources-affiliate": "بصفتنا شركاء في أمازون، يحصل تايمرهافن على أرباح من المشتريات المؤهلة. شكرًا لدعمكم!",
+  "resources-affiliate": "بصفتنا شركاء أمازون، يحصل تايمرهافن على أرباح من المشتريات المؤهلة. شكرًا لدعمكم!",
   "footer-copyright": "&copy; 2025 تايمرهافن. جميع الأدوات مجانية وتحترم الخصوصية.",
-  "footer-tools": "الأدوات",
-  "footer-resources": "الموارد",
+  "footer-about": "حول",
+  "footer-privacy": "الخصوصية",
   "footer-contact": "اتصل بنا",
-  "footer-credit": "تم الإنشاء بواسطة <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">شريك أمازون</a>"
-},
+  "footer-credit": "تم الإنشاء بواسطة <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+      }
     };
 
-    // Copy English as placeholder for missing translations
-    ["es","de","ru","el","ar"].forEach(l => { translations[l] = {...translations.en, ...translations[l]}; });
+    // Ensure all locales at least inherit English keys to avoid missing properties
+    ["es","de","ru","el","ar","fr"].forEach(l => {
+      try {
+        translations[l] = Object.assign({}, translations.en, translations[l] || {});
+      } catch(e){}
+    });
 
-    function updateLanguage() {
-      const lang = document.getElementById("lang-select").value;
+    // Helper to read stored language; central single source of truth
+    function getStoredLang() {
+      try {
+        const s = localStorage.getItem('timerhavenLang');
+        if (s && typeof s === 'string') return s.slice(0,2);
+      } catch(e){}
+      return 'en';
+    }
+
+    // Update UI texts from translations; accept lang param to avoid race conditions
+    function updateLanguage(lang) {
+      if (!lang) lang = document.getElementById("lang-select")?.value || getStoredLang();
+      if (!translations[lang]) lang = 'en';
       Object.keys(translations[lang]).forEach(function(id) {
         const el = document.getElementById(id);
         if (el) {
-          // Handle innerHTML for credit/footer, textContent for others
-          if (id === "footer-credit") {
-            el.innerHTML = translations[lang][id];
-          } else {
-            el.textContent = translations[lang][id];
-          }
+          try {
+            if (id === "footer-credit" || id === "footer-copyright") {
+              el.innerHTML = translations[lang][id];
+            } else {
+              el.textContent = translations[lang][id];
+            }
+          } catch(e){ /* ignore per-element errors */ }
         }
       });
-      document.title = translations[lang]["page-title"];
+      try { document.title = translations[lang]["page-title"] || document.title; } catch(e){}
+      console.info('[i18n] applied language ->', lang);
     }
 
-    // Attach to language dropdown change event
-document.getElementById("lang-select").addEventListener("change", function() {
-  localStorage.setItem('timerhavenLang', this.value); // save selected language to localStorage
-  updateLanguage();
-});
+    // Rewrite tool links so they point to language-specific tool pages when appropriate.
+    // Behavior:
+    //  - For English (en) we keep canonical links like "unit-converter.html" (no suffix).
+    //  - For other languages we rewrite "tool.html" -> "tool-<lang>.html" (e.g. unit-converter -> unit-converter-es.html)
+    //  - Only affects anchors with data-tool attribute (menu cards); safe and idempotent.
+    function rewriteToolLinks() {
+      try {
+        const lang = getStoredLang() || 'en';
+        const anchors = document.querySelectorAll('a[data-tool]');
+        anchors.forEach(a => {
+          try {
+            const tool = a.getAttribute('data-tool'); // e.g. "unit-converter"
+            if (!tool) return;
+            let newHref;
+            if (lang === 'en') {
+              // canonical english page
+              newHref = `${tool}.html`;
+            } else {
+              newHref = `${tool}-${lang}.html`;
+            }
+            a.setAttribute('href', newHref);
+            // make absolute for clarity (keeps same origin)
+            a.href = location.origin.replace(/\/$/,'') + '/' + newHref;
+          } catch(e){}
+        });
+        console.info('[index] rewriteToolLinks applied for lang ->', getStoredLang());
+      } catch(e) {
+        console.warn('[index] rewriteToolLinks failed', e);
+      }
+    }
 
-// On page load, set dropdown and UI to saved language (or default to English)
-document.addEventListener("DOMContentLoaded", function() {
-  const savedLang = localStorage.getItem('timerhavenLang') || 'en';
-  document.getElementById('lang-select').value = savedLang;
-  updateLanguage();
-});
+    // Previous currency-specific rewrite is kept for backward compatibility (defensive)
+    function localizeGenericCurrencyAnchors() {
+      try {
+        const lang = getStoredLang() || 'en';
+        const replacements = {
+          'currency.html': `currency-${lang}.html`,
+          '/currency.html': `currency-${lang}.html`,
+          'currency-how-to.html': `currency-how-to-${lang}.html`,
+          '/currency-how-to.html': `currency-how-to-${lang}.html`,
+          'currency-tips.html': `currency-tips-${lang}.html`,
+          '/currency-tips.html': `currency-tips-${lang}.html`
+        };
+
+        Object.keys(replacements).forEach(function(key){
+          const nodes = document.querySelectorAll('a[href="' + key + '"]');
+          nodes.forEach(function(a){
+            try {
+              a.setAttribute('href', replacements[key]);
+              a.href = replacements[key];
+            } catch(e){}
+          });
+        });
+
+        document.querySelectorAll('a[href]').forEach(function(a){
+          try {
+            const attr = a.getAttribute('href') || '';
+            if (attr.match(/(^|\/)currency(\.html)?($|\?)/i)) {
+              a.href = '/' + replacements['currency.html'];
+            } else if (attr.match(/(^|\/)currency-how-to(\.html)?($|\?)/i)) {
+              a.href = '/' + replacements['currency-how-to.html'];
+            } else if (attr.match(/(^|\/)currency-tips(\.html)?($|\?)/i)) {
+              a.href = '/' + replacements['currency-tips.html'];
+            }
+          } catch(e){}
+        });
+
+        console.info('[index] localized currency anchors for lang ->', lang);
+      } catch(e) {
+        console.warn('[index] localizeGenericCurrencyAnchors error', e);
+      }
+    }
+
+    // Wire up language select and initialization in a robust order
+    document.addEventListener("DOMContentLoaded", function() {
+      // initialize select from stored language
+      const saved = getStoredLang() || 'en';
+      const select = document.getElementById('lang-select');
+      if (select) {
+        select.value = saved;
+        // when user changes selection, save and apply immediately
+        select.addEventListener('change', function() {
+          const v = this.value?.slice(0,2) || 'en';
+          try { localStorage.setItem('timerhavenLang', v); } catch(e){}
+          updateLanguage(v);
+          // rewrite menu tool links to selected language
+          try { rewriteToolLinks(); } catch(e){}
+          // maintain defensive currency-specific rewrite
+          try { localizeGenericCurrencyAnchors(); } catch(e){}
+        });
+      }
+
+      // First apply language from saved (so UI labels are filled)
+      updateLanguage(saved);
+
+      // ensure menu links point to localized tool pages
+      try { rewriteToolLinks(); } catch(e){}
+
+      // ensure any generic anchors pointing to currency.html are rewritten for chosen lang
+      try { localizeGenericCurrencyAnchors(); } catch(e){}
+
+      // Debug: show some values if the tool titles are blank
+      try {
+        console.info('debug: header-title ->', document.getElementById('header-title')?.textContent);
+        console.info('debug: tool-currency-title ->', document.getElementById('tool-currency-title')?.textContent);
+      } catch(e){}
+    });
+
+    // Also respond to storage events (other tab changed language)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        const lang = (e.newValue || 'en').slice(0,2);
+        updateLanguage(lang);
+        rewriteToolLinks();
+        localizeGenericCurrencyAnchors();
+      }
+    });
   </script>
 </body>
 </html>

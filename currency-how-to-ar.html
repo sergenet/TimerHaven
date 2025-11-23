@@ -18,7 +18,8 @@
 </head>
 <body>
   <div class="container">
-    <a href="currency.html" class="back-link"><i class="fa fa-arrow-left"></i> العودة إلى محول العملات</a>
+    <!-- localized back link -->
+    <a href="currency-ar.html" class="back-link" id="back-to-tool" onclick="return goBackOrFallback(event)"><i class="fa fa-arrow-left"></i> العودة إلى محول العملات</a>
     <h1><i class="fa fa-money-bill-wave"></i> كيفية استخدام محول العملات</h1>
     <p>
       <strong>محول العملات</strong> يوفر لك تحويلات سريعة ودقيقة. إليك طريقة الاستخدام:
@@ -43,9 +44,45 @@
       <li><b>هل يمكن تحويل أي عملة؟</b> معظم العملات الشائعة مدعومة.</li>
     </ul>
     <p>
-      <a href="currency.html" class="btn btn-outline-primary btn-sm mt-3">العودة إلى محول العملات</a>
+      <a href="currency-ar.html" class="btn btn-outline-primary btn-sm mt-3" id="back-btn" onclick="return goBackOrFallback(event)">العودة إلى محول العملات</a>
     </p>
   </div>
+
+  <script>
+    // Safety: rewrite any lingering generic currency.html hrefs to the localized page
+    (function rewriteBackLinks() {
+      try {
+        document.querySelectorAll('a[href]').forEach(a => {
+          const h = (a.getAttribute('href') || '').toLowerCase();
+          if (h === 'currency.html' || h === '/currency.html' || h.endsWith('/currency.html')) {
+            a.setAttribute('href', 'currency-ar.html');
+            a.href = location.origin + '/currency-ar.html';
+          }
+        });
+      } catch (e) { /* ignore */ }
+    })();
+
+    // Robust go-back: use history.back() only when referrer is the localized currency page.
+    function goBackOrFallback(e) {
+      try {
+        const ref = (document.referrer || '').toLowerCase();
+        const localized = '/currency-ar.html';
+        if (ref && (ref.endsWith(localized) || ref.indexOf(location.origin + localized) === 0)) {
+          e.preventDefault();
+          window.history.back();
+          return false;
+        }
+      } catch (err) { /* ignore */ }
+      try {
+        e.preventDefault();
+        window.location.replace('/currency-ar.html');
+        return false;
+      } catch (err) {
+        return true;
+      }
+    }
+  </script>
+
 <footer>
   &copy; 2025 TimerHaven. جميع الأدوات مجانية وتحترم الخصوصية.<br>
   <a href="privacy.html">سياسة الخصوصية</a> &bull;

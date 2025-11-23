@@ -38,16 +38,11 @@
       align-items: center;
       gap: 0.3em;
     }
-    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol { 
-      margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; 
+    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol {
+      margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word;
     }
-    .article-card .btn, .tool-card .btn { 
-      align-self: stretch;
-      font-weight: 600; 
-      border-radius: 8px; 
-      margin-top: 0.2em; 
-      margin-bottom: 0; 
-      box-sizing: border-box;
+    .article-card .btn, .tool-card .btn {
+      align-self: stretch; font-weight: 600; border-radius: 8px; margin-top: 0.2em; margin-bottom: 0; box-sizing: border-box;
     }
     .music-player { margin-bottom: 1em; }
     .music-player label { margin-left: 0.5em; font-size: 1em;}
@@ -57,46 +52,9 @@
     .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
     .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
     .back-link:hover { text-decoration: underline; }
-    .language-select {
-      text-align: right;
-      padding: 20px 40px 0 0;
-      margin-bottom: 0.7em;
-      position: relative;
-      z-index: 5;
-    }
-    .language-select label {
-      margin-right: 8px;
-      font-size: 1.08em;
-      font-weight: 600;
-      color: #185a9d;
-    }
-    #focus-lang-select {
-      min-width: 150px;
-      font-size: 1.08em;
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1px solid #43cea2;
-      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
-      color: #fff;
-      margin-left: 6px;
-      margin-right: 4px;
-      box-shadow: 0 2px 8px #e0e7ef;
-      transition: background 0.2s;
-      font-weight: 600;
-    }
-    #focus-lang-select option {
-      color: #185a9d;
-      background: #f4f7fb;
-      font-weight: 500;
-    }
-    body[dir="rtl"] .language-select {
-      text-align: left;
-      padding: 20px 0 0 40px;
-    }
-    body[dir="rtl"] #focus-lang-select {
-      margin-left: 4px;
-      margin-right: 6px;
-    }
+
+    /* language indicator removed intentionally */
+
     @media (max-width: 1100px) {
       .main-container{padding:0 8px;}
       .center-row, .card-row{gap:1em;}
@@ -114,18 +72,6 @@
   </style>
 </head>
 <body>
-  <div class="language-select">
-    <label for="focus-lang-select"><strong id="language-label">Language:</strong></label>
-    <select id="focus-lang-select">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="el">Ελληνικά</option>
-      <option value="es">Español</option>
-      <option value="ar">العربية</option>
-    </select>
-  </div>
   <div class="main-container">
     <div class="center-row">
       <!-- Article 1 (desktop only, left) -->
@@ -136,11 +82,13 @@
         </div>
         <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
       </div>
+
       <!-- Tool card (center) -->
       <div class="tool-card">
         <a href="index.html" class="back-link" id="back-link"></a>
         <h3 id="tool-title"></h3>
         <div class="help-section" id="tool-help"></div>
+
         <div class="music-player">
           <label for="music-select" id="music-label"></label>
           <select id="music-select" class="form-select mb-2">
@@ -151,20 +99,23 @@
             <option value="ocean"></option>
             <option value="cafe"></option>
           </select>
+
           <label for="music-loop" id="loop-label">
-            <input type="checkbox" id="music-loop"> 
+            <input type="checkbox" id="music-loop">
             <span id="loop-label-text"></span>
           </label>
         </div>
+
         <button class="btn btn-primary w-100 mb-2" id="play-btn">Play</button>
         <button class="btn btn-danger w-100 mb-2" id="stop-btn">Stop</button>
         <audio id="focus-audio" style="display:none;" controls></audio>
-        
+
         <details class="faq-section mt-2">
           <summary id="faq-title"></summary>
           <ul id="faq-list" style="padding-left: 1em;"></ul>
         </details>
       </div>
+
       <!-- Article 2 (desktop only, right) -->
       <div class="article-card">
         <div>
@@ -175,8 +126,9 @@
       </div>
     </div>
   </div>
+
   <script>
-    // Track map (SoundHelix, public domain)
+    // Track map (SoundHelix examples)
     const tracks = {
       white:    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
       rain:     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
@@ -185,7 +137,8 @@
       ocean:    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
       cafe:     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
     };
-    // Paste the full translation object from earlier here!
+
+    // Full translations kept intact
     const focusMusicTranslations = {
   en: {
     "language-label": "Language:",
@@ -333,7 +286,7 @@
     "faq-title": "Συχνές Ερωτήσεις",
     "faq-list": `<li><b>Μπορώ να επαναλάβω κομμάτια;</b> Ναι, με το κουμπί ή τα χειριστήρια audio.</li>
       <li><b>Λειτουργεί offline;</b> Όχι, η μουσική μεταδίδεται από τον server.</li>
-      <li><b>Μπορώ να προσθέσω δική μου μουσική;</b> Όχι ακόμα—πείτε μας αν θέλετε!</li>`,
+      <li><b>Μπορώ να προσθέσω δική μου μουσική;</b> Όχι ακόμα—πείτε μας αν το θέλετε!</li>`,
     "howto-title": '<i class="fa fa-music"></i> Πώς να χρησιμοποιήσετε τη Μουσική Συγκέντρωσης',
     "howto-steps": `<li><b>Επιλέξτε playlist:</b> Μουσική για συγκέντρωση ή χαλάρωση.</li>
       <li><b>Παίξτε & ρυθμίστε ένταση:</b> Χρησιμοποιήστε τα χειριστήρια για αναπαραγωγή/ένταση.</li>
@@ -413,55 +366,89 @@
   }
 };
 
+    // language display names for the indicator (kept for internal use if needed)
+    const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
 
-    function updateDropdownDirection() {
-      const lang = document.getElementById("focus-lang-select").value;
-      document.querySelector('.language-select').style.textAlign = (lang === "ar") ? "left" : "right";
+    // Source-of-truth language (set by index.html) stored under 'timerhavenLang'
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'en';
+        return (l && l.slice(0,2)) || 'en';
+      } catch (e) {
+        return 'en';
+      }
     }
 
-    function updateFocusMusicLanguage() {
-      const lang = document.getElementById("focus-lang-select").value;
-      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
-      updateDropdownDirection();
-      document.getElementById("language-label").textContent = focusMusicTranslations[lang]["language-label"];
-      document.getElementById("back-link").textContent = focusMusicTranslations[lang]["back-link"];
-      document.getElementById("tool-title").innerHTML = `<i class="fa fa-music"></i> ${focusMusicTranslations[lang]["tool-title"]}`;
-      document.getElementById("tool-help").textContent = focusMusicTranslations[lang]["tool-help"];
-      document.getElementById("music-label").textContent = focusMusicTranslations[lang]["music-label"];
-      document.getElementById("music-select").options[0].text = focusMusicTranslations[lang]["music-white"];
-      document.getElementById("music-select").options[1].text = focusMusicTranslations[lang]["music-rain"];
-      document.getElementById("music-select").options[2].text = focusMusicTranslations[lang]["music-alpha"];
-      document.getElementById("music-select").options[3].text = focusMusicTranslations[lang]["music-classical"];
-      document.getElementById("music-select").options[4].text = focusMusicTranslations[lang]["music-ocean"];
-      document.getElementById("music-select").options[5].text = focusMusicTranslations[lang]["music-cafe"];
-      document.getElementById("loop-label-text").textContent = focusMusicTranslations[lang]["loop-label"];
-      document.getElementById("play-btn").textContent = focusMusicTranslations[lang]["play"];
-      document.getElementById("play-btn").onclick = playMusic;
-      document.getElementById("stop-btn").textContent = focusMusicTranslations[lang]["stop"];
-      document.getElementById("stop-btn").onclick = stopMusic;
-      document.getElementById("faq-title").textContent = focusMusicTranslations[lang]["faq-title"];
-      document.getElementById("faq-list").innerHTML = focusMusicTranslations[lang]["faq-list"];
-      document.getElementById("howto-title").innerHTML = focusMusicTranslations[lang]["howto-title"];
-      document.getElementById("howto-steps").innerHTML = focusMusicTranslations[lang]["howto-steps"];
-      document.getElementById("howto-article-btn").textContent = focusMusicTranslations[lang]["howto-article-btn"];
-      document.getElementById("howto-article-btn").href = focusMusicTranslations[lang]["howto-article-link"];
-      document.getElementById("tips-title").innerHTML = focusMusicTranslations[lang]["tips-title"];
-      document.getElementById("tips-list").innerHTML = focusMusicTranslations[lang]["tips-list"];
-      document.getElementById("tips-article-btn").textContent = focusMusicTranslations[lang]["tips-article-btn"];
-      document.getElementById("tips-article-btn").href = focusMusicTranslations[lang]["tips-article-link"];
+    // Apply translations to the page based on timerhavenLang
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0,2);
+      const t = focusMusicTranslations[lang] || focusMusicTranslations['en'];
+
+      // RTL support
+      document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      // Main UI
+      const back = document.getElementById('back-link');
+      if (back) back.textContent = t['back-link'] || '';
+
+      const toolTitle = document.getElementById('tool-title');
+      if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-music"></i> ${t['tool-title'] || ''}`;
+
+      const help = document.getElementById('tool-help');
+      if (help) help.textContent = t['tool-help'] || '';
+
+      // Music selector labels
+      const musicLabel = document.getElementById('music-label');
+      if (musicLabel) musicLabel.textContent = t['music-label'] || '';
+
+      const ms = document.getElementById('music-select');
+      if (ms && ms.options) {
+        ms.options[0].text = t['music-white'] || 'White Noise';
+        ms.options[1].text = t['music-rain'] || 'Rain';
+        ms.options[2].text = t['music-alpha'] || 'Alpha Waves';
+        ms.options[3].text = t['music-classical'] || 'Classical';
+        ms.options[4].text = t['music-ocean'] || 'Ocean Waves';
+        ms.options[5].text = t['music-cafe'] || 'Cafe Ambience';
+      }
+
+      const loopText = document.getElementById('loop-label-text');
+      if (loopText) loopText.textContent = t['loop-label'] || 'Loop track';
+
+      // Buttons
+      const playBtn = document.getElementById('play-btn');
+      const stopBtn = document.getElementById('stop-btn');
+      if (playBtn) playBtn.textContent = t['play'] || 'Play';
+      if (stopBtn) stopBtn.textContent = t['stop'] || 'Stop';
+
+      // FAQ / Howto / Tips
+      const faqTitle = document.getElementById('faq-title');
+      if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+      const faqList = document.getElementById('faq-list');
+      if (faqList) faqList.innerHTML = t['faq-list'] || '';
+
+      const howtoTitle = document.getElementById('howto-title');
+      const howtoSteps = document.getElementById('howto-steps');
+      if (howtoTitle) howtoTitle.innerHTML = t['howto-title'] || '';
+      if (howtoSteps) howtoSteps.innerHTML = t['howto-steps'] || '';
+      const howtoBtn = document.getElementById('howto-article-btn');
+      if (howtoBtn) { howtoBtn.textContent = t['howto-article-btn'] || ''; howtoBtn.href = t['howto-article-link'] || ''; }
+
+      const tipsTitle = document.getElementById('tips-title');
+      const tipsList = document.getElementById('tips-list');
+      const tipsBtn = document.getElementById('tips-article-btn');
+      if (tipsTitle) tipsTitle.innerHTML = t['tips-title'] || '';
+      if (tipsList) tipsList.innerHTML = t['tips-list'] || '';
+      if (tipsBtn) { tipsBtn.textContent = t['tips-article-btn'] || ''; tipsBtn.href = t['tips-article-link'] || ''; }
     }
 
-    document.getElementById("focus-lang-select").addEventListener("change", function() {
-      localStorage.setItem('focusMusicLang', this.value);
-      updateFocusMusicLanguage();
+    // React to language changes made on the main index (other tabs)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        applyLanguage((e.newValue || 'en').slice(0,2));
+      }
     });
 
-    document.addEventListener("DOMContentLoaded", function() {
-      const savedLang = localStorage.getItem('focusMusicLang') || 'en';
-      document.getElementById('focus-lang-select').value = savedLang;
-      updateFocusMusicLanguage();
-    });
-
+    // Playback controls
     function playMusic() {
       const sel = document.getElementById("music-select").value;
       const audio = document.getElementById("focus-audio");
@@ -469,7 +456,7 @@
       audio.loop = document.getElementById("music-loop").checked;
       audio.style.display = "block";
       audio.load();
-      audio.play();
+      audio.play().catch(()=>{ /* ignore play errors (autoplay policies) */ });
     }
     function stopMusic() {
       const audio = document.getElementById("focus-audio");
@@ -477,10 +464,23 @@
       audio.currentTime = 0;
       audio.style.display = "none";
     }
-    document.getElementById("music-loop").addEventListener("change", function() {
-      document.getElementById("focus-audio").loop = this.checked;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Apply language chosen on main index (timerhavenLang)
+      applyLanguage(getLang());
+
+      // Wire up play/stop and loop checkbox
+      const playBtn = document.getElementById('play-btn');
+      const stopBtn = document.getElementById('stop-btn');
+      const loopCb = document.getElementById('music-loop');
+      if (playBtn) playBtn.addEventListener('click', playMusic);
+      if (stopBtn) stopBtn.addEventListener('click', stopMusic);
+      if (loopCb) loopCb.addEventListener('change', function() {
+        document.getElementById("focus-audio").loop = this.checked;
+      });
     });
   </script>
+
 <footer>
   &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
   <a href="privacy.html">Privacy Policy</a> &bull;

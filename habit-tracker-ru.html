@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Трекер привычек — TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Отслеживайте ежедневные привычки и формируйте новые рутины.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* consistent styling */
+    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; }
+    .main-container{ max-width:1200px; margin:2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
+    .center-row{ display:flex; gap:2em; width:100%; justify-content:center; align-items:flex-start; }
+    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef; width:340px; min-width:220px; max-width:340px; min-height:500px; flex:1 1 340px; display:flex; flex-direction:column; padding:2em 1.3em 1em; box-sizing:border-box; text-align:left; overflow:hidden; }
+    .tool-card{ max-width:410px; min-width:240px; padding:2em 1.5em 1em; position:relative; z-index:1; }
+    .habit-form{ margin-bottom:1em; display:flex; gap:.5em; }
+    .habit-item{ background:#f7fafc; border-radius:7px; padding:.6em .8em; margin-bottom:.6em; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .dot{ width:15px; height:15px; border-radius:50%; display:inline-block; background:#e0e7ef; border:1px solid #d0d0d0; }
+    .dot.done{ background:#43cea2; border:1.5px solid #185a9d; }
+    .dot.today{ border:2px solid #43cea2; }
+    .stats-bar{ background:#f6fbfa; border-radius:10px; margin-bottom:1.2em; padding:.7em 1em; font-size:1.05em; font-weight:600; color:#185a9d; display:flex; gap:2em; align-items:center; justify-content:space-between; }
+    .banner{ background:linear-gradient(90deg,#43cea2 0%,#185a9d 100%); color:#fff; border-radius:10px; font-size:1.11em; font-weight:600; text-align:center; margin-bottom:1em; padding:.7em .8em; }
+    .faq-section{ margin-top:1.1em; margin-bottom:0.3em; font-size:1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; }
+    @media (max-width:1100px){ .main-container{padding:0 8px;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
+    @media (max-width:800px){ .center-row{flex-direction:column;align-items:center;} .article-card{display:none!important;} .howto-mobile, .tips-mobile { display:block !important; } }
+    @media (min-width:801px){ .howto-mobile, .tips-mobile { display:none !important; } }
+    details[open] summary::after{ content:" ▲"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" ▼"; font-size:.9em; }
+  </style>
+</head>
+<body>
+  <!-- language indicator removed -->
+
+  <div class="main-container">
+    <div class="center-row">
+      <div class="article-card">
+        <div><h2 id="howto-title"></h2><ol id="howto-steps"></ol></div>
+        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
+      </div>
+
+      <div class="tool-card">
+        <div id="banner" class="banner" style="display:none;"></div>
+        <a href="index.html" class="back-link" id="back-link"></a>
+        <h3 id="tool-title"></h3>
+        <div class="stats-bar" id="stats-bar"></div>
+
+        <form class="habit-form" id="habitForm">
+          <input type="text" id="habitInput" class="form-control" placeholder="">
+          <button type="submit" class="btn btn-success btn-sm" id="add-btn"></button>
+        </form>
+
+        <div id="habitList" class="habit-list"></div>
+
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title"></summary>
+          <ul id="faq-list" style="padding-left:1em;"></ul>
+        </details>
+
+        <!-- Removed the inline "Советы" block from inside the tool-card to avoid duplicate on desktop -->
+      </div>
+
+      <div class="article-card">
+        <div><h2 id="tips-title"></h2><ul id="tips-list"></ul></div>
+        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile-only tips collapsible (outside tool-card) -->
+  <details class="tips-mobile" id="tips-mobile" style="display:none;">
+    <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
+    <ul id="tips-mobile-list"></ul>
+  </details>
+
+<script>
+  const habitTranslations = {
+    ru: {
+      "language-label":"Язык:","back-link":"Назад в главное меню","tool-title":"Трекер привычек",
+      "habitInput":"Название привычки","add-btn":"Добавить","banner-all-done":"🎉 Все привычки выполнены сегодня! Отличная работа!",
+      "stats-tracked":"Отслеживается: ","stats-done":"Выполнено сегодня: ","stats-best":"Лучшая серия: ",
+      "howto-title":'<i class="fa fa-check-double"></i> Как пользоваться трекером привычек',
+      "howto-steps":`<li><b>Добавьте привычку:</b> Введите вашу ежедневную привычку и нажмите Добавить.</li>
+        <li><b>Отметить как сделанное:</b> Когда вы выполнили привычку, нажмите кнопку Выполнено.</li>
+        <li><b>Удалить/архивировать:</b> Удаляйте или архивируйте ненужные привычки.</li>
+        <li><b>Повторять ежедневно:</b> Возвращайтесь каждый день для обновления прогресса.</li>`,
+      "howto-article-btn":"Читать полностью","howto-article-link":"habit-how-to-ru.html",
+      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по привычкам',
+      "tips-list":`<li><b>Начинайте с малого:</b> Легкие привычки быстрее приживаются.</li>
+        <li><b>Отслеживайте ежедневно:</b> Постоянство — ключ к успеху.</li>
+        <li><b>Отмечайте прогресс:</b> Маленькие победы поддерживают мотивацию.</li>`,
+      "tips-article-btn":"Читать полностью","tips-article-link":"habit-tips-ru.html",
+      "tips-mobile-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы',
+      "tips-mobile-list":`<li><b>Начинайте с малого:</b> Постепенно увеличивайте.</li>
+        <li><b>Следите за сериями:</b> Отслеживание мотивирует.</li>
+        <li><b>Добавьте напоминания:</b> Используйте календарные оповещения.</li>`,
+      "faq-title":"Часто задаваемые вопросы",
+      "faq-list":`<li><b>Сохраняются ли привычки?</b> Да, в браузере.</li>
+        <li><b>Можно ли отслеживать несколько привычек?</b> Да.</li>
+        <li><b>Отображаются ли серии?</b> Да.</li>`,
+      "mark-done":"Отметить","done-today":"Выполнено сегодня","streak":"Серия: ","longest":"Лучшее: ",
+      "archive":"Архивировать","unarchive":"Восстановить","delete":"Удалить","no-habits":"Пока нет привычек."
+    }
+  };
+
+  const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
+
+  function getLang(){ try{ const l=localStorage.getItem('timerhavenLang')||'ru'; return (l && l.slice(0,2))||'ru'; }catch(e){ return 'ru'; } }
+
+  function applyLanguage(lang){ 
+    lang=(lang||getLang()).slice(0,2); 
+    const t=habitTranslations[lang]||habitTranslations['ru']; 
+    document.body.dir=(lang==="ar")?"rtl":"ltr"; 
+
+    // language indicator elements not present — calls guarded by existence checks
+    const labelEl=document.getElementById('language-label'); if(labelEl) labelEl.textContent=t['language-label']; 
+    const nameEl=document.getElementById('language-name'); if(nameEl) nameEl.textContent='Русский'; 
+
+    const back=document.getElementById('back-link'); if(back) back.textContent=t['back-link']; 
+    const toolTitle=document.getElementById('tool-title'); if(toolTitle) toolTitle.innerHTML=`<i class="fa fa-check-double"></i> ${t['tool-title']}`; 
+    const input=document.getElementById('habitInput'); if(input) input.placeholder=t['habitInput']; 
+    const addBtn=document.getElementById('add-btn'); if(addBtn) addBtn.textContent=t['add-btn']; 
+    const faqTitle=document.getElementById('faq-title'); if(faqTitle) faqTitle.textContent=t['faq-title']; 
+    const faqList=document.getElementById('faq-list'); if(faqList) faqList.innerHTML=t['faq-list']; 
+    const howtoTitle=document.getElementById('howto-title'); if(howtoTitle) howtoTitle.innerHTML=t['howto-title']; 
+    const howtoSteps=document.getElementById('howto-steps'); if(howtoSteps) howtoSteps.innerHTML=t['howto-steps']; 
+    const howtoBtn=document.getElementById('howto-article-btn'); if(howtoBtn){ howtoBtn.textContent=t['howto-article-btn']; howtoBtn.href=t['howto-article-link']; } 
+    const tipsTitle=document.getElementById('tips-title'); if(tipsTitle) tipsTitle.innerHTML=t['tips-title']; 
+    const tipsList=document.getElementById('tips-list'); if(tipsList) tipsList.innerHTML=t['tips-list']; 
+    const tipsBtn=document.getElementById('tips-article-btn'); if(tipsBtn){ tipsBtn.textContent=t['tips-article-btn']; tipsBtn.href=t['tips-article-link']; } 
+    const tipsMobileTitle=document.getElementById('tips-mobile-title'); if(tipsMobileTitle) tipsMobileTitle.innerHTML=t['tips-mobile-title']; 
+    const tipsMobileList=document.getElementById('tips-mobile-list'); if(tipsMobileList) tipsMobileList.innerHTML=t['tips-mobile-list']; 
+
+    renderHabits();
+
+    // show mobile-only tips only on small screens
+    const mobileDetails = document.getElementById('tips-mobile');
+    if (mobileDetails) mobileDetails.style.display = (window.innerWidth < 801) ? 'block' : 'none';
+  }
+
+  function getTodayStr(){ const d=new Date(); return d.getFullYear()+"-"+(d.getMonth()+1).toString().padStart(2,"0")+"-"+d.getDate().toString().padStart(2,"0"); }
+  function lastNDays(n){ const arr=[]; for(let i=n-1;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); arr.push(d.getFullYear()+"-"+(d.getMonth()+1).toString().padStart(2,"0")+"-"+d.getDate().toString().padStart(2,"0")); } return arr; }
+
+  let habits = JSON.parse(localStorage.getItem('habits') || '[]');
+  function saveHabits(){ localStorage.setItem('habits', JSON.stringify(habits)); }
+  function resetHabitsIfNeeded(){ const today=getTodayStr(); let changed=false; habits.forEach(h=>{ if(!h.history) h.history=[]; if(h.lastChecked!==today){ h.doneToday=false; h.lastChecked=today; changed=true; }}); if(changed) saveHabits(); }
+
+  function renderHabits(){
+    resetHabitsIfNeeded();
+    const lang=getLang(); const t=habitTranslations[lang]||habitTranslations['ru']; const list=document.getElementById('habitList'); list.innerHTML=''; const today=getTodayStr(); let doneTodayCount=0; let bestStreak=0; let activeCount=0; habits.forEach(h=>{ if(!h.archived) activeCount++; });
+    if(habits.length===0||activeCount===0){ list.innerHTML=`<div style="color:#888;">${t["no-habits"]}</div>`; }
+    habits.forEach((habit, idx)=>{ if(habit.archived) return; let streak=habit.streak||0; let longest=habit.longest||streak; bestStreak=Math.max(bestStreak,longest); if(!habit.history) habit.history=[]; let historyDots=''; lastNDays(7).forEach(date=>{ const done=habit.history.includes(date); historyDots+=`<span class="dot${done?' done':''}${date===today?' today':''}" title="${date}"></span>`; }); const isDone=habit.doneToday; if(isDone) doneTodayCount++; list.innerHTML+=`<div class="habit-item"><span><b>${habit.name}</b><span class="habit-meta">${t["streak"]}${streak} ${t["longest"]}${longest}</span><span class="habit-history">${historyDots}</span></span><button class="btn btn-outline-${isDone?'secondary':'success'} btn-sm habit-btn" onclick="markDone(${idx})" ${isDone?'disabled':''}>${isDone? t["done-today"]: t["mark-done"]}</button><button class="archive-btn${habit.archived?' archived':''}" onclick="archiveHabit(${idx})">${habit.archived? t["unarchive"]: t["archive"]}</button><button class="btn btn-outline-danger btn-sm habit-btn" onclick="deleteHabit(${idx})"><i class="fa fa-trash"></i> ${t["delete"]}</button></div>`; });
+    renderStats(activeCount, doneTodayCount, bestStreak); renderBanner(activeCount, doneTodayCount);
+  }
+  function renderStats(tracked, done, best){ const t=habitTranslations[getLang()]; document.getElementById("stats-bar").innerHTML = `${t["stats-tracked"]}${tracked} &bull; ${t["stats-done"]}${done} &bull; ${t["stats-best"]}${best}`; }
+  function renderBanner(tracked, done){ const t=habitTranslations[getLang()]; const banner=document.getElementById("banner"); if(tracked>0 && done===tracked){ banner.textContent=t["banner-all-done"]; banner.style.display="block"; } else { banner.style.display="none"; } }
+
+  document.getElementById('habitForm').addEventListener('submit', function(e){ e.preventDefault(); const name=document.getElementById('habitInput').value.trim(); if(!name) return; habits.push({ name, streak:0, longest:0, doneToday:false, lastChecked:getTodayStr(), history:[], archived:false }); saveHabits(); document.getElementById('habitInput').value=''; renderHabits(); });
+
+  window.markDone=function(idx){ const today=getTodayStr(); if(!habits[idx].doneToday){ habits[idx].doneToday=true; habits[idx].lastChecked=today; habits[idx].streak=(habits[idx].streak||0)+1; habits[idx].longest=Math.max(habits[idx].longest||0,habits[idx].streak); if(!habits[idx].history) habits[idx].history=[]; if(!habits[idx].history.includes(today)) habits[idx].history.push(today); saveHabits(); renderHabits(); } }
+  window.archiveHabit=function(idx){ habits[idx].archived=!habits[idx].archived; saveHabits(); renderHabits(); }
+  window.deleteHabit=function(idx){ habits.splice(idx,1); saveHabits(); renderHabits(); }
+
+  window.addEventListener('storage', function(e){ if(e.key==='timerhavenLang'){ const lang=(e.newValue||getLang()).slice(0,2); applyLanguage(lang); }});
+  document.addEventListener('DOMContentLoaded', function(){ applyLanguage(getLang()); renderHabits(); window.addEventListener('resize', function(){ applyLanguage(getLang()); }); });
+</script>
+
+<footer>
+  &copy; 2025 TimerHaven. Все инструменты бесплатны и защищают приватность.<br>
+  <a href="privacy.html">Политика конфиденциальности</a> &bull; <a href="terms.html">Условия</a> &bull; <a href="contact.html">Контакты</a>
+</footer>
+</body>
+</html>

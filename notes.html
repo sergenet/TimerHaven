@@ -1,123 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Notes — TimerHaven</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Take quick notes and organize your thoughts. Learn how to use Notes, get productivity tips, FAQs, and read expert articles.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Take quick notes and organize your thoughts. Learn how to use Notes, get productivity tips, FAQs, and read expert articles." />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
-    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 370px; height: auto; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
+    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 200px; height: auto; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
     .article-card h2 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; }
     .article-card ul, .article-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; }
-    .article-card .btn {
-      white-space: normal;
-      word-break: break-word;
-      font-size: 1em;
-      padding: 0.4em 0.6em;
-      min-width: 0;
-      width: 100%;
-      box-sizing: border-box;
-      margin-top: 0.6em;
-      border-radius: 8px;
-      font-weight: 600;
-    }
+    .article-card .btn { white-space: normal; word-break: break-word; font-size: 1em; padding: 0.4em 0.6em; min-width: 0; width: 100%; box-sizing: border-box; margin-top: 0.6em; border-radius: 8px; font-weight: 600; }
     .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: left; position: relative; z-index: 1; }
     .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
     .back-link { display: inline-block; margin-bottom: 1em; color: #185a9d; text-decoration: none; font-weight: bold; font-size: 1em; }
     .back-link:hover { text-decoration: underline; color: #43cea2; }
     .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
     .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
-    .tip-section { margin-top: 0.5em; text-align: center; font-size: 1.08em; color: #43cea2; background: #f6fbfa; padding: 0.6em; border-radius: 8px; font-weight: 500; min-height: 2em; word-break: break-word; }
-    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; } }
-    @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; } }
-    details[open] summary::after { content: " ▲"; font-size: 0.9em; }
-    details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
-    details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
-    .howto-mobile { margin-bottom: 1em; }
-    .tips-mobile { margin-top: 1.5em; margin-bottom: 0.5em; }
     .notes-form { margin-bottom: 1em; display: flex; gap: 0.5em; }
     .notes-list { margin-bottom: 1em; }
-    .note-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display: flex; align-items: center; justify-content: space-between; }
+    .note-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
     .note-meta { font-size: 0.9em; color: #888; margin-right: 1em; }
     .note-btn { font-size: 0.9em; margin-left: 0.6em; }
     .note-pinned { font-weight: bold; color: #185a9d; margin-right: 0.6em; }
-    /* Language selector style */
-    .lang-selector { position:fixed;top:20px;right:26px;z-index:100; background:#f4f7fb; border-radius:8px; box-shadow:0 2px 8px #e0e7ef; padding:8px 16px; border: 1px solid #e0e7ef; }
-    .lang-selector select {
-      background: #fff;
-      border-radius: 6px;
-      border: 1px solid #185a9d;
-      color: #185a9d;
-      font-weight: 500;
-      padding: 2px 8px;
-      font-size: 1em;
-      outline: none;
-      margin-left: 0.5em;
-    }
-    .lang-selector label {
-      color: #185a9d;
-      font-weight: bold;
-      margin-right: 0.5em;
-      font-size: 1em;
-    }
+
+    /* language indicator removed */
   </style>
 </head>
 <body>
-  <!-- Single Language Selector, styled -->
-  <div class="lang-selector">
-    <label for="language-select">Language:</label>
-    <select id="language-select" onchange="setLanguage(this.value)">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="es">Español</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="el">Ελληνικά</option>
-      <option value="ar">العربية</option>
-    </select>
-  </div>
   <div class="main-container">
     <div class="center-row">
       <!-- Article 1 (desktop only) -->
       <div class="article-card" id="howto-article">
         <div>
           <h2 style="color:#185a9d;"><i class="fa fa-note-sticky"></i> <span id="howto-title"></span></h2>
-          <ol id="howto-list"></ol>
+          <ol id="howto-list" aria-live="polite"></ol>
         </div>
         <a id="howto-link" href="notes-how-to.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;"></a>
       </div>
-      <!-- Tool card -->
+
+      <!-- Tool card (middle) - removed the extra "How to Use" and "Tips" blocks from here -->
       <div class="tool-card">
-        <!-- How to Use (mobile only, collapsible) -->
-        <details class="howto-mobile" id="howto-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;"><i class="fa fa-note-sticky"></i> <span id="howto-title-mobile"></span></h4></summary>
-          <ol id="howto-list-mobile"></ol>
-        </details>
         <a href="index.html" class="back-link" id="back-main"></a>
         <h3><i class="fa fa-note-sticky"></i> <span id="notes-title"></span></h3>
+
         <div class="notes-section">
           <form class="notes-form" id="notesForm">
-            <input type="text" id="noteInput" class="form-control" placeholder="" style="max-width:180px;">
-            <button type="submit" class="btn btn-success btn-sm" id="add-note-btn"></button>
+            <input type="text" id="noteInput" class="form-control" placeholder="" style="max-width:260px;" aria-label="New note">
+            <button type="submit" class="btn btn-success btn-sm" id="add-note-btn" aria-label="Add note"></button>
           </form>
-          <div id="notesList" class="notes-list"></div>
+          <div id="notesList" class="notes-list" aria-live="polite"></div>
         </div>
+
         <details class="faq-section" id="faq-section">
           <summary id="faq-title"></summary>
           <ul style="padding-left: 1em;" id="faq-list"></ul>
         </details>
-        <!-- Tips (mobile only, collapsible) -->
-        <details class="tips-mobile" id="tips-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> <span id="tips-title-mobile"></span></h4></summary>
-          <ul id="tips-list-mobile"></ul>
-        </details>
       </div>
+
       <!-- Article 2 (desktop only) -->
       <div class="article-card" id="tips-article">
         <div>
@@ -128,10 +72,12 @@
       </div>
     </div>
   </div>
+
   <script>
-    // Translation dictionary for 7 languages
+    // full translations preserved
     const translations = {
       en: {
+        "language-label": "Language:",
         howtoTitle: "How to Use Notes",
         howtoLink: "Read Full Article",
         howtoSteps: [
@@ -159,6 +105,7 @@
         tipsTitleMobile: "Tips"
       },
       fr: {
+        "language-label": "Langue :",
         howtoTitle: "Comment utiliser les Notes",
         howtoLink: "Lire l'article complet",
         howtoSteps: [
@@ -186,6 +133,7 @@
         tipsTitleMobile: "Conseils"
       },
       es: {
+        "language-label": "Idioma:",
         howtoTitle: "Cómo usar las Notas",
         howtoLink: "Leer el artículo completo",
         howtoSteps: [
@@ -213,6 +161,7 @@
         tipsTitleMobile: "Consejos"
       },
       de: {
+        "language-label": "Sprache:",
         howtoTitle: "So nutzen Sie Notizen",
         howtoLink: "Vollständigen Artikel lesen",
         howtoSteps: [
@@ -240,6 +189,7 @@
         tipsTitleMobile: "Tipps"
       },
       ru: {
+        "language-label": "Язык:",
         howtoTitle: "Как использовать Заметки",
         howtoLink: "Читать всю статью",
         howtoSteps: [
@@ -267,6 +217,7 @@
         tipsTitleMobile: "Советы"
       },
       el: {
+        "language-label": "Γλώσσα:",
         howtoTitle: "Πώς να χρησιμοποιήσετε τις Σημειώσεις",
         howtoLink: "Διαβάστε ολόκληρο το άρθρο",
         howtoSteps: [
@@ -294,6 +245,7 @@
         tipsTitleMobile: "Συμβουλές"
       },
       ar: {
+        "language-label": "اللغة:",
         howtoTitle: "كيفية استخدام الملاحظات",
         howtoLink: "اقرأ المقال الكامل",
         howtoSteps: [
@@ -322,113 +274,149 @@
       }
     };
 
-    // Set language and update UI
-    function setLanguage(lang) {
-      const t = translations[lang] || translations['en'];
-      // Article 1 (desktop)
-      document.getElementById('howto-title').innerHTML = t.howtoTitle;
-      document.getElementById('howto-list').innerHTML = t.howtoSteps.map(s => `<li>${s}</li>`).join('');
-      document.getElementById('howto-link').innerHTML = t.howtoLink;
-      document.getElementById('howto-link').href = lang === 'en' ? 'notes-how-to.html' : `notes-how-to-${lang}.html`;
-
-      // Article 2 (desktop)
-      document.getElementById('tips-title').innerHTML = t.tipsTitle;
-      document.getElementById('tips-list').innerHTML = t.tipsItems.map(s => `<li>${s}</li>`).join('');
-      document.getElementById('tips-link').innerHTML = t.tipsLink;
-      document.getElementById('tips-link').href = lang === 'en' ? 'notes-tips.html' : `notes-tips-${lang}.html`;
-
-      // Mobile sections
-      document.getElementById('howto-title-mobile').innerHTML = t.howtoTitle;
-      document.getElementById('howto-list-mobile').innerHTML = t.howtoSteps.map(s => `<li>${s}</li>`).join('');
-      document.getElementById('tips-title-mobile').innerHTML = t.tipsTitleMobile;
-      document.getElementById('tips-list-mobile').innerHTML = t.tipsItems.map(s => `<li>${s}</li>`).join('');
-
-      // Tool card
-      document.getElementById('back-main').innerHTML = t.backMain;
-      document.getElementById('notes-title').innerHTML = t.notesTitle;
-      document.getElementById('add-note-btn').innerHTML = t.addNoteBtn;
-      document.getElementById('noteInput').placeholder = t.noteInputPlaceholder;
-      document.getElementById('faq-title').innerHTML = t.faqTitle;
-      document.getElementById('faq-list').innerHTML = t.faqItems.map(s => `<li>${s}</li>`).join('');
-
-      // RTL fix for Arabic
-      if(lang === 'ar') {
-        document.body.setAttribute('dir', 'rtl');
-      } else {
-        document.body.removeAttribute('dir');
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'en';
+        return (l && l.slice(0,2)) || 'en';
+      } catch (e) {
+        return 'en';
       }
     }
+    const langNames = { en: "English", fr: "Français", es: "Español", de: "Deutsch", ru: "Русский", el: "Ελληνικά", ar: "العربية" };
 
-    // Set initial language based on selector or browser
-    document.getElementById('language-select').addEventListener('change', function() {
-      setLanguage(this.value);
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0,2);
+      const t = translations[lang] || translations['en'];
+
+      // RTL support
+      if (lang === 'ar') document.body.dir = 'rtl'; else document.body.removeAttribute('dir');
+
+      // Article 1 (left)
+      document.getElementById('howto-title').innerHTML = t.howtoTitle || '';
+      document.getElementById('howto-list').innerHTML = (t.howtoSteps || []).map(s => `<li>${s}</li>`).join('');
+      document.getElementById('howto-link').innerHTML = t.howtoLink || '';
+      document.getElementById('howto-link').href = (lang === 'en') ? 'notes-how-to.html' : `notes-how-to-${lang}.html`;
+
+      // Article 2 (right)
+      document.getElementById('tips-title').innerHTML = t.tipsTitle || '';
+      document.getElementById('tips-list').innerHTML = (t.tipsItems || []).map(s => `<li>${s}</li>`).join('');
+      document.getElementById('tips-link').innerHTML = t.tipsLink || '';
+      document.getElementById('tips-link').href = (lang === 'en') ? 'notes-tips.html' : `notes-tips-${lang}.html`;
+
+      // Tool card (middle) — no HowTo or Tips blocks here anymore
+      document.getElementById('back-main').innerHTML = t.backMain || '';
+      document.getElementById('notes-title').innerHTML = t.notesTitle || '';
+      const addBtn = document.getElementById('add-note-btn');
+      if (addBtn) addBtn.innerHTML = t.addNoteBtn || 'Add Note';
+      const noteInput = document.getElementById('noteInput');
+      if (noteInput) noteInput.placeholder = t.noteInputPlaceholder || '';
+      document.getElementById('faq-title').innerHTML = t.faqTitle || '';
+      document.getElementById('faq-list').innerHTML = (t.faqItems || []).map(s => `<li>${s}</li>`).join('');
+    }
+
+    // listen for main-menu language changes
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        applyLanguage((e.newValue || 'en').slice(0,2));
+      }
     });
 
-    function detectLang() {
-      const lang = navigator.language.substr(0,2);
-      if(Object.keys(translations).includes(lang)) {
-        document.getElementById('language-select').value = lang;
-        setLanguage(lang);
-      } else {
-        setLanguage('en');
-      }
+    // Notes implementation (storage + render)
+    let notes = [];
+    try {
+      notes = JSON.parse(localStorage.getItem('notesData') || '[]');
+      if (!Array.isArray(notes)) notes = [];
+    } catch (e) {
+      notes = [];
     }
-    detectLang();
 
-    // Notes code: Save, pin, delete, display notes
-    let notes = JSON.parse(localStorage.getItem('notesData') || '[]');
-    function saveNotes() { localStorage.setItem('notesData', JSON.stringify(notes)); }
+    function saveNotes() {
+      try { localStorage.setItem('notesData', JSON.stringify(notes)); } catch (e) {}
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;');
+    }
+
     function renderNotes() {
       const list = document.getElementById('notesList');
+      if (!list) return;
       list.innerHTML = '';
-      if (notes.length === 0) {
+      if (!notes || notes.length === 0) {
         list.innerHTML = '<div style="color:#888;">No notes yet.</div>';
         return;
       }
       notes.forEach((note, idx) => {
-        const pinned = note.pinned ? '<span class="note-pinned"><i class="fa fa-thumbtack"></i></span>' : '';
+        const pinnedHtml = note.pinned ? `<span class="note-pinned" aria-hidden="true"><i class="fa fa-thumbtack"></i></span>` : '';
+        const textHtml = escapeHtml(note.text);
+        const dateHtml = escapeHtml(note.date || '');
         list.innerHTML += `
-          <div class="note-item">
-            ${pinned}
-            <span>${note.text}</span>
-            <span class="note-meta">${note.date}</span>
-            <button class="btn btn-outline-${note.pinned ? 'secondary' : 'info'} btn-sm note-btn" onclick="pinNote(${idx})" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>
-            <button class="btn btn-outline-danger btn-sm note-btn" onclick="deleteNote(${idx})"><i class="fa fa-trash"></i></button>
+          <div class="note-item" role="article" aria-label="note-${idx}">
+            <div style="display:flex;align-items:center;gap:.6rem;min-width:0;">
+              ${pinnedHtml}
+              <div style="min-width:0;overflow:hidden;">
+                <div style="white-space:pre-wrap;word-break:break-word;">${textHtml}</div>
+                <div class="note-meta" style="margin-top:6px;">${dateHtml}</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:.4rem;align-items:center;">
+              <button class="btn btn-outline-${note.pinned ? 'secondary' : 'info'} btn-sm note-btn" onclick="pinNote(${idx})" aria-label="Pin or unpin note ${idx}"><i class="fa fa-thumbtack"></i></button>
+              <button class="btn btn-outline-danger btn-sm note-btn" onclick="deleteNote(${idx})" aria-label="Delete note ${idx}"><i class="fa fa-trash"></i></button>
+            </div>
           </div>
         `;
       });
     }
-    document.getElementById('notesForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const text = document.getElementById('noteInput').value.trim();
-      if (!text) return;
-      notes.unshift({ text, date: new Date().toLocaleString(), pinned: false });
-      saveNotes();
-      document.getElementById('noteInput').value = "";
+
+    // DOM handlers are attached after DOMContentLoaded
+    function attachHandlers() {
+      const form = document.getElementById('notesForm');
+      if (form) {
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          const input = document.getElementById('noteInput');
+          if (!input) return;
+          const text = input.value.trim();
+          if (!text) return;
+          notes.unshift({ text, date: new Date().toLocaleString(), pinned: false });
+          saveNotes();
+          input.value = '';
+          renderNotes();
+        });
+      }
+      // expose functions globally for inline onclick
+      window.deleteNote = function(idx){
+        notes.splice(idx, 1);
+        saveNotes();
+        renderNotes();
+      };
+      window.pinNote = function(idx){
+        if (!notes[idx]) return;
+        notes[idx].pinned = !notes[idx].pinned;
+        if (notes[idx].pinned) {
+          const pn = notes.splice(idx, 1)[0];
+          notes.unshift(pn);
+        }
+        saveNotes();
+        renderNotes();
+      };
+    }
+
+    // initialize after DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // apply language from main site
+      applyLanguage(getLang());
+      attachHandlers();
       renderNotes();
     });
-    window.deleteNote = function(idx){
-      notes.splice(idx, 1);
-      saveNotes();
-      renderNotes();
-    }
-    window.pinNote = function(idx){
-      notes[idx].pinned = !notes[idx].pinned;
-      // Move pinned note to top
-      if (notes[idx].pinned) {
-        const pinnedNote = notes.splice(idx, 1)[0];
-        notes.unshift(pinnedNote);
-      }
-      saveNotes();
-      renderNotes();
-    }
-    renderNotes();
   </script>
-<footer>
-  &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
-  <a href="privacy.html">Privacy Policy</a> &bull;
-  <a href="terms.html">Terms</a> &bull;
-  <a href="contact.html">Contact</a>
-</footer>
+
+  <footer>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
+    <a href="privacy.html">Privacy Policy</a> &bull;
+    <a href="terms.html">Terms</a> &bull;
+    <a href="contact.html">Contact</a>
+  </footer>
 </body>
 </html>

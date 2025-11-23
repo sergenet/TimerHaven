@@ -1,0 +1,148 @@
+/* Mobile/tool centering fix — prevents vw + container padding overflow */
+html, body { -webkit-text-size-adjust: 100%; }
+.main-container, .main-container * { box-sizing: border-box; }
+.main-container { overflow-x: hidden; -webkit-overflow-scrolling: touch; }
+
+/* Ensure the main tool card centers properly on mobile and respects padding */
+.tool-card {
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Strong centering using transform so parent padding/overflow won't offset the card */
+@media (max-width: 800px) {
+  .article-card { display: none; } /* kept for compatibility */
+  .tool-card {
+    width: 95%;
+    max-width: 540px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .main-container {
+    padding: 0.75em 0.5em;
+    min-height: 100vh;
+    height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* extra safety for very small phones */
+@media (max-width: 420px) {
+  .tool-card { width: 92%; max-width: 420px; left: 50%; transform: translateX(-50%); }
+}
+
+/* Hide the lh-debug overlay on mobile if accidentally left in -->
+   This prevents debug overlay from covering the bottom area */
+@media (max-width: 800px) {
+  #lh-debug { display: none !important; visibility: hidden !important; pointer-events: none !important; }
+}
+
+/* Panel overlay defaults (desktop fallback: use the inline panel but not full-screen) */
+#tool-panel-overlay { display:none; }
+@media (max-width: 900px) {
+  #tool-panel-overlay { display:none; } /* controlled by inline script; keep CSS safe */
+}
+
+/* Minor improvements for list overflow inside panel */
+#tool-panel .panel-body { word-break: break-word; -webkit-overflow-scrolling: touch; }
+
+/* Accessibility: ensure focus outlines are visible for keyboard users */
+:focus { outline: 3px solid rgba(24,90,157,0.15); outline-offset: 2px; }
+
+/* ------------------- Mobile UX fixes requested ------------------- */
+/* Ensure article cards are not shown in the stacked mobile layout.
+   Use !important here so any earlier CSS that forces display won't override. */
+@media (max-width: 800px) {
+  /* hide left/right article content (completely remove from flow) */
+  .article-card, #left-article, #right-article,
+  .article-card *, #left-article *, #right-article * {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Make the tool column appear first when stacked (keeps tool visible) */
+  .tool-col { order: -1 !important; }
+
+  /* Compact, equal-sized top buttons for Tips and How‑to */
+  .tool-top-actions {
+    display: flex;
+    gap: .35rem;
+    justify-content: flex-start;
+    align-items: center;
+    /* sticky so they remain visible while scrolling the tool content */
+    position: sticky;
+    top: 8px;
+    z-index: 6;
+    background: transparent;
+    padding-top: 0.25rem;
+  }
+
+  .tool-top-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .36rem .9rem;     /* compact padding */
+    min-width: 96px;           /* small compact width */
+    max-width: 140px;
+    width: auto;               /* do NOT stretch full width */
+    white-space: nowrap;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: none;
+    transition: transform .14s ease, box-shadow .14s ease, opacity .12s ease;
+  }
+
+  /* Both Tips and How-to are colored (matching visual weight) */
+  .tool-top-actions .btn.tips {
+    background: linear-gradient(90deg,#43cea2,#185a9d) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(24,90,157,0.12) !important;
+  }
+  .tool-top-actions .btn.howto {
+    background: linear-gradient(90deg,#2bb7b7,#1e6aa7) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(16,70,110,0.10) !important;
+  }
+
+  /* Hover / active affordances (compact) */
+  .tool-top-actions .btn:focus { outline: 3px solid rgba(24,90,157,0.12) !important; outline-offset: 2px; }
+  .tool-top-actions .btn:hover,
+  .tool-top-actions .btn.active {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16,70,110,0.12);
+    opacity: 1;
+  }
+
+  /* Ensure the add button / input inside the tool don't force wide layout */
+  .clips-form input[type="text"], .clips-form .btn {
+    width: auto !important;
+  }
+}
+
+/* Small tweak for slightly larger small screens to maintain compactness */
+@media (min-width: 481px) and (max-width: 900px) {
+  .tool-top-actions .btn { min-width: 110px; padding: .42rem 1rem; font-size: 1rem; }
+}
+
+/* ------------------- Additional safe desktop fallbacks ------------------- */
+/* Keep the panel overlay hidden by default on desktop; script controls it on mobile */
+#tool-panel-overlay { display: none; }
+
+/* Ensure keyboard focusable controls keep visible outline on desktop as well */
+.tool-top-actions .btn:focus { box-shadow: 0 0 0 3px rgba(24,90,157,0.08); }
+
+/* End of merged mobile-enhancements.css */
+/* Merged: kept your original rules and replaced the mobile .tool-top-actions button rules
+   so both Tips and How-to are colored, compact and equal in size. */

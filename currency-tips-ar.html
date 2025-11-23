@@ -18,7 +18,8 @@
 </head>
 <body>
   <div class="container">
-    <a href="currency.html" class="back-link"><i class="fa fa-arrow-left"></i> العودة إلى محول العملات</a>
+    <!-- localized back link -->
+    <a href="currency-ar.html" class="back-link" id="back-to-tool" onclick="return goBackReplace(event);"><i class="fa fa-arrow-left"></i> العودة إلى محول العملات</a>
     <h1><i class="fa fa-lightbulb"></i> نصائح لتحويل العملات</h1>
     <p>
       قم بالتحويل بذكاء وتجنب المفاجآت بهذه النصائح:
@@ -37,9 +38,36 @@
       <li>التحويلات الكبيرة تستفيد من التوقيت الصحيح وتنبيهات الأسعار.</li>
     </ul>
     <p>
-      <a href="currency.html" class="btn btn-outline-primary btn-sm mt-3">العودة إلى محول العملات</a>
+      <a href="currency-ar.html" class="btn btn-outline-primary btn-sm mt-3" onclick="return goBackReplace(event);">العودة إلى محول العملات</a>
     </p>
   </div>
+
+  <script>
+    // Safety: rewrite any lingering generic currency.html hrefs to the localized page
+    (function rewriteBackLinks() {
+      try {
+        document.querySelectorAll('a[href]').forEach(a => {
+          const h = (a.getAttribute('href') || '').toLowerCase();
+          if (h === 'currency.html' || h === '/currency.html' || h.endsWith('/currency.html')) {
+            a.setAttribute('href', '/currency-ar.html');
+            a.href = location.origin + '/currency-ar.html';
+          }
+        });
+      } catch (e) { /* ignore */ }
+    })();
+
+    // Replace navigation helper: always navigate to the localized converter and replace history entry
+    function goBackReplace(e) {
+      try {
+        e.preventDefault();
+        window.location.replace('/currency-ar.html');
+        return false;
+      } catch (err) {
+        return true;
+      }
+    }
+  </script>
+
 <footer>
   &copy; 2025 TimerHaven. جميع الأدوات مجانية وتحترم الخصوصية.<br>
   <a href="privacy.html">سياسة الخصوصية</a> &bull;

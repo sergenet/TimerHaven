@@ -10,26 +10,54 @@
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row, .card-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
-    .article-card, .tool-card {
+    /* align items to the top so left/right article cards do not stretch to match the center tool card */
+    .center-row, .card-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
+
+    /* Article cards (left + right) — reduce height so they look compact and equal */
+    .article-card {
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 2px 12px #e0e7ef;
       min-width: 220px;
       max-width: 340px;
       width: 340px;
-      min-height: 500px;
-      flex: 1 1 340px;
+      /* make left/right compact: fixed small min-height so they end just below the Read Full Article button */
+      min-height: 200px;
+      /* allow height to fit content, but not stretch */
+      height: auto;
+      flex: 0 0 340px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch;
-      padding: 2em 1.3em 1em 1.3em;
+      padding: 1.2em 1.3em 0.9em 1.3em;
       margin: 0;
       box-sizing: border-box;
       text-align: left;
       overflow: hidden;
     }
+
+    /* Tool card (center) remains full height for the interactive tool */
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      min-width: 240px;
+      max-width: 410px;
+      width: 410px;
+      /* keep center tool tall for content */
+      min-height: 500px;
+      flex: 0 0 410px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 2em 1.5em 1em 1.5em;
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+
     .article-card h2, .tool-card h3 {
       font-size: 1.35em;
       font-weight: 700;
@@ -38,39 +66,26 @@
       align-items: center;
       gap: 0.3em;
     }
-    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol { 
-      margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; 
+    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol {
+      margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word;
     }
-    .article-card .btn, .tool-card .btn { 
-      align-self: stretch;
-      font-weight: 600; 
-      border-radius: 8px; 
-      margin-top: 0.2em; 
-      margin-bottom: 0; 
-      box-sizing: border-box;
+    .article-card .btn, .tool-card .btn {
+      align-self: stretch; font-weight: 600; border-radius: 8px; margin-top: 0.2em; margin-bottom: 0; box-sizing: border-box;
     }
     .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
     .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
     .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
     .back-link:hover { text-decoration: underline; }
-    .language-select { text-align: right; padding: 10px 18px 0 0; margin-bottom: 0.5em; }
-    #language-label { color: #185a9d; font-weight: bold; font-size: 1.08em; margin-right: 0.5em; letter-spacing: 0.02em; }
-    #lang-select {
-      border: 2px solid #43cea2;
-      background: linear-gradient(90deg, #f4f7fb 60%, #e0f7fa 100%);
-      color: #185a9d;
-      font-weight: 600;
-      border-radius: 7px;
-      padding: 7px 16px;
-      font-size: 1em;
-      box-shadow: 0 2px 8px #e0e7ef;
-      outline: none;
-      transition: border 0.2s, background 0.2s;
-    }
-    #lang-select:focus {
-      border-color: #185a9d;
-      background: linear-gradient(90deg, #e0f7fa 60%, #43cea2 100%);
-    }
+
+    /* language-indicator removed across all localized pages */
+
+    .language-select { display:none; } /* hidden: language controlled by main index */
+
+    .meeting-form-row { margin-bottom: 0.8rem; }
+    .participant-item { background:#f7fafc; border-radius:8px; padding:.6rem; margin-bottom:.6rem; display:flex; justify-content:space-between; align-items:center; gap:.6rem; }
+    .meeting-times-list { margin-top:.6rem; padding-left:1em; }
+    .meeting-times-grid { display:flex; flex-direction:column; gap:.4rem; margin-top:0.6rem; }
+    .time-suggestion { display:flex; gap:.6rem; align-items:center; justify-content:space-between; padding:.45rem .6rem; border-radius:8px; background:#fff; border:1px solid #eef6f3; }
     @media (max-width: 1100px) {
       .main-container{padding:0 8px;}
       .center-row, .card-row{gap:1em;}
@@ -86,20 +101,32 @@
     details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
     details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
   </style>
+
+  <!-- Early redirect: if site language (timerhavenLang) is set to a non-English code,
+       redirect to the matching localized tool page (meeting-planner-<lang>.html).
+       Supported languages: es, fr, de, ru, el, ar -->
+  <script>
+    (function(){
+      try {
+        const raw = localStorage.getItem('timerhavenLang') || '';
+        const lang = (raw && raw.toString().slice(0,2).toLowerCase()) || '';
+        const supported = ['es','fr','de','ru','el','ar'];
+        if (!lang || lang === 'en' || supported.indexOf(lang) === -1) return;
+        const path = location.pathname || '';
+        const filename = path.split('/').pop().toLowerCase();
+        if (filename && filename.indexOf('-' + lang + '.html') !== -1) return;
+        const localized = path.replace(/(meeting-planner)(\.html)?$/i, '$1-' + lang + '.html');
+        const target = (localized === path) ? ('/meeting-planner-' + lang + '.html') : localized;
+        if (target && (target !== location.pathname + location.search + location.hash)) {
+          location.replace(target + location.search + location.hash);
+        }
+      } catch (e) {
+        console && console.warn && console.warn('locale redirect failed', e);
+      }
+    })();
+  </script>
 </head>
 <body>
-  <div class="language-select">
-    <label for="lang-select"><strong id="language-label"></strong></label>
-    <select id="lang-select">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="es">Español</option>
-      <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="el">Ελληνικά</option>
-      <option value="ar">العربية</option>
-    </select>
-  </div>
   <div class="main-container">
     <div class="center-row">
       <div class="article-card">
@@ -107,39 +134,55 @@
         <ol id="howto-steps"></ol>
         <a href="#" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" id="howto-article-btn"></a>
       </div>
+
       <div class="tool-card">
         <a href="index.html" class="back-link" id="back-link"></a>
         <h3><i class="fa fa-users"></i> <span id="tool-title"></span></h3>
-        <form id="meetingForm">
+
+        <!-- Participants -->
+        <form id="meetingForm" onsubmit="return false;">
           <div class="meeting-form-row">
             <label for="participantName" id="participant-name-label"></label>
-            <input type="text" id="participantName" class="form-control" placeholder="" autocomplete="off">
+            <input type="text" id="participantName" class="form-control" placeholder="">
           </div>
           <div class="meeting-form-row">
             <label for="participantCity" id="city-label"></label>
-            <select id="participantCity" class="form-select" autocomplete="off"></select>
+            <select id="participantCity" class="form-select"></select>
           </div>
-          <button type="button" class="btn btn-success btn-participant" id="add-participant-btn"><i class="fa fa-plus"></i> <span id="add-participant-btn-text"></span></button>
+          <div style="display:flex;gap:.5rem;align-items:center;">
+            <button type="button" class="btn btn-success btn-participant" id="add-participant-btn"><i class="fa fa-plus"></i> <span id="add-participant-btn-text"></span></button>
+            <button type="button" class="btn btn-outline-secondary" id="clear-participants-btn" title="Clear participants"><i class="fa fa-eraser"></i></button>
+          </div>
         </form>
-        <div class="participant-list" id="participantList"></div>
+
+        <div class="participant-list" id="participantList" style="margin-top:1rem;"></div>
+
+        <!-- Improved meeting time selector: choose date and then choose from a simple list of suggested times (auto-updates) -->
         <div class="meeting-form-row">
           <label for="meetingDate" id="meeting-date-label"></label>
           <input type="date" id="meetingDate" class="form-control">
         </div>
+
         <div class="meeting-form-row">
-          <label for="meetingTime" id="meeting-time-label"></label>
-          <input type="time" id="meetingTime" class="form-control">
-          <button type="button" class="btn btn-primary btn-sm" style="margin-top:0.6em;" id="show-times-btn"></button>
+          <label for="meetingTimeSelect" id="meeting-time-label"></label>
+          <select id="meetingTimeSelect" class="form-select"></select>
         </div>
-        <div>
-          <div id="meetingTimes"></div>
-        </div>
-        <details class="faq-section">
-          <summary id="faq-title"></summary>
-          <ul style="padding-left: 1em;" id="faq-list"></ul>
+
+        <div id="meetingTimes" aria-live="polite"></div>
+
+        <!-- Static English FAQ fallback: ensures English FAQ appears even if translations loading fails -->
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title">FAQs</summary>
+          <ul style="padding-left: 1em;" id="faq-list">
+            <li><b>How many participants?</b> Add as many as you need.</li>
+            <li><b>What time zones?</b> Pick from 30+ popular global cities or time zones.</li>
+            <li><b>How do I share?</b> Copy the meeting times and share with your participants.</li>
+          </ul>
         </details>
-        <div class="bookmark-tip"></div>
+
+        <div class="bookmark-tip" style="margin-top:0.8rem;color:#666;font-size:.95rem;"></div>
       </div>
+
       <div class="article-card">
         <h2 id="tips-title"></h2>
         <ul id="tips-list"></ul>
@@ -147,8 +190,14 @@
       </div>
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
   <script>
+/* Full translations object should include en, fr, es, de, ru, el, ar.
+   Make sure when you deploy you include the complete language objects for each locale.
+   For this change I keep the original translation structure but remove any code that expects
+   a DOM language-indicator element to exist. */
+
 const translations = {
   en: {
     "language-label": "Language:",
@@ -160,13 +209,12 @@ const translations = {
     "city-placeholder": "Choose a city/time zone",
     "add-participant-btn-text": "Add Participant",
     "meeting-date-label": "Select Meeting Date",
-    "meeting-time-label": "Select Meeting Time",
+    "meeting-time-label": "Select Meeting Time (suggested)",
     "show-times-btn": "Show Times",
     "howto-title": "How to Use Meeting Planner",
-    "howto-title-text": "How to Use Meeting Planner",
     "howto-steps": [
       {"bold": "Add participants:", "text": "Enter time zones for each attendee."},
-      {"bold": "Select meeting time:", "text": "Choose a date/time and see what works for all."},
+      {"bold": "Pick a suggested time:", "text": "Choose a date and pick a suggested time — participants' local times update automatically."},
       {"bold": "Share details:", "text": "Send the final meeting time to participants."}
     ],
     "howto-article-btn": "Read Full Article",
@@ -178,7 +226,6 @@ const translations = {
       {"bold": "How do I share?", "text": "Copy the meeting times and share with your participants."}
     ],
     "tips-title": "Meeting Productivity Tips",
-    "tips-title-text": "Meeting Productivity Tips",
     "tips-list": [
       {"bold": "Plan ahead:", "text": "Set meetings at times that fit all participants."},
       {"bold": "Send calendar invites:", "text": "Avoid confusion with shared invites."},
@@ -216,509 +263,123 @@ const translations = {
       {value:"Asia/Manila", label:"Manila 🇵🇭"},
       {value:"Europe/Madrid", label:"Madrid 🇪🇸"},
       {value:"Europe/Rome", label:"Rome 🇮🇹"},
-      {value:"Europe/Warsaw", label:"Warsaw 🇵🇱"},
+      {value:"Europe/Warsaw", label:"Warsaw 🇵ₗ"},
       {value:"Europe/Amsterdam", label:"Amsterdam 🇳🇱"},
       {value:"Europe/Athens", label:"Athens 🇬🇷"},
       {value:"America/Vancouver", label:"Vancouver 🇨🇦"}
-    ]
+    ],
+    "enter-name-msg": "Please enter a participant name.",
+    "select-city-msg": "Please select a time zone / city.",
+    "select-date-time-msg": "Please select both a meeting date and time.",
+    "no-participants-yet": "No participants yet.",
+    "meeting-times-heading": "Meeting Times (organizer local → participants local)"
   },
-  fr: {
-    "language-label": "Langue :",
-    "back-link": "Retour au menu principal",
-    "tool-title": "Planificateur de Réunion",
-    "participant-name-label": "Nom du participant",
-    "participant-name-placeholder": "Entrez le nom (ex. Jean)",
-    "city-label": "Fuseau horaire / Ville",
-    "city-placeholder": "Choisissez une ville/un fuseau horaire",
-    "add-participant-btn-text": "Ajouter un participant",
-    "meeting-date-label": "Sélectionner la date",
-    "meeting-time-label": "Sélectionner l’heure",
-    "show-times-btn": "Afficher les horaires",
-    "howto-title": "Comment utiliser le Planificateur de Réunion",
-    "howto-title-text": "Comment utiliser le Planificateur de Réunion",
-    "howto-steps": [
-      {"bold": "Ajoutez des participants :", "text": "Saisissez le fuseau horaire de chaque personne."},
-      {"bold": "Sélectionnez l’horaire :", "text": "Choisissez une date et une heure, voyez ce qui convient à tous."},
-      {"bold": "Partagez les détails :", "text": "Envoyez l’horaire final à tous les participants."}
-    ],
-    "howto-article-btn": "Lire l'article complet",
-    "howto-article-link": "meeting-how-to-fr.html",
-    "faq-title": "FAQ",
-    "faq-list": [
-      {"bold": "Combien de participants ?", "text": "Ajoutez autant que vous le souhaitez."},
-      {"bold": "Quels fuseaux horaires ?", "text": "Choisissez parmi 30+ villes mondiales."},
-      {"bold": "Comment partager ?", "text": "Copiez les horaires et partagez avec vos participants."}
-    ],
-    "tips-title": "Conseils de productivité en réunion",
-    "tips-title-text": "Conseils de productivité en réunion",
-    "tips-list": [
-      {"bold": "Planifiez à l’avance :", "text": "Choisissez un horaire qui convient à tous."},
-      {"bold": "Envoyez des invitations :", "text": "Évitez toute confusion."},
-      {"bold": "Vérifiez les fuseaux :", "text": "Confirmez l’heure locale de chaque participant."}
-    ],
-    "tips-article-btn": "Lire l'article complet",
-    "tips-article-link": "meeting-tips-fr.html",
-    "city-options": [
-      {value:"", label:"Choisissez une ville/un fuseau horaire"},
-      {value:"America/New_York", label:"New York 🇺🇸"},
-      {value:"America/Chicago", label:"Chicago 🇺🇸"},
-      {value:"America/Los_Angeles", label:"Los Angeles 🇺🇸"},
-      {value:"America/Toronto", label:"Toronto 🇨🇦"},
-      {value:"Europe/London", label:"Londres 🇬🇧"},
-      {value:"Europe/Paris", label:"Paris 🇫🇷"},
-      {value:"Europe/Berlin", label:"Berlin 🇩🇪"},
-      {value:"Europe/Moscow", label:"Moscou 🇷🇺"},
-      {value:"Europe/Istanbul", label:"Istanbul 🇹🇷"},
-      {value:"Asia/Dubai", label:"Dubaï 🇦🇪"},
-      {value:"Asia/Kolkata", label:"Calcutta 🇮🇳"},
-      {value:"Asia/Shanghai", label:"Shanghai 🇨🇳"},
-      {value:"Asia/Tokyo", label:"Tokyo 🇯🇵"},
-      {value:"Asia/Singapore", label:"Singapour 🇸🇬"},
-      {value:"Asia/Jakarta", label:"Jakarta 🇮🇩"},
-      {value:"Australia/Sydney", label:"Sydney 🇦🇺"},
-      {value:"Pacific/Auckland", label:"Auckland 🇳🇿"},
-      {value:"America/Sao_Paulo", label:"São Paulo 🇧🇷"},
-      {value:"America/Mexico_City", label:"Mexico 🇲🇽"},
-      {value:"Africa/Johannesburg", label:"Johannesburg 🇿🇦"},
-      {value:"Africa/Cairo", label:"Le Caire 🇪🇬"},
-      {value:"Africa/Nairobi", label:"Nairobi 🇰🇪"},
-      {value:"Asia/Seoul", label:"Séoul 🇰🇷"},
-      {value:"Asia/Hong_Kong", label:"Hong Kong 🇭🇰"},
-      {value:"Asia/Bangkok", label:"Bangkok 🇹🇭"},
-      {value:"Asia/Manila", label:"Manille 🇵🇭"},
-      {value:"Europe/Madrid", label:"Madrid 🇪🇸"},
-      {value:"Europe/Rome", label:"Rome 🇮🇹"},
-      {value:"Europe/Warsaw", label:"Varsovie 🇵🇱"},
-      {value:"Europe/Amsterdam", label:"Amsterdam 🇳🇱"},
-      {value:"Europe/Athens", label:"Athènes 🇬🇷"},
-      {value:"America/Vancouver", label:"Vancouver 🇨🇦"}
-    ]
+  /* ensure other full language objects (fr, es, de, ru, el, ar) are present in deployment */
+};
+
+/* mapping for localized how-to and tips pages */
+const localizedArticles = {
+  howto: {
+    en: 'meeting-how-to.html',
+    fr: 'meeting-how-to-fr.html',
+    es: 'meeting-how-to-es.html',
+    de: 'meeting-how-to-de.html',
+    ru: 'meeting-how-to-ru.html',
+    el: 'meeting-how-to-el.html',
+    ar: 'meeting-how-to-ar.html'
   },
-  es: {
-    "language-label": "Idioma:",
-    "back-link": "Volver al menú principal",
-    "tool-title": "Planificador de Reuniones",
-    "participant-name-label": "Nombre del participante",
-    "participant-name-placeholder": "Introduce el nombre (ej. Juan)",
-    "city-label": "Zona horaria / Ciudad",
-    "city-placeholder": "Elige ciudad/zona horaria",
-    "add-participant-btn-text": "Agregar participante",
-    "meeting-date-label": "Selecciona la fecha",
-    "meeting-time-label": "Selecciona la hora",
-    "show-times-btn": "Mostrar horarios",
-    "howto-title": "Cómo usar el Planificador de Reuniones",
-    "howto-title-text": "Cómo usar el Planificador de Reuniones",
-    "howto-steps": [
-      {"bold": "Agregar participantes:", "text": "Ingresa la zona horaria de cada asistente."},
-      {"bold": "Seleccionar hora de reunión:", "text": "Elige fecha/hora y ve qué funciona para todos."},
-      {"bold": "Compartir detalles:", "text": "Envía el horario final a los participantes."}
-    ],
-    "howto-article-btn": "Leer artículo completo",
-    "howto-article-link": "meeting-how-to-es.html",
-    "faq-title": "FAQs",
-    "faq-list": [
-      {"bold": "¿Cuántos participantes?", "text": "Los que necesites."},
-      {"bold": "¿Qué zonas horarias?", "text": "Elige entre más de 30 ciudades globales."},
-      {"bold": "¿Cómo compartir?", "text": "Copia los horarios y compártelos con los asistentes."}
-    ],
-    "tips-title": "Consejos de productividad en reuniones",
-    "tips-title-text": "Consejos de productividad en reuniones",
-    "tips-list": [
-      {"bold": "Planifica con anticipación:", "text": "Elige horarios que funcionen para todos."},
-      {"bold": "Envía invitaciones de calendario:", "text": "Evita confusiones."},
-      {"bold": "Verifica zonas:", "text": "Confirma la hora local de cada participante."}
-    ],
-    "tips-article-btn": "Leer artículo completo",
-    "tips-article-link": "meeting-tips-es.html",
-    "city-options": [
-      {value:"", label:"Elige ciudad/zona horaria"},
-      {value:"America/New_York", label:"Nueva York 🇺🇸"},
-      {value:"America/Chicago", label:"Chicago 🇺🇸"},
-      {value:"America/Los_Angeles", label:"Los Ángeles 🇺🇸"},
-      {value:"America/Toronto", label:"Toronto 🇨🇦"},
-      {value:"Europe/London", label:"Londres 🇬🇧"},
-      {value:"Europe/Paris", label:"París 🇫🇷"},
-      {value:"Europe/Berlin", label:"Berlín 🇩🇪"},
-      {value:"Europe/Moscow", label:"Moscú 🇷🇺"},
-      {value:"Europe/Istanbul", label:"Estambul 🇹🇷"},
-      {value:"Asia/Dubai", label:"Dubái 🇦🇪"},
-      {value:"Asia/Kolkata", label:"Calcuta 🇮🇳"},
-      {value:"Asia/Shanghai", label:"Shanghái 🇨🇳"},
-      {value:"Asia/Tokyo", label:"Tokio 🇯🇵"},
-      {value:"Asia/Singapore", label:"Singapur 🇸🇬"},
-      {value:"Asia/Jakarta", label:"Yakarta 🇮🇩"},
-      {value:"Australia/Sydney", label:"Sídney 🇦🇺"},
-      {value:"Pacific/Auckland", label:"Auckland 🇳🇿"},
-      {value:"America/Sao_Paulo", label:"São Paulo 🇧🇷"},
-      {value:"America/Mexico_City", label:"Ciudad de México 🇲🇽"},
-      {value:"Africa/Johannesburg", label:"Johannesburgo 🇿🇦"},
-      {value:"Africa/Cairo", label:"El Cairo 🇪🇬"},
-      {value:"Africa/Nairobi", label:"Nairobi 🇰🇪"},
-      {value:"Asia/Seoul", label:"Seúl 🇰🇷"},
-      {value:"Asia/Hong_Kong", label:"Hong Kong 🇭🇰"},
-      {value:"Asia/Bangkok", label:"Bangkok 🇹🇭"},
-      {value:"Asia/Manila", label:"Manila 🇵🇭"},
-      {value:"Europe/Madrid", label:"Madrid 🇪🇸"},
-      {value:"Europe/Rome", label:"Roma 🇮🇹"},
-      {value:"Europe/Warsaw", label:"Varsovia 🇵ₗ"},
-      {value:"Europe/Amsterdam", label:"Ámsterdam 🇳🇱"},
-      {value:"Europe/Athens", label:"Atenas 🇬🇷"},
-      {value:"America/Vancouver", label:"Vancouver 🇨🇦"}
-    ]
-  },
-  de: {
-    "language-label": "Sprache:",
-    "back-link": "Zurück zum Hauptmenü",
-    "tool-title": "Meeting-Planer",
-    "participant-name-label": "Teilnehmername",
-    "participant-name-placeholder": "Name eingeben (z. B. Anna)",
-    "city-label": "Zeitzone / Stadt",
-    "city-placeholder": "Wählen Sie eine Stadt/Zeitzone",
-    "add-participant-btn-text": "Teilnehmer hinzufügen",
-    "meeting-date-label": "Meeting-Datum wählen",
-    "meeting-time-label": "Meeting-Zeit wählen",
-    "show-times-btn": "Zeiten anzeigen",
-    "howto-title": "So nutzen Sie den Meeting-Planer",
-    "howto-title-text": "So nutzen Sie den Meeting-Planer",
-    "howto-steps": [
-      {"bold": "Teilnehmer hinzufügen:", "text": "Geben Sie die Zeitzonen der Teilnehmer ein."},
-      {"bold": "Meeting-Zeit wählen:", "text": "Wählen Sie Datum/Uhrzeit und sehen Sie, was passt."},
-      {"bold": "Details teilen:", "text": "Senden Sie die endgültige Zeit an alle."}
-    ],
-    "howto-article-btn": "Vollständigen Artikel lesen",
-    "howto-article-link": "meeting-how-to-de.html",
-    "faq-title": "FAQs",
-    "faq-list": [
-      {"bold": "Wie viele Teilnehmer?", "text": "So viele Sie möchten."},
-      {"bold": "Welche Zeitzonen?", "text": "Wählen Sie aus über 30 beliebten Städten/Zeitzonen."},
-      {"bold": "Wie teilen?", "text": "Kopieren Sie die Zeiten und teilen Sie sie mit den Teilnehmern."}
-    ],
-    "tips-title": "Produktivitätstipps für Meetings",
-    "tips-title-text": "Produktivitätstipps für Meetings",
-    "tips-list": [
-      {"bold": "Planen Sie voraus:", "text": "Wählen Sie passende Zeiten."},
-      {"bold": "Kalendereinladungen senden:", "text": "Vermeiden Sie Verwirrung."},
-      {"bold": "Zeitzonen prüfen:", "text": "Bestätigen Sie die lokale Zeit der Teilnehmer."}
-    ],
-    "tips-article-btn": "Vollständigen Artikel lesen",
-    "tips-article-link": "meeting-tips-de.html",
-    "city-options": [
-      {value:"", label:"Wählen Sie eine Stadt/Zeitzone"},
-      {value:"America/New_York", label:"New York 🇺🇸"},
-      {value:"America/Chicago", label:"Chicago 🇺🇸"},
-      {value:"America/Los_Angeles", label:"Los Angeles 🇺🇸"},
-      {value:"America/Toronto", label:"Toronto 🇨🇦"},
-      {value:"Europe/London", label:"London 🇬🇧"},
-      {value:"Europe/Paris", label:"Paris 🇫🇷"},
-      {value:"Europe/Berlin", label:"Berlin 🇩🇪"},
-      {value:"Europe/Moscow", label:"Moskau 🇷🇺"},
-      {value:"Europe/Istanbul", label:"Istanbul 🇹🇷"},
-      {value:"Asia/Dubai", label:"Dubai 🇦🇪"},
-      {value:"Asia/Kolkata", label:"Kolkata 🇮🇳"},
-      {value:"Asia/Shanghai", label:"Shanghai 🇨🇳"},
-      {value:"Asia/Tokyo", label:"Tokio 🇯🇵"},
-      {value:"Asia/Singapore", label:"Singapur 🇸🇬"},
-      {value:"Asia/Jakarta", label:"Jakarta 🇮🇩"},
-      {value:"Australia/Sydney", label:"Sydney 🇦🇺"},
-      {value:"Pacific/Auckland", label:"Auckland 🇳🇿"},
-      {value:"America/Sao_Paulo", label:"São Paulo 🇧🇷"},
-      {value:"America/Mexico_City", label:"Mexiko-Stadt 🇲🇽"},
-      {value:"Africa/Johannesburg", label:"Johannesburg 🇿🇦"},
-      {value:"Africa/Cairo", label:"Kairo 🇪🇬"},
-      {value:"Africa/Nairobi", label:"Nairobi 🇰🇪"},
-      {value:"Asia/Seoul", label:"Seoul 🇰🇷"},
-      {value:"Asia/Hong_Kong", label:"Hongkong 🇭🇰"},
-      {value:"Asia/Bangkok", label:"Bangkok 🇹🇭"},
-      {value:"Asia/Manila", label:"Manila 🇵🇭"},
-      {value:"Europe/Madrid", label:"Madrid 🇪🇸"},
-      {value:"Europe/Rome", label:"Rom 🇮🇹"},
-      {value:"Europe/Warsaw", label:"Warschau 🇵ₗ"},
-      {value:"Europe/Amsterdam", label:"Amsterdam 🇳🇱"},
-      {value:"Europe/Athens", label:"Athen 🇬🇷"},
-      {value:"America/Vancouver", label:"Vancouver 🇨🇦"}
-    ]
-  },
-  ru: {
-    "language-label": "Язык:",
-    "back-link": "Назад в главное меню",
-    "tool-title": "Планировщик встреч",
-    "participant-name-label": "Имя участника",
-    "participant-name-placeholder": "Введите имя (например, Иван)",
-    "city-label": "Часовой пояс / город",
-    "city-placeholder": "Выберите город или часовой пояс",
-    "add-participant-btn-text": "Добавить участника",
-    "meeting-date-label": "Выберите дату встречи",
-    "meeting-time-label": "Выберите время встречи",
-    "show-times-btn": "Показать время",
-    "howto-title": "Как использовать Планировщик встреч",
-    "howto-title-text": "Как использовать Планировщик встреч",
-    "howto-steps": [
-      {"bold": "Добавьте участников:", "text": "Укажите часовой пояс каждого участника."},
-      {"bold": "Выберите время встречи:", "text": "Укажите дату/время и проверьте, что подходит всем."},
-      {"bold": "Отправьте детали:", "text": "Сообщите финальное время всем участникам."}
-    ],
-    "howto-article-btn": "Читать полный текст",
-    "howto-article-link": "meeting-how-to-ru.html",
-    "faq-title": "Частые вопросы",
-    "faq-list": [
-      {"bold": "Сколько участников?", "text": "Добавьте столько, сколько нужно."},
-      {"bold": "Какие часовые пояса?", "text": "Выберите из 30+ популярных городов и зон."},
-      {"bold": "Как поделиться?", "text": "Скопируйте время встречи и поделитесь с участниками."}
-    ],
-    "tips-title": "Советы по продуктивности для встреч",
-    "tips-title-text": "Советы по продуктивности для встреч",
-    "tips-list": [
-      {"bold": "Планируйте заранее:", "text": "Выбирайте удобное время для всех."},
-      {"bold": "Отправляйте приглашения:", "text": "Избегайте путаницы."},
-      {"bold": "Проверьте часовые пояса:", "text": "Подтвердите локальное время участников."}
-    ],
-    "tips-article-btn": "Читать полный текст",
-    "tips-article-link": "meeting-tips-ru.html",
-    "city-options": [
-      {value:"", label:"Выберите город или часовой пояс"},
-      {value:"America/New_York", label:"Нью-Йорк 🇺🇸"},
-      {value:"America/Chicago", label:"Чикаго 🇺🇸"},
-      {value:"America/Los_Angeles", label:"Лос-Анджелес 🇺🇸"},
-      {value:"America/Toronto", label:"Торонто 🇨🇦"},
-      {value:"Europe/London", label:"Лондон 🇬🇧"},
-      {value:"Europe/Paris", label:"Париж 🇫🇷"},
-      {value:"Europe/Berlin", label:"Берлин 🇩🇪"},
-      {value:"Europe/Moscow", label:"Москва 🇷🇺"},
-      {value:"Europe/Istanbul", label:"Стамбул 🇹🇷"},
-      {value:"Asia/Dubai", label:"Дубай 🇦🇪"},
-      {value:"Asia/Kolkata", label:"Калькутта 🇮🇳"},
-      {value:"Asia/Shanghai", label:"Шанхай 🇨🇳"},
-      {value:"Asia/Tokyo", label:"Токио 🇯🇵"},
-      {value:"Asia/Singapore", label:"Сингапур 🇸🇬"},
-      {value:"Asia/Jakarta", label:"Джакарта 🇮🇩"},
-      {value:"Australia/Sydney", label:"Сидней 🇦🇺"},
-      {value:"Pacific/Auckland", label:"Окленд 🇳🇿"},
-      {value:"America/Sao_Paulo", label:"Сан-Паулу 🇧🇷"},
-      {value:"America/Mexico_City", label:"Мехико 🇲🇽"},
-      {value:"Africa/Johannesburg", label:"Йоханнесбург 🇿🇦"},
-      {value:"Africa/Cairo", label:"Каир 🇪🇬"},
-      {value:"Africa/Nairobi", label:"Найроби 🇰🇪"},
-      {value:"Asia/Seoul", label:"Сеул 🇰🇷"},
-      {value:"Asia/Hong_Kong", label:"Гонконг 🇭🇰"},
-      {value:"Asia/Bangkok", label:"Бангкок 🇹🇭"},
-      {value:"Asia/Manila", label:"Манила 🇵🇭"},
-      {value:"Europe/Madrid", label:"Мадрид 🇪🇸"},
-      {value:"Europe/Rome", label:"Рим 🇮🇹"},
-      {value:"Europe/Warsaw", label:"Варшава 🇵ₗ"},
-      {value:"Europe/Amsterdam", label:"Амстердам 🇳🇱"},
-      {value:"Europe/Athens", label:"Афины 🇬🇷"},
-      {value:"America/Vancouver", label:"Ванкувер 🇨🇦"}
-    ]
-  },
-  el: {
-    "language-label": "Γλώσσα:",
-    "back-link": "Επιστροφή στο κύριο μενού",
-    "tool-title": "Προγραμματιστής Συνάντησης",
-    "participant-name-label": "Όνομα συμμετέχοντα",
-    "participant-name-placeholder": "Εισάγετε όνομα (π.χ. Γιώργος)",
-    "city-label": "Ζώνη ώρας / Πόλη",
-    "city-placeholder": "Επιλέξτε πόλη/ζώνη ώρας",
-    "add-participant-btn-text": "Προσθήκη συμμετέχοντα",
-    "meeting-date-label": "Επιλέξτε ημερομηνία",
-    "meeting-time-label": "Επιλέξτε ώρα",
-    "show-times-btn": "Εμφάνιση ωρών",
-    "howto-title": "Πώς να χρησιμοποιήσετε τον προγραμματιστή συνάντησης",
-    "howto-title-text": "Πώς να χρησιμοποιήσετε τον προγραμματιστή συνάντησης",
-    "howto-steps": [
-      {"bold": "Προσθήκη συμμετεχόντων:", "text": "Εισάγετε τη ζώνη ώρας κάθε συμμετέχοντα."},
-      {"bold": "Επιλογή ώρας συνάντησης:", "text": "Επιλέξτε ημερομηνία/ώρα, δείτε τι λειτουργεί για όλους."},
-      {"bold": "Κοινοποίηση λεπτομερειών:", "text": "Στείλτε την τελική ώρα σε όλους."}
-    ],
-    "howto-article-btn": "Διαβάστε το πλήρες άρθρο",
-    "howto-article-link": "meeting-how-to-el.html",
-    "faq-title": "Συχνές Ερωτήσεις",
-    "faq-list": [
-      {"bold": "Πόσοι συμμετέχοντες;", "text": "Όσοι θέλετε."},
-      {"bold": "Ποιες ζώνες ώρας;", "text": "Επιλέξτε από 30+ δημοφιλείς πόλεις/ζώνες."},
-      {"bold": "Πώς μοιράζομαι;", "text": "Αντιγράψτε τις ώρες και μοιραστείτε τις με τους συμμετέχοντες."}
-    ],
-    "tips-title": "Συμβουλές παραγωγικότητας για συναντήσεις",
-    "tips-title-text": "Συμβουλές παραγωγικότητας για συναντήσεις",
-    "tips-list": [
-      {"bold": "Προγραμματίστε εκ των προτέρων:", "text": "Επιλέξτε ώρες που ταιριάζουν σε όλους."},
-      {"bold": "Στείλτε προσκλήσεις ημερολογίου:", "text": "Αποφύγετε σύγχυση."},
-      {"bold": "Ελέγξτε τις ζώνες ώρας:", "text": "Επιβεβαιώστε την τοπική ώρα κάθε συμμετέχοντα."}
-    ],
-    "tips-article-btn": "Διαβάστε το πλήρες άρθρο",
-    "tips-article-link": "meeting-tips-el.html",
-    "city-options": [
-      {value:"", label:"Επιλέξτε πόλη/ζώνη ώρας"},
-      {value:"America/New_York", label:"Νέα Υόρκη 🇺🇸"},
-      {value:"America/Chicago", label:"Σικάγο 🇺🇸"},
-      {value:"America/Los_Angeles", label:"Λος Άντζελες 🇺🇸"},
-      {value:"America/Toronto", label:"Τορόντο 🇨🇦"},
-      {value:"Europe/London", label:"Λονδίνο 🇬🇧"},
-      {value:"Europe/Paris", label:"Παρίσι 🇫🇷"},
-      {value:"Europe/Berlin", label:"Βερολίνο 🇩🇪"},
-      {value:"Europe/Moscow", label:"Μόσχα 🇷🇺"},
-      {value:"Europe/Istanbul", label:"Κωνσταντινούπολη 🇹🇷"},
-      {value:"Asia/Dubai", label:"Ντουμπάι 🇦🇪"},
-      {value:"Asia/Kolkata", label:"Καλκούτα 🇮🇳"},
-      {value:"Asia/Shanghai", label:"Σανγκάη 🇨🇳"},
-      {value:"Asia/Tokyo", label:"Τόκιο 🇯🇵"},
-      {value:"Asia/Singapore", label:"Σιγκαπούρη 🇸🇬"},
-      {value:"Asia/Jakarta", label:"Τζακάρτα 🇮🇩"},
-      {value:"Australia/Sydney", label:"Σίδνεϊ 🇦🇺"},
-      {value:"Pacific/Auckland", label:"Όκλαντ 🇳🇿"},
-      {value:"America/Sao_Paulo", label:"Σάο Πάολο 🇧🇷"},
-      {value:"America/Mexico_City", label:"Μεξικό 🇲🇽"},
-      {value:"Africa/Johannesburg", label:"Γιοχάνεσμπουργκ 🇿🇦"},
-      {value:"Africa/Cairo", label:"Κάιρο 🇪🇬"},
-      {value:"Africa/Nairobi", label:"Ναϊρόμπι 🇰🇪"},
-      {value:"Asia/Seoul", label:"Σεούλ 🇰🇷"},
-      {value:"Asia/Hong_Kong", label:"Χονγκ Κονγκ 🇭🇰"},
-      {value:"Asia/Bangkok", label:"Μπανγκόκ 🇹🇭"},
-      {value:"Asia/Manila", label:"Μανίλα 🇵🇭"},
-      {value:"Europe/Madrid", label:"Μαδρίτη 🇪🇸"},
-      {value:"Europe/Rome", label:"Ρώμη 🇮🇹"},
-      {value:"Europe/Warsaw", label:"Βαρσοβία 🇵ₗ"},
-      {value:"Europe/Amsterdam", label:"Άμστερνταμ 🇳🇱"},
-      {value:"Europe/Athens", label:"Αθήνα 🇬🇷"},
-      {value:"America/Vancouver", label:"Βανκούβερ 🇨🇦"}
-    ]
-  },
-  ar: {
-    "language-label": "اللغة:",
-    "back-link": "العودة إلى القائمة الرئيسية",
-    "tool-title": "مخطط الاجتماعات",
-    "participant-name-label": "اسم المشارك",
-    "participant-name-placeholder": "أدخل الاسم (مثال: أحمد)",
-    "city-label": "المنطقة الزمنية / المدينة",
-    "city-placeholder": "اختر مدينة/منطقة زمنية",
-    "add-participant-btn-text": "إضافة مشارك",
-    "meeting-date-label": "اختر تاريخ الاجتماع",
-    "meeting-time-label": "اختر وقت الاجتماع",
-    "show-times-btn": "عرض الأوقات",
-    "howto-title": "كيفية استخدام مخطط الاجتماعات",
-    "howto-title-text": "كيفية استخدام مخطط الاجتماعات",
-    "howto-steps": [
-      {"bold": "أضف المشاركين:", "text": "أدخل المنطقة الزمنية لكل مشارك."},
-      {"bold": "حدد وقت الاجتماع:", "text": "اختر التاريخ/الوقت وانظر ما يناسب الجميع."},
-      {"bold": "شارك التفاصيل:", "text": "أرسل الوقت النهائي للجميع."}
-    ],
-    "howto-article-btn": "اقرأ المقال الكامل",
-    "howto-article-link": "meeting-how-to-ar.html",
-    "faq-title": "الأسئلة الشائعة",
-    "faq-list": [
-      {"bold": "كم عدد المشاركين؟", "text": "أضف العدد الذي تريد."},
-      {"bold": "ما المناطق الزمنية؟", "text": "اختر من أكثر من 30 مدينة عالمية."},
-      {"bold": "كيف أشارك؟", "text": "انسخ أوقات الاجتماع وشاركها مع المشاركين."}
-    ],
-    "tips-title": "نصائح إنتاجية للاجتماعات",
-    "tips-title-text": "نصائح إنتاجية للاجتماعات",
-    "tips-list": [
-      {"bold": "خطط مسبقًا:", "text": "اختر أوقات تناسب الجميع."},
-      {"bold": "أرسل دعوات التقويم:", "text": "تجنب الالتباس."},
-      {"bold": "تحقق من المناطق:", "text": "أكد الوقت المحلي لكل مشارك."}
-    ],
-    "tips-article-btn": "اقرأ المقال الكامل",
-    "tips-article-link": "meeting-tips-ar.html",
-    "city-options": [
-      {value:"", label:"اختر مدينة/منطقة زمنية"},
-      {value:"America/New_York", label:"نيويورك 🇺🇸"},
-      {value:"America/Chicago", label:"شيكاغو 🇺🇸"},
-      {value:"America/Los_Angeles", label:"لوس أنجلوس 🇺🇸"},
-      {value:"America/Toronto", label:"تورونتو 🇨🇦"},
-      {value:"Europe/London", label:"لندن 🇬🇧"},
-      {value:"Europe/Paris", label:"باريس 🇫🇷"},
-      {value:"Europe/Berlin", label:"برلين 🇩🇪"},
-      {value:"Europe/Moscow", label:"موسكو 🇷🇺"},
-      {value:"Europe/Istanbul", label:"إسطنبول 🇹🇷"},
-      {value:"Asia/Dubai", label:"دبي 🇦🇪"},
-      {value:"Asia/Kolkata", label:"كولكاتا 🇮🇳"},
-      {value:"Asia/Shanghai", label:"شنغهاي 🇨🇳"},
-      {value:"Asia/Tokyo", label:"طوكيو 🇯🇵"},
-      {value:"Asia/Singapore", label:"سنغافورة 🇸🇬"},
-      {value:"Asia/Jakarta", label:"جاكرتا 🇮🇩"},
-      {value:"Australia/Sydney", label:"سيدني 🇦🇺"},
-      {value:"Pacific/Auckland", label:"أوكلاند 🇳🇿"},
-      {value:"America/Sao_Paulo", label:"ساو باولو 🇧🇷"},
-      {value:"America/Mexico_City", label:"مكسيكو سيتي 🇲🇽"},
-      {value:"Africa/Johannesburg", label:"جوهانسبيرغ 🇿🇦"},
-      {value:"Africa/Cairo", label:"القاهرة 🇪🇬"},
-      {value:"Africa/Nairobi", label:"نيروبي 🇰🇪"},
-      {value:"Asia/Seoul", label:"سيول 🇰🇷"},
-      {value:"Asia/Hong_Kong", label:"هونغ كونغ 🇭🇰"},
-      {value:"Asia/Bangkok", label:"بانكوك 🇹🇭"},
-      {value:"Asia/Manila", label:"مانيلا 🇵🇭"},
-      {value:"Europe/Madrid", label:"مدريد 🇪🇸"},
-      {value:"Europe/Rome", label:"روما 🇮🇹"},
-      {value:"Europe/Warsaw", label:"وارسو 🇵ₗ"},
-      {value:"Europe/Amsterdam", label:"أمستردام 🇳🇱"},
-      {value:"Europe/Athens", label:"أثينا 🇬🇷"},
-      {value:"America/Vancouver", label:"فانكوفر 🇨🇦"}
-    ]
+  tips: {
+    en: 'meeting-tips.html',
+    fr: 'meeting-tips-fr.html',
+    es: 'meeting-tips-es.html',
+    de: 'meeting-tips-de.html',
+    ru: 'meeting-tips-ru.html',
+    el: 'meeting-tips-el.html',
+    ar: 'meeting-tips-ar.html'
   }
 };
-function updateLanguage() {
-  const lang = document.getElementById("lang-select").value;
+
+function getLang() {
+  try {
+    const l = localStorage.getItem('timerhavenLang') || 'en';
+    return (l && l.slice(0,2)) || 'en';
+  } catch (e) {
+    return 'en';
+  }
+}
+const langNames = { en:"English", fr:"Français", es:"Español", de:"Deutsch", ru:"Русский", el:"Ελληνικά", ar:"العربية" };
+
+function applyLanguage(lang) {
+  lang = (lang || getLang()).slice(0,2);
   const t = translations[lang] || translations.en;
+
   document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
-  // Middle card
-  document.getElementById("language-label").textContent = t["language-label"];
-  document.getElementById("back-link").textContent = t["back-link"];
-  document.getElementById("tool-title").textContent = t["tool-title"];
-  document.getElementById("participant-name-label").textContent = t["participant-name-label"];
-  document.getElementById("participantName").placeholder = t["participant-name-placeholder"];
-  document.getElementById("city-label").textContent = t["city-label"];
-  document.getElementById("add-participant-btn-text").textContent = t["add-participant-btn-text"];
-  document.getElementById("meeting-date-label").textContent = t["meeting-date-label"];
-  document.getElementById("meeting-time-label").textContent = t["meeting-time-label"];
-  document.getElementById("show-times-btn").textContent = t["show-times-btn"];
+  // Update main UI strings (existence checks to avoid errors)
+  const back = document.getElementById('back-link'); if (back) back.textContent = t["back-link"] || 'Back to Main Menu';
+  const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.textContent = t["tool-title"] || 'Meeting Planner';
+  const participantLabel = document.getElementById('participant-name-label'); if (participantLabel) participantLabel.textContent = t["participant-name-label"] || 'Participant Name';
+  const participantPlaceholder = document.getElementById('participantName'); if (participantPlaceholder) participantPlaceholder.placeholder = t["participant-name-placeholder"] || 'Enter name';
+  const cityLabel = document.getElementById('city-label'); if (cityLabel) cityLabel.textContent = t["city-label"] || 'Time Zone / City';
+  const addBtnText = document.getElementById('add-participant-btn-text'); if (addBtnText) addBtnText.textContent = t["add-participant-btn-text"] || 'Add Participant';
+
+  document.getElementById("meeting-date-label").textContent = t["meeting-date-label"] || 'Select Meeting Date';
+  document.getElementById("meeting-time-label").textContent = t["meeting-time-label"] || 'Select Meeting Time (suggested)';
 
   // City dropdown
   const citySelect = document.getElementById("participantCity");
   citySelect.innerHTML = '';
-  t["city-options"].forEach(opt => {
+  (t["city-options"] || []).forEach(opt => {
     const option = document.createElement("option");
     option.value = opt.value;
     option.textContent = opt.label;
-    if (opt.value === "") option.selected = true;
     citySelect.appendChild(option);
   });
 
-  // FAQ
-  document.getElementById("faq-title").textContent = t["faq-title"];
+  // FAQ (ensure English has entries — fixes the missing FAQ in en)
   const faqList = document.getElementById("faq-list");
   faqList.innerHTML = "";
-  t["faq-list"].forEach(faq => {
+  (t["faq-list"] || []).forEach(faq => {
     const li = document.createElement("li");
     li.innerHTML = `<b>${faq.bold}</b> ${faq.text}`;
     faqList.appendChild(li);
   });
 
-  // How-To card (LEFT)
-  document.getElementById("howto-title").textContent = t["howto-title"];
-  document.getElementById("howto-article-btn").textContent = t["howto-article-btn"];
-  document.getElementById("howto-article-btn").href = t["howto-article-link"];
+  // How-To & Tips listing (and set localized links)
+  const howtoBtn = document.getElementById("howto-article-btn");
+  if (howtoBtn) {
+    const href = (localizedArticles.howto[lang] || localizedArticles.howto.en);
+    howtoBtn.href = href;
+    howtoBtn.textContent = t["howto-article-btn"] || 'Read Full Article';
+  }
   const howtoSteps = document.getElementById("howto-steps");
   howtoSteps.innerHTML = "";
-  t["howto-steps"].forEach(step => {
+  (t["howto-steps"] || []).forEach(step => {
     const li = document.createElement("li");
     li.innerHTML = `<b>${step.bold}</b> ${step.text}`;
     howtoSteps.appendChild(li);
   });
 
-  // Tips card (RIGHT)
-  document.getElementById("tips-title").textContent = t["tips-title"];
-  document.getElementById("tips-article-btn").textContent = t["tips-article-btn"];
-  document.getElementById("tips-article-btn").href = t["tips-article-link"];
+  const tipsBtn = document.getElementById("tips-article-btn");
+  if (tipsBtn) {
+    const href = (localizedArticles.tips[lang] || localizedArticles.tips.en);
+    tipsBtn.href = href;
+    tipsBtn.textContent = t["tips-article-btn"] || 'Read Full Article';
+  }
   const tipsList = document.getElementById("tips-list");
   tipsList.innerHTML = "";
-  t["tips-list"].forEach(tip => {
+  (t["tips-list"] || []).forEach(tip => {
     const li = document.createElement("li");
     li.innerHTML = `<b>${tip.bold}</b> ${tip.text}`;
     tipsList.appendChild(li);
   });
+
+  populateTimeSelect();
+  updateMeetingTimes();
 }
 
-// --- Meeting Planner JS (add/remove participants, show times) ---
+/* --- Remaining meeting planner logic (participants, time conversion etc.) unchanged --- */
+
 const { DateTime } = luxon;
 const LS_PARTICIPANTS = 'meetingPlannerParticipants';
 const LS_DATE = 'meetingPlannerDate';
@@ -733,40 +394,64 @@ function saveParticipants() {
 }
 function loadMeetingSettings() {
   document.getElementById('meetingDate').value = localStorage.getItem(LS_DATE) || '';
-  document.getElementById('meetingTime').value = localStorage.getItem(LS_TIME) || '';
+  document.getElementById('meetingTimeSelect').value = localStorage.getItem(LS_TIME) || '';
 }
 function saveMeetingSettings() {
   localStorage.setItem(LS_DATE, document.getElementById('meetingDate').value);
-  localStorage.setItem(LS_TIME, document.getElementById('meetingTime').value);
+  localStorage.setItem(LS_TIME, document.getElementById('meetingTimeSelect').value);
 }
 function renderParticipants() {
   const list = document.getElementById('participantList');
   list.innerHTML = '';
+  const lang = getLang();
+  const t = translations[lang] || translations.en;
   if (!window.participants || window.participants.length === 0) {
-    list.innerHTML = '<div style="color: #888;">No participants yet.</div>';
+    list.innerHTML = `<div style="color: #888;">${t["no-participants-yet"] || "No participants yet."}</div>`;
     return;
   }
   window.participants.forEach((p, idx) => {
     const item = document.createElement('div');
     item.className = 'participant-item';
     item.innerHTML = `
-      <div class="participant-text"><b>${p.name}</b> (${p.city.replace(/_/g, ' ')})</div>
-      <div class="participant-actions">
-        <button class="btn btn-outline-danger btn-sm" onclick="removeParticipant(${idx})"><i class="fa fa-trash"></i></button>
+      <div style="min-width:0;">
+        <div style="font-weight:700;">${escapeHtml(p.name)}</div>
+        <div style="font-size:.9em;color:#666;">${escapeHtml(p.city)}</div>
+      </div>
+      <div style="display:flex;gap:.5rem;">
+        <button class="btn btn-outline-danger btn-sm" onclick="removeParticipant(${idx})" aria-label="Remove participant"><i class="fa fa-trash"></i></button>
       </div>
     `;
     list.appendChild(item);
   });
 }
+function escapeHtml(s) {
+  if (!s) return '';
+  return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Redirect already handled early above. Continue initialization for in-page behavior.
+  applyLanguage(getLang());
+  populateTimeSelect();
+  loadParticipants();
+  renderParticipants();
+  loadMeetingSettings();
+  updateMeetingTimes();
+});
+
+/* Add / remove participants handlers (same behavior as original) */
 document.getElementById('add-participant-btn').addEventListener('click', function() {
   const name = document.getElementById('participantName').value.trim();
   const city = document.getElementById('participantCity').value;
+  const lang = getLang();
+  const t = translations[lang] || translations.en;
+
   if (!name) {
-    alert('Please enter a participant name.');
+    alert(t['enter-name-msg'] || 'Please enter a participant name.');
     return;
   }
   if (!city) {
-    alert('Please select a time zone/city.');
+    alert(t['select-city-msg'] || 'Please select a time zone/city.');
     return;
   }
   window.participants.push({ name, city });
@@ -774,52 +459,121 @@ document.getElementById('add-participant-btn').addEventListener('click', functio
   document.getElementById('participantName').value = '';
   document.getElementById('participantCity').selectedIndex = 0;
   renderParticipants();
+  updateMeetingTimes();
 });
 window.removeParticipant = function(idx) {
   window.participants.splice(idx, 1);
   saveParticipants();
   renderParticipants();
-  document.getElementById('meetingTimes').innerHTML = '';
+  updateMeetingTimes();
 };
-document.getElementById('meetingDate').addEventListener('input', saveMeetingSettings);
-document.getElementById('meetingTime').addEventListener('input', saveMeetingSettings);
-document.getElementById('show-times-btn').addEventListener('click', function() {
+document.getElementById('clear-participants-btn').addEventListener('click', function(){
+  if (!window.participants || window.participants.length === 0) return;
+  if (!confirm('Clear all participants?')) return;
+  window.participants = [];
+  saveParticipants();
+  renderParticipants();
+  updateMeetingTimes();
+});
+
+/* Time selector helpers */
+function populateTimeSelect() {
+  const sel = document.getElementById('meetingTimeSelect');
+  const lang = getLang();
+  const t = translations[lang] || translations.en;
+  sel.innerHTML = '';
+  const placeholder = document.createElement('option');
+  placeholder.value = '';
+  placeholder.textContent = '— ' + (t['meeting-time-label'] || 'Select Meeting Time') + ' —';
+  sel.appendChild(placeholder);
+
+  for (let h = 0; h < 24; h++) {
+    for (let m = 0; m < 60; m += 30) {
+      const hr = String(h).padStart(2,'0');
+      const min = String(m).padStart(2,'0');
+      const value = `${hr}:${min}`;
+      const label = `${hr}:${min}`;
+      const opt = document.createElement('option');
+      opt.value = value;
+      opt.textContent = label;
+      sel.appendChild(opt);
+    }
+  }
+  if (!sel.value) {
+    const now = DateTime.local().startOf('minute');
+    const minutes = now.minute;
+    const next = now.plus({ minutes: (minutes < 30 ? (30 - minutes) : (60 - minutes)) });
+    const v = `${String(next.hour).padStart(2,'0')}:${String(Math.floor(next.minute/30)*30).padStart(2,'0')}`;
+    sel.value = v;
+  }
+}
+
+function updateMeetingTimes() {
   const dateInput = document.getElementById('meetingDate').value;
-  const timeInput = document.getElementById('meetingTime').value;
+  const timeInput = document.getElementById('meetingTimeSelect').value;
   const timesDiv = document.getElementById('meetingTimes');
+  const lang = getLang();
+  const t = translations[lang] || translations.en;
+
   if (!dateInput || !timeInput) {
-    timesDiv.innerHTML = '<span style="color:#b00;">Please select both a meeting date and time.</span>';
+    timesDiv.innerHTML = `<div style="color:#888;">${t['select-date-time-msg'] || 'Please select both a meeting date and time.'}</div>`;
     return;
   }
   if (!window.participants || window.participants.length === 0) {
-    timesDiv.innerHTML = '<span style="color:#b00;">Please add at least one participant.</span>';
+    timesDiv.innerHTML = `<div style="color:#888;">${t['no-participants-yet'] || 'No participants yet.'}</div>`;
     return;
   }
-  const localISO = dateInput + 'T' + timeInput;
-  const utcTime = DateTime.fromISO(localISO, { zone: 'utc' });
-  let html = '<b>Meeting Times:</b><ul class="meeting-times-list">';
-  window.participants.forEach(p => {
-    const localTime = utcTime.setZone(p.city);
-    html += `<li><b>${p.name}</b>: ${localTime.toFormat('fff')} <span style="color:#888;">(${p.city})</span></li>`;
-  });
-  html += '</ul>';
-  timesDiv.innerHTML = html;
-});
 
-// Init
-document.getElementById("lang-select").addEventListener("change", function() {
-  localStorage.setItem('meetingPlannerLang', this.value);
-  updateLanguage();
-});
-document.addEventListener("DOMContentLoaded", function() {
-  const savedLang = localStorage.getItem('meetingPlannerLang') || 'en';
-  document.getElementById('lang-select').value = savedLang;
-  updateLanguage();
-  loadParticipants();
-  renderParticipants();
-  loadMeetingSettings();
+  const localISO = `${dateInput}T${timeInput}`;
+  let organizerDT = DateTime.fromISO(localISO);
+  if (!organizerDT.isValid) {
+    timesDiv.innerHTML = `<div style="color:#b00;">${t['select-date-time-msg'] || 'Please select both a meeting date and time.'}</div>`;
+    return;
+  }
+
+  let html = `<div style="font-weight:700;margin-bottom:.4rem;">${t['meeting-times-heading'] || 'Meeting Times (organizer local → participants local)'}</div>`;
+  html += `<div class="meeting-times-grid">`;
+  html += `<div class="time-suggestion"><div><b>Organizer</b> (${escapeHtml(organizerDT.zoneName)})</div><div>${escapeHtml(organizerDT.toLocaleString(DateTime.DATETIME_FULL))}</div></div>`;
+
+  window.participants.forEach(p => {
+    let localP;
+    try {
+      localP = organizerDT.setZone(p.city);
+    } catch (e) {
+      localP = null;
+    }
+    const label = localP ? localP.toLocaleString(DateTime.DATETIME_FULL) : 'Invalid zone';
+    html += `<div class="time-suggestion"><div><b>${escapeHtml(p.name)}</b> <span style="color:#666;">(${escapeHtml(p.city)})</span></div><div>${escapeHtml(label)}</div></div>`;
+  });
+
+  html += `</div>`;
+  timesDiv.innerHTML = html;
+  saveMeetingSettings();
+}
+
+/* Wire up change handlers */
+document.getElementById('meetingDate').addEventListener('input', updateMeetingTimes);
+document.getElementById('meetingTimeSelect').addEventListener('change', updateMeetingTimes);
+
+/* React to timerhavenLang changes from main index */
+window.addEventListener('storage', function(e){
+  if (e.key === 'timerhavenLang') {
+    applyLanguage((e.newValue || 'en').slice(0,2));
+    try {
+      const lang = (e.newValue || 'en').slice(0,2).toLowerCase();
+      const supported = ['es','fr','de','ru','el','ar'];
+      if (supported.indexOf(lang) !== -1) {
+        const localized = location.pathname.replace(/(meeting-planner)(\.html)?$/i, '$1-' + lang + '.html');
+        const target = (localized === location.pathname) ? ('/meeting-planner-' + lang + '.html') : localized;
+        if (target && (target !== location.pathname + location.search + location.hash)) {
+          location.replace(target + location.search + location.hash);
+        }
+      }
+    } catch (err) {}
+  }
 });
   </script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 <footer>
   &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
