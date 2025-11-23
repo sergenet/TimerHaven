@@ -10,30 +10,19 @@
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
-    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 370px; height: auto; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
-    .article-card h2 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; }
-    .article-card ul, .article-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; }
-    .article-card .btn {
-      white-space: normal;
-      word-break: break-word;
-      font-size: 1em;
-      padding: 0.4em 0.6em;
-      min-width: 0;
-      width: 100%;
-      box-sizing: border-box;
-      margin-top: 0.6em;
-      border-radius: 8px;
-      font-weight: 600;
-    }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    
+    
+    
     .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: left; position: relative; z-index: 1; }
     .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
     .back-link { display: inline-block; margin-bottom: 1em; color: #185a9d; text-decoration: none; font-weight: bold; font-size: 1em; }
     .back-link:hover { text-decoration: underline; color: #43cea2; }
     .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
     .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
-    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } }
+    @media (max-width: 1100px) { .main-container{padding:0 8px;} .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } .tool-card, }
+    @media (max-width: 800px) { .main-container{padding:0;} .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } .tool-card,  }
     details[open] summary::after { content: " ▲"; font-size: 0.9em; }
     details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
     details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
@@ -68,7 +57,6 @@
       current = langs[i];
       break;
     }
-  }
   document.getElementById('language-select').value = current;
   document.getElementById('language-select').addEventListener('change', function() {
     window.location.href = 'notes-' + this.value + '.html';
@@ -77,19 +65,13 @@
 </script>
 
   <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div>
-          <h2 style="color:#185a9d;"><i class="fa fa-note-sticky"></i> So nutzen Sie Notizen</h2>
-          <ol>
-            <li><b>Notiz hinzufügen:</b> Schreiben und speichern Sie Ihre Notiz.</li><li><b>Organisieren:</b> Bearbeiten, löschen oder markieren Sie Notizen nach Bedarf.</li><li><b>Produktiv bleiben:</b> Nutzen Sie Notizen für Ideen, Erinnerungen und Aufgaben.</li>
-          </ol>
-        </div>
-        <a href="notes-how-to-de.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;">Vollständigen Artikel lesen</a>
-      </div>
-      <div class="tool-card">
+    <main class="main-container" role="main">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="back-link"><i class='fa fa-arrow-left'></i> Zurück zum Hauptmenü</a>
         <h3><i class="fa fa-note-sticky"></i> Notizen</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/de/notes/notes-index.html" role="button">Vollständigen Leitfaden lesen</a>
+
         <div class="notes-section">
           <form class="notes-form" id="notesForm">
             <input type="text" id="noteInput" class="form-control" placeholder="Notiz eingeben..." style="max-width:180px;">
@@ -103,15 +85,6 @@
             <li><b>Werden Notizen gespeichert?</b> Ja, im Browser bis Sie sie löschen.</li><li><b>Können wichtige Notizen angepinnt werden?</b> Ja, verwenden Sie die Pin-Funktion, falls verfügbar.</li><li><b>Gibt es ein Limit?</b> Nein, Sie können beliebig viele Notizen hinzufügen.</li>
           </ul>
         </details>
-      </div>
-      <div class="article-card">
-        <div>
-          <h2 style="color:#185a9d;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Notizen Tipps</h2>
-          <ul>
-            <li><b>Notizen kurz halten:</b> Fokussieren Sie auf Schlüsselideen und Erinnerungen.</li><li><b>Wichtige Elemente anpinnen:</b> Markieren Sie wichtige Notizen für schnellen Zugriff.</li><li><b>Regelmäßig überprüfen:</b> Entfernen Sie alte Notizen, um organisiert zu bleiben.</li>
-          </ul>
-        </div>
-        <a href="notes-tips-de.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;">Vollständigen Artikel lesen</a>
       </div>
     </div>
   </div>

@@ -10,14 +10,9 @@
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; direction: rtl; }
     .main-container { max-width: 1200px; margin: 2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
-    .center-row { display:flex; gap:2em; width:100%; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card {
-      background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef;
-      width:340px; min-width:220px; max-width:340px; min-height:500px;
-      flex:1 1 340px; display:flex; flex-direction:column; padding:2em 1.3em 1em; box-sizing:border-box; overflow:hidden;
-      text-align:right;
-    }
-    .article-card { padding:1.2em; min-height:200px; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    
     .back-link { display:inline-block; margin-bottom:1em; color:#007bff; text-decoration:none; font-weight:bold; font-size:1em; }
     .back-link:hover { text-decoration:underline; }
     .faq-section { margin-top:1.1em; margin-bottom:0.3em; font-size:1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; direction:rtl; text-align:right; }
@@ -26,30 +21,24 @@
     .participant-item { background:#f7fafc; border-radius:8px; padding:.6rem; margin-bottom:.6rem; display:flex; justify-content:space-between; align-items:center; gap:.6rem; direction:rtl; }
     .meeting-times-grid { display:flex; flex-direction:column; gap:.4rem; margin-top:.6rem; }
     .time-suggestion { display:flex; gap:.6rem; align-items:center; justify-content:space-between; padding:.45rem .6rem; border-radius:8px; background:#fff; border:1px solid #eef6f3; direction:rtl; }
-  </style>
+  
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    </style>
 </head>
 <body>
   <div class="main-container">
-    <div class="center-row">
+    <main class="main-container" role="main">
 
       <!-- Left article card: How-to (Arabic) -->
-      <div class="article-card" aria-labelledby="howto-heading">
-        <h2 id="howto-heading">كيفية استخدام مخطط الاجتماعات</h2>
-        <ol>
-          <li>أضف المشاركين ومناطقهم الزمنية.</li>
-          <li>اختر تاريخًا ووقتًا مقترحًا.</li>
-          <li>تحقق من الأوقات المحلية وشارك الموعد النهائي.</li>
-        </ol>
-        <div class="article-links">
-          <a class="btn btn-outline-primary btn-sm" href="meeting-how-to-ar.html">قراءة المقال الكامل</a>
-        </div>
-      </div>
 
       <!-- Center tool card (Arabic) -->
-      <div class="tool-card" id="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <!-- removed in-page language selector: language controlled by main menu -->
         <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i>&nbsp;العودة إلى القائمة الرئيسية</a>
         <h3 style="display:flex;align-items:center;gap:.6rem;justify-content:flex-end;"><span id="tool-title">مخطط الاجتماعات</span> <i class="fa fa-users"></i></h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ar/meeting-planner/meeting-planner-index.html" role="button">قراءة الدليل الكامل</a>
+
 
         <form id="meetingForm" onsubmit="return false;">
           <div class="meeting-form-row mb-2">
@@ -97,17 +86,6 @@
       </div>
 
       <!-- Right article card: Tips (Arabic) -->
-      <div class="article-card" aria-labelledby="tips-heading">
-        <h2 id="tips-heading">نصائح لاجتماعات أكثر إنتاجية</h2>
-        <ul>
-          <li>خطط مسبقًا لاختيار وقت مناسب للجميع.</li>
-          <li>أرسل دعوات التقويم لتجنب الالتباس.</li>
-          <li>تحقق من المناطق الزمنية قبل الإرسال.</li>
-        </ul>
-        <div class="article-links" style="justify-content:flex-end;">
-          <a class="btn btn-outline-primary btn-sm" href="meeting-tips-ar.html">قراءة المقال الكامل</a>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -170,10 +148,8 @@
       } catch(e) {
         window.participants = [];
       }
-    }
     function saveParticipants() {
       try { localStorage.setItem(LS_KEY, JSON.stringify(window.participants || [])); } catch(e) {}
-    }
     function renderParticipants() {
       const container = document.getElementById('participantList');
       container.innerHTML = '';
@@ -263,11 +239,10 @@
         const savedTime = localStorage.getItem('meetingPlannerTime');
         if (savedDate) document.getElementById('meetingDate').value = savedDate;
         if (savedTime) document.getElementById('meetingTime').value = savedTime;
-      } catch(e){}
-    });
+      } catch(e){});
 
-    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){} });
-    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){} });
+    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){});
+    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){});
   </script>
 </body>
 </html>

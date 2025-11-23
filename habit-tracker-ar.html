@@ -11,16 +11,15 @@
     /* consistent layout with other language files */
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; direction: rtl; }
     .main-container { max-width:1200px; margin:2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
-    .center-row { display:flex; gap:2em; width:100%; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card {
-      background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef;
-      width:340px; min-width:220px; max-width:340px; min-height:500px;
-      flex:1 1 340px; display:flex; flex-direction:column; padding:2em 1.3em 1em; box-sizing:border-box;
-      text-align:right; overflow:hidden;
-    }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
     .tool-card { max-width:410px; min-width:240px; padding:2em 1.5em 1em; position:relative; z-index:1; }
     .tool-card h3 { font-size:1.45em; font-weight:700; margin-bottom:0.1em; display:flex; align-items:center; gap:.4em; justify-content:flex-end; }
-    .article-card h2, .tool-card h3 { font-size:1.35em; font-weight:700; margin-bottom:.4em; }
+    
     .habit-form { margin-bottom:1em; display:flex; gap:.5em; justify-content:stretch; align-items:center; }
     .habit-form input { direction: ltr; } /* input text direction handled by browser; keep placeholder localized */
     .habit-list { margin-bottom:1em; }
@@ -36,9 +35,9 @@
     .banner { background:linear-gradient(90deg,#43cea2 0%,#185a9d 100%); color:#fff; border-radius:10px; font-size:1.11em; font-weight:600; text-align:center; margin-bottom:1em; padding:.7em .8em; }
     .faq-section { margin-top:1.1em; margin-bottom:0.3em; font-size:1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; direction:rtl; text-align:right; }
     /* language-indicator removed */
-    @media (max-width:1100px){ .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width:800px){ .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card{display:none!important;} .howto-mobile, .tips-mobile{ display:block !important; margin-bottom:1em; } }
-    @media (min-width:801px){ .howto-mobile, .tips-mobile { display:none !important; } }
+    @media (max-width:1100px){ .main-container{padding:0 8px;} .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } .tool-card, }
+    @media (max-width:800px){ .main-container{padding:0;} .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } .tool-card,  .howto-mobile, .tips-mobile{ display:block !important; margin-bottom:1em; }
+    @media (min-width:801px){ .howto-mobile, .tips-mobile { display:none !important; }
     details[open] summary::after{ content:" ▲"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" ▼"; font-size:.9em; }
   </style>
 </head>
@@ -47,21 +46,17 @@
   <script>try{ localStorage.setItem('timerhavenLang','ar'); }catch(e){}</script>
 
   <div class="main-container">
-    <div class="center-row">
+    <main class="main-container" role="main">
       <!-- Left article (desktop only) -->
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
 
       <!-- Central tool card -->
-      <div class="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <div id="banner" class="banner" style="display:none;"></div>
         <a href="index.html" class="back-link" id="back-link"></a>
         <h3 id="tool-title"></h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ar/habit-tracker/habit-tracker-index.html" role="button">قراءة الدليل الكامل</a>
+
 
         <div class="stats-bar" id="stats-bar" aria-hidden="true"></div>
 
@@ -82,13 +77,6 @@
       </div>
 
       <!-- Right article (desktop only) -->
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
     </div>
   </div>
 
@@ -126,8 +114,7 @@
         <li><b>هل تُعرض السلاسل؟</b> نعم لكل عادة.</li>`,
       "mark-done":"تم","done-today":"تم اليوم","streak":"السلسلة: ","longest":"الأفضل: ",
       "archive":"أرشفة","unarchive":"استعادة","delete":"حذف","no-habits":"لا توجد عادات بعد."
-    }
-  };
+    };
 
   const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
 
@@ -156,7 +143,6 @@
     } catch (e) {
       return 'ar';
     }
-  }
 
   // Apply translations and re-render
   function applyLanguage(lang) {
@@ -201,8 +187,7 @@
         habit.doneToday = false;
         habit.lastChecked = today;
         changed = true;
-      }
-    });
+      });
     if (changed) saveHabits();
   }
 
@@ -223,7 +208,6 @@
     } else {
       banner.style.display = "none";
     }
-  }
 
   function renderHabits() {
     resetHabitsIfNeeded();
@@ -308,8 +292,7 @@
       if (e.key === 'timerhavenLang') {
         const lang = (e.newValue || getLang()).slice(0,2);
         applyLanguage(lang);
-      }
-    });
+      });
 
     // Wire resize to show/hide mobile tips
     window.addEventListener('resize', function(){ applyLanguage(getLang()); });
@@ -331,7 +314,6 @@
       saveHabits();
       renderHabits();
     }
-  }
   window.archiveHabit = function(idx){
     habits[idx].archived = !habits[idx].archived;
     saveHabits();

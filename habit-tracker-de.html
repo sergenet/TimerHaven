@@ -11,11 +11,15 @@
     /* same styling as the English file for parity */
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
-    .article-card, .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 340px; min-width: 220px; max-width: 340px; min-height: 500px; flex: 1 1 340px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.3em 1em 1.3em; margin: 0; box-sizing: border-box; text-align: left; overflow: hidden; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
     .tool-card { max-width: 410px; min-width: 240px; padding: 2em 1.5em 1em 1.5em; position: relative; z-index: 1; }
     .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
-    .article-card h2, .tool-card h3 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; }
+    
     .habit-form { margin-bottom: 1em; display:flex; gap:.5em; }
     .habit-item { background:#f7fafc; border-radius:7px; padding:.6em .8em; margin-bottom:.6em; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
     .dot { width:15px; height:15px; border-radius:50%; display:inline-block; background:#e0e7ef; border:1px solid #d0d0d0;}
@@ -24,31 +28,17 @@
     .stats-bar{ background:#f6fbfa; border-radius:10px; margin-bottom:1.2em; padding:.7em 1em; font-size:1.05em; font-weight:600; color:#185a9d; display:flex; gap:2em; align-items:center; justify-content:space-between; }
     .banner{ background:linear-gradient(90deg,#43cea2 0%,#185a9d 100%); color:#fff; border-radius:10px; font-size:1.11em; font-weight:600; text-align:center; margin-bottom:1em; padding:.7em .8em; }
     /* language-indicator removed */
-  </style>
+  
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    </style>
 </head>
 <body>
   <!-- Force German for local-file testing -->
   <script>try{ localStorage.setItem('timerhavenLang','de'); }catch(e){}</script>
 
   <div class="main-container">
-    <div class="center-row">
-      <div class="article-card"><div><h2 id="howto-title"></h2><ol id="howto-steps"></ol></div><a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a></div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card">
-        <div id="banner" class="banner" style="display:none;"></div>
-        <a href="index.html" class="back-link" id="back-link"></a>
-        <h3 id="tool-title"></h3>
-        <div class="stats-bar" id="stats-bar"></div>
-        <form class="habit-form" id="habitForm"><input type="text" id="habitInput" class="form-control" placeholder=""><button type="submit" class="btn btn-success btn-sm" id="add-btn"></button></form>
-        <div id="habitList" class="habit-list"></div>
-
-        <details class="faq-section" id="faq-section"><summary id="faq-title"></summary><ul id="faq-list" style="padding-left:1em;"></ul></details>
-
-        <!-- removed the duplicate desktop "Tipps" link from inside the tool-card -->
-      </div>
-
-      <div class="article-card"><div><h2 id="tips-title"></h2><ul id="tips-list"></ul></div><a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a></div>
-    </div>
   </div>
 
   <!-- Mobile-only tips collapsible (outside the tool card) -->
@@ -84,12 +74,11 @@
         <li><b>Serien sichtbar?</b> Ja, für jede Gewohnheit.</li>`,
       "mark-done":"Erledigt","done-today":"Heute erledigt","streak":"Serie: ","longest":"Bestes: ",
       "archive":"Archivieren","unarchive":"Wiederherstellen","delete":"Löschen","no-habits":"Noch keine Gewohnheiten."
-    }
-  };
+    };
 
   const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
 
-  function getLang(){ try{ const l=localStorage.getItem('timerhavenLang')||'de'; return (l && l.slice(0,2)) || 'de'; }catch(e){ return 'de'; } }
+  function getLang(){ try{ const l=localStorage.getItem('timerhavenLang')||'de'; return (l && l.slice(0,2)) || 'de'; }catch(e){ return 'de'; }
 
   function applyLanguage(lang){
     lang = (lang || getLang()).slice(0,2);
@@ -114,7 +103,6 @@
     if (mobileDetails) {
       mobileDetails.style.display = (window.innerWidth < 801) ? 'block' : 'none';
     }
-  }
 
   function getTodayStr(){ const d=new Date(); return d.getFullYear()+"-"+(d.getMonth()+1).toString().padStart(2,"0")+"-"+d.getDate().toString().padStart(2,"0"); }
   function lastNDays(n){ const arr=[]; for(let i=n-1;i>=0;i--){ const d=new Date(); d.setDate(d.getDate()-i); arr.push(d.getFullYear()+"-"+(d.getMonth()+1).toString().padStart(2,"0")+"-"+d.getDate().toString().padStart(2,"0")); } return arr; }
@@ -132,11 +120,11 @@
     renderStats(activeCount, doneTodayCount, bestStreak); renderBanner(activeCount, doneTodayCount);
   }
   function renderStats(tracked, done, best){ const t=habitTranslations[getLang()]; document.getElementById("stats-bar").innerHTML = `${t["stats-tracked"]}${tracked} &bull; ${t["stats-done"]}${done} &bull; ${t["stats-best"]}${best}`; }
-  function renderBanner(tracked, done){ const t=habitTranslations[getLang()]; const banner=document.getElementById("banner"); if(tracked>0 && done===tracked){ banner.textContent=t["banner-all-done"]; banner.style.display="block"; } else { banner.style.display="none"; } }
+  function renderBanner(tracked, done){ const t=habitTranslations[getLang()]; const banner=document.getElementById("banner"); if(tracked>0 && done===tracked){ banner.textContent=t["banner-all-done"]; banner.style.display="block"; } else { banner.style.display="none"; }
 
   document.getElementById('habitForm').addEventListener('submit', function(e){ e.preventDefault(); const name=document.getElementById('habitInput').value.trim(); if(!name) return; habits.push({ name, streak:0, longest:0, doneToday:false, lastChecked:getTodayStr(), history:[], archived:false }); saveHabits(); document.getElementById('habitInput').value=''; renderHabits(); });
 
-  window.markDone=function(idx){ const today=getTodayStr(); if(!habits[idx].doneToday){ habits[idx].doneToday=true; habits[idx].lastChecked=today; habits[idx].streak=(habits[idx].streak||0)+1; habits[idx].longest=Math.max(habits[idx].longest||0,habits[idx].streak); if(!habits[idx].history) habits[idx].history=[]; if(!habits[idx].history.includes(today)) habits[idx].history.push(today); saveHabits(); renderHabits(); } }
+  window.markDone=function(idx){ const today=getTodayStr(); if(!habits[idx].doneToday){ habits[idx].doneToday=true; habits[idx].lastChecked=today; habits[idx].streak=(habits[idx].streak||0)+1; habits[idx].longest=Math.max(habits[idx].longest||0,habits[idx].streak); if(!habits[idx].history) habits[idx].history=[]; if(!habits[idx].history.includes(today)) habits[idx].history.push(today); saveHabits(); renderHabits(); }
   window.archiveHabit=function(idx){ habits[idx].archived=!habits[idx].archived; saveHabits(); renderHabits(); }
   window.deleteHabit=function(idx){ habits.splice(idx,1); saveHabits(); renderHabits(); }
 

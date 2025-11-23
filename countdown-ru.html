@@ -11,44 +11,10 @@
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row, .card-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
-    .article-card, .tool-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #e0e7ef;
-      min-width: 220px;
-      max-width: 340px;
-      width: 340px;
-      min-height: 500px;
-      flex: 1 1 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      padding: 2em 1.3em 1em 1.3em;
-      margin: 0;
-      box-sizing: border-box;
-      text-align: left;
-      overflow: hidden;
-    }
-    .article-card h2, .tool-card h3 {
-      font-size: 1.35em;
-      font-weight: 700;
-      margin-bottom: 0.4em;
-      display: flex;
-      align-items: center;
-      gap: 0.3em;
-    }
-    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol {
-      margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word;
-    }
-    .article-card .btn, .tool-card .btn {
-      align-self: stretch;
-      font-weight: 600;
-      border-radius: 8px;
-      margin-top: 0.2em;
-      margin-bottom: 0;
-      box-sizing: border-box;
-    }
+    
+    
+    
+    
     .countdown-section { margin-bottom: 1.5em; }
     .countdown-section input[type="number"] { width: 100px; display: inline-block; margin-right: 0.5em; }
     .countdown-section .btn { margin-right: 0.3em; min-width: 80px; margin-bottom: 0.3em; }
@@ -62,38 +28,36 @@
     @media (max-width: 1100px) {
       .main-container{padding:0 8px;}
       .center-row, .card-row{gap:1em;}
-      .tool-card,.article-card{width:97vw;max-width:540px;height:auto;}
+      .tool-card,
     }
     @media (max-width: 800px) {
       .main-container{padding:0;}
       .center-row, .card-row{flex-direction:column;align-items:center;}
-      .tool-card,.article-card{width:98vw;max-width:540px;height:auto;}
-      .article-card { display: none !important; }
+      .tool-card,
+      
     }
     details[open] summary::after { content: " ▲"; font-size: 0.9em; }
     details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
     details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
-  </style>
+  
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    </style>
 </head>
 <body>
   <!-- Force Russian for local-file testing so opening this local file shows Russian UI -->
   <script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){}</script>
 
 <div class="main-container">
-  <div class="center-row">
+  <main class="main-container" role="main">
     <!-- Article 1 (desktop only) -->
-    <div class="article-card">
-      <div>
-        <h2 id="howto-title"></h2>
-        <ol id="howto-steps"></ol>
-      </div>
-      <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-    </div>
 
     <!-- Countdown Tool -->
-    <div class="tool-card">
+    <section class="tool-card" aria-labelledby="tool-title">
       <a href="index.html" class="back-link" id="back-link"></a>
       <h3 id="tool-title"></h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ru/countdown/countdown-index.html" role="button">Читать полное руководство</a>
+
       <div class="help-section" id="tool-help"></div>
 
       <div class="countdown-section">
@@ -118,13 +82,6 @@
     </div>
 
     <!-- Article 2 (desktop only) -->
-    <div class="article-card">
-      <div>
-        <h2 id="tips-title"></h2>
-        <ul id="tips-list"></ul>
-      </div>
-      <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-    </div>
   </div>
 </div>
 
@@ -340,8 +297,7 @@
         <li><b>راجع سير العمل:</b> اكتشف أي مدة تناسبك أكثر.</li>`,
       "tips-article-btn": "اقرأ المقال الكامل",
       "tips-article-link": "countdown-tips-ar.html"
-    }
-  };
+    };
 
   const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
 
@@ -352,7 +308,6 @@
     } catch (e) {
       return 'ru';
     }
-  }
 
   function applyLanguage(lang) {
     lang = (lang || getLang()).slice(0,2);
@@ -425,8 +380,7 @@
   window.addEventListener('storage', function(e) {
     if (e.key === 'timerhavenLang') {
       applyLanguage((e.newValue || 'ru').slice(0,2));
-    }
-  });
+    });
 
   // Timer logic
   let timerInterval = null;
@@ -440,7 +394,6 @@
     if (disp) {
       disp.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
     }
-  }
 
   document.addEventListener("DOMContentLoaded", function() {
     applyLanguage(getLang());
@@ -479,8 +432,7 @@
               alert(t['alert-end'] || "Время вышло!");
             } catch (e) {}
             if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Пауза';
-          }
-        }, 1000);
+          }, 1000);
       });
     }
 
@@ -505,8 +457,7 @@
         if (pauseBtnEl) pauseBtnEl.textContent = t['pause'] || 'Пауза';
         paused = false;
       });
-    }
-  });
+    });
 </script>
 
 <footer>

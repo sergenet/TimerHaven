@@ -10,11 +10,11 @@
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
-    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 340px; height: 340px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
-    .article-card h2 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; }
-    .article-card ul, .article-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; }
-    .article-card .btn { align-self: stretch; font-weight: 600; border-radius: 8px; margin-top: 0.2em; margin-bottom: 0; box-sizing: border-box; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    
+    
+    
     .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: left; position: relative; z-index: 1; }
     .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
     .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
@@ -25,9 +25,9 @@
 
     /* language-indicator CSS removed intentionally */
 
-    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; } }
-    @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; } }
+    @media (max-width: 1100px) { .main-container{padding:0 8px;} .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } .tool-card, }
+    @media (max-width: 800px) { .main-container{padding:0;} .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } .tool-card,  .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; }
+    @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; }
     details[open] summary::after { content: " ▲"; font-size: 0.9em; }
     details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
     details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
@@ -41,23 +41,19 @@
   <!-- Removed per-page language setter and removed visible language indicator so the site-level language control is the single source-of-truth -->
 
   <div class="main-container">
-    <div class="center-row">
+    <main class="main-container" role="main">
       <!-- Article 1 (desktop only) -->
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
       <!-- Tool card -->
-      <div class="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <details class="howto-mobile" id="howto-mobile">
           <summary><h4 style="color:#185a9d;display:inline;" id="howto-mobile-title"></h4></summary>
           <ol id="howto-mobile-steps"></ol>
         </details>
         <a href="index.html" class="back-link" id="back-link"></a>
         <h3 id="tool-title"></h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/de/currency/currency-index.html" role="button">Vollständigen Leitfaden lesen</a>
+
         <div class="tool-help" id="tool-help"></div>
         <div class="converter-section">
           <form class="converter-form" id="currencyForm">
@@ -79,13 +75,6 @@
         </details>
       </div>
       <!-- Article 2 (desktop only) -->
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
     </div>
   </div>
 
@@ -300,8 +289,7 @@
           <li><b>استخدمه في السفر:</b> حوّل الأسعار المحلية بسرعة.</li>`,
         "tips-article-btn": "اقرأ المقال الكامل",
         "tips-article-link": "currency-tips-ar.html"
-      }
-    };
+      };
 
     // language display names for the indicator (JS may update these IDs if present elsewhere)
     const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
@@ -329,7 +317,6 @@
       } catch (e) {
         return 'de';
       }
-    }
 
     // apply translations to UI based on timerhavenLang
     function applyLanguage(lang) {
@@ -399,8 +386,7 @@
     window.addEventListener('storage', function(e) {
       if (e.key === 'timerhavenLang') {
         applyLanguage((e.newValue || 'de').slice(0,2));
-      }
-    });
+      });
 
     // form submit: use getLang() to determine messages
     document.getElementById('currencyForm').addEventListener('submit', function(e){
@@ -428,8 +414,7 @@
             document.getElementById('result').innerText = `${amountVal} ${fromCur} = ${conv} ${toCur} (Kurs: ${rate})`;
           } else {
             document.getElementById('result').innerText = t['conversion-unavailable'] || "Umrechnung nicht verfügbar.";
-          }
-        })
+          })
         .catch(() => {
           document.getElementById('result').innerText = t['fetch-error'] || "Konnte die Umrechnung nicht abrufen.";
         });

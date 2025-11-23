@@ -12,9 +12,14 @@
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
     .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:340px; padding:1.3rem; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
+    
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
     .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
     .form-inline { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
     .pomodoro-display { font-weight:700; font-size:1.25rem; margin-top:.5rem; margin-bottom:.5rem; }
@@ -23,7 +28,7 @@
     .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
     .btn-small { padding:.35rem .7rem; font-size:.9rem; }
     footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-    @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
+    @media (max-width:900px) { .tool-card{ width:98vw; padding:1rem; }  }
   </style>
 </head>
 <body>
@@ -40,23 +45,17 @@
       <p class="lead" style="color:#374151; margin-bottom:1rem;">Améliorez votre concentration avec la technique Pomodoro. Apprenez à utiliser le Minuteur Pomodoro, obtenez des conseils, FAQs et articles.</p>
     </div>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-apple-whole"></i> Comment utiliser le Minuteur Pomodoro</h2>
-          <ol style="padding-left:1.1rem; color:#374151;">
-            <li><b>Réglez le minuteur :</b> Choisissez la durée de travail et de pause.</li><li><b>Démarrez :</b> Cliquez sur <strong>Démarrer</strong> pour commencer.</li><li><b>Prenez des pauses :</b> Quand le minuteur s&#x27;arrête, faites une courte pause, puis recommencez.</li><li><b>Répétez :</b> Après plusieurs Pomodoros, prenez une pause plus longue.</li>
-          </ol>
-        </div>
-        <a href="pomodoro-how-to-fr.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Lire l&#x27;article</a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card" role="region" aria-label="Minuteur Pomodoro">
+      <section class="tool-card" aria-labelledby="tool-title">
         <!-- Back to main menu (translated and id for potential script localization) -->
-        <a id="backLink" href="index.html" class="d-block mb-2" style="text-decoration:none; color:#0d6efd; font-weight:600;" aria-label="Retour au menu principal">
+        <a href="index.html" class="back-link" id="back-link">
           &larr; Retour au menu principal
         </a>
         <h3><i class="fa fa-apple-whole"></i> Minuteur Pomodoro</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/fr/pomodoro-timer/pomodoro-index.html" role="button">Lire le guide complet</a>
+
 
         <div class="pomodoro-section" aria-live="polite">
           <div class="form-inline mb-2">
@@ -97,16 +96,7 @@
         </div>
       </div>
 
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils Pomodoro — TimerHaven</h2>
-          <ul style="padding-left:1.1rem; color:#374151;">
-            <li><b>Ne sautez pas les pauses :</b> Elles rechargent votre énergie.</li><li><b>Suivez vos sessions :</b> Notez vos Pomodoros quotidiens.</li><li><b>Personnalisez :</b> Ajustez les durées selon vos tâches.</li>
-          </ul>
-        </div>
-        <a href="pomodoro-tips-fr.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Lire l&#x27;article</a>
-      </div>
-    </div>
+    </main>
 
     <footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
       &copy; 2025 TimerHaven. <a href="privacy.html">Politique de confidentialité</a> &bull; <a href="terms.html">Conditions</a> &bull; <a href="contact.html">Contact</a>
@@ -164,8 +154,7 @@
           if (isWork) cycleCount++;
           isWork = !isWork;
           setLengths();
-        }
-      }, 1000);
+        }, 1000);
     });
 
     document.getElementById('pauseBtn').addEventListener('click', function(){

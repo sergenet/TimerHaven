@@ -10,7 +10,7 @@
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
     .tool-card {
       background: #fff;
       border-radius: 16px;
@@ -35,30 +35,22 @@
     .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
     .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
     .article-links { display:flex; flex-direction:column; gap:.5rem; margin-top:.6rem; }
-    .article-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef; padding:1.2em; width:340px; box-sizing:border-box; }
+    
   </style>
 </head>
 <body>
   <div class="main-container">
-    <div class="center-row">
+    <main class="main-container" role="main">
 
       <!-- Left article card: How-to -->
-      <div class="article-card" aria-labelledby="howto-heading">
-        <h2 id="howto-heading">Comment utiliser le Planificateur de Réunion</h2>
-        <ol>
-          <li>Ajoutez les participants et leurs fuseaux horaires.</li>
-          <li>Choisissez une date et une heure suggérée.</li>
-          <li>Vérifiez les heures locales et partagez l'horaire final.</li>
-        </ol>
-        <div class="article-links">
-          <a id="howto-article-link" class="btn btn-outline-primary btn-sm" href="meeting-how-to-fr.html">Lire l'article complet</a>
-        </div>
-      </div>
 
       <!-- Center tool card -->
-      <div class="tool-card" id="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Retour au menu principal</a>
         <h3><i class="fa fa-users"></i> Planificateur de Réunion</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/fr/meeting-planner/meeting-planner-index.html" role="button">Lire le guide complet</a>
+
 
         <form id="meetingForm" onsubmit="return false;">
           <div class="meeting-form-row mb-2">
@@ -106,17 +98,6 @@
       </div>
 
       <!-- Right article card: Tips -->
-      <div class="article-card" aria-labelledby="tips-heading">
-        <h2 id="tips-heading">Conseils de productivité pour les réunions</h2>
-        <ul>
-          <li>Planifiez à l'avance pour trouver un horaire qui convient à tous.</li>
-          <li>Envoyez des invitations de calendrier pour éviter la confusion.</li>
-          <li>Vérifiez les fuseaux horaires avant d'envoyer l'invitation.</li>
-        </ul>
-        <div class="article-links">
-          <a class="btn btn-outline-primary btn-sm" href="meeting-tips-fr.html">Lire l'article complet</a>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -178,10 +159,8 @@
       } catch(e) {
         window.participants = [];
       }
-    }
     function saveParticipants() {
       try { localStorage.setItem(LS_KEY, JSON.stringify(window.participants || [])); } catch(e){}
-    }
     function renderParticipants() {
       const container = document.getElementById('participantList');
       container.innerHTML = '';
@@ -268,11 +247,10 @@
         const savedTime = localStorage.getItem('meetingPlannerTime');
         if (savedDate) document.getElementById('meetingDate').value = savedDate;
         if (savedTime) document.getElementById('meetingTime').value = savedTime;
-      } catch(e){}
-    });
+      } catch(e){});
 
-    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){} });
-    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){} });
+    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){});
+    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){});
 
   </script>
 </body>

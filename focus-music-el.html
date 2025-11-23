@@ -11,40 +11,33 @@
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; }
     .main-container { max-width:1200px; margin:2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
     .center-row, .card-row { display:flex; gap:2em; width:100%; justify-content:center; align-items:stretch; }
-    .article-card, .tool-card {
-      background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef;
-      min-width:220px; max-width:340px; width:340px; min-height:500px;
-      flex:1 1 340px; display:flex; flex-direction:column; padding:2em 1.3em 1em; box-sizing:border-box;
-      text-align:left; overflow:hidden;
-    }
-    .article-card h2, .tool-card h3 { font-size:1.35em; font-weight:700; margin-bottom:.4em; display:flex; gap:.3em; align-items:center; }
+    
+    
     .music-player { margin-bottom:1em; }
     .music-player label { margin-left:.5em; font-size:1em; }
     .faq-section { margin-top:1.1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; }
     .back-link { display:inline-block; margin-bottom:1em; color:#007bff; text-decoration:none; font-weight:700; }
     .back-link:hover { text-decoration:underline; }
-    @media (max-width:1100px){ .main-container{padding:0 8px;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width:800px){ .center-row{flex-direction:column;align-items:center;} .article-card{display:none!important;} }
+    @media (max-width:1100px){ .main-container{padding:0 8px;} .tool-card, }
+    @media (max-width:800px){ .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
     details[open] summary::after{ content:" ▲"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" ▼"; font-size:.9em; }
-  </style>
+  
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    </style>
 </head>
 <body>
   <!-- Force Greek for local testing -->
   <script>try{ localStorage.setItem('timerhavenLang','el'); }catch(e){}</script>
 
   <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="back-link" id="back-link"></a>
         <h3 id="tool-title"></h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/el/focus-music/focus-music-index.html" role="button">Διαβάστε τον πλήρη οδηγό</a>
+
         <div class="help-section" id="tool-help"></div>
 
         <div class="music-player">
@@ -74,13 +67,6 @@
         </details>
       </div>
 
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
     </div>
   </div>
 
@@ -165,14 +151,12 @@
       "tips-article-btn":"Διαβάστε το πλήρες άρθρο","tips-article-link":"focus-music-tips-el.html"
     },
     es: { "language-label":"Idioma:","back-link":"Volver al menú principal","tool-title":"Música para concentrarse","tool-help":"Mejora tu concentración με música.","music-label":"Selecciona una lista:","music-white":"Ruido blanco","music-rain":"Lluvia","music-alpha":"Ondas alfa","music-classical":"Clásica","music-ocean":"Olas","music-cafe":"Ambiente de café","loop-label":"Repetir pista","play":"Reproducir","stop":"Detener","faq-title":"Preguntas frecuentes","faq-list":"<li>...</li>","howto-title":"<i class='fa fa-music'></i> Cómo usar","howto-steps":"<li>...</li>","howto-article-btn":"Leer","howto-article-link":"focus-music-how-to-es.html","tips-title":"<i class='fa fa-lightbulb' style='color:#43cea2;'></i> Consejos","tips-list":"<li>...</li>","tips-article-btn":"Leer","tips-article-link":"focus-music-tips-es.html" },
-    ar: { "language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"موسيقى التركيز","tool-help":"عزز تركيزك بإيقاعات علمية.","music-label":"اختر قائمة تشغيل:","music-white":"ضوضاء بيضاء","music-rain":"مطر","music-alpha":"موجات ألفا","music-classical":"كلاسيك","music-ocean":"أمواج البحر","music-cafe":"أجواء مقهى","loop-label":"تكرار المقطع","play":"تشغيل","stop":"إيقاف","faq-title":"الأسئلة الشائعة","faq-list":"<li>...</li>","howto-title":"<i class='fa fa-music'></i> كيفية الاستخدام","howto-steps":"<li>...</li>","howto-article-btn":"اقرأ","howto-article-link":"focus-music-how-to-ar.html","tips-title":"<i class='fa fa-lightbulb' style='color:#43cea2;'></i> نصائح","tips-list":"<li>...</li>","tips-article-btn":"اقرأ","tips-article-link":"focus-music-tips-ar.html" }
-  };
+    ar: { "language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"موسيقى التركيز","tool-help":"عزز تركيزك بإيقاعات علمية.","music-label":"اختر قائمة تشغيل:","music-white":"ضوضاء بيضاء","music-rain":"مطر","music-alpha":"موجات ألفا","music-classical":"كلاسيك","music-ocean":"أمواج البحر","music-cafe":"أجواء مقهى","loop-label":"تكرار المقطع","play":"تشغيل","stop":"إيقاف","faq-title":"الأسئلة الشائعة","faq-list":"<li>...</li>","howto-title":"<i class='fa fa-music'></i> كيفية الاستخدام","howto-steps":"<li>...</li>","howto-article-btn":"اقرأ","howto-article-link":"focus-music-how-to-ar.html","tips-title":"<i class='fa fa-lightbulb' style='color:#43cea2;'></i> نصائح","tips-list":"<li>...</li>","tips-article-btn":"اقرأ","tips-article-link":"focus-music-tips-ar.html" };
 
   const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
 
   function getLang() {
     try { const l = localStorage.getItem('timerhavenLang') || 'el'; return (l && l.slice(0,2)) || 'el'; } catch(e){ return 'el'; }
-  }
 
   function applyLanguage(lang) {
     lang = (lang || getLang()).slice(0,2);
@@ -212,7 +196,6 @@
     if (document.getElementById('tips-title')) document.getElementById('tips-title').innerHTML = t['tips-title'] || '';
     if (document.getElementById('tips-list')) document.getElementById('tips-list').innerHTML = t['tips-list'] || '';
     if (document.getElementById('tips-article-btn')) { document.getElementById('tips-article-btn').textContent = t['tips-article-btn'] || ''; document.getElementById('tips-article-btn').href = t['tips-article-link'] || ''; }
-  }
 
   window.addEventListener('storage', function(e) {
     if (e.key === 'timerhavenLang') applyLanguage((e.newValue || 'el').slice(0,2));

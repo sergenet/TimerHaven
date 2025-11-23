@@ -12,28 +12,21 @@
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
 
     /* Force cards to stretch to the same height and allow content to flow */
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:stretch; flex-wrap:wrap; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
 
-    .article-card, .tool-card {
-      background:#fff;
-      border-radius:16px;
-      box-shadow:0 2px 12px rgba(0,0,0,0.06);
-      padding:1.3rem;
-      box-sizing:border-box;
-      min-width:280px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
 
     /* let cards size naturally but keep a comfortable minimum on desktop */
-    .article-card { width:330px; min-height:360px; align-items:flex-start; padding-bottom:1.2rem; }
+    
     .tool-card { width:410px; min-width:240px; min-height:360px; padding-bottom:1.2rem; }
 
     /* Responsive fallback */
-    @media (max-width:900px) {
-      .center-row{flex-direction:column;align-items:center;}
-      .article-card, .tool-card{width:98%; max-width:540px; min-height:auto;}
+    @media (max-width:900px) { .tool-card{ width:98vw; padding:1rem; }
+      
     }
 
     .converter-form { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center; }
@@ -42,18 +35,12 @@
     .btn-small { padding:.35rem .7rem; font-size:.9rem; }
 
     /* Ensure article buttons are block-level, full width, and inside the card */
-    .article-card a.btn,
-    .tool-card a.btn {
-      display:block;
-      width:100%;
-      box-sizing:border-box;
-      text-align:center;
-      margin-top:.6rem;
-      margin-bottom:0;
-    }
+    
 
     footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-  </style>
+  
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    </style>
 </head>
 <body>
   <div class="page-wrap">
@@ -62,22 +49,15 @@
       <p class="lead" style="color:#374151; margin-bottom:1rem;">Конвертируйте длину, вес, температуру и другие единицы. Узнайте, как пользоваться конвертером, получите советы и статьи.</p>
     </div>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-left-ru">
-        <h2 id="howto-left-ru">Как пользоваться конвертером</h2>
-        <ol style="padding-left:1.1rem; color:#374151;">
-          <li><b>Введите значение:</b> Введите число для конвертации.</li>
-          <li><b>Выберите тип:</b> Длина / Вес / Температура.</li>
-          <li><b>Выберите единицы:</b> Укажите исходную и целевую единицы.</li>
-          <li><b>Нажмите Преобразовать:</b> Получите результат сразу.</li>
-        </ol>
-        <a href="unit-how-to-ru.html" class="btn btn-outline-primary btn-sm">Читать статью</a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card" role="region" aria-label="Конвертер единиц">
+      <section class="tool-card" aria-labelledby="tool-title">
         <div>
           <a href="index.html" class="back-link" style="text-decoration:none; color:#0d6efd; font-weight:600; margin-bottom:.4rem; display:block;">&larr; Назад в главное меню</a>
           <h3><i class="fa fa-ruler-combined"></i> Конвертер единиц</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ru/unit-converter/unit-converter-index.html" role="button">Читать полное руководство</a>
+
 
           <div class="unit-section">
             <form class="converter-form" id="unitForm">
@@ -106,16 +86,7 @@
         </details>
       </div>
 
-      <div class="article-card" aria-labelledby="tips-right-ru">
-        <h2 id="tips-right-ru">Советы</h2>
-        <ul style="padding-left:1.1rem; color:#374151;">
-          <li><b>Проверяйте единицы:</b> Убедитесь, что выбрали правильный тип.</li>
-          <li><b>Поменяйте направление:</b> Попробуйте обратную конверсию для проверки.</li>
-          <li><b>Добавьте в закладки:</b> Быстрый доступ в будущем.</li>
-        </ul>
-        <a href="unit-tips-ru.html" class="btn btn-outline-primary btn-sm">Читать статью</a>
-      </div>
-    </div>
+    </main>
 
     <footer class="site">© 2025 TimerHaven. <a href="privacy.html">Политика</a></footer>
   </div>
@@ -141,7 +112,6 @@
         if (from === "Fahrenheit" && to === "Kelvin") return (val - 32) * 5/9 + 273.15;
         if (from === "Kelvin" && to === "Fahrenheit") return (val - 273.15) * 9/5 + 32;
       }
-    }
   };
 
   function populateUnits(type) {

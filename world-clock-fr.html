@@ -21,40 +21,18 @@
     .text-center.mb-4 h1 { font-size:2.4rem !important; margin:0 !important; color:#0b2545 !important; }
     .text-center.mb-4 p.lead { margin-top:.4rem !important; color:#6b7280 !important; }
 
-    .center-row { display:flex !important; gap:1.6rem !important; justify-content:center !important; align-items:flex-start !important; flex-wrap:nowrap !important; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
 
-    .article-card, .tool-card {
-      background:#fff !important;
-      border-radius:18px !important;
-      box-shadow: 0 6px 20px rgba(11,37,69,0.06) !important;
-      padding:1.3rem !important;
-      box-sizing:border-box !important;
-      display:flex !important;
-      flex-direction:column !important;
-      justify-content:space-between !important;
-    }
+    
 
     /* Make all cards equal height for visual consistency */
-    .article-card, .tool-card { width: 330px; min-height: 420px !important; }
+    
     .tool-card { width: 420px; min-height: 420px !important; }
 
-    .article-card h2, .tool-card h3 { color:#185a9d !important; margin:0 0 .6rem 0 !important; font-size:1.25rem !important; }
-    .article-card ul, .article-card ol, .tool-card ul { color:#374151 !important; padding-left:1.1rem !important; }
+    
+    
 
-    .article-card > a.btn,
-    .article-card .btn-outline-primary {
-      width:100% !important;
-      box-sizing:border-box !important;
-      display:inline-block !important;
-      padding:.5rem .75rem !important;
-      border-radius:8px !important;
-      border:1px solid rgba(13,110,253,0.18) !important;
-      color:#0d6efd !important;
-      background:transparent !important;
-      text-align:center !important;
-      margin-top:.35rem !important;
-      font-weight:600 !important;
-    }
+    
 
     .tool-card .back-link { color:#0d6efd !important; display:inline-block !important; margin-bottom:.6rem !important; text-decoration:none !important; }
 
@@ -63,8 +41,8 @@
     footer.site { text-align:center !important; margin-top:1.6rem !important; color:#6b7280 !important; }
 
     @media (max-width:900px) {
-      .center-row { flex-direction:column !important; align-items:center !important; gap:1rem !important; }
-      .article-card, .tool-card { width:98vw !important; max-width:540px !important; min-height: auto !important; }
+      .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+      
       .text-center.mb-4 h1 { font-size:1.8rem !important; }
     }
 
@@ -97,21 +75,9 @@
       <p class="lead">Voyez l&#x27;heure partout dans le monde instantanément.</p>
     </div>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-globe"></i> Comment utiliser l&#x27;Horloge mondiale</h2>
-          <ol>
-            <li><b>Ajouter une ville :</b> Utilisez le menu pour les villes populaires ou commencez à taper le nom.</li>
-            <li><b>Comparer les heures :</b> Ajoutez plusieurs villes pour voir les heures côte à côte.</li>
-            <li><b>Supprimer :</b> Cliquez sur Supprimer pour retirer une ville.</li>
-            <li><b>Actualisation :</b> Les heures se mettent à jour automatiquement.</li>
-          </ol>
-        </div>
-        <a href="world-how-to-fr.html" class="btn btn-outline-primary btn-sm">Lire l&#x27;article</a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card" role="region" aria-label="World Clock">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="back-link">&larr; Retour au menu principal</a>
         <div class="world-section">
           <form class="clock-form" id="clockForm">
@@ -138,18 +104,7 @@
         </details>
       </div>
 
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils Horloge mondiale</h2>
-          <ul>
-            <li><b>Planifiez vos réunions :</b> Ajoutez vos villes pour trouver le meilleur créneau.</li>
-            <li><b>Voyagez malin :</b> Vérifiez l'heure locale avant de partir.</li>
-            <li><b>Utilisez l'autocomplétion :</b> Commencez à taper pour trouver rapidement une ville.</li>
-          </ul>
-        </div>
-        <a href="world-tips-fr.html" class="btn btn-outline-primary btn-sm">Lire l&#x27;article</a>
-      </div>
-    </div>
+    </main>
 
     <footer class="site">
       &copy; 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>

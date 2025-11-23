@@ -12,9 +12,14 @@
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
     .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:340px; padding:1.3rem; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
+    
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
     .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
     .stopwatch-display { font-weight:700; font-size:1.25rem; margin-top:.5rem; margin-bottom:.5rem; }
     .controls-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem; }
@@ -22,7 +27,7 @@
     .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
     .btn-small { padding:.35rem .7rem; font-size:.9rem; }
     footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-    @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
+    @media (max-width:900px) { .tool-card{ width:98vw; padding:1rem; }  }
 
     /* Hide the visible language indicator while keeping the markup and JS behavior intact */
     .top-row { display: none !important; }
@@ -42,22 +47,16 @@
       <p class="lead" style="color:#374151; margin-bottom:1rem;">قِس الوقت المنقضي لأي نشاط. تعلّم كيفية استخدام الموقت، واحصل على نصائح والأسئلة الشائعة.</p>
     </div>
 
-    <div class="center-row">
+    <main class="main-container" role="main">
       <!-- Left summary card -->
-      <div class="article-card">
-        <div>
-          <h2><i class="fa fa-clock"></i> كيفية استخدام الموقت</h2>
-          <ol style="padding-left:1.1rem; color:#374151;">
-            <li><b>ابدأ المؤقت:</b> اضغط <strong>ابدأ</strong>.</li><li><b>إيقاف/إعادة ضبط:</b> استخدم <strong>إيقاف مؤقت</strong> و <strong>إعادة ضبط</strong>.</li><li><b>سجل لفات:</b> اضغط <strong>لفة</strong>.</li>
-          </ol>
-        </div>
-        <a href="stopwatch-how-to-ar.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">اقرأ المقالة</a>
-      </div>
 
       <!-- Main tool card -->
-      <div class="tool-card" role="region" aria-label="Stopwatch">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="d-block mb-2" style="text-decoration:none; color:#0d6efd; font-weight:600;">&larr; العودة إلى القائمة الرئيسية</a>
         <h3><i class="fa fa-clock"></i> الموقت</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ar/stopwatch/stopwatch-index.html" role="button">قراءة الدليل الكامل</a>
+
 
         <div class="stopwatch-section" aria-live="polite">
           <div id="swDisplay" class="stopwatch-display">00:00:00</div>
@@ -83,16 +82,7 @@
       </div>
 
       <!-- Right summary card -->
-      <div class="article-card">
-        <div>
-          <h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح الموقت</h2>
-          <ul style="padding-left:1.1rem; color:#374151;">
-            <li><b>استخدم اللفات للفترات:</b>سجل أوقات التقسيم</li><li><b>إيقاف مؤقت واستئناف:</b> مفيد عند المقاطعات.</li><li><b>إعادة ضبط بين الجلسات:</b> للحفاظ على سجلات نظيفة.</li>
-          </ul>
-        </div>
-        <a href="stopwatch-tips-ar.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">اقرأ المقالة</a>
-      </div>
-    </div>
+    </main>
 
     <footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
       &copy; 2025 TimerHaven. <a href="privacy.html">سياسة الخصوصية</a>

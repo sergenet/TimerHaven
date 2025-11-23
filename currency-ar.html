@@ -10,11 +10,11 @@
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; direction: rtl; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
-    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 340px; height: 340px; display: flex; flex-direction: column; justify-content: space-between; align-items: stretch; padding: 2em 1.3em 1em 1.3em; text-align: right; overflow: hidden; box-sizing: border-box; }
-    .article-card h2 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display:flex; align-items:center; gap:0.3em; justify-content:flex-end; }
-    .article-card ul, .article-card ol { margin-right: 1em; font-size: 1em; margin-bottom: 0.2em; padding-left: 0.2em; word-break: break-word; }
-    .article-card .btn { align-self: stretch; font-weight: 600; border-radius: 8px; margin-top: 0.2em; margin-bottom: 0; box-sizing: border-box; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    
+    
+    
     .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: right; position: relative; z-index: 1; }
     .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; display:flex; justify-content:flex-end; }
     .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
@@ -29,9 +29,9 @@
     /* Hide the visible language indicator while keeping markup intact */
     .language-indicator { display: none !important; }
 
-    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; } }
-    @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; } }
+    @media (max-width: 1100px) { .main-container{padding:0 8px;} .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } .tool-card, }
+    @media (max-width: 800px) { .main-container{padding:0;} .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } .tool-card,  .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; }
+    @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; }
     details[open] summary::after { content: " ▲"; font-size: 0.9em; }
     details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
     details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
@@ -51,22 +51,18 @@
   </div>
 
   <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <details class="howto-mobile" id="howto-mobile">
           <summary><h4 style="color:#185a9d;display:inline;" id="howto-mobile-title"></h4></summary>
           <ol id="howto-mobile-steps"></ol>
         </details>
         <a href="index.html" class="back-link" id="back-link"></a>
         <h3 id="tool-title"></h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ar/currency/currency-index.html" role="button">قراءة الدليل الكامل</a>
+
         <div class="tool-help" id="tool-help"></div>
 
         <div class="converter-section">
@@ -91,13 +87,6 @@
         </details>
       </div>
 
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
     </div>
   </div>
 
@@ -110,8 +99,7 @@
     ru: {"language-label":"Язык:","back-link":"Назад в главное меню","tool-title":"Конвертер валют","tool-help":"Конвертируйте валюты по актуальным курсам.","amount":"Сумма","convert":"Конвертировать","result-placeholder":"Сконвертированная сумма появится здесь.","fetching":"Получение курса...","amount-error":"Пожалуйста, введите корректную сумму.","conversion-unavailable":"Конвертация недоступна.","fetch-error":"Не удалось получить конвертацию.","faq-title":"Частые вопросы","faq-list":`<li><b>Курсы актуальны?</b> Да, обновляются регулярно.</li><li><b>Можно конвертировать любые валюты?</b> Большинство мировых валют поддерживаются.</li><li><b>Это бесплатно?</b> Да, все инструменты TimerHaven бесплатны.</li>`,"howto-title":'<i class="fa fa-dollar-sign"></i> Как пользоваться Конвертером валют',"howto-steps":`<li><b>Выберите валюты:</b> Выберите валюты для конвертации.</li><li><b>Введите сумму:</b> Введите сумму для конвертации.</li><li><b>Просмотрите результат:</b> Конвертированная сумма появится сразу.</li>`,"howto-article-btn":"Читать полный текст","howto-article-link":"currency-how-to-ru.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по конвертации валют',"tips-list":`<li><b>Проверяйте курсы:</b> Для крупных переводов уточняйте в банке.</li><li><b>Ведите историю:</b> Записывайте конвертации для бюджета.</li><li><b>Для путешествий:</b> Быстро переводи цены на месте.</li>`,"tips-article-btn":"Читать полный текст","tips-article-link":"currency-tips-ru.html"},
     el: {"language-label":"Γλώσσα:","back-link":"Επιστροφή στο κύριο μενού","tool-title":"Μετατροπέας Νομισμάτων","tool-help":"Μετατρέψτε νομίσματα με live ισοτιμίες.","amount":"Ποσό","convert":"Μετατροπή","result-placeholder":"Το αποτέλεσμα εμφανίζεται εδώ.","fetching":"Φόρτωση ισοτιμίας...","amount-error":"Παρακαλώ εισάγετε έγκυρο ποσό.","conversion-unavailable":"Η μετατροπή δεν είναι διαθέσιμη.","fetch-error":"Δεν ήταν δυνατή η λήψη της μετατροπής.","faq-title":"Συχνές Ερωτήσεις","faq-list":`<li><b>Οι ισοτιμίες είναι σε πραγματικό χρόνο;</b> Ναι, ενημερώνονται τακτικά.</li><li><b>Μπορώ να μετατρέψω οποιοδήποτε νόμισμα;</b> Τα πιο δημοφιλή είναι διαθέσιμα.</li><li><b>Είναι δωρεάν;</b> Ναι, όλα τα εργαλεία είναι δωρεάν.</li>`,"howto-title":'<i class="fa fa-dollar-sign"></i> Πώς να χρησιμοποιήσετε τον Μετατροπέα Νομισμάτων',"howto-steps":`<li><b>Επιλέξτε νομίσματα:</b> Διαλέξτε αυτά που θέλετε να μετατρέψετε.</li><li><b>Εισάγετε ποσό:</b> Γράψτε το ποσό για μετατροπή.</li><li><b>Δείτε το αποτέλεσμα:</b> Το αποτέλεσμα εμφανίζεται άμεσα.</li>`,"howto-article-btn":"Διαβάστε το πλήρες άρθρο","howto-article-link":"currency-how-to-el.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές για μετατροπή νομισμάτων',"tips-list":`<li><b>Ελέγξτε τις ισοτιμίες:</b> Για μεγάλες μεταφορές, επιβεβαιώστε με την τράπεζα.</li><li><b>Κρατήστε ιστορικό:</b> Σημειώστε τις μετατροπές για τον προϋπολογισμό.</li><li><b>Ιδανικό για ταξίδια:</b> Μετατρέψτε τιμές γρήγορα.</li>`,"tips-article-btn":"Διαβάστε το πλήρες άρθρο","tips-article-link":"currency-tips-el.html"},
     es: {"language-label":"Idioma:","back-link":"Volver al menú principal","tool-title":"Conversor de monedas","tool-help":"Convierte monedas con tasas en tiempo real.","amount":"Cantidad","convert":"Convertir","result-placeholder":"El resultado aparece aquí.","fetching":"Obteniendo tasa...","amount-error":"Por favor introduce una cantidad válida.","conversion-unavailable":"Conversión no disponible.","fetch-error":"No se pudo obtener la conversión.","faq-title":"Preguntas frecuentes","faq-list":`<li><b>¿Las tasas son en tiempo real?</b> Sí, se actualizan regularmente.</li><li><b>¿Puedo convertir cualquier moneda?</b> La mayoría de monedas están disponibles.</li><li><b>¿Es gratis?</b> Sí, todas las herramientas son gratuitas.</li>`,"howto-title":'<i class="fa fa-dollar-sign"></i> Cómo usar el Conversor de monedas',"howto-steps":`<li><b>Selecciona monedas:</b> Elige las monedas a convertir.</li><li><b>Introduce cantidad:</b> Escribe la cantidad a convertir.</li><li><b>Ver resultado:</b> El resultado aparece al instante.</li>`,"howto-article-btn":"Leer artículo completo","howto-article-link":"currency-how-to-es.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos para convertir monedas',"tips-list":`<li><b>Verifica las tasas:</b> Para grandes transferencias, consulta el banco.</li><li><b>Mantén un historial:</b> Guarda tus conversiones para controlar gastos.</li><li><b>Usa en viajes:</b> Convierte precios locales rápidamente.</li>`,"tips-article-btn":"Leer artículo completo","tips-article-link":"currency-tips-es.html"},
-    ar: {"language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"محول العملات","tool-help":"حوّل العملات باستخدام أسعار الصرف المباشرة.","amount":"المبلغ","convert":"تحويل","result-placeholder":"المبلغ المحول يظهر هنا.","fetching":"جاري جلب السعر...","amount-error":"يرجى إدخال مبلغ صحيح.","conversion-unavailable":"التحويل غير متاح.","fetch-error":"تعذر جلب التحويل.","faq-title":"الأسئلة الشائعة","faq-list":`<li><b>هل الأسعار مباشرة؟</b> نعم، يتم تحديثها باستمرار.</li><li><b>هل يمكن تحويل أي عملة؟</b> معظم العملات العالمية متاحة.</li><li><b>هل الأداة مجانية؟</b> نعم، جميع الأدوات مجانية.</li>`,"howto-title":'<i class="fa fa-dollar-sign"></i> كيفية استخدام محول العملات',"howto-steps":`<li><b>اختر العملات:</b> حدد العملات للتحويل بينها.</li><li><b>أدخل المبلغ:</b> اكتب المبلغ للتحويل.</li><li><b>شاهد النتيجة:</b> تظهر النتيجة فورًا.</li>`,"howto-article-btn":"اقرأ المقال الكامل","howto-article-link":"currency-how-to-ar.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح لتحويل العملات',"tips-list":`<li><b>تحقق من الأسعار:</b> للتحويلات الكبيرة، تحقق مع البنك.</li><li><b>احتفظ بسجل:</b> سجل التحويلات للميزانية.</li><li><b>استخدمه في السفر:</b> حوّل الأسعار المحلية بسرعة.</li>`,"tips-article-btn":"اقرأ المقال الكامل","tips-article-link":"currency-tips-ar.html"}
-  };
+    ar: {"language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"محول العملات","tool-help":"حوّل العملات باستخدام أسعار الصرف المباشرة.","amount":"المبلغ","convert":"تحويل","result-placeholder":"المبلغ المحول يظهر هنا.","fetching":"جاري جلب السعر...","amount-error":"يرجى إدخال مبلغ صحيح.","conversion-unavailable":"التحويل غير متاح.","fetch-error":"تعذر جلب التحويل.","faq-title":"الأسئلة الشائعة","faq-list":`<li><b>هل الأسعار مباشرة؟</b> نعم، يتم تحديثها باستمرار.</li><li><b>هل يمكن تحويل أي عملة؟</b> معظم العملات العالمية متاحة.</li><li><b>هل الأداة مجانية؟</b> نعم، جميع الأدوات مجانية.</li>`,"howto-title":'<i class="fa fa-dollar-sign"></i> كيفية استخدام محول العملات',"howto-steps":`<li><b>اختر العملات:</b> حدد العملات للتحويل بينها.</li><li><b>أدخل المبلغ:</b> اكتب المبلغ للتحويل.</li><li><b>شاهد النتيجة:</b> تظهر النتيجة فورًا.</li>`,"howto-article-btn":"اقرأ المقال الكامل","howto-article-link":"currency-how-to-ar.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح لتحويل العملات',"tips-list":`<li><b>تحقق من الأسعار:</b> للتحويلات الكبيرة، تحقق مع البنك.</li><li><b>احتفظ بسجل:</b> سجل التحويلات للميزانية.</li><li><b>استخدمه في السفر:</b> حوّل الأسعار المحلية بسرعة.</li>`,"tips-article-btn":"اقرأ المقال الكامل","tips-article-link":"currency-tips-ar.html"};
 
   const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
 
@@ -130,7 +118,6 @@
 
   function getLang() {
     try { const l = localStorage.getItem('timerhavenLang') || 'ar'; return (l && l.slice(0,2)) || 'ar'; } catch (e) { return 'ar'; }
-  }
 
   function applyLanguage(lang) {
     lang = (lang || getLang()).slice(0,2);
@@ -190,8 +177,7 @@
           document.getElementById('result').innerText = `${amountVal} ${fromCur} = ${conv} ${toCur} (السعر: ${rate})`;
         } else {
           document.getElementById('result').innerText = t['conversion-unavailable'] || "التحويل غير متاح.";
-        }
-      })
+        })
       .catch(() => {
         document.getElementById('result').innerText = t['fetch-error'] || "تعذر جلب التحويل.";
       });

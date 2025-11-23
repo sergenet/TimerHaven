@@ -10,14 +10,14 @@
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
     .tool-card {
       background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef;
       min-width: 220px; max-width: 340px; width: 340px; min-height: 500px;
       flex: 1 1 340px; display:flex; flex-direction:column; justify-content:flex-start; align-items:stretch;
       padding: 2em 1.3em 1em 1.3em; margin:0; box-sizing:border-box; text-align:left; overflow:hidden;
     }
-    .article-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef; padding:1.2em; width:340px; box-sizing:border-box; }
+    
     .back-link { display:inline-block; margin-bottom:1em; color:#007bff; text-decoration:none; font-weight:bold; font-size:1em; }
     .back-link:hover { text-decoration:underline; }
     .faq-section { margin-top:1.1em; margin-bottom:0.3em; font-size:1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; }
@@ -26,26 +26,18 @@
 </head>
 <body>
   <div class="main-container">
-    <div class="center-row">
+    <main class="main-container" role="main">
 
       <!-- Left article card: How-to -->
-      <div class="article-card" aria-labelledby="howto-heading">
-        <h2 id="howto-heading">Wie man den Meeting-Planer nutzt</h2>
-        <ol>
-          <li>Fügen Sie Teilnehmer und ihre Zeitzonen hinzu.</li>
-          <li>Wählen Sie ein Datum und eine vorgeschlagene Uhrzeit.</li>
-          <li>Überprüfen Sie lokale Zeiten und teilen Sie die endgültige Uhrzeit.</li>
-        </ol>
-        <div class="article-links">
-          <a id="howto-article-link" class="btn btn-outline-primary btn-sm" href="meeting-how-to-de.html">Vollständigen Artikel lesen</a>
-        </div>
-      </div>
 
       <!-- Center tool card -->
-      <div class="tool-card" id="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <!-- language selector removed; language controlled by main menu -->
         <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Zurück zum Hauptmenü</a>
         <h3><i class="fa fa-users"></i> Meeting-Planer</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/de/meeting-planner/meeting-planner-index.html" role="button">Vollständigen Leitfaden lesen</a>
+
 
         <form id="meetingForm" onsubmit="return false;">
           <div class="meeting-form-row mb-2">
@@ -94,17 +86,6 @@
       </div>
 
       <!-- Right article card: Tips -->
-      <div class="article-card" aria-labelledby="tips-heading">
-        <h2 id="tips-heading">Tipps für produktive Meetings</h2>
-        <ul>
-          <li>Plane im Voraus, um Zeiten zu finden, die für alle passen.</li>
-          <li>Sende Kalendereinladungen, um Verwirrung zu vermeiden.</li>
-          <li>Überprüfe die Zeitzonen vor dem Einladen.</li>
-        </ul>
-        <div class="article-links">
-          <a class="btn btn-outline-primary btn-sm" href="meeting-tips-de.html">Vollständigen Artikel lesen</a>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -161,8 +142,7 @@
     const LS_KEY = 'meetingPlannerParticipants';
     function loadParticipants() {
       try { const raw = localStorage.getItem(LS_KEY); window.participants = raw ? JSON.parse(raw) : []; } catch(e){ window.participants = []; }
-    }
-    function saveParticipants() { try { localStorage.setItem(LS_KEY, JSON.stringify(window.participants || [])); } catch(e){} }
+    function saveParticipants() { try { localStorage.setItem(LS_KEY, JSON.stringify(window.participants || [])); } catch(e){}
     function renderParticipants() {
       const container = document.getElementById('participantList');
       container.innerHTML = '';
@@ -249,11 +229,10 @@
         const savedTime = localStorage.getItem('meetingPlannerTime');
         if (savedDate) document.getElementById('meetingDate').value = savedDate;
         if (savedTime) document.getElementById('meetingTime').value = savedTime;
-      } catch(e){}
-    });
+      } catch(e){});
 
-    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){} });
-    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){} });
+    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){});
+    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){});
 
   </script>
 </body>

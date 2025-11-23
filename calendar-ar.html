@@ -11,26 +11,14 @@
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; direction: rtl; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
-    .article-card, .tool-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #e0e7ef;
-      width: 340px;
-      min-width: 220px;
-      max-width: 340px;
-      flex: 1 1 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      padding: 2em 1.3em 1rem 1.3em;
-      margin: 0;
-      box-sizing: border-box;
-      min-height: 500px;
-    }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
     .tool-card { max-width: 640px; min-width: 320px; }
-    .article-card h2, .tool-card h3 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display:flex; align-items:center; gap:0.3em; }
+    
     .calendar-header { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.6rem; flex-wrap:nowrap; }
     .calendar-nav { display:flex; gap:.25rem; align-items:center; flex-shrink:0; }
     .calendar-nav .btn { min-width:40px; padding:.22rem .45rem; height:34px; line-height:1; display:inline-flex; align-items:center; justify-content:center; }
@@ -57,19 +45,18 @@
 
     @media (max-width:1100px) {
       .main-container{padding:0 8px;}
-      .center-row{gap:1em;}
-      .tool-card,.article-card{width:97vw;max-width:540px;height:auto;}
+      .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+      .tool-card,
     }
     @media (max-width:800px) {
       .main-container{padding:0;}
-      .center-row{flex-direction:column;align-items:center;}
-      .tool-card,.article-card{width:98vw;max-width:540px;height:auto;}
-      .article-card{display:none!important;}
+      .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+      .tool-card,
+      
       .howto-mobile{display:block!important; margin-bottom:1em;}
       .calendar-header{flex-wrap:wrap; justify-content:flex-start;}
       .calendar-select{width:48%; max-width:220px; margin-top:.45rem;}
       .calendar-nav{margin-right:.5rem;}
-    }
   </style>
 
   <!-- Defensive override: force true horizontal table layout for the calendar -->
@@ -122,32 +109,22 @@
           localStorage.setItem('timerhavenLang', 'ar');
         } else if (!localStorage.getItem('timerhavenLang')) {
           localStorage.setItem('timerhavenLang', 'ar');
-        }
-      } catch (err) {
+        } catch (err) {
         console.warn('lang detection error', err);
-      }
-    })();
+      })();
   </script>
 
   <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-calendar-check"></i> كيفية استخدام التقويم</h2>
-          <ol id="howto-steps" style="text-align:right">
-            <li><b>انقر على يوم:</b> افتح النافذة لإضافة/عرض ملاحظات متعددة لكل يوم.</li>
-            <li><b>نظّم الأحداث:</b> كل ملاحظة تحصل على طابع زمني ويمكن حذفها بشكل مستقل.</li>
-            <li><b>الحفظ:</b> تُخزن الملاحظات في متصفحك وتبقى حتى حذفها.</li>
-          </ol>
-        </div>
-        <a href="calendar-how-to-ar.html" class="btn btn-outline-primary btn-sm" id="howto-article-btn">اقرأ المقال الكامل</a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <!-- removed the mobile "كيف تستخدم" details to keep the middle card cleaner -->
 
         <a href="index.html" class="back-link" id="back-link">العودة للقائمة الرئيسية</a>
         <h3 id="tool-title"><i class="fa fa-calendar-days"></i> التقويم</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ar/calendar-planning/calendar-index.html" role="button">قراءة الدليل الكامل</a>
+
         <div class="help-section">
           <b id="tool-help">انقر على أي يوم لإضافة/عرض/تعديل ملاحظاتك. يمكن إضافة ملاحظات متعددة لكل يوم وتبقى محفوظة!</b>
         </div>
@@ -185,17 +162,6 @@
         <!-- tips-mobile removed from middle card to keep center clean -->
       </div>
 
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb"></i> نصائح الإنتاجية</h2>
-          <ul id="tips-list" style="text-align:right;">
-            <li><b>ترميز المشروع:</b> أضف كود المشروع لعناوين الأحداث (مثلاً ALPHA – مراجعة) لتصفية سريعة.</li>
-            <li><b>تذكيرات افتراضية:</b> ضع تذكيرين: قبل 24 ساعة وقبل 30 دقيقة للأحداث المهمة.</li>
-            <li><b>مشاركة بدون سحابة:</b> استخدم تصدير .ics لمشاركة الأحداث بدون مزامنة سحابية.</li>
-          </ul>
-        </div>
-        <a href="calendar-tips-ar.html" class="btn btn-outline-primary btn-sm" id="tips-article-btn">اقرأ المقال الكامل</a>
-      </div>
     </div>
   </div>
 
@@ -269,8 +235,7 @@
         "note-add-btn": "أضف ملاحظة",
         "days": ["الأحد","الإثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"],
         "months": ["كانون الثاني","شباط","آذار","نيسان","أيار","حزيران","تموز","آب","أيلول","تشرين الأول","تشرين الثاني","كانون الأول"]
-      }
-    };
+      };
 
     function updateLanguage(lang) {
       lang = lang || getLang();
@@ -295,7 +260,6 @@
         if (labelEl) labelEl.textContent = `${months[currentMonth]} ${currentYear}`;
         renderCalendar(currentYear, currentMonth, lang);
       }
-    }
 
     // Populate month/year selects (uses explicit translations[lang].months when available)
     function populateMonthYearControls(year, month, lang) {
@@ -328,7 +292,6 @@
         if (y === year) opt.selected = true;
         yearSelect.appendChild(opt);
       }
-    }
 
     // Calendar renderer
     function renderCalendar(year, month, lang) {
@@ -464,7 +427,6 @@
         mSel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
         ySel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
       }
-    }
 
     document.addEventListener('DOMContentLoaded', function() {
       const now = new Date();

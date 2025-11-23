@@ -12,11 +12,15 @@
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
     .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); padding:1.3rem; }
-    .article-card { width:330px; min-width:200px; min-height:340px; height:340px; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
+    
     .tool-card { width:410px; min-width:240px; min-height:330px; display:flex; flex-direction:column; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
+    
     .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
     .weather-form-row { display:flex; gap:.5rem; margin-bottom:1rem; align-items:center; flex-wrap:wrap; }
     .weather-result { margin-top:1rem; background:#f7fafc; border-radius:7px; padding:1rem; font-size:1.15em; min-height:48px; }
@@ -27,28 +31,12 @@
     .action-row { display:flex; gap:.7rem; flex-wrap:wrap; }
     #getWeatherBtn { width:175px; height:42px; font-size:1.07em; background:#157af6; color:#fff; border:none; border-radius:8px; font-weight:600; box-shadow:0 2px 8px #e0e7ef; cursor:pointer; }
     #useLocationBtn { background:#444; color:#fff; border-radius:8px; font-size:1.07em; font-weight:600; border:none; padding:0.4em 1.1em; width:175px; height:42px; display:inline-flex; align-items:center; gap:.4em; cursor:pointer; }
-    @media (max-width:750px) { #getWeatherBtn,#useLocationBtn{width:100%;} .weather-form-row{flex-direction:column;align-items:stretch;} .action-row{flex-direction:column;} }
+    @media (max-width:750px) { #getWeatherBtn,#useLocationBtn{width:100%;} .weather-form-row{flex-direction:column;align-items:stretch;} .action-row{flex-direction:column;}
     footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
 
     /* Strong rule: remove underlines for links in article-card lists and do NOT add underline on hover */
-    .article-card a,
-    .article-card ul a,
-    .article-card ol a,
-    .article-card li a,
-    .article-card ul li a,
-    .article-card ol li a {
-      text-decoration: none !important;
-      color: inherit !important;
-    }
-    .article-card a:hover,
-    .article-card ul a:hover,
-    .article-card ol a:hover,
-    .article-card li a:hover,
-    .article-card ul li a:hover,
-    .article-card ol li a:hover {
-      text-decoration: none !important;
-      color: inherit !important;
-    }
+    
+    
 
     /* Hide the visible language selector while keeping the markup and JS intact */
     .top-row { display: none !important; }
@@ -76,20 +64,9 @@
       <p class="lead" style="color:#374151; margin-bottom:1rem;">تحقق من الطقس للمدن حول العالم فورًا.</p>
     </div>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-cloud-sun"></i> كيفية استخدام الطقس</h2>
-          <ol style="padding-left:1.1rem; color:#374151;">
-            <li><b>اختر أو ادخل مدينة:</b> اختر من القائمة أو اكتب مدينتك.</li>
-            <li><b>استخدم الموقع:</b> اضغط <strong>استخدام موقعي</strong>.</li>
-            <li><b>عرض النتائج:</b> اضغط <strong>الحصول على الطقس</strong>.</li>
-          </ol>
-        </div>
-        <a href="weather-how-to-ar.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">اقرأ المقالة</a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card" role="region" aria-label="Global Weather">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="back-link">&larr; العودة إلى القائمة الرئيسية</a>
 
         <!-- Middle visible title intentionally removed to keep the card minimal per request -->
@@ -159,18 +136,7 @@
         </details>
       </div>
 
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح الطقس</h2>
-          <ul style="padding-left:1.1rem; color:#374151;">
-            <li><b>خطط مسبقًا:</b> افحص الطقس قبل السفر أو الأحداث.</li>
-            <li><b>استخدم الموقع:</b> احصل على تحديثات محلية فورية.</li>
-            <li><b>وفر وقتًا:</b> استخدم القائمة للمدن الشائعة.</li>
-          </ul>
-        </div>
-        <a href="weather-tips-ar.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">اقرأ المقالة</a>
-      </div>
-    </div>
+    </main>
 
     <footer class="site">
       &copy; 2025 TimerHaven. <a href="privacy.html">سياسة الخصوصية</a>
@@ -232,7 +198,6 @@
         found = true;
         break;
       }
-    }
     if (!found) dd.selectedIndex = 0;
   });
 
@@ -281,8 +246,7 @@
         var v = this.value || 'en';
         window.location.href = 'weather-' + v + '.html';
       });
-    }
-  })();
+    })();
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

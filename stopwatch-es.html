@@ -10,9 +10,13 @@
   <style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:340px; padding:1.3rem; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
+    
     .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
     .stopwatch-display { font-weight:700; font-size:1.25rem; margin-top:.5rem; margin-bottom:.5rem; }
     .controls-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem; }
@@ -20,8 +24,10 @@
     .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
     .btn-small { padding:.35rem .7rem; font-size:.9rem; }
     footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-    @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
-  </style>
+    @media (max-width:900px) { .tool-card{ width:98vw; padding:1rem; }  }
+  
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    </style>
 </head>
 <body>
   <div class="page-wrap">
@@ -30,24 +36,16 @@
       <p class="lead" style="color:#374151; margin-bottom:1rem;">Mide el tiempo transcurrido para cualquier actividad. Aprende a usar el Cronómetro, obtén consejos, FAQs y artículos.</p>
     </div>
 
-    <div class="center-row">
+    <main class="main-container" role="main">
       <!-- Left summary card -->
-      <div class="article-card">
-        <div>
-          <h2><i class="fa fa-clock"></i> Cómo usar el Cronómetro</h2>
-          <ol style="padding-left:1.1rem; color:#374151;">
-            <li><b>Inicie el temporizador:</b> Haga clic en <strong>Iniciar</strong>.</li>
-            <li><b>Pausa / Reiniciar:</b> Use <strong>Pausa</strong> y <strong>Reiniciar</strong>.</li>
-            <li><b>Registre vueltas:</b> Haga clic en <strong>Vuelta</strong>.</li>
-          </ol>
-        </div>
-        <a href="stopwatch-how-to-es.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Leer el artículo</a>
-      </div>
 
       <!-- Main tool card -->
-      <div class="tool-card" role="region" aria-label="Stopwatch">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="d-block mb-2" style="text-decoration:none; color:#0d6efd; font-weight:600;">&larr; Volver al menú principal</a>
         <h3><i class="fa fa-clock"></i> Cronómetro</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/es/stopwatch/stopwatch-index.html" role="button">Leer guía completa</a>
+
 
         <div class="stopwatch-section" aria-live="polite">
           <div id="swDisplay" class="stopwatch-display">00:00:00</div>
@@ -73,18 +71,7 @@
       </div>
 
       <!-- Right summary card -->
-      <div class="article-card">
-        <div>
-          <h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos Cronómetro</h2>
-          <ul style="padding-left:1.1rem; color:#374151;">
-            <li><b>Usa vueltas para intervalos:</b> Registra tiempos parciales.</li>
-            <li><b>Pausa y reanuda:</b> Útil en interrupciones.</li>
-            <li><b>Reinicia entre actividades:</b> Mantén registros limpios.</li>
-          </ul>
-        </div>
-        <a href="stopwatch-tips-es.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Leer el artículo</a>
-      </div>
-    </div>
+    </main>
 
     <footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
       &copy; 2025 TimerHaven. <a href="privacy.html">Política</a>

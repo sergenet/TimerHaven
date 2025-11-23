@@ -11,40 +11,33 @@
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; }
     .main-container { max-width:1200px; margin:2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
     .center-row, .card-row { display:flex; gap:2em; width:100%; justify-content:center; align-items:stretch; }
-    .article-card, .tool-card {
-      background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef;
-      min-width:220px; max-width:340px; width:340px; min-height:500px;
-      flex:1 1 340px; display:flex; flex-direction:column; padding:2em 1.3em 1em; box-sizing:border-box;
-      text-align:left; overflow:hidden;
-    }
-    .article-card h2, .tool-card h3 { font-size:1.35em; font-weight:700; margin-bottom:.4em; display:flex; gap:.3em; align-items:center; }
+    
+    
     .music-player { margin-bottom:1em; }
     .music-player label { margin-left:.5em; font-size:1em; }
     .faq-section { margin-top:1.1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; }
     .back-link { display:inline-block; margin-bottom:1em; color:#007bff; text-decoration:none; font-weight:700; }
     .back-link:hover { text-decoration:underline; }
-    @media (max-width:1100px){ .main-container{padding:0 8px;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width:800px){ .center-row{flex-direction:column;align-items:center;} .article-card{display:none!important;} }
+    @media (max-width:1100px){ .main-container{padding:0 8px;} .tool-card, }
+    @media (max-width:800px){ .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
     details[open] summary::after{ content:" ▲"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" ▼"; font-size:.9em; }
-  </style>
+  
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    </style>
 </head>
 <body>
   <!-- Force Russian for local testing -->
   <script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){}</script>
 
   <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="back-link" id="back-link"></a>
         <h3 id="tool-title"></h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ru/focus-music/focus-music-index.html" role="button">Читать полное руководство</a>
+
         <div class="help-section" id="tool-help"></div>
 
         <div class="music-player">
@@ -74,13 +67,6 @@
         </details>
       </div>
 
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
     </div>
   </div>
 
@@ -139,12 +125,11 @@
     },
     el: { "language-label":"Γλώσσα:","back-link":"Επιστροφή στο κύριο μενού","tool-title":"Μουσική Συγκέντρωσης","tool-help":"Βελτιώστε τη συγκέντρωση με μουσική: λευκός θόρυβος, βροχή, άλφα κύματα, κλασική, κύματα ωκεανού ή ατμόσφαιρα καφέ.","music-label":"Επιλέξτε playlist:","music-white":"Λευκός θόρυβος","music-rain":"Βροχή","music-alpha":"Άλφα κύματα","music-classical":"Κλασική","music-ocean":"Κύματα ωκεανού","music-cafe":"Ατμόσφαιρα καφέ","loop-label":"Επανάληψη κομματιού","play":"Αναπαραγωγή","stop":"Διακοπή","faq-title":"Συχνές Ερωτήσεις","faq-list":`<li><b>Μπορώ να επαναλάβω κομμάτια;</b> Ναι, με το κουμπί ή τα χειριστήρια audio.</li><li><b>Λειτουργεί offline;</b> Όχι, η μουσική μεταδίδεται από τον server.</li><li><b>Μπορώ να προσθέσω δική μου μουσική;</b> Όχι ακόμα—πείτε μας αν το θέλετε!</li>`,"howto-title":'<i class="fa fa-music"></i> Πώς να χρησιμοποιήσετε τη Μουσική Συγκέντρωσης',"howto-steps":`<li><b>Επιλέξτε playlist:</b> Μουσική για συγκέντρωση ή χαλάρωση.</li><li><b>Παίξτε & ρυθμίστε ένταση:</b> Χρησιμοποιήστε τα χειριστήρια για αναπαραγωγή/ένταση.</li><li><b>Αλλάξτε είδος:</b> Δοκιμάστε διαφορετικές μουσικές για καλύτερη συγκέντρωση.</li>`,"howto-article-btn":"Διαβάστε το πλήρες άρθρο","howto-article-link":"focus-music-how-to-el.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές για Μουσική Συγκέντρωσης',"tips-list":`<li><b>Πειραματιστείτε με είδη:</b> Δοκιμάστε διαφορετικές playlists.</li><li><b>Χρησιμοποιήστε ακουστικά:</b> Μειώστε τους περισπασμούς.</li><li><b>Ένταση χαμηλά:</b> Για καλύτερη συγκέντρωση.</li>`,"tips-article-btn":"Διαβάστε το πλήρες άρθρο","tips-article-link":"focus-music-tips-el.html" },
     es: { "language-label":"Idioma:","back-link":"Volver al menú principal","tool-title":"Música para concentrarse","tool-help":"Mejora tu concentración con música: ruido blanco, lluvia, ondas alfa, clásica, olas, o ambiente de café.","music-label":"Selecciona una lista:","music-white":"Ruido blanco","music-rain":"Lluvia","music-alpha":"Ondas alfa","music-classical":"Clásica","music-ocean":"Olas","music-cafe":"Ambiente de café","loop-label":"Repetir pista","play":"Reproducir","stop":"Detener","faq-title":"Preguntas frecuentes","faq-list":`<li><b>¿Puedo repetir la pista?</b> Sí, usa el botón o los controles de audio.</li><li><b>¿Funciona offline?</b> No, las pistas se transmiten desde el servidor.</li><li><b>¿Puedo agregar mi música?</b> No todavía—¡dínoslo si lo quieres!</li>`,"howto-title":'<i class="fa fa-music"></i> Cómo usar Música para concentrarse',"howto-steps":`<li><b>Selecciona lista:</b> Escoge música para concentración o relajación.</li><li><b>Reproduce y ajusta volumen:</b> Usa los controles para regular.</li><li><b>Cambia de estilo:</b> Prueba diferentes géneros y elige el que mejor funcione.</li>`,"howto-article-btn":"Leer artículo completo","howto-article-link":"focus-music-how-to-es.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos Música de concentración',"tips-list":`<li><b>Prueba géneros:</b> Testea varias playlists para cada tarea.</li><li><b>Usa auriculares:</b> Bloquea distracciones.</li><li><b>Volumen bajo:</b> Mantén el sonido suave para concentrarte.</li>`,"tips-article-btn":"Leer artículo completo","tips-article-link":"focus-music-tips-es.html" },
-    ar: { "language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"موسيقى التركيز","tool-help":"عزز تركيزك بإيقاعات علمية: ضوضاء بيضاء، مطر، موجات ألفا، كلاسيك، أمواج البحر أو أجواء المقهى.","music-label":"اختر قائمة تشغيل:","music-white":"ضوضاء بيضاء","music-rain":"مطر","music-alpha":"موجات ألفا","music-classical":"كلاسيك","music-ocean":"أمواج البحر","music-cafe":"أجواء مقهى","loop-label":"تكرار المقطع","play":"تشغيل","stop":"إيقاف","faq-title":"الأسئلة الشائعة","faq-list":`<li><b>هل يمكن تكرار المقطع؟</b> نعم، استخدم التكرار أو أدوات الصوت.</li><li><b>هل يعمل بدون إنترنت؟</b> لا، تُبث الموسيقى من الخادم.</li><li><b>هل يمكن إضافة موسيقاك؟</b> ليس بعد—أخبرنا إذا رغبت بذلك!</li>`,"howto-title":'<i class="fa fa-music"></i> كيفية استخدام موسيقى التركيز',"howto-steps":`<li><b>اختر قائمة تشغيل:</b> موسيقى للتركيز أو الاسترخاء.</li><li><b>شغل وعدل الصوت:</b> استخدم أدوات التحكم.</li><li><b>غيّر المقطوعات:</b> جرب أنماطًا مختلفة للتركيز الأفضل.</li>`,"howto-article-btn":"اقرأ المقال الكامل","howto-article-link":"focus-music-how-to-ar.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح لموسيقى التركيز',"tips-list":`<li><b>جرب الأنواع المختلفة:</b> قوائم تشغيل متنوعة لكل مهمة.</li><li><b>استخدم سماعات الرأس:</b> احجب المشتتات.</li><li><b>حافظ على انخفاض الصوت:</b> لمزيد من التركيز.</li>`,"tips-article-btn":"اقرأ المقال الكامل","tips-article-link":"focus-music-tips-ar.html" }
-  };
+    ar: { "language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"موسيقى التركيز","tool-help":"عزز تركيزك بإيقاعات علمية: ضوضاء بيضاء، مطر، موجات ألفا، كلاسيك، أمواج البحر أو أجواء المقهى.","music-label":"اختر قائمة تشغيل:","music-white":"ضوضاء بيضاء","music-rain":"مطر","music-alpha":"موجات ألفا","music-classical":"كلاسيك","music-ocean":"أمواج البحر","music-cafe":"أجواء مقهى","loop-label":"تكرار المقطع","play":"تشغيل","stop":"إيقاف","faq-title":"الأسئلة الشائعة","faq-list":`<li><b>هل يمكن تكرار المقطع؟</b> نعم، استخدم التكرار أو أدوات الصوت.</li><li><b>هل يعمل بدون إنترنت؟</b> لا، تُبث الموسيقى من الخادم.</li><li><b>هل يمكن إضافة موسيقاك؟</b> ليس بعد—أخبرنا إذا رغبت بذلك!</li>`,"howto-title":'<i class="fa fa-music"></i> كيفية استخدام موسيقى التركيز',"howto-steps":`<li><b>اختر قائمة تشغيل:</b> موسيقى للتركيز أو الاسترخاء.</li><li><b>شغل وعدل الصوت:</b> استخدم أدوات التحكم.</li><li><b>غيّر المقطوعات:</b> جرب أنماطًا مختلفة للتركيز الأفضل.</li>`,"howto-article-btn":"اقرأ المقال الكامل","howto-article-link":"focus-music-how-to-ar.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح لموسيقى التركيز',"tips-list":`<li><b>جرب الأنواع المختلفة:</b> قوائم تشغيل متنوعة لكل مهمة.</li><li><b>استخدم سماعات الرأس:</b> احجب المشتتات.</li><li><b>حافظ على انخفاض الصوت:</b> لمزيد من التركيز.</li>`,"tips-article-btn":"اقرأ المقال الكامل","tips-article-link":"focus-music-tips-ar.html" };
 
   const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
 
-  function getLang() { try { const l = localStorage.getItem('timerhavenLang') || 'ru'; return (l && l.slice(0,2)) || 'ru'; } catch(e){ return 'ru'; } }
+  function getLang() { try { const l = localStorage.getItem('timerhavenLang') || 'ru'; return (l && l.slice(0,2)) || 'ru'; } catch(e){ return 'ru'; }
 
   function applyLanguage(lang) {
     lang = (lang || getLang()).slice(0,2);
@@ -192,7 +177,6 @@
     if (tipsTitle) tipsTitle.innerHTML = t['tips-title'] || '';
     if (tipsList) tipsList.innerHTML = t['tips-list'] || '';
     if (tipsBtn) { tipsBtn.textContent = t['tips-article-btn'] || ''; tipsBtn.href = t['tips-article-link'] || ''; }
-  }
 
   window.addEventListener('storage', function(e) {
     if (e.key === 'timerhavenLang') applyLanguage((e.newValue || 'ru').slice(0,2));

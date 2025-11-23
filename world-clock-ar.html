@@ -21,40 +21,17 @@
     .text-center.mb-4 h1 { font-size:2.4rem !important; margin:0 !important; color:#0b2545 !important; }
     .text-center.mb-4 p.lead { margin-top:.4rem !important; color:#6b7280 !important; }
 
-    .center-row { display:flex !important; gap:1.6rem !important; justify-content:center !important; align-items:flex-start !important; flex-wrap:nowrap !important; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
 
-    .article-card, .tool-card {
-      background:#fff !important;
-      border-radius:18px !important;
-      box-shadow: 0 6px 20px rgba(11,37,69,0.06) !important;
-      padding:1.3rem !important;
-      box-sizing:border-box !important;
-      min-height:340px !important;
-      display:flex !important;
-      flex-direction:column !important;
-      justify-content:space-between !important;
-    }
+    
 
-    .article-card { width:330px !important; }
+    
     .tool-card { width:420px !important; }
 
-    .article-card h2, .tool-card h3 { color:#185a9d !important; margin:0 0 .6rem 0 !important; font-size:1.25rem !important; }
-    .article-card ul, .article-card ol, .tool-card ul { color:#374151 !important; padding-left:1.1rem !important; }
+    
+    
 
-    .article-card > a.btn,
-    .article-card .btn-outline-primary {
-      width:100% !important;
-      box-sizing:border-box !important;
-      display:inline-block !important;
-      padding:.5rem .75rem !important;
-      border-radius:8px !important;
-      border:1px solid rgba(13,110,253,0.18) !important;
-      color:#0d6efd !important;
-      background:transparent !important;
-      text-align:center !important;
-      margin-top:.35rem !important;
-      font-weight:600 !important;
-    }
+    
 
     .tool-card .back-link { color:#0d6efd !important; display:inline-block !important; margin-bottom:.6rem !important; text-decoration:none !important; }
 
@@ -63,8 +40,8 @@
     footer.site { text-align:center !important; margin-top:1.6rem !important; color:#6b7280 !important; }
 
     @media (max-width:900px) {
-      .center-row { flex-direction:column !important; align-items:center !important; gap:1rem !important; }
-      .article-card, .tool-card { width:98vw !important; max-width:540px !important; }
+      .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+      
       .text-center.mb-4 h1 { font-size:1.8rem !important; }
     }
 
@@ -104,21 +81,9 @@
       <p class="lead">شاهد الوقت في أي مكان بالعالم فورًا.</p>
     </div>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-globe"></i> كيفية استخدام الوقت العالمي</h2>
-          <ol>
-            <li><b>أضف مدينة:</b> استخدم القائمة أو ابدأ بالكتابة.</li>
-            <li><b>قارن الأوقات:</b> أضف مدنًا متعددة للمقارنة.</li>
-            <li><b>إزالة:</b> انقر لإزالة مدينة من قائمتك.</li>
-            <li><b>التحديث:</b> يتم تحديث الأوقات تلقائيًا.</li>
-          </ol>
-        </div>
-        <a href="world-how-to-ar.html" class="btn btn-outline-primary btn-sm">اقرأ المقال</a>
-      </div>
+    <main class="main-container" role="main">
 
-      <div class="tool-card" role="region" aria-label="World Clock">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="back-link">&larr; العودة إلى القائمة الرئيسية</a>
         <div class="world-section">
           <form class="clock-form" id="clockForm">
@@ -145,18 +110,7 @@
         </details>
       </div>
 
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح الوقت العالمي</h2>
-          <ul>
-            <li><b>خطط للاجتماعات:</b> أضف المدن واختر الوقت الأنسب.</li>
-            <li><b>سافر بذكاء:</b> تحقق من الوقت المحلي قبل السفر.</li>
-            <li><b>استخدم الإكمال التلقائي:</b> ابدأ بالكتابة للحصول على اقتراحات سريعة.</li>
-          </ul>
-        </div>
-        <a href="world-tips-ar.html" class="btn btn-outline-primary btn-sm">اقرأ المقال</a>
-      </div>
-    </div>
+    </main>
 
     <footer class="site">
       &copy; 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>

@@ -12,29 +12,33 @@
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
     .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:stretch; } /* stretch children to same height */
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); padding:1.3rem; box-sizing: border-box; display:flex; flex-direction:column; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; } /* stretch children to same height */
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
     /* Set matching minimum heights so left and right cards align visually */
-    .article-card { width:330px; min-width:200px; min-height:340px; justify-content:space-between; align-items:flex-start; }
+    
     .tool-card { width:410px; min-width:240px; min-height:340px; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
+    
     .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
     .converter-form { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center; }
     .converter-result { font-weight:700; font-size:1.12em; margin-bottom:1rem; }
     .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
     .btn-small { padding:.35rem .7rem; font-size:.9rem; }
     footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-    @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
+    @media (max-width:900px) { .tool-card{ width:98vw; padding:1rem; }  }
 
     /* HIDE the visible language selector while keeping the markup and JS intact */
     .top-row { display: none !important; }
 
     /* Make the left-card's article button match the right card appearance and sit inside the card */
-    .article-card .read-article-btn { display: inline-block; align-self: stretch; margin-top: .6rem; box-sizing: border-box; }
-    .article-card .read-article-btn.btn { text-align:center; }
+    
+    
 
     /* Reduce bottom spacing of lists so buttons fit comfortably inside */
-    .article-card ul, .article-card ol { margin-bottom: 0; }
+    
   </style>
 </head>
 <body>
@@ -51,27 +55,16 @@
       <p class="lead" style="color:#374151; margin-bottom:1rem;">Konvertieren Sie Länge, Gewicht, Temperatur und mehr. Erfahren Sie, wie der Umrechner funktioniert, erhalten Sie Tipps und Artikel.</p>
     </div>
 
-    <div class="center-row">
+    <main class="main-container" role="main">
       <!-- Left article card -->
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-ruler-combined"></i> So verwenden Sie den Einheitenumrechner</h2>
-          <ol style="padding-left:1.1rem; color:#374151;">
-            <li><b>Geben Sie Ihren Wert ein:</b> Tippen Sie die Zahl ein, die Sie umrechnen möchten.</li>
-            <li><b>Wählen Sie Einheiten:</b> Wählen Sie die Ausgangs- und Ziel-Einheiten.</li>
-            <li><b>Konvertieren:</b> Klicken Sie auf <strong>Konvertieren</strong>, um sofort das Ergebnis zu erhalten.</li>
-            <li><b>Andere Einheiten ausprobieren:</b> Wechseln Sie die Einheiten bei Bedarf.</li>
-          </ol>
-        </div>
-
-        <!-- Read article button INSIDE the left card and stretched to match the right card button -->
-        <a href="unit-how-to-de.html" class="btn btn-outline-primary btn-sm read-article-btn">Artikel lesen</a>
-      </div>
 
       <!-- Tool card (converter) -->
-      <div class="tool-card" role="region" aria-label="Unit Converter">
+      <section class="tool-card" aria-labelledby="tool-title">
         <a href="index.html" class="back-link">&larr; Zurück zum Hauptmenü</a>
         <h3><i class="fa fa-ruler-combined"></i> Einheitenumrechner</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/de/unit-converter/unit-converter-index.html" role="button">Vollständigen Leitfaden lesen</a>
+
 
         <div class="unit-section" style="flex: 1 1 auto;">
           <form class="converter-form" id="unitForm">
@@ -104,18 +97,7 @@
       </div>
 
       <!-- Right article card -->
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps Einheitenumrechner</h2>
-          <ul style="padding-left:1.1rem; color:#374151;">
-            <li><b>Einheiten überprüfen:</b> Stellen Sie sicher, dass Sie die richtigen Typen umrechnen.</li>
-            <li><b>Richtung wechseln:</b> Versuchen Sie die Umrechnung in beide Richtungen zur Kontrolle.</li>
-            <li><b>Lesezeichen setzen:</b> Speichern Sie diese Seite zum schnellen Zugriff.</li>
-          </ul>
-        </div>
-        <a href="unit-tips-de.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Artikel lesen</a>
-      </div>
-    </div>
+    </main>
 
     <footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
       &copy; 2025 TimerHaven. <a href="privacy.html">Datenschutz</a>
@@ -144,7 +126,6 @@
         if (from === "Fahrenheit" && to === "Kelvin") return (val - 32) * 5/9 + 273.15;
         if (from === "Kelvin" && to === "Fahrenheit") return (val - 273.15) * 9/5 + 32;
       }
-    }
   };
 
   function populateUnits(type) {
@@ -185,8 +166,7 @@
         var v = this.value || 'en';
         window.location.href = 'unit-converter-' + v + '.html';
       });
-    }
-  })();
+    })();
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

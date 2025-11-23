@@ -12,27 +12,16 @@
     /* Layout & visuals matched to calendar-en.html but with RU text */
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; color: #102a43; }
     .main-container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; min-height: 90vh; }
-    .center-row { display: flex; gap: 2rem; align-items: flex-start; justify-content: center; }
-    .article-card, .tool-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      width: 340px;
-      min-width: 220px;
-      max-width: 340px;
-      flex: 1 1 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      padding: 2rem 1.3rem 1rem 1.3rem;
-      box-sizing: border-box;
-      min-height: 500px;
-    }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+
     .tool-card { max-width: 640px; min-width: 320px; flex: 1 1 640px; }
-    .article-card h2, .tool-card h3 { font-size: 1.35em; font-weight: 700; margin-bottom: .4em; display:flex; align-items:center; gap:.3em; }
-    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol { margin-left:1em; font-size:1em; margin-bottom:.2em; padding-right:.2em; word-break:break-word; }
-    .article-card .btn, .tool-card .btn { margin-top:1.2em; margin-bottom:.6em; align-self:center; min-width:180px; border-radius:8px; font-weight:600; }
+    
+    
+    
 
     /* Header layout: keep nav buttons and month/year on one line on desktop */
     .calendar-header { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.6rem; flex-wrap:nowrap; }
@@ -92,20 +81,19 @@
 
     @media (max-width:1100px) {
       .main-container{padding:0 8px;}
-      .center-row{gap:1em;}
-      .tool-card,.article-card{width:97vw;max-width:540px;height:auto;}
+      .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+      .tool-card,
     }
     @media (max-width:800px) {
       .main-container{padding:0;}
-      .center-row{flex-direction:column;align-items:center;}
-      .tool-card,.article-card{width:98vw;max-width:540px;height:auto;}
-      .article-card{display:none!important;}
+      .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+      .tool-card,
+      
       .howto-mobile {display:block!important; margin-bottom:1em;}
       /* allow the header to wrap on narrow screens */
       .calendar-header{flex-wrap:wrap; justify-content:flex-start;}
       .calendar-select{width:48%; max-width:220px; margin-top:.45rem;}
       .calendar-nav{margin-right:.5rem;}
-    }
   </style>
 
   <!-- Defensive override: force true horizontal table layout for the calendar -->
@@ -159,25 +147,17 @@
 </head>
 <body>
   <div class="main-container">
-    <div class="center-row">
+    <main class="main-container" role="main">
       <!-- LEFT -->
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-calendar-check"></i> Как пользоваться Календарём</h2>
-          <ol id="howto-steps">
-            <li><b>Кликните по дню:</b> Откройте окно для добавления/просмотра нескольких заметок на день.</li>
-            <li><b>Организуйте события:</b> Каждая заметка получает метку времени и может быть удалена отдельно.</li>
-            <li><b>Сохранение:</b> Заметки сохраняются в вашем браузере и остаются до удаления.</li>
-          </ol>
-        </div>
-        <a href="calendar-how-to-ru.html" class="btn btn-outline-primary btn-sm" id="howto-article-btn">Прочитать полную статью</a>
-      </div>
 
       <!-- CENTER -->
-      <div class="tool-card">
+      <section class="tool-card" aria-labelledby="tool-title">
 
         <a href="index.html" class="back-link" id="back-link">Вернуться в главное меню</a>
         <h3 id="tool-title"><i class="fa fa-calendar-days"></i> Календарь</h3>
+
+      <a id="read-guide-btn" class="read-guide" href="/ru/calendar-planning/calendar-index.html" role="button">Читать полное руководство</a>
+
         <div class="help-section">
           <b id="tool-help">Кликните любой день, чтобы добавить/просмотреть/редактировать заметки. Для каждого дня поддерживается несколько заметок!</b>
         </div>
@@ -208,17 +188,6 @@
       </div>
 
       <!-- RIGHT -->
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb"></i> Советы по продуктивности</h2>
-          <ul id="tips-list">
-            <li><b>Цветовая маркировка заметок:</b> Используйте эмодзи или теги для визуальной организации.</li>
-            <li><b>Проверяйте регулярно:</b> Просматривайте заметки и удаляйте устаревшие события.</li>
-            <li><b>Планируйте заранее:</b> Добавляйте заметки на будущие даты, чтобы быть готовым.</li>
-          </ul>
-        </div>
-        <a href="calendar-tips-ru.html" class="btn btn-outline-primary btn-sm" id="tips-article-btn">Прочитать полную статью</a>
-      </div>
     </div>
   </div>
 
@@ -278,8 +247,7 @@
         "note-close-btn":"Закрыть",
         "note-add-btn":"Добавить заметку",
         "days":["Вс","Пн","Вт","Ср","Чт","Пт","Сб"]
-      }
-    };
+      };
 
     // Update UI strings and re-render if calendar already initialized
     function updateLanguage(lang){
@@ -333,7 +301,6 @@
         if (y === year) opt.selected = true;
         yearSelect.appendChild(opt);
       }
-    }
 
     // Calendar renderer
     function renderCalendar(year, month, lang) {
@@ -387,7 +354,6 @@
       const ni = document.getElementById('noteInput');
       if (ni) ni.value = '';
       try { new bootstrap.Modal(document.getElementById('noteModal')).show(); } catch(e) {}
-    }
 
     function renderNoteList(dateStr) {
       const list = document.getElementById('noteList');
@@ -462,7 +428,6 @@
         mSel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
         ySel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
       }
-    }
 
     document.addEventListener('DOMContentLoaded', function() {
       const now = new Date();
