@@ -1,14 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <meta name="google" content="notranslate">
-  <title>Ημερολόγιο — TimerHaven</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Αποθηκεύστε και διαχειριστείτε πολλαπλές σημειώσεις στο ημερολόγιο εύκολα. Μάθετε πώς να χρησιμοποιείτε το Ημερολόγιο, δείτε συμβουλές παραγωγικότητας, FAQ και άρθρα ειδικών.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<meta content="notranslate" name="google"/>
+<title>Ημερολόγιο — TimerHaven</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Αποθηκεύστε και διαχειριστείτε πολλαπλές σημειώσεις στο ημερολόγιο εύκολα. Μάθετε πώς να χρησιμοποιείτε το Ημερολόγιο, δείτε συμβουλές παραγωγικότητας, FAQ και άρθρα ειδικών." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container {
       max-width: 1200px;
@@ -80,9 +81,8 @@
       .calendar-nav{margin-right:.5rem;}
     }
   </style>
-
-  <!-- Defensive override: force true horizontal table layout for the calendar -->
-  <style id="calendar-table-fix">
+<!-- Defensive override: force true horizontal table layout for the calendar -->
+<style id="calendar-table-fix">
     /* Force the calendar to behave as a real table regardless of injected styles or transforms */
     #calendar-table,
     table#calendar-table,
@@ -131,93 +131,62 @@
   </style>
 </head>
 <body dir="ltr">
+<div class="main-container">
+<div class="center-row">
 
-  <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-calendar-check"></i> Πώς να χρησιμοποιήσετε το Ημερολόγιο</h2>
-          <ol id="howto-steps">
-            <li><b>Κάντε κλικ σε μια ημέρα:</b> Ανοίξτε το παράθυρο για να προσθέσετε/δείτε πολλές σημειώσεις ανά ημέρα.</li>
-            <li><b>Οργανώστε τα γεγονότα:</b> Κάθε σημείωση έχει χρονοσήμανση και μπορεί να διαγραφεί μεμονωμένα.</li>
-            <li><b>Επιμονή:</b> Οι σημειώσεις αποθηκεύονται στο πρόγραμμα περιήγησής σας και παραμένουν μέχρι να τις διαγράψετε.</li>
-          </ol>
-        </div>
-        <a href="calendar-how-to-el.html" class="btn btn-outline-primary btn-sm" id="howto-article-btn">Διαβάστε το πλήρες άρθρο</a>
-      </div>
+<div class="tool-card">
+<!-- removed the mobile "Οδηγίες" details here to keep the middle card cleaner -->
+<a class="back-link" href="index.html" id="back-link">Επιστροφή στο κύριο μενού</a>
+<h3 id="tool-title"><i class="fa fa-calendar-days"></i> Ημερολόγιο</h3>
+<div class="help-section">
+<b id="tool-help">Κάντε κλικ σε οποιαδήποτε ημέρα για να προσθέσετε/δείτε/επεξεργαστείτε τις σημειώσεις σας. Υποστηρίζονται πολλές σημειώσεις ανά ημέρα και αποθηκεύονται!</b>
+</div>
+<!-- Header controls (buttons + month/year selects) -->
+<div aria-label="Навигация календаря" class="calendar-header">
+<div aria-label="Навигация месяц/год" class="calendar-nav" role="toolbar">
+<button aria-label="Προηγούμενο έτος" class="btn btn-sm btn-outline-secondary" id="nav-prev-year">«</button>
+<button aria-label="Προηγούμενος μήνας" class="btn btn-sm btn-outline-secondary" id="nav-prev-month">‹</button>
+<button aria-label="Σήμερα" class="btn btn-sm btn-outline-secondary" id="nav-today">Σήμερα</button>
+<button aria-label="Επόμενος μήνας" class="btn btn-sm btn-outline-secondary" id="nav-next-month">›</button>
+<button aria-label="Επόμενο έτος" class="btn btn-sm btn-outline-secondary" id="nav-next-year">»</button>
+</div>
+<div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
+<select aria-label="Επιλογή μήνα" class="calendar-select month" id="calendar-month-select"></select>
+<select aria-label="Επιλογή έτους" class="calendar-select year" id="calendar-year-select"></select>
+</div>
+</div>
+<table class="table calendar-table" id="calendar-table">
+<!-- thead & tbody are populated by JS -->
+</table>
+<details class="faq-section" id="faq-section">
+<summary id="faq-title">Συχνές Ερωτήσεις</summary>
+<ul id="faq-list" style="padding-left:1em;"></ul>
+</details>
+<!-- tips-mobile removed from middle card as requested -->
+</div>
 
-      <div class="tool-card">
-        <!-- removed the mobile "Οδηγίες" details here to keep the middle card cleaner -->
-
-        <a href="index.html" class="back-link" id="back-link">Επιστροφή στο κύριο μενού</a>
-        <h3 id="tool-title"><i class="fa fa-calendar-days"></i> Ημερολόγιο</h3>
-        <div class="help-section">
-          <b id="tool-help">Κάντε κλικ σε οποιαδήποτε ημέρα για να προσθέσετε/δείτε/επεξεργαστείτε τις σημειώσεις σας. Υποστηρίζονται πολλές σημειώσεις ανά ημέρα και αποθηκεύονται!</b>
-        </div>
-
-        <!-- Header controls (buttons + month/year selects) -->
-        <div class="calendar-header" aria-label="Навигация календаря">
-          <div class="calendar-nav" role="toolbar" aria-label="Навигация месяц/год">
-            <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary" aria-label="Προηγούμενο έτος">«</button>
-            <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary" aria-label="Προηγούμενος μήνας">‹</button>
-            <button id="nav-today" class="btn btn-sm btn-outline-secondary" aria-label="Σήμερα">Σήμερα</button>
-            <button id="nav-next-month" class="btn btn-sm btn-outline-secondary" aria-label="Επόμενος μήνας">›</button>
-            <button id="nav-next-year" class="btn btn-sm btn-outline-secondary" aria-label="Επόμενο έτος">»</button>
-          </div>
-
-          <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
-            <select id="calendar-month-select" class="calendar-select month" aria-label="Επιλογή μήνα"></select>
-            <select id="calendar-year-select" class="calendar-select year" aria-label="Επιλογή έτους"></select>
-          </div>
-        </div>
-
-        <table class="table calendar-table" id="calendar-table">
-          <!-- thead & tbody are populated by JS -->
-        </table>
-
-        <details class="faq-section" id="faq-section">
-          <summary id="faq-title">Συχνές Ερωτήσεις</summary>
-          <ul id="faq-list" style="padding-left:1em;"></ul>
-        </details>
-
-        <!-- tips-mobile removed from middle card as requested -->
-      </div>
-
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb"></i> Συμβουλές παραγωγικότητας για το ημερολόγιο</h2>
-          <ul id="tips-list">
-            <li><b>Κωδικοποίηση με χρώματα για τις σημειώσεις:</b> Χρησιμοποιήστε emoji ή ετικέτες για οπτική οργάνωση.</li>
-            <li><b>Ελέγχετε τακτικά:</b> Ελέγξτε τις σημειώσεις σας και αφαιρέστε παλιά συμβάντα.</li>
-            <li><b>Σχεδιάστε εκ των προτέρων:</b> Προσθέστε σημειώσεις για μελλοντικές ημερομηνίες για να είστε προετοιμασμένοι.</li>
-          </ul>
-        </div>
-        <a href="calendar-tips-el.html" class="btn btn-outline-primary btn-sm" id="tips-article-btn">Διαβάστε το πλήρες άρθρο</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-    <div class="modal-dialog"><div class="modal-content">
-      <form id="noteForm" autocomplete="off">
-        <div class="modal-header">
-          <h5 class="modal-title" id="noteModalLabel">Σημειώσεις για <span id="modal-date-label"></span></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <ul class="note-list" id="noteList"></ul>
-          <textarea id="noteInput" class="form-control" rows="3" placeholder="Προσθέστε μια νέα σημείωση για αυτήν την ημέρα..."></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn">Κλείσιμο</button>
-          <button type="submit" class="btn btn-success" id="note-add-btn">Προσθήκη σημείωσης</button>
-        </div>
-      </form>
-    </div></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
+</div>
+</div>
+<div aria-hidden="true" aria-labelledby="noteModalLabel" class="modal fade" id="noteModal" tabindex="-1">
+<div class="modal-dialog"><div class="modal-content">
+<form autocomplete="off" id="noteForm">
+<div class="modal-header">
+<h5 class="modal-title" id="noteModalLabel">Σημειώσεις για <span id="modal-date-label"></span></h5>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<ul class="note-list" id="noteList"></ul>
+<textarea class="form-control" id="noteInput" placeholder="Προσθέστε μια νέα σημείωση για αυτήν την ημέρα..." rows="3"></textarea>
+</div>
+<div class="modal-footer">
+<button class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn" type="button">Κλείσιμο</button>
+<button class="btn btn-success" id="note-add-btn" type="submit">Προσθήκη σημείωσης</button>
+</div>
+</form>
+</div></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
     // Force Greek for local-file testing and make Greek the fallback
     localStorage.setItem('timerhavenLang','el');
 
@@ -483,12 +452,11 @@
       renderCalendar(currentYear, currentMonth, getLang());
     });
   </script>
-
-  <footer>
-    © 2025 TimerHaven. Όλα τα εργαλεία είναι δωρεάν και φιλικά προς την ιδιωτικότητα.<br>
-    <a href="privacy.html">Πολιτική απορρήτου</a> •
+<footer>
+    © 2025 TimerHaven. Όλα τα εργαλεία είναι δωρεάν και φιλικά προς την ιδιωτικότητα.<br/>
+<a href="privacy.html">Πολιτική απορρήτου</a> •
     <a href="terms.html">Όροι</a> •
     <a href="contact.html">Επικοινωνία</a>
-  </footer>
-</body>
+</footer>
+<p style="margin-top:1rem;"><a class="cta" href="/el/calendar/calendar-index.html">Read full guide</a></p></body>
 </html>

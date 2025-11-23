@@ -1,14 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Χρονοδιακόπτης εργασίας</title>
-  <meta name="description" content="Παρακολουθήστε συνεδρίες εργασίας, εστίαση και διαλείμματα. Απλός, εστιασμένος χρονοδιακόπτης.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Χρονοδιακόπτης εργασίας</title>
+<meta content="Παρακολουθήστε συνεδρίες εργασίας, εστίαση και διαλείμματα. Απλός, εστιασμένος χρονοδιακόπτης." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"SoftwareApplication",
@@ -23,8 +23,7 @@
     }
   }
   </script>
-
-  <style>
+<style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
@@ -41,57 +40,49 @@
   </style>
 </head>
 <body>
-  <div class="page-wrap">
-    <div class="text-center mb-4">
-      <h1 style="margin-bottom:.25rem;">Χρονοδιακόπτης εργασίας</h1>
-      <p class="lead" style="color:#374151; margin-bottom:1rem;">Παρακολουθήστε συνεδρίες εργασίας, εστίαση και διαλείμματα. Απλός, εστιασμένος χρονοδιακόπτης.</p>
-    </div>
-
-    <div class="center-row single" id="center-row">
-      <div class="tool-card" role="region" aria-label="Χρονοδιακόπτης εργασίας">
-        <a href="index.html" class="d-block mb-2" style="text-decoration:none; color:#0d6efd; font-weight:600;">&larr; Επιστροφή στο κύριο μενού</a>
-        <h3><i class="fa fa-hourglass-half"></i> Χρονοδιακόπτης</h3>
-
-        <div class="guide-links" aria-label="Οδηγός">
-          <a href="/el/task-timer/" class="btn btn-sm btn-primary" rel="help" aria-label="Διαβάστε τον οδηγό">Διαβάστε τον οδηγό</a>
-        </div>
-
-        <div class="timer-section" aria-live="polite">
-          <div class="timer-controls mb-2" style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;">
-            <label style="font-weight:600; display:flex;align-items:center;">Λεπτά:
-              <input id="minutes" type="number" min="0" max="999" value="25" class="form-control" style="width:80px; display:inline-block; margin-left:.4rem;">
-            </label>
-            <label style="font-weight:600; display:flex;align-items:center;">Δευτερόλεπτα:
-              <input id="seconds" type="number" min="0" max="59" value="0" class="form-control" style="width:80px; display:inline-block; margin-left:.4rem;">
-            </label>
-          </div>
-
-          <div id="timerDisplay" class="timer-display">25:00</div>
-
-          <div class="timer-btns" role="toolbar" aria-label="Χειριστήρια χρονοδιακόπτη">
-            <button id="startBtn" class="btn btn-success btn-small"><i class="fa fa-play"></i> Έναρξη</button>
-            <button id="pauseBtn" class="btn btn-secondary btn-small"><i class="fa fa-pause"></i> Παύση</button>
-            <button id="resetBtn" class="btn btn-danger btn-small"><i class="fa fa-refresh"></i> Επαναφορά</button>
-          </div>
-
-          <details class="faq-section" style="margin-top:1rem;">
-            <summary style="font-weight:700; font-size:1rem;">Συχνές ερωτήσεις</summary>
-            <ul style="padding-left:1.1rem; color:#374151;">
-              <li><b>Μπορώ να ορίσω προσαρμοσμένες διάρκειες;</b> Ναι — επιλέξτε οποιαδήποτε διάρκεια σε λεπτά και δευτερόλεπτα.</li>
-              <li><b>Θα διατηρηθεί ο χρονοδιακόπτης μετά την ανανέωση;</b> Όχι — με την ανανέωση της σελίδας ο χρονοδιακόπτης και οι ρυθμίσεις επαναφέρονται.</li>
-              <li><b>Είναι δωρεάν;</b> Ναι — όλα τα εργαλεία TimerHaven είναι δωρεάν.</li>
-            </ul>
-          </details>
-        </div>
-      </div>
-    </div>
-
-    <footer class="site">
-      <p style="text-align:center; margin-top:1.5rem; color:#6b7280;">&copy; 2025 TimerHaven.</p>
-    </footer>
-  </div>
-
-  <script>
+<div class="page-wrap">
+<div class="text-center mb-4">
+<h1 style="margin-bottom:.25rem;">Χρονοδιακόπτης εργασίας</h1>
+<p class="lead" style="color:#374151; margin-bottom:1rem;">Παρακολουθήστε συνεδρίες εργασίας, εστίαση και διαλείμματα. Απλός, εστιασμένος χρονοδιακόπτης.</p>
+</div>
+<div class="center-row single" id="center-row">
+<div aria-label="Χρονοδιακόπτης εργασίας" class="tool-card" role="region">
+<a class="d-block mb-2" href="index.html" style="text-decoration:none; color:#0d6efd; font-weight:600;">← Επιστροφή στο κύριο μενού</a>
+<h3><i class="fa fa-hourglass-half"></i> Χρονοδιακόπτης</h3>
+<div aria-label="Οδηγός" class="guide-links">
+<a aria-label="Διαβάστε τον οδηγό" class="btn btn-sm btn-primary" href="/el/task-timer/" rel="help">Διαβάστε τον οδηγό</a>
+</div>
+<div aria-live="polite" class="timer-section">
+<div class="timer-controls mb-2" style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;">
+<label style="font-weight:600; display:flex;align-items:center;">Λεπτά:
+              <input class="form-control" id="minutes" max="999" min="0" style="width:80px; display:inline-block; margin-left:.4rem;" type="number" value="25"/>
+</label>
+<label style="font-weight:600; display:flex;align-items:center;">Δευτερόλεπτα:
+              <input class="form-control" id="seconds" max="59" min="0" style="width:80px; display:inline-block; margin-left:.4rem;" type="number" value="0"/>
+</label>
+</div>
+<div class="timer-display" id="timerDisplay">25:00</div>
+<div aria-label="Χειριστήρια χρονοδιακόπτη" class="timer-btns" role="toolbar">
+<button class="btn btn-success btn-small" id="startBtn"><i class="fa fa-play"></i> Έναρξη</button>
+<button class="btn btn-secondary btn-small" id="pauseBtn"><i class="fa fa-pause"></i> Παύση</button>
+<button class="btn btn-danger btn-small" id="resetBtn"><i class="fa fa-refresh"></i> Επαναφορά</button>
+</div>
+<details class="faq-section" style="margin-top:1rem;">
+<summary style="font-weight:700; font-size:1rem;">Συχνές ερωτήσεις</summary>
+<ul style="padding-left:1.1rem; color:#374151;">
+<li><b>Μπορώ να ορίσω προσαρμοσμένες διάρκειες;</b> Ναι — επιλέξτε οποιαδήποτε διάρκεια σε λεπτά και δευτερόλεπτα.</li>
+<li><b>Θα διατηρηθεί ο χρονοδιακόπτης μετά την ανανέωση;</b> Όχι — με την ανανέωση της σελίδας ο χρονοδιακόπτης και οι ρυθμίσεις επαναφέρονται.</li>
+<li><b>Είναι δωρεάν;</b> Ναι — όλα τα εργαλεία TimerHaven είναι δωρεάν.</li>
+</ul>
+</details>
+</div>
+</div>
+</div>
+<footer class="site">
+<p style="text-align:center; margin-top:1.5rem; color:#6b7280;">© 2025 TimerHaven.</p>
+</footer>
+</div>
+<script>
   (function(){
     // focus-on-hash so /timer-el.html#startBtn focuses Start
     window.addEventListener('load', function() {
@@ -156,8 +147,7 @@
     setTimerLengths();
   })();
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+<p style="margin-top:1rem;"><a class="cta" href="/el/timer/timer-index.html">Read full guide</a></p></body>
 </html>

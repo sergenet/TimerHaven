@@ -1,17 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Παγκόσμιο Ρολόι</title>
-  <meta name="description" content="Δείτε την ώρα σε όλο τον κόσμο άμεσα.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Παγκόσμιο Ρολόι</title>
+<meta content="Δείτε την ώρα σε όλο τον κόσμο άμεσα." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+<style>
     /* Strong page-level override to match other tools */
     body { background:#f4f7fb !important; font-family: 'Montserrat', Arial, sans-serif !important; color:#0b2545 !important; margin:0; }
     .page-wrap { max-width:1200px; margin:2.4rem auto !important; padding:0 1rem !important; box-sizing:border-box !important; }
@@ -90,80 +90,50 @@
     }
 
   </style>
-</head>
+</link></head>
 <body>
-  <div class="page-wrap">
-    <div class="top-row" aria-hidden="true">
-      <label for="language-select-top" style="font-weight:600; margin-right:.5rem;">Language:</label>
-      <!-- populated by JS; header select is primary (kept in DOM for JS but hidden visually) -->
-      <select id="language-select-top" class="language-select" aria-label="Language selector"></select>
-    </div>
+<div class="page-wrap">
+<div aria-hidden="true" class="top-row">
+<label for="language-select-top" style="font-weight:600; margin-right:.5rem;">Language:</label>
+<!-- populated by JS; header select is primary (kept in DOM for JS but hidden visually) -->
+<select aria-label="Language selector" class="language-select" id="language-select-top"></select>
+</div>
+<div class="text-center mb-4">
+<h1>Παγκόσμιο Ρολόι</h1>
+<p class="lead">Δείτε την ώρα σε όλο τον κόσμο άμεσα.</p>
+</div>
+<div class="center-row">
 
-    <div class="text-center mb-4">
-      <h1>Παγκόσμιο Ρολόι</h1>
-      <p class="lead">Δείτε την ώρα σε όλο τον κόσμο άμεσα.</p>
-    </div>
+<div aria-label="World Clock" class="tool-card" role="region">
+<a class="back-link" href="index.html">← Επιστροφή στο κύριο μενού</a>
+<div class="world-section">
+<form class="clock-form" id="clockForm">
+<select class="form-select city-dropdown" id="cityDropdown">
+<option value="">Επιλέξτε πόλη...</option>
+</select>
+<input autocomplete="off" class="form-control awesomplete" id="cityInput" placeholder="Ή εισάγετε πόλη/ζώνη (π.χ. Αθήνα, Europe/Athens, GMT+2)" style="margin-top:.6rem;" type="text"/>
+<button class="btn btn-success btn-sm" style="margin-top:.5rem; width:110px;" type="submit">Προσθήκη ρολογιού</button>
+</form>
+<div id="errorMsg" style="color:#b00;margin-bottom:.6em;"></div>
+<div class="clock-list" id="clockList"></div>
+</div>
+<details class="faq-section" style="margin-top:1rem;">
+<summary style="font-weight:700; font-size:1rem;">Συχνές ερωτήσεις</summary>
+<ul style="padding-left:1.1rem;">
+<li><b>Προσθέστε πόλη:</b> Χρησιμοποιήστε τη λίστα ή ξεκινήστε να πληκτρολογείτε το όνομα.</li>
+<li><b>Συγκρίνετε ώρες:</b> Προσθέστε πολλές πόλεις για σύγκριση.</li>
+<li><b>Κατάργηση:</b> Κάντε κλικ για να διαγράψετε μια πόλη από τη λίστα σας.</li>
+<li>Πλήρης λίστα ζωνών ώρας: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">Δείτε εδώ</a></li>
+</ul>
+</details>
+</div>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-globe"></i> Πώς να χρησιμοποιήσετε το Παγκόσμιο Ρολόι</h2>
-          <ol>
-            <li><b>Προσθέστε πόλη:</b> Χρησιμοποιήστε το μενού ή ξεκινήστε να πληκτρολογείτε.</li>
-            <li><b>Συγκρίνετε ώρες:</b> Προσθέστε πολλές πόλεις για σύγκριση.</li>
-            <li><b>Κατάργηση:</b> Κάντε κλικ για να διαγράψετε πόλη.</li>
-            <li><b>Ανανέωση:</b> Οι ώρες ενημερώνονται αυτόματα.</li>
-          </ol>
-        </div>
-        <a href="world-how-to-el.html" class="btn btn-outline-primary btn-sm">Διαβάστε το άρθρο</a>
-      </div>
-
-      <div class="tool-card" role="region" aria-label="World Clock">
-        <a href="index.html" class="back-link">&larr; Επιστροφή στο κύριο μενού</a>
-        <div class="world-section">
-          <form class="clock-form" id="clockForm">
-            <select id="cityDropdown" class="form-select city-dropdown">
-              <option value="">Επιλέξτε πόλη...</option>
-            </select>
-            <input type="text" id="cityInput" class="form-control awesomplete" placeholder="Ή εισάγετε πόλη/ζώνη (π.χ. Αθήνα, Europe/Athens, GMT+2)" autocomplete="off" style="margin-top:.6rem;">
-            <button type="submit" class="btn btn-success btn-sm" style="margin-top:.5rem; width:110px;">Προσθήκη ρολογιού</button>
-          </form>
-
-          <div id="errorMsg" style="color:#b00;margin-bottom:.6em;"></div>
-          <div id="clockList" class="clock-list"></div>
-
-        </div>
-
-        <details class="faq-section" style="margin-top:1rem;">
-          <summary style="font-weight:700; font-size:1rem;">Συχνές ερωτήσεις</summary>
-          <ul style="padding-left:1.1rem;">
-            <li><b>Προσθέστε πόλη:</b> Χρησιμοποιήστε τη λίστα ή ξεκινήστε να πληκτρολογείτε το όνομα.</li>
-            <li><b>Συγκρίνετε ώρες:</b> Προσθέστε πολλές πόλεις για σύγκριση.</li>
-            <li><b>Κατάργηση:</b> Κάντε κλικ για να διαγράψετε μια πόλη από τη λίστα σας.</li>
-            <li>Πλήρης λίστα ζωνών ώρας: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">Δείτε εδώ</a></li>
-          </ul>
-        </details>
-      </div>
-
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές Παγκόσμιου Ρολογιού</h2>
-          <ul>
-            <li><b>Προγραμματίστε συναντήσεις:</b> Προσθέστε πόλεις και βρείτε την καλύτερη ώρα.</li>
-            <li><b>Ταξιδέψτε έξυπνα:</b> Ελέγξτε την τοπική ώρα πριν ταξιδέψετε.</li>
-            <li><b>Χρησιμοποιήστε autocomplete:</b> Πληκτρολογήστε για γρήγορες προτάσεις.</li>
-          </ul>
-        </div>
-        <a href="world-tips-el.html" class="btn btn-outline-primary btn-sm">Διαβάστε το άρθρο</a>
-      </div>
-    </div>
-
-    <footer class="site">
-      &copy; 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>
-    </footer>
-  </div>
-
-  <script>
+</div>
+<footer class="site">
+      © 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms</a> • <a href="contact.html">Contact</a>
+</footer>
+</div>
+<script>
     // Clock logic (identical behavior as previous generator)
     const { DateTime } = luxon;
     let cityList = [];
@@ -278,9 +248,8 @@
     setInterval(renderClocks, 1000);
     renderClocks();
   </script>
-
-  <!-- Embedded unified header language selector + defensive localizer JS -->
-  <script>
+<!-- Embedded unified header language selector + defensive localizer JS -->
+<script>
   (function(){
     const LANGS = [
       { code: 'en', name: 'English' },
@@ -395,5 +364,5 @@
     else init();
   })();
   </script>
-</body>
+<p style="margin-top:1rem;"><a class="cta" href="/el/world-clock/world-clock-index.html">Read full guide</a></p></body>
 </html>

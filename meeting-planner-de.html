@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Meeting-Planer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Finde die beste Meeting-Zeit für alle – überall auf der Welt.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<title>Meeting-Planer</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Finde die beste Meeting-Zeit für alle – überall auf der Welt." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
@@ -25,92 +26,73 @@
   </style>
 </head>
 <body>
-  <div class="main-container">
-    <div class="center-row">
+<div class="main-container">
+<div class="center-row">
+<!-- Left article card: How-to -->
+<div aria-labelledby="howto-heading" class="article-card">
+<h2 id="howto-heading">Wie man den Meeting-Planer nutzt</h2>
+<ol>
+<li>Fügen Sie Teilnehmer und ihre Zeitzonen hinzu.</li>
+<li>Wählen Sie ein Datum und eine vorgeschlagene Uhrzeit.</li>
+<li>Überprüfen Sie lokale Zeiten und teilen Sie die endgültige Uhrzeit.</li>
+</ol>
 
-      <!-- Left article card: How-to -->
-      <div class="article-card" aria-labelledby="howto-heading">
-        <h2 id="howto-heading">Wie man den Meeting-Planer nutzt</h2>
-        <ol>
-          <li>Fügen Sie Teilnehmer und ihre Zeitzonen hinzu.</li>
-          <li>Wählen Sie ein Datum und eine vorgeschlagene Uhrzeit.</li>
-          <li>Überprüfen Sie lokale Zeiten und teilen Sie die endgültige Uhrzeit.</li>
-        </ol>
-        <div class="article-links">
-          <a id="howto-article-link" class="btn btn-outline-primary btn-sm" href="meeting-how-to-de.html">Vollständigen Artikel lesen</a>
-        </div>
-      </div>
-
-      <!-- Center tool card -->
-      <div class="tool-card" id="tool-card">
-        <!-- language selector removed; language controlled by main menu -->
-        <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Zurück zum Hauptmenü</a>
-        <h3><i class="fa fa-users"></i> Meeting-Planer</h3>
-
-        <form id="meetingForm" onsubmit="return false;">
-          <div class="meeting-form-row mb-2">
-            <label for="participantName">Teilnehmername</label>
-            <input type="text" id="participantName" class="form-control" placeholder="Name eingeben (z. B. Anna)" autocomplete="off">
-          </div>
-
-          <div class="meeting-form-row mb-2">
-            <label for="participantCity">Zeitzone / Stadt</label>
-            <select id="participantCity" class="form-select" autocomplete="off"></select>
-          </div>
-
-          <div class="mb-2 d-flex gap-2">
-            <button type="button" class="btn btn-success btn-participant" id="addParticipant"><i class="fa fa-plus"></i> Teilnehmer hinzufügen</button>
-            <button type="button" class="btn btn-outline-secondary" id="clearParticipants" title="Teilnehmer löschen"><i class="fa fa-eraser"></i></button>
-          </div>
-        </form>
-
-        <div class="participant-list mb-3" id="participantList"></div>
-
-        <div class="meeting-form-row mb-2">
-          <label for="meetingDate">Meeting-Datum wählen</label>
-          <input type="date" id="meetingDate" class="form-control">
-        </div>
-
-        <div class="meeting-form-row mb-2">
-          <label for="meetingTime">Meeting-Zeit wählen</label>
-          <input type="time" id="meetingTime" class="form-control">
-          <button type="button" class="btn btn-primary btn-sm mt-2" id="calcTimes"><i class="fa fa-clock"></i> Zeiten anzeigen</button>
-        </div>
-
-        <div id="meetingTimes" aria-live="polite" class="mt-2"></div>
-
-        <details class="faq-section mt-3">
-          <summary id="faq-heading">Häufig gestellte Fragen
+</div>
+<!-- Center tool card -->
+<div class="tool-card" id="tool-card">
+<!-- language selector removed; language controlled by main menu -->
+<a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i> Zurück zum Hauptmenü</a>
+<h3><i class="fa fa-users"></i> Meeting-Planer</h3>
+<form id="meetingForm" onsubmit="return false;">
+<div class="meeting-form-row mb-2">
+<label for="participantName">Teilnehmername</label>
+<input autocomplete="off" class="form-control" id="participantName" placeholder="Name eingeben (z. B. Anna)" type="text"/>
+</div>
+<div class="meeting-form-row mb-2">
+<label for="participantCity">Zeitzone / Stadt</label>
+<select autocomplete="off" class="form-select" id="participantCity"></select>
+</div>
+<div class="mb-2 d-flex gap-2">
+<button class="btn btn-success btn-participant" id="addParticipant" type="button"><i class="fa fa-plus"></i> Teilnehmer hinzufügen</button>
+<button class="btn btn-outline-secondary" id="clearParticipants" title="Teilnehmer löschen" type="button"><i class="fa fa-eraser"></i></button>
+</div>
+</form>
+<div class="participant-list mb-3" id="participantList"></div>
+<div class="meeting-form-row mb-2">
+<label for="meetingDate">Meeting-Datum wählen</label>
+<input class="form-control" id="meetingDate" type="date"/>
+</div>
+<div class="meeting-form-row mb-2">
+<label for="meetingTime">Meeting-Zeit wählen</label>
+<input class="form-control" id="meetingTime" type="time"/>
+<button class="btn btn-primary btn-sm mt-2" id="calcTimes" type="button"><i class="fa fa-clock"></i> Zeiten anzeigen</button>
+</div>
+<div aria-live="polite" class="mt-2" id="meetingTimes"></div>
+<details class="faq-section mt-3">
+<summary id="faq-heading">Häufig gestellte Fragen
 </summary>
-          <ul id="faq-list" style="padding-left: 1em;">
-            <li><b>Wie viele Teilnehmer?</b> So viele Sie möchten.</li>
-            <li><b>Welche Zeitzonen?</b> Wählen Sie aus über 30 beliebten Städten/Zeitzonen.</li>
-            <li><b>Wie teilen?</b> Kopieren Sie die Zeiten und teilen Sie sie mit den Teilnehmern.</li>
-          </ul>
-        </details>
+<ul id="faq-list" style="padding-left: 1em;">
+<li><b>Wie viele Teilnehmer?</b> So viele Sie möchten.</li>
+<li><b>Welche Zeitzonen?</b> Wählen Sie aus über 30 beliebten Städten/Zeitzonen.</li>
+<li><b>Wie teilen?</b> Kopieren Sie die Zeiten und teilen Sie sie mit den Teilnehmern.</li>
+</ul>
+</details>
+<!-- "Tipps lesen" link removed from the bottom of the tool card per request -->
+</div>
+<!-- Right article card: Tips -->
+<div aria-labelledby="tips-heading" class="article-card">
+<h2 id="tips-heading">Tipps für produktive Meetings</h2>
+<ul>
+<li>Plane im Voraus, um Zeiten zu finden, die für alle passen.</li>
+<li>Sende Kalendereinladungen, um Verwirrung zu vermeiden.</li>
+<li>Überprüfe die Zeitzonen vor dem Einladen.</li>
+</ul>
 
-        <!-- "Tipps lesen" link removed from the bottom of the tool card per request -->
-
-      </div>
-
-      <!-- Right article card: Tips -->
-      <div class="article-card" aria-labelledby="tips-heading">
-        <h2 id="tips-heading">Tipps für produktive Meetings</h2>
-        <ul>
-          <li>Plane im Voraus, um Zeiten zu finden, die für alle passen.</li>
-          <li>Sende Kalendereinladungen, um Verwirrung zu vermeiden.</li>
-          <li>Überprüfe die Zeitzonen vor dem Einladen.</li>
-        </ul>
-        <div class="article-links">
-          <a class="btn btn-outline-primary btn-sm" href="meeting-tips-de.html">Vollständigen Artikel lesen</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
-  <script>
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+<script>
     const cities = [
       {value:"", label:"Wählen Sie eine Stadt/Zeitzone"},
       {value:"America/New_York", label:"New York 🇺🇸"},
@@ -256,5 +238,5 @@
     document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){} });
 
   </script>
-</body>
+<p style="margin-top:1rem;"><a class="cta" href="/de/meeting-planner/meeting-planner-index.html">Read full guide</a></p></body>
 </html>

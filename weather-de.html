@@ -1,13 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Weltwetter</title>
-  <meta name="description" content="Prüfen Sie das Wetter weltweit sofort.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Weltwetter</title>
+<meta content="Prüfen Sie das Wetter weltweit sofort." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
@@ -61,117 +62,89 @@
   </style>
 </head>
 <body>
-  <div class="page-wrap">
-    <div class="top-row">
-      <label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-      <select id="language-select-top" class="language-select" aria-label="Language selector">
-        <option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de" selected>Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
-      </select>
-    </div>
+<div class="page-wrap">
+<div class="top-row">
+<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
+<select aria-label="Language selector" class="language-select" id="language-select-top">
+<option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option selected="" value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
+</select>
+</div>
+<div class="text-center mb-4">
+<h1 style="margin-bottom:.25rem;">Weltwetter</h1>
+<p class="lead" style="color:#374151; margin-bottom:1rem;">Prüfen Sie das Wetter weltweit sofort.</p>
+</div>
+<div class="center-row">
 
-    <div class="text-center mb-4">
-      <h1 style="margin-bottom:.25rem;">Weltwetter</h1>
-      <p class="lead" style="color:#374151; margin-bottom:1rem;">Prüfen Sie das Wetter weltweit sofort.</p>
-    </div>
+<div aria-label="Global Weather" class="tool-card" role="region">
+<a class="back-link" href="index.html">← Zurück zum Hauptmenü</a>
+<!-- Middle visible title intentionally removed to keep the card minimal per request -->
+<form autocomplete="off" id="weatherForm">
+<div class="weather-form-row">
+<select class="form-select" id="cityDropdown" style="min-width:140px;" title="Stadt auswählen...">
+<option value="">Stadt auswählen...</option>
+<option value="New York">New York</option>
+<option value="London">London</option>
+<option value="Paris">Paris</option>
+<option value="Berlin">Berlin</option>
+<option value="Tokyo">Tokio</option>
+<option value="Sydney">Sydney</option>
+<option value="São Paulo">São Paulo</option>
+<option value="Moscow">Moskau</option>
+<option value="Dubai">Dubai</option>
+<option value="Istanbul">Istanbul</option>
+<option value="Johannesburg">Johannesburg</option>
+<option value="Toronto">Toronto</option>
+<option value="Mexico City">Mexiko-Stadt</option>
+<option value="Los Angeles">Los Angeles</option>
+<option value="Mumbai">Mumbai</option>
+<option value="Cairo">Kairo</option>
+<option value="Singapore">Singapur</option>
+<option value="Hong Kong">Hongkong</option>
+<option value="Bangkok">Bangkok</option>
+<option value="Seoul">Seoul</option>
+<option value="San Francisco">San Francisco</option>
+<option value="Rome">Rom</option>
+<option value="Kolkata">Kolkata</option>
+<option value="Jakarta">Jakarta</option>
+<option value="Madrid">Madrid</option>
+<option value="Cape Town">Kapstadt</option>
+<option value="Lagos">Lagos</option>
+<option value="Melbourne">Melbourne</option>
+<option value="Beijing">Peking</option>
+<option value="Chicago">Chicago</option>
+<option value="Vancouver">Vancouver</option>
+<option value="Auckland">Auckland</option>
+<option value="Hanoi">Hanoi</option>
+<option value="Manila">Manila</option>
+<option value="Warsaw">Warschau</option>
+</select>
+<input class="form-control" id="cityInput" placeholder="Oder Stadt eingeben..." style="min-width:160px;" title="Oder Stadt eingeben..." type="text"/>
+</div>
+<div class="action-row">
+<button id="getWeatherBtn" type="submit">Wetter abrufen</button>
+<button id="useLocationBtn" type="button"><i class="fa fa-location-arrow"></i> Meine Position verwenden</button>
+</div>
+</form>
+<div class="weather-result" id="weatherResult"></div>
+<!-- powered-by: show provider link and a small provider label -->
+<div class="powered-by">Daten von <a href="https://open-meteo.com" rel="noopener" target="_blank">Open‑Meteo</a><span class="provider"></span></div>
+<!-- FAQ: summary visible with icon and German label -->
+<details class="faq-section" style="margin-top:1rem;">
+<summary><i class="fa fa-play"></i> Häufige Fragen</summary>
+<ul style="padding-left:1.1rem; color:#374151;">
+<li><b>Wie genau ist das Wetter?</b> Daten stammen von Open‑Meteo oder ähnlichen APIs.</li>
+<li><b>Kann ich meinen Standort verwenden?</b> Ja, klicken Sie auf <b>Meine Position verwenden</b>.</li>
+<li><b>Kann ich jede Stadt eingeben?</b> Ja! Geben Sie die Stadt in das Feld ein.</li>
+</ul>
+</details>
+</div>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-cloud-sun"></i> So verwenden Sie das Wetter</h2>
-          <ol style="padding-left:1.1rem; color:#374151;">
-            <li><b>Stadt wählen oder eingeben:</b> Wählen Sie aus der Liste oder geben Sie Ihre eigene Stadt ein.</li><li><b>Standort verwenden:</b> Klicken Sie auf <strong>Meine Position verwenden</strong>.</li><li><b>Ergebnisse anzeigen:</b> Klicken Sie auf <strong>Wetter abrufen</strong>.</li>
-          </ol>
-        </div>
-        <a href="weather-how-to-de.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Artikel lesen</a>
-      </div>
-
-      <div class="tool-card" role="region" aria-label="Global Weather">
-        <a href="index.html" class="back-link">&larr; Zurück zum Hauptmenü</a>
-
-        <!-- Middle visible title intentionally removed to keep the card minimal per request -->
-
-        <form id="weatherForm" autocomplete="off">
-          <div class="weather-form-row">
-            <select id="cityDropdown" class="form-select" title="Stadt auswählen..." style="min-width:140px;">
-              <option value="">Stadt auswählen...</option>
-              <option value="New York">New York</option>
-              <option value="London">London</option>
-              <option value="Paris">Paris</option>
-              <option value="Berlin">Berlin</option>
-              <option value="Tokyo">Tokio</option>
-              <option value="Sydney">Sydney</option>
-              <option value="São Paulo">São Paulo</option>
-              <option value="Moscow">Moskau</option>
-              <option value="Dubai">Dubai</option>
-              <option value="Istanbul">Istanbul</option>
-              <option value="Johannesburg">Johannesburg</option>
-              <option value="Toronto">Toronto</option>
-              <option value="Mexico City">Mexiko-Stadt</option>
-              <option value="Los Angeles">Los Angeles</option>
-              <option value="Mumbai">Mumbai</option>
-              <option value="Cairo">Kairo</option>
-              <option value="Singapore">Singapur</option>
-              <option value="Hong Kong">Hongkong</option>
-              <option value="Bangkok">Bangkok</option>
-              <option value="Seoul">Seoul</option>
-              <option value="San Francisco">San Francisco</option>
-              <option value="Rome">Rom</option>
-              <option value="Kolkata">Kolkata</option>
-              <option value="Jakarta">Jakarta</option>
-              <option value="Madrid">Madrid</option>
-              <option value="Cape Town">Kapstadt</option>
-              <option value="Lagos">Lagos</option>
-              <option value="Melbourne">Melbourne</option>
-              <option value="Beijing">Peking</option>
-              <option value="Chicago">Chicago</option>
-              <option value="Vancouver">Vancouver</option>
-              <option value="Auckland">Auckland</option>
-              <option value="Hanoi">Hanoi</option>
-              <option value="Manila">Manila</option>
-              <option value="Warsaw">Warschau</option>
-            </select>
-            <input type="text" id="cityInput" class="form-control" placeholder="Oder Stadt eingeben..." title="Oder Stadt eingeben..." style="min-width:160px;">
-          </div>
-
-          <div class="action-row">
-            <button type="submit" id="getWeatherBtn">Wetter abrufen</button>
-            <button type="button" id="useLocationBtn"><i class="fa fa-location-arrow"></i> Meine Position verwenden</button>
-          </div>
-        </form>
-
-        <div id="weatherResult" class="weather-result"></div>
-
-        <!-- powered-by: show provider link and a small provider label -->
-        <div class="powered-by">Daten von <a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a><span class="provider"></span></div>
-
-        <!-- FAQ: summary visible with icon and German label -->
-        <details class="faq-section" style="margin-top:1rem;">
-          <summary><i class="fa fa-play"></i> Häufige Fragen</summary>
-          <ul style="padding-left:1.1rem; color:#374151;">
-            <li><b>Wie genau ist das Wetter?</b> Daten stammen von Open‑Meteo oder ähnlichen APIs.</li>
-            <li><b>Kann ich meinen Standort verwenden?</b> Ja, klicken Sie auf <b>Meine Position verwenden</b>.</li>
-            <li><b>Kann ich jede Stadt eingeben?</b> Ja! Geben Sie die Stadt in das Feld ein.</li>
-          </ul>
-        </details>
-      </div>
-
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Wettertipps</h2>
-          <ul style="padding-left:1.1rem; color:#374151;">
-            <li><b>Planen Sie voraus:</b> Prüfen Sie das Wetter vor Reisen oder Veranstaltungen.</li><li><b>Standort verwenden:</b> Holen Sie sich lokale Updates sofort.</li><li><b>Zeit sparen:</b> Verwenden Sie das Dropdown für beliebte Städte.</li>
-          </ul>
-        </div>
-        <a href="weather-tips-de.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Artikel lesen</a>
-      </div>
-    </div>
-
-    <footer class="site">
-      &copy; 2025 TimerHaven. <a href="privacy.html">Datenschutz</a>
-    </footer>
-  </div>
-
-  <script>
+</div>
+<footer class="site">
+      © 2025 TimerHaven. <a href="privacy.html">Datenschutz</a>
+</footer>
+</div>
+<script>
   // localized JS strings
   const MSG_PLEASE_SELECT = "Bitte wählen oder geben Sie eine Stadt ein.";
   const MSG_GEO_UNSUPPORTED = "Geolocation wird nicht unterstützt.";
@@ -278,8 +251,7 @@
     }
   })();
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+<p style="margin-top:1rem;"><a class="cta" href="/de/weather/weather-index.html">Read full guide</a></p></body>
 </html>

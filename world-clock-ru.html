@@ -1,17 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Мировые часы</title>
-  <meta name="description" content="Смотрите время в любой точке мира мгновенно.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Мировые часы</title>
+<meta content="Смотрите время в любой точке мира мгновенно." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+<style>
     /* Strong page-level override to match other tools */
     body { background:#f4f7fb !important; font-family: 'Montserrat', Arial, sans-serif !important; color:#0b2545 !important; margin:0; }
     .page-wrap { max-width:1200px; margin:2.4rem auto !important; padding:0 1rem !important; box-sizing:border-box !important; }
@@ -96,80 +96,51 @@
     /* FAQ summary styling */
     .faq-section summary { cursor:pointer; font-weight:700; font-size:1rem; display:flex; align-items:center; gap:.5rem; }
   </style>
-</head>
+</link></head>
 <body>
-  <div class="page-wrap">
-    <div class="top-row" aria-hidden="true">
-      <label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-      <select id="language-select-top" class="language-select" aria-label="Language selector">
-        <option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru" selected>Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
-      </select>
-    </div>
+<div class="page-wrap">
+<div aria-hidden="true" class="top-row">
+<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
+<select aria-label="Language selector" class="language-select" id="language-select-top">
+<option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option selected="" value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
+</select>
+</div>
+<div class="text-center mb-4">
+<h1>Мировые часы</h1>
+<p class="lead">Смотрите время в любой точке мира мгновенно.</p>
+</div>
+<div class="center-row">
 
-    <div class="text-center mb-4">
-      <h1>Мировые часы</h1>
-      <p class="lead">Смотрите время в любой точке мира мгновенно.</p>
-    </div>
+<div aria-label="World Clock" class="tool-card" role="region">
+<a class="back-link" href="index.html">← Вернуться в главное меню</a>
+<div class="world-section" style="flex:1 1 auto;">
+<form class="clock-form" id="clockForm">
+<select class="form-select" id="cityDropdown" title="Выберите город...">
+<option value="">Выберите город...</option>
+</select>
+<input autocomplete="off" class="form-control awesomplete" id="cityInput" placeholder="Или введите город/зону (например, Москва, Europe/Moscow, GMT+3)" style="margin-top:.6rem;" type="text"/>
+<button class="btn btn-success btn-sm" style="margin-top:.5rem; width:110px;" type="submit">Добавить часы</button>
+</form>
+<div id="errorMsg" style="color:#b00;margin-bottom:.6em;"></div>
+<div class="clock-list" id="clockList" style="margin-top:.6rem;"></div>
+</div>
+<details class="faq-section" style="margin-top:1rem;">
+<summary>Вопросы</summary>
+<ul style="padding-left:1.1rem;">
+<li><b>Добавьте город:</b> Используйте выпадающий список или начните вводить название города.</li>
+<li><b>Сравнить время:</b> Добавьте несколько городов, чтобы сравнить время.</li>
+<li><b>Удалить:</b> Нажмите Удалить, чтобы удалить город из списка.</li>
+<li>Полный список часовых поясов: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">См. здесь</a></li>
+</ul>
+</details>
+</div>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-globe"></i> Как использовать Мировые часы</h2>
-          <ol>
-            <li><b>Добавьте город:</b> Используйте выпадающий список или начните вводить название.</li>
-            <li><b>Сравните время:</b> Добавьте несколько городов, чтобы сравнить время.</li>
-            <li><b>Удалить:</b> Нажмите Удалить, чтобы убрать город.</li>
-            <li><b>Обновление:</b> Время обновляется автоматически.</li>
-          </ol>
-        </div>
-        <a href="world-how-to-ru.html" class="btn btn-outline-primary btn-sm">Читать статью</a>
-      </div>
-
-      <div class="tool-card" role="region" aria-label="World Clock">
-        <a href="index.html" class="back-link">&larr; Вернуться в главное меню</a>
-        <div class="world-section" style="flex:1 1 auto;">
-          <form class="clock-form" id="clockForm">
-            <select id="cityDropdown" class="form-select" title="Выберите город...">
-              <option value="">Выберите город...</option>
-            </select>
-            <input type="text" id="cityInput" class="form-control awesomplete" placeholder="Или введите город/зону (например, Москва, Europe/Moscow, GMT+3)" autocomplete="off" style="margin-top:.6rem;">
-            <button type="submit" class="btn btn-success btn-sm" style="margin-top:.5rem; width:110px;">Добавить часы</button>
-          </form>
-
-          <div id="errorMsg" style="color:#b00;margin-bottom:.6em;"></div>
-          <div id="clockList" class="clock-list" style="margin-top:.6rem;"></div>
-        </div>
-
-        <details class="faq-section" style="margin-top:1rem;">
-          <summary>Вопросы</summary>
-          <ul style="padding-left:1.1rem;">
-            <li><b>Добавьте город:</b> Используйте выпадающий список или начните вводить название города.</li>
-            <li><b>Сравнить время:</b> Добавьте несколько городов, чтобы сравнить время.</li>
-            <li><b>Удалить:</b> Нажмите Удалить, чтобы удалить город из списка.</li>
-            <li>Полный список часовых поясов: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">См. здесь</a></li>
-          </ul>
-        </details>
-      </div>
-
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по Мировым часам</h2>
-          <ul>
-            <li><b>Планируйте встречи:</b> Добавьте города и выберите удобное время.</li>
-            <li><b>Путешествуйте грамотно:</b> Узнайте местное время перед поездкой.</li>
-            <li><b>Используйте автозаполнение:</b> Начните ввод, чтобы быстро найти город.</li>
-          </ul>
-        </div>
-        <a href="world-tips-ru.html" class="btn btn-outline-primary btn-sm">Читать статью</a>
-      </div>
-    </div>
-
-    <footer class="site">
-      &copy; 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>
-    </footer>
-  </div>
-
-  <script>
+</div>
+<footer class="site">
+      © 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms</a> • <a href="contact.html">Contact</a>
+</footer>
+</div>
+<script>
     // Clock logic (identical behavior as previous generator)
     const { DateTime } = luxon;
     let cityList = [];
@@ -284,9 +255,8 @@
     setInterval(renderClocks, 1000);
     renderClocks();
   </script>
-
-  <!-- Embedded unified header language selector + defensive localizer JS -->
-  <script>
+<!-- Embedded unified header language selector + defensive localizer JS -->
+<script>
   (function(){
     const LANGS = [
       { code: 'en', name: 'English' },
@@ -401,5 +371,5 @@
     else init();
   })();
   </script>
-</body>
+<p style="margin-top:1rem;"><a class="cta" href="/ru/world-clock/world-clock-index.html">Read full guide</a></p></body>
 </html>
