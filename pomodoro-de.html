@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Pomodoro-Timer — TimerHaven</title>
+<meta content="Steigern Sie Ihre Konzentration mit der Pomodoro-Technik. Erfahren Sie, wie der Pomodoro-Timer funktioniert, erhalten Sie Tipps und FAQs." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
+    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
+    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
+    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:340px; padding:1.3rem; }
+    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
+    .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
+    .form-inline { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
+    .pomodoro-display { font-weight:700; font-size:1.25rem; margin-top:.5rem; margin-bottom:.5rem; }
+    .controls-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem; }
+    .toggles { margin-top:.6rem; display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; }
+    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
+    .btn-small { padding:.35rem .7rem; font-size:.9rem; }
+    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
+    @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="text-center mb-4">
+<h1 style="margin-bottom:.25rem;">Pomodoro-Timer</h1>
+<p class="lead" style="color:#374151; margin-bottom:1rem;">Steigern Sie Ihre Konzentration mit der Pomodoro-Technik. Erfahren Sie, wie der Pomodoro-Timer funktioniert, erhalten Sie Tipps und FAQs.</p>
+</div>
+<div class="center-row">
+
+<div aria-label="Pomodoro timer" class="tool-card" role="region">
+<!-- Back to main menu (translated and id for accessibility) -->
+<a aria-label="Zurück zum Hauptmenü" class="d-block mb-2" href="index.html" id="backLink" style="text-decoration:none; color:#0d6efd; font-weight:600;">
+          ← Zurück zum Hauptmenü
+        </a>
+<h3><i class="fa fa-apple-whole"></i> Pomodoro-Timer</h3>
+<div aria-live="polite" class="pomodoro-section">
+<div class="form-inline mb-2">
+<label style="font-weight:600;">Arbeit (min):
+              <input class="form-control" id="workLength" max="60" min="1" style="width:80px; margin-left:.3rem;" type="number" value="25"/>
+</label>
+<label style="font-weight:600;">Pause (min):
+              <input class="form-control" id="breakLength" max="30" min="1" style="width:80px; margin-left:.3rem;" type="number" value="5"/>
+</label>
+</div>
+<div id="pomodoroStatus" style="font-weight:600; margin-bottom:.25rem;">Arbeit</div>
+<div class="pomodoro-display" id="pomodoroDisplay">25:00</div>
+<div class="controls-row">
+<button class="btn btn-success btn-small" id="startBtn"><i class="fa fa-play"></i> Start</button>
+<button class="btn btn-secondary btn-small" id="pauseBtn"><i class="fa fa-pause"></i> Pause</button>
+<button class="btn btn-danger btn-small" id="resetBtn"><i class="fa fa-refresh"></i> Zurücksetzen</button>
+</div>
+<div id="pomodoroCycle" style="margin-top:.5rem; color:#185a9d; font-weight:600;">Abgeschlossene Zyklen: 0</div>
+<div aria-hidden="false" class="toggles" style="margin-top:.5rem;">
+<label style="display:flex; align-items:center; gap:.35rem;"><input id="beepToggle" type="checkbox"/> Signalton am Ende</label>
+<label style="display:flex; align-items:center; gap:.35rem;"><input id="notifyToggle" type="checkbox"/> Desktop-Benachrichtigung</label>
+<label style="display:flex; align-items:center; gap:.35rem;"><input id="autoStartToggle" type="checkbox"/> Automatisch nächste Periode starten</label>
+</div>
+<details class="faq-section" style="margin-top:1rem;">
+<summary style="font-weight:700; font-size:1rem;">Häufig gestellte Fragen</summary>
+<ul style="padding-left:1.1rem; color:#374151;">
+<li><b>Was ist Pomodoro?</b> Eine Produktivitätstechnik mit Fokus-/Pausenzyklen.</li>
+<li><b>Kann ich den Timer anpassen?</b> Ja — passen Sie die Dauer an Ihre Arbeit an.</li>
+<li><b>Werden Sitzungen gespeichert?</b> Nein — sie werden nach dem Neuladen zurückgesetzt.</li>
+</ul>
+</details>
+</div>
+</div>
+
+</div>
+<footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
+      © 2025 TimerHaven. <a href="privacy.html">Datenschutz</a> • <a href="terms.html">Nutzungsbedingungen</a> • <a href="contact.html">Kontakt</a>
+</footer>
+</div>
+<script>
+  (function(){
+    // Pomodoro logic (simple)
+    var timer = null;
+    var running = false;
+    var isWork = true;
+    var timeLeft = 25*60;
+    var cycleCount = 0;
+
+    function updateDisplay() {
+      var min = Math.floor(timeLeft/60);
+      var sec = timeLeft % 60;
+      document.getElementById('pomodoroDisplay').textContent = String(min).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
+      document.getElementById('pomodoroStatus').textContent = isWork ? "Arbeit" : "Pause";
+      document.getElementById('pomodoroCycle').textContent = "Abgeschlossene Zyklen: " + cycleCount;
+    }
+
+    function setLengths() {
+      if (isWork) {
+        timeLeft = parseInt(document.getElementById('workLength').value,10) * 60;
+      } else {
+        timeLeft = parseInt(document.getElementById('breakLength').value,10) * 60;
+      }
+      updateDisplay();
+    }
+
+    document.getElementById('workLength').addEventListener('change', setLengths);
+    document.getElementById('breakLength').addEventListener('change', setLengths);
+
+    document.getElementById('startBtn').addEventListener('click', function(){
+      if (running) return;
+      running = true;
+      timer = setInterval(function(){
+        if (timeLeft > 0) {
+          timeLeft--;
+          updateDisplay();
+        } else {
+          clearInterval(timer);
+          running = false;
+          if (isWork) cycleCount++;
+          isWork = !isWork;
+          setLengths();
+        }
+      }, 1000);
+    });
+
+    document.getElementById('pauseBtn').addEventListener('click', function(){
+      if (timer) clearInterval(timer);
+      running = false;
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      if (timer) clearInterval(timer);
+      running = false;
+      cycleCount = 0;
+      isWork = true;
+      setLengths();
+    });
+
+    setLengths();
+  })();
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+<p style="margin-top:1rem;"><a class="cta" href="/de/pomodoro/pomodoro-index.html">Read full guide</a></p></body>
+</html>

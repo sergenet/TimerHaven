@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <title>Προγραμματισμός Ημερολογίου — Κλείστε χρόνο για βαθιά εργασία | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Πρακτικός οδηγός για τον προγραμματισμό μπλοκ εργασίας, σειρών Pomodoro και εβδομαδιαίου planning με πρότυπα .ics, μετρήσεις και ροές εργασίας.">
+  <link rel="canonical" href="https://timerhaven.com/el/calendar-planning-index.html">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Προγραμματίστε βαθιά εργασία με μπλοκ στο ημερολόγιο",
+        "description":"Οδηγίες βήμα‑βήμα για να κλείσετε χρόνο, να επισυνάψετε πλαίσια (checklists), να τρέξετε Pomodoro/90‑λεπτα blocks και να μετρήσετε αποτελέσματα.",
+        "image":"https://timerhaven.com/assets/images/calendar-snapshot.png",
+        "totalTime":"PT3H",
+        "supply":["Ημερολόγιο (TimerHaven ή άλλη εφαρμογή .ics)","Pomodoro Timer","Σημειώσεις / checklist"],
+        "step":[
+          {"@type":"HowToStep","name":"Ορίστε σαφές αποτέλεσμα","text":"Γράψτε τον στόχο του μπλοκ σε μία γραμμή (π.χ. «Σύνταξη περίληψης — 400 λέξεις»)."},
+          {"@type":"HowToStep","name":"Προσθέστε περιγραφή & checklists","text":"Επικολλήστε 2–4 bullets με συνδέσμους/αρχεία στην περιγραφή για να ξεκινήσετε χωρίς αναμονές."},
+          {"@type":"HowToStep","name":"Ρυθμίστε κατάσταση & υπενθυμίσεις","text":"Ορίστε το συμβάν ως 'Απασχολημένος' και προσθέστε υπενθυμίσεις 24ω/30λ για κρίσιμα σημεία."},
+          {"@type":"HowToStep","name":"Εκτελέστε & καταγράψτε","text":"Τρέξτε Pomodoros ή 90‑120λεπτα blocks, καταγράψτε διακοπές και σημειώστε σύντομο αποτέλεσμα στην περιγραφή."}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Προγραμματισμός Ημερολογίου — Κλείστε χρόνο για εστίαση",
+        "image":["https://timerhaven.com/assets/images/calendar-snapshot.png"],
+        "author":{"@type":"Person","name":"Serge Shammas"},
+        "publisher":{"@type":"Organization","name":"TimerHaven","logo":{"@type":"ImageObject","url":"https://timerhaven.com/assets/images/timerhaven-logo.png"}},
+        "datePublished":"2025-10-28",
+        "dateModified":"2025-11-23",
+        "description":"Πρακτικές συμβουλές και πρότυπα για να κάνετε το ημερολόγιό σας εργαλείο μάθησης και προστασίας του χρόνου."
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fbfeff;color:#102a43;margin:0;padding:2rem;line-height:1.6}
+    .container{max-width:920px;margin:0 auto}
+    .card{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+    h1{color:var(--brand);margin-top:0;font-size:1.9rem}
+    .lead{font-size:1.05rem;color:#334;margin-bottom:.6rem}
+    .author{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid rgba(15,23,42,0.06)}
+    .meta{color:var(--muted);font-size:.95rem}
+    nav.toc{margin:.75rem 0;padding:.4rem 0;border-left:3px solid #eef5fb}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600}
+    .section{margin-top:1.2rem}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:.9rem;border-radius:8px;margin-bottom:.9rem}
+    .workflow{background:#f0fbff;border-left:4px solid #bfe7ff;padding:.9rem;border-radius:8px;margin-bottom:.9rem}
+    .cta{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none}
+    pre.template{background:#f3f7fb;padding:.75rem;border-radius:6px;overflow:auto}
+    .muted{color:var(--muted)}
+    .small-note{font-size:.95rem;color:#51606b}
+    table.sample{border-collapse:collapse;margin-top:.5rem;width:100%;max-width:680px}
+    table.sample td, table.sample th{border:1px solid #eef5fb;padding:.35rem .6rem;text-align:left}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Προγραμματισμός Ημερολογίου — Κλείστε χρόνο για βαθιά εργασία</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας">
+        <img src="https://timerhaven.com/assets/images/authors/serge-shammas-200.jpg"
+             srcset="https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg 2x"
+             width="56" height="56" alt="Φωτογραφία Serge Shammas" loading="lazy"
+             onerror="this.onerror=null;this.src='https://timerhaven.com/assets/images/authors/avatar-placeholder.png';">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong></div>
+          <div class="meta">Δημοσίευση: 2025-10-28 · Τελευταία ενημέρωση: 2025-11-23</div>
+        </div>
+      </div>
+
+      <p class="lead">Το κλείσιμο μπλοκ στο ημερολόγιο μετατρέπει προθέσεις σε δεσμεύσεις. Μάθετε πώς να προγραμματίζετε μπλοκ Pomodoro, 90–120λεπτα μπλοκ, πώς να μετράτε αποτελεσματικότητα και πώς να συντονίζεστε με την ομάδα.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#why">Γιατί ημερολόγιο</a>
+        <a href="#plan">Σχεδιασμός μπλοκ</a>
+        <a href="#pomodoro">Pomodoro σε μπλοκ</a>
+        <a href="#deep">90–120 λεπτά</a>
+        <a href="#weekly">Εβδομαδιαίο planning</a>
+        <a href="#measure">Μετρήσεις</a>
+        <a href="#team">Ομαδική συντονισμός</a>
+        <a href="#ics">Πρότυπα .ics</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section">
+        <h2>Γιατί να χρησιμοποιείτε το ημερολόγιο για τον χρόνο εστίασης</h2>
+        <p>Το ημερολόγιο κάνει το χρόνο ορατό και μειώνει την ψυχική φόρτιση. Συνδέστε μικρές λίστες ενεργειών στο πεδίο περιγραφής και θα ξεκινάτε κάθε μπλοκ έτοιμοι — χωρίς αναζήτηση πόρων.</p>
+        <p class="small-note">Συμβουλή: Ορίστε τα μπλοκ ως «Απασχολημένος» ώστε να μειώσετε τις ανεπιθύμητες προσκλήσεις.</p>
+      </section>
+
+      <section id="plan" class="section">
+        <h2>Σχεδιασμός — δημιουργήστε μπλοκ που παράγουν αποτέλεσμα</h2>
+        <ul>
+          <li><strong>Τίτλος-στόχος:</strong> Βάλτε αποτέλεσμα στον τίτλο (π.χ. «Εκτελεστική περίληψη — 400 λέξεις»).</li>
+          <li><strong>Περιγραφή:</strong> 3 bullets, links, αρχεία — όλα στην περιγραφή.</li>
+          <li><strong>Ετικέτες & εκτιμήσεις:</strong> Προσθέστε κωδικό έργου (ALPHA –) και εκτιμώμενη διάρκεια.</li>
+          <li><strong>Υπενθυμίσεις:</strong> 24 ώρες και 30 λεπτά συν ένα 5λεπτο «προετοιμασίας» όπου χρειάζεται.</li>
+        </ul>
+      </section>
+
+      <section id="pomodoro" class="section">
+        <h2>Σειρές Pomodoro μέσα σε μπλοκ</h2>
+        <div class="recipe">
+          <strong>Συνταγή — 2ωρο μπλοκ με 4 Pomodoros</strong>
+          <ol>
+            <li>Κλείστε 2 ώρες, γράψτε στόχο και 4 checkpoints στην περιγραφή.</li>
+            <li>Τρέξτε 4×25/5 Pomodoros· στις παύσεις σημειώστε πρόοδο.</li>
+            <li>Στο τέλος προσθέστε «Αποτέλεσμα: » με μία πρόταση — έτσι κρατάτε ιστορικό στον ίδιο το συμβάν.</li>
+          </ol>
+        </div>
+        <p class="small-note">Αν διακόπτεστε συχνά, δοκιμάστε 50/10 για λιγότερο κόστος επαναφοράς του πλαισίου εργασίας.</p>
+      </section>
+
+      <section id="deep" class="section">
+        <h2>Μπλοκ 90–120 λεπτών — οδηγός χρήσης</h2>
+        <p>Τα 90–120λεπτα μπλοκ είναι κατάλληλα για εργασία που απαιτεί ροή. Για καλύτερα αποτελέσματα:</p>
+        <ul>
+          <li>5–10λεπτο τελετουργικό εκκίνησης (διαβάστε brief, ανοίξτε docs).</li>
+          <li>Καθορισμός μικρού πρώτου στόχου πριν ξεκινήσετε.</li>
+          <li>Καταγράψτε τον αριθμό διακοπών και βαθμολογήστε την ποιότητα (0–5) μετά το μπλοκ.</li>
+        </ul>
+      </section>
+
+      <section id="weekly" class="section">
+        <h2>Εβδομαδιαίο planning — σύντομη ρουτίνα (30–45 λεπτά)</h2>
+        <ol>
+          <li>Εξάγετε δεδομένα Task Timer από την προηγούμενη εβδομάδα για να δείτε πραγματικό χρόνο και διακοπές.</li>
+          <li>Επιλέξτε 2–3 κύριους στόχους για την επόμενη εβδομάδα και κλείστε μπλοκ, προτιμώντας πρωινές ώρες.</li>
+          <li>Κρατήστε buffer ~20–30% για συναντήσεις και απρόοπτα.</li>
+          <li>Μεταφέρετε μη ολοκληρωμένα στοιχεία σε συγκεκριμένα νέα μπλοκ και ενημερώστε τις περιγραφές με αποτελέσματα.</li>
+        </ol>
+      </section>
+
+      <section id="measure" class="section">
+        <h2>Μέτρηση αποτελεσματικότητας — τι να παρακολουθείτε</h2>
+        <p>Οι μετρήσεις κάνουν το ημερολόγιο εργαλείο μάθησης. Σημειώστε αυτές τις βασικές στήλες κατά την εξαγωγή:</p>
+        <pre class="template">date,event_title,planned_minutes,actual_minutes,interruptions,quality_rating,notes</pre>
+        <ul>
+          <li><strong>Bloks προγραμματισμένα</strong> vs ολοκληρωμένα</li>
+          <li><strong>Πραγματικός χρόνος</strong> vs εκτιμώμενος</li>
+          <li><strong>Ποσοστό διακοπών</strong> — πόσα μπλοκ διακόπηκαν</li>
+          <li><strong>Βαθμολογία ποιότητας</strong> (αυτοαξιολόγηση 0–5)</li>
+        </ul>
+
+        <h3>Συνήθεις τύποι (Google Sheets)</h3>
+        <pre class="template">=AVERAGEIF(ProjectRange,"ALPHA",ActualMinutesRange)
+=MEDIAN(IF(ProjectRange="ALPHA",ActualMinutesRange))  // ως array‑formula
+=COUNTIFS(ProjectRange,"ALPHA",InterruptedRange,">0") / COUNTIF(ProjectRange,"ALPHA")</pre>
+      </section>
+
+      <section id="team" class="section">
+        <h2>Συντονισμός ομάδας</h2>
+        <ul>
+          <li>Συμφωνήστε σε κοινά παράθυρα focus (π.χ. 10:00–12:00) για συνεργασία χωρίς meetings.</li>
+          <li>Δημιουργήστε ένα κανάλι <code>#urgent</code> μόνο για πραγματικές διακοπές.</li>
+          <li>Κάντε σύντομες συγχρονίσεις στις παύσεις (breaks) αντί για επιπλέον meetings.</li>
+        </ul>
+
+        <div class="workflow">
+          <strong>Πρότυπο — Ομαδικό Pomodoro</strong>
+          <ol>
+            <li>Συγχρονισμός εκκίνησης των Pomodoros· 25 min εργασία, 5 min διάλειμμα.</li>
+            <li>Στις παύσεις κάθε μέλος γράφει μία φράση για μπλοκάρισμα, ο συντονιστής συγκεντρώνει τα θέματα.</li>
+            <li>Μετά 4 κύκλους, 15 min σύντομη ανασκόπηση.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="ics" class="section">
+        <h2>Πρότυπα & λήψη .ics</h2>
+        <p class="muted">Κατεβάστε ένα πρότυπο .ics για εισαγωγή σε Google/Outlook/Apple Calendar.</p>
+        <p><a href="#" id="downloadIcs" class="cta">Κατέβασμα πρότυπου .ics</a></p>
+
+        <pre class="template" id="icsTemplate" aria-hidden="true">BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//TimerHaven//Pomodoro Block Template//EL
+BEGIN:VEVENT
+UID:{{UID}}
+DTSTAMP:{{UTC_NOW}}
+DTSTART:20251110T090000Z
+DTEND:20251110T103000Z
+SUMMARY:Pomodoro Focus — [Στόχος]
+DESCRIPTION:Checklist:
+- Σημείο 1
+- Σημείο 2
+Notes: Αναφορά σε Σημειώσεις (ID).
+STATUS:BUSY
+END:VEVENT
+END:VCALENDAR</pre>
+
+        <script>
+          document.getElementById('downloadIcs').addEventListener('click', function(e){
+            e.preventDefault();
+            var template = document.getElementById('icsTemplate').textContent;
+            var now = new Date();
+            var uid = 'ph-' + Math.floor(Math.random()*900000+100000) + '@timerhaven.com';
+            var stamp = now.toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+            var content = template.replace('{{UID}}', uid).replace('{{UTC_NOW}}', stamp).replace('{{DTSTART}}','20251110T090000Z').replace('{{DTEND}}','20251110T103000Z');
+            var blob = new Blob([content], {type:'text/calendar;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'pomodoro-block-template.ics';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="troubleshoot" class="section">
+        <h2>Συνηθισμένα προβλήματα & γρήγορες λύσεις</h2>
+        <ul>
+          <li><strong>Συνεχής διακοπή μπλοκ:</strong> Συμφωνήστε σε παράθυρα σιωπής, και αναγνωρίστε ποιοι τύποι διακοπών είναι πραγματικά επείγοντες.</li>
+          <li><strong>Σταθερές υποεκτιμήσεις:</strong> Καταγράψτε 2 εβδομάδες πραγματικού χρόνου και χρησιμοποιήστε τη μediana ανά τύπο εργασίας.</li>
+          <li><strong>Συνεχείς συναντήσεις:</strong> Περιορίστε την προεπιλεγμένη διάρκεια συναντήσεων σε 30–45 λεπτά και δημιουργήστε buffers.</li>
+        </ul>
+      </section>
+
+      <section id="examples" class="section">
+        <h2>Πρακτικά παραδείγματα</h2>
+
+        <div class="workflow">
+          <strong>Παράδειγμα — Product Manager</strong>
+          <ol>
+            <li>09:00–10:30 — Deep Work: Roadmap prioritization (90 min)</li>
+            <li>10:30–11:00 — Buffer / Email</li>
+            <li>11:00–12:30 — Pomodoro sprint: PRD draft</li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>Παράδειγμα — Freelancer</strong>
+          <ol>
+            <li>08:00–09:00 — Email & planning</li>
+            <li>09:00–11:00 — Billable block for client A (2h)</li>
+            <li>11:30–12:00 — Save notes & export</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="faq" class="section">
+        <h2>FAQ</h2>
+        <div class="faq">
+          <p><strong>Ε: Πρέπει να ορίζω τα μπλοκ ως «Απασχολημένος»;</strong><br><strong>Α:</strong> Ναι — μειώνει τις διακοπές και θέτει σαφείς προσδοκίες. Ενημερώστε την ομάδα για εξαιρέσεις.</p>
+          <p><strong>Ε: Πώς μοιράζομαι ένα μπλοκ;</strong><br><strong>Α:</strong> Εξάγετε το .ics και στείλτε το ή προσθέστε το σε κοινό ημερολόγιο.</p>
+          <p><strong>Ε: Μπορώ να αυτοματοποιήσω μπλοκ;</strong><br><strong>Α:</strong> Ναι — δημιουργήστε πρότυπα ή χρησιμοποιήστε συντομεύσεις για γρήγορη εισαγωγή γεγονότων με προπληρωμένα checklists.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section">
+        <h2>Πόροι</h2>
+        <ul class="muted">
+          <li><a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" target="_blank" rel="noopener">Pomodoro Technique — περιγραφή</a></li>
+          <li><a href="https://calendar.google.com" target="_blank" rel="noopener">Google Calendar — εισαγωγή .ics</a></li>
+        </ul>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Σχετικά εργαλεία: <a href="/el/notes-index.html">Σημειώσεις</a> · <a href="/el/pomodoro-index.html">Pomodoro</a> · <a href="/el/task-timer-index.html">Task Timer</a></p>
+
+      <p style="margin-top:1.2rem;"><a href="/calendar-el.html" class="cta" aria-label="Άνοιγμα Ημερολογίου">Άνοιγμα Ημερολογίου</a></p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:.95rem;">
+        <p>Σχόλια ή προτάσεις: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>.</p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>

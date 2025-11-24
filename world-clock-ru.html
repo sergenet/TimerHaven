@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Мировые часы</title>
+<meta content="Смотрите время в любой точке мира мгновенно." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+<style>
+    /* Strong page-level override to match other tools */
+    body { background:#f4f7fb !important; font-family: 'Montserrat', Arial, sans-serif !important; color:#0b2545 !important; margin:0; }
+    .page-wrap { max-width:1200px; margin:2.4rem auto !important; padding:0 1rem !important; box-sizing:border-box !important; }
+
+    /* Header language area (kept in DOM for JS but hidden visually) */
+    .top-row { display:flex !important; justify-content:flex-end !important; gap:.6rem !important; margin-bottom:.6rem !important; align-items:center; }
+    .top-row label[for="language-select-top"] { font-weight:600; margin-right:.5rem; color:#0b2545; }
+    .top-row .language-select {
+      width:180px !important;
+      border-radius:10px !important;
+      padding:.28rem .6rem !important;
+      border:1px solid rgba(13,110,253,0.18) !important;
+      background:#fff !important;
+      color:#0d6efd !important;
+      font-weight:600 !important;
+      box-shadow:none !important;
+    }
+
+    /* Hide the visible language indicator while keeping markup & JS intact */
+    .top-row { display: none !important; visibility: hidden !important; }
+
+    .text-center.mb-4 { margin-bottom:1.5rem !important; }
+    .text-center.mb-4 h1 { font-size:2.4rem !important; margin:0 !important; color:#0b2545 !important; }
+    .text-center.mb-4 p.lead { margin-top:.4rem !important; color:#6b7280 !important; }
+
+    /* Layout: stretch cards so equal-height alignment works */
+    .center-row { display:flex !important; gap:1.6rem !important; justify-content:center !important; align-items:stretch !important; flex-wrap:nowrap !important; }
+
+    .article-card, .tool-card {
+      background:#fff !important;
+      border-radius:18px !important;
+      box-shadow: 0 6px 20px rgba(11,37,69,0.06) !important;
+      padding:1.3rem !important;
+      box-sizing:border-box !important;
+      display:flex !important;
+      flex-direction:column !important;
+      justify-content:space-between !important;
+    }
+
+    /* Make all three cards equal height on desktop; responsive fallback below */
+    .article-card { width:330px !important; min-height:440px !important; }
+    .tool-card   { width:420px !important; min-height:440px !important; }
+
+    .article-card h2, .tool-card h3 { color:#185a9d !important; margin:0 0 .6rem 0 !important; font-size:1.25rem !important; }
+    .article-card ul, .article-card ol, .tool-card ul { color:#374151 !important; padding-left:1.1rem !important; }
+
+    .article-card > a.btn,
+    .article-card .btn-outline-primary {
+      width:100% !important;
+      box-sizing:border-box !important;
+      display:inline-block !important;
+      padding:.5rem .75rem !important;
+      border-radius:8px !important;
+      border:1px solid rgba(13,110,253,0.18) !important;
+      color:#0d6efd !important;
+      background:transparent !important;
+      text-align:center !important;
+      margin-top:.35rem !important;
+      font-weight:600 !important;
+    }
+
+    .tool-card .back-link { color:#0d6efd !important; display:inline-block !important; margin-bottom:.6rem !important; text-decoration:none !important; }
+
+    .clock-item { background:#f7fafc !important; border-radius:8px !important; padding:.8rem !important; margin-bottom:.6rem !important; display:flex !important; align-items:center !important; justify-content:space-between !important; }
+
+    footer.site { text-align:center !important; margin-top:1.6rem !important; color:#6b7280 !important; }
+
+    /* Responsive: remove fixed min-heights on small screens so cards flow naturally */
+    @media (max-width:900px) {
+      .center-row { flex-direction:column !important; align-items:center !important; gap:1rem !important; }
+      .article-card, .tool-card { width:98vw !important; max-width:540px !important; min-height: auto !important; }
+      .text-center.mb-4 h1 { font-size:1.8rem !important; }
+    }
+
+    /* Defensive: hide any selectors inserted into the tool-card */
+    .tool-card .lang-wrap,
+    .tool-card #language-select-top {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    /* FAQ summary styling */
+    .faq-section summary { cursor:pointer; font-weight:700; font-size:1rem; display:flex; align-items:center; gap:.5rem; }
+  </style>
+</link></head>
+<body>
+<div class="page-wrap">
+<div aria-hidden="true" class="top-row">
+<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
+<select aria-label="Language selector" class="language-select" id="language-select-top">
+<option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option selected="" value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
+</select>
+</div>
+<div class="text-center mb-4">
+<h1>Мировые часы</h1>
+<p class="lead">Смотрите время в любой точке мира мгновенно.</p>
+</div>
+<div class="center-row">
+
+<div aria-label="World Clock" class="tool-card" role="region">
+<a class="back-link" href="index.html">← Вернуться в главное меню</a>
+<div class="world-section" style="flex:1 1 auto;">
+<form class="clock-form" id="clockForm">
+<select class="form-select" id="cityDropdown" title="Выберите город...">
+<option value="">Выберите город...</option>
+</select>
+<input autocomplete="off" class="form-control awesomplete" id="cityInput" placeholder="Или введите город/зону (например, Москва, Europe/Moscow, GMT+3)" style="margin-top:.6rem;" type="text"/>
+<button class="btn btn-success btn-sm" style="margin-top:.5rem; width:110px;" type="submit">Добавить часы</button>
+</form>
+<div id="errorMsg" style="color:#b00;margin-bottom:.6em;"></div>
+<div class="clock-list" id="clockList" style="margin-top:.6rem;"></div>
+</div>
+<details class="faq-section" style="margin-top:1rem;">
+<summary>Вопросы</summary>
+<ul style="padding-left:1.1rem;">
+<li><b>Добавьте город:</b> Используйте выпадающий список или начните вводить название города.</li>
+<li><b>Сравнить время:</b> Добавьте несколько городов, чтобы сравнить время.</li>
+<li><b>Удалить:</b> Нажмите Удалить, чтобы удалить город из списка.</li>
+<li>Полный список часовых поясов: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">См. здесь</a></li>
+</ul>
+</details>
+</div>
+
+</div>
+<footer class="site">
+      © 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms</a> • <a href="contact.html">Contact</a>
+</footer>
+</div>
+<script>
+    // Clock logic (identical behavior as previous generator)
+    const { DateTime } = luxon;
+    let cityList = [];
+    let cityToZone = {};
+    let cityNames = [];
+    let awesompleteInstance;
+
+    fetch('world-cities.json')
+      .then(r => r.json())
+      .then(data => {
+        cityList = data;
+        cityToZone = {};
+        cityNames = [];
+        data.forEach(city => {
+          cityToZone[city.name.toLowerCase()] = city.timezone;
+          cityNames.push(city.name);
+        });
+        let dropdown = document.getElementById("cityDropdown");
+        cityList.forEach(city => {
+          if (city.name.toLowerCase() !== 'tokyo') {
+            let opt = document.createElement("option");
+            opt.value = city.timezone;
+            opt.textContent = city.name;
+            dropdown.appendChild(opt);
+          }
+        });
+        let input = document.getElementById("cityInput");
+        awesompleteInstance = new Awesomplete(input, {
+          list: cityNames.filter(n => n.toLowerCase() !== 'tokyo'),
+          minChars: 1,
+          maxItems: 12,
+          autoFirst: true
+        });
+      });
+
+    let clocks = JSON.parse(localStorage.getItem('worldClocks') || '[]');
+    function saveClocks() { localStorage.setItem('worldClocks', JSON.stringify(clocks)); }
+    function renderClocks() {
+      const list = document.getElementById('clockList');
+      list.innerHTML = '';
+      if (clocks.length === 0) {
+        list.innerHTML = '<div style="color:#888;">Часы не добавлены.</div>';
+        return;
+      }
+      clocks.forEach((clock, idx) => {
+        let timeStr = '...';
+        let error = false;
+        try {
+          let now = DateTime.now().setZone(clock.tz);
+          if (!now.isValid) throw new Error("Invalid zone");
+          timeStr = now.toFormat('cccc, dd LLL yyyy<br>HH:mm:ss');
+        } catch {
+          timeStr = 'Invalid time zone';
+          error = true;
+        }
+        list.innerHTML += `
+          <div class="clock-item">
+            <span class="clock-meta"><i class="fa fa-clock"></i></span>
+            <span><b>${clock.label}</b><br>${timeStr}${error ? ' <span style="color:#b00;">(Check spelling or use a valid city or IANA time zone)</span>' : ''}</span>
+            <button class="btn btn-outline-danger btn-sm clock-btn" onclick="deleteClock(${idx})"><i class="fa fa-trash"></i></button>
+          </div>
+        `;
+      });
+    }
+
+    function normalizeInput(input) { return input.trim().toLowerCase().replace(/[\s\-_]+/g, " "); }
+
+    function addClock(label, tz) {
+      clocks.push({ label, tz });
+      saveClocks();
+      renderClocks();
+    }
+
+    document.getElementById('clockForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('errorMsg').textContent = '';
+      let cityInput = document.getElementById('cityInput').value.trim();
+      let dropdown = document.getElementById('cityDropdown').value;
+      let label = '';
+      let zone = '';
+      if (dropdown) {
+        label = document.getElementById('cityDropdown').options[document.getElementById('cityDropdown').selectedIndex].text;
+        zone = dropdown;
+      } else if (cityInput) {
+        label = cityInput;
+        if (/^[A-Za-z]+\/[A-Za-z_]+$/.test(cityInput)) {
+          zone = cityInput;
+        } else {
+          let norm = normalizeInput(cityInput);
+          if (cityToZone[norm] && norm !== 'tokyo') {
+            zone = cityToZone[norm];
+          } else {
+            document.getElementById('errorMsg').innerHTML = 'Город не распознан. Попробуйте выпадающий список, автозаполнение или введите корректную IANA зону (например, Europe/Moscow). <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">Full list here</a>.';
+            return;
+          }
+        }
+      } else {
+        document.getElementById('errorMsg').textContent = 'Пожалуйста, выберите или введите город или временную зону.';
+        return;
+      }
+      addClock(label, zone);
+      document.getElementById('cityInput').value = '';
+      document.getElementById('cityDropdown').selectedIndex = 0;
+    });
+
+    window.deleteClock = function(idx) {
+      clocks.splice(idx, 1);
+      saveClocks();
+      renderClocks();
+    }
+
+    setInterval(renderClocks, 1000);
+    renderClocks();
+  </script>
+<!-- Embedded unified header language selector + defensive localizer JS -->
+<script>
+  (function(){
+    const LANGS = [
+      { code: 'en', name: 'English' },
+      { code: 'fr', name: 'Français' },
+      { code: 'es', name: 'Español' },
+      { code: 'de', name: 'Deutsch' },
+      { code: 'ru', name: 'Русский' },
+      { code: 'el', name: 'Ελληνικά' },
+      { code: 'ar', name: 'العربية' }
+    ];
+
+    function detectPageInfo() {
+      const path = (location.pathname || '').split('/').pop() || '';
+      const m = path.match(/^world-(clock|how-to|tips)-([a-z]{2})\.html$/i);
+      if (m) return { type: m[1], lang: m[2].toLowerCase() };
+      if (/^world-clock\.html$/i.test(path)) return { type: 'clock', lang: 'ru' };
+      const m2 = path.match(/^world-(clock|how-to|tips)\.html$/i);
+      if (m2) return { type: m2[1], lang: 'ru' };
+      return { type: 'clock', lang: 'ru' };
+    }
+
+    function removeInCardSelectors() {
+      document.querySelectorAll('.tool-card .lang-wrap, .tool-card #language-select-top').forEach(function(el){ try{ el.remove(); }catch(e){} });
+    }
+
+    function buildHeaderSelector(selectedLang) {
+      // ensure .top-row exists (page templates include it; create if missing)
+      let top = document.querySelector('.page-wrap .top-row') || document.querySelector('.top-row');
+      if (!top) {
+        top = document.createElement('div');
+        top.className = 'top-row';
+        const pw = document.querySelector('.page-wrap') || document.body;
+        pw.insertBefore(top, pw.firstChild);
+      }
+
+      // remove any existing header select/label
+      top.querySelectorAll('label[for="language-select-top"], #language-select-top').forEach(function(n){ try{ n.remove(); }catch(e){} });
+
+      const label = document.createElement('label');
+      label.setAttribute('for','language-select-top');
+      label.textContent = 'Language:';
+      label.style.fontWeight = '600';
+      label.style.marginRight = '.5rem';
+
+      const sel = document.createElement('select');
+      sel.id = 'language-select-top';
+      sel.className = 'language-select';
+      sel.setAttribute('aria-label','Language selector');
+
+      LANGS.forEach(function(l){
+        const o = document.createElement('option');
+        o.value = l.code;
+        o.textContent = l.name;
+        if (l.code === selectedLang) o.selected = true;
+        sel.appendChild(o);
+      });
+
+      top.appendChild(label);
+      top.appendChild(sel);
+      // ensure visible
+      sel.style.display = 'inline-flex';
+      sel.style.visibility = 'visible';
+      return sel;
+    }
+
+    function hookSelector(sel) {
+      if (!sel) return;
+      // remove previous handler if any
+      if (sel._handler) sel.removeEventListener('change', sel._handler);
+      sel._handler = function() {
+        const code = this.value || 'ru';
+        const info = detectPageInfo();
+        if ((location.pathname || '').match(/world-clock\.html$/i)) {
+          window.location.href = 'world-clock-' + code + '.html';
+          return;
+        }
+        window.location.href = 'world-' + info.type + '-' + code + '.html';
+      };
+      sel.addEventListener('change', sel._handler);
+    }
+
+    // Run on DOM ready
+    function init() {
+      removeInCardSelectors();
+      const info = detectPageInfo();
+      const sel = buildHeaderSelector(info.lang);
+      hookSelector(sel);
+
+      // Defensive: observe for a short time and remove inserted in-card selectors (legacy scripts)
+      const observer = new MutationObserver(function(muts){
+        muts.forEach(function(m){
+          if (m.addedNodes) {
+            m.addedNodes.forEach(function(n){
+              try {
+                if (n.querySelectorAll) {
+                  n.querySelectorAll('.tool-card .lang-wrap, .tool-card #language-select-top').forEach(function(el){ try{ el.remove(); }catch(e){} });
+                }
+                if (n.matches && (n.matches('.tool-card .lang-wrap') || n.matches('.tool-card #language-select-top'))) {
+                  try{ n.remove(); }catch(e){}
+                }
+              } catch(e){}
+            });
+          }
+        });
+      });
+      observer.observe(document.documentElement || document.body, { childList: true, subtree: true });
+      // stop observing after 6s
+      setTimeout(function(){ try{ observer.disconnect(); }catch(e){} }, 6000);
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
+<p style="margin-top:1rem;"><a class="cta" href="/ru/world-clock/world-clock-index.html">Read full guide</a></p></body>
+</html>

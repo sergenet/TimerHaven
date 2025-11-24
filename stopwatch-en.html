@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Stopwatch — TimerHaven</title>
+  <meta name="description" content="Measure elapsed time for any activity. Learn how to use Stopwatch, get productivity tips, FAQs, and read expert articles.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
+    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
+    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .read-guide {
+      display:inline-block;
+      margin:.35rem 0 .8rem 0;
+      padding:.45rem .7rem;
+      border-radius:8px;
+      background:var(--brand,#0d6efd);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+      border:none;
+    }
+    .stopwatch-display { font-weight:700; font-size:1.25rem; margin-top:.5rem; margin-bottom:.5rem; }
+    .controls-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem; }
+    .lap-list { margin-top:.8rem; }
+    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
+    @media (max-width:900px) { .tool-card{ width:98vw; padding:1rem; } }
+  </style>
+</head>
+<body>
+  <script>try{ localStorage.setItem('timerhavenLang','en'); }catch(e){};</script>
+
+  <main class="main-container" role="main">
+    <section class="tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link">&larr; Back to Main Menu</a>
+
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-clock"></i> Stopwatch</h3>
+
+      <!-- Read full guide button added -->
+      <a id="read-guide-btn" class="read-guide" href="stopwatch-how-to-en.html" role="button">Read full guide</a>
+
+      <div class="stopwatch-section" aria-live="polite">
+        <div id="swDisplay" class="stopwatch-display">00:00:00</div>
+
+        <div class="controls-row">
+          <button id="swStartBtn" class="btn btn-success btn-small">Start</button>
+          <button id="swPauseBtn" class="btn btn-secondary btn-small">Pause</button>
+          <button id="swResetBtn" class="btn btn-danger btn-small">Reset</button>
+          <button id="swLapBtn" class="btn btn-info btn-small">Lap</button>
+        </div>
+
+        <div id="lapList" class="lap-list" style="margin-top:.8rem;"></div>
+
+        <details class="faq-section" style="margin-top:1rem;">
+          <summary style="font-weight:700; font-size:1rem;">FAQs</summary>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>Can I track multiple laps?</b> Yes, use the lap button.</li>
+            <li><b>Will the time persist?</b> No, it resets after page reload.</li>
+            <li><b>Is this free?</b> Yes, all TimerHaven tools are free.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function(){
+    // Stopwatch logic (preserved)
+    var swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
+    function swFormat(ms) {
+      var t = Math.floor(ms / 1000);
+      var h = Math.floor(t / 3600);
+      var m = Math.floor((t % 3600) / 60);
+      var s = t % 60;
+      return String(h).padStart(2,'0')+":"+String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
+    }
+    function renderLaps() {
+      var lapList = document.getElementById('lapList');
+      lapList.innerHTML = laps.map(function(l,i){
+        return '<div class="lap-item" style="background:#f7fafc;padding:.45rem;border-radius:8px;margin-bottom:.4rem;">Lap '+(i+1)+': '+swFormat(l)+'</div>';
+      }).join('');
+    }
+    function swUpdateDisplay() {
+      document.getElementById('swDisplay').textContent = swFormat(swElapsed);
+      renderLaps();
+    }
+    document.getElementById('swStartBtn').onclick = function() {
+      if (swRunning) return;
+      swRunning = true;
+      swStart = Date.now() - swElapsed;
+      swTimer = setInterval(function(){
+        swElapsed = Date.now() - swStart;
+        swUpdateDisplay();
+      }, 100);
+    };
+    document.getElementById('swPauseBtn').onclick = function() {
+      swRunning = false;
+      clearInterval(swTimer);
+    };
+    document.getElementById('swResetBtn').onclick = function() {
+      swRunning = false;
+      clearInterval(swTimer);
+      swElapsed = 0;
+      laps = [];
+      swUpdateDisplay();
+    };
+    document.getElementById('swLapBtn').onclick = function() {
+      if (swRunning) laps.push(swElapsed);
+      swUpdateDisplay();
+    };
+    swUpdateDisplay();
+  })();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
+</html>

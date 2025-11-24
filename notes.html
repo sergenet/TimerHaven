@@ -1,166 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Notes — TimerHaven</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Take quick notes and organize your thoughts. Learn how to use Notes, get productivity tips, FAQs, and read expert articles.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Take quick notes and organize your thoughts. Learn how to use Notes, get productivity tips, FAQs, and read expert articles." />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
-    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 340px; height: 340px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
+    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 200px; height: auto; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
     .article-card h2 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; }
     .article-card ul, .article-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; }
-    .article-card .btn { align-self: stretch; font-weight: 600; border-radius: 8px; margin-top: 0.2em; margin-bottom: 0; box-sizing: border-box; }
+    .article-card .btn { white-space: normal; word-break: break-word; font-size: 1em; padding: 0.4em 0.6em; min-width: 0; width: 100%; box-sizing: border-box; margin-top: 0.6em; border-radius: 8px; font-weight: 600; }
     .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: left; position: relative; z-index: 1; }
     .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
-    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
-    .back-link:hover { text-decoration: underline; }
+    .back-link { display: inline-block; margin-bottom: 1em; color: #185a9d; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .back-link:hover { text-decoration: underline; color: #43cea2; }
     .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
     .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
-    .tip-section { margin-top: 0.5em; text-align: center; font-size: 1.08em; color: #43cea2; background: #f6fbfa; padding: 0.6em; border-radius: 8px; font-weight: 500; min-height: 2em; word-break: break-word; }
-    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; } }
-    @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; } }
-    details[open] summary::after { content: " ▲"; font-size: 0.9em; }
-    details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
-    details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
-    .howto-mobile { margin-bottom: 1em; }
-    .tips-mobile { margin-top: 1.5em; margin-bottom: 0.5em; }
     .notes-form { margin-bottom: 1em; display: flex; gap: 0.5em; }
     .notes-list { margin-bottom: 1em; }
-    .note-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display: flex; align-items: center; justify-content: space-between; }
+    .note-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
     .note-meta { font-size: 0.9em; color: #888; margin-right: 1em; }
     .note-btn { font-size: 0.9em; margin-left: 0.6em; }
     .note-pinned { font-weight: bold; color: #185a9d; margin-right: 0.6em; }
+
+    /* language indicator removed */
   </style>
 </head>
 <body>
   <div class="main-container">
     <div class="center-row">
       <!-- Article 1 (desktop only) -->
-      <div class="article-card">
+      <div class="article-card" id="howto-article">
         <div>
-          <h2 style="color:#185a9d;"><i class="fa fa-note-sticky"></i> How to Use Notes</h2>
-          <ol>
-            <li><b>Add a note:</b> Type and save your note.</li>
-            <li><b>Organize:</b> Edit, delete, or pin notes as needed.</li>
-            <li><b>Stay productive:</b> Use notes for ideas, reminders, and tasks.</li>
-          </ol>
+          <h2 style="color:#185a9d;"><i class="fa fa-note-sticky"></i> <span id="howto-title"></span></h2>
+          <ol id="howto-list" aria-live="polite"></ol>
         </div>
-        <a href="notes-how-to.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;">Read Full Article</a>
+        <a id="howto-link" href="notes-how-to.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;"></a>
       </div>
-      <!-- Tool card -->
+
+      <!-- Tool card (middle) - removed the extra "How to Use" and "Tips" blocks from here -->
       <div class="tool-card">
-        <!-- How to Use (mobile only, collapsible) -->
-        <details class="howto-mobile" id="howto-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;"><i class="fa fa-note-sticky"></i> How to Use</h4></summary>
-          <ol>
-            <li><b>Add a note:</b> Type and save your note.</li>
-            <li><b>Organize:</b> Edit, delete, or pin notes as needed.</li>
-            <li><b>Stay productive:</b> Use notes for ideas, reminders, and tasks.</li>
-          </ol>
-        </details>
-        <a href="index.html" class="back-link"><i class="fa fa-arrow-left"></i> Back to Main Menu</a>
-        <h3><i class="fa fa-note-sticky"></i> Notes</h3>
+        <a href="index.html" class="back-link" id="back-main"></a>
+        <h3><i class="fa fa-note-sticky"></i> <span id="notes-title"></span></h3>
+
         <div class="notes-section">
           <form class="notes-form" id="notesForm">
-            <input type="text" id="noteInput" class="form-control" placeholder="Type your note..." style="max-width:180px;">
-            <button type="submit" class="btn btn-success btn-sm">Add Note</button>
+            <input type="text" id="noteInput" class="form-control" placeholder="" style="max-width:260px;" aria-label="New note">
+            <button type="submit" class="btn btn-success btn-sm" id="add-note-btn" aria-label="Add note"></button>
           </form>
-          <div id="notesList" class="notes-list"></div>
+          <div id="notesList" class="notes-list" aria-live="polite"></div>
         </div>
-        <details class="faq-section">
-          <summary>FAQs</summary>
-          <ul style="padding-left: 1em;">
-            <li><b>Are notes saved?</b> Yes, in your browser until you clear them.</li>
-            <li><b>Can I pin important notes?</b> Yes, use the pin feature if available.</li>
-            <li><b>Is there a limit?</b> No, add as many notes as you need.</li>
-          </ul>
-        </details>
-        
-        <!-- Tips (mobile only, collapsible) -->
-        <details class="tips-mobile" id="tips-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tips</h4></summary>
-          <ul>
-            <li><b>Keep notes short:</b> Focus on key ideas and reminders.</li>
-            <li><b>Pin top items:</b> Mark important notes for quick access.</li>
-            <li><b>Review regularly:</b> Clear old notes to stay organized.</li>
-          </ul>
+
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title"></summary>
+          <ul style="padding-left: 1em;" id="faq-list"></ul>
         </details>
       </div>
+
       <!-- Article 2 (desktop only) -->
-      <div class="article-card">
+      <div class="article-card" id="tips-article">
         <div>
-          <h2 style="color:#185a9d;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Notes Productivity Tips</h2>
-          <ul>
-            <li><b>Keep notes short:</b> Focus on key ideas and reminders.</li>
-            <li><b>Pin top items:</b> Mark important notes for quick access.</li>
-            <li><b>Review regularly:</b> Clear old notes to stay organized.</li>
-          </ul>
+          <h2 style="color:#185a9d;"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> <span id="tips-title"></span></h2>
+          <ul id="tips-list"></ul>
         </div>
-        <a href="notes-tips.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;">Read Full Article</a>
+        <a id="tips-link" href="notes-tips.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;"></a>
       </div>
     </div>
   </div>
+
   <script>
-    // Notes code: Save, pin, delete, display notes
-    let notes = JSON.parse(localStorage.getItem('notesData') || '[]');
-    function saveNotes() { localStorage.setItem('notesData', JSON.stringify(notes)); }
+    // full translations preserved
+    const translations = {
+      en: {
+        "language-label": "Language:",
+        howtoTitle: "How to Use Notes",
+        howtoLink: "Read Full Article",
+        howtoSteps: [
+          "<b>Add a note:</b> Type and save your note.",
+          "<b>Organize:</b> Edit, delete, or pin notes as needed.",
+          "<b>Stay productive:</b> Use notes for ideas, reminders, and tasks."
+        ],
+        backMain: "<i class='fa fa-arrow-left'></i> Back to Main Menu",
+        notesTitle: "Notes",
+        addNoteBtn: "Add Note",
+        noteInputPlaceholder: "Type your note...",
+        faqTitle: "FAQs",
+        faqItems: [
+          "<b>Are notes saved?</b> Yes, in your browser until you clear them.",
+          "<b>Can I pin important notes?</b> Yes, use the pin feature if available.",
+          "<b>Is there a limit?</b> No, add as many notes as you need."
+        ],
+        tipsTitle: "Notes Productivity Tips",
+        tipsLink: "Read Full Article",
+        tipsItems: [
+          "<b>Keep notes short:</b> Focus on key ideas and reminders.",
+          "<b>Pin top items:</b> Mark important notes for quick access.",
+          "<b>Review regularly:</b> Clear old notes to stay organized."
+        ],
+        tipsTitleMobile: "Tips"
+      },
+      fr: {
+        "language-label": "Langue :",
+        howtoTitle: "Comment utiliser les Notes",
+        howtoLink: "Lire l'article complet",
+        howtoSteps: [
+          "<b>Ajoutez une note :</b> Saisissez et enregistrez votre note.",
+          "<b>Organisez :</b> Modifiez, supprimez ou épinglez les notes selon vos besoins.",
+          "<b>Restez productif :</b> Utilisez les notes pour des idées, rappels et tâches."
+        ],
+        backMain: "<i class='fa fa-arrow-left'></i> Retour au menu principal",
+        notesTitle: "Notes",
+        addNoteBtn: "Ajouter une note",
+        noteInputPlaceholder: "Tapez votre note...",
+        faqTitle: "FAQs",
+        faqItems: [
+          "<b>Les notes sont-elles sauvegardées ?</b> Oui, dans votre navigateur jusqu’à suppression.",
+          "<b>Peut-on épingler des notes importantes ?</b> Oui, utilisez l’option épingler si disponible.",
+          "<b>Y a-t-il une limite ?</b> Non, ajoutez autant de notes que vous le souhaitez."
+        ],
+        tipsTitle: "Conseils pour les Notes",
+        tipsLink: "Lire l'article complet",
+        tipsItems: [
+          "<b>Soyez concis :</b> Des notes courtes et claires sont plus faciles à relire et à utiliser.",
+          "<b>Épinglez les éléments importants :</b> Marquez les notes essentielles pour y accéder rapidement.",
+          "<b>Supprimez régulièrement :</b> Gardez vos notes organisées en effaçant les anciennes."
+        ],
+        tipsTitleMobile: "Conseils"
+      },
+      es: {
+        "language-label": "Idioma:",
+        howtoTitle: "Cómo usar las Notas",
+        howtoLink: "Leer el artículo completo",
+        howtoSteps: [
+          "<b>Agrega una nota:</b> Escribe y guarda tu nota.",
+          "<b>Organiza:</b> Edita, elimina o fija notas según lo necesites.",
+          "<b>Sé productivo:</b> Usa notas para ideas, recordatorios y tareas."
+        ],
+        backMain: "<i class='fa fa-arrow-left'></i> Volver al menú principal",
+        notesTitle: "Notas",
+        addNoteBtn: "Agregar nota",
+        noteInputPlaceholder: "Escribe tu nota...",
+        faqTitle: "FAQs",
+        faqItems: [
+          "<b>¿Se guardan las notas?</b> Sí, en tu navegador hasta que las elimines.",
+          "<b>¿Puedo fijar notas importantes?</b> Sí, usa la función de fijar si está disponible.",
+          "<b>¿Hay límite?</b> No, agrega tantas notas como quieras."
+        ],
+        tipsTitle: "Consejos para las Notas",
+        tipsLink: "Leer el artículo completo",
+        tipsItems: [
+          "<b>Mantén notas cortas:</b> Enfócate en ideas y recordatorios clave.",
+          "<b>Fija elementos importantes:</b> Marca notas esenciales para acceso rápido.",
+          "<b>Elimina regularmente:</b> Borra notas antiguas para mantenerte organizado."
+        ],
+        tipsTitleMobile: "Consejos"
+      },
+      de: {
+        "language-label": "Sprache:",
+        howtoTitle: "So nutzen Sie Notizen",
+        howtoLink: "Vollständigen Artikel lesen",
+        howtoSteps: [
+          "<b>Notiz hinzufügen:</b> Schreiben und speichern Sie Ihre Notiz.",
+          "<b>Organisieren:</b> Bearbeiten, löschen oder markieren Sie Notizen nach Bedarf.",
+          "<b>Produktiv bleiben:</b> Nutzen Sie Notizen für Ideen, Erinnerungen und Aufgaben."
+        ],
+        backMain: "<i class='fa fa-arrow-left'></i> Zurück zum Hauptmenü",
+        notesTitle: "Notizen",
+        addNoteBtn: "Notiz hinzufügen",
+        noteInputPlaceholder: "Notiz eingeben...",
+        faqTitle: "FAQs",
+        faqItems: [
+          "<b>Werden Notizen gespeichert?</b> Ja, im Browser bis Sie sie löschen.",
+          "<b>Können wichtige Notizen angepinnt werden?</b> Ja, verwenden Sie die Pin-Funktion, falls verfügbar.",
+          "<b>Gibt es ein Limit?</b> Nein, Sie können beliebig viele Notizen hinzufügen."
+        ],
+        tipsTitle: "Notizen Tipps",
+        tipsLink: "Vollständigen Artikel lesen",
+        tipsItems: [
+          "<b>Notizen kurz halten:</b> Fokussieren Sie auf Schlüsselideen und Erinnerungen.",
+          "<b>Wichtige Elemente anpinnen:</b> Markieren Sie wichtige Notizen für schnellen Zugriff.",
+          "<b>Regelmäßig überprüfen:</b> Entfernen Sie alte Notizen, um organisiert zu bleiben."
+        ],
+        tipsTitleMobile: "Tipps"
+      },
+      ru: {
+        "language-label": "Язык:",
+        howtoTitle: "Как использовать Заметки",
+        howtoLink: "Читать всю статью",
+        howtoSteps: [
+          "<b>Добавьте заметку:</b> Введите и сохраните свою заметку.",
+          "<b>Организуйте:</b> Редактируйте, удаляйте или закрепляйте заметки по необходимости.",
+          "<b>Оставайтесь продуктивным:</b> Используйте заметки для идей, напоминаний и задач."
+        ],
+        backMain: "<i class='fa fa-arrow-left'></i> Назад в главное меню",
+        notesTitle: "Заметки",
+        addNoteBtn: "Добавить заметку",
+        noteInputPlaceholder: "Введите заметку...",
+        faqTitle: "FAQs",
+        faqItems: [
+          "<b>Заметки сохраняются?</b> Да, в вашем браузере до удаления.",
+          "<b>Можно закреплять важные заметки?</b> Да, используйте функцию закрепления, если она доступна.",
+          "<b>Есть лимит?</b> Нет, добавляйте сколько угодно заметок."
+        ],
+        tipsTitle: "Советы по Заметкам",
+        tipsLink: "Читать всю статью",
+        tipsItems: [
+          "<b>Пишите коротко:</b> Сосредоточьтесь на ключевых идеях и напоминаниях.",
+          "<b>Закрепляйте важные заметки:</b> Помечайте важные заметки для быстрого доступа.",
+          "<b>Регулярно удаляйте:</b> Очищайте старые заметки для порядка."
+        ],
+        tipsTitleMobile: "Советы"
+      },
+      el: {
+        "language-label": "Γλώσσα:",
+        howtoTitle: "Πώς να χρησιμοποιήσετε τις Σημειώσεις",
+        howtoLink: "Διαβάστε ολόκληρο το άρθρο",
+        howtoSteps: [
+          "<b>Προσθέστε σημείωση:</b> Γράψτε και αποθηκεύστε τη σημείωσή σας.",
+          "<b>Οργανώστε:</b> Επεξεργαστείτε, διαγράψτε ή καρφιτσώστε σημειώσεις όπως χρειάζεται.",
+          "<b>Μείνετε παραγωγικοί:</b> Χρησιμοποιήστε σημειώσεις για ιδέες, υπενθυμίσεις και εργασίες."
+        ],
+        backMain: "<i class='fa fa-arrow-left'></i> Επιστροφή στο κύριο μενού",
+        notesTitle: "Σημειώσεις",
+        addNoteBtn: "Προσθήκη σημείωσης",
+        noteInputPlaceholder: "Γράψτε τη σημείωσή σας...",
+        faqTitle: "FAQs",
+        faqItems: [
+          "<b>Αποθηκεύονται οι σημειώσεις;</b> Ναι, στον browser μέχρι να διαγραφούν.",
+          "<b>Μπορώ να καρφιτσώσω σημαντικές σημειώσεις;</b> Ναι, χρησιμοποιήστε τη δυνατότητα αν είναι διαθέσιμη.",
+          "<b>Υπάρχει όριο;</b> Όχι, προσθέστε όσες σημειώσεις θέλετε."
+        ],
+        tipsTitle: "Συμβουλές για τις Σημειώσεις",
+        tipsLink: "Διαβάστε ολόκληρο το άρθρο",
+        tipsItems: [
+          "<b>Κρατήστε τις σημειώσεις σύντομες:</b> Εστιάστε σε βασικές ιδέες και υπενθυμίσεις.",
+          "<b>Καρφιτσώστε σημαντικά στοιχεία:</b> Μαρκάρετε σημαντικές σημειώσεις για γρήγορη πρόσβαση.",
+          "<b>Επαναξιολογήστε τακτικά:</b> Διαγράψτε παλιές σημειώσεις για να είστε οργανωμένοι."
+        ],
+        tipsTitleMobile: "Συμβουλές"
+      },
+      ar: {
+        "language-label": "اللغة:",
+        howtoTitle: "كيفية استخدام الملاحظات",
+        howtoLink: "اقرأ المقال الكامل",
+        howtoSteps: [
+          "<b>أضف ملاحظة:</b> اكتب واحتفظ بملاحظتك.",
+          "<b>نظم:</b> عدل أو احذف أو ثبّت الملاحظات حسب الحاجة.",
+          "<b>كن منتجًا:</b> استخدم الملاحظات للأفكار والتذكيرات والمهام."
+        ],
+        backMain: "<i class='fa fa-arrow-right'></i> العودة إلى القائمة الرئيسية",
+        notesTitle: "الملاحظات",
+        addNoteBtn: "أضف ملاحظة",
+        noteInputPlaceholder: "اكتب ملاحظتك...",
+        faqTitle: "الأسئلة الشائعة",
+        faqItems: [
+          "<b>هل تحفظ الملاحظات؟</b> نعم، في المتصفح حتى يتم حذفها.",
+          "<b>هل يمكن تثبيت الملاحظات المهمة؟</b> نعم، استخدم ميزة التثبيت إذا كانت متاحة.",
+          "<b>هل هناك حد؟</b> لا، أضف عددًا غير محدود من الملاحظات."
+        ],
+        tipsTitle: "نصائح حول الملاحظات",
+        tipsLink: "اقرأ المقال الكامل",
+        tipsItems: [
+          "<b>اجعل الملاحظات قصيرة:</b> ركز على الأفكار والتذكيرات الأساسية.",
+          "<b>ثبّت العناصر المهمة:</b> ميّز الملاحظات الهامة للوصول السريع.",
+          "<b>راجع بانتظام:</b> احذف الملاحظات القديمة للبقاء منظمًا."
+        ],
+        tipsTitleMobile: "نصائح"
+      }
+    };
+
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'en';
+        return (l && l.slice(0,2)) || 'en';
+      } catch (e) {
+        return 'en';
+      }
+    }
+    const langNames = { en: "English", fr: "Français", es: "Español", de: "Deutsch", ru: "Русский", el: "Ελληνικά", ar: "العربية" };
+
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0,2);
+      const t = translations[lang] || translations['en'];
+
+      // RTL support
+      if (lang === 'ar') document.body.dir = 'rtl'; else document.body.removeAttribute('dir');
+
+      // Article 1 (left)
+      document.getElementById('howto-title').innerHTML = t.howtoTitle || '';
+      document.getElementById('howto-list').innerHTML = (t.howtoSteps || []).map(s => `<li>${s}</li>`).join('');
+      document.getElementById('howto-link').innerHTML = t.howtoLink || '';
+      document.getElementById('howto-link').href = (lang === 'en') ? 'notes-how-to.html' : `notes-how-to-${lang}.html`;
+
+      // Article 2 (right)
+      document.getElementById('tips-title').innerHTML = t.tipsTitle || '';
+      document.getElementById('tips-list').innerHTML = (t.tipsItems || []).map(s => `<li>${s}</li>`).join('');
+      document.getElementById('tips-link').innerHTML = t.tipsLink || '';
+      document.getElementById('tips-link').href = (lang === 'en') ? 'notes-tips.html' : `notes-tips-${lang}.html`;
+
+      // Tool card (middle) — no HowTo or Tips blocks here anymore
+      document.getElementById('back-main').innerHTML = t.backMain || '';
+      document.getElementById('notes-title').innerHTML = t.notesTitle || '';
+      const addBtn = document.getElementById('add-note-btn');
+      if (addBtn) addBtn.innerHTML = t.addNoteBtn || 'Add Note';
+      const noteInput = document.getElementById('noteInput');
+      if (noteInput) noteInput.placeholder = t.noteInputPlaceholder || '';
+      document.getElementById('faq-title').innerHTML = t.faqTitle || '';
+      document.getElementById('faq-list').innerHTML = (t.faqItems || []).map(s => `<li>${s}</li>`).join('');
+    }
+
+    // listen for main-menu language changes
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        applyLanguage((e.newValue || 'en').slice(0,2));
+      }
+    });
+
+    // Notes implementation (storage + render)
+    let notes = [];
+    try {
+      notes = JSON.parse(localStorage.getItem('notesData') || '[]');
+      if (!Array.isArray(notes)) notes = [];
+    } catch (e) {
+      notes = [];
+    }
+
+    function saveNotes() {
+      try { localStorage.setItem('notesData', JSON.stringify(notes)); } catch (e) {}
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;');
+    }
+
     function renderNotes() {
       const list = document.getElementById('notesList');
+      if (!list) return;
       list.innerHTML = '';
-      if (notes.length === 0) {
+      if (!notes || notes.length === 0) {
         list.innerHTML = '<div style="color:#888;">No notes yet.</div>';
         return;
       }
       notes.forEach((note, idx) => {
-        const pinned = note.pinned ? '<span class="note-pinned"><i class="fa fa-thumbtack"></i></span>' : '';
+        const pinnedHtml = note.pinned ? `<span class="note-pinned" aria-hidden="true"><i class="fa fa-thumbtack"></i></span>` : '';
+        const textHtml = escapeHtml(note.text);
+        const dateHtml = escapeHtml(note.date || '');
         list.innerHTML += `
-          <div class="note-item">
-            ${pinned}
-            <span>${note.text}</span>
-            <span class="note-meta">${note.date}</span>
-            <button class="btn btn-outline-${note.pinned ? 'secondary' : 'info'} btn-sm note-btn" onclick="pinNote(${idx})" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>
-            <button class="btn btn-outline-danger btn-sm note-btn" onclick="deleteNote(${idx})"><i class="fa fa-trash"></i></button>
+          <div class="note-item" role="article" aria-label="note-${idx}">
+            <div style="display:flex;align-items:center;gap:.6rem;min-width:0;">
+              ${pinnedHtml}
+              <div style="min-width:0;overflow:hidden;">
+                <div style="white-space:pre-wrap;word-break:break-word;">${textHtml}</div>
+                <div class="note-meta" style="margin-top:6px;">${dateHtml}</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:.4rem;align-items:center;">
+              <button class="btn btn-outline-${note.pinned ? 'secondary' : 'info'} btn-sm note-btn" onclick="pinNote(${idx})" aria-label="Pin or unpin note ${idx}"><i class="fa fa-thumbtack"></i></button>
+              <button class="btn btn-outline-danger btn-sm note-btn" onclick="deleteNote(${idx})" aria-label="Delete note ${idx}"><i class="fa fa-trash"></i></button>
+            </div>
           </div>
         `;
       });
     }
-    document.getElementById('notesForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const text = document.getElementById('noteInput').value.trim();
-      if (!text) return;
-      notes.unshift({ text, date: new Date().toLocaleString(), pinned: false });
-      saveNotes();
-      document.getElementById('noteInput').value = "";
+
+    // DOM handlers are attached after DOMContentLoaded
+    function attachHandlers() {
+      const form = document.getElementById('notesForm');
+      if (form) {
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          const input = document.getElementById('noteInput');
+          if (!input) return;
+          const text = input.value.trim();
+          if (!text) return;
+          notes.unshift({ text, date: new Date().toLocaleString(), pinned: false });
+          saveNotes();
+          input.value = '';
+          renderNotes();
+        });
+      }
+      // expose functions globally for inline onclick
+      window.deleteNote = function(idx){
+        notes.splice(idx, 1);
+        saveNotes();
+        renderNotes();
+      };
+      window.pinNote = function(idx){
+        if (!notes[idx]) return;
+        notes[idx].pinned = !notes[idx].pinned;
+        if (notes[idx].pinned) {
+          const pn = notes.splice(idx, 1)[0];
+          notes.unshift(pn);
+        }
+        saveNotes();
+        renderNotes();
+      };
+    }
+
+    // initialize after DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // apply language from main site
+      applyLanguage(getLang());
+      attachHandlers();
       renderNotes();
     });
-    window.deleteNote = function(idx){
-      notes.splice(idx, 1);
-      saveNotes();
-      renderNotes();
-    }
-    window.pinNote = function(idx){
-      notes[idx].pinned = !notes[idx].pinned;
-      // Move pinned note to top
-      if (notes[idx].pinned) {
-        const pinnedNote = notes.splice(idx, 1)[0];
-        notes.unshift(pinnedNote);
-      }
-      saveNotes();
-      renderNotes();
-    }
-    renderNotes();
   </script>
-<footer>
-  &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
-  <a href="privacy.html">Privacy Policy</a> &bull;
-  <a href="terms.html">Terms</a> &bull;
-  <a href="contact.html">Contact</a>
-</footer>
+
+  <footer>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
+    <a href="privacy.html">Privacy Policy</a> &bull;
+    <a href="terms.html">Terms</a> &bull;
+    <a href="contact.html">Contact</a>
+  </footer>
 </body>
 </html>

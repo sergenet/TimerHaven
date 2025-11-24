@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr" >
+<head>
+  <meta charset="UTF-8" />
+  <title>Clipboard Manager — TimerHaven (fr)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Save, manage, and organize multiple clipboard snippets." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    :root { --card-bg: #fff; --page-bg: #f4f7fb; --accent: #185a9d; --accent-2: #43cea2; }
+    body { background: var(--page-bg); font-family: 'Montserrat', Arial, sans-serif; margin: 0; }
+
+    /* keep language select (top-left) — it's part of localized pages */
+    .top-bar { padding: 10px 16px; }
+
+    /* Layout: make columns flex containers so cards can stretch to equal height */
+    .main-container { max-width: 1200px; margin: 1.5em auto; display: flex; justify-content: center; align-items: stretch; min-height: 70vh; padding: 0 12px; box-sizing: border-box; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 1.5em; width: 100%; }
+
+    /* Each column is a flex column so inner card can expand */
+    .center-row > .col { display: flex; flex-direction: column; flex: 1 1 0; min-width: 240px; }
+
+    .article-card, .tool-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      /* use width:100% so card fills its column */
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 1.6em;
+      box-sizing: border-box;
+      text-align: left;
+      overflow: visible;
+      /* make card stretch to fill column height */
+      height: 100%;
+    }
+
+    .article-card h2, .tool-card h3 { font-weight: 700; color: var(--accent); margin-bottom: .5em; display:flex; align-items:center; gap:.4em; }
+    .article-card .btn, .tool-card .btn { margin-top: .6em; border-radius: 8px; font-weight:600; }
+    .clips-section { margin-top: 6px; display:flex; flex-direction:column; flex:1 1 auto; }
+    .clips-form { display:flex; gap:.5em; align-items:center; margin-bottom:.6em; }
+    .clips-form input[type="text"] { flex: 1 1 180px; min-width: 0; }
+    .clips-list { margin-top:.6em; max-height: 260px; overflow-y: auto; padding-right: 6px; }
+    .clip-item { background:#f7fafc; border-radius:8px; padding:10px; margin-bottom:8px; display:flex; align-items:center; gap:.8em; }
+    .clip-text { flex:1; word-break:break-word; }
+    .clip-actions .btn { padding:.25rem .5rem; }
+    .faq-section { margin-top: 1em; background:#f7fafc; border-radius:8px; padding: .8em; }
+    details[open] summary::after { content: " ▲"; }
+    details summary::after { content: " ▼"; }
+    .back-link { color: var(--accent); font-weight:700; text-decoration:none; display:inline-block; margin-bottom:.6em; }
+    .back-link i { margin-right:.35em; }
+    footer { text-align:center; color:#666; padding: 1.2rem 0; font-size:.9rem; }
+
+    /* small-screen adjustments */
+    @media (max-width: 900px) {
+      .main-container { margin: 12px auto; padding: 0 8px; }
+      .center-row { flex-direction: column; gap: 12px; align-items: stretch; }
+      .center-row > .col { min-width: auto; }
+      .article-card, .tool-card { width: 100%; max-width: 680px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <select id="clipboard-lang-select" class="language-select" aria-label="Language selector">
+      <option value="en">English</option>
+      <option value="fr" selected>Français</option>
+      <option value="de">Deutsch</option>
+      <option value="es">Español</option>
+      <option value="ru">Русский</option>
+      <option value="el">Ελληνικά</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
+  <div class="main-container" id="page-main">
+    <div class="center-row">
+      <div class="col">
+        <article class="article-card" id="left-article">
+          <div class="card-inner" style="display:flex;flex-direction:column;flex:1 1 auto;">
+            <header class="card-content" style="flex:1 1 auto;">
+              <h2><i class="fa fa-clipboard"></i> Comment utiliser le Gestionnaire de Presse-papiers</h2>
+              <ol>
+                <li><b>Ajouter une note :</b> Tapez ou collez le texte, puis cliquez sur <b>Ajouter</b>. Votre note apparaîtra dans la liste.</li>
+                <li><b>Copier une note :</b> Cliquez sur <b>Copier</b> pour l'ajouter au presse-papiers.</li>
+                <li><b>Supprimer une note :</b> Cliquez sur <b>Supprimer</b> pour retirer la note.</li>
+                <li><b>Les notes sont enregistrées :</b> Elles restent dans votre navigateur même après fermeture.</li>
+              </ol>
+            </header>
+            <div class="card-actions" style="margin-top:auto;">
+              <a id="left-article-btn" class="btn btn-outline-primary w-100" href="clipboard-how-to-fr.html">Lire l'article complet</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col">
+        <section class="tool-card" id="tool-card" aria-labelledby="tool-title">
+          <div class="card-inner" style="display:flex;flex-direction:column;flex:1 1 auto;">
+            <div class="card-content" style="flex:1 1 auto;">
+              <a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i>Retour au menu principal</a>
+              <h3>Gestionnaire de Presse-papiers</h3>
+
+              <div class="clips-section" role="region" aria-label="Clips section">
+                <form id="clipboardForm" class="clips-form" aria-label="Add clip form">
+                  <input type="text" id="clipInput" class="form-control" placeholder="Tapez ou collez votre note ici..." />
+                  <button type="submit" class="btn btn-success" id="add-btn">Ajouter</button>
+                </form>
+
+                <div id="clipsList" class="clips-list" aria-live="polite"></div>
+
+                <details class="faq-section" style="margin-top:12px;">
+                  <summary>Foire aux questions</summary>
+                  <ul style="padding-left:1em;">
+                    <li><b>Mes notes sont-elles sauvegardées ?</b> Oui ! Elles restent dans votre navigateur jusqu'à suppression.</li>
+                    <li><b>Puis-je copier une note ?</b> Oui, cliquez sur <b>Copier</b> à côté de la note.</li>
+                    <li><b>Comment supprimer une note ?</b> Cliquez sur <b>Supprimer</b> à côté de la note.</li>
+                    <li><b>Comment tout effacer ?</b> Supprimez chaque note individuellement.</li>
+                  </ul>
+                </details>
+              </div>
+            </div>
+
+            <div class="card-actions" style="margin-top:auto;" aria-hidden="true"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col">
+        <aside class="article-card" id="right-article">
+          <div class="card-inner" style="display:flex;flex-direction:column;flex:1 1 auto;">
+            <header class="card-content" style="flex:1 1 auto;">
+              <h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour le Gestionnaire de Presse-papiers</h2>
+              <ul>
+                <li><b>Groupez les notes :</b> Gardez les informations similaires ensemble.</li>
+                <li><b>Copiez les infos importantes :</b> Gagnez du temps en stockant les textes courants.</li>
+                <li><b>Supprimez les anciennes notes :</b> Nettoyez régulièrement vos notes obsolètes.</li>
+              </ul>
+            </header>
+            <div class="card-actions" style="margin-top:auto;">
+              <a id="right-article-btn" class="btn btn-outline-primary w-100" href="clipboard-tips-fr.html">Lire l'article complet</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <button id="lh-floating-add" title="Add (fallback)" style="display:none;">Add</button>
+
+  <script>
+    // language selector behaviour (safe check fallback)
+    (function(){
+      var sel = document.getElementById('clipboard-lang-select');
+      if (!sel) return;
+      sel.addEventListener('change', function(){
+        var val = this.value || 'en';
+        var target = '/clipboard-manager-' + val + '.html' + window.location.search;
+        // check existence before navigating
+        fetch('/clipboard-manager-' + val + '.html', { method: 'HEAD' }).then(function(resp){
+          if (resp.ok) { window.location.href = target; }
+          else {
+            try { localStorage.setItem('clipboardLang', val); } catch(e){}
+            alert('Language page not found: ' + target + '\n\nPlease upload clipboard-manager-' + val + '.html to enable this language.');
+          }
+        }).catch(function(){
+          alert('Could not check language page. If you want this language, upload clipboard-manager-' + val + '.html to the server.');
+        });
+      });
+    })();
+
+    // Clips persistence & UI
+    (function(){
+      function safeGet(k){ try { return localStorage.getItem(k); } catch(e) { return null; } }
+      function safeSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e) { return false; } }
+      window.clips = JSON.parse(safeGet('clipboardClips') || '[]');
+      var clips = window.clips || [];
+
+      function escapeHtml(s){ return String(s || '').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+      function renderClips(){
+        var list = document.getElementById('clipsList');
+        if (!list) return;
+        list.innerHTML = '';
+        if (!clips.length) { list.innerHTML = '<div style="color:#888;">Aucune note ajoutée pour le moment.</div>'; return; }
+        for (var i=0;i<clips.length;i++){
+          var c = clips[i];
+          var pin = c.pinned ? '<span style="font-weight:700;color:var(--accent);margin-right:.5em;"><i class="fa fa-thumbtack"></i></span>' : '';
+          var div = document.createElement('div');
+          div.className = 'clip-item';
+          div.innerHTML = '<div class="clip-text">' + pin + escapeHtml(c.text) + '</div>' +
+                          '<div style="display:flex;gap:.4rem;align-items:center;">' +
+                          '<button class="btn btn-outline-info btn-sm" data-idx="' + i + '" data-action="pin" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>' +
+                          '<button class="btn btn-outline-success btn-sm" data-idx="' + i + '" data-action="copy" title="Copy"><i class="fa fa-copy"></i></button>' +
+                          '<button class="btn btn-outline-danger btn-sm" data-idx="' + i + '" data-action="remove" title="Remove"><i class="fa fa-trash"></i></button>' +
+                          '</div>';
+          list.appendChild(div);
+        }
+
+        Array.from(list.querySelectorAll('button[data-idx]')).forEach(function(btn){
+          var idx = parseInt(btn.getAttribute('data-idx'), 10);
+          var action = btn.getAttribute('data-action');
+          btn.onclick = function(){
+            if (action === 'copy') {
+              try { navigator.clipboard.writeText(clips[idx].text); } catch(e) {}
+            } else if (action === 'remove') {
+              clips.splice(idx,1); window.clips = clips; safeSet('clipboardClips', JSON.stringify(clips)); renderClips();
+            } else if (action === 'pin') {
+              clips[idx].pinned = !clips[idx].pinned;
+              if (clips[idx].pinned) { var p = clips.splice(idx,1)[0]; clips.unshift(p); }
+              safeSet('clipboardClips', JSON.stringify(clips)); renderClips();
+            }
+          };
+        });
+
+        // after rendering clips, trigger a resize event to let equalizer run
+        setTimeout(function(){ try { window.dispatchEvent(new Event('resize')); } catch(e) {} }, 60);
+      }
+
+      function addClipFromInput(){
+        var input = document.getElementById('clipInput');
+        var text = (input && input.value || '').trim();
+        if (!text) return;
+        clips = clips || [];
+        clips.unshift({ text: text, date: new Date().toLocaleString(), pinned: false });
+        window.clips = clips;
+        safeSet('clipboardClips', JSON.stringify(clips));
+        if (input) input.value = '';
+        renderClips();
+      }
+
+      var form = document.getElementById('clipboardForm');
+      if (form) form.addEventListener('submit', function(e){ e.preventDefault(); addClipFromInput(); });
+
+      window.addClipFromInput = addClipFromInput;
+      window.lhShowClips = function(){ console.log('window.clips', window.clips); return window.clips; };
+
+      window.addEventListener('pagehide', function(){ safeSet('clipboardClips', JSON.stringify(window.clips || [])); });
+      window.addEventListener('beforeunload', function(){ safeSet('clipboardClips', JSON.stringify(window.clips || [])); });
+
+      document.addEventListener('DOMContentLoaded', function(){ clips = window.clips || []; renderClips(); });
+    })();
+
+    // Equalize heights and observe DOM changes (robust)
+    (function(){
+      function equalizeCardHeights(){
+        var cols = Array.from(document.querySelectorAll('.center-row > .col'));
+        if (!cols.length) return;
+        cols.forEach(function(col){ var card = col.querySelector('.article-card, .tool-card'); if (card) card.style.height = ''; });
+        var maxh = 0;
+        cols.forEach(function(col){
+          var card = col.querySelector('.article-card, .tool-card');
+          if (!card) return;
+          var rect = card.getBoundingClientRect();
+          var h = Math.ceil(rect.height);
+          if (h > maxh) maxh = h;
+        });
+        if (maxh > 0) {
+          cols.forEach(function(col){
+            var card = col.querySelector('.article-card, .tool-card');
+            if (card) card.style.height = maxh + 'px';
+          });
+        }
+      }
+      function runRetries() {
+        equalizeCardHeights();
+        setTimeout(equalizeCardHeights, 120);
+        setTimeout(equalizeCardHeights, 420);
+      }
+      var container = document.getElementById('page-main');
+      if (container) {
+        var mo = new MutationObserver(function(){ runRetries(); });
+        mo.observe(container, { childList:true, subtree:true, characterData:true });
+      }
+      window.addEventListener('load', runRetries);
+      window.addEventListener('resize', runRetries);
+      document.addEventListener('DOMContentLoaded', runRetries);
+      window.addEventListener('storage', function(e){ if (e.key === 'timerhavenLang') runRetries(); });
+    })();
+  </script>
+
+  <footer>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br />
+    <a href="privacy.html">Privacy Policy</a> &bull;
+    <a href="terms.html">Terms</a> &bull;
+    <a href="contact.html">Contact</a>
+  </footer>
+</body>
+</html>

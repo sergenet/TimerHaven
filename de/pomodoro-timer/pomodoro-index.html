@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Pomodoro‑Timer — Praktischer Leitfaden für fokussiertes Arbeiten | TimerHaven</title>
+  <meta name="description" content="Umfassender Pomodoro‑Leitfaden mit praktischen Workflows, Schritt‑für‑Schritt‑Anleitungen, Vorlagen, Fallbeispielen und Fehlerbehebung zur Verbesserung von Fokus und Ergebnissen.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="https://timerhaven.com/de/pomodoro-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta property="og:title" content="Pomodoro‑Timer — Praktischer Leitfaden & Workflows">
+  <meta property="og:description" content="Praktischer Pomodoro‑Leitfaden mit Workflows, Anleitungen, Vorlagen und Tipps zur Verbesserung von Fokus und Messbarkeit.">
+  <meta property="og:image" content="/assets/images/pomodoro-snapshot.png">
+  <meta property="og:url" content="https://timerhaven.com/de/pomodoro-index.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "HowTo",
+        "name": "Die Pomodoro‑Technik für fokussiertes Arbeiten verwenden",
+        "description": "Ein praktischer Pomodoro‑Workflow: Einrichten, starten, aufzeichnen und auswerten von Pomodoro‑Sitzungen mit Varianten und Team‑Mustern.",
+        "image": "https://timerhaven.com/assets/images/pomodoro-snapshot.png",
+        "totalTime": "PT3H",
+        "supply": ["Timer (Browser oder Telefon)", "Notizapp oder Notizbuch", "Aufgabenliste"],
+        "tool": ["TimerHaven Pomodoro‑Tool", "Task Timer (optional)"],
+        "step": [
+          {"@type":"HowToStep","name":"Eine messbare Aufgabe wählen","text":"Formulieren Sie ein klares Ziel (ein Satz) und max. drei Unteraufgaben für den Block."},
+          {"@type":"HowToStep","name":"Umgebung vorbereiten","text":"Benachrichtigungen stummschalten, Arbeitsplatz vorbereiten und Wasser bereithalten. Öffnen Sie den Pomodoro‑Timer und stellen Sie 25/5 oder Ihr bevorzugtes Intervall ein."},
+          {"@type":"HowToStep","name":"Starten und fokussieren","text":"Starten Sie den Timer und arbeiten Sie ohne Ablenkung an der Aufgabe bis zur Glocke. Unterbrechungen notieren; bei längeren Unterbrechungen Pause/Neustart überlegen."},
+          {"@type":"HowToStep","name":"Kurze Pause und Reflexion","text":"Nehmen Sie eine 5‑minütige Pause, notieren Sie kurz den Fortschritt und planen Sie das nächste Mikro‑Ziel."},
+          {"@type":"HowToStep","name":"Nach vier Zyklen überprüfen","text":"Nach vier Pomodoros eine längere Pause (15–30 Min.) einlegen und Notizen zur Verbesserung durchsehen."}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type":"Question","name":"Welche Pomodoro‑Längen sind üblich?","acceptedAnswer":{"@type":"Answer","text":"Gängige Aufteilungen sind 25/5 und 50/10. Wählen Sie die Länge, die zu Ihrer Aufmerksamkeitsspanne und Aufgabe passt."}},
+          {"@type":"Question","name":"Was tun bei Unterbrechungen?","acceptedAnswer":{"@type":"Answer","text":"Bei kurzen Unterbrechungen (<2 Min.) notieren und weitermachen. Bei längeren Unterbrechungen pausieren und neu starten; Unterbrechungen protokollieren."}},
+          {"@type":"Question","name":"Kann man Pomodoro im Team verwenden?","acceptedAnswer":{"@type":"Answer","text":"Ja — synchronisierte Pomodoros für paralleles Arbeiten sind möglich; Pausen für kurze Status‑Updates nutzen."}}
+        ]
+      },
+      {
+        "@type":"Person",
+        "name":"Serge Shammas",
+        "url":"https://timerhaven.com/authors/serge-shammas",
+        "image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .case{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Pomodoro‑Timer — Praktischer Leitfaden für fokussiertes Arbeiten</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Produktivitätsautor und UX‑Forscher</div>
+          <div class="meta">Veröffentlicht: 2025‑10‑20 · Zuletzt aktualisiert: 2025‑11‑21 · Lesezeit: 10–12 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Die Pomodoro‑Technik teilt Arbeit in kurze, fokussierte Intervalle mit Pausen. Dieser Leitfaden bietet praktische Einstellungen, Varianten für verschiedene Aufgaben, Team‑Workflows, Vorlagen zum Download und Tipps zur Messung und Verbesserung.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#why">Warum Pomodoro?</a>
+        <a href="#setup">Vorbereitung</a>
+        <a href="#howto">Schritt‑für‑Schritt</a>
+        <a href="#variants">Varianten</a>
+        <a href="#recipes">Rezepte & Workflows</a>
+        <a href="#measure">Messen & Verbessern</a>
+        <a href="#team">Pomodoro im Team</a>
+        <a href="#troubleshoot">Fehlerbehebung</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Warum Pomodoro?</h2>
+        <p>Pomodoro verwandelt das große „viel erledigen“ in kleine, machbare Ziele. Kurze Blöcke verringern die Hemmschwelle zum Starten, reduzieren Entscheidungs‑Ermüdung und liefern verlässliche Daten über tatsächliche Arbeitszeiten.</p>
+      </section>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Vorbereitung & Umfeld</h2>
+        <ul>
+          <li><strong>Eine Aufgabe:</strong> Formulieren Sie ein klares Ziel (z. B. „Intro schreiben — 300 Wörter“).</li>
+          <li><strong>Störquellen ausschalten:</strong> Chat‑Apps schließen, Telefon auf „Nicht stören“.</li>
+          <li><strong>Timer wählen:</strong> TimerHaven Pomodoro nutzen oder einen physischen Timer. Prüfen Sie Benachrichtigungen.</li>
+        </ul>
+      </section>
+
+      <section id="howto" class="section" aria-labelledby="howto-title">
+        <h2 id="howto-title">Schritt‑für‑Schritt (25/5)</h2>
+        <div class="workflow" aria-labelledby="setup-steps">
+          <strong id="setup-steps">Schnellcheck</strong>
+          <ol>
+            <li>Ziel wählen und in einem Satz festhalten.</li>
+            <li>25 Minuten Timer starten und ohne Multitasking arbeiten.</li>
+            <li>Bei Glocke sofort stoppen, 5 Minuten Pause machen.</li>
+            <li>Während der Pause eine kurze Notiz zum Fortschritt.</li>
+            <li>Nach vier Pomodoros eine längere Pause (15–30 Min.) und Review.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Kleine Aufgaben bündeln, große Aufgaben in mehrere Pomodoros aufteilen.</p>
+
+        <figure>
+          <img class="screenshot" src="/assets/images/pomodoro-snapshot.png" alt="Pomodoro Timer — Beispieloberfläche">
+          <figcaption class="muted">Beispiel: Pomodoro‑Timer startet, pausiert, protokolliert.</figcaption>
+        </figure>
+      </section>
+
+      <section id="variants" class="section" aria-labelledby="variants-title">
+        <h2 id="variants-title">Varianten und Einsatz</h2>
+        <ul>
+          <li><strong>25/5:</strong> Für allgemeine Aufgaben und Einsteiger.</li>
+          <li><strong>50/10:</strong> Für tiefes Arbeiten mit hohem Unterbrechungskosten.</li>
+          <li><strong>90/20:</strong> Für kreative Sprints — sparsam verwenden.</li>
+          <li><strong>Task Batching:</strong> Kurze ähnliche Aufgaben bündeln.</li>
+        </ul>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Rezepte & Workflows</h2>
+        <div class="workflow">
+          <strong>Quick Draft (25/5)</strong>
+          <ol>
+            <li>Drei Stichpunkte als Outline erstellen.</li>
+            <li>1 Pomodoro schreiben ohne Korrektur.</li>
+            <li>Pausen nutzen, um Stichpunkte in Absätze zu verwandeln.</li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>Deep Sprint (50/10)</strong>
+          <ol>
+            <li>Zwei 50‑Minuten‑Blöcke blocken.</li>
+            <li>In einer ablenkungsfreien Zone arbeiten.</li>
+            <li>Ergebnisse und Unterbrechungen dokumentieren.</li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>Meeting Prep (25/5 + Review)</strong>
+          <ol>
+            <li>Erster Pomodoro Material sammeln und gliedern.</li>
+            <li>Zweiter Pomodoro rehearsal und 1–2 Min. Zusammenfassung.</li>
+            <li>Längere Pause danach.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Messen, protokollieren und verbessern</h2>
+        <p>Protokollieren Sie Datum, Aufgabe, geplante Dauer, tatsächliche Dauer, Unterbrechungen und eine kurze Notiz. Exportieren Sie wöchentlich und berechnen Sie Durchschnitt, Median und Unterbrechungsrate.</p>
+
+        <h3>Wichtige Kennzahlen</h3>
+        <ul>
+          <li>Durchschnittliche Dauer</li>
+          <li>Unterbrechungsrate</li>
+          <li>Abschluss‑Ratio (geplante vs. benötigte Pomodoros)</li>
+        </ul>
+
+        <h3>Tabellen‑Formeln</h3>
+        <pre class="template">=AVERAGEIF(TagRange,"project-alpha",ActualMinutesRange)
+=MEDIAN(IF(TagRange="project-alpha",ActualMinutesRange))
+=COUNTIFS(TagRange,"project-alpha",InterruptionsRange,">0") / COUNTIF(TagRange,"project-alpha")</pre>
+      </section>
+
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Pomodoro im Team</h2>
+        <ul>
+          <li>Dringende Kanäle definieren.</li>
+          <li>Synchronisierte Timer und kurze Break‑Standups.</li>
+          <li>Blockierungen in einem gemeinsamen Dokument festhalten.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Fehlerbehebung</h2>
+        <h3>Häufige Unterbrechungen</h3>
+        <p>Unterbrechungen eine Woche protokollieren, Muster erkennen und Fokusfenster aushandeln.</p>
+
+        <h3>Aufgaben zu groß</h3>
+        <p>In kleinere, 1–3 Pomodoro‑sinnige Teile aufteilen oder als Multi‑Pomodoro‑Block planen.</p>
+
+        <h3>Timer‑Genauigkeit</h3>
+        <p class="small-note">Auf Mobilgeräten kann Tab‑Throttling den Timer beeinflussen — ggf. native App nutzen.</p>
+      </section>
+
+      <section id="download" class="section" aria-labelledby="download-title">
+        <h2 id="download-title">Download — Session‑Vorlage</h2>
+        <p class="muted">Vorlage herunterladen und wöchentlich protokollieren.</p>
+        <p><a href="#" id="downloadPomodoro" class="cta">Vorlage herunterladen (.txt)</a></p>
+        <pre id="pomTemplate" class="template" aria-hidden="true">Pomodoro Session Log
+Date: {{YYYY-MM-DD}}
+Task:
+Pomodoro #1: start __:__ end __:__ duration 25
+Pomodoro #2: start __:__ end __:__ duration 25
+Short breaks:
+Interruptions (#):
+Notes / next steps:</pre>
+
+        <script>
+          document.getElementById('downloadPomodoro').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('pomTemplate').textContent;
+            var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'pomodoro-session-template-de.txt';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title">Kurz‑Fallstudien</h2>
+        <div class="case">
+          <strong>Entwicklerin — Aisha</strong>
+          <p>Aisha stellte fest, dass Debugging durchschnittlich 3 Pomodoros benötigt. Sie plant nun größere Blöcke und trennt Code‑Reviews.</p>
+        </div>
+
+        <div class="case">
+          <strong>Freelancer — Jonah</strong>
+          <p>Jonah bündelte Angebotserstellung in Sprints und erhöhte dadurch seine Abschlussquote.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Frage:</strong> Pomodoro für Meetings?<br><strong>Antwort:</strong> Eher für Vorbereitung und Nachbereitung nutzen; während Meetings keine neuen Pomodoros starten.</p>
+          <p><strong>Frage:</strong> Ist Pomodoro ein Allheilmittel?<br><strong>Antwort:</strong> Nein. Testen Sie und nutzen Sie die Daten, um zu entscheiden, ob es Ihre Produktivität verbessert.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/de/notes-index.html">Notes</a> · <a href="/timer.html#startBtn">Task Timer</a> · <a href="/de/calendar-planning-index.html">Kalender</a></p>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/pomodoro-de.html" class="cta">Pomodoro‑Tool öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Feedback? <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Siehe <a href="/privacy/">Datenschutzerklärung</a>.</p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
