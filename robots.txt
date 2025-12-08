@@ -1,4 +1,17 @@
+﻿# robots.txt - TimerHaven
+# Allow all normal crawling, but protect obvious admin/debug paths.
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+Allow: /
 
+# Helpful: link to your sitemap (no trailing dot)
 Sitemap: https://timerhaven.com/sitemap.xml
+
+# Optional: explicit rules for ad / verification crawlers (keeps them allowed)
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
