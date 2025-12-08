@@ -1,18 +1,251 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>countdown — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for countdown guide (ar)">
+  <meta charset="utf-8" />
+  <title>مؤقت العد التنازلي — خطط للمواعيد النهائية وابق مركّزًا | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل شامل لاستخدام مؤقت العد التنازلي: تخطيط المواعيد النهائية، اختيار المدد، أنماط العمل للاجتماعات وجلسات التركيز، الإشعارات، واستكشاف المشاكل." />
+  <link rel="canonical" href="https://timerhaven.com/ar/countdown/countdown-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"استخدام مؤقت العد التنازلي بفعالية",
+        "description":"اضبط وأدر مؤقتات العد التنازلي للمواعيد النهائية والاجتماعات والعمل المركّز والتذكيرات. يغطي هذا الدليل التخطيط وأنماط التطبيق وخيارات الإشعار وأفضل الممارسات لزيادة وعيك بالزمن.",
+        "image":"https://timerhaven.com/assets/images/countdown-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["مؤقت العد التنازلي (TimerHaven)","تقويم أو قائمة مهام","صوت إشعارات على الهاتف أو سطح المكتب"],
+        "step":[
+          {"@type":"HowToStep","name":"تحديد الغرض","text":"اختر ما إذا كان المؤقت لموعد نهائي قادم، أو اجتماع، أو جلسة عمل مركزة."},
+          {"@type":"HowToStep","name":"تعيين المدة","text":"أدخل دقائق وثوانٍ؛ للاجتماعات استخدم دقائق كاملة؛ للتركيز استخدم فترات متسقة مع سير عملك."},
+          {"@type":"HowToStep","name":"اختيار الإشعار","text":"فعّل صفارة أو إشعار سطح مكتب حتى لا يفوتك انتهاء المدة؛ اختبر مستوى الصوت وأذونات المتصفح."},
+          {"@type":"HowToStep","name":"التشغيل والمراجعة","text":"ابدأ المؤقت وسجل الانقطاعات؛ بعد الجلسة قم بتدوين المتابعات أو المهام التي لم تُنجز."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"هل سيستمر المؤقت إذا غيّرت التبويب؟","acceptedAnswer":{"@type":"Answer","text":"نعم — المتصفحات الحديثة تحافظ على تشغيل مؤقتات JS طالما أن التبويب مفتوح. قد تؤثر إجراءات تقليل نشاط الخلفية على الدقة في بعض المتصفحات، لكن المؤقت سيستمر بالعد التنازلي."}},
+          {"@type":"Question","name":"هل يمكنني ضبط مؤقتات طويلة جدًا؟","acceptedAnswer":{"@type":"Answer","text":"نعم — اضبط الدقائق حتى الحد الذي يسمح به واجهة المستخدم. للمؤقتات الطويلة جدًا، فكر في تسجيل وقت النهاية في تقويمك أيضًا."}},
+          {"@type":"Question","name":"ما هي خيارات الإشعار الأفضل؟","acceptedAnswer":{"@type":"Answer","text":"استخدم صفارة مسموعة وإشعار سطح مكتب إن أمكن. للاجتماعات اختر نغمة أعلى؛ لجلسات التركيز قد يكون رنين خفيف أفضل."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">countdown — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">مؤقت العد التنازلي — استخدم المواعيد النهائية للتركيز والإنجاز</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب إنتاجية وباحث تجربة المستخدم</div>
+          <div class="meta">نُشر: 2025-11-24 · وقت القراءة: 12–16 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">مؤقتات العد التنازلي وسيلة بسيطة لكنها قوية لخلق الشعور بالعجلة، وإدارة الاجتماعات، وحماية نوافذ قصيرة من التركيز. يغطي هذا الدليل إعدادات عملية لجلسات العمل والاجتماعات والروتين الشخصي؛ اختيار الإشعارات ومعدل التفاصيل؛ التكامل مع التقويم وسلاسل Pomodoro؛ واستكشاف مشاكل الأذونات والدقة.</p>
+
+      <nav class="toc" aria-label="فهرس المحتويات">
+        <a href="#why">لماذا تساعد العدّادات</a>
+        <a href="#setup">اختيار المدة والخيارات</a>
+        <a href="#workflows">أنماط عملية</a>
+        <a href="#alerts">الإشعارات وإمكانية الوصول</a>
+        <a href="#integration">التكامل مع التقويم وPomodoro</a>
+        <a href="#precision">الدقة وتقليل نشاط الخلفية</a>
+        <a href="#troubleshoot">استكشاف الأخطاء</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">لماذا تساعد العدّادات</h2>
+        <p>المواعيد النهائية تغيّر السلوك. يحوّل العدّاد المرئي الوقت المفتوح إلى مورد ملموس فيزيد التركيز. بالنسبة للعديد من المهام، يخلق المؤقت القصير اندفاعًا يقلل التسويف ويساعدك على الوصول إلى نقطة توقف واضحة — مناسب لتنقية البريد، التحرير المركّز، أو تمارين مؤقتة مثل ممارسة عرض تقديمي.</p>
+
+        <p>استخدم مؤقتًا عندما تحتاج إلى:</p>
+        <ul>
+          <li>قطاعات عمل محددة وواضحة (مثل جلسات ترتيب لمدة 15 دقيقة).</li>
+          <li>مؤشرات بصرية لإدارة الاجتماعات والاستراحات.</li>
+          <li>تذكير موثوق بقرب الميعاد النهائي بحيث تُعطي الأولوية الآن بدلًا من لاحقًا.</li>
+        </ul>
+      </section>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">اختيار المدة والخيارات</h2>
+        <p>اختر المدة بهدف واضح. تستفيد المهام المختلفة من أطوال مختلفة. اختر دائمًا مدة تحفظ القليل من الحذر في المحاولات الأولى ثم اضبطها بعد قياس الوقت الفعلي لإتمام المهمة.</p>
+
+        <h3>المدد الشائعة ومتى تُستخدم</h3>
+        <ul>
+          <li><strong>5–10 دقائق:</strong> فحوصات سريعة، مهام ترتيب صغيرة، أو استراحات مصغرة.</li>
+          <li><strong>15–30 دقيقة:</strong> فرز البريد، تحريرات قصيرة، أو فترات تعلم مركّزة.</li>
+          <li><strong>45–90 دقيقة:</strong> عمل أطول مركّز أو أجزاء من اجتماع (اقتران مع طقوس تحضيرية).</li>
+          <li><strong>مدد مخصصة:</strong> استخدم دقائق محددة للبروفات أو المقابلات ذات حدود زمنية (مثلاً 12 أو 20 دقيقة).</li>
+        </ul>
+
+        <h3>خيارات يجب مراعاتها</h3>
+        <ul>
+          <li><strong>صفير أم إشعار سطح المكتب:</strong> الصوت مناسب إن لم تكن تنظر إلى الشاشة؛ إشعارات سطح المكتب جيدة للعمل الهادئ مع إشارات مرئية.</li>
+          <li><strong>بدء تلقائي للفترة التالية:</strong> للسلاسل المتكررة (مثل اختبارات متتابعة) فعّل البدء التلقائي بحذر لتجنب المفاجآت.</li>
+          <li><strong>إيقاف مؤقت/استئناف:</strong> مفيد للحفاظ على الوقت المتبقي عند الانقطاع.</li>
+        </ul>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">أنماط عملية</h2>
+        <p>فيما يلي أنماط تطابق الاحتياجات الشائعة بأنماط المؤقت. استخدمها كنقطة انطلاق وعدّلها بناءً على إيقاعك.</p>
+
+        <div class="recipe" aria-labelledby="email-tidy">
+          <strong id="email-tidy">فرز البريد — 25 دقيقة</strong>
+          <ol>
+            <li>اضبط 25 دقيقة. نظف صندوق الوارد من الرسائل ذات الأولوية فقط.</li>
+            <li>استخدم أول 5 دقائق للمسح السريع والعلامات، ثم أمضِ الـ20 دقيقة المتبقية في الحل أو التفويض.</li>
+            <li>في النهاية، أرشِف أو أجل العناصر المتبقية؛ سجّل أي متابعات في نظام المهام لديك.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="meeting">
+          <strong id="meeting">الاجتماعات — إنذار نهاية الأجندة</strong>
+          <ol>
+            <li>اضبط عدّادًا للـ5 دقائق الأخيرة من الاجتماع لعرض بنود العمل وإغلاق القرارات.</li>
+            <li>اعرض العدّاد أو شارك شاشتك حتى يعرف الجميع الوقت المتبقي.</li>
+            <li>استخدم نغمة أعلى لنهاية الاجتماع لضمان ملاحظة المشاركين عن بُعد فورًا.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="focus">
+          <strong id="focus">تمرين تركيز — 45 دقيقة</strong>
+          <ol>
+            <li>احجز 45 دقيقة واضبط العدّاد.</li>
+            <li>قم بطقوس تجهيز سريعة (مخطط + فتح المراجع) لمدة 3–5 دقائق.</li>
+            <li>اعمل دون انقطاع؛ إذا تعرضت لانقطاع، سجّل الانقطاع واستأنف.</li>
+            <li>في النهاية، دوّن التقدم وحدد الخطوة التالية.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">الإشعارات وإمكانية الوصول</h2>
+        <p>الإشعارات هي الصلة بين المؤقت وسلوكك. اختر أوضاعًا تتناسب مع السياق: مكتبي، عن بُعد، أو تركيز هادئ.</p>
+
+        <h3>أفضل الممارسات</h3>
+        <ul>
+          <li>فعّل إشعارات سطح المكتب في المتصفح واختبر مرة للتأكد من منح الإذن.</li>
+          <li>اختر صوتًا مسموعًا لكن غير مفزع للاستخدام المتكرر؛ احتفظ بأصوات أعلى للمواعيد النهائية الحرجة.</li>
+          <li>للوصولية: تأكد من تباين بصري عالي للعدّاد وفكّر في الاهتزاز على الأجهزة المحمولة إن كان مدعومًا.</li>
+        </ul>
+      </section>
+
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">التكامل مع التقويم وPomodoro</h2>
+        <p>تكون المؤقتات أقوى عند اقترانها بخطة. استخدمها بجانب حجز في التقويم أو تسلسل Pomodoro لكي يتطابق قياس الزمن مع النتائج.</p>
+
+        <ul>
+          <li><strong>علامات في التقويم:</strong> أضف وقت النهاية المخطط إلى حدث التقويم حتى يرى المشاركون موعد الانتهاء المتوقع.</li>
+          <li><strong>ربط Pomodoro:</strong> استخدم العدّادات لمدد مخصصة (مثل 40/10)، ثم سجّل الدورات المكتملة في سجل المهام.</li>
+          <li><strong>تحضير للاجتماع:</strong> عدّاد قصير قبل الاجتماع يساعد على تبديل السياق وتلخيص القرارات بكفاءة.</li>
+        </ul>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">الدقة وتقليل نشاط الخلفية</h2>
+        <p>مؤقتات المتصفح دقيقة عمومًا للاستخدام الظاهري، لكنها قد تتأثر بتقليل نشاط الخلفية في بعض المتصفحات عندما لا تكون التبويبة مرئية. إذا كانت الدقة مهمة (مثل الأحداث المباشرة)، فكّر في حلول تكميلية:</p>
+
+        <ul>
+          <li>استخدم إشعارات النظام أو تطبيق منبه كإشارة احتياطية.</li>
+          <li>أبقِ التبويبة مفتوحة ومرئية أثناء العدّادات الحرجة، أو شغّل تطبيقًا محليًا للدقة العالية.</li>
+          <li>للمؤقتات الطويلة، حدّد وقت نهاية مطلق (وإضافة حدث تقويم اختياري) حتى يكون لديك مرجع مستقل عن مؤقت الصفحة.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">استكشاف الأخطاء</h2>
+        <ul>
+          <li><strong>الإشعارات محظورة:</strong> منح إذن الإشعارات في إعدادات المتصفح (إعدادات الموقع → الإشعارات).</li>
+          <li><strong>لا يُسمع الصوت:</strong> تحقق من مستوى صوت النظام واسمح بالتشغيل التلقائي للمواقع التي تحتاج صوتًا؛ بعض المتصفحات تكتم الصوت حتى يتفاعل المستخدم.</li>
+          <li><strong>يبدو أن المؤقت متوقف:</strong> تأكد من بقاء التبويبة مفتوحة؛ قد تقلل آلية تقليل نشاط الخلفية من تكرار التحديث لكنها لا تكسر بالضرورة حساب وقت النهاية.</li>
+          <li><strong>مشكلات الهاتف المحمول:</strong> قد تعلق صفحات الخلفية في المتصفحات المحمولة؛ فكر في استخدام تذكير محلي أو التقويم كنسخة احتياطية.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> هل يمكنني استخدام العدّادات للتذكير المتكرر؟<br><strong>ج:</strong> للتذكيرات المتكررة استخدم أحداث التقويم أو تذكيرات المهام. مؤقت العد التنازلي مثالي للجلسات الفورية والمتفرّدة.</p>
+
+          <p><strong>س:</strong> هل سينبهني المؤقت إذا كانت شاشتي مقفلة؟<br><strong>ج:</strong> قد تُعلق تبويبات المتصفح عند سكون الجهاز. إذا احتجت إشعارات أثناء القفل فاستعمل منبه الجهاز أو إشعار التقويم.</p>
+
+          <p><strong>س:</strong> هل يمكنني ضبط المؤقت بالساعات؟<br><strong>ج:</strong> نعم — أدخل الدقائق المقابلة للساعات المطلوبة (مثلاً 120 دقيقة لساعتين) أو استخدم سير عمل وقت نهاية مطلق مع التقويم.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/countdown-ar.html">افتح أداة مؤقت العد التنازلي</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Countdown" target="_blank" rel="noopener">العد التنازلي (مفهوم) — ويكيبيديا</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/countdown-ar.html" class="cta" aria-label="افتح مؤقت العد التنازلي">افتح مؤقت العد التنازلي</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>أسئلة أو ملاحظات؟ تواصل معنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/countdown-ar.html" class="return-to-tool" id="returnToToolCountdown" aria-label="العودة إلى مؤقت العد التنازلي">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى مؤقت العد التنازلي</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCountdown');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

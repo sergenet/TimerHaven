@@ -2,17 +2,287 @@
 <html lang="el">
 <head>
   <meta charset="utf-8">
-  <title>notes — Guide (el)</title>
+  <title>Σημειώσεις — Πρακτικός οδηγός για την καταγραφή λειτουργικών σημειώσεων | TimerHaven</title>
+  <meta name="description" content="Πώς να χρησιμοποιείτε τις Σημειώσεις αποτελεσματικά με ροές εργασίας Pomodoro και Task Timer. Περιλαμβάνει HowTo βήμα‑βήμα, FAQ, στιγμιότυπα, πρότυπο προς λήψη και δομημένα δεδομένα.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for notes guide (el)">
+  <link rel="canonical" href="https://timerhaven.com/el/notes-index.html">
+  <meta name="author" content="Serge Shammas">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Καταγράψτε, επισημάνετε και ενεργοποιήστε σημειώσεις με το TimerHaven Notes",
+        "description":"Πρακτική ροή εργασίας για γρήγορη καταγραφή σημειώσεων, επισημάνσεις για πλαίσιο, μετατροπή ενεργειών σε εργασίες και εβδομαδιαία ανασκόπηση με ροές Pomodoro και Task Timer.",
+        "image":"https://timerhaven.com/assets/images/notes-snapshot.png",
+        "totalTime":"PT30M",
+        "supply":["TimerHaven Σημειώσεις","Χρονόμετρο Pomodoro (TimerHaven)","Υπολογιστικό φύλλο (προαιρετικό)"],
+        "step":[
+          {"@type":"HowToStep","name":"Καταγράψτε μια συνοπτική σημείωση","text":"Δημιουργήστε μια σημείωση με μία γραμμή τίτλο και 2–4 bullets που περιγράφουν την ιδέα, το πλαίσιο ή τα βήματα."},
+          {"@type":"HowToStep","name":"Επισημάνετε και ιεραρχήστε","text":"Προσθέστε μία σύντομη ετικέτα πλαισίου και ένα δείκτη προτεραιότητας· επισημάνετε ως ενεργή αν χρειάζεται άμεση εργασία."},
+          {"@type":"HowToStep","name":"Μετατρέψτε σε εργασία ή προγραμματίστε","text":"Εάν η σημείωση απαιτεί εργασία, μετατρέψτε τη σε Task Timer εγγραφή ή συμβάν ημερολογίου και συνδέστε το αναγνωριστικό της σημείωσης για πλαίσιο."},
+          {"@type":"HowToStep","name":"Ανασκοπήστε τακτικά","text":"Κάντε καθημερινό triage για γρήγορες ενέργειες και εβδομαδιαία ανασκόπηση για επεξεργασία των υπολοίπων."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Οι Σημειώσεις αποθηκεύονται τοπικά ή στο cloud;","acceptedAnswer":{"@type":"Answer","text":"Κατά προεπιλογή οι σημειώσεις αποθηκεύονται τοπικά στο πρόγραμμα περιήγησης. Μπορείτε να εξάγετε σημειώσεις σε αρχείο για backup ή να συγχρονίσετε χειροκίνητα με άλλη συσκευή."}},
+          {"@type":"Question","name":"Πόσο συχνά πρέπει να ανασκοπώ τις σημειώσεις;","acceptedAnswer":{"@type":"Answer","text":"Ένα σύντομο καθημερινό triage (5–10 λεπτά) κρατά τα στοιχεία ενεργά και μια εβδομαδιαία ανασκόπηση (15–30 λεπτά) είναι ιδανική για επεξεργασία και προγραμματισμό."}},
+          {"@type":"Question","name":"Μπορώ να χρησιμοποιήσω τις Σημειώσεις με Pomodoro;","acceptedAnswer":{"@type":"Answer","text":"Ναι — επιλέξτε μία σημείωση #task ως σκοπό του Pomodoro πριν την έναρξη και χρησιμοποιήστε τα διαλείμματα για να καταγράψετε πρόοδο ή να μετατρέψετε bullets σε εργασίες."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    table.sample{border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:680px;}
+    table.sample td, table.sample th{border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:left;}
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
+    }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px; }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">notes — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Σημειώσεις — Καταγράψτε, Επισημάνετε και Μετατρέψτε Ιδέες σε Έργο</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας άρθρου">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας για παραγωγικότητα και UX</div>
+          <div class="meta">Δημοσιεύτηκε: 2025-10-22 · Τελευταία ενημέρωση: 2025-11-21 · Χρόνος ανάγνωσης: 10–12 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Οι Σημειώσεις είναι η γέφυρα ανάμεσα σε στιγμιαίες ιδέες και ολοκληρωμένη εργασία. Αυτός ο οδηγός παρουσιάζει μια πρακτική, μετρήσιμη προσέγγιση: καταγράψτε σύντομες σημειώσεις, επισημάνετε το πλαίσιο, μετατρέψτε ενεργές ενέργειες σε χρονισμένη εργασία (Pomodoro/Task Timer) και κάντε εβδομαδιαία ανασκόπηση ώστε οι σημειώσεις να παράγουν αποτελέσματα αντί να μαζεύουν σκόνη.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#why">Γιατί έχουν σημασία οι καλές σημειώσεις</a>
+        <a href="#capture">Καλές πρακτικές καταγραφής</a>
+        <a href="#structure">Δομή & ετικέτες</a>
+        <a href="#workflows">Ροές εργασίας με Pomodoro & Task Timer</a>
+        <a href="#templates">Πρότυπα</a>
+        <a href="#review">Καθημερινή & εβδομαδιαία ανασκόπηση</a>
+        <a href="#search">Αναζήτηση & ανάκτηση</a>
+        <a href="#cases">Σύντομα case studies</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Γιατί έχουν σημασία οι καλές σημειώσεις</h2>
+        <p>
+          Οι περισσότερες ιδέες χάνονται επειδή καταγράφονται αδύναμα ή δεν συνδέονται με ενέργεια. Μια καλή σημείωση είναι σύντομη, περιγραφική και ενεργή — πρέπει να απαντά γρήγορα: Τι είναι; Γιατί έχει σημασία; Ποιο είναι το επόμενο βήμα; Όταν οι σημειώσεις έχουν αυτή τη δομή, γίνονται αξιόπιστη πηγή εργασιών, έρευνας ή αναφοράς.
+        </p>
+      </section>
+
+      <section id="capture" class="section" aria-labelledby="capture-title">
+        <h2 id="capture-title">Καταγραφή — γρήγορη, συγκεντρωμένη, ελάχιστη</h2>
+
+        <div class="workflow" aria-labelledby="capture-check">
+          <strong id="capture-check">Checklist καταγραφής</strong>
+          <ol>
+            <li><strong>Τίτλος:</strong> Μια γραμμή με αποτέλεσμα (όχι διαδικασία) — π.χ. "Πρόχειρο: Εισαγωγή πρότασης".</li>
+            <li><strong>Bullets:</strong> 2–4 σύντομα bullets που περιγράφουν βασικά σημεία, πόρους ή περιορισμούς.</li>
+            <li><strong>Ετικέτα:</strong> Προσθέστε μια βασική ετικέτα (#task, #idea, #research) και προαιρετικό πλαίσιο (#projectX, #meeting).</li>
+            <li><strong>Σημαία ενέργειας:</strong> Σημειώστε ως ενεργή αν χρειάζεται εργασία σύντομα· αλλιώς χαρακτηρίστε ως αναφορά.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="structure" class="section" aria-labelledby="structure-title">
+        <h2 id="structure-title">Δομή & ετικέτες — κάντε τις σημειώσεις αναζητήσιμες</h2>
+        <p>
+          Μια σταθερή σύμβαση ονοματοδοσίας και ετικετών μετατρέπει τις σημειώσεις από θόρυβο σε μια αναζητήσιμη γνώση. Χρησιμοποιήστε σύντομες, προβλέψιμες ετικέτες και αποφύγετε πολύ ελεύθερες ετικέτες με παραλλαγές.
+        </p>
+
+        <h3>Προτεινόμενη ταξινομία ετικετών</h3>
+        <ul>
+          <li><strong>#task</strong> Ενέργειες που πρέπει να γίνουν.</li>
+          <li><strong>#idea</strong> Ιδέες που αξίζει να κρατήσετε αλλά δεν είναι άμεσες ενέργειες.</li>
+          <li><strong>#research</strong> Σύνδεσμοι, δεδομένα ή περιλήψεις για μελλοντική δουλειά.</li>
+          <li><strong>#quick</strong> Ενέργειες που εκτιμώνται κάτω από 5 λεπτά.</li>
+        </ul>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Ροές εργασίας: συνδέστε τις σημειώσεις με χρονισμένη εργασία</h2>
+
+        <h3>Γρήγορη ροή για ένα Pomodoro</h3>
+        <ol>
+          <li>Επιλέξτε μια σημείωση <strong>#task</strong> ως στόχο Pomodoro.</li>
+          <li>Ξεκινήστε ένα 25λεπτο Pomodoro στο TimerHaven· δουλέψτε μόνο σε στοιχεία της σημείωσης.</li>
+          <li>Κατά το 5λεπτο διάλειμμα, προσθέστε μια μονογραμμή προόδου στη σημείωση.</li>
+          <li>Μετά το σετ, μετατρέψτε τα ολοκληρωμένα bullets σε εγγραφές Task Timer και ανασκοπήστε χρόνους.</li>
+        </ol>
+      </section>
+
+      <section id="templates" class="section" aria-labelledby="templates-title">
+        <h2 id="templates-title">Πρότυπα — γρήγορη εκκίνηση</h2>
+        <p>Χρησιμοποιήστε αυτά τα πρότυπα για συνεπή καταγραφή. Κάντε κλικ για λήψη ενός έτοιμου αρχείου κειμένου.</p>
+        <p><a href="#" id="downloadNotes" class="cta" aria-label="Λήψη προτύπου σημειώσεων">Λήψη προτύπου σημειώσεων (.txt)</a></p>
+
+        <pre id="notesTemplate" class="template" aria-hidden="true">Τίτλος: [Δήλωση αποτελέσματος]
+Ετικέτες: #task #projectX
+1) Bullet — πλαίσιο / σύνδεσμος
+2) Bullet — πόρος / βήμα
+3) Bullet — περιορισμός / σημείωση
+Ενέργεια: [μετατροπή σε εργασία / προγραμματισμός / αρχειοθέτηση]</pre>
+
+        <script>
+          document.getElementById('downloadNotes').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('notesTemplate').textContent;
+            var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'notes-template-el.txt';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="review" class="section" aria-labelledby="review-title">
+        <h2 id="review-title">Triage: καθημερινή και εβδομαδιαία ανασκόπηση</h2>
+        <h3>Καθημερινό triage (5–10 λεπτά)</h3>
+        <ul>
+          <li>Γρήγορο σκανάρισμα νέων σημειώσεων και επισημάνσεις επείγοντων ως <strong>#task</strong> ή <strong>#quick</strong>.</li>
+          <li>Μετατρέψτε κάθε ενεργό bullet σε εγγραφή Task Timer ή σε slot ημερολογίου αν χρειάζεται προγραμματισμός.</li>
+          <li>Αρχειοθετήστε καθαρές αναφορές ή μετακινήστε τις σε φάκελο έργου.</li>
+        </ul>
+
+        <h3>Εβδομαδιαία βαθιά ανασκόπηση (15–30 λεπτά)</h3>
+        <ul>
+          <li>Ανοίξτε όλες τις σημειώσεις με <strong>#idea</strong> και αποφασίστε: ενέργεια, έρευνα ή αρχειοθέτηση.</li>
+          <li>Ομαδοποιήστε σχετικές σημειώσεις σε σημείωση έργου και σχεδιάστε επόμενα βήματα (συνταγές Pomodoro ή εκτιμήσεις Task Timer).</li>
+          <li>Εξάγετε μια σύντομη εβδομαδιαία περίληψη αν κρατάτε προσωπικά μετρικά.</li>
+        </ul>
+      </section>
+
+      <section id="search" class="section" aria-labelledby="search-title">
+        <h2 id="search-title">Αναζήτηση & ανάκτηση — κάντε τις σημειώσεις εύκολα ανιχνεύσιμες</h2>
+        <p>Χρησιμοποιήστε σύντομες ετικέτες και πρόθεμα τίτλου για γρήγορο φιλτράρισμα (π.χ. "Idea:", "Task:", "Ref:"). Χρησιμοποιήστε τα φίλτρα του εργαλείου Σημειώσεις για εμφάνιση κατά ετικέτα, ημερομηνία ή λέξη‑κλειδί. Για μεγάλα αρχεία, εξάγετε και κρατήστε αντίγραφο ασφαλείας στο cloud.</p>
+
+        <table class="sample" aria-hidden="false">
+          <thead><tr><th>Πεδίο</th><th>Παράδειγμα</th></tr></thead>
+          <tbody>
+            <tr><td>Τίτλος</td><td>Πρόχειρο: Επικεφαλίδα σελίδας προσγείωσης</td></tr>
+            <tr><td>Ετικέτες</td><td>#task #marketing</td></tr>
+            <tr><td>Bullets</td><td>Στόχος κοινού, βασικό όφελος, ιδέα CTA</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="cases" class="section" aria-labelledby="cases-title">
+        <h2 id="cases-title">Σύντομα case studies</h2>
+
+        <div class="case">
+          <strong>Product Manager — Imani</strong>
+          <p>Η Imani χρησιμοποιεί σημειώσεις στις κλήσεις με τα μέρη ενδιαφέροντος για να καταγράφει αποφάσεις και σημεία δράσης. Μετατρέπει κάθε δράση σε Task Timer εντός της ίδιας συνεδρίας και προγραμματίζει ένα Pomodoro για εργασία την επόμενη μέρα.</p>
+        </div>
+
+        <div class="case">
+          <strong>Researcher — Alex</strong>
+          <p>Ο Alex επισημαίνει σημειώσεις με #research και αποθηκεύει πηγές. Οι εβδομαδιαίες ανασκοπήσεις του επιτρέπουν να συναρμολογεί γρήγορα περιλήψεις βιβλιογραφίας συνδυάζοντας σχετικά bullets.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Συχνές ερωτήσεις</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> Μπορώ να εξάγω σημειώσεις σε άλλα εργαλεία;<br><strong>A:</strong> Ναι — εξάγετε ως απλό κείμενο ή CSV και εισάγετε σε άλλες εφαρμογές. Χρησιμοποιήστε συνεπείς τίτλους και ετικέτες για απλή αντιστοίχιση.</p>
+
+          <p><strong>Q:</strong> Πόσο συχνά πρέπει να ανασκοπώ τις σημειώσεις;<br><strong>A:</strong> Σύντομο καθημερινό triage (5–10 λεπτά) για να παραμένουν ενεργές· πλήρης ανασκόπηση εβδομαδιαία.</p>
+
+          <p><strong>Q:</strong> Υπάρχει προτεινόμενη πολιτική διατήρησης;<br><strong>A:</strong> Κρατήστε ενεργές σημειώσεις μέχρι να ολοκληρωθούν· αρχειοθετήστε αναφορές παλαιότερες του 1–2 ετών εκτός αν είναι ουσιώδεις.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Σχετικά εργαλεία: <a href="/pomodoro-el.html">Pomodoro</a> · <a href="/timer-el.html#startBtn">Task Timer</a> · <a href="/calendar-el.html">Ημερολόγιο</a></p>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/notes-el.html" class="cta" aria-label="Άνοιγμα εργαλείου Σημειώσεων">Άνοιγμα εργαλείου Σημειώσεων</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε στο <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/el/privacy/">Πολιτική Απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Notes" button -->
+  <a href="/notes-el.html"
+     class="return-to-tool"
+     id="returnToToolNotes"
+     aria-label="Επιστροφή στις Σημειώσεις">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Επιστροφή στις Σημειώσεις</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolNotes');
+      if (!btn) return;
+      // keyboard activation
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      // adjust subtle opacity when at top vs scrolled
+      function toggleOpacity(){
+        try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){}
+      }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

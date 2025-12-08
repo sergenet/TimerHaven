@@ -1,18 +1,193 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>currency — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for currency guide (de)">
+  <meta charset="utf-8" />
+  <title>Währungsrechner — Kurse konvertieren & smarte Workflows nutzen | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Praxisleitfaden für Währungsumrechnung: Auswahl von Kursquellen, Rundung und Darstellung, Reisetipps, geschäftliche Nutzung und Automatisierung von Konversionen." />
+  <link rel="canonical" href="https://timerhaven.com/de/currency/currency-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Praktische Währungsumrechnung",
+        "description":"Wie man Währungen zuverlässig umrechnet, geeignete Kursquellen wählt, Umrechnungen für Nutzer darstellt und Rundungs‑ sowie geschäftliche Anforderungen berücksichtigt.",
+        "image":"https://timerhaven.com/assets/images/currency-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Währungsrechner (TimerHaven)","ExchangeRate API oder Bankkurse","Tabellenkalkulation"],
+        "step":[
+          {"@type":"HowToStep","name":"Quelle wählen","text":"Entscheiden Sie, ob Sie Interbank‑Mid‑Market‑Kurse oder Bankkurse benötigen (Banken/Transferdienste berechnen Aufschläge)."},
+          {"@type":"HowToStep","name":"Rundung festlegen","text":"Wählen Sie die Präsentations‑Rundung (2 Dezimalstellen für Preise, 4–6 Dezimalstellen für Analysen)."},
+          {"@type":"HowToStep","name":"Kontext anzeigen","text":"Zeigen Sie Kurs, umgerechneten Betrag und Zeitstempel an, damit Nutzer wissen, wann das Angebot galt."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Sind die Kurswerte im Konverter live?","acceptedAnswer":{"@type":"Answer","text":"Konverter können Live‑Mid‑Market‑Kurse von APIs abrufen, aber Bank‑ oder Zahlungsanbieter‑Kurse können sich unterscheiden, da sie Spreads und Gebühren enthalten."}},
+          {"@type":"Question","name":"Sollte ich umgerechnete Beträge runden?","acceptedAnswer":{"@type":"Answer","text":"Ja — zeigen Sie Beträge passend zur Währung gerundet an (meist 2 Dezimalstellen für Fiat) und zeigen Sie den Kurs bei Bedarf mit höherer Genauigkeit an."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">currency — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Währungsrechner — Praktischer Leitfaden für verlässliche Umrechnungen</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Zahlungen & Produktivität</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 12–16 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Ein Währungsrechner sollte mehr als Zahlen anzeigen — er muss Kontext liefern: Welcher Kurs wurde verwendet, wann galt er und sind Gebühren enthalten? Dieser Leitfaden erklärt Kursquellen, Darstellungsoptionen, Reisetipps, geschäftliche Muster, Rundung und Automatisierung häufigerer Konversionen.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#sources">Kursquellen</a>
+        <a href="#presentation">Darstellung & Rundung</a>
+        <a href="#travel">Reisen & Budgetplanung</a>
+        <a href="#business">Geschäftliches & Preisgestaltung</a>
+        <a href="#automation">Automatisierung & Skripte</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="sources" class="section" aria-labelledby="sources-title">
+        <h2 id="sources-title">Kursquellen — passend zum Bedarf wählen</h2>
+        <p>Nicht alle Kurse sind gleich. Mid‑Market‑Kurse (Durchschnitt aus Kauf/Verkauf) liefern APIs meist als Referenz. Banken und Zahlungsanbieter berechnen Aufschläge und Gebühren; für kundenorientierte Preise sollten Sie Anbieter‑Kurse in Erwägung ziehen oder sowohl Mid‑Market‑Kurs als auch eine Kostenschätzung inklusive Gebühren anzeigen.</p>
+
+        <h3>Gängige Quellen</h3>
+        <ul>
+          <li><strong>Exchange‑Rate‑APIs:</strong> kostenlose oder bezahlte APIs (gut für Mid‑Market‑Kurse).</li>
+          <li><strong>Bank‑Quoten:</strong> präzise für Zahlungen, oft aber nur per Login oder API‑Key zugänglich.</li>
+          <li><strong>Kartenzahlungsraten:</strong> enthalten Spread und Konvertierungsgebühren — relevant für Kartentransaktionen.</li>
+        </ul>
+      </section>
+
+      <section id="presentation" class="section" aria-labelledby="presentation-title">
+        <h2 id="presentation-title">Darstellung & Rundung — Klarheit schafft Vertrauen</h2>
+        <p>Zeigen Sie den umgerechneten Betrag, den verwendeten Kurs und den Zeitstempel an. Rundungsregeln sind wichtig: Bei Preisen meist zwei Dezimalstellen, in Analysen kann der Kurs selbst mit höherer Genauigkeit angezeigt werden.</p>
+
+        <div class="recipe" aria-labelledby="display-recipe">
+          <strong id="display-recipe">Minimaldarstellung</strong>
+          <ol>
+            <li>Umgerechneter Betrag (für Anzeige gerundet) — z. B. 123,45 EUR</li>
+            <li>Kurs — z. B. 1.234567 (4–6 Dezimalstellen anzeigen)</li>
+            <li>Zeitstempel oder "Stand" — damit Nutzer wissen, wann das Angebot galt</li>
+            <li>Optional: Datenanbieter nennen, wenn ein bezahlter Dienst genutzt wurde</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="travel" class="section" aria-labelledby="travel-title">
+        <h2 id="travel-title">Reisen & Budgettipps</h2>
+        <p>Beim Reisen summieren sich kleine Rundungsdifferenzen. Verwenden Sie Live‑Mid‑Market‑Kurse zur Schätzung, berücksichtigen Sie aber Gebühren für Bargeldabhebungen oder Kartenzahlungen bei der Budgetplanung.</p>
+
+        <ul>
+          <li>Bei ATM‑Abhebungen sind zusätzlich ATM‑ und Bankgebühren zu erwarten; planen Sie +3–5% über dem Mid‑Market‑Schätzwert ein.</li>
+          <li>Halten Sie einen kleinen Puffer im Tagesbudget, um Kursschwankungen auszugleichen.</li>
+        </ul>
+      </section>
+
+      <section id="business" class="section" aria-labelledby="business-title">
+        <h2 id="business-title">Geschäftliches & Preisgestaltung</h2>
+        <p>Bei Rechnungen und Preisen: Seien Sie explizit. Entweder in der Kundenwährung abrechnen und den umgerechneten Betrag angeben, oder in Ihrer Währung fakturieren und eine umgerechnete Schätzung anzeigen. Geben Sie Kurs und Zeitpunkt auf der Rechnung an.</p>
+
+        <h3>Rezept für Rechnungen</h3>
+        <pre class="template">Feldern, die eine Rechnung enthalten sollte:
+- Betrag (Verkäufer‑Währung)
+- Umgerechneter Betrag (Käufer‑Währung) mit Rundung
+- Verwendeter Kurs
+- Zeitstempel des Kurses
+- Hinweis: "Kurs bezogen von [Anbieter]"</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Automatisierung & Skripte</h2>
+        <p>Automatisieren Sie häufige Umrechnungen mit einfachen Skripten oder Tabellenformeln. Viele APIs liefern JSON — damit können Sie Umrechnungen in Tabellen oder kleinen Hilfsprogrammen durchführen.</p>
+
+        <h3>Formel für Tabellen</h3>
+        <pre class="template">Wenn Kurs in Zelle B2 und Betrag in A2:
+=ROUND(A2 * B2, 2)</pre>
+
+        <p class="small-note">Bei wiederkehrenden Aufgaben Raten cachen und in sinnvollem Rhythmus (z. B. stündlich) aktualisieren, um API‑Limits zu schonen.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Sollte ich immer den Mid‑Market‑Kurs verwenden?<br><strong>A:</strong> Für Schätzungen ja. Für tatsächliche Abrechnung oder Überweisungen verwenden Sie Anbieter‑Quoten mit Gebühren und Spreads.</p>
+
+          <p><strong>F:</strong> Wie häufig werden Kurse aktualisiert?<br><strong>A:</strong> Viele APIs liefern minütliche Updates; Ihre Wahl hängt vom Bedarf und API‑Limits ab.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/currency-de.html">Währungsrechner öffnen</a></li>
+          <li><a href="https://exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate API</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/currency-de.html" class="cta" aria-label="Währungsrechner öffnen">Währungsrechner öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktieren Sie uns unter <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/de/privacy/">Datenschutzerklärung</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/currency-de.html" class="return-to-tool" id="returnToToolCurrency" aria-label="Zurück zum Währungsrechner">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zum Währungsrechner</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCurrency');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

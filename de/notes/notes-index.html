@@ -57,6 +57,15 @@
     .badge{display:inline-block;padding:.12rem .5rem;border-radius:999px;background:#eef6fb;color:#0b63a0;font-weight:700;font-size:.85rem;margin-right:.4rem}
     table.sample{border-collapse:collapse;margin-top:.5rem;width:100%;max-width:680px;}
     table.sample td, table.sample th{border:1px solid #eef5fb;padding:.35rem .5rem;text-align:left;}
+
+    /* author block styling */
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+
+    /* Floating return button */
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
   </style>
 </head>
 <body>
@@ -64,7 +73,13 @@
     <article class="card" aria-labelledby="title">
       <h1 id="title">Notizen — Erfassen, taggen und in Arbeit überführen</h1>
 
-      <div class="meta">Von Serge Shammas — Veröffentlicht: 2025‑10‑22 · Letzte Aktualisierung: 2025‑11‑22 · Lesezeit: 10–12 Min.</div>
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Produktivität & UX</div>
+          <div class="meta">Veröffentlicht: 2025‑10‑22 · Letzte Aktualisierung: 2025‑11‑22 · Lesezeit: 10–12 Min.</div>
+        </div>
+      </div>
 
       <p class="lead">Gute Notizen sind kurz, kontextreich und handlungsorientiert. Dieser Leitfaden zeigt eine einfache, messbare Methode: Notizen schnell erfassen, mit konsistenten Tags versehen, bei Bedarf in Aufgaben überführen und regelmäßig prüfen, damit Ideen nicht verstauben.</p>
 
@@ -94,7 +109,7 @@
             <li><strong>Titel:</strong> Ergebnisorientiert, eine Zeile (z. B. „Entwurf: Projekt X Intro“).</li>
             <li><strong>Stichpunkte:</strong> 2–4 bullets mit Kernpunkten, Links oder Schritten.</li>
             <li><strong>Taggen:</strong> Primärtags wie <span class="badge">#task</span> oder <span class="badge">#idea</span>.</li>
-            <li><strong>Action‑Flag:</strong> Sofort erledigen (<5 min) oder in Task konvertieren.</li>
+            <li><strong>Action‑Flag:</strong> Sofort erledigen (&lt;5 min) oder in Task konvertieren.</li>
           </ol>
         </div>
       </section>
@@ -211,9 +226,26 @@ Aktion: [umwandeln / planen / archivieren]</pre>
       <p style="margin-top:1.2rem;"><a href="/notes-de.html" class="cta">Notizen‑Tool öffnen</a></p>
 
       <footer style="margin-top:1.4rem;color:var(--muted);font-size:.95rem;">
-        <p>Fragen? <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Datenschutz: <a href="/privacy/">Privacy Policy</a>.</p>
+        <p>Fragen? <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Datenschutz: <a href="/de/privacy/">Privacy Policy</a>.</p>
       </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/notes-de.html" class="return-to-tool" id="returnToToolNotes" aria-label="Zurück zu Notizen">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zum Notizen‑Tool</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolNotes');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

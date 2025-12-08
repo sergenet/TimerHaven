@@ -1,18 +1,192 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>focus-music — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for focus-music guide (el)">
+  <meta charset="utf-8" />
+  <title>Μουσική για συγκέντρωση — Δημιουργήστε ένα ηχητικό περιβάλλον για βαθιά εργασία | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Οδηγός για τη χρήση της Μουσικής Συγκέντρωσης: επιλογή playlist, σχεδιασμός ήχου, στρώσεις ήχου, προσβασιμότητα και τεχνικές παραγωγικότητας." />
+  <link rel="canonical" href="https://timerhaven.com/el/focus-music/focus-music-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Χρησιμοποιήστε αποτελεσματικά τη Μουσική Συγκέντρωσης",
+        "description":"Επιλέξτε και διαμορφώστε ηχητικά περιβάλλοντα που υποστηρίζουν τη συγκέντρωση, όπως λευκό θόρυβο, κύματα άλφα, ήχους βροχής και ατμοσφαιρικά υπόβαθρα. Αυτός ο οδηγός καλύπτει τη ρύθμιση, την ένταση, το layering και ζητήματα προσβασιμότητας.",
+        "image":"https://timerhaven.com/assets/images/focus-music-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Εργαλείο Μουσικής Συγκέντρωσης (TimerHaven)","Ακουστικά ή ηχεία","Προαιρετική εφαρμογή ambient"],
+        "step":[
+          {"@type":"HowToStep","name":"Επιλέξτε είδος","text":"Διαλέξτε το ηχοτοπίο που ταιριάζει με την εργασία — ambient ή ρυθμικό ανάλογα με το γνωστικό φορτίο."},
+          {"@type":"HowToStep","name":"Ορίστε την ένταση","text":"Διατηρήστε την ένταση σε χαμηλά έως μέτρια επίπεδα· αποφύγετε έντονα κομμάτια για βαθιά εργασία."},
+          {"@type":"HowToStep","name":"Layer με προσοχή","text":"Συνδυάστε απαλή φόντο-θόρυβο με χαμηλής στάθμης μουσική για καλύτερη κάλυψη των περισπασμών."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Τι μουσική είναι καλύτερη για συγκέντρωση;","acceptedAnswer":{"@type":"Answer","text":"Εξαρτάται: για επαναλαμβανόμενες εργασίες, τα χαμηλού ρυθμού ηλεκτρονικά ή κομμάτια με κύματα άλφα λειτουργούν καλά. Για δημιουργική εργασία, καθαρά κλασικά ή ambient κομμάτια συχνά βοηθούν όταν δεν αποσπούν την προσοχή."}},
+          {"@type":"Question","name":"Μπορώ να χρησιμοποιώ ακουστικά;","acceptedAnswer":{"@type":"Answer","text":"Ναι — τα ακουστικά βελτιώνουν την εμβύθιση και μειώνουν τον εξωτερικό θόρυβο. Επιλέξτε άνετα, χαμηλής καθυστέρησης μοντέλα για μεγάλες συνεδρίες."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">focus-music — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Μουσική Συγκέντρωσης — Δημιουργήστε ένα ηχοτοπίο που σας βοηθά να συγκεντρωθείτε</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας άρθρου">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — παραγωγικότητα & ηχητικά περιβάλλοντα</div>
+          <div class="meta">Δημοσιεύτηκε: 2025-11-24 · Χρόνος ανάγνωσης: 12–16 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Ο ήχος επηρεάζει την προσοχή. Το κατάλληλο υπόβαθρο μπορεί να καλύψει περισπασμούς, να υποστηρίξει ρυθμό και να σηματοδοτήσει την εστίαση. Αυτός ο οδηγός εξηγεί πώς να διαλέξετε κομμάτια, να ρυθμίσετε την ένταση και τα layers, να οργανώσετε συνεδρίες και να διασφαλίσετε την προσβασιμότητα όταν χρησιμοποιείτε μουσική για συγκέντρωση στην εργασία σας.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#choose">Επιλογή playlist ή ηχοτοπίου</a>
+        <a href="#volume">Ένταση & εργονομία ακρόασης</a>
+        <a href="#layer">Layering & κάλυψη θορύβου</a>
+        <a href="#sessions">Δομή συνεδριών</a>
+        <a href="#access">Προσβασιμότητα & ευγένεια</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="choose" class="section" aria-labelledby="choose-title">
+        <h2 id="choose-title">Επιλέξτε playlist ή ηχοτοπίο</h2>
+        <p>Διαφορετικές εργασίες απαιτούν διαφορετικά προφίλ ήχου. Ταιριάξτε την υφή του ήχου με τις γνωστικές απαιτήσεις της εργασίας.</p>
+
+        <ul>
+          <li><strong>Λευκός θόρυβος / σταθερό hum:</strong> Εξαιρετικό για βαθιά συγκέντρωση και κάλυψη διακοπτόμενου περιβαλλοντικού θορύβου.</li>
+          <li><strong>Βροχή / φυσικά ηχοτοπία:</strong> Κατάλληλα για δημιουργική εργασία και ήρεμη εστίαση· συνήθως ευχάριστα και μη παρεμβατικά.</li>
+          <li><strong>Κύματα άλφα / ελαφροί ρυθμοί:</strong> Μπορούν να βοηθήσουν σε επαναλαμβανόμενες εργασίες και στη διατήρηση ρυθμού.</li>
+          <li><strong>Κλασική / ορχηστρική μουσική χωρίς φωνητικά:</strong> Βοηθά σε ανάγνωση και σύνθεση όταν είναι αδιάφορη και προβλέψιμη.</li>
+        </ul>
+      </section>
+
+      <section id="volume" class="section" aria-labelledby="volume-title">
+        <h2 id="volume-title">Ένταση, υγεία ακοής & εργονομία</h2>
+        <p>Η ένταση επηρεάζει τόσο την αποτελεσματικότητα όσο και την υγεία των αυτιών. Διατηρήστε τον ήχο αρκετά χαμηλό ώστε να μη καλύπτει λεπτές ενδείξεις (π.χ. εισερχόμενες κλήσεις) και αποφύγετε παρατεταμένα υψηλά επίπεδα.</p>
+
+        <h3>Οδηγίες</h3>
+        <ul>
+          <li>Για μεγάλες συνεδρίες προτιμήστε χαμηλότερα επίπεδα (κάτω από περίπου 60% στις περισσότερες συσκευές).</li>
+          <li>Κάντε τακτικά διαλείμματα από τα ακουστικά για να αποφύγετε κόπωση και βλάβη στην ακοή.</li>
+          <li>Χρησιμοποιήστε άνετα ακουστικά με καλή παθητική μείωση θορύβου αντί για έντονες εντάσεις.</li>
+        </ul>
+      </section>
+
+      <section id="layer" class="section" aria-labelledby="layer-title">
+        <h2 id="layer-title">Layering & κάλυψη: συνδυασμός ήχων</h2>
+        <p>Το να προσθέσετε λίγη μουσική πάνω από έναν ουδέτερο υπόβαθρο μπορεί να βελτιώσει την κάλυψη ενώ διατηρεί τον ρυθμό. Παράδειγμα: χαμηλού όγκου ambient μουσική + απαλή βροχή σε χαμηλή στάθμη.</p>
+
+        <div class="recipe">
+          <strong>Απλή συνταγή layering</strong>
+          <ol>
+            <li>Επιλέξτε μια ουδέτερη βάση (λευκός θόρυβος ή χαμηλή βροχή).</li>
+            <li>Προσθέστε ένα απαλό μελωδικό στρώμα σε χαμηλή ένταση (χωρίς φωνητικά).</li>
+            <li>Δοκιμάστε για κάλυψη — αν το περιβάλλον ακόμα αποσπά, αυξήστε ελαφρώς τη βάση.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="sessions" class="section" aria-labelledby="sessions-title">
+        <h2 id="sessions-title">Δομή συνεδριάσεων — σήματα και τελετουργίες</h2>
+        <p>Χρησιμοποιήστε τον ήχο ως τελετουργικό. Σήματα έναρξης και λήξης βοηθούν τον εγκέφαλο να εισέρχεται και να εξέρχεται πιο γρήγορα από καταστάσεις εστίασης.</p>
+
+        <h3>Πρότυπο συνεδρίας</h3>
+        <ol>
+          <li>Προετοιμασία (2–3 λεπτά): οργανώστε τον χώρο εργασίας, ανοίξτε τα έγγραφα που χρειάζεστε.</li>
+          <li>Ήχος έναρξης: παίξτε ένα σύντομο διακριτό ήχο ή αυξήστε προσωρινά την ένταση για να σηματοδοτήσετε την έναρξη.</li>
+          <li>Περίοδος εστίασης (25–90 λεπτά): κρατήστε τη μουσική σταθερή· αποφύγετε συχνές αλλαγές κομματιών.</li>
+          <li>Σήμα λήξης: ένα απαλό κτύπημα ή σταδιακή μείωση της έντασης σηματοδοτεί το τέλος και διευκολύνει τη μετάβαση στην ανασκόπηση.</li>
+        </ol>
+      </section>
+
+      <section id="access" class="section" aria-labelledby="access-title">
+        <h2 id="access-title">Προσβασιμότητα & ευγένεια</h2>
+        <p>Σεβαστείτε τους άλλους και τις ανάγκες προσβασιμότητας. Όταν εργάζεστε σε κοινόχρηστους χώρους, προτιμήστε τα ακουστικά και επιλογές χαμηλής έντασης. Σε κοινόχρηστους χώρους εργασίας, ορίστε κανόνες για τη χρήση μουσικής.</p>
+
+        <ul>
+          <li>Σε κοινόχρηστους χώρους προτιμήστε ακουστικά.</li>
+          <li>Παρέχετε μεταγραφές ή επιλογές σιγής για εγγεγραμμένο υλικό αν απαιτείται για προσβασιμότητα.</li>
+          <li>Όταν συνεργάζεστε, ρωτήστε αν κάποιος είναι ευαίσθητος σε ηχητικά ερεθίσματα ή χρειάζεται διαφορετικό περιβάλλον.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Ερώτηση:</strong> Μπορεί η μουσική να βελτιώσει την παραγωγικότητα;<br><strong>Απάντηση:</strong> Ναι, για πολλούς ανθρώπους το κατάλληλο ηχοτοπίο μειώνει τους περισπασμούς και υποστηρίζει τη ροή. Οι προτιμήσεις διαφέρουν — δοκιμάστε διαφορετικά playlists και παρατηρήστε τα αποτελέσματα.</p>
+
+          <p><strong>Ερώτηση:</strong> Είναι η μουσική επιζήμια για σύνθετη σκέψη;<br><strong>Απάντηση:</strong> Για πολύ σύνθετες ή πρωτότυπες εργασίες, ησυχία ή πολύ χαμηλό ambient υπόβαθρο μπορεί να είναι καλύτερα. Χρησιμοποιήστε μουσική για εργασίες που επωφελούνται από ρυθμό ή κάλυψη εξωτερικών θορύβων.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Πόροι</h2>
+        <ul class="muted">
+          <li><a href="/focus-music-el.html">Άνοιγμα εργαλείου Μουσική Συγκέντρωσης</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Noise" target="_blank" rel="noopener">Ambient noise & masking — έρευνα</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/focus-music-el.html" class="cta" aria-label="Άνοιγμα Μουσικής Συγκέντρωσης">Άνοιγμα Μουσικής Συγκέντρωσης</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε μαζί μας: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/el/privacy/">Πολιτική Απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/focus-music-el.html" class="return-to-tool" id="returnToToolFocusMusic" aria-label="Επιστροφή στη Μουσική Συγκέντρωσης">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Προς Μουσική Συγκέντρωσης</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolFocusMusic');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

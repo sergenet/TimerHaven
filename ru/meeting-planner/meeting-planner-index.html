@@ -1,18 +1,221 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>meeting-planner — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for meeting-planner guide (ru)">
+  <meta charset="utf-8" />
+  <title>Планировщик встреч — Эффективно планируйте встречи в разных часовых поясах | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Руководство по планированию и координации встреч: шаблоны приглашений, планирование по часовым поясам, разработка повестки, рецепты планирования и обмен предложениями по времени." />
+  <link rel="canonical" href="https://timerhaven.com/ru/meeting-planner/meeting-planner-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Планируйте эффективные встречи",
+        "description":"Практические рецепты для планирования по часовым поясам, подготовки повестки, проведения эффективных обсуждений и обмена временем встречи.",
+        "image":"https://timerhaven.com/assets/images/meeting-planner-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Планировщик встреч (TimerHaven)","Календарь","Часовые пояса участников"],
+        "step":[
+          {"@type":"HowToStep","name":"Соберите часовые пояса","text":"Уточните предпочтительный часовой пояс или город каждого участника."},
+          {"@type":"HowToStep","name":"Выберите варианты времени","text":"Предложите 2–3 варианта времени, минимизирующие неудобства для участников в разных зонах."},
+          {"@type":"HowToStep","name":"Поделитесь и подтвердите","text":"Отправляйте время в формате организатор‑локал → участник‑локал, чтобы снизить путаницу; подтвердите слот и отправьте приглашение в календарь."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Сколько вариантов следует предлагать?","acceptedAnswer":{"@type":"Answer","text":"Предлагайте 2–3 разумных окна. Слишком много вариантов замедляет решение; слишком мало — может не учесть доступность."}},
+          {"@type":"Question","name":"Нужно ли показывать локальное время участников?","acceptedAnswer":{"@type":"Answer","text":"Да — показ времени организатора и участника снижает ошибки и укрепляет доверие."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">meeting-planner — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Планировщик встреч — Лучше планируйте встречи в разных часовых поясах</h1>
+
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — автор по встречам и сотрудничеству</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 12–18 мин.</div>
+        </div>
+      </div>
+
+      <p class="lead">Проведение встреч в разных часовых поясах или с распределёнными командами требует ясности и эмпатии. Планировщик встреч помогает предлагать время, визуализировать локальные часы участников и выбирать слоты, которые минимизируют неудобства. Это руководство охватывает сбор участников, выбор временных окон, разработку повестки, лучшие практики обмена и подводные камни часовых поясов.</p>
+
+      <nav class="toc" aria-label="Содержание">
+        <a href="#collect">Сбор участников и часовых поясов</a> ·
+        <a href="#propose">Эффективное предложение времени</a> ·
+        <a href="#agenda">Разработка повестки</a> ·
+        <a href="#timezone">Подводные камни часовых поясов</a> ·
+        <a href="#sync">Рецепты синхронных встреч</a> ·
+        <a href="#share">Обмен и подтверждение</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="collect" class="section" aria-labelledby="collect-title">
+        <h2 id="collect-title">Сбор участников и их часовых поясов</h2>
+        <p>Начните с того, чтобы собрать предпочитаемые часовые пояса или города каждого приглашённого и их доступность (утро/день). Используйте планировщик, чтобы сохранить города и быстро вычислять локальное время.</p>
+
+        <h3>Практические советы</h3>
+        <ul>
+          <li>Спросите у участников их предпочтительные часы для встреч (локальное время).</li>
+          <li>Попросите указать ограничения «не раньше чем» или «не позднее чем», чтобы сузить окна.</li>
+          <li>По возможности выбирайте дневные окна — они минимизируют экстремальные часы для большинства регионов.</li>
+        </ul>
+      </section>
+
+      <section id="propose" class="section" aria-labelledby="propose-title">
+        <h2 id="propose-title">Эффективное предложение времени — держите выбор небольшим</h2>
+        <p>Предлагайте 2–3 разумных слота вместо открытого голосования. Используйте инструмент, чтобы показывать время организатора → локальное время участника и избежать путаницы.</p>
+
+        <div class="recipe">
+          <strong>Рецепт предложения слота</strong>
+          <ol>
+            <li>Выберите 2–3 варианта, которые удовлетворяют большинству ограничений.</li>
+            <li>Поделитесь списком, указав локальное время для каждого участника (организатор → участник‑локал).</li>
+            <li>Попросите подтвердить предпочтения или конфликты и быстро финализируйте слот.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="agenda" class="section" aria-labelledby="agenda-title">
+        <h2 id="agenda-title">Разрабатывайте короткую повестку — ограничивайте время и фиксируйте решения</h2>
+        <p>Повестка определяет результат. Укажите цели, распределение времени, роли (ведущий, протоколист) и ожидаемые решения или результаты.</p>
+
+        <ul>
+          <li><strong>Начинайте с намерения:</strong> однофразовый результат встречи.</li>
+          <li><strong>Время на пункты:</strong> распределите минуты на каждую тему и отслеживайте время во время встречи.</li>
+          <li><strong>Завершение с решениями и ответственными:</strong> оставляйте 5 минут для подтверждения следующих шагов и ответственных.</li>
+        </ul>
+      </section>
+
+      <section id="timezone" class="section" aria-labelledby="timezone-title">
+        <h2 id="timezone-title">Подводные камни часовых поясов и переходы на летнее/зимнее время</h2>
+        <p>Остерегайтесь переходов на летнее/зимнее время и неоднозначных названий зон. По возможности используйте IANA‑идентификаторы (например, Europe/London) и показывайте явные смещения времени.</p>
+
+        <h3>Контрольный список</h3>
+        <ul>
+          <li>Проверьте дату и применимость DST в каждом часовом поясе участника.</li>
+          <li>Указывайте названия зон и смещения (например, GMT+1) в сообщениях.</li>
+          <li>Тестируйте ссылки и приглашения в календарь на примере аккаунта участника при планировании критичных событий.</li>
+        </ul>
+      </section>
+
+      <section id="sync" class="section" aria-labelledby="sync-title">
+        <h2 id="sync-title">Рецепты для синхронных встреч</h2>
+        <p>Ниже — рецепты для распространённых типов встреч, которые помогут проводить их эффективно.</p>
+
+        <div class="recipe">
+          <strong>Standup (15 минут)</strong>
+          <ol>
+            <li>Строгий таймер — 15 минут. Каждый участник отвечает на три вопроса (вчера/сегодня/блокеры).</li>
+            <li>Ведущий следит за временем и откладывает углублённые обсуждения в виде дальнейших задач.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Встреча для принятия решений (30–60 минут)</strong>
+          <ol>
+            <li>Материалы для предварительного чтения раздать за 24–48 часов.</li>
+            <li>Начните с критериев решения и вариантов; проведите короткое обсуждение и завершите голосованием или решением владельца.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="share" class="section" aria-labelledby="share-title">
+        <h2 id="share-title">Отправка, подтверждение и приглашения</h2>
+        <p>После подтверждения слота отправьте приглашение в календарь с явным указанием времени с учётом часовых поясов, повесткой и вложениями. Добавьте краткое «что подготовить» и ожидаемые результаты.</p>
+
+        <ul>
+          <li>Добавьте ссылку на заметку встречи или совместный документ в описании приглашения.</li>
+          <li>Укажите ожидаемые решения или результаты в описании.</li>
+          <li>Установите видимость события как «Занят» (Busy), чтобы защитить слот.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Устранение неполадок</h2>
+        <ul>
+          <li><strong>Путаница со временем:</strong> повторно отправьте время с локальными метками участников, если есть расхождения.</li>
+          <li><strong>Изменения часовых поясов в последний момент:</strong> подтвердите локальное время участника и при необходимости предложите альтернативу.</li>
+          <li><strong>Отсутствие на встрече:</strong> зафиксируйте, кто не пришёл, и предложите несколько новых вариантов для переноса.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Как поступать с очень большими распределёнными командами?<br><strong>Ответ:</strong> Делите на небольшие рабочие группы или используйте асинхронные обновления; большие синхронные встречи дороги и часто неэффективны.</p>
+
+          <p><strong>Вопрос:</strong> Всегда ли показывать два часовых пояса?<br><strong>Ответ:</strong> Всегда показывайте локальное время организатора и участника; при множестве участников рассмотрите таблицу локальных времён для выбранного слота.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/meeting-planner-ru.html">Открыть Планировщик встреч</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA — список часовых поясов</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/meeting-planner-ru.html" class="cta" aria-label="Открыть Планировщик встреч">Открыть Планировщик встреч</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Политика конфиденциальности: <a href="/ru/privacy/">Privacy Policy</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/meeting-planner-ru.html" class="return-to-tool" id="returnToToolMeeting" aria-label="Вернуться в Планировщик встреч">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К Планировщику встреч</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolMeeting');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

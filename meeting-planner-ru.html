@@ -1,255 +1,329 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<title>Планировщик встреч</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Найдите лучшее время для встречи для всех, где бы вы ни были." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
-    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
-    .tool-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #e0e7ef;
-      min-width: 220px;
-      max-width: 340px;
-      width: 340px;
-      min-height: 500px;
-      flex: 1 1 340px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      padding: 2em 1.3em 1em 1.3em;
-      margin: 0;
-      box-sizing: border-box;
-      text-align: left;
-      overflow: hidden;
+  <meta charset="utf-8"/>
+  <title>Планировщик встреч — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Найдите лучшее время для встречи для всех, где бы вы ни были."/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/css/tool-theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html,body{height:100%}
+    body { background:var(--bg); font-family:'Montserrat', Arial, sans-serif; margin:0; padding:2rem; color:var(--text-dark,#102a43); }
+    .container { max-width:720px; margin:0 auto; }
+    .card { background:var(--card); border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.06); padding:1.6rem 1.5rem; box-sizing:border-box; }
+    .back-link { display:inline-block; margin-bottom:.75rem; color:#007bff !important; text-decoration:none; font-weight:700; }
+    .back-link:hover { text-decoration:underline; }
+    .tool-title { font-size:1.35rem; margin:0 0 .4rem 0; display:flex; align-items:center; gap:.4rem; color:#185a9d; }
+    .cta{
+      display:inline-block;margin:.35rem 0 .8rem 0;padding:.45rem .7rem;border-radius:8px;background:#007bff !important;color:#fff !important;
+      text-decoration:none;font-weight:700;font-size:.95rem;border:none;box-shadow:0 6px 18px rgba(0,123,255,0.08);
     }
-    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
-    .back-link:hover { text-decoration: underline; }
-    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
-    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
-    .article-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef; padding:1.2em; width:340px; box-sizing:border-box; }
-    .article-links { display:flex; flex-direction:column; gap:.5rem; margin-top:.6rem; }
+    .tool-help { color:var(--muted); margin-bottom:.8rem; }
+    .meeting-form-row { margin-bottom:.8rem; }
+    .participant-item { background:#f7fafc; border-radius:8px; padding:.6rem; margin-bottom:.6rem; display:flex; justify-content:space-between; align-items:center; gap:.6rem; }
+    .meeting-times-grid { display:flex; flex-direction:column; gap:.4rem; margin-top:0.6rem; }
+    .time-suggestion { display:flex; gap:.6rem; align-items:center; justify-content:space-between; padding:.45rem .6rem; border-radius:8px; background:#fff; border:1px solid #eef6f3; }
+    .faq-section { margin-top:1.1rem; margin-bottom:0.3rem; font-size:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
+    .faq-section summary { font-weight:700; font-size:1.02rem; cursor:pointer; }
+    @media (max-width:900px){ .card{padding:1rem} }
   </style>
 </head>
 <body>
-<div class="main-container">
-<div class="center-row">
-<!-- Left article card: How-to -->
-<div aria-labelledby="howto-heading" class="article-card">
-<h2 id="howto-heading">Как пользоваться Планировщиком встреч</h2>
-<ol>
-<li>Добавьте участников и их часовые пояса.</li>
-<li>Выберите дату и предлагаемое время.</li>
-<li>Проверьте местное время участников и поделитесь финальным временем.</li>
-</ol>
+  <main class="container" role="main">
+    <section class="card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">← Назад в главное меню</a>
 
-</div>
-<!-- Center tool card -->
-<div class="tool-card" id="tool-card">
-<!-- language selector removed -->
-<a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i> Назад в главное меню</a>
-<h3><i class="fa fa-users"></i> Планировщик встреч</h3>
-<form id="meetingForm" onsubmit="return false;">
-<div class="meeting-form-row mb-2">
-<label for="participantName">Имя участника</label>
-<input autocomplete="off" class="form-control" id="participantName" placeholder="Введите имя (например, Иван)" type="text"/>
-</div>
-<div class="meeting-form-row mb-2">
-<label for="participantCity">Часовой пояс / город</label>
-<select autocomplete="off" class="form-select" id="participantCity"></select>
-</div>
-<div class="mb-2 d-flex gap-2">
-<button class="btn btn-success btn-participant" id="addParticipant" type="button"><i class="fa fa-plus"></i> Добавить участника</button>
-<button class="btn btn-outline-secondary" id="clearParticipants" title="Clear participants" type="button"><i class="fa fa-eraser"></i></button>
-</div>
-</form>
-<div class="participant-list mb-3" id="participantList"></div>
-<div class="meeting-form-row mb-2">
-<label for="meetingDate">Выберите дату встречи</label>
-<input class="form-control" id="meetingDate" type="date"/>
-</div>
-<div class="meeting-form-row mb-2">
-<label for="meetingTime">Выберите время встречи</label>
-<input class="form-control" id="meetingTime" type="time"/>
-<button class="btn btn-primary btn-sm mt-2" id="calcTimes" type="button"><i class="fa fa-clock"></i> Показать время</button>
-</div>
-<div aria-live="polite" class="mt-2" id="meetingTimes"></div>
-<details class="faq-section mt-3">
-<summary id="faq-heading">Частые вопросы</summary>
-<ul id="faq-list" style="padding-left: 1em;">
-<li><b>Сколько участников?</b> Добавьте столько, сколько нужно.</li>
-<li><b>Какие часовые пояса?</b> Выберите из 30+ популярных городов и зон.</li>
-<li><b>Как поделиться?</b> Скопируйте время встречи и поделитесь с участниками.</li>
-</ul>
-</details>
-<!-- Removed the extra link at the very bottom of the tool card -->
-</div>
-<!-- Right article card: Tips -->
-<div aria-labelledby="tips-heading" class="article-card">
-<h2 id="tips-heading">Советы по проведению продуктивных встреч</h2>
-<ul>
-<li>Планируйте заранее, чтобы найти подходящее время для всех.</li>
-<li>Отправляйте приглашения в календарь для избежания путаницы.</li>
-<li>Проверяйте часовые пояса перед отправкой приглашения.</li>
-</ul>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-users"></i> Планировщик встреч</h3>
 
-</div>
-</div>
-</div>
+      <!-- Read full guide button (canonical Russian path) -->
+      <p style="margin:0 0 .6rem 0;">
+        <a id="read-guide-btn" class="cta" href="https://timerhaven.com/ru/meeting-planner/meeting-planner-index.html" role="button" target="_blank" rel="noopener">Читать полностью</a>
+      </p>
+
+      <div class="tool-help" id="tool-help">Найдите подходящее время для встреч по часовым поясам, добавьте участников и выберите лучшее время.</div>
+
+      <!-- Participants -->
+      <form id="meetingForm" onsubmit="return false;">
+        <div class="meeting-form-row">
+          <label for="participantName" id="participant-name-label">Имя участника</label>
+          <input autocomplete="off" type="text" id="participantName" class="form-control" placeholder="Введите имя (например, Иван)">
+        </div>
+        <div class="meeting-form-row">
+          <label for="participantCity" id="city-label">Часовой пояс / Город</label>
+          <select id="participantCity" class="form-select"></select>
+        </div>
+        <div style="display:flex;gap:.5rem;align-items:center;">
+          <button type="button" class="btn btn-success btn-participant" id="add-participant-btn"><i class="fa fa-plus"></i> <span id="add-participant-btn-text">Добавить участника</span></button>
+          <button type="button" class="btn btn-outline-secondary" id="clear-participants-btn" title="Очистить участников"><i class="fa fa-eraser"></i></button>
+        </div>
+      </form>
+
+      <div id="participantList" style="margin-top:1rem;"></div>
+
+      <div class="meeting-form-row">
+        <label for="meetingDate" id="meeting-date-label">Выберите дату</label>
+        <input type="date" id="meetingDate" class="form-control">
+      </div>
+
+      <div class="meeting-form-row">
+        <label for="meetingTimeSelect" id="meeting-time-label">Выберите время (рекомендуется)</label>
+        <select id="meetingTimeSelect" class="form-select"></select>
+      </div>
+
+      <div id="meetingTimes" aria-live="polite"></div>
+
+      <details class="faq-section" id="faq-section">
+        <summary id="faq-title">Частые вопросы</summary>
+        <ul id="faq-list" style="padding-left:1em;"></ul>
+      </details>
+    </section>
+  </main>
+
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
 <script>
-    const cities = [
-      {value:"", label:"Выберите город или часовой пояс"},
-      {value:"America/New_York", label:"Нью-Йорк 🇺🇸"},
-      {value:"America/Chicago", label:"Чикаго 🇺🇸"},
-      {value:"America/Los_Angeles", label:"Лос-Анджелес 🇺🇸"},
-      {value:"America/Toronto", label:"Торонто 🇨🇦"},
-      {value:"Europe/London", label:"Лондон 🇬🇧"},
-      {value:"Europe/Paris", label:"Париж 🇫🇷"},
-      {value:"Europe/Berlin", label:"Берлин 🇩🇪"},
-      {value:"Europe/Moscow", label:"Москва 🇷🇺"},
-      {value:"Europe/Istanbul", label:"Стамбул 🇹🇷"},
-      {value:"Asia/Dubai", label:"Дубай 🇦🇪"},
-      {value:"Asia/Kolkata", label:"Калькутта 🇮🇳"},
-      {value:"Asia/Shanghai", label:"Шанхай 🇨🇳"},
-      {value:"Asia/Tokyo", label:"Токио 🇯🇵"},
-      {value:"Asia/Singapore", label:"Сингапур 🇸🇬"},
-      {value:"Asia/Jakarta", label:"Джакарта 🇮🇩"},
-      {value:"Australia/Sydney", label:"Сидней 🇦🇺"},
-      {value:"Pacific/Auckland", label:"Окленд 🇳🇿"},
-      {value:"America/Sao_Paulo", label:"Сан-Паулу 🇧🇷"},
-      {value:"America/Mexico_City", label:"Мехико 🇲🇽"},
-      {value:"Africa/Johannesburg", label:"Йоханнесбург 🇿🇦"},
-      {value:"Africa/Cairo", label:"Каир 🇪🇬"},
-      {value:"Africa/Nairobi", label:"Найроби 🇰🇪"},
-      {value:"Asia/Seoul", label:"Сеул 🇰🇷"},
-      {value:"Asia/Hong_Kong", label:"Гонконг 🇭🇰"},
-      {value:"Asia/Bangkok", label:"Бангкок 🇹🇭"},
-      {value:"Asia/Manila", label:"Манила 🇵🇭"},
-      {value:"Europe/Madrid", label:"Мадрид 🇪🇸"},
-      {value:"Europe/Rome", label:"Рим 🇮🇹"},
-      {value:"Europe/Warsaw", label:"Варшава 🇵🇱"},
-      {value:"Europe/Amsterdam", label:"Амстердам 🇳🇱"},
-      {value:"Europe/Athens", label:"Афины 🇬🇷"},
-      {value:"America/Vancouver", label:"Ванкувер 🇨🇦"}
-    ];
+/* Translations for RU */
+const translations = {
+  ru: {
+    "back-link":"← Назад в главное меню",
+    "tool-title":"Планировщик встреч",
+    "participant-name-label":"Имя участника",
+    "participant-name-placeholder":"Введите имя (например, Иван)",
+    "city-label":"Часовой пояс / Город",
+    "add-participant-btn-text":"Добавить участника",
+    "meeting-date-label":"Выберите дату",
+    "meeting-time-label":"Выберите время (рекомендуется)",
+    "howto-article-btn":"Читать полностью",
+    "howto-article-link":"https://timerhaven.com/ru/meeting-planner/meeting-planner-index.html",
+    "faq-list":[
+      {"bold":"Сколько участников?","text":"Добавьте столько участников, сколько необходимо."},
+      {"bold":"Какие часовые пояса?","text":"Выберите из 30+ популярных городов или часовых поясов."},
+      {"bold":"Как поделиться?","text":"Скопируйте время встречи и отправьте участникам."}
+    ],
+    "enter-name-msg":"Пожалуйста, введите имя участника.",
+    "select-city-msg":"Пожалуйста, выберите город / часовой пояс.",
+    "select-date-time-msg":"Пожалуйста, выберите дату и время.",
+    "no-participants-yet":"Пока нет участников.",
+    "meeting-times-heading":"Время встречи (организатор локально → участники локально)"
+  }
+};
 
-    function populateCities() {
-      const sel = document.getElementById('participantCity');
-      sel.innerHTML = '';
-      cities.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c.value;
-        opt.textContent = c.label;
-        sel.appendChild(opt);
-      });
-    }
+const localizedArticles = {
+  howto: { ru:'https://timerhaven.com/ru/meeting-planner/meeting-planner-index.html' },
+  tips: { ru:'meeting-tips.html' }
+};
 
-    const LS_KEY = 'meetingPlannerParticipants';
-    function loadParticipants() {
-      try { const raw = localStorage.getItem(LS_KEY); window.participants = raw ? JSON.parse(raw) : []; } catch(e){ window.participants = []; }
-    }
-    function saveParticipants() { try { localStorage.setItem(LS_KEY, JSON.stringify(window.participants || [])); } catch(e){} }
-    function renderParticipants() {
-      const container = document.getElementById('participantList');
-      container.innerHTML = '';
-      if (!window.participants || window.participants.length === 0) {
-        container.innerHTML = '<div style="color:#888;">Пока нет участников.</div>';
-        return;
-      }
-      window.participants.forEach((p, idx) => {
-        const el = document.createElement('div');
-        el.className = 'participant-item';
-        el.innerHTML = `<div style="min-width:0;"><div style="font-weight:700;">${escapeHtml(p.name)}</div><div style="font-size:.9em;color:#666;">${escapeHtml(p.city)}</div></div>
-          <div style="display:flex;gap:.5rem;"><button class="btn btn-outline-danger btn-sm" onclick="removeParticipant(${idx})" aria-label="Remove participant"><i class="fa fa-trash"></i></button></div>`;
-        container.appendChild(el);
-      });
-    }
-    function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
+function getLang(){ try{ const l = localStorage.getItem('timerhavenLang') || 'ru'; return (l && l.slice(0,2)) || 'ru'; } catch(e){ return 'ru'; } }
+function applyLanguage(lang) {
+  lang = (lang || getLang()).slice(0,2);
+  const t = translations[lang] || translations.ru;
+  document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  const back = document.getElementById('back-link'); if (back) back.textContent = t['back-link'] || 'Назад в главное меню';
+  const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.textContent = t['tool-title'] || 'Планировщик встреч';
+  const participantLabel = document.getElementById('participant-name-label'); if (participantLabel) participantLabel.textContent = t['participant-name-label'] || 'Имя участника';
+  const participantPlaceholder = document.getElementById('participantName'); if (participantPlaceholder) participantPlaceholder.placeholder = t['participant-name-placeholder'] || '';
+  const cityLabel = document.getElementById('city-label'); if (cityLabel) cityLabel.textContent = t['city-label'] || 'Часовой пояс / Город';
+  const addBtnText = document.getElementById('add-participant-btn-text'); if (addBtnText) addBtnText.textContent = t['add-participant-btn-text'] || 'Добавить участника';
 
-    document.getElementById('addParticipant').addEventListener('click', function(){
-      const name = document.getElementById('participantName').value.trim();
-      const city = document.getElementById('participantCity').value;
-      if (!name) { alert('Пожалуйста введите имя участника.'); return; }
-      if (!city) { alert('Пожалуйста выберите город / часовой пояс.'); return; }
-      window.participants = window.participants || [];
-      window.participants.push({ name, city });
-      saveParticipants();
-      document.getElementById('participantName').value = '';
-      document.getElementById('participantCity').selectedIndex = 0;
-      renderParticipants();
-      updateMeetingTimes();
-    });
+  document.getElementById("meeting-date-label").textContent = t["meeting-date-label"] || 'Выберите дату';
+  document.getElementById("meeting-time-label").textContent = t["meeting-time-label"] || 'Выберите время (рекомендуется)';
 
-    document.getElementById('clearParticipants').addEventListener('click', function(){
-      if (!window.participants || window.participants.length === 0) return;
-      if (!confirm('Очистить всех участников?')) return;
-      window.participants = [];
-      saveParticipants();
-      renderParticipants();
-      updateMeetingTimes();
-    });
+  const faqList = document.getElementById("faq-list");
+  faqList.innerHTML = "";
+  (t["faq-list"] || []).forEach(faq => {
+    const li = document.createElement("li");
+    li.innerHTML = `<b>${faq.bold}</b> ${faq.text}`;
+    faqList.appendChild(li);
+  });
 
-    window.removeParticipant = function(idx){
-      if (!window.participants) return;
-      window.participants.splice(idx,1);
-      saveParticipants();
-      renderParticipants();
-      updateMeetingTimes();
-    };
+  const howtoBtn = document.getElementById("read-guide-btn");
+  if (howtoBtn) {
+    howtoBtn.href = localizedArticles.howto[lang] || localizedArticles.howto.ru;
+    howtoBtn.textContent = t['howto-article-btn'] || 'Читать полностью';
+    howtoBtn.target = '_blank';
+    howtoBtn.rel = 'noopener';
+  }
+}
 
-    const { DateTime } = luxon;
-    function updateMeetingTimes(){
-      const date = document.getElementById('meetingDate').value;
-      const time = document.getElementById('meetingTime').value;
-      const out = document.getElementById('meetingTimes');
-      const tlang = {
-        noDateTime: "Пожалуйста выберите дату и время.",
-        noParticipants: "Пока нет участников.",
-        heading: "Время встречи (организатор → местное время участников)"
-      };
-      if (!date || !time) { out.innerHTML = `<div style="color:#888;">${tlang.noDateTime}</div>`; return; }
-      if (!window.participants || window.participants.length === 0) { out.innerHTML = `<div style="color:#888;">${tlang.noParticipants}</div>`; return; }
-      const localISO = `${date}T${time}`;
-      let organizer = DateTime.fromISO(localISO);
-      if (!organizer.isValid) { out.innerHTML = `<div style="color:#b00;">${tlang.noDateTime}</div>`; return; }
-      let html = `<div style="font-weight:700;margin-bottom:.4rem;">${tlang.heading}</div><div class="meeting-times-grid">`;
-      html += `<div class="time-suggestion"><div><b>Организатор</b> (${escapeHtml(organizer.zoneName)})</div><div>${escapeHtml(organizer.toLocaleString(DateTime.DATETIME_FULL))}</div></div>`;
-      window.participants.forEach(p => {
-        let dt;
-        try { dt = organizer.setZone(p.city); } catch(e) { dt = null; }
-        const label = dt ? dt.toLocaleString(DateTime.DATETIME_FULL) : 'Неверная зона';
-        html += `<div class="time-suggestion"><div><b>${escapeHtml(p.name)}</b> <span style="color:#666;">(${escapeHtml(p.city)})</span></div><div>${escapeHtml(label)}</div></div>`;
-      });
-      html += `</div>`;
-      out.innerHTML = html;
-    }
+/* meeting planner logic */
+const { DateTime } = luxon;
+const LS_PARTICIPANTS = 'meetingPlannerParticipants';
+const LS_DATE = 'meetingPlannerDate';
+const LS_TIME = 'meetingPlannerTime';
 
-    document.getElementById('calcTimes').addEventListener('click', updateMeetingTimes);
+const cities = [
+  {value:"", label:"Выберите город или часовой пояс"},
+  {value:"America/New_York", label:"Нью-Йорк 🇺🇸"},
+  {value:"America/Chicago", label:"Чикаго 🇺🇸"},
+  {value:"America/Los_Angeles", label:"Лос-Анджелес 🇺🇸"},
+  {value:"America/Toronto", label:"Торонто 🇨🇦"},
+  {value:"Europe/London", label:"Лондон 🇬🇧"},
+  {value:"Europe/Paris", label:"Париж 🇫🇷"},
+  {value:"Europe/Berlin", label:"Берлин 🇩🇪"},
+  {value:"Europe/Moscow", label:"Москва 🇷🇺"},
+  {value:"Europe/Istanbul", label:"Стамбул 🇹🇷"},
+  {value:"Asia/Dubai", label:"Дубай 🇦🇪"},
+  {value:"Asia/Kolkata", label:"Калькутта 🇮🇳"},
+  {value:"Asia/Shanghai", label:"Шанхай 🇨🇳"},
+  {value:"Asia/Tokyo", label:"Токио 🇯🇵"},
+  {value:"Asia/Singapore", label:"Сингапур 🇸🇬"},
+  {value:"Asia/Jakarta", label:"Джакарта 🇮🇩"},
+  {value:"Australia/Sydney", label:"Сидней 🇦🇺"},
+  {value:"Pacific/Auckland", label:"Окленд 🇳🇿"},
+  {value:"America/Sao_Paulo", label:"Сан-Паулу 🇧🇷"},
+  {value:"America/Mexico_City", label:"Мехико 🇲🇽"},
+  {value:"Africa/Johannesburg", label:"Йоханнесбург 🇿🇦"},
+  {value:"Africa/Cairo", label:"Каир 🇪🇬"},
+  {value:"Africa/Nairobi", label:"Найроби 🇰🇪"},
+  {value:"Asia/Seoul", label:"Сеул 🇰🇷"},
+  {value:"Asia/Hong_Kong", label:"Гонконг 🇭🇰"},
+  {value:"Asia/Bangkok", label:"Бангкок 🇹🇭"},
+  {value:"Asia/Manila", label:"Манила 🇵🇭"},
+  {value:"Europe/Madrid", label:"Мадрид 🇪🇸"},
+  {value:"Europe/Rome", label:"Рим 🇮🇹"},
+  {value:"Europe/Warsaw", label:"Варшава 🇵🇱"},
+  {value:"Europe/Amsterdam", label:"Амстердам 🇳🇱"},
+  {value:"Europe/Athens", label:"Афины 🇬🇷"},
+  {value:"America/Vancouver", label:"Ванкувер 🇨🇦"}
+];
 
-    document.addEventListener('DOMContentLoaded', function(){
-      populateCities();
-      loadParticipants();
-      renderParticipants();
-      try {
-        const savedDate = localStorage.getItem('meetingPlannerDate');
-        const savedTime = localStorage.getItem('meetingPlannerTime');
-        if (savedDate) document.getElementById('meetingDate').value = savedDate;
-        if (savedTime) document.getElementById('meetingTime').value = savedTime;
-      } catch(e){}
-    });
+function populateCities() {
+  const sel = document.getElementById('participantCity');
+  sel.innerHTML = '';
+  cities.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.value;
+    opt.textContent = c.label;
+    sel.appendChild(opt);
+  });
+}
 
-    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){} });
-    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){} });
+function loadParticipants(){
+  try { const raw = localStorage.getItem(LS_PARTICIPANTS); window.participants = raw ? JSON.parse(raw) : []; } catch(e){ window.participants = []; }
+}
+function saveParticipants(){ try { localStorage.setItem(LS_PARTICIPANTS, JSON.stringify(window.participants || [])); } catch(e){} }
 
-  </script>
-<p style="margin-top:1rem;"><a class="cta" href="/ru/meeting-planner/meeting-planner-index.html">Read full guide</a></p></body>
+function renderParticipants(){
+  const container = document.getElementById('participantList');
+  container.innerHTML = '';
+  const lang = getLang();
+  const t = translations[lang] || translations.ru;
+  if (!window.participants || window.participants.length === 0) {
+    container.innerHTML = `<div style="color:#888;">${t["no-participants-yet"] || "Пока нет участников."}</div>`;
+    return;
+  }
+  window.participants.forEach((p, idx) => {
+    const el = document.createElement('div');
+    el.className = 'participant-item';
+    el.innerHTML = `<div style="min-width:0;"><div style="font-weight:700;">${escapeHtml(p.name)}</div><div style="font-size:.9em;color:#666;">${escapeHtml(p.city)}</div></div>
+      <div style="display:flex;gap:.5rem;"><button class="btn btn-outline-danger btn-sm" onclick="removeParticipant(${idx})" aria-label="Удалить участника"><i class="fa fa-trash"></i></button></div>`;
+    container.appendChild(el);
+  });
+}
+function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
+
+document.addEventListener('DOMContentLoaded', function(){
+  applyLanguage(getLang());
+  populateCities();
+  populateTimeSelect();
+  loadParticipants();
+  renderParticipants();
+  try {
+    const savedDate = localStorage.getItem('meetingPlannerDate');
+    const savedTime = localStorage.getItem('meetingPlannerTime');
+    if (savedDate) document.getElementById('meetingDate').value = savedDate;
+    if (savedTime) document.getElementById('meetingTimeSelect').value = savedTime;
+  } catch(e){}
+  updateMeetingTimes();
+});
+
+document.getElementById('add-participant-btn').addEventListener('click', function(){
+  const name = document.getElementById('participantName').value.trim();
+  const city = document.getElementById('participantCity').value;
+  const lang = getLang();
+  const t = translations[lang] || translations.ru;
+  if (!name) { alert(t['enter-name-msg'] || 'Пожалуйста введите имя участника.'); return; }
+  if (!city) { alert(t['select-city-msg'] || 'Пожалуйста выберите город / часовой пояс.'); return; }
+  window.participants = window.participants || [];
+  window.participants.push({ name, city });
+  saveParticipants();
+  document.getElementById('participantName').value = '';
+  document.getElementById('participantCity').selectedIndex = 0;
+  renderParticipants();
+  updateMeetingTimes();
+});
+document.getElementById('clear-participants-btn').addEventListener('click', function(){
+  if (!window.participants || window.participants.length === 0) return;
+  if (!confirm('Очистить всех участников?')) return;
+  window.participants = [];
+  saveParticipants();
+  renderParticipants();
+  updateMeetingTimes();
+});
+window.removeParticipant = function(idx){ if (!window.participants) return; window.participants.splice(idx,1); saveParticipants(); renderParticipants(); updateMeetingTimes(); };
+
+function populateTimeSelect(){
+  const sel = document.getElementById('meetingTimeSelect');
+  if (!sel) return;
+  const lang = getLang(); const t = translations[lang] || translations.ru;
+  sel.innerHTML = '';
+  const placeholder = document.createElement('option'); placeholder.value=''; placeholder.textContent = '— ' + (t['meeting-time-label']||'Выберите время') + ' —'; sel.appendChild(placeholder);
+  for(let h=0;h<24;h++){ for(let m=0;m<60;m+=30){ const hr=String(h).padStart(2,'0'); const min=String(m).padStart(2,'0'); const opt=document.createElement('option'); opt.value=`${hr}:${min}`; opt.textContent=`${hr}:${min}`; sel.appendChild(opt); } }
+  if (!sel.value) {
+    const now = DateTime.local().startOf('minute'); const minutes = now.minute;
+    const next = now.plus({ minutes: (minutes < 30 ? (30 - minutes) : (60 - minutes)) });
+    const v = `${String(next.hour).padStart(2,'0')}:${String(Math.floor(next.minute/30)*30).padStart(2,'0')}`;
+    sel.value = v;
+  }
+}
+
+function saveMeetingSettings(){ try{ localStorage.setItem('meetingPlannerDate', document.getElementById('meetingDate').value); localStorage.setItem('meetingPlannerTime', document.getElementById('meetingTimeSelect').value); }catch(e){} }
+
+function updateMeetingTimes(){
+  const dateInput = document.getElementById('meetingDate').value;
+  const timeInput = document.getElementById('meetingTimeSelect').value;
+  const timesDiv = document.getElementById('meetingTimes');
+  const lang = getLang();
+  const t = translations[lang] || translations.ru;
+  if (!dateInput || !timeInput) {
+    timesDiv.innerHTML = `<div style="color:#888;">${t['select-date-time-msg'] || 'Пожалуйста выберите дату и время.'}</div>`;
+    return;
+  }
+  if (!window.participants || window.participants.length === 0) {
+    timesDiv.innerHTML = `<div style="color:#888;">${t['no-participants-yet'] || 'Пока нет участников.'}</div>`;
+    return;
+  }
+  const localISO = `${dateInput}T${timeInput}`;
+  let organizerDT = DateTime.fromISO(localISO);
+  if (!organizerDT.isValid) {
+    timesDiv.innerHTML = `<div style="color:#b00;">${t['select-date-time-msg'] || 'Пожалуйста выберите дату и время.'}</div>`;
+    return;
+  }
+  let html = `<div style="font-weight:700;margin-bottom:.4rem;">${t['meeting-times-heading'] || 'Время встречи (организатор → местное время участников)'}</div>`;
+  html += `<div class="meeting-times-grid">`;
+  html += `<div class="time-suggestion"><div><b>Организатор</b> (${escapeHtml(organizerDT.zoneName)})</div><div>${escapeHtml(organizerDT.toLocaleString(DateTime.DATETIME_FULL))}</div></div>`;
+  window.participants.forEach(p => {
+    let localP; try { localP = organizerDT.setZone(p.city); } catch(e){ localP = null; }
+    const label = localP ? localP.toLocaleString(DateTime.DATETIME_FULL) : 'Неверная зона';
+    html += `<div class="time-suggestion"><div><b>${escapeHtml(p.name)}</b> <span style="color:#666;">(${escapeHtml(p.city)})</span></div><div>${escapeHtml(label)}</div></div>`;
+  });
+  html += `</div>`;
+  timesDiv.innerHTML = html;
+  saveMeetingSettings();
+}
+
+document.getElementById('meetingDate').addEventListener('input', updateMeetingTimes);
+document.getElementById('meetingTimeSelect').addEventListener('change', updateMeetingTimes);
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted);">
+  &copy; 2025 TimerHaven. Все инструменты бесплатны и защищают приватность.<br/>
+  <a href="privacy.html">Политика конфиденциальности</a> &bull;
+  <a href="terms.html">Условия</a> &bull;
+  <a href="contact.html">Контакты</a>
+</footer>
+</body>
 </html>

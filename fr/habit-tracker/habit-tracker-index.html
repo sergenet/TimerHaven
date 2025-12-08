@@ -1,18 +1,239 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>habit-tracker — Guide (fr)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for habit-tracker guide (fr)">
+  <meta charset="utf-8" />
+  <title>Suivi d'habitudes — Construisez la constance avec des routines simples | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guide pratique pour utiliser le suivi d'habitudes : définition d'objectifs, conception d'habitudes, streaks, métriques, automatisation et patterns d'équipe." />
+  <link rel="canonical" href="https://timerhaven.com/fr/habit-tracker/habit-tracker-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Créer et maintenir des habitudes avec Habit Tracker",
+        "description":"Flux pas‑à‑pas pour créer des habitudes efficaces, maintenir des séries (streaks), mesurer le progrès et passer d'une habitude unique à des routines hebdomadaires.",
+        "image":"https://timerhaven.com/assets/images/habit-tracker-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Habit Tracker (TimerHaven)","Carnet ou application de notes","Calendrier"],
+        "step":[
+          {"@type":"HowToStep","name":"Choisir une habitude clé","text":"Choisissez une petite action facile à réaliser et qui apporte un bénéfice disproportionné."},
+          {"@type":"HowToStep","name":"Commencer petit & lier à un déclencheur","text":"Attachez la nouvelle habitude à une routine existante (après le café, avant les emails). Commencez par de très petites répétitions."},
+          {"@type":"HowToStep","name":"Suivre quotidiennement","text":"Marquez l'habitude comme faite chaque jour ; notez les interruptions ou raisons d'échec."},
+          {"@type":"HowToStep","name":"Revoir chaque semaine","text":"Résumez les streaks et ajustez la difficulté ou l'horaire pour améliorer la cohérence."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Combien d'habitudes devrais‑je suivre ?","acceptedAnswer":{"@type":"Answer","text":"Commencez avec 1–3 habitudes. La concentration et la cohérence valent mieux que la quantité. Ajoutez progressivement de nouvelles habitudes une fois que les précédentes sont stables."}},
+          {"@type":"Question","name":"Comment récupérer après une interruption de streak ?","acceptedAnswer":{"@type":"Answer","text":"Notez la cause de l'oubli, ajustez éventuellement l'attente, puis reprenez immédiatement : redémarrer compte plus que l'échec."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">habit-tracker — Guide (fr)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Suivi d'habitudes — Concevez des habitudes qui durent</h1>
+
+      <div class="author" role="articleauthor" aria-label="Auteur de l'article">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Par Serge Shammas</strong> — spécialiste du design d'habitudes & productivité</div>
+          <div class="meta">Publié : 2025-11-24 · Temps de lecture : 12–16 min</div>
+        </div>
+      </div>
+
+      <p class="lead">De petites actions régulières produisent des résultats significatifs. Le suivi d'habitudes vous aide à transformer des intentions en pratiques quotidiennes. Ce guide couvre la sélection des habitudes, la réduction des frictions, la mesure, la gestion des streaks, les stratégies de reprise et l'usage en équipe pour instaurer des habitudes durables.</p>
+
+      <nav class="toc" aria-label="Table des matières">
+        <a href="#choose">Choisir les bonnes habitudes</a> ·
+        <a href="#design">Concevoir des habitudes microscopiques</a> ·
+        <a href="#track">Flux de suivi quotidien</a> ·
+        <a href="#measure">Mesure & métriques</a> ·
+        <a href="#streaks">Streaks & motivation</a> ·
+        <a href="#recover">Reprendre après une erreur</a> ·
+        <a href="#team">Équipe & responsabilité</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="choose" class="section" aria-labelledby="choose-title">
+        <h2 id="choose-title">Choisir les bonnes habitudes — commencez par l'impact</h2>
+        <p>Toutes les habitudes ne se valent pas. Commencez par une ou deux habitudes "clefs" qui apportent un levier (ex. exercice, planification matinale, tri des emails). Une habitude clef simplifie d'autres comportements et génère rapidement des bénéfices visibles, ce qui alimente la motivation.</p>
+
+        <ul>
+          <li><strong>Impact d'abord :</strong> choisissez des habitudes qui contribuent directement à vos objectifs.</li>
+          <li><strong>Commencez petit :</strong> si une habitude semble intimidante, réduisez‑la à une version minuscule (1 pompe, 2 minutes de lecture).</li>
+          <li><strong>Spécificité :</strong> définissez précisément ce que "fait" signifie — ex. "Lire 1 page" plutôt que "Lire plus".</li>
+        </ul>
+      </section>
+
+      <section id="design" class="section" aria-labelledby="design-title">
+        <h2 id="design-title">Concevoir des mini‑habitudes — moins de friction, plus de cohérence</h2>
+        <p>Adoptez la méthode "Tiny Habits" : facilitez l'action, liez‑la à un déclencheur et célébrez l'achèvement. L'UI du suivi d'habitudes rend l'enregistrement rapide — plus il est simple de marquer "fait", plus l'habitude se maintient.</p>
+
+        <div class="recipe">
+          <strong>Recette mini‑habitude</strong>
+          <ol>
+            <li>Déclencheur : attachez l'habitude à un indice fiable (ex. après le café du matin).</li>
+            <li>Action minuscule : choisissez une version minimale réalisable même en étant fatigué.</li>
+            <li>Marquage immédiat : ouvrez Habit Tracker et appuyez sur "Marquer comme fait" (ou utilisez le raccourci clavier si disponible).</li>
+            <li>Récompense : faites une micro‑célébration (un check, une note courte) pour fermer la boucle.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Astuce : le chaining d'habitudes réduit le switching contextuel — "Après m'être brossé les dents, j'écris 1 phrase dans mon journal."</p>
+      </section>
+
+      <section id="track" class="section" aria-labelledby="track-title">
+        <h2 id="track-title">Flux de suivi quotidien</h2>
+        <p>La cohérence dépend de la visibilité. Utilisez Habit Tracker en début de journée ou à une heure fixe (fin de journée). Enregistrez à la fois les accomplissements et de courtes notes sur les interruptions ou les causes de friction.</p>
+
+        <h3>Exemple de routine quotidienne</h3>
+        <ol>
+          <li>Matin : passez en revue les habitudes du jour et ajoutez du contexte si nécessaire.</li>
+          <li>Pendant la journée : marquez les habitudes au fur et à mesure.</li>
+          <li>Soir : revue rapide — notez les raisons des manques et replanifiez si besoin.</li>
+        </ol>
+      </section>
+
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Mesure & métriques — restez simple</h2>
+        <p>La mesure vous maintient honnête. Suivez quelques métriques pertinentes et révisez‑les chaque semaine pour améliorer la conception et le timing.</p>
+
+        <h3>Métriques minimales</h3>
+        <ul>
+          <li><strong>Jours suivis :</strong> nombre de jours où vous avez marqué l'habitude comme faite.</li>
+          <li><strong>Taux de complétion :</strong> jours complétés / jours planifiés.</li>
+          <li><strong>Longueur du streak :</strong> nombre de jours consécutifs actuels.</li>
+          <li><strong>Raisons des manques :</strong> codes courts pour les causes (déplacement, maladie, oubli).</li>
+        </ul>
+
+        <pre class="template">Colonnes CSV :
+date,habit,done,reason,notes
+2025-11-24,Boire de l'eau,1,,Bouteille au bureau</pre>
+      </section>
+
+      <section id="streaks" class="section" aria-labelledby="streaks-title">
+        <h2 id="streaks-title">Streaks & motivation — utilisez‑les avec sagesse</h2>
+        <p>Les streaks peuvent motiver mais sont fragiles. Servez‑vous des streaks pour créer un rythme, pas pour vous punir. Si un streak casse, redémarrez rapidement plutôt que de ruminer.</p>
+
+        <h3>Règles saines pour les streaks</h3>
+        <ul>
+          <li>Fixez des objectifs réalistes (les habitudes quotidiennes sont plus simples ; certaines peuvent être hebdomadaires).</li>
+          <li>Appliquez des règles souples pour les jours spéciaux (voyage / vacances) — snooze automatique ou marquer "excusé" si nécessaire.</li>
+          <li>Célébrez les étapes (7, 30, 90 jours) par une petite récompense.</li>
+        </ul>
+      </section>
+
+      <section id="recover" class="section" aria-labelledby="recover-title">
+        <h2 id="recover-title">Reprendre après une erreur — redémarrez vite</h2>
+        <p>Les ratés sont normaux. Un plan de reprise rapide limite l'impact et reconstruit l'élan.</p>
+
+        <div class="recipe">
+          <strong>Routine de reprise</strong>
+          <ol>
+            <li>Enregistrez la raison du manqué (une ligne).</li>
+            <li>Ajustez le plan (réduisez la taille, changez le déclencheur ou l'heure).</li>
+            <li>Reprenez tout de suite — ne pas attendre lundi.</li>
+            <li>Réfléchissez chaque semaine aux patterns et ajustez la conception.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Équipe & patterns de responsabilisation</h2>
+        <p>Les équipes peuvent utiliser des habitudes pour des rythmes partagés (daily standup, résumé de fin de journée). Gardez les habitudes d'équipe volontaires et orientées résultats, pas de la surveillance individuelle.</p>
+
+        <ul>
+          <li><strong>Rituels partagés :</strong> petites habitudes qui améliorent la coordination (ex. mise à jour du statut d’un ticket chaque jour).</li>
+          <li><strong>Système de binôme :</strong> associez‑vous avec un collègue pour des points hebdomadaires sur la progression.</li>
+          <li><strong>Métriques agrégées :</strong> partagez des taux de complétion anonymisés pour améliorer l'équipe, pas pour contrôler les individus.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Dépannage & problèmes courants</h2>
+        <ul>
+          <li><strong>Pas le temps d'enregistrer :</strong> ajoutez un bouton "Marquer fait" en un tap ou utilisez une note vocale pour enregistrer rapidement.</li>
+          <li><strong>Trop d'habitudes :</strong> réduisez à 1–3 priorités et mettez les autres en pause jusqu'à stabilité.</li>
+          <li><strong>Faux positifs :</strong> assurez‑vous que "fait" reflète une vraie exécution — privilégiez la qualité au simple remplissage.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q :</strong> Combien de temps pour qu'une habitude devienne automatique ?<br><strong>A :</strong> Cela varie : les petites habitudes peuvent devenir régulières en quelques semaines ; les plus complexes prennent des mois. Concentrez‑vous sur la cohérence plutôt que sur une durée fixe.</p>
+
+          <p><strong>Q :</strong> Dois‑je suivre tous les jours ?<br><strong>A :</strong> Le suivi quotidien crée un rythme. Pour certaines habitudes, une cadence hebdomadaire est plus adaptée — alignez la fréquence à la nature de l'habitude.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressources</h2>
+        <ul class="muted">
+          <li><a href="https://timerhaven.com/habit-tracker-fr.html">Ouvrir l'outil Habit Tracker</a></li>
+          <li><a href="https://jamesclear.com/habits" target="_blank" rel="noopener">Atomic Habits — James Clear</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/habit-tracker-fr.html" class="cta" aria-label="Ouvrir Habit Tracker">Ouvrir Habit Tracker</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions ou retours ? Contactez‑nous à <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lisez notre <a href="/fr/privacy/">Politique de confidentialité</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Retour à l'outil" button -->
+  <a href="https://timerhaven.com/habit-tracker-fr.html" class="return-to-tool" id="returnToToolHabit" aria-label="Retour à Habit Tracker">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Retour à Habit Tracker</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolHabit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

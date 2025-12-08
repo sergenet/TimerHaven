@@ -1,18 +1,225 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>unit-converter — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for unit-converter guide (de)">
+  <meta charset="utf-8" />
+  <title>Einheitenumrechner — Einheiten präzise konvertieren & Fehler vermeiden | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Umfassender Leitfaden zur Einheitenumrechnung: Einheitensysteme, Genauigkeit, Rundung, Temperatur‑Fallstricke, Konversionsrezepte für Technik, Kochen und Reisen sowie Automatisierung in Tabellen." />
+  <link rel="canonical" href="https://timerhaven.com/de/unit-converter/unit-converter-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Einheiten zuverlässig umrechnen",
+        "description":"Einheitenfamilien, Genauigkeit und Rundung, Spezialfälle (Temperatur) und gängige Umrechnungsrezepte für Alltag und Fachanwendungen.",
+        "image":"https://timerhaven.com/assets/images/unit-converter-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Einheitenumrechner (TimerHaven)","Referenztabellen oder technisches Handbuch","Tabellenkalkulation"],
+        "step":[
+          {"@type":"HowToStep","name":"Einheitenfamilie identifizieren","text":"Festlegen, ob Länge, Masse, Temperatur, Volumen etc. vorliegt."},
+          {"@type":"HowToStep","name":"Referenz und Genauigkeit wählen","text":"Autoritative Umrechnungsfaktoren wählen und notwendige Dezimalgenauigkeit bestimmen."},
+          {"@type":"HowToStep","name":"Umrechnen und runden","text":"Umrechnen und Ergebnis passend runden — für Anzeige oder weitere Berechnung formatieren."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Warum sind Temperaturumrechnungen speziell?","acceptedAnswer":{"@type":"Answer","text":"Temperaturumrechnungen sind affine Transformationen (Skalierung + Offset). Temperaturdifferenzen werden anders umgerechnet als absolute Werte — darauf muss geachtet werden."}},
+          {"@type":"Question","name":"Wie viele Dezimalstellen sollte ich anzeigen?","acceptedAnswer":{"@type":"Answer","text":"Das hängt vom Kontext ab: Preise — 2 Dezimalstellen; Ingenieurwesen — 3–6 Dezimalstellen je nach Toleranz; wissenschaftlich — signifikante Stellen entsprechend Messgenauigkeit."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">unit-converter — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Einheitenumrechner — Einheiten korrekt umrechnen & Fallstricke kennen</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Usability & Engineering</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 10–15 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Einheitenumrechnung begegnet uns beim Reisen, Kochen, in der Technik und in Software. Kleine Fehler bei Einheiten oder Rundung können große Auswirkungen haben. Dieser Leitfaden erklärt Einheitensysteme, Genauigkeitsregeln, Temperatur‑Spezialfälle, Präsentationsmuster, Tabellen‑ und API‑Rezepte sowie praktische Hinweise, um Fehler zu vermeiden.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#families">Einheitenfamilien & Grundlagen</a>
+        <a href="#precision">Genauigkeit & Rundung</a>
+        <a href="#temperature">Temperatur — Besonderheiten</a>
+        <a href="#recipes">Gängige Umrechnungsrezepte</a>
+        <a href="#spreadsheet">Tabellen & Skript‑Beispiele</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="families" class="section" aria-labelledby="families-title">
+        <h2 id="families-title">Einheitenfamilien & Grundlagen</h2>
+        <p>Einheiten gehören zu Familien (Länge, Masse, Temperatur, Volumen, Zeit, Fläche, Energie usw.). Konvertieren Sie nur innerhalb derselben Familie und verwenden Sie autoritative Umrechnungsfaktoren.</p>
+
+        <ul>
+          <li><strong>Länge:</strong> Meter, Kilometer, Meile, Fuß, Zoll.</li>
+          <li><strong>Masse / Gewicht:</strong> Kilogramm, Gramm, Pfund, Unze.</li>
+          <li><strong>Volumen:</strong> Liter, Milliliter, Gallone (US/UK Unterschiede), Tasse.</li>
+          <li><strong>Temperatur:</strong> Celsius, Fahrenheit, Kelvin (affine Transformationen).</li>
+        </ul>
+
+        <p>Für technisch kritische Anwendungen konsultieren Sie nationale Standards (NIST, BIPM) für exakte Faktoren und Definitionen.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Genauigkeit & Rundungsregeln</h2>
+        <p>Wählen Sie die Präzision nach Zweck. Zu starke Rundung erzeugt systematischen Bias; zu viele Nachkommastellen suggerieren falsche Genauigkeit.</p>
+
+        <h3>Richtlinien nach Kontext</h3>
+        <ul>
+          <li><strong>Alltag / Einkauf:</strong> 2 Dezimalstellen bei Beträgen und für Nutzer sichtbare Mengen.</li>
+          <li><strong>Kochen:</strong> Auf sinnvolle Einheiten runden (Teelöffel, Gramm) und Alternativen (metrisch & imperial) anbieten.</li>
+          <li><strong>Ingenieurwesen:</strong> Signifikante Stellen entsprechend Messgenauigkeit (3–6+ Dezimalstellen je nach Toleranz).</li>
+          <li><strong>Analyse:</strong> Rohwerte mit hoher Genauigkeit speichern, Rundung nur in der Darstellung vornehmen.</li>
+        </ul>
+
+        <p>Zeigen Sie stets die Einheit neben Zahlen an und überlegen Sie, einen Umrechnungsfaktor oder einen „Stand‑Zeitstempel“ bei dynamischen Werten anzugeben.</p>
+      </section>
+
+      <section id="temperature" class="section" aria-labelledby="temperature-title">
+        <h2 id="temperature-title">Temperatur — besondere Fälle</h2>
+        <p>Temperaturumrechnungen sind affine Transformationen: sie beinhalten Skalierung und Verschiebung. Temperaturdifferenzen werden anders umgerechnet als absolute Werte.</p>
+
+        <ul>
+          <li>Absolute Umrechnung korrekt anwenden:
+            <ul>
+              <li>C → F: F = C × 9/5 + 32</li>
+              <li>F → C: C = (F − 32) × 5/9</li>
+              <li>C ↔ K: K = C + 273.15</li>
+            </ul>
+          </li>
+          <li>Temperaturänderungen (Δ): nur die Skala verwenden (ΔC × 9/5 = ΔF) — keine Offsets hinzufügen.</li>
+        </ul>
+
+        <p>Beispiel: Eine Änderung von 10°C entspricht 18°F (richtig). Das Umrechnen eines absoluten 10°C‑Werts in Fahrenheit erfordert zusätzlich +32 nach der Skalierung.</p>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Gängige Umrechnungsrezepte</h2>
+
+        <div class="recipe">
+          <strong>Länge: Meilen ↔ Kilometer</strong>
+          <ol>
+            <li>Faktor: 1 mile = 1.60934 Kilometer.</li>
+            <li>Beispiel: 5 miles × 1.60934 = 8.0467 km → Anzeige: 8,05 km (üblich).</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Gewicht: Pfund ↔ Kilogramm</strong>
+          <ol>
+            <li>Faktor: 1 lb = 0.45359237 kg.</li>
+            <li>Beispiel: 150 lb × 0.45359237 = 68.0389 kg → Anzeige: 68,04 kg (2 Dez.), ggf. 68,0 für medizinische Rundung.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Volumen: US fl oz & Tassen</strong>
+          <ol>
+            <li>1 US cup = 8 US fl oz = 236,588 mL.</li>
+            <li>Regionale Unterschiede beachten: UK/Imperial cups und Gallonen haben andere Werte.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="spreadsheet" class="section" aria-labelledby="spreadsheet-title">
+        <h2 id="spreadsheet-title">Tabellen & Skript‑Beispiele</h2>
+        <p>Formeln und Snippets automatisieren Konversionen sinnvoll.</p>
+
+        <h3>Tabellen‑Beispiel (Google Sheets / Excel)</h3>
+        <pre class="template">Meilen in A2 nach Kilometern:
+=ROUND(A2 * 1.60934, 2)</pre>
+
+        <h3>JavaScript‑Snippet</h3>
+        <pre class="template">function convertLength(val, fromFactor, toFactor) {
+  // Faktoren in Metern pro Einheit
+  return val * (fromFactor / toFactor);
+}
+// Beispiel: miles->km: milesFactor=1609.34, kmFactor=1000
+</pre>
+
+        <p class="muted">Bewahren Sie kanonische Faktoren an einer zentralen Stelle auf und verwenden Sie sie überall, um Inkonsistenzen zu vermeiden.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Warum wirken Umrechnungen imperial ↔ metrisch manchmal „falsch“?<br><strong>A:</strong> Unterschiedliche Rundungs‑ und Darstellungsregeln sowie regionale Definitionen (z. B. Gallonen) führen zu Abweichungen. Prüfen Sie die verwendete Definition.</p>
+
+          <p><strong>F:</strong> Wie zeige ich beide Einheiten an?<br><strong>A:</strong> Zeigen Sie Primär‑ und Sekundäreinheit an (z. B. 68,04 kg (150 lb)) und bevorzugen Sie die vom Nutzer gewünschte Einheit zuerst, wenn möglich.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/unit-converter-de.html">Einheitenumrechner öffnen</a></li>
+          <li><a href="https://www.nist.gov/pml/weights-and-measures/metric-si" target="_blank" rel="noopener">NIST — SI‑Einheiten</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/unit-converter-de.html" class="cta" aria-label="Einheitenumrechner öffnen">Einheitenumrechner öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktieren Sie uns unter <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/de/privacy/">Datenschutzerklärung</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/unit-converter-de.html" class="return-to-tool" id="returnToToolUnit" aria-label="Zurück zum Einheitenumrechner">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zum Einheitenumrechner</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolUnit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

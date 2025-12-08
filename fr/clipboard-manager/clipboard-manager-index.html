@@ -1,18 +1,221 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>clipboard-manager — Guide (fr)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for clipboard-manager guide (fr)">
+  <meta charset="utf-8" />
+  <title>Gestionnaire de presse-papiers — Enregistrer et réutiliser des extraits | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guide pratique pour utiliser le gestionnaire de presse-papiers : flux de capture rapides, organisation, export/import, raccourcis clavier, bonnes pratiques de sécurité et usage en équipe." />
+  <link rel="canonical" href="https://timerhaven.com/fr/clipboard-manager/clipboard-manager-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Gestion efficace du presse‑papier",
+        "description":"Enregistrez, organisez et réutilisez de courts extraits de texte via un gestionnaire local. Le guide couvre les flux de capture, les sauvegardes, les raccourcis clavier, la confidentialité et les techniques avancées.",
+        "image":"https://timerhaven.com/assets/images/clipboard-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Gestionnaire de presse‑papier (local)","Navigateur","Notes","Task Timer"],
+        "step":[
+          {"@type":"HowToStep","name":"Capture rapide","text":"Collez ou tapez l'extrait dans le gestionnaire et enregistrez avec un tag ou un titre court."},
+          {"@type":"HowToStep","name":"Organiser","text":"Groupez les extraits avec des tags ou une convention de nommage (projet:sujet). Utilisez la recherche pour retrouver rapidement un extrait."},
+          {"@type":"HowToStep","name":"Réutiliser","text":"Copiez les extraits dans le document actif ou collez via les contrôles du gestionnaire. Utilisez les raccourcis pour aller vite."},
+          {"@type":"HowToStep","name":"Sauvegarder","text":"Exportez les extraits au format JSON pour les sauvegardes ; importez pour restaurer ou transférer vers un autre appareil."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Où sont stockés les extraits ?","acceptedAnswer":{"@type":"Answer","text":"Ils sont stockés localement dans le navigateur (localStorage). Ils ne quittent pas votre appareil sauf si vous les exportez."}},
+          {"@type":"Question","name":"Comment sauvegarder ou transférer ?","acceptedAnswer":{"@type":"Answer","text":"Utilisez le bouton Exporter pour télécharger une sauvegarde JSON; importez ce fichier sur un autre appareil."}},
+          {"@type":"Question","name":"Les gestionnaires de presse‑papier sont‑ils sûrs ?","acceptedAnswer":{"@type":"Answer","text":"Un gestionnaire local est relativement sûr car les données restent sur l'appareil. N'enregistrez pas des identifiants sensibles en clair; utilisez un gestionnaire de mots de passe pour cela."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); opacity:0.98; }
+    .return-to-tool .icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;font-size:16px;}
+    .return-to-tool .label{font-size:0.95rem;}
+    @media (max-width:520px){ .return-to-tool{padding:.45rem .5rem; right:14px; bottom:14px;} .return-to-tool .label{display:none;} .return-to-tool{border-radius:12px;} }
+    .return-to-tool:focus{outline:3px solid rgba(11,99,160,0.18);outline-offset:4px;}
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">clipboard-manager — Guide (fr)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Gestionnaire de presse‑papier — Capture, organisation et réutilisation</h1>
+
+      <div class="author" role="articleauthor" aria-label="Auteur">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Par Serge Shammas</strong> — auteur productivité & chercheur UX</div>
+          <div class="meta">Publié : 2025-11-24 · Temps de lecture : 10–14 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Un gestionnaire de presse‑papier léger vous aide à sauvegarder de courts extraits réutilisables — modèles d'email, fragments de code, identifiants — pour arrêter de les chercher et commencer à coller. Ce guide détaille les flux de capture, l'organisation, les sauvegardes, les raccourcis clavier, la confidentialité et l'usage en équipe.</p>
+
+      <nav class="toc" aria-label="Sommaire">
+        <a href="#why">Pourquoi l'utiliser</a> · <a href="#capture">Capture</a> · <a href="#organize">Organisation</a> · <a href="#reuse">Réutilisation</a> · <a href="#backup">Sauvegarde</a> · <a href="#security">Sécurité</a> · <a href="#team">Équipe</a> · <a href="#troubleshoot">Dépannage</a> · <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section">
+        <h2>Pourquoi un gestionnaire de presse‑papier importe</h2>
+        <p>Le travail moderne répète de nombreux petits textes entre applications. Un gestionnaire réduit les frictions, diminue les erreurs et conserve du contexte.</p>
+        <ul>
+          <li><strong>Rapidité :</strong> accéder en deux clics ou via un raccourci.</li>
+          <li><strong>Consistance :</strong> réutiliser du texte validé.</li>
+          <li><strong>Mémoire :</strong> court terme recherché pour la tâche en cours.</li>
+          <li><strong>Sauvegarde :</strong> exporter/restaurer la bibliothèque d'extraits.</li>
+        </ul>
+      </section>
+
+      <section id="capture" class="section">
+        <h2>Capture — sauvegarder sur le vif</h2>
+        <div class="recipe">
+          <strong>Recette de capture rapide</strong>
+          <ol>
+            <li>Copiez un élément utile, ouvrez le gestionnaire et collez dans le champ d'entrée ; conservez un seul élément logique.</li>
+            <li>Ajoutez un titre ou tag court (ex. "Facture: Acme — IBAN").</li>
+            <li>Enregistrez ; l'élément apparaît en tête de liste.</li>
+            <li>Prenez l'habitude de purger les éléments obsolètes.</li>
+          </ol>
+        </div>
+        <p class="small-note">Astuce : pour du texte multi‑lignes, ajoutez un titre pour faciliter la recherche.</p>
+      </section>
+
+      <section id="organize" class="section">
+        <h2>Organiser & rechercher</h2>
+        <p>Favorisez la récupération rapide : titres, tags et conventions simples.</p>
+        <h3>Modèle d'organisation</h3>
+        <ul>
+          <li><strong>Titre :</strong> 3–6 mots décrivant l'usage.</li>
+          <li><strong>Tag :</strong> projet, client, template, code.</li>
+          <li><strong>Aperçu :</strong> éviter les textes énormes.</li>
+        </ul>
+      </section>
+
+      <section id="reuse" class="section">
+        <h2>Réutilisation rapide & raccourcis</h2>
+        <h3>Raccourcis pratiques</h3>
+        <ul>
+          <li><span class="kbd">Ctrl/Cmd+Shift+V</span> — ouvrir et coller le dernier élément.</li>
+          <li><span class="kbd">Ctrl/Cmd+Alt+C</span> — capture rapide (focus prêt à coller).</li>
+          <li><span class="kbd">Flèches</span> — naviguer; <span class="kbd">Entrée</span> pour copier.</li>
+        </ul>
+        <p class="small-note">Si le navigateur bloque l'écriture dans le presse‑papier, utilisez le bouton Copier dans l'UI.</p>
+      </section>
+
+      <section id="backup" class="section">
+        <h2>Export / import & sauvegardes</h2>
+        <div class="recipe">
+          <strong>Routine de sauvegarde (5 minutes)</strong>
+          <ol>
+            <li>Chaque semaine : exportez en JSON.</li>
+            <li>Stockez l'export dans un dossier sécurisé (cloud ou coffre chiffré).</li>
+            <li>Pour changer d'appareil : importez le JSON.</li>
+            <li>Archivez avec une date (clipboard-backup-YYYYMMDD.json).</li>
+          </ol>
+        </div>
+        <pre class="template">Exemple CSV :
+title,text,tags,created
+Invoice: Acme,"Acct: 123-45-678",finance;client,2025-11-21T10:15:00Z</pre>
+      </section>
+
+      <section id="security" class="section">
+        <h2>Sécurité & confidentialité</h2>
+        <ul>
+          <li>Ne stockez pas de mots de passe, clés privées ou PINs en clair.</li>
+          <li>Si nécessaire, chiffez vos sauvegardes exportées.</li>
+          <li>Sur machines partagées : exportez puis supprimez les extraits.</li>
+          <li>Nettoyez régulièrement les extraits sensibles.</li>
+        </ul>
+        <p class="small-note">Le gestionnaire utilise localStorage : les données restent sur l'appareil sauf export.</p>
+      </section>
+
+      <section id="team" class="section">
+        <h2>Usage en équipe</h2>
+        <p>Pour le travail d'équipe, utilisez un dépôt d'extraits partagé pour le texte canonique; gardez le gestionnaire local pour l'usage personnel.</p>
+      </section>
+
+      <section id="troubleshoot" class="section">
+        <h2>Dépannage</h2>
+        <ul>
+          <li>Extraits disparus : vérifiez les paramètres de stockage du navigateur ; importez la dernière sauvegarde.</li>
+          <li>Collage bloqué : autorisez l'accès au presse‑papier dans les paramètres.</li>
+          <li>Export échoue : vérifiez les permissions d'écriture disque.</li>
+          <li>Listes longues : épurez ou utilisez la fonction favoris.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section">
+        <h2>FAQ</h2>
+        <div class="muted">
+          <p><strong>Q :</strong> Où sont enregistrés les extraits ?<br><strong>R :</strong> Localement dans le navigateur (localStorage).</p>
+          <p><strong>Q :</strong> Puis‑je importer depuis un autre appareil ?<br><strong>R :</strong> Oui, via l'import du JSON.</p>
+          <p><strong>Q :</strong> Y a‑t‑il des limites ?<br><strong>R :</strong> localStorage a une limite (quelques Mo). Pour des bibliothèques volumineuses, exportez régulièrement.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section">
+        <h2>Ressources</h2>
+        <ul class="muted">
+          <li><a href="/fr/clipboard-manager/clipboard-manager-index.html">Ouvrir l'outil Clipboard Manager</a></li>
+          <li><a href="https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage" target="_blank" rel="noopener">localStorage — MDN</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Clipboard_(computing)" target="_blank" rel="noopener">Clipboard (computing) — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/clipboard-manager-fr.html" class="cta" aria-label="Ouvrir Clipboard Manager">Ouvrir Clipboard Manager</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions ? Contactez‑nous : <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lire notre <a href="/fr/privacy/">Politique de confidentialité</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <a href="https://timerhaven.com/clipboard-manager-fr.html" class="return-to-tool" id="returnToTool" aria-label="Retour vers Clipboard Manager">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Retour vers Clipboard Manager</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToTool');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleVisibility(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleVisibility);
+      toggleVisibility();
+    })();
+  </script>
 </body>
 </html>

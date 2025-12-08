@@ -2,136 +2,239 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <title>Kalenderplanung — Fokuszeiten blocken & Review | TimerHaven</title>
-  <meta name="description" content="Planen Sie Tiefenarbeit mit Kalenderblöcken: Pomodoro‑Serien, 90–120‑Minuten Blocks, wöchentliche Planung, ICS‑Vorlage und Messhinweise.">
+  <title>Kalenderplanung — Zeitfenster für Fokus reservieren & Ergebnisse überprüfen | TimerHaven</title>
+  <meta name="description" content="Plane Deep‑Work‑Sitzungen und Fokus‑Blöcke mit Pomodoro‑ und Aufgaben‑Timer‑Workflows. Praktische Rezepte, ICS‑Vorlage, Mess‑Tipps, Team‑Koordination und Fehlerbehebung.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="canonical" href="https://timerhaven.com/de/calendar-planning-index.html">
+  <link rel="canonical" href="https://timerhaven.com/de/calendar-planning/calendar-planning-index.html">
   <meta name="author" content="Serge Shammas">
 
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@graph":[
-      {"@type":"HowTo","name":"Tiefenarbeit mit Kalenderblöcken planen","description":"Anleitung zum Planen von Pomodoro‑ oder längeren Fokusblöcken im Kalender mit Kontext und Review.","image":"https://timerhaven.com/assets/images/calendar-snapshot.png","totalTime":"PT3H","supply":["Kalenderapp","Pomodoro Timer","Task Timer","Notizen"],"step":[{"@type":"HowToStep","name":"Ziel bestimmen","text":"Wählen Sie ein klares Ergebnis für den Block (z. B. 'Executive Summary schreiben — 400 Wörter')."},{"@type":"HowToStep","name":"Zeit blocken und Kontext hinzufügen","text":"Ereignis anlegen, Status auf 'Beschäftigt' setzen und 2–3 Checkpoints als Beschreibung einfügen."},{"@type":"HowToStep","name":"Fokusintervalle durchführen","text":"Pomodoro‑Zyklen oder längere Blöcke durchführen, Unterbrechungen protokollieren und Pausen für Notizen nutzen."}]},
-      {"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Welche Dauer ist ideal für Tiefenarbeit?","acceptedAnswer":{"@type":"Answer","text":"90–120 Minuten sind für viele Wissensarbeiten effektiv; für kreative Sprints sind 2‑Stunden‑Blöcke möglich."}},{"@type":"Question","name":"Sollte ich Blöcke als beschäftigt markieren?","acceptedAnswer":{"@type":"Answer","text":"Ja — 'Beschäftigt' reduziert Unterbrechungen und kommuniziert Verfügbarkeit."}}]},
+      {
+        "@type":"HowTo",
+        "name":"Deep Work mit Kalenderblöcken planen",
+        "description":"Schritt‑für‑Schritt‑Workflow zum Planen von Pomodoros oder längeren Fokus‑Blöcken im Kalender, Kontext reservieren und Ergebnisse prüfen, damit du ungestörte Konzentration schützt und Ergebnisse messen kannst.",
+        "image":"https://timerhaven.com/assets/images/calendar-snapshot.png",
+        "totalTime":"PT3H",
+        "supply":["Kalender‑App","Pomodoro‑Timer (TimerHaven)","Aufgaben‑Timer","Notizen"],
+        "step":[
+          {"@type":"HowToStep","name":"Klares Ergebnis wählen","text":"Wähle ein einzelnes Ergebnis für den Block. Formuliere es als Ergebnis‑Statement (z. B. 'Executive Summary entwerfen — 400 Wörter')."},
+          {"@type":"HowToStep","name":"Zeit blocken und Kontext anhängen","text":"Erstelle ein Kalenderelement, setze es auf 'Beschäftigt' und füge eine kurze Checkliste oder Notiz in die Beschreibung ein, sodass du sofort starten kannst."},
+          {"@type":"HowToStep","name":"Fokussierte Intervalle durchführen","text":"Führe Pomodoros oder längere Intervalle innerhalb des Blocks aus, protokolliere Unterbrechungen und nutze Pausen für schnelle Notizen."},
+          {"@type":"HowToStep","name":"Überprüfen und nachbearbeiten","text":"Aktualisiere nach dem Block deine Notizen/Aufgaben‑Timer, dokumentiere Ergebnisse und bestimme die nächsten Schritte."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Welche Dauer sollte ich für Deep Work blocken?","acceptedAnswer":{"@type":"Answer","text":"90–120 Minuten sind für viele kognitive Aufgaben effektiv. Für nachhaltig kreatives Arbeiten denke an 2‑Stunden‑Blöcke mit klarem Start‑Ritual und gutem Kontext."}},
+          {"@type":"Question","name":"Sollte ich Blöcke als 'Beschäftigt' anzeigen?","acceptedAnswer":{"@type":"Answer","text":"Ja — als 'Beschäftigt' markierte Blöcke signalisieren dem Team, dass du nicht verfügbar bist, und reduzieren beiläufige Unterbrechungen."}},
+          {"@type":"Question","name":"Wie messe ich die Wirksamkeit der Kalenderplanung?","acceptedAnswer":{"@type":"Answer","text":"Verfolge die Umwandlungsrate von geblockter Zeit in abgeschlossene Ergebnisse und protokolliere Unterbrechungen mit dem Aufgaben‑Timer. Wöchentliche Metrik‑Reviews (abgeschlossene Ergebnisse, Unterbrechungen, benötigte Zeit) zeigen Fortschritt."}}
+        ]
+      },
       {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
     ]
   }
   </script>
 
   <style>
-    :root{--brand:#0b63a0;--muted:#6b7c89}
-    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fbfeff;color:#102a43;margin:0;padding:2rem}
-    .container{max-width:920px;margin:0 auto}
-    .card{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
-    h1{color:var(--brand);margin-top:0}
-    .meta{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
-    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:.9rem;border-radius:8px;margin-bottom:.9rem}
-    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:.9rem;border-radius:8px;margin-bottom:.9rem}
-    .cta{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none}
-    pre.template{background:#f3f7fb;padding:.75rem;border-radius:6px}
-    .small-note{font-size:.95rem;color:#51606b}
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    table.sample{border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:740px;}
+    table.sample td, table.sample th{border:1px solid #eef5fb;padding:0.35rem 0.6rem;text-align:left;}
+    /* Floating return-to-tool button (shared pattern used across guides) */
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
+    }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      font-size:16px;
+    }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
   </style>
 </head>
 <body>
   <main class="container">
-    <article class="card">
-      <h1>Kalenderplanung — Zeit reservieren für Fokus</h1>
-      <div class="meta">Von Serge Shammas — Veröffentlicht: 2025‑10‑28 · Aktualisiert: 2025‑11‑22</div>
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Kalenderplanung — Reserviere Zeit für Fokus und erledige Arbeit</h1>
 
-      <p class="lead">Kalenderblöcke schützen Tiefenarbeit am besten. Dieser Leitfaden beschreibt Pomodoro‑Serien im Kalender, 90–120‑Minuten‑Blöcke, wöchentliche Planung, Messmetriken und Team‑Patterns, damit Ihr Kalender zu einem produktiven Werkzeug wird.</p>
+      <div class="author" role="articleauthor" aria-label="Autor des Artikels">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Produktivitätsautor und UX‑Forscher</div>
+          <div class="meta">Veröffentlicht: 2025-10-28 · Zuletzt aktualisiert: 2025-11-21 · Lesezeit: 10–15 Min.</div>
+        </div>
+      </div>
 
-      <nav class="toc">
-        <a href="#why">Warum kalenderbasiert planen</a>
-        <a href="#plan">Planen: Ergebnis vor Aktivität</a>
-        <a href="#pomodoro">Pomodoro‑Serien</a>
-        <a href="#deep">90–120 Min. Blöcke</a>
+      <p class="lead">Das Blockieren von Zeit im Kalender ist die beste Maßnahme, um konzentriertes Arbeiten zu schützen. Dieser Leitfaden bietet praktische Rezepte für Pomodoro‑Blöcke, 90–120 Minuten Deep‑Work‑Sessions, wöchentliche Planungsroutinen, Mess‑Tipps und Team‑Koordinationsmuster, damit dein Kalender zu einem Produktivitätswerkzeug wird — nicht nur zu einem Terminplan.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#why">Warum kalenderzentrierte Planung funktioniert</a>
+        <a href="#plan">Planen: ergebnisorientierte Blöcke</a>
+        <a href="#pomodoro">Pomodoro‑Serie im Kalender</a>
+        <a href="#deep">90–120 Minuten Deep‑Work‑Blöcke</a>
         <a href="#weekly">Wöchentliche Planung</a>
         <a href="#measure">Messen & verbessern</a>
-        <a href="#team">Teamkoordination</a>
+        <a href="#team">Team‑Koordination</a>
         <a href="#ics">ICS‑Vorlage</a>
         <a href="#faq">FAQ</a>
       </nav>
 
-      <section id="why" class="workflow">
-        <h2>Warum kalenderbasiert planen</h2>
-        <p>Ein Kalendereintrag macht Zeit sichtbar, reduziert mentale Last und signalisiert Verfügbarkeit für andere. In Kombination mit Notizen und Messdaten wird daraus ein Lerninstrument: Sie erkennen, wie lange Aufgaben tatsächlich dauern.</p>
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Warum kalenderzentrierte Planung funktioniert</h2>
+        <p>
+          Ein Kalender verwandelt Absichten in Verpflichtungen: Er macht Zeit für dich und andere sichtbar, reduziert die kognitive Last des Erinnerns und schafft vorhersehbare Zeitfenster für Fokus. In Kombination mit knackigem Kontext (Notizen/Checklisten) und Messung (Aufgaben‑Timer/Pomodoro‑Protokolle) werden Kalenderblöcke zu einem Lernwerkzeug — sie zeigen, wie lange Arbeit tatsächlich dauert und wo man sich verbessern kann.
+        </p>
       </section>
 
-      <section id="plan" class="section">
-        <h2>Plan: Ergebnis‑orientierte Blöcke</h2>
+      <section id="plan" class="section" aria-labelledby="plan-title">
+        <h2 id="plan-title">Planen: erstelle ergebnisorientierte Blöcke</h2>
+        <p>Beim Anlegen eines Blocks beginne immer mit einem klaren Ergebnis, nicht mit einer Arbeitsart. Ergebnisse sind messbar und reduzieren Unklarheiten.</p>
+
         <ul>
-          <li><strong>Ziel:</strong> Formulieren Sie das Ergebnis (z. B. „Einleitung fertigstellen — 400 Wörter“).</li>
-          <li><strong>Dauer:</strong> Auf Basis Task Timer Daten oder großzügig schätzen.</li>
-          <li><strong>Kontext:</strong> 3 Checkpoints & Links in die Beschreibung einfügen.</li>
-          <li><strong>Status:</strong> Auf "Beschäftigt" setzen und ggf. Team kurz informieren.</li>
+          <li><strong>Ergebnis‑Statement:</strong> „Entwurf: Executive Summary — 400 Wörter.“</li>
+          <li><strong>Dauerabschätzung:</strong> Nutze aktuelle Task‑Timer‑Daten; andernfalls lieber großzügig planen.</li>
+          <li><strong>Kontext:</strong> Füge 3 Checklisten‑Punkte und Links zu Ressourcen in die Ereignisbeschreibung ein, damit du sofort loslegen kannst.</li>
+          <li><strong>Sichtbarkeit:</strong> Markiere das Ereignis als 'Beschäftigt' und informiere ggf. das Team kurz („In Deep Work 10:00–12:00 — nur dringend“).</li>
         </ul>
-        <div class="small-note">Tipp: 10–20% Puffer für Unbekanntes einplanen.</div>
+
+        <div class="small-note muted">Pro‑Tipp: Plane bei komplexen Aufgaben 10–20% Puffer ein.</div>
       </section>
 
-      <section id="pomodoro" class="section">
-        <h2>Pomodoro‑Serien im Kalender</h2>
-        <div class="recipe">
-          <strong>Kalender‑Pomodoro (2‑Stunden‑Block)</strong>
+      <section id="pomodoro" class="section" aria-labelledby="pomodoro-title">
+        <h2 id="pomodoro-title">Pomodoro‑Serie im Kalender</h2>
+        <p>
+          Pomodoro wird häufig als Serie innerhalb eines Kalenderblocks verwendet — entweder als wiederholte 25‑Minuten‑Ereignisse mit Pausen oder als ein längeres Ereignis, das mehrere Pomodoros enthält. Beide Methoden funktionieren; wähle die passende für dein Kalendersystem und Team.
+        </p>
+
+        <div class="recipe" aria-labelledby="pomodoro-recipe">
+          <strong id="pomodoro-recipe">Kalender‑Pomodoro‑Rezept (2‑Stunden‑Block)</strong>
           <ol>
-            <li>2 Stunden blocken, Titel mit Ergebnis versehen.</li>
-            <li>In der Beschreibung die Pomodoros & Checkpoints auflisten.</li>
-            <li>Ersten Pomodoro in TimerHaven starten, Notiz‑ID in Beschreibung verlinken.</li>
-            <li>Pausen für Notizen nutzen; nach 4 Pomodoros längere Pause.</li>
-            <li>Ergebnis nachtragen, damit das Ereignis als Log dient.</li>
+            <li>Blocke 2 Stunden mit dem Ergebnis im Titel (z. B. „2× Pomodoro: Bericht‑Intro fertigstellen“).</li>
+            <li>Liste in der Ereignisbeschreibung die Pomodoros oder Aufgaben und kleine Checkpoints auf.</li>
+            <li>Starte den ersten 25‑Minuten‑Pomodoro in TimerHaven und verlinke die Notiz‑ID in der Ereignisbeschreibung (kurzes Notat oder URL einfügen).</li>
+            <li>Nutze 5‑Minuten‑Pausen für eine Fortschrittsnotiz und Dehnübungen; nach dem 4. Pomodoro eine längere Pause (15–30 Minuten).</li>
+            <li>Füge nach Beendigung des Blocks eine Ergebniszeile in die Ereignisbeschreibung ein (was erledigt wurde) — so dient das Ereignis als kurzer Log.</li>
           </ol>
         </div>
+
+        <p class="small-note">Wenn du diskrete Ereignisse bevorzugst, erstelle vier 25‑Minuten‑Ereignisse und nummeriere sie (Pomodoro 1/4, Pomodoro 2/4 …), damit der Kalender den Fokus‑Rhythmus visuell zeigt.</p>
       </section>
 
-      <section id="deep" class="section">
-        <h2>90–120 Minuten Deep Work</h2>
+      <section id="deep" class="section" aria-labelledby="deep-title">
+        <h2 id="deep-title">90–120 Minuten Deep‑Work‑Blöcke</h2>
+        <p>
+          Für anspruchsvolle kognitive Aufgaben (Architektur, längere Texte, Planungen) sind längere, ununterbrochene Blöcke effektiver. Nutze ein klares Start‑Ritual und eine Überprüfung nach Abschluss.
+        </p>
+
         <div class="recipe">
-          <strong>Deep Work 90 Rezept</strong>
+          <strong>Deep Work 90‑Rezept</strong>
           <ol>
-            <li>90 Minuten blocken und Referenzen anhängen.</li>
-            <li>5–10 Minuten Ritual (Brief lesen, Dokumente öffnen).</li>
-            <li>Voll fokussiert arbeiten; Unterbrechungen notieren.</li>
-            <li>Nach dem Block Ergebnis dokumentieren und Fortschritt bewerten.</li>
+            <li>Blocke 90 Minuten mit Ergebnis im Titel und hänge eine Checkliste oder Referenzen an.</li>
+            <li>Führe ein 5–10 Minuten Vorbereitung‑Ritual aus (Brief nochmals lesen, die drei benötigten Dokumente öffnen).</li>
+            <li>Arbeite während des Blocks mit nur essentiellen Unterbrechungen; notiere dringende Störungen und setze die Arbeit später fort.</li>
+            <li>Nach dem Block dokumentiere das Ergebnis in der Ereignisbeschreibung und bewerte den Fortschritt (0–5) für die Retrospektive.</li>
           </ol>
         </div>
+
+        <p>Zwei Vorteile: (1) weniger Kontextwechsel bei tiefen Aufgaben und (2) bessere Messbarkeit der Ergebnisse in der Wochen‑Review.</p>
       </section>
 
-      <section id="weekly" class="section">
-        <h2>Wöchentliche Planung</h2>
+      <section id="weekly" class="section" aria-labelledby="weekly-title">
+        <h2 id="weekly-title">Wöchentliche Planung — eine praktische Routine</h2>
+        <p>
+          Wöchentliche Planung verbindet deinen Kalender mit dem, was tatsächlich passiert ist. Prüfe kurz die geblockte Zeit der letzten Woche und die Task‑Timer‑Protokolle, und plane die Deep‑Work‑Blöcke der nächsten Woche anhand realer Daten.
+        </p>
+
         <ol>
-          <li>Task Timer Sessions exportieren und Unterbrechungen analysieren.</li>
-          <li>Drei Prioritäten identifizieren und dafür Zeit blocken (morgens bevorzugt).</li>
-          <li>Buffer für Meetings/responsive Arbeit reservieren (Ziel: 60–70% geplanter Deep Work).</li>
+          <li>Exportiere Task‑Timer‑Sitzungen der letzten Woche und fasse die Unterbrechungen pro Slot zusammen.</li>
+          <li>Identifiziere drei prioritäre Ergebnisse für die nächste Woche und blocke Zeit (vorzugsweise morgens oder in deinem produktivsten Fenster).</li>
+          <li>Lasse Puffer für Meetings und Ad‑hoc‑Aufgaben — Ziel: 60–70% geplante Deep‑Work‑Zeit, um flexibel zu bleiben.</li>
         </ol>
+
+        <div class="small-note muted">Beispiel: Wenn eine Aufgabe letzte Woche im Schnitt 3×25 Minuten brauchte, blocke stattdessen einen 90‑Minuten‑Slot, um den Flow zu bewahren.</div>
       </section>
 
-      <section id="measure" class="section">
-        <h2>Messen & verbessern — Was zu tracken ist</h2>
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Messen & verbessern — was du tracken solltest</h2>
+        <p>Messung schließt die Schleife. Tracke einige einfache Metriken und überprüfe sie wöchentlich, um deine Planung zu verfeinern.</p>
+
+        <h3>Minimal nützliche Metriken</h3>
         <ul>
-          <li><strong>Geplante Blöcke</strong></li>
-          <li><strong>Abgeschlossene Blöcke</strong></li>
-          <li><strong>Unterbrechungsrate</strong></li>
-          <li><strong>Zeit vs. Schätzung</strong></li>
+          <li><strong>Geplante Blöcke</strong> — Anzahl der Kalenderblöcke für Deep Work.</li>
+          <li><strong>Abgeschlossene Blöcke</strong> — wie viele Blöcke zum geplanten Ergebnis führten.</li>
+          <li><strong>Unterbrechungsrate</strong> — Anteil der Blöcke mit Unterbrechungen (via Task‑Timer protokolliert).</li>
+          <li><strong>Zeit bis Abschluss</strong> — tatsächliche Minuten zur Erledigung vs. Schätzung.</li>
         </ul>
+
+        <h3>Einfache Tabellen‑Vorlage</h3>
         <pre class="template">Spalten: date,event_title,planned_minutes,actual_minutes,interruptions,notes
-Formeln:
-Durchschnitt: =AVERAGE(actual_minutes_range)
-Unterbrechungsrate: =COUNTIF(interruptions_range,">0")/COUNTA(interruptions_range)</pre>
+Average completion time: =AVERAGE(actual_minutes_range)
+Interruption rate: =COUNTIF(interruptions_range,">0")/COUNTA(interruptions_range)</pre>
       </section>
 
-      <section id="team" class="section">
-        <h2>Teamkoordination</h2>
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Team‑Koordinationsmuster</h2>
         <ul>
-          <li>Shared focus windows: Team einigt sich auf Fokuszeiten.</li>
-          <li>Kurze Break‑Check‑ins statt Meetings.</li>
-          <li>Beschäftigt respektieren; Ausnahmen nur bei klaren Eskalationsregeln.</li>
+          <li><strong>Geteilte Fokusfenster:</strong> Teammitglieder vereinbaren Kalenderfenster für synchrones Deep Work — reduziert Chat und Meetings.</li>
+          <li><strong>Kurze Check‑Ins in Pausen:</strong> Nutze 5–10 Minuten Pausen für kurze Statusupdates statt ganzer Meetings.</li>
+          <li><strong>Beschäftigt respektieren:</strong> Behandle 'Beschäftigt' als echte Arbeitszeit; erlaube Ausnahmen nur mit klaren Eskalationsregeln.</li>
         </ul>
       </section>
 
-      <section id="ics" class="section">
-        <h2>ICS‑Vorlage</h2>
-        <p class="muted">ICS herunterladen und in Kalender importieren.</p>
-        <p><a href="#" id="downloadIcs" class="cta">ICS‑Vorlage herunterladen</a></p>
+      <section id="ics" class="section" aria-labelledby="ics-title">
+        <h2 id="ics-title">ICS‑Vorlage — importiere einen Pomodoro‑Block</h2>
+        <p class="muted">Lade diese ICS‑Datei herunter und importiere sie in die meisten Kalender als Starter‑Pomodoro‑Block.</p>
+        <p><a href="#" id="downloadIcs" class="cta" aria-label="ICS‑Vorlage herunterladen">ICS‑Vorlage herunterladen</a></p>
+
         <pre id="icsTemplate" class="template" aria-hidden="true">BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//TimerHaven//Pomodoro Block Template//DE
@@ -140,11 +243,11 @@ UID:{{UID}}
 DTSTAMP:{{UTC_NOW}}
 DTSTART:{{START_UTC}}
 DTEND:{{END_UTC}}
-SUMMARY:Pomodoro Focus — [Ziel]
+SUMMARY:Pomodoro Focus — [Ergebnis]
 DESCRIPTION:Checklist:
 - Punkt 1
 - Punkt 2
-Notes: Notiz‑URL/ID hier einfügen.
+Notes: füge hier eine URL oder Notiz‑ID ein.
 STATUS:BUSY
 END:VEVENT
 END:VCALENDAR</pre>
@@ -169,23 +272,61 @@ END:VCALENDAR</pre>
         </script>
       </section>
 
-      <section id="faq" class="section">
-        <h2>FAQ</h2>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
         <div class="muted">
-          <p><strong>Q:</strong> Occupied oder Free?<br><strong>A:</strong> Occupied sinnvoll für Fokusblöcke — reduziert Störungen.</p>
-          <p><strong>Q:</strong> Last‑minute Meetings?<br><strong>A:</strong> Buffer vorsehen; nach Verschiebung Block neu terminieren und Grund dokumentieren.</p>
-          <p><strong>Q:</strong> Review‑Rhythmus?<br><strong>A:</strong> Wöchentlich planen, monatlich Trends prüfen.</p>
+          <p><strong>F:</strong> Soll ich Kalenderblöcke als 'Beschäftigt' anzeigen?<br><strong>A:</strong> Ja — markiere Fokusblöcke als 'Beschäftigt', um Unterbrechungen zu reduzieren und Verfügbarkeit zu signalisieren.</p>
+
+          <p><strong>F:</strong> Wie gehe ich mit kurzfristigen Meetings um?<br><strong>A:</strong> Halte einen Puffer von 10–20% pro Woche. Wenn ein Meeting einen Block verdrängt, plane den Block neu und dokumentiere den Grund.</p>
+
+          <p><strong>F:</strong> Wie oft sollte ich die Effektivität meiner Planung überprüfen?<br><strong>A:</strong> Führe eine schnelle wöchentliche Überprüfung (geplant vs. erledigt) durch und eine monatliche Analyse zur Erkennung von Trends.</p>
         </div>
       </section>
 
-      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/de/pomodoro-de.html">Pomodoro</a> · <a href="/de/notes-index.html">Notes</a> · <a href="/timer-de.html">Task Timer</a></p>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="https://calendar.google.com" target="_blank" rel="noopener">Google Kalender — Vorlagen & Import</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" target="_blank" rel="noopener">Pomodoro‑Technik — Originalbeschreibung</a></li>
+        </ul>
+      </section>
 
-      <p style="margin-top:1.2rem;"><a href="/calendar-de.html" class="cta">Kalender‑Tool öffnen</a></p>
+      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/de/pomodoro/pomodoro-index.html">Pomodoro</a> · <a href="/de/notes/notes-index.html">Notizen</a> · <a href="/de/timer/timer-index.html#startBtn">Aufgaben‑Timer</a></p>
 
-      <footer style="margin-top:1.4rem;color:var(--muted);font-size:.95rem;">
-        <p>Kontakt: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Datenschutz: <a href="/privacy/">Privacy Policy</a>.</p>
+      <p style="margin-top:1.2rem;">
+        <a href="/calendar-de.html" class="cta" aria-label="Kalender‑Tool öffnen">Kalender‑Tool öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktiere uns unter <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lies unsere <a href="/de/privacy/">Datenschutzrichtlinie</a>.</p>
       </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Calendar" button (link uses /calendar-de.html) -->
+  <a href="/calendar-de.html"
+     class="return-to-tool"
+     id="returnToToolCalendar"
+     aria-label="Zurück zum Kalender">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zurück zum Kalender</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCalendar');
+      if (!btn) return;
+      // keyboard activation
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      // visual tweak when scrolling
+      function toggleOpacity(){
+        try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){}
+      }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

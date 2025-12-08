@@ -1,18 +1,199 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>world-clock — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for world-clock guide (de)">
+  <meta charset="utf-8" />
+  <title>Weltzeituhr — Zeitzonen vergleichen und Termine sicher planen | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Umfassender Leitfaden zur Nutzung der Weltzeituhr: Zonen auswählen, Offsets lesen, Meetings über Regionen planen, Sommerzeit‑Fallstricke und Automatisierungstipps." />
+  <link rel="canonical" href="https://timerhaven.com/de/world-clock/world-clock-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Weltzeituhr zum Planen verwenden",
+        "description":"Zeitzonen vergleichen, lokale Zeiten für Teilnehmende anzeigen und Sommerzeit‑Verwirrung vermeiden. Anleitung mit Planungsrezepte, Umrechnungs‑Tipps und Automatisierungs‑Ideen.",
+        "image":"https://timerhaven.com/assets/images/world-clock-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["Weltzeituhr (TimerHaven)","Kalender","Zeitzonen‑Angaben der Teilnehmenden"],
+        "step":[
+          {"@type":"HowToStep","name":"Referenzpunkte wählen","text":"Wählen Sie eine Organisator‑Referenz und fügen Sie Teilnehmer‑Zonen hinzu, um lokale Zeiten zu vergleichen."},
+          {"@type":"HowToStep","name":"DST‑Wechsel beachten","text":"Prüfen Sie Sommerzeitregeln und bestätigen Sie Zeiten in der Nähe von Übergangsdatumsangaben."},
+          {"@type":"HowToStep","name":"Lokale Zeiten teilen","text":"Teilen Sie Slots mit Organisator‑ und Teilnehmer‑lokalen Zeiten, um Missverständnisse zu vermeiden."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Wie gehe ich mit Sommerzeit‑Übergängen um?","acceptedAnswer":{"@type":"Answer","text":"Vermeiden Sie, wenn möglich, Termine an DST‑Übergangstagen; andernfalls bestätigen Sie lokale Zeiten explizit und fügen Sie IANA‑Zeitzonenkennungen in Einladungen hinzu."}},
+          {"@type":"Question","name":"Sollte ich mehrere lokale Zeiten in Einladungen anzeigen?","acceptedAnswer":{"@type":"Answer","text":"Ja — die Anzeige von Organisator‑ und Teilnehmer‑lokalzeiten reduziert Fehler, besonders bei verteilten Teams."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">world-clock — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Weltzeituhr — Zeitzonen vergleichen und Termine sicher planen</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — verteiltes Arbeiten & Terminplanung</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 12–16 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Das Planen über Zeitzonen hinweg ist eine häufige Fehlerquelle. Eine verlässliche Weltzeituhr hilft, lokale Zeiten zu vergleichen, Sommerzeit‑Probleme zu vermeiden und Einladungen eindeutig zu kommunizieren. Dieser Leitfaden behandelt Zeitzonengrundlagen, Planungsrezepte, DST‑Fallen, IANA‑Bezeichnungen, Automatisierungs‑Tipps und Sharing‑Muster, die Fehler reduzieren.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#basics">Grundlagen zu Zeitzonen</a> ·
+        <a href="#dst">Sommerzeit & Fallstricke</a> ·
+        <a href="#planning">Planungsrezepte</a> ·
+        <a href="#naming">IANA‑Bezeichnungen & klare Labels</a> ·
+        <a href="#automation">Automatisierung & Kalender‑Tipps</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="basics" class="section" aria-labelledby="basics-title">
+        <h2 id="basics-title">Grundlagen — Offsets, UTC und lokale Zeit</h2>
+        <p>Zeitzonen sind relativ zu Coordinated Universal Time (UTC) definiert (z. B. UTC+1). Kommunizieren Sie stets sowohl die Uhrzeit als auch die Zone oder den Offset, wenn Sie über Regionen hinweg terminieren.</p>
+
+        <ul>
+          <li><strong>UTC‑Referenz:</strong> Verwenden Sie UTC für systemseitige Koordination, um lokale Mehrdeutigkeiten zu vermeiden.</li>
+          <li><strong>Lokale Zeiten:</strong> Für Einladungen zeigen Sie lokal konvertierte Zeiten für Empfänger an — idealerweise sowohl Organisator‑ als auch Empfänger‑Zeit.</li>
+          <li><strong>24‑ vs. 12‑Stunden:</strong> Verwenden Sie das Format, das Ihr Publikum versteht — 24‑Stunden reduziert AM/PM‑Verwirrung.</li>
+        </ul>
+      </section>
+
+      <section id="dst" class="section" aria-labelledby="dst-title">
+        <h2 id="dst-title">Sommerzeit — häufige Fallstricke</h2>
+        <p>Sommerzeit‑Übergänge verschieben lokal den Offset und führen oft zu Planungsfehlern, besonders rund um das Übergangsdatum. Vermeiden Sie nach Möglichkeit wiederkehrende Termine an DST‑Tagen oder fügen Sie die Zeitzonenkennung in Einladungen ein.</p>
+
+        <h3>Praktische Regeln</h3>
+        <ul>
+          <li>Vermeiden Sie kritische Deadlines oder internationale Meetings an DST‑Übergangstagen.</li>
+          <li>Nennen Sie die Zeitzone explizit (z. B. "09:00 America/Los_Angeles (PDT)"), statt sich auf lokale Bezeichnungen zu verlassen.</li>
+          <li>Beim Bestätigen zeigen Sie Teilnehmern ihre lokale Zeit und zusätzlich die UTC‑Zeit als definitive Referenz an.</li>
+        </ul>
+      </section>
+
+      <section id="planning" class="section" aria-labelledby="planning-title">
+        <h2 id="planning-title">Planungsrezepte — Reibung minimieren</h2>
+        <p>Nutzen Sie die Weltzeituhr, um faire Zeitfenster zu finden und Zeiten klar zu kommunizieren.</p>
+
+        <div class="recipe" aria-labelledby="small-meeting">
+          <strong id="small-meeting">Kleines verteiltes Team — 30‑Minuten‑Meeting</strong>
+          <ol>
+            <li>Sammeln Sie bevorzugte Verfügbarkeitsfenster der Teilnehmenden (lokaler Morgen/Nachmittag).</li>
+            <li>Zeigen Sie Kandidatenzeiten in den lokalen Zeiten der Teilnehmenden mithilfe der Weltzeituhr an.</li>
+            <li>Bieten Sie 2–3 Slots an und finalisieren Sie zügig; fügen Sie Organisator‑ und Teilnehmer‑Lokaluhrzeiten in die Einladung.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="global">
+          <strong id="global">Globales Town‑Hall — Unannehmlichkeiten minimieren</strong>
+          <ol>
+            <li>Wählen Sie Zeitfenster, die extreme frühe/späte Zeiten für die meisten Teilnehmenden vermeiden; rotieren Sie die Zeiten bei wiederkehrenden Events.</li>
+            <li>Nehmen Sie eine Aufzeichnung auf und teilen Sie sie für Teilnehmende in ungünstigen Zeitslots.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="naming" class="section" aria-labelledby="naming-title">
+        <h2 id="naming-title">IANA‑Bezeichnungen & klare Labels verwenden</h2>
+        <p>IANA‑Zone (z. B. Europe/London, America/New_York) ist eindeutig und beinhaltet DST‑Regeln. Zeigen Sie in Nachrichten sowohl ein lesbares Label als auch die IANA‑Kennung oder den UTC‑Offset an.</p>
+
+        <pre class="template">Beispiel Einladungszeile:
+Meeting: Project Sync
+Zeit: 2025‑11‑30 09:00 America/Los_Angeles (UTC‑8) — 17:00 Europe/London (UTC+0)
+Agenda: ...</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Automatisierung & Kalender‑Tipps</h2>
+        <p>Gestalten Sie Planung vorhersehbar mit Automatisierung und klaren Kalendereinstellungen.</p>
+
+        <ul>
+          <li><strong>Zeitzone pro Ereignis setzen:</strong> Speichern Sie die Organisator‑Zeitzone in den Event‑Metadaten, damit Einladungen korrekt konvertiert werden.</li>
+          <li><strong>Zeitzonen‑bewusste Links:</strong> Fügen Sie konvertierte lokale Zeiten wichtiger Teilnehmender in die Eventbeschreibung ein.</li>
+          <li><strong>Scheduling‑Tools nutzen:</strong> Verwenden Sie Tools, die optimale Fenster anhand von Teilnehmer‑Zeitzonen und Arbeitszeiten vorschlagen.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Was tun, wenn Teilnehmende unterschiedliche Zeiten sehen?<br><strong>A:</strong> Bestätigen Sie die Zeitzone des Events und fügen Sie die UTC‑Zeit in die Einladung. Fordern Sie Teilnehmende auf, das Event in ihrer Kalenderapp zu öffnen, um die automatische Konvertierung zu prüfen.</p>
+
+          <p><strong>F:</strong> Sollte ich immer in UTC planen?<br><strong>A:</strong> UTC ist ideal für Systeme und Automatisierung, aber für die Kommunikation mit Menschen zeigen Sie lokale Zeiten und ergänzen UTC als Fallback. Lokale Zeiten sind für die meisten Nutzer verständlicher; UTC beseitigt technische Mehrdeutigkeiten.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/world-clock-de.html">Weltzeituhr öffnen</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA Zeitzonen</a></li>
+          <li><a href="https://timeanddate.com" target="_blank" rel="noopener">timeanddate.com — Konvertierungen & DST</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/world-clock-de.html" class="cta" aria-label="Weltzeituhr öffnen">Weltzeituhr öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktieren Sie uns unter <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/de/privacy/">Datenschutzerklärung</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/world-clock-de.html" class="return-to-tool" id="returnToToolWorldClock" aria-label="Zurück zur Weltzeituhr">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zur Weltzeituhr</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWorldClock');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

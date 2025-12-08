@@ -71,6 +71,14 @@
       .calendar-select{width:48%; max-width:220px; margin-top:.45rem;}
       .calendar-nav{margin-right:.5rem;}
     }
+
+    /* CTA link style (blue text) — ensure visible blue link for "Read full guide" */
+    .cta {
+      color: #0d6efd;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .cta:hover { text-decoration: underline; color: #0b5ed7; }
   </style>
 <!-- Defensive override: force true horizontal table layout for the calendar -->
 <style id="calendar-table-fix">
@@ -137,6 +145,12 @@
 <div class="help-section">
 <b id="tool-help">انقر على أي يوم لإضافة/عرض/تعديل ملاحظاتك. يمكن إضافة ملاحظات متعددة لكل يوم وتبقى محفوظة!</b>
 </div>
+
+<!-- ADDED: visible "Read full guide" blue link under the help text (right-aligned for RTL) -->
+<p style="margin-top:0.6rem; text-align:right;">
+  <a class="cta" href="/ar/calendar-planning/calendar-planning-index.html" aria-label="اقرأ المقال كاملًا">اقرأ المقال كاملًا</a>
+</p>
+
 <!-- Header controls (buttons + month/year selects) -->
 <div aria-label="تنقل التقويم" class="calendar-header">
 <div aria-label="تنقل شهر/سنة" class="calendar-nav" role="toolbar">
@@ -447,5 +461,5 @@
 <footer style="margin-top:1.2rem;text-align:right;color:#6b7c89;font-size:0.95rem;">
     © 2025 TimerHaven. جميع الأدوات مجانية وتحترم الخصوصية.
   </footer>
-<p style="margin-top:1rem;"><a class="cta" href="/ar/calendar/calendar-index.html">Read full guide</a></p></body>
+</body>
 </html>

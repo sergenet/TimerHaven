@@ -1,104 +1,82 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="el">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Μετατροπέας μονάδων</title>
-<meta content="Μετατρέψτε μήκος, βάρος, θερμοκρασία και άλλες μονάδες. Μάθετε πώς να χρησιμοποιείτε τον Μετατροπέα, λάβετε συμβουλές και άρθρα." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
-    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-    .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; align-items:center; }
-    .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
-    /* hide language selector visually but leave markup for JS */
-    .top-row { display: none !important; }
-
-    /* Layout: make cards same-height and centered */
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:stretch; flex-wrap:wrap; }
-
-    .article-card, .tool-card {
-      background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06);
-      padding:1.3rem; box-sizing:border-box; min-width:280px;
-      display:flex; flex-direction:column;
-    }
-
-    /* ensure left & right cards match the middle card height visually */
-    .article-card { width:330px; min-height:340px; justify-content:space-between; align-items:flex-start; }
-    .tool-card { width:410px; min-width:240px; min-height:330px; display:flex; flex-direction:column; }
-
-    /* Fix heading overflow and long-word wrapping in the left card */
-    .article-card h2, .article-card li, .article-card ol {
-      overflow-wrap:break-word;
-      word-break:break-word;
-      hyphens:auto;
-    }
-    /* Slightly reduce left card heading size to avoid forced overflow/line breaks */
-    .article-card h2 { color:#185a9d; font-size:1.3rem; margin-bottom:.6rem; line-height:1.12; }
-
-    /* Reduce list bottom spacing so the button can sit comfortably inside */
-    .article-card ol { padding-left:1.1rem; color:#374151; margin-bottom:0.6rem; }
-
-    /* Button inside left card should stretch like the right card */
-    .article-card .btn { align-self:stretch; margin-top:.6rem; box-sizing:border-box; }
-
-    .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Μετατροπέας μονάδων — TimerHaven</title>
+  <meta name="description" content="Μετατρέψτε μήκος, βάρος, θερμοκρασία και άλλες μονάδες. Μάθετε πώς να χρησιμοποιείτε τον Μετατροπέα, λάβετε συμβουλές και άρθρα.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff;--link-blue:#0d6efd}
+    html,body{height:100%}
+    body { background:var(--bg); font-family:'Montserrat', Arial, sans-serif; color:#0b2545; margin:0; padding:2rem; }
+    .container { max-width:720px; margin:0 auto; }
+    .card { background:var(--card); border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.06); padding:1.6rem 1.5rem; box-sizing:border-box; }
+    .back-link{display:inline-block;margin-bottom:.75rem;color:var(--link-blue) !important;text-decoration:none;font-weight:700}
+    .back-link:hover{text-decoration:underline}
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .cta { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .9rem; border-radius:999px; background:var(--link-blue); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; box-shadow: 0 6px 18px rgba(13,110,253,0.12); }
     .converter-form { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center; }
-    .converter-result { font-weight:700; font-size:1.12em; margin-bottom:1rem; }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
-    .btn-small { padding:.35rem .7rem; font-size:.9rem; }
-    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-
-    @media (max-width:900px) {
-      .center-row{flex-direction:column;align-items:center;}
-      .article-card, .tool-card{width:98%; max-width:540px;}
-    }
+    .converter-result { font-weight:700; font-size:1.12em; margin-bottom:1rem; color:#102a43; min-height:1.2em; }
+    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
+    @media (max-width:900px) { .card{padding:1rem} }
+    /* Keep language selector markup for JS but hide visually (defensive) */
+    .top-row { display:none !important; }
   </style>
 </head>
 <body>
-<div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-<select aria-label="Επιλογή γλώσσας" class="language-select" id="language-select-top">
-<option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option selected="" value="el">Ελληνικά</option><option value="ar">العربية</option>
-</select>
-</div>
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">Μετατροπέας μονάδων</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">Μετατρέψτε μήκος, βάρος, θερμοκρασία και άλλες μονάδες. Μάθετε πώς να χρησιμοποιείτε τον Μετατροπέα, λάβετε συμβουλές και άρθρα.</p>
-</div>
-<div class="center-row">
+  <script>try{ localStorage.setItem('timerhavenLang','el'); }catch(e){};</script>
 
-<div aria-label="Μετατροπέας μονάδων" class="tool-card" role="region">
-<a class="back-link" href="index.html" style="text-decoration:none; color:#0d6efd; font-weight:600; margin-bottom:.4rem; display:block;">← Επιστροφή στο κύριο μενού</a>
-<h3><i class="fa fa-ruler-combined"></i> Μετατροπέας μονάδων</h3>
-<div class="unit-section">
-<form class="converter-form" id="unitForm">
-<select class="form-select" id="typeSelect" style="max-width:140px;">
-<option value="length">Μήκος</option>
-<option value="weight">Βάρος</option>
-<option value="temperature">Θερμοκρασία</option>
-</select>
-<input class="form-control" id="inputValue" placeholder="Τιμή" style="max-width:100px;" type="number"/>
-<select class="form-select" id="fromUnit" style="max-width:140px;"></select>
-<span style="font-size:1.3em;">→</span>
-<select class="form-select" id="toUnit" style="max-width:140px;"></select>
-<button class="btn btn-primary btn-sm" type="submit">Μετατροπή</button>
-</form>
-<div class="converter-result" id="unitResult"></div>
-</div>
-<details class="faq-section">
-<summary>Συχνές ερωτήσεις</summary>
-<p style="margin-top:.6rem;">Εισάγετε μια τιμή, επιλέξτε τύπο &amp; μονάδες, και πατήστε Μετατροπή.</p>
-</details>
-</div>
+  <main class="container" role="main">
+    <article class="card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link">&larr;&nbsp;Επιστροφή στο κύριο μενού</a>
 
-</div>
-<footer class="site">© 2025 TimerHaven. <a href="privacy.html">Πολιτική</a></footer>
-</div>
-<script>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-ruler-combined" aria-hidden="true"></i> Μετατροπέας μονάδων</h3>
+
+      <p style="margin:0 0 .6rem 0;">
+        <a id="read-guide-btn" class="cta" href="/el/unit-converter/unit-converter-index.html" role="button" target="_blank" rel="noopener">Διαβάστε το πλήρες άρθρο</a>
+      </p>
+
+      <div class="unit-section" aria-live="polite">
+        <form id="unitForm" class="converter-form" onsubmit="return false;" aria-label="Φόρμα μετατροπής μονάδων">
+          <label for="typeSelect" class="visually-hidden">Τύπος</label>
+          <select id="typeSelect" class="form-select" style="max-width:140px;">
+            <option value="length">Μήκος</option>
+            <option value="weight">Βάρος</option>
+            <option value="temperature">Θερμοκρασία</option>
+          </select>
+
+          <label for="inputValue" class="visually-hidden">Τιμή</label>
+          <input type="number" id="inputValue" class="form-control" placeholder="Τιμή" style="max-width:100px;">
+
+          <label for="fromUnit" class="visually-hidden">Από</label>
+          <select id="fromUnit" class="form-select" style="max-width:120px;"></select>
+
+          <span aria-hidden="true" style="font-size:1.3em;">→</span>
+
+          <label for="toUnit" class="visually-hidden">Προς</label>
+          <select id="toUnit" class="form-select" style="max-width:120px;"></select>
+
+          <button id="convertBtn" class="btn btn-primary btn-sm" type="button">Μετατροπή</button>
+        </form>
+
+        <div id="unitResult" class="converter-result" aria-live="polite">Το αποτέλεσμα θα εμφανιστεί εδώ.</div>
+
+        <details class="faq-section">
+          <summary style="font-weight:700; font-size:1.02rem; cursor:pointer;">Συχνές ερωτήσεις</summary>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><strong>Υποστηρίζονται όλες οι μονάδες;</strong> Οι πιο κοινές μονάδες περιλαμβάνονται.</li>
+            <li><strong>Είναι δωρεάν η μετατροπή;</strong> Ναι — χρησιμοποιήστε το χωρίς περιορισμό.</li>
+            <li><strong>Μπορώ να μετατρέψω δεκαδικούς;</strong> Ναι — οι δεκαδικές τιμές υποστηρίζονται.</li>
+          </ul>
+        </details>
+      </div>
+    </article>
+  </main>
+
+  <script>
+  // Unit definitions & conversion logic (same as English version)
   const unitTypes = {
     length: {
       units: { "Meter": 1, "Kilometer": 1000, "Centimeter": 0.01, "Millimeter": 0.001, "Mile": 1609.34, "Yard": 0.9144, "Foot": 0.3048, "Inch": 0.0254 },
@@ -127,34 +105,47 @@
     const to = document.getElementById('toUnit');
     from.innerHTML = to.innerHTML = '';
     Object.keys(unitTypes[type].units).forEach(u => {
-      from.innerHTML += `<option value="${u}">${u}</option>`;
-      to.innerHTML += `<option value="${u}">${u}</option>`;
+      from.appendChild(new Option(u, u));
+      to.appendChild(new Option(u, u));
     });
   }
 
   const typeSelect = document.getElementById('typeSelect');
   const initialType = typeSelect.value || 'length';
-  typeSelect.addEventListener('change', function() {
-    populateUnits(this.value);
-  });
+  typeSelect.addEventListener('change', function() { populateUnits(this.value); });
   populateUnits(initialType);
 
-  document.getElementById('unitForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  function formatNumber(v) {
+    if (typeof v !== 'number' || !isFinite(v)) return v;
+    // trim to max 6 decimals, remove trailing zeros
+    return parseFloat(v.toFixed(6)).toString();
+  }
+
+  function doConvert() {
     const type = document.getElementById('typeSelect').value;
     const val = parseFloat(document.getElementById('inputValue').value);
     const from = document.getElementById('fromUnit').value;
     const to = document.getElementById('toUnit').value;
     const resultEl = document.getElementById('unitResult');
+
     if (isNaN(val)) {
-      resultEl.innerText = "Please enter a valid value.";
+      resultEl.innerText = "Παρακαλώ εισάγετε μια έγκυρη τιμή.";
       return;
     }
+
     let result = unitTypes[type].convert(val, from, to);
+    if (typeof result === 'number') result = formatNumber(result);
+
     resultEl.innerText = `${val} ${from} = ${result} ${to}`;
+  }
+
+  document.getElementById('convertBtn').addEventListener('click', doConvert);
+  document.getElementById('unitForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    doConvert();
   });
 
-  // language selector redirect (markup still present but hidden by CSS)
+  // language selector redirect (markup remains but hidden by CSS)
   (function() {
     var sel = document.getElementById('language-select-top');
     if (sel) {
@@ -165,6 +156,7 @@
     }
   })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/el/unit-converter/unit-converter-index.html">Read full guide</a></p></body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

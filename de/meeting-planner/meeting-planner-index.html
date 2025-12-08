@@ -1,18 +1,222 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>meeting-planner — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <title>Meeting Planner — Besprechungen effizient über Zeitzonen planen | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Leitfaden zur Planung und Koordination von Meetings: Einladungsmuster, Zeitzonenplanung, Agendengestaltung, Planungsrezepte und Möglichkeiten zum Teilen von Zeitvorschlägen." />
+  <link rel="canonical" href="https://timerhaven.com/de/meeting-planner/meeting-planner-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Effektive Meetings planen",
+        "description":"Praktische Rezepte zum Planen über Zeitzonen hinweg, zur Vorbereitung von Agenden, für effiziente Moderation und zum Teilen passender Meeting‑Termine.",
+        "image":"https://timerhaven.com/assets/images/meeting-planner-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Meeting Planner (TimerHaven)","Kalender","Zeitzonen der Teilnehmer"],
+        "step":[
+          {"@type":"HowToStep","name":"Zeitzonen sammeln","text":"Sammeln Sie die bevorzugte Zeitzone oder Stadt jedes Teilnehmers."},
+          {"@type":"HowToStep","name":"Zeitfenster vorschlagen","text":"Nutzen Sie den Planner, um 2–3 Kandidatenzeiten vorzuschlagen, die die Belastung über Zeitzonen minimieren."},
+          {"@type":"HowToStep","name":"Teilen und bestätigen","text":"Teilen Sie Zeiten als Organisator‑lokal → Teilnehmer‑lokal, um Verwirrung zu vermeiden; bestätigen Sie einen Slot und senden Sie die Kalendereinladung."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Wie viele Optionen sollte ich vorschlagen?","acceptedAnswer":{"@type":"Answer","text":"Bieten Sie 2–3 sinnvolle Zeitfenster an. Zu viele Optionen verlangsamen Entscheidungen; zu wenige könnten Verfügbarkeit ausschließen."}},
+          {"@type":"Question","name":"Sollte ich immer lokale Zeiten der Teilnehmer anzeigen?","acceptedAnswer":{"@type":"Answer","text":"Ja — die Anzeige von Organisator‑ und Teilnehmer‑Lokaluhrzeiten reduziert Fehler und erhöht Vertrauen."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for meeting-planner guide (de)">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">meeting-planner — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Meeting Planner — Besser planen über Zeitzonen hinweg</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Meetings & Zusammenarbeit</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 12–18 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Meetings mit verteilten Teams erfordern Klarheit und Rücksichtnahme. Der Meeting Planner hilft dabei, Termine vorzuschlagen, lokale Zeiten der Teilnehmenden zu visualisieren und Slots zu wählen, die Unannehmlichkeiten minimieren. Dieser Leitfaden behandelt die Sammlung von Teilnehmerdaten, Auswahl von Zeitfenstern, Agendengestaltung, Best Practices beim Teilen und typische Fallstricke rund um Zeitzonen.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#collect">Teilnehmer & Zeitzonen sammeln</a> ·
+        <a href="#propose">Terminvorschläge sinnvoll machen</a> ·
+        <a href="#agenda">Agenda entwerfen</a> ·
+        <a href="#timezone">Zeitzonen‑Fallen</a> ·
+        <a href="#sync">Rezepte für synchrone Meetings</a> ·
+        <a href="#share">Teilen & bestätigen</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="collect" class="section" aria-labelledby="collect-title">
+        <h2 id="collect-title">Teilnehmer und Zeitzonen erfassen</h2>
+        <p>Beginnen Sie damit, die bevorzugte Zeitzone oder Stadt jedes Eingeladenen sowie sinnvolle Verfügbarkeitsfenster (Morgen/Nachmittag) zu sammeln. Nutzen Sie den Planner, um Städte zu speichern und lokale Zeiten schnell zu berechnen.</p>
+
+        <h3>Praktische Tipps</h3>
+        <ul>
+          <li>Fragen Sie nach bevorzugten Zeitfenstern in der lokalen Zeit des Teilnehmers.</li>
+          <li>Erlauben Sie Eingabemöglichkeiten wie "nicht früher als" oder "nicht später als", um die Auswahl einzugrenzen.</li>
+          <li>Bevorzugen Sie — wenn möglich — Zeitfenster um die Mittagszeit, da diese für viele Regionen moderate Zeiten erlauben.</li>
+        </ul>
+      </section>
+
+      <section id="propose" class="section" aria-labelledby="propose-title">
+        <h2 id="propose-title">Termine vorschlagen — die Auswahl klein halten</h2>
+        <p>Bieten Sie 2–3 sinnvolle Slots an statt einer offenen Umfrage. Zeigen Sie in der Kommunikation die Organisator‑Zeit → Teilnehmer‑Zeit, um Missverständnisse zu vermeiden.</p>
+
+        <div class="recipe">
+          <strong>Vorschlags‑Rezept</strong>
+          <ol>
+            <li>Wählen Sie 2–3 Kandidatenfenster, die die meisten Einschränkungen berücksichtigen.</li>
+            <li>Teilen Sie die Liste mit den lokalen Zeiten für jeden Teilnehmer (Organisator → Teilnehmer lokal).</li>
+            <li>Bitten Sie um Präferenz oder Konfliktmeldung und finalisieren Sie zügig.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="agenda" class="section" aria-labelledby="agenda-title">
+        <h2 id="agenda-title">Kurze Agenda gestalten — timeboxen und Entscheidungen verankern</h2>
+        <p>Eine Agenda erzeugt Ergebnisse. Nennen Sie Ziele, Zeitzuweisungen, Rollen (Moderator, Protokollant) und erwartete Entscheidungen oder Ergebnisse.</p>
+
+        <ul>
+          <li><strong>Mit Ziel starten:</strong> eine einprägsame Ein‑Satz‑Formulierung des Meeting‑Ergebnisses.</li>
+          <li><strong>Agenda timeboxen:</strong> ordnen Sie jedem Thema Minuten zu und tracken Sie die Zeit im Meeting.</li>
+          <li><strong>Mit Entscheidungen enden:</strong> reservieren Sie 5 Minuten, um nächste Schritte und Verantwortlichkeiten zu bestätigen.</li>
+        </ul>
+      </section>
+
+      <section id="timezone" class="section" aria-labelledby="timezone-title">
+        <h2 id="timezone-title">Zeitzonenfallen & Sommerzeit</h2>
+        <p>Achten Sie auf Übergänge durch Sommerzeit und unklare Zeitzonennamen. Wann immer möglich, verwenden Sie IANA‑Zeitzonenbezeichner (z. B. Europe/London) und zeigen Sie explizite Offsets an.</p>
+
+        <h3>Checklist</h3>
+        <ul>
+          <li>Prüfen Sie das Datum und ob DST in den jeweiligen Zeitzonen greift.</li>
+          <li>Zeigen Sie Zeitzonennamen und Offsets (z. B. GMT+1) in der Kommunikation an.</li>
+          <li>Testen Sie Links und Kalendereinladungen in einem Beispielteilnehmerkonto bei kritischen Terminen.</li>
+        </ul>
+      </section>
+
+      <section id="sync" class="section" aria-labelledby="sync-title">
+        <h2 id="sync-title">Rezepte für synchrone Meetings</h2>
+        <p>Hier finden Sie Rezepte für gängige Meetingtypen, mit denen Sie effizienter arbeiten können.</p>
+
+        <div class="recipe">
+          <strong>Standup (15 Minuten)</strong>
+          <ol>
+            <li>Strenger 15‑Minuten‑Timer. Jeder Teilnehmer beantwortet drei Fragen (gestern/heute/Blocker).</li>
+            <li>Moderator überwacht die Zeit und parkt tiefergehende Diskussionen als Follow‑Ups.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Entscheidungsmeeting (30–60 Minuten)</strong>
+          <ol>
+            <li>Verteilen Sie Pre‑Read‑Materialien 24–48 Stunden vorher.</li>
+            <li>Starten Sie mit den Entscheidungskriterien und Optionen; erlauben Sie kurze Diskussionen und schließen Sie mit einer Abstimmung oder einer Besitzerentscheidung ab.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="share" class="section" aria-labelledby="share-title">
+        <h2 id="share-title">Teilen, bestätigen & Einladungen senden</h2>
+        <p>Nachdem Sie einen Slot bestätigt haben, senden Sie eine Kalendereinladung mit zeitzonen‑sensitiven Zeiten, Agenda und Anhängen. Fügen Sie eine kurze "Was vorzubereiten ist"-Notiz und erwartete Ergebnisse hinzu.</p>
+
+        <ul>
+          <li>Fügen Sie einen Link zur Meeting‑Notiz oder zum kollaborativen Dokument in die Einladung ein.</li>
+          <li>Nennen Sie erwartete Entscheidungen oder Ergebnisse in der Beschreibung.</li>
+          <li>Setzen Sie die Sichtbarkeit des Events auf "Beschäftigt", um den Slot zu schützen.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Fehlerbehebung</h2>
+        <ul>
+          <li><strong>Verwirrung über Zeit:</strong> Senden Sie die Zeiten mit teilnehmer‑lokalen Labels erneut, wenn es Unstimmigkeiten gibt.</li>
+          <li><strong>Letzte‑Minute‑Zeitzonenänderungen:</strong> Bestätigen Sie die Teilnehmerzeiten und bieten Sie bei Bedarf Alternativen an.</li>
+          <li><strong>No‑Shows:</strong> Erfassen Sie, wer nicht teilnehmen konnte, und planen Sie mit wenigen Kandidaten neu.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Wie gehe ich mit sehr großen, verteilten Teams um?<br><strong>A:</strong> Teilen Sie in kleinere Arbeitsgruppen auf oder nutzen Sie asynchrone Updates; große synchrone Meetings sind teuer und häufig ineffizient.</p>
+
+          <p><strong>F:</strong> Sollte ich immer zwei Zeitzonen anzeigen?<br><strong>A:</strong> Zeigen Sie immer Organisator‑ und Teilnehmer‑Lokaluhrzeit an; bei vielen Teilnehmern lohnt sich eine Tabelle mit lokalen Zeiten für den gewählten Slot.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/meeting-planner-de.html">Meeting Planner öffnen</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA Zeitzonen</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/meeting-planner-de.html" class="cta" aria-label="Meeting Planner öffnen">Meeting Planner öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktieren Sie uns unter <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/de/privacy/">Datenschutzerklärung</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/meeting-planner-de.html" class="return-to-tool" id="returnToToolMeeting" aria-label="Zurück zum Meeting Planner">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zum Meeting Planner</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolMeeting');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

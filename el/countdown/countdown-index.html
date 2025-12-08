@@ -1,18 +1,250 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>countdown — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for countdown guide (el)">
+  <meta charset="utf-8" />
+  <title>Χρονόμετρο αντίστροφης μέτρησης — Σχεδιάστε προθεσμίες & διατηρήστε τη συγκέντρωση | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Οδηγός για τη χρήση του χρονόμετρου αντίστροφης μέτρησης: προγραμματισμός προθεσμιών, επιλογή διάρκειας, ροές εργασίας για συσκέψεις και συνεδρίες εστίασης, ειδοποιήσεις και αντιμετώπιση προβλημάτων." />
+  <link rel="canonical" href="https://timerhaven.com/el/countdown/countdown-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Χρησιμοποιήστε αποτελεσματικά το Χρονόμετρο Αντίστροφης Μέτρησης",
+        "description":"Ορίστε και διαχειριστείτε χρονόμετρα αντίστροφης μέτρησης για προθεσμίες, συσκέψεις, συγκεντρωμένη εργασία και υπενθυμίσεις. Ο οδηγός καλύπτει τον προγραμματισμό, πρακτικά μοτίβα, επιλογές ειδοποιήσεων και βέλτιστες πρακτικές για εμπέδωση του χρονικού αισθητηρίου.",
+        "image":"https://timerhaven.com/assets/images/countdown-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Χρονόμετρο αντίστροφης μέτρησης (TimerHaven)","Ημερολόγιο ή λίστα εργασιών","Ήχοι ειδοποίησης σε τηλέφωνο ή υπολογιστή"],
+        "step":[
+          {"@type":"HowToStep","name":"Καθορίστε τον σκοπό","text":"Επιλέξτε αν το χρονόμετρο προορίζεται για προθεσμία, σύσκεψη ή συνεδρία συγκέντρωσης."},
+          {"@type":"HowToStep","name":"Ορίστε τη διάρκεια","text":"Καταχωρίστε λεπτά και δευτερόλεπτα· για συσκέψεις προτιμήστε στρογγυλά λεπτά· για εστιασμένη εργασία χρησιμοποιήστε διαστήματα που ταιριάζουν στη ροή σας."},
+          {"@type":"HowToStep","name":"Επιλέξτε ειδοποίηση","text":"Ενεργοποιήστε ήχο ή ειδοποίηση επιφάνειας εργασίας ώστε να μη χάσετε τη λήξη· δοκιμάστε την ένταση και τις άδειες."},
+          {"@type":"HowToStep","name":"Εκτελέστε και ανασκοπήστε","text":"Εκκινήστε το χρονόμετρο και καταγράψτε τυχόν διακοπές· μετά τη συνεδρία καταγράψτε ενέργειες ή εκκρεμότητες."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Θα συνεχίσει να τρέχει το χρονόμετρο αν αλλάξω καρτέλα;","acceptedAnswer":{"@type":"Answer","text":"Ναι — οι σύγχρονοι browsers διατηρούν τους JavaScript timers όσο είναι ανοικτή η καρτέλα. Το φόντο μπορεί να μειώσει την ακρίβεια σε ορισμένα προγράμματα περιήγησης, όμως η αντίστροφη μέτρηση θα συνεχίσει να μετρά."}},
+          {"@type":"Question","name":"Μπορώ να ορίσω πολύ μεγάλες διάρκειες;","acceptedAnswer":{"@type":"Answer","text":"Ναι — εισάγετε όσα λεπτά επιτρέπει το UI. Για πολύ μεγάλες αντίστροφες μετρήσεις, σκεφτείτε να καταχωρήσετε και την ώρα λήξης στο ημερολόγιό σας."}},
+          {"@type":"Question","name":"Ποιες επιλογές ειδοποίησης είναι οι καλύτερες;","acceptedAnswer":{"@type":"Answer","text":"Συνδυάστε έναν ακουστό ήχο με ειδοποίηση επιφάνειας εργασίας, αν είναι διαθέσιμη. Για συσκέψεις προτιμήστε πιο ισχυρό ήχο· για δεσμεύσεις εστίασης, ένα ήπιο τόνισμα είναι καταλληλότερο."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">countdown — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Χρονόμετρο αντίστροφης μέτρησης — Χρησιμοποιήστε προθεσμίες για εστίαση και ολοκλήρωση</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας άρθρου">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας για παραγωγικότητα και UX</div>
+          <div class="meta">Δημοσιεύτηκε: 2025-11-24 · Χρόνος ανάγνωσης: 12–16 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Τα χρονόμετρα αντίστροφης μέτρησης είναι ένα απλό αλλά ισχυρό εργαλείο για να δημιουργήσετε αίσθηση επείγοντος, να διαχειριστείτε συναντήσεις και να προστατέψετε σύντομα διαστήματα συγκέντρωσης. Αυτός ο οδηγός καλύπτει πρακτικές ρυθμίσεις για εργασιακές συνεδρίες, συναντήσεις και προσωπικές ρουτίνες· επιλογή ειδοποιήσεων και λεπτομερειών· ενσωμάτωση με ημερολόγια και ροές Pomodoro· και αντιμετώπιση ζητημάτων αδειών και ακρίβειας.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#why">Γιατί βοηθούν οι αντίστροφες μετρήσεις</a>
+        <a href="#setup">Επιλογή διάρκειας & επιλογές</a>
+        <a href="#workflows">Πρακτικές ροές εργασίας</a>
+        <a href="#alerts">Ειδοποιήσεις & προσβασιμότητα</a>
+        <a href="#integration">Ενσωμάτωση με ημερολόγιο & Pomodoro</a>
+        <a href="#precision">Ακρίβεια & περιορισμοί στο παρασκήνιο</a>
+        <a href="#troubleshoot">Αντιμετώπιση προβλημάτων</a>
+        <a href="#faq">Συχνές Ερωτήσεις</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Γιατί βοηθούν οι αντίστροφες μετρήσεις</h2>
+        <p>Οι προθεσμίες αλλάζουν τη συμπεριφορά. Μια ορατή αντίστροφη μέτρηση εστιάζει την προσοχή μετατρέποντας το απροσδιόριστο χρόνο σε συγκεκριμένο πόρο. Για πολλές εργασίες, ένα σύντομο χρονόμετρο δημιουργεί μια «έκρηξη» που μειώνει την αναβλητικότητα και βοηθά να κλείσετε ένα καθαρό σημείο τερματισμού — ιδανικό για ταχυδιόρθωση email, σύντομες επεξεργασίες ή χρονισμένες ασκήσεις όπως η πρόβα παρουσίασης.</p>
+
+        <p>Χρησιμοποιήστε αντίστροφες μετρήσεις όταν χρειάζεστε:</p>
+        <ul>
+          <li>Σαφή, πεπερασμένα διαστήματα εργασίας (π.χ. 15 λεπτά για τακτοποίηση).</li>
+          <li>Οπτικά σήματα για διαχείριση συσκέψεων και διαλειμμάτων.</li>
+          <li>Αξιόπιστη υπενθύμιση ότι μια προθεσμία πλησιάζει, ώστε να δώσετε προτεραιότητα τώρα.</li>
+        </ul>
+      </section>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Επιλογή διάρκειας και ρυθμίσεων</h2>
+        <p>Επιλέξτε διάρκεια με σκοπό. Διάφορες εργασίες ωφελούνται από διαφορετικά μήκη. Επιλέξτε αρχικά ελαφρώς συντηρητική διάρκεια και προσαρμόστε μετά από μέτρηση του πραγματικού χρόνου ολοκλήρωσης.</p>
+
+        <h3>Συνηθισμένες διάρκειες και πότε ταιριάζουν</h3>
+        <ul>
+          <li><strong>5–10 λεπτά:</strong> Γρήγοροι έλεγχοι, μικρά καθήκοντα, μικρά διαλείμματα.</li>
+          <li><strong>15–30 λεπτά:</strong> Ταξινόμηση email, σύντομες επεξεργασίες ή σύντομες συνεδρίες μάθησης.</li>
+          <li><strong>45–90 λεπτά:</strong> Μεγαλύτερη εστιασμένη εργασία ή τμήματα συσκέψεων (συνδυάστε με προπαρασκευαστικά βήματα).</li>
+          <li><strong>Προσαρμοσμένες διάρκειες:</strong> Χρησιμοποιήστε ακριβή λεπτά για πρόβες ή χρονικοποιημένες συνεντεύξεις (π.χ. 12 ή 20 λεπτά).</li>
+        </ul>
+
+        <h3>Επιλογές προς σκέψη</h3>
+        <ul>
+          <li><strong>Ήχος vs ειδοποίηση επιφάνειας εργασίας:</strong> Ήχος όταν δεν παρακολουθείτε την οθόνη· ειδοποίηση για ήσυχη εργασία με ορατό σήμα.</li>
+          <li><strong>Αυτόματη έναρξη επόμενης περιόδου:</strong> Για αλυσίδες διαστημάτων ενεργοποιήστε προσεκτικά για να αποφύγετε εκπλήξεις.</li>
+          <li><strong>Παύση/συνέχιση:</strong> Χρήσιμο για διατήρηση του εναπομείναντος χρόνου σε περίπτωση διακοπής.</li>
+        </ul>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Πρακτικές ροές εργασίας</h2>
+        <p>Παρακάτω υπάρχουν ροές εργασίας που αντιστοιχούν σε κοινές ανάγκες. Χρησιμοποιήστε τες ως αφετηρία και προσαρμόστε στη ρουτίνα σας.</p>
+
+        <div class="recipe" aria-labelledby="email-tidy">
+          <strong id="email-tidy">Ταξινόμηση email — 25 λεπτά</strong>
+          <ol>
+            <li>Ορίστε 25 λεπτά. Καθαρίστε τα πιο σημαντικά μηνύματα μόνο.</li>
+            <li>Χρησιμοποιήστε τα πρώτα 5 λεπτά για γρήγορο σκανάρισμα και σήμανση, μετά αφιερώστε τα υπόλοιπα 20 για επίλυση ή ανάθεση.</li>
+            <li>Στο τέλος, αρχειοθετήστε ή αναβάλετε τα υπόλοιπα και καταγράψτε τα επόμενα βήματα στο σύστημα εργασιών σας.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="meeting">
+          <strong id="meeting">Συσκέψεις — προειδοποίηση στο τέλος της ατζέντας</strong>
+          <ol>
+            <li>Ορίστε αντίστροφη μέτρηση για τα τελευταία 5 λεπτά της συνάντησης για να προβάλετε ενέργειες και να κλείσετε αποφάσεις.</li>
+            <li>Μοιραστείτε την αντίστροφη μέτρηση ή κάντε κοινή οθόνη, ώστε όλοι να γνωρίζουν τον υπόλοιπο χρόνο.</li>
+            <li>Χρησιμοποιήστε πιο δυνατό τόνο στο τέλος της συνάντησης ώστε και οι απομακρυσμένοι συμμετέχοντες να τον αντιληφθούν.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="focus">
+          <strong id="focus">Συγκεντρωμένη άσκηση — 45 λεπτά</strong>
+          <ol>
+            <li>Κλείστε 45 λεπτά και ορίστε την αντίστροφη μέτρηση.</li>
+            <li>Κάντε ένα σύντομο τελετουργικό προετοιμασίας (σχέδιο + ανοικτές αναφορές) για 3–5 λεπτά.</li>
+            <li>Εργαστείτε αδιάλειπτα· αν συμβεί διακοπή, καταγράψτε την και συνεχίστε.</li>
+            <li>Στο τέλος, καταγράψτε πρόοδο και προγραμματίστε το επόμενο βήμα.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Ειδοποιήσεις & προσβασιμότητα</h2>
+        <p>Οι ειδοποιήσεις συνδέουν το χρονόμετρο με τη συμπεριφορά σας. Επιλέξτε τρόπους που ταιριάζουν στο περιβάλλον: γραφείο, απομακρυσμένη εργασία ή ήσυχη συγκέντρωση.</p>
+
+        <h3>Καλές πρακτικές</h3>
+        <ul>
+          <li>Ενεργοποιήστε ειδοποιήσεις επιφάνειας εργασίας στον browser και δοκιμάστε μια φορά για να επιβεβαιώσετε ότι έχουν δοθεί άδειες.</li>
+          <li>Επιλέξτε έναν ήχο που ακούγεται αλλά δεν τρομάζει — κρατήστε πιο δυνατούς τόνους για κρίσιμες προθεσμίες.</li>
+          <li>Για προσβασιμότητα: διασφαλίστε υψηλή αντίθεση στο οπτικό στοιχείο του χρονόμετρου και σκεφτείτε δόνηση σε κινητά αν υποστηρίζεται.</li>
+        </ul>
+      </section>
+
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Ενσωμάτωση με ημερολόγιο & Pomodoro</h2>
+        <p>Οι αντίστροφες μετρήσεις είναι πιο αποτελεσματικές όταν συνδυάζονται με ένα σχέδιο. Χρησιμοποιήστε τες σε συνδυασμό με μπλοκ ημερολογίου ή ακολουθίες Pomodoro ώστε η χρονομέτρηση να αντιστοιχεί σε αποτελέσματα.</p>
+
+        <ul>
+          <li><strong>Σημάνσεις ημερολογίου:</strong> Προσθέστε την προγραμματισμένη ώρα λήξης στο συμβάν του ημερολογίου ώστε οι συμμετέχοντες να γνωρίζουν πότε αναμένεται να τελειώσετε.</li>
+          <li><strong>Αλυσιδωτά Pomodoro:</strong> Χρησιμοποιήστε αντίστροφες μετρήσεις για προσαρμοσμένες διάρκειες (π.χ. 40/10) και στη συνέχεια καταγράψτε τους κύκλους στο ημερολόγιο εργασιών.</li>
+          <li><strong>Προετοιμασία συσκέψεων:</strong> Μία σύντομη αντίστροφη μέτρηση πριν από τη σύσκεψη βοηθά στη μετάβαση και στη σύνοψη αποφάσεων.</li>
+        </ul>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Ακρίβεια & περιορισμοί στο παρασκήνιο</h2>
+        <p>Οι timers των browser είναι σε γενικές γραμμές ακριβείς για χρήστη‑προσανατολισμένες αντίστροφες μετρήσεις, αλλά μπορεί να επηρεαστούν από το throttling όταν η καρτέλα δεν είναι ορατή. Αν η ακρίβεια είναι κρίσιμη (π.χ. ζωντανές εκδηλώσεις), σκεφτείτε πρόσθετες προσεγγίσεις:</p>
+
+        <ul>
+          <li>Χρησιμοποιήστε συστήματα ειδοποιήσεων ή εφαρμογή ξυπνητηριού ως εφεδρικό σήμα.</li>
+          <li>Κρατήστε την καρτέλα ανοιχτή και ορατή κατά τη διάρκεια κρίσιμων αντίστροφων μετρήσεων, ή τρέξτε μια μικρή εγγενή εφαρμογή για υψηλή ακρίβεια.</li>
+          <li>Για μεγάλες αντίστροφες μετρήσεις, ορίστε μια απόλυτη ώρα λήξης (και προαιρετικά προσθέστε ένα συμβάν στο ημερολόγιο) ώστε να έχετε αναφορά ανεξάρτητη από τον μετρητή της σελίδας.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Αντιμετώπιση προβλημάτων</h2>
+        <ul>
+          <li><strong>Ειδοποιήσεις μπλοκαρισμένες:</strong> Δώστε άδεια ειδοποιήσεων στις ρυθμίσεις του browser (Ρυθμίσεις ιστότοπου → Ειδοποιήσεις).</li>
+          <li><strong>Δεν ακούγεται ήχος:</strong> Ελέγξτε την ένταση του συστήματος και επιτρέψτε την αυτόματη αναπαραγωγή σε ιστότοπους που χρειάζονται ήχο· κάποιοι browsers αποκρύπτουν τον ήχο μέχρι να υπάρξει ανθρώπινη αλληλεπίδραση.</li>
+          <li><strong>Φαίνεται ότι ο μετρητής σταμάτησε:</strong> Βεβαιωθείτε ότι η καρτέλα παραμένει ανοικτή· το throttling στο παρασκήνιο μπορεί να μειώσει τη συχνότητα των tick αλλά όχι απαραίτητα τον τελικό υπολογισμό της ώρας λήξης.</li>
+          <li><strong>Προβλήματα στο κινητό:</strong> Οι mobile browsers μπορεί να θέτουν σε αναστολή σελίδες στο παρασκήνιο· σκεφτείτε μια εγγενή υπενθύμιση ή το ημερολόγιο ως εφεδρική λύση.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Συχνές Ερωτήσεις</h2>
+        <div class="muted">
+          <p><strong>Ε:</strong> Μπορώ να χρησιμοποιήσω αντίστροφες μετρήσεις για επαναλαμβανόμενες υπενθυμίσεις;<br><strong>Α:</strong> Για επαναλαμβανόμενες υπενθυμίσεις προτιμήστε τα συμβάντα ημερολογίου ή τις ειδοποιήσεις εργασιών. Το Χρονόμετρο Αντίστροφης Μέτρησης είναι ιδανικό για άμεσες, μονολεκτικές συνεδρίες.</p>
+
+          <p><strong>Ε:</strong> Θα με ειδοποιήσει το χρονόμετρο αν η οθόνη είναι κλειδωμένη;<br><strong>Α:</strong> Οι καρτέλες του browser μπορεί να αναστέλλονται όταν η συσκευή κοιμάται. Αν χρειάζεστε ειδοποίηση με κλειδωμένη οθόνη, χρησιμοποιήστε ξυπνητήρι της συσκευής ή ειδοποίηση ημερολογίου.</p>
+
+          <p><strong>Ε:</strong> Μπορώ να ορίσω διάρκεια σε ώρες;<br><strong>Α:</strong> Ναι — εισάγετε τα λεπτά που αντιστοιχούν στις ώρες (π.χ. 120 λεπτά για 2 ώρες) ή χρησιμοποιήστε ροή εργασίας με απόλυτη ώρα λήξης σε συνδυασμό με το ημερολόγιο.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Πόροι</h2>
+        <ul class="muted">
+          <li><a href="/countdown-el.html">Άνοιγμα του Χρονόμετρου Αντίστροφης Μέτρησης</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Countdown" target="_blank" rel="noopener">Countdown (έννοια) — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/countdown-el.html" class="cta" aria-label="Άνοιγμα Χρονόμετρου Αντίστροφης Μέτρησης">Άνοιγμα Χρονόμετρου</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε μαζί μας στο <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/el/privacy/">Πολιτική Απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/countdown-el.html" class="return-to-tool" id="returnToToolCountdown" aria-label="Επιστροφή στο Χρονόμετρο Αντίστροφης Μέτρησης">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Επιστροφή στο Χρονόμετρο</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCountdown');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

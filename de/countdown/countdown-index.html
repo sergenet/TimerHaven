@@ -1,18 +1,209 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>countdown — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <title>Countdown — Planen, Termine setzen und konzentriert bleiben | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Leitfaden für die Nutzung des Countdown‑Timers: Fristen planen, passende Dauer wählen, Workflows für Meetings und Fokus‑Sessions, Benachrichtigungen und Troubleshooting." />
+  <link rel="canonical" href="https://timerhaven.com/de/countdown/countdown-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Countdown‑Timer effektiv nutzen",
+        "description":"Einstellungen und Workflows für Countdown‑Timer: Dauer wählen, Benachrichtigungen konfigurieren, für Meetings und Fokus verwenden sowie typische Fehler vermeiden.",
+        "image":"https://timerhaven.com/assets/images/countdown-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Countdown‑Timer (TimerHaven)","Kalender","Benachrichtigungen am Gerät"],
+        "step":[
+          {"@type":"HowToStep","name":"Zweck wählen","text":"Bestimmen Sie, ob der Timer für eine Frist, eine Besprechung oder eine Fokus‑Session dient."},
+          {"@type":"HowToStep","name":"Dauer festlegen","text":"Geben Sie Minuten und Sekunden an; für Besprechungen in ganzen Minuten, für Fokus‑Sessions passende Intervalle wählen."},
+          {"@type":"HowToStep","name":"Benachrichtigung wählen","text":"Aktivieren Sie Ton und/oder Desktop‑Benachrichtigung; testen Sie Lautstärke und Berechtigungen."},
+          {"@type":"HowToStep","name":"Durchführen und prüfen","text":"Starten Sie den Timer, notieren Sie Unterbrechungen und prüfen Sie nach Ablauf das Ergebnis."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Bleibt der Timer aktiv, wenn ich die Browser‑Registerkarte wechsle?","acceptedAnswer":{"@type":"Answer","text":"Ja — moderne Browser halten Timer‑Berechnungen aktiv, solange die Seite offen ist. Hintergrund‑Throttling kann die Anzeige‑Updates verlangsamen, nicht aber die Berechnung der verstrichenen Zeit, wenn der Timer korrekt mit Zeitstempeln arbeitet."}},
+          {"@type":"Question","name":"Kann ich sehr lange Timer einstellen?","acceptedAnswer":{"@type":"Answer","text":"Ja — stellen Sie die benötigten Minuten ein. Für sehr lange Zeiträume empfiehlt sich zusätzlich eine Kalendereinladung mit Endzeit als Redundanz."}},
+          {"@type":"Question","name":"Welche Benachrichtigungsoptionen sind sinnvoll?","acceptedAnswer":{"@type":"Answer","text":"Kombinieren Sie einen hörbaren Ton mit einer Desktop‑Benachrichtigung. Für Besprechungen einen deutlichen Ton, für Fokus‑Sessions eine dezente Glocke."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for countdown guide (de)">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">countdown — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Countdown — Zeitfenster nutzen, Fristen sinnvoll setzen</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Productivity & UX</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 8–12 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Countdown‑Timer sind einfache, aber effektive Werkzeuge, um Dringlichkeit zu schaffen, Meetings zu timen und kurze Fokus‑Sessions zu strukturieren. Diese Anleitung zeigt, wie Sie passende Dauern wählen, Benachrichtigungen einrichten und den Timer zuverlässig in Ihre Planung integrieren.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#why">Warum ein Countdown hilft</a>
+        <a href="#setup">Dauer & Optionen</a>
+        <a href="#workflows">Praktische Workflows</a>
+        <a href="#alerts">Benachrichtigungen & Barrierefreiheit</a>
+        <a href="#precision">Genauigkeit & Hinweise</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Warum ein Countdown hilft</h2>
+        <p>Ein Countdown macht verbleibende Zeit sichtbar und wandelt offene Zeit in eine knappe Ressource. Das erzeugt Fokus und hilft, Stopppunkte zu setzen — praktisch beim E‑Mail‑Triage, beim Üben von Präsentationen oder bei zeitlich begrenzten Aufgaben.</p>
+      </section>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Dauer & Optionen einstellen</h2>
+        <p>Wählen Sie die Dauer mit dem Ziel im Kopf. Unterschiedliche Aufgaben brauchen unterschiedliche Längen — bei Unsicherheit lieber konservativ starten und anpassen.</p>
+
+        <h3>Übliche Dauern</h3>
+        <ul>
+          <li><strong>5–10 Minuten:</strong> Schnellaufgaben, Micro‑Pausen.</li>
+          <li><strong>15–30 Minuten:</strong> Kurze Fokus‑Blöcke, E‑Mail‑Aufräumen.</li>
+          <li><strong>45–90 Minuten:</strong> Längere Sessions oder Gruppensitzungen (ggf. mit Pausen planen).</li>
+        </ul>
+
+        <h3>Optionen</h3>
+        <ul>
+          <li><strong>Ton vs. Desktop‑Benachrichtigung:</strong> Ton, wenn Sie nicht auf den Bildschirm schauen; visuelle Meldung für stille Umgebungen.</li>
+          <li><strong>Automatische Folge:</strong> Für verkettete Intervalle mit Vorsicht aktivieren.</li>
+          <li><strong>Pausieren/Reanlassen:</strong> Hilfreich bei kurzfristigen Unterbrechungen.</li>
+        </ul>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Praktische Workflows</h2>
+
+        <div class="recipe" aria-labelledby="email-tidy">
+          <strong id="email-tidy">E‑Mail‑Triage — 25 Minuten</strong>
+          <ol>
+            <li>25 Minuten einstellen und nur Nachrichten mit hoher Priorität bearbeiten.</li>
+            <li>5 Minuten scannen, 20 Minuten auflösen/delegieren.</li>
+            <li>Restliche Nachrichten archivieren oder verschieben.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="meeting">
+          <strong id="meeting">Meeting — Letzte 5 Minuten anzeigen</strong>
+          <ol>
+            <li>Countdown für die letzten 5 Minuten einer Besprechung stellen, um Entscheidungen zu fokussieren.</li>
+            <li>Bei Bildschirmfreigabe sichtbar machen, damit alle Teilnehmer die verbleibende Zeit sehen.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="focus">
+          <strong id="focus">Fokus‑Session — 45 Minuten</strong>
+          <ol>
+            <li>45 Minuten einstellen, kurzes Ritual (3–5 Minuten) zur Vorbereitung.</li>
+            <li>Während der Session keine Ablenkungen; Unterbrechungen notieren.</li>
+            <li>Nach Ablauf kurz reflektieren und nächstes Ziel setzen.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Benachrichtigungen & Barrierefreiheit</h2>
+        <p>Kombinieren Sie Klang und visuelle Hinweise passend zum Kontext und testen Sie Berechtigungen für Desktop‑Benachrichtigungen einmalig.</p>
+
+        <ul>
+          <li>Aktivieren Sie Benachrichtigungen im Browser und prüfen Sie Berechtigungen.</li>
+          <li>Wählen Sie für häufige Benachrichtigungen dezente Töne; für kritische Fristen stärkere Signale.</li>
+          <li>Für Barrierefreiheit: ausreichender Kontrast und ggf. Vibrationsunterstützung auf Mobilgeräten.</li>
+        </ul>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Genauigkeit & Hinweise</h2>
+        <p>Browser‑Timer sind für den Alltag ausreichend. Beachten Sie jedoch Background‑Throttling oder Geräteschlaf, die Anzeige‑Updates oder Messungen beeinflussen können.</p>
+
+        <ul>
+          <li>Tabs im Hintergrund können UI‑Updates verlangsamen; die zugrundeliegende Zeitrechnung per Zeitstempel bleibt bei korrekter Implementierung aussagekräftig.</li>
+          <li>Bei hoher Präzisionsanforderung (z. B. Live‑Events) nutzen Sie ergänzend Systemalarmanwendungen oder Kalender‑Events als Redundanz.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Bleibt der Timer im Hintergrund aktiv?<br><strong>A:</strong> Ja, solange die Seite geöffnet ist. Manche Browser drosseln die Darstellung, aber nicht die Zeitberechnung, wenn die Logik richtig auf Zeitstempeln basiert.</p>
+
+          <p><strong>F:</strong> Kann ich den Timer für mehrere Intervalle hintereinander nutzen?<br><strong>A:</strong> Ja — nutzen Sie die Option für automatische Folgeintervalle oder starten Sie den nächsten Timer manuell.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/countdown-de.html">Countdown‑Tool öffnen</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Countdown" target="_blank" rel="noopener">Countdown — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/countdown-de.html" class="cta" aria-label="Countdown öffnen">Countdown öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktieren Sie uns unter <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/de/privacy/">Datenschutzerklärung</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/countdown-de.html" class="return-to-tool" id="returnToToolCountdown" aria-label="Zurück zum Countdown">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zum Countdown</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCountdown');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

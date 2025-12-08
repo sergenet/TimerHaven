@@ -1,183 +1,184 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Météo mondiale</title>
-<meta content="Consultez la météo des villes du monde en un instant." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
-    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-    .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
-    .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); padding:1.3rem; }
-    .article-card { width:330px; min-width:200px; min-height:340px; height:340px; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; }
-    .tool-card { width:410px; min-width:240px; min-height:330px; display:flex; flex-direction:column; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
-    .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
-    .weather-form-row { display:flex; gap:.5rem; margin-bottom:1rem; align-items:center; flex-wrap:wrap; }
-    .weather-result { margin-top:1rem; background:#f7fafc; border-radius:7px; padding:1rem; font-size:1.15em; min-height:48px; }
-    .powered-by { margin-top:0.5rem; font-size:0.9em; color:#6b7280; }
-    .action-row { display:flex; gap:.7rem; flex-wrap:wrap; }
-    #getWeatherBtn { width:175px; height:42px; font-size:1.07em; background:#157af6; color:#fff; border:none; border-radius:8px; font-weight:600; box-shadow:0 2px 8px #e0e7ef; cursor:pointer; }
-    #useLocationBtn { background:#444; color:#fff; border-radius:8px; font-size:1.07em; font-weight:600; border:none; padding:0.4em 1.1em; width:175px; height:42px; display:inline-flex; align-items:center; gap:.4em; cursor:pointer; }
-    @media (max-width:750px) { #getWeatherBtn,#useLocationBtn{width:100%;} .weather-form-row{flex-direction:column;align-items:stretch;} .action-row{flex-direction:column;} }
-    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-
-    /* Strong rule: remove underlines for links in article-card lists and do NOT add underline on hover */
-    .article-card a,
-    .article-card ul a,
-    .article-card ol a,
-    .article-card li a,
-    .article-card ul li a,
-    .article-card ol li a {
-      text-decoration: none !important;
-      color: inherit !important;
-    }
-    .article-card a:hover,
-    .article-card ul a:hover,
-    .article-card ol a:hover,
-    .article-card li a:hover,
-    .article-card ul li a:hover,
-    .article-card ol li a:hover {
-      text-decoration: none !important;
-      color: inherit !important;
-    }
-
-    /* Hide the visible language selector while leaving markup/JS intact */
-    .top-row { display: none !important; }
-
-    /* Make the FAQ summary visually sit next to an arrow (small icon) */
-    .faq-section summary { cursor: pointer; font-weight:700; font-size:1rem; display:flex; align-items:center; gap:.5rem; }
-    .faq-section summary .fa { color:#185a9d; }
-
-    /* Ensure powered-by includes open-meteo label styling */
-    .powered-by a { text-decoration:none; color:inherit; font-weight:600; }
-    .powered-by .provider { margin-left:6px; font-size:0.92em; color:#6b7280; }
+  <meta charset="utf-8">
+  <title>Météo mondiale — TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Consultez la météo des villes du monde en un instant.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{--brand:#0b63a0;--brand-dark:#09507a;--muted:#6b7c89;--card:#fff;--bg:#fbfeff;--link-blue:#0d6efd}
+    html,body{height:100%}
+    body { background:var(--bg); font-family:'Montserrat', Arial, sans-serif; color:#0b2545; margin:0; padding:2rem; }
+    .container{max-width:720px;margin:0 auto;}
+    .card{background:var(--card);border-radius:12px;padding:1.6rem;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    .back-link{display:inline-block;margin-bottom:.75rem;color:var(--link-blue) !important;text-decoration:none;font-weight:700}
+    .back-link:hover{text-decoration:underline}
+    .tool-title{color:var(--brand);font-size:1.35rem;margin:0 0 .6rem 0;display:flex;align-items:center;gap:.5rem}
+    .lead{color:#374151;margin:0 0 .8rem 0}
+    .cta{display:inline-block;padding:.45rem .7rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;border:none;}
+    .cta:hover{background:var(--brand-dark);color:#fff}
+    article.card a.read-guide { background: var(--link-blue) !important; color: #fff !important; border-radius: 8px; padding: .45rem .7rem; display: inline-block; text-decoration: none; font-weight: 700; font-size: .95rem; border: none; box-shadow: 0 6px 18px rgba(13,110,253,0.12); }
+    article.card a.read-guide:hover { background: var(--brand-dark) !important; color: #fff !important; }
+    .weather-form-row{display:flex;gap:.5rem;margin-bottom:1rem;align-items:center;flex-wrap:wrap}
+    .weather-result{margin-top:1rem;background:#f7fafc;border-radius:7px;padding:1rem;font-size:1.15em;min-height:48px}
+    .powered-by{margin-top:.5rem;font-size:.9em;color:#6b7280}
+    .action-row{display:flex;gap:.7rem;flex-wrap:wrap}
+    #getWeatherBtn{width:175px;height:42px;font-size:1.07em;background:var(--brand);color:#fff;border:none;border-radius:8px;font-weight:600;box-shadow:0 2px 8px #e0e7ef;cursor:pointer}
+    #getWeatherBtn:hover{background:var(--brand-dark)}
+    #useLocationBtn{background:#444;color:#fff;border-radius:8px;font-size:1.07em;font-weight:600;border:none;padding:.4em 1.1em;width:175px;height:42px;display:inline-flex;align-items:center;gap:.4em;cursor:pointer}
+    .faq-section{margin-top:1rem;background:#f7fafc;border-radius:8px;padding:1rem;box-shadow:0 1px 4px #e0e7ef}
+    @media (max-width:750px){#getWeatherBtn,#useLocationBtn{width:100%}.weather-form-row{flex-direction:column;align-items:stretch}.action-row{flex-direction:column}}
   </style>
 </head>
 <body>
-<div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-<select aria-label="Language selector" class="language-select" id="language-select-top">
-<option value="en">English</option><option selected="" value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
-</select>
-</div>
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">Météo mondiale</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">Consultez la météo des villes du monde en un instant.</p>
-</div>
-<div class="center-row">
+  <main class="container" role="main">
+    <article class="card" aria-labelledby="tool-title">
+      <a href="/index.html" class="back-link" id="back-link">← Retour au menu principal</a>
 
-<div aria-label="Global Weather" class="tool-card" role="region">
-<a class="back-link" href="index.html">← Retour au menu principal</a>
-<!-- Middle visible title intentionally removed to keep the card minimal per request -->
-<form autocomplete="off" id="weatherForm">
-<div class="weather-form-row">
-<select class="form-select" id="cityDropdown" style="min-width:140px;" title="Sélectionnez une ville...">
-<option value="">Sélectionnez une ville...</option>
-<option value="New York">New York</option>
-<option value="London">Londres</option>
-<option value="Paris">Paris</option>
-<option value="Berlin">Berlin</option>
-<option value="Tokyo">Tokyo</option>
-<option value="Sydney">Sydney</option>
-<option value="São Paulo">São Paulo</option>
-<option value="Moscow">Moscou</option>
-<option value="Dubai">Dubaï</option>
-<option value="Istanbul">Istanbul</option>
-<option value="Johannesburg">Johannesburg</option>
-<option value="Toronto">Toronto</option>
-<option value="Mexico City">Mexico</option>
-<option value="Los Angeles">Los Angeles</option>
-<option value="Mumbai">Mumbai</option>
-<option value="Cairo">Le Caire</option>
-<option value="Singapore">Singapour</option>
-<option value="Hong Kong">Hong Kong</option>
-<option value="Bangkok">Bangkok</option>
-<option value="Seoul">Séoul</option>
-<option value="San Francisco">San Francisco</option>
-<option value="Rome">Rome</option>
-<option value="Kolkata">Kolkata</option>
-<option value="Jakarta">Jakarta</option>
-<option value="Madrid">Madrid</option>
-<option value="Cape Town">Le Cap</option>
-<option value="Lagos">Lagos</option>
-<option value="Melbourne">Melbourne</option>
-<option value="Beijing">Pékin</option>
-<option value="Chicago">Chicago</option>
-<option value="Vancouver">Vancouver</option>
-<option value="Auckland">Auckland</option>
-<option value="Hanoi">Hanoï</option>
-<option value="Manila">Manille</option>
-<option value="Warsaw">Varsovie</option>
-</select>
-<input class="form-control" id="cityInput" placeholder="Ou saisissez la ville..." style="min-width:160px;" title="Ou saisissez la ville..." type="text"/>
-</div>
-<div class="action-row">
-<button id="getWeatherBtn" type="submit">Obtenir la météo</button>
-<button id="useLocationBtn" type="button"><i class="fa fa-location-arrow"></i> Utiliser ma position</button>
-</div>
-</form>
-<div class="weather-result" id="weatherResult"></div>
-<div class="powered-by">Données par <a href="https://open-meteo.com" rel="noopener" target="_blank">Open‑Meteo</a><span class="provider"></span></div>
-<details class="faq-section" style="margin-top:1rem;">
-<summary><i class="fa fa-play"></i> Foire aux questions</summary>
-<ul style="padding-left:1.1rem; color:#374151;">
-<li><b>Quelle est la précision ?</b> Les données proviennent d'APIs comme Open‑Meteo.</li>
-<li><b>Puis-je utiliser ma position ?</b> Oui, cliquez sur <b>Utiliser ma position</b>.</li>
-<li><b>Puis-je saisir n'importe quelle ville ?</b> Oui ! Tapez la ville dans le champ.</li>
-</ul>
-</details>
-</div>
+      <div id="tool-title" class="tool-title"><i class="fa fa-cloud-sun"></i> Météo mondiale</div>
 
-</div>
-<footer class="site">
-      © 2025 TimerHaven. <a href="privacy.html">Politique</a>
-</footer>
-</div>
-<script>
-  // localized JS strings
+      <p style="margin:0 0 .6rem 0;">
+        <a id="read-guide-btn" class="read-guide" href="/fr/weather/weather-index.html" role="button" aria-label="Lire l'article complet">Lire l'article complet</a>
+      </p>
+
+      <p class="lead">Consultez la météo des villes du monde en un instant.</p>
+
+      <form id="weatherForm" autocomplete="off">
+        <div class="weather-form-row">
+          <select id="cityDropdown" class="form-select" title="Sélectionnez une ville..." style="min-width:140px;">
+            <option value="">Sélectionnez une ville...</option>
+            <option value="New York">New York</option>
+            <option value="London">London</option>
+            <option value="Paris">Paris</option>
+            <option value="Berlin">Berlin</option>
+            <option value="Tokyo">Tokyo</option>
+            <option value="Sydney">Sydney</option>
+            <option value="São Paulo">São Paulo</option>
+            <option value="Moscow">Moscow</option>
+            <option value="Dubai">Dubai</option>
+            <option value="Istanbul">Istanbul</option>
+            <option value="Johannesburg">Johannesburg</option>
+            <option value="Toronto">Toronto</option>
+            <option value="Mexico City">Mexico City</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Cairo">Cairo</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Hong Kong">Hong Kong</option>
+            <option value="Bangkok">Bangkok</option>
+            <option value="Seoul">Seoul</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="Rome">Rome</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Jakarta">Jakarta</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Cape Town">Cape Town</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Melbourne">Melbourne</option>
+            <option value="Beijing">Beijing</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Vancouver">Vancouver</option>
+            <option value="Auckland">Auckland</option>
+            <option value="Hanoi">Hanoi</option>
+            <option value="Manila">Manila</option>
+            <option value="Warsaw">Warsaw</option>
+          </select>
+
+          <input type="text" id="cityInput" class="form-control" placeholder="Ou saisissez la ville..." title="Ou saisissez la ville..." style="min-width:160px;">
+        </div>
+
+        <div class="action-row">
+          <button type="submit" id="getWeatherBtn">Obtenir la météo</button>
+          <button type="button" id="useLocationBtn"><i class="fa fa-location-arrow"></i> Utiliser ma position</button>
+        </div>
+      </form>
+
+      <div id="weatherResult" class="weather-result" aria-live="polite"></div>
+      <div class="powered-by">Données par <a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a></div>
+
+      <details class="faq-section" style="margin-top:1rem;">
+        <summary style="font-weight:700; font-size:1rem;">FAQs</summary>
+        <ul style="padding-left:1.1rem; color:#374151;">
+          <li><b>Quelle est la précision ?</b> Les données sont fournies par Open‑Meteo ou d'autres APIs similaires.</li>
+          <li><b>Puis-je utiliser ma position ?</b> Oui, cliquez sur <b>Utiliser ma position</b> pour obtenir la météo locale.</li>
+          <li><b>Puis-je saisir n'importe quelle ville ?</b> Oui — tapez la ville dans la zone de saisie.</li>
+        </ul>
+      </details>
+    </article>
+  </main>
+
+  <script>
+  // French UI messages
   const MSG_PLEASE_SELECT = "Veuillez sélectionner ou saisir une ville.";
   const MSG_GEO_UNSUPPORTED = "Géolocalisation non prise en charge.";
   const MSG_UNABLE_LOCATION = "Impossible d'obtenir votre position.";
   const MSG_FETCH_ERROR = "Erreur lors de la récupération des données météo.";
   const MSG_NOT_FOUND_TEMPLATE = "Météo introuvable pour «{city}».";
 
-  function renderWeatherData(data) {
-    return `<b>${data.name}, ${data.sys.country}</b><br>
-            Weather: ${data.weather[0].description}<br>
-            Temperature: ${data.main.temp}&deg;C<br>
-            Humidity: ${data.main.humidity}%<br>
-            Wind: ${data.wind.speed} m/s`;
+  // Lightweight translation fallback map (common descriptions)
+  const DESC_TRANSLATIONS = {
+    "clear sky": "ciel dégagé",
+    "few clouds": "peu nuageux",
+    "scattered clouds": "nuages épars",
+    "broken clouds": "nuages fragmentés",
+    "overcast clouds": "couvert",
+    "light rain": "pluie légère",
+    "moderate rain": "pluie modérée",
+    "heavy intensity rain": "pluie forte",
+    "light snow": "neige légère",
+    "snow": "neige",
+    "thunderstorm": "orage",
+    "mist": "brume",
+    "haze": "brume sèche",
+    "smoke": "fumée"
+    // add more if needed
+  };
+
+  function translateDesc(desc) {
+    if (!desc) return desc;
+    const key = desc.toLowerCase().trim();
+    return DESC_TRANSLATIONS[key] || desc;
   }
 
+  function renderWeatherData(data) {
+    const name = data.name || '';
+    const country = data.sys && data.sys.country ? ', ' + data.sys.country : '';
+    const rawDesc = data.weather && data.weather[0] ? data.weather[0].description : '';
+    const desc = translateDesc(rawDesc);
+    const temp = data.main ? data.main.temp : 'N/A';
+    const hum = data.main ? data.main.humidity : 'N/A';
+    const wind = data.wind ? data.wind.speed : 'N/A';
+    return `<b>${name}${country}</b><br>
+            Météo : ${desc}<br>
+            Température : ${temp}&deg;C<br>
+            Humidité : ${hum}%<br>
+            Vent : ${wind} m/s`;
+  }
+
+  // NOTE: we append &lang=fr so servers that forward that param to upstream APIs (e.g. OpenWeatherMap 'lang') will return localized descriptions.
   function fetchWeather(city) {
     const resultEl = document.getElementById('weatherResult');
     if (!city) {
       resultEl.innerHTML = '<span style="color:#b00;">' + MSG_PLEASE_SELECT + '</span>';
       return;
     }
-    fetch(`/weather?city=${encodeURIComponent(city)}`)
+    resultEl.innerHTML = 'Chargement...';
+    // append lang=fr
+    fetch(`/weather?city=${encodeURIComponent(city)}&lang=fr`)
       .then(r => r.json())
       .then(data => {
-        if (data.cod !== 200 && data.error) {
-          resultEl.innerHTML = `<span style="color:#b00;">${data.error}</span>`;
+        if (!data || (data.cod && parseInt(data.cod,10) !== 200)) {
+          const err = (data && (data.error || data.message)) || MSG_NOT_FOUND_TEMPLATE.replace('{city}', city);
+          resultEl.innerHTML = `<span style="color:#b00;">${err}</span>`;
           return;
         }
-        if (data.cod !== 200) {
-          resultEl.innerHTML = '<span style="color:#b00;">' + MSG_NOT_FOUND_TEMPLATE.replace('{city}', city) + '</span>';
-          return;
-        }
+        // If API returned English description, translateDesc fallback will handle common phrases
         resultEl.innerHTML = renderWeatherData(data);
       })
       .catch(() => {
-        document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_FETCH_ERROR + '</span>';
+        resultEl.innerHTML = '<span style="color:#b00;">' + MSG_FETCH_ERROR + '</span>';
       });
   }
 
@@ -211,22 +212,21 @@
       document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_GEO_UNSUPPORTED + '</span>';
       return;
     }
+    document.getElementById('weatherResult').innerHTML = 'Détection de la position...';
     navigator.geolocation.getCurrentPosition(function(pos) {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
-      fetch(`/weather?lat=${lat}&lon=${lon}`)
+      // append lang=fr
+      fetch(`/weather?lat=${lat}&lon=${lon}&lang=fr`)
         .then(r => r.json())
         .then(data => {
-          if (data.cod !== 200 && data.error) {
-            document.getElementById('weatherResult').innerHTML = `<span style="color:#b00;">${data.error}</span>`;
-            return;
-          }
-          if (data.cod !== 200) {
-            document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_UNABLE_LOCATION + '</span>';
+          if (!data || (data.cod && parseInt(data.cod,10) !== 200)) {
+            const err = (data && (data.error || data.message)) || MSG_UNABLE_LOCATION;
+            document.getElementById('weatherResult').innerHTML = `<span style="color:#b00;">${err}</span>`;
             return;
           }
           document.getElementById('weatherResult').innerHTML = renderWeatherData(data);
-          document.getElementById('cityInput').value = data.name;
+          document.getElementById('cityInput').value = data.name || '';
           document.getElementById('cityDropdown').value = '';
         })
         .catch(() => {
@@ -248,7 +248,8 @@
     }
   })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/fr/weather/weather-index.html">Read full guide</a></p></body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
 </html>

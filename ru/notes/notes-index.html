@@ -2,17 +2,298 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>notes — Guide (ru)</title>
+  <title>Заметки — Практическое руководство по записи действенных заметок | TimerHaven</title>
+  <meta name="description" content="Как эффективно использовать Notes вместе с Pomodoro и Task Timer. Пошаговое руководство, FAQ, скриншоты, шаблон для скачивания и структурированные данные.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for notes guide (ru)">
+  <link rel="canonical" href="https://timerhaven.com/ru/notes-index.html">
+  <meta name="author" content="Serge Shammas">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Фиксируйте, тегируйте и превращайте заметки в задачи с TimerHaven Notes",
+        "description":"Практический рабочий процесс: быстро фиксировать заметки, помечать их тэгами, превращать выполнимые пункты в задачи и еженедельно просматривать в связке с Pomodoro и Task Timer.",
+        "image":"https://timerhaven.com/assets/images/notes-snapshot.png",
+        "totalTime":"PT30M",
+        "supply":["TimerHaven Notes","Pomodoro‑таймер (TimerHaven)","Таблица (опционально)"],
+        "step":[
+          {"@type":"HowToStep","name":"Сделайте короткую заметку","text":"Создайте заметку с одно‑строчным заголовком и 2–4 буллет‑пунктами, описывающими идею, контекст или шаги."},
+          {"@type":"HowToStep","name":"Тегируйте и приоритезируйте","text":"Добавьте один короткий контекстный тэг и маркер приоритета; отметьте как выполняемую, если нужно сделать в ближайшее время."},
+          {"@type":"HowToStep","name":"Преобразуйте в задачу или запланируйте","text":"Если заметка требует работы — превратите её в запись Task Timer или событие в календаре и прикрепите идентификатор заметки для контекста."},
+          {"@type":"HowToStep","name":"Регулярно просматривайте","text":"Проводите быструю триаж‑проверку ежедневно и глубокий недельный обзор, чтобы заметки не пылились."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Хранятся ли заметки локально или в облаке?","acceptedAnswer":{"@type":"Answer","text":"По умолчанию заметки хранятся локально в браузере. Вы можете экспортировать заметки в файл для резервной копии или вручную синхронизировать с другим устройством."}},
+          {"@type":"Question","name":"Как часто нужно просматривать заметки?","acceptedAnswer":{"@type":"Answer","text":"Короткая ежедневная триаж‑проверка (5–10 минут) удерживает список в рабочем состоянии; глубинный недельный обзор (15–30 минут) подходит для обработки и планирования."}},
+          {"@type":"Question","name":"Можно ли использовать Notes вместе с Pomodoro?","acceptedAnswer":{"@type":"Answer","text":"Да — выберите одну заметку как цель Pomodoro перед запуском сессии и используйте перерывы для записи прогресса или преобразования буллетов в задачи."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    table.sample{border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:680px;}
+    table.sample td, table.sample th{border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:left;}
+
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
+    }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      font-size:16px;
+    }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">notes — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Заметки — Фиксируйте, тегируйте и превращайте идеи в работу</h1>
+
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — специалист по продуктивности и UX‑исследованию</div>
+          <div class="meta">Опубликовано: 2025-10-22 · Обновлено: 2025-11-21 · Время чтения: 10–12 мин.</div>
+        </div>
+      </div>
+
+      <p class="lead">Заметки — мост между мимолётной идеей и завершённой работой. Это руководство предлагает практичный подход, ориентированный на действие: кратко фиксируйте заметки, тегируйте их по контексту, превращайте выполнимые пункты в запланированные задачи (Pomodoro/Task Timer) и еженедельно просматривайте — так заметки начинают приносить результат, а не пыляться.</p>
+
+      <nav class="toc" aria-label="Содержание">
+        <a href="#why">Почему важны хорошие заметки</a>
+        <a href="#capture">Как быстро фиксировать</a>
+        <a href="#structure">Структура и теги</a>
+        <a href="#workflows">Рабочие процессы с Pomodoro и Task Timer</a>
+        <a href="#templates">Шаблоны</a>
+        <a href="#review">Ежедневный и недельный обзор</a>
+        <a href="#search">Поиск и извлечение</a>
+        <a href="#cases">Краткие кейсы</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Почему важны хорошие заметки</h2>
+        <p>
+          Большинство идей исчезает, потому что они плохо записаны или не связаны с действием. Хорошая заметка короткая, содержательная и ориентирована на действие. Она отвечает трём вопросам: что это, почему это важно и какой следующий шаг. При такой структуре заметки становятся надёжным источником задач, материалов для исследования или справочной информации.
+        </p>
+      </section>
+
+      <section id="capture" class="section" aria-labelledby="capture-title">
+        <h2 id="capture-title">Фиксация — быстро, лаконично, минимально</h2>
+
+        <div class="workflow" aria-labelledby="capture-check">
+          <strong id="capture-check">Контрольный список фиксации</strong>
+          <ol>
+            <li><strong>Заголовок:</strong> одно‑строчная цель (не процесс), например «Черновик: вступление к предложению».</li>
+            <li><strong>Буллеты:</strong> 2–4 коротких пункта с ключевыми идеями, ресурсами или ограничениями.</li>
+            <li><strong>Тег:</strong> добавьте один основной тэг (#task, #idea, #research) и опционально контекст (#projectX, #meeting).</li>
+            <li><strong>Флаг действия:</strong> отметьте как выполняемое, если это нужно сделать в ближайшее время; иначе оставьте как справочное.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="structure" class="section" aria-labelledby="structure-title">
+        <h2 id="structure-title">Структура и теги — делаем заметки удобными для поиска</h2>
+        <p>
+          Последовательная конвенция именования и тегирования превращает заметки из хаоса в базу знаний. Используйте короткие предсказуемые теги и избегайте длинных вариаций с разной пунктуацией или написанием.
+        </p>
+
+        <h3>Рекомендуемая таксономия тегов</h3>
+        <ul>
+          <li><strong>#task</strong> Выполнимые пункты, которые нужно сделать.</li>
+          <li><strong>#idea</strong> Идеи, которые стоит сохранить, но пока не выполнять.</li>
+          <li><strong>#research</strong> Ссылки, данные или краткие обзоры для будущей работы.</li>
+          <li><strong>#quick</strong> Пункты, которые занимают менее 5 минут.</li>
+        </ul>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Рабочие процессы: связываем заметки с тайм‑работой</h2>
+
+        <h3>Быстрый рабочий процесс на один Pomodoro</h3>
+        <ol>
+          <li>Выберите одну заметку с тегом <strong>#task</strong> как цель Pomodoro.</li>
+          <li>Запустите Pomodoro на 25 минут в TimerHaven; работайте только по пунктам из этой заметки.</li>
+          <li>Во время 5‑минутного перерыва добавьте короткую строку о прогрессе в заметку.</li>
+          <li>После блока преобразуйте выполненные буллеты в записи Task Timer и проанализируйте затраченное время.</li>
+        </ol>
+      </section>
+
+      <section id="templates" class="section" aria-labelledby="templates-title">
+        <h2 id="templates-title">Шаблоны — быстрый старт</h2>
+        <p>Используйте эти шаблоны для единого способа фиксации. Нажмите, чтобы скачать текстовый шаблон.</p>
+        <p><a href="#" id="downloadNotes" class="cta" aria-label="Скачать шаблон заметок">Скачать шаблон заметок (.txt)</a></p>
+
+        <pre id="notesTemplate" class="template" aria-hidden="true">Заголовок: [Краткое заявление о результате]
+Теги: #task #projectX
+1) Пункт — контекст / ссылка
+2) Пункт — ресурс / шаг
+3) Пункт — ограничение / заметка
+Действие: [преобразовать в задачу / запланировать / архивировать]</pre>
+
+        <script>
+          document.getElementById('downloadNotes').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('notesTemplate').textContent;
+            var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'notes-template-ru.txt';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="review" class="section" aria-labelledby="review-title">
+        <h2 id="review-title">Триаж: ежедневный и недельный обзор</h2>
+        <h3>Ежедневный триаж (5–10 минут)</h3>
+        <ul>
+          <li>Быстро просмотрите новые заметки и пометьте срочные пункты тегом <strong>#task</strong> или <strong>#quick</strong>.</li>
+          <li>Преобразуйте любой выполнимый пункт в запись Task Timer или запланируйте в календаре, если нужно выделить время.</li>
+          <li>Архивируйте чисто справочные записи или переместите их в проектную папку.</li>
+        </ul>
+
+        <h3>Глубокий недельный обзор (15–30 минут)</h3>
+        <ul>
+          <li>Откройте все заметки с тегом <strong>#idea</strong> и решите: выполнить, исследовать или архивировать.</li>
+          <li>Группируйте связанные заметки в проектную запись и планируйте следующие шаги (рецепты Pomodoro или оценки Task Timer).</li>
+          <li>Экспортируйте краткое еженедельное резюме, если ведёте личные метрики.</li>
+        </ul>
+      </section>
+
+      <section id="search" class="section" aria-labelledby="search-title">
+        <h2 id="search-title">Поиск и извлечение — делайте заметки находимыми</h2>
+        <p>Держите теги короткими и используйте префиксы в заголовках для быстрого фильтра (например, "Idea:", "Task:", "Ref:"). Используйте фильтры Notes по тегам, датам или ключевым словам. Для больших архивов экспортируйте заметки и храните резервную копию в облаке.</p>
+
+        <table class="sample" aria-hidden="false">
+          <thead><tr><th>Поле</th><th>Пример</th></tr></thead>
+          <tbody>
+            <tr><td>Заголовок</td><td>Черновик: заголовок лендинга</td></tr>
+            <tr><td>Теги</td><td>#task #marketing</td></tr>
+            <tr><td>Буллеты</td><td>Целевая аудитория, ключевое преимущество, идея CTA</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="cases" class="section" aria-labelledby="cases-title">
+        <h2 id="cases-title">Краткие кейсы</h2>
+
+        <div class="case">
+          <strong>Product Manager — Imani</strong>
+          <p>Imani использует заметки во время созвонов со стейкхолдерами, чтобы фиксировать решения и пункты действий. Она превращает любой пункт в запись Task Timer в той же сессии и планирует Pomodoro для выполнения на следующее утро.</p>
+        </div>
+
+        <div class="case">
+          <strong>Researcher — Alex</strong>
+          <p>Alex помечает заметки тегом #research и сохраняет ссылки на источники. Недельные обзоры позволяют быстро собрать литературные обзоры, объединяя связанные буллеты в один документ.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Часто задаваемые вопросы</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Можно ли экспортировать заметки в другие инструменты?<br><strong>Ответ:</strong> Да — экспортируйте в plain text или CSV и импортируйте в другие приложения. Используйте согласованные заголовки и теги для простого соответствия полей.</p>
+
+          <p><strong>Вопрос:</strong> Как часто пересматривать заметки?<br><strong>Ответ:</strong> Быстрый ежедневный триаж (5–10 минут) держит заметки в рабочем состоянии; полный обзор — еженедельно.</p>
+
+          <p><strong>Вопрос:</strong> Есть ли рекомендуемая политика хранения?<br><strong>Ответ:</strong> Храните выполняемые заметки, пока они не завершены; архивируйте справочные заметки старше 1–2 лет, если они не являются критичными.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Связанные инструменты: <a href="/pomodoro-ru.html">Pomodoro</a> · <a href="/timer-ru.html#startBtn">Task Timer</a> · <a href="/calendar-ru.html">Календарь</a></p>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/notes-ru.html" class="cta" aria-label="Открыть инструмент Notes">Открыть Notes</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Политика конфиденциальности: <a href="/ru/privacy/">Privacy Policy</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Notes" button -->
+  <a href="/notes-ru.html"
+     class="return-to-tool"
+     id="returnToToolNotes"
+     aria-label="Вернуться к Notes">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К Notes</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolNotes');
+      if (!btn) return;
+      // keyboard activation
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      // adjust subtle opacity when at top vs scrolled
+      function toggleOpacity(){
+        try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){}
+      }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

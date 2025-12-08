@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Конвертер единиц</title>
+<meta content="Конвертируйте длину, вес, температуру и другие единицы. Узнайте, как пользоваться конвертером, получите советы и статьи." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
+    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
+
+    /* Force cards to stretch to the same height and allow content to flow */
+    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:stretch; flex-wrap:wrap; }
+
+    .article-card, .tool-card {
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 2px 12px rgba(0,0,0,0.06);
+      padding:1.3rem;
+      box-sizing:border-box;
+      min-width:280px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    /* let cards size naturally but keep a comfortable minimum on desktop */
+    .article-card { width:330px; min-height:360px; align-items:flex-start; padding-bottom:1.2rem; }
+    .tool-card { width:410px; min-width:240px; min-height:360px; padding-bottom:1.2rem; }
+
+    /* Responsive fallback */
+    @media (max-width:900px) {
+      .center-row{flex-direction:column;align-items:center;}
+      .article-card, .tool-card{width:98%; max-width:540px; min-height:auto;}
+    }
+
+    .converter-form { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center; }
+    .converter-result { font-weight:700; font-size:1.12em; margin-bottom:1rem; }
+    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
+    .btn-small { padding:.35rem .7rem; font-size:.9rem; }
+
+    /* Ensure article buttons are block-level, full width, and inside the card */
+    .article-card a.btn,
+    .tool-card a.btn {
+      display:block;
+      width:100%;
+      box-sizing:border-box;
+      text-align:center;
+      margin-top:.6rem;
+      margin-bottom:0;
+    }
+
+    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
+  </style>
+<style>
+/* timerhaven: enforce single-card layout and CTA */
+.main-container {
+  max-width: 520px !important;
+  margin: 2rem auto !important;
+  padding: 0 12px !important;
+  box-sizing: border-box;
+}
+.center-row {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+.tool-card, .article-card {
+  background: #fff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  padding: 1.6rem 1.3rem !important;
+  box-sizing: border-box !important;
+  margin: 0 0 1.2rem 0 !important;
+}
+.article-card {
+  display: none !important;
+}
+.read-guide {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: .35rem 0 .8rem 0 !important;
+  padding: .45rem .9rem !important;
+  border-radius: 8px !important;
+  background: #007bff !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+  font-size: .95rem !important;
+  border: none !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+}
+.read-guide:hover { filter: brightness(.95); text-decoration: none; }
+@media (max-width: 800px) {
+  .main-container { padding: 0 8px !important; }
+  .tool-card { max-width: 97vw !important; }
+}
+</style><style>/* timerhaven: backlink color */
+.back-link {
+  color: #0d6efd !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+.back-link:hover { text-decoration: underline !important; }
+</style><style>
+/* timerhaven: faq spacing fix */
+.tool-card, .article-card {
+  margin-bottom: 2.8rem !important; /* ensure card has breathing room above footer */
+  position: relative !important;
+  z-index: 1 !important;
+}
+.faq-section, .clips-list, .faq {
+  position: relative !important;
+  z-index: 2 !important; /* ensure FAQ content appears above footer if near */
+  margin-bottom: 1.2rem !important;
+}
+footer {
+  position: relative !important;
+  z-index: 0 !important;
+  padding-top: 1.0rem !important;
+}
+.main-container {
+  padding-bottom: 2.4rem !important;
+}
+@media (max-width: 900px) {
+  .tool-card, .article-card { margin-bottom: 3.6rem !important; }
+  .main-container { padding-bottom: 3.2rem !important; }
+}
+</style></head>
+<body>
+<div class="page-wrap">
+<div class="text-center mb-4">
+<h1 style="margin-bottom:.25rem;">Конвертер единиц</h1>
+<p class="lead" style="color:#374151; margin-bottom:1rem;">Конвертируйте длину, вес, температуру и другие единицы. Узнайте, как пользоваться конвертером, получите советы и статьи.</p>
+</div>
+<div class="center-row">
+<div aria-label="Конвертер единиц" class="tool-card" role="region">
+<div>
+<a class="back-link" href="index.html" style="text-decoration:none; color:#0d6efd; font-weight:600; margin-bottom:.4rem; display:block;">← Назад в главное меню</a>
+<h3><i class="fa fa-ruler-combined"></i> Конвертер единиц</h3><p style="margin-top:1rem;"><a class="read-guide cta" href="/ru/unit-converter/unit-converter-index.html" rel="noopener" target="_blank">Читать полное руководство</a></p>
+<div class="unit-section">
+<form class="converter-form" id="unitForm">
+<select class="form-select" id="typeSelect" style="max-width:140px;">
+<option value="length">Длина</option>
+<option value="weight">Вес</option>
+<option value="temperature">Температура</option>
+</select>
+<input class="form-control" id="inputValue" placeholder="Значение" style="max-width:100px;" type="number"/>
+<select class="form-select" id="fromUnit" style="max-width:140px;"></select>
+<span style="font-size:1.3em;">→</span>
+<select class="form-select" id="toUnit" style="max-width:140px;"></select>
+<button class="btn btn-primary btn-sm" type="submit">Преобразовать</button>
+</form>
+<div class="converter-result" id="unitResult"></div>
+</div>
+</div>
+<details class="faq-section">
+<summary>Часто задаваемые вопросы</summary>
+<p style="margin-top:.6rem;">Введите число, выберите тип и единицы, затем нажмите Преобразовать.</p>
+</details>
+</div>
+</div>
+<footer class="site">© 2025 TimerHaven. <a href="privacy.html">Политика</a></footer>
+</div>
+<script>
+  const unitTypes = {
+    length: {
+      units: { "Meter": 1, "Kilometer": 1000, "Centimeter": 0.01, "Millimeter": 0.001, "Mile": 1609.34, "Yard": 0.9144, "Foot": 0.3048, "Inch": 0.0254 },
+      convert: (val, from, to) => val * unitTypes.length.units[from] / unitTypes.length.units[to]
+    },
+    weight: {
+      units: { "Kilogram": 1, "Gram": 0.001, "Milligram": 0.000001, "Pound": 0.453592, "Ounce": 0.0283495 },
+      convert: (val, from, to) => val * unitTypes.weight.units[from] / unitTypes.weight.units[to]
+    },
+    temperature: {
+      units: { "Celsius": "C", "Fahrenheit": "F", "Kelvin": "K" },
+      convert: (val, from, to) => {
+        if (from === to) return val;
+        if (from === "Celsius" && to === "Fahrenheit") return val * 9/5 + 32;
+        if (from === "Fahrenheit" && to === "Celsius") return (val - 32) * 5/9;
+        if (from === "Celsius" && to === "Kelvin") return val + 273.15;
+        if (from === "Kelvin" && to === "Celsius") return val - 273.15;
+        if (from === "Fahrenheit" && to === "Kelvin") return (val - 32) * 5/9 + 273.15;
+        if (from === "Kelvin" && to === "Fahrenheit") return (val - 273.15) * 9/5 + 32;
+      }
+    }
+  };
+
+  function populateUnits(type) {
+    const from = document.getElementById('fromUnit');
+    const to = document.getElementById('toUnit');
+    from.innerHTML = to.innerHTML = '';
+    Object.keys(unitTypes[type].units).forEach(u => {
+      from.innerHTML += `<option value="${u}">${u}</option>`;
+      to.innerHTML += `<option value="${u}">${u}</option>`;
+    });
+  }
+
+  const typeSelect = document.getElementById('typeSelect');
+  const initialType = typeSelect.value || 'length';
+  typeSelect.addEventListener('change', function() {
+    populateUnits(this.value);
+  });
+  populateUnits(initialType);
+
+  document.getElementById('unitForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const type = document.getElementById('typeSelect').value;
+    const val = parseFloat(document.getElementById('inputValue').value);
+    const from = document.getElementById('fromUnit').value;
+    const to = document.getElementById('toUnit').value;
+    const resultEl = document.getElementById('unitResult');
+    if (isNaN(val)) {
+      resultEl.innerText = "Please enter a valid value.";
+      return;
+    }
+    let result = unitTypes[type].convert(val, from, to);
+    resultEl.innerText = `${val} ${from} = ${result} ${to}`;
+  });
+
+  // language selector redirect removed
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<p style="margin-top:1rem;"></p></body>
+</html>

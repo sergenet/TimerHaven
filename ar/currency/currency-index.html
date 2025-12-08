@@ -1,18 +1,193 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>currency — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for currency guide (ar)">
+  <meta charset="utf-8" />
+  <title>محول العملات — تحويل الأسعار وطرق عمل عملية ذكية | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل متقدم لتحويل العملات: اختيار مصادر الأسعار، القواعد حول التقريب والعرض، نصائح للسفر والأعمال، وأتمتة التحويلات." />
+  <link rel="canonical" href="https://timerhaven.com/ar/currency/currency-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"تحويل العملات العملي",
+        "description":"كيفية تحويل العملات بشكل موثوق، اختيار مصادر الأسعار، عرض التحويلات للمستخدمين، والتعامل مع التقريب واحتياجات الأعمال.",
+        "image":"https://timerhaven.com/assets/images/currency-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["محول عملات (TimerHaven)","ExchangeRate API أو أسعار البنوك","ورقة بيانات (Spreadsheet)"],
+        "step":[
+          {"@type":"HowToStep","name":"اختر المصدر","text":"قرر ما إذا كنت بحاجة إلى أسعار السوق الوسيط (mid‑market) أو أسعار البنوك (تضيف البنوك ومقدمو التحويل هوامش)."},
+          {"@type":"HowToStep","name":"حدد قواعد التقريب","text":"اختر قواعد عرض الأرقام (مركزان عشريان للأسعار، 4–6 عشرية للعمليات التحليلية للربح)."},
+          {"@type":"HowToStep","name":"اعرض السياق","text":"اعرض السعر المستخدم والمبلغ المحوّل والطابع الزمني حتى يفهم المستخدم متى طُبّق العرض."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"هل أسعار المحول مباشرة؟","acceptedAnswer":{"@type":"Answer","text":"يمكن لأدوات التحويل جلب أسعار السوق الوسيط من واجهات برمجة التطبيقات، لكن أسعار البنوك وخدمات التحويل قد تختلف بسبب الهوامش والرسوم."}},
+          {"@type":"Question","name":"هل يجب تقريب المبالغ المحوّلة؟","acceptedAnswer":{"@type":"Answer","text":"نعم — اعرض المبالغ بعد تقريب مناسب للعملة (مركزان عشريان لمعظم العملات الورقية) وعرّض السعر بدقة أعلى عند الحاجة."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">currency — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">محول العملات — دليل عملي لتحويلات موثوقة</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب في مجالي المدفوعات والإنتاجية</div>
+          <div class="meta">نشر: 2025-11-24 · وقت القراءة: 12–16 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">يجب أن يفعل محول العملات أكثر من عرض أرقام فقط — يجب أن يبيّن السياق: أي سعر استُخدم، متى طُبّق، وهل الرسوم مضمّنة أم لا. يشرح هذا الدليل مصادر الأسعار، خيارات العرض، أنماط للسفر والأعمال، قواعد التقريب، وطرق لأتمتة التحويلات المتكررة.</p>
+
+      <nav class="toc" aria-label="فهرس المحتويات">
+        <a href="#sources">مصادر الأسعار</a>
+        <a href="#presentation">العرض وعمليات التقريب</a>
+        <a href="#travel">نصائح للسفر والميزانية</a>
+        <a href="#business">أنماط الأعمال والتسعير</a>
+        <a href="#automation">الأتمتة والبرمجة النصية</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="sources" class="section" aria-labelledby="sources-title">
+        <h2 id="sources-title">مصادر الأسعار — اختر ما يتناسب مع حاجتك</h2>
+        <p>ليست كل الأسعار متساوية. أسعار السوق الوسيط (mid-market) هي منتصف نطاق الشراء والبيع في الأسواق بين البنوك وتوفرها معظم واجهات برمجة التطبيقات العامة. البنوك ومقدمو الدفع يضيفون هوامش ورسوم؛ للعرض للمستخدمين، فكر في استخدام عروض مقدمي الخدمة أو عرض السعر الوسيط إلى جانب تقدير للتكلفة النهائية بما في ذلك الرسوم.</p>
+
+        <h3>المصادر الشائعة</h3>
+        <ul>
+          <li><strong>واجهات API لأسعار الصرف:</strong> واجهات مجانية أو مدفوعة (مناسبة لأسعار السوق الوسيط).</li>
+          <li><strong>عروض البنوك:</strong> الأدق للمدفوعات لكن غالبًا ما تتطلب تسجيل دخول أو مفتاح API من البنك/شريك الدفع.</li>
+          <li><strong>أسعار معالجات البطاقات:</strong> تُستخدم لعمليات البطاقات وتضم الفارق والرسوم.</li>
+        </ul>
+      </section>
+
+      <section id="presentation" class="section" aria-labelledby="presentation-title">
+        <h2 id="presentation-title">العرض وعمليات التقريب — الوضوح يبني الثقة</h2>
+        <p>اعرض المبلغ المحوّل، والسعر المستخدم، والطابع الزمني. قواعد التقريب مهمة: اعرض مبلغ الدفع بمركزين عشريين للعملات الورقية؛ أما لتحليلات الأسعار فاعرض دقة أكبر للسعر نفسه.</p>
+
+        <div class="recipe" aria-labelledby="display-recipe">
+          <strong id="display-recipe">تنسيق العرض الأدنى</strong>
+          <ol>
+            <li>المبلغ المحوّل (مقرب للعرض) — مثال: 123.45 يورو</li>
+            <li>السعر — مثال: 1.234567 (اعرض 4–6 منازل عشرية)</li>
+            <li>الطابع الزمني أو عبارة "ساري اعتبارًا من" — ليعرف المستخدم متى طُبّق العرض</li>
+            <li>اختياري: نسبة المصدر إن كنت تستخدم مزود بيانات مدفوع</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="travel" class="section" aria-labelledby="travel-title">
+        <h2 id="travel-title">نصائح للسفر والميزانية</h2>
+        <p>عند السفر قد تتراكم فروق التقريب الصغيرة. استخدم أسعار السوق الوسيط للتقديرات السريعة، لكن احسب الرسوم المتوقعة عند التخطيط لسحب النقود أو استخدام البطاقة.</p>
+
+        <ul>
+          <li>لسحب النقود من الصراف الآلي، توقع رسومًا إضافية من الصراف والبنك؛ احسب هامشًا إضافيًا 3–5٪ فوق تقدير السوق الوسيط.</li>
+          <li>احتفظ بوسادة يومية صغيرة عند تحويل المال للسفر لتجنب التقليل من المصاريف.</li>
+        </ul>
+      </section>
+
+      <section id="business" class="section" aria-labelledby="business-title">
+        <h2 id="business-title">أنماط للأعمال والتسعير</h2>
+        <p>للفواتير والتسعير، كن صريحًا: إما أن تفوّتش بالعملة العميل وعرض تحويل مقتبس، أو تكلف بالعملة الخاصة بك وتعرض تقدير التحويل. أضمن إدراج السعر والطابع الزمني على الفواتير للشفافية.</p>
+
+        <h3>وصفة الفاتورة</h3>
+        <pre class="template">حقول الفاتورة التي يجب تضمينها:
+- المبلغ (عملة البائع)
+- المبلغ المحوّل (عملة المشتري) مع التقريب
+- السعر المستخدم
+- طابع زمني للسعر
+- ملاحظة: "السعر مصدره [المزود]"</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">الأتمتة والبرمجة النصية</h2>
+        <p>أتمتة التحويلات المتكررة باستخدام سكربتات بسيطة أو صيغ في الجداول. تعيد كثير من واجهات API JSON، لذا يمكنك جلبها وحساب التحويلات في جدول بيانات أو أداة صغيرة.</p>
+
+        <h3>صيغة في الجدول (Spreadsheet)</h3>
+        <pre class="template">إذا كان السعر في الخلية B2 والمبلغ في A2:
+=ROUND(A2 * B2, 2)</pre>
+
+        <p class="small-note">للمهام المتكررة، خزّن الأسعار مؤقتًا وقم بتحديثها بتواتر معقول (مثل كل ساعة) لتجنب الوصول إلى حدود واجهات API المجانية.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> هل يجب دائمًا استخدام سعر السوق الوسيط؟<br><strong>ج:</strong> أسعار السوق الوسيط ممتازة للتقديرات. للفاتورة الفعلية أو التحويلات، استخدم عروض المزود التي تتضمن الرسوم والهوامش.</p>
+
+          <p><strong>س:</strong> كم تتكرر تحديثات الأسعار؟<br><strong>ج:</strong> تقوم العديد من واجهات API بتحديث الأسعار كل دقيقة؛ يعتمد اختيارك على الحاجة وقيود API.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/currency-ar.html">افتح أداة محول العملات</a></li>
+          <li><a href="https://exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate API</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/currency-ar.html" class="cta" aria-label="افتح محول العملات">افتح محول العملات</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>أسئلة أو ملاحظات؟ اتصل بنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- زر عائدي للأداة -->
+  <a href="/currency-ar.html" class="return-to-tool" id="returnToToolCurrency" aria-label="العودة إلى محول العملات">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى محول العملات</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCurrency');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

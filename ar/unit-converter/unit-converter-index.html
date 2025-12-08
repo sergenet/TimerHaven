@@ -1,18 +1,226 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>unit-converter — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for unit-converter guide (ar)">
+  <meta charset="utf-8" />
+  <title>محول الوحدات — حوّل الوحدات بدقّة وتجنّب الأخطاء | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل شامل لتحويل الوحدات: أنظمة الوحدات، الدقة، التقريب، ملاحظات درجات الحرارة، وصفات تحويل للهندسة والطهي والسفر، وأتمتة في جداول البيانات." />
+  <link rel="canonical" href="https://timerhaven.com/ar/unit-converter/unit-converter-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"تحويل الوحدات بشكل موثوق",
+        "description":"افهم عائلات الوحدات، الدقة والتقريب، الحالات الخاصة (درجات الحرارة)، ووصفات تحويل شائعة للاستخدام اليومي والمهني.",
+        "image":"https://timerhaven.com/assets/images/unit-converter-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["محول الوحدات (TimerHaven)","جداول مرجعية أو دليل تقني","جدول بيانات"],
+        "step":[
+          {"@type":"HowToStep","name":"حدّد عائلة الوحدة","text":"قرّر ما إذا كنت تحول طولًا، وزنًا، درجة حرارة، حجمًا، إلخ."},
+          {"@type":"HowToStep","name":"اختر مرجعًا والدقة","text":"اختر عوامل تحويل موثوقة وحدّد الدقة العشرية المطلوبة."},
+          {"@type":"HowToStep","name":"طبّق التحويل وقم بالتقريب","text":"حوّل ونسّق النتيجة مع التقريب المناسب للعرض أو الحساب."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"لماذا تختلف تحويلات الحرارة؟","acceptedAnswer":{"@type":"Answer","text":"تحويلات درجات الحرارة تحويلات أُفينية (Affine) — تتضمن إزاحة ومقياس، لذلك لا يمكنك تحويل فروق درجات الحرارة بنفس الطريقة التي تحول بها قراءات مطلقة دون تعديل الإزاحة."}},
+          {"@type":"Question","name":"كم عدد الكسور العشرية التي أُظهر؟","acceptedAnswer":{"@type":"Answer","text":"يعتمد ذلك على السياق: الأسعار—منزلتان عشريتان؛ التحملات الهندسية—مزيد من المنازل (3–6)؛ الأعمال العلمية—استخدم الأرقام المعنوية المناسبة لدقة الأداة."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;text-align:right;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;justify-content:flex-end;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">unit-converter — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">محول الوحدات — حوّل الوحدات بدقّة وافهم المزالق</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب في قابلية الاستخدام والهندسة</div>
+          <div class="meta">نشر: 2025-11-24 · وقت القراءة: 10–15 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">تحويل الوحدات يُعد أمرًا روتينيًا في السفر والطهي والهندسة والبرمجيات. يمكن للأخطاء الصغيرة في الوحدات أو التقريب أن تؤدي إلى نتائج كبيرة. يشرح هذا الدليل عائلات الوحدات، قواعد الدقة، تحويلات درجات الحرارة، أنماط العرض، وصفات للجداول البرمجية وطرق عملية لتجنّب الأخطاء الشائعة.</p>
+
+      <nav class="toc" aria-label="فهرس المحتوى">
+        <a href="#families">عائلات الوحدات والأساسيات</a>
+        <a href="#precision">الدقة وقواعد التقريب</a>
+        <a href="#temperature">درجات الحرارة — ملاحظات خاصة</a>
+        <a href="#recipes">وصفات تحويل شائعة</a>
+        <a href="#spreadsheet">أمثلة للجداول والسكريبتات</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="families" class="section" aria-labelledby="families-title">
+        <h2 id="families-title">عائلات الوحدات والأساسيات</h2>
+        <p>تنتمي الوحدات إلى عائلات (طول، كتلة، درجة حرارة، حجم، زمن، مساحة، طاقة، إلخ). حول دائمًا ضمن نفس العائلة واختر عوامل تحويل مرجعية موثوقة.</p>
+
+        <ul>
+          <li><strong>الطول:</strong> متر، كيلومتر، ميل، قدم، بوصة.</li>
+          <li><strong>الكتلة / الوزن:</strong> كيلوغرام، غرام، رطل، أوقية.</li>
+          <li><strong>الحجم:</strong> لتر، مليلتر، جالون (فرق US/UK)، كوب.</li>
+          <li><strong>الحرارة:</strong> سلسيوس، فهرنهايت، كلفن (تحويلات أُفينية).</li>
+        </ul>
+
+        <p>للأعمال الهندسية الحساسة، ارجع إلى المعايير الوطنية (مثل NIST، BIPM) لعوامل دقيقة وتعريفات الوحدات.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">الدقة وقواعد التقريب</h2>
+        <p>حدّد الدقة اعتمادًا على الغرض. التقريب المفرط يخلق انحيازًا منهجيًا؛ أما العرض بدقة مبالَغ فيها فقد يعطي إيحاءً بدقة غير حقيقية.</p>
+
+        <h3>إرشادات حسب السياق</h3>
+        <ul>
+          <li><strong>الاستخدام اليومي / التسوق:</strong> منزلتان عشريان للعملات والمبالغ المعروضة للمستخدمين.</li>
+          <li><strong>الطهي:</strong> قرّب للوحدات المعقولة (ملاعق صغيرة، غرامات) ووفّر بدائل (متري وامبريال).</li>
+          <li><strong>الهندسة:</strong> اعرض أرقامًا ذات أرقام معنوية مطابقة لدقة الأداة (3–6+ منازل عشرية حسب التحمل).</li>
+          <li><strong>التحليلات:</strong> خزّن القيم الخام بدقة عالية وقرّب فقط عند العرض.</li>
+        </ul>
+
+        <p>اعرض دائمًا الوحدة إلى جانب الرقم وفكّر في إظهار عامل التحويل أو طابع زمني "ساري اعتبارًا من" عند استخدام عوامل ديناميكية (مثل أسعار الصرف).</p>
+      </section>
+
+      <section id="temperature" class="section" aria-labelledby="temperature-title">
+        <h2 id="temperature-title">الحرارة — تحويلات ذات حالة خاصة</h2>
+        <p>تحويلات درجات الحرارة هي تحويلات أُفينية: تتطلب تحجيمًا وتحريكًا. تحويل درجة حرارة مطلقة يختلف عن تحويل فروق درجات الحرارة.</p>
+
+        <ul>
+          <li>حوّل القيم المطلقة بشكل صحيح:
+            <ul>
+              <li>C → F: F = C × 9/5 + 32</li>
+              <li>F → C: C = (F − 32) × 5/9</li>
+              <li>C ↔ K: K = C + 273.15</li>
+            </ul>
+          </li>
+          <li>عند تحويل فرق في درجة الحرارة (Δ): استخدم المقياس فقط (اضرب بـ 9/5 لتحويل ΔC → ΔF) — لا تُطبّق الإزاحة.</li>
+        </ul>
+
+        <p>مثال شائع للخطأ: "تغيير 10°C يعادل 18°F" صحيح للفارق؛ لكن تحويل 10°C كقيمة مطلقة إلى فهرنهايت يتطلب إضافة 32 بعد الضرب.</p>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">وصفات تحويل شائعة</h2>
+
+        <div class="recipe">
+          <strong>الطول: ميل ↔ كيلومتر</strong>
+          <ol>
+            <li>استخدم العامل: 1 ميل = 1.60934 كيلومتر.</li>
+            <li>مثال: 5 ميل × 1.60934 = 8.0467 كم → عرض 8.05 كم للاستخدام الشائع.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>الوزن: رطل ↔ كيلوغرام</strong>
+          <ol>
+            <li>استخدم العامل: 1 lb = 0.45359237 كغم.</li>
+            <li>مثال: 150 lb × 0.45359237 = 68.0389 كغم → عرض 68.04 كغم (منزلتان) أو 68.0 للتقريب الطبي حسب السياق.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>الحجم: أونصة سائلة وكوب (US)</strong>
+          <ol>
+            <li>1 كوب US = 8 أونصات سائلة US = 236.588 مليلتر.</li>
+            <li>تحقق من الاختلافات الإقليمية: أكواب وجالونات الإمبراطورية (UK) لها قيم مختلفة.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="spreadsheet" class="section" aria-labelledby="spreadsheet-title">
+        <h2 id="spreadsheet-title">أمثلة للجداول والسكريبتات</h2>
+        <p>صيغ شائعة ونماذج سكريبت تساعد على أتمتة التحويلات على نطاق واسع.</p>
+
+        <h3>مثال جدول بيانات (Google Sheets / Excel)</h3>
+        <pre class="template">تحويل الأميال في A2 إلى كيلومترات:
+=ROUND(A2 * 1.60934, 2)</pre>
+
+        <h3>مقطع JavaScript</h3>
+        <pre class="template">function convertLength(val, fromFactor, toFactor) {
+  // حيث العوامل معبر عنها بالأمتار لكل وحدة
+  return val * (fromFactor / toFactor);
+}
+// مثال: ميل->كم: milesFactor=1609.34, kmFactor=1000
+</pre>
+
+        <p class="small-note">خزن عوامل التحويل الأساسية في مكان واحد وأعد استخدامها لتجنّب التباينات عبر الجداول أو الشيفرات.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> لماذا تبدو تحويلات الإمبريال مقابل المتري "مختلفة" أحيانًا؟<br><strong>ج:</strong> لأن خيارات التقريب والعرض تختلف؛ وأيضًا لأن بعض العوامل المنشورة (مثل الجالونات) تختلف حسب المنطقة (US مقابل UK). تحقّق دائمًا من التعريف المستخدم.</p>
+
+          <p><strong>س:</strong> كيف أُظهر الوحدتين معًا للمستخدم؟<br><strong>ج:</strong> اعرض الوحدتين الأساسية والثانوية (مثلاً: 68.04 كغم (150 lb)) وضع الوحدة المفضلة لدى المستخدم أولًا حينما يكون ذلك ممكنًا.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/unit-converter-ar.html">افتح أداة محول الوحدات</a></li>
+          <li><a href="https://www.nist.gov/pml/weights-and-measures/metric-si" target="_blank" rel="noopener">NIST — وحدات النظام الدولي (SI)</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/unit-converter-ar.html" class="cta" aria-label="افتح محول الوحدات">افتح محول الوحدات</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>أسئلة أو ملاحظات؟ تواصل معنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- زر العودة للأداة -->
+  <a href="/unit-converter-ar.html" class="return-to-tool" id="returnToToolUnit" aria-label="العودة إلى محول الوحدات">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى محول الوحدات</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolUnit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

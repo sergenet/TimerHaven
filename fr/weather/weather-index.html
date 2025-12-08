@@ -1,18 +1,244 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>weather — Guide (fr)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for weather guide (fr)">
+  <meta charset="utf-8" />
+  <title>Météo mondiale — Consulter, interpréter et planifier | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guide pratique pour l'outil Météo : choisir les lieux, interpréter les prévisions, planifier les déplacements, alertes météo, microclimats et sauvegarde des prévisions." />
+  <link rel="canonical" href="https://timerhaven.com/fr/weather/weather-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Utiliser efficacement les prévisions météo",
+        "description":"Trouver et interpréter des prévisions météo pour planifier activités quotidiennes et voyages. Ce guide explique les types de prévisions, la lecture des probabilités, la planification avec incertitude, les alertes, les microclimats et la sauvegarde des prévisions.",
+        "image":"https://timerhaven.com/assets/images/weather-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["Outil Météo (TimerHaven)","Calendrier","Plan de voyage ou checklist"],
+        "step":[
+          {"@type":"HowToStep","name":"Choisir le lieu approprié","text":"Recherchez par ville ou utilisez la géolocalisation pour obtenir des coordonnées exactes."},
+          {"@type":"HowToStep","name":"Choisir le type de prévision","text":"Comprenez les différences entre prévisions horaires, quotidiennes et longue portée et ce pour quoi chacune est utile."},
+          {"@type":"HowToStep","name":"Planifier avec incertitude","text":"Utilisez probabilités et plages pour prendre des décisions robustes (prévoir des couches, fixer des horaires flexibles)."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Quelle est la précision des prévisions à court terme ?","acceptedAnswer":{"@type":"Answer","text":"Les prévisions à court terme (0–3 jours) sont généralement fiables pour la température et la probabilité de précipitations, mais la précision varie selon la région et la résolution des modèles."}},
+          {"@type":"Question","name":"Doit‑on privilégier les prévisions horaires ou quotidiennes ?","acceptedAnswer":{"@type":"Answer","text":"Les prévisions horaires conviennent aux décisions immédiates (24 heures) ; les résumés quotidiens sont plus utiles pour la planification sur plusieurs jours."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    /* Floating return button */
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">weather — Guide (fr)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Météo — Trouver, interpréter et utiliser les prévisions</h1>
+
+      <div class="author" role="articleauthor" aria-label="Auteur de l'article">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Par Serge Shammas</strong> — auteur voyages & planification</div>
+          <div class="meta">Publié : 2025-11-24 · Temps de lecture : 12–18 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Les prévisions météo sont des outils de décision. Que vous planifiiez un trajet, un week‑end ou un travail sur le terrain, savoir choisir la bonne prévision, lire les probabilités et planifier avec incertitude rendra vos plans plus robustes. Ce guide explique les types de prévisions, l'interprétation des probabilités de précipitations, les microclimats, les alertes, la sauvegarde des prévisions et des recettes pratiques de planification.</p>
+
+      <nav class="toc" aria-label="Table des matières">
+        <a href="#types">Types de prévisions</a> ·
+        <a href="#ppo">Précipitations & probabilité</a> ·
+        <a href="#hourly-daily">Horaire vs quotidien</a> ·
+        <a href="#micro">Microclimats & facteurs locaux</a> ·
+        <a href="#alerts">Alertes, vigilances & seuils</a> ·
+        <a href="#plan">Recettes de planification</a> ·
+        <a href="#save">Sauvegarder & partager</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="types" class="section" aria-labelledby="types-title">
+        <h2 id="types-title">Types de prévisions — choisissez la bonne</h2>
+        <p>Les prévisions existent sous plusieurs formes. Choisissez celle qui correspond à votre horizon de décision et au niveau de détail requis :</p>
+        <ul>
+          <li><strong>Nowcast / très court terme (0–6 h) :</strong> idéal pour décisions immédiates — utilise radar haute résolution et observations locales.</li>
+          <li><strong>Court terme (6–72 h) :</strong> bon pour la planification quotidienne — températures, fenêtres de précipitations et vent sont raisonnablement fiables.</li>
+          <li><strong>Moyen terme (3–7 jours) :</strong> utile pour organiser un voyage, mais prenez les détails (timing) comme approximatifs ; concentrez‑vous sur les tendances.</li>
+          <li><strong>Long terme (7+ jours) :</strong> signale des tendances larges (plus chaud/froid que la normale) — à utiliser pour attentes générales, pas pour un calendrier précis.</li>
+        </ul>
+      </section>
+
+      <section id="ppo" class="section" aria-labelledby="ppo-title">
+        <h2 id="ppo-title">Précipitations & probabilité — lire la chance de pluie</h2>
+        <p>La probabilité de précipitation (PoP) est souvent mal comprise. PoP indique la probabilité qu'une quantité mesurable de précipitations se produit à un endroit donné pendant une période. Elle n'indique pas directement la quantité.</p>
+
+        <ul>
+          <li><strong>Interpréter la PoP :</strong> 20 % signifie une chance modeste — emporter un imperméable ou un parapluie si vous voulez être prudent ; 60–80 % implique de prévoir des alternatives pour les activités extérieures.</li>
+          <li><strong>Intensité vs probabilité :</strong> vérifiez toujours l'intensité attendue et la durée. 30 % de risque d'averse forte pendant 10 minutes peut être plus perturbant que 60 % de bruine légère.</li>
+          <li><strong>Utiliser le radar pour le timing :</strong> pour les décisions immédiates, consultez le radar en direct pour visualiser le mouvement et l'heure d'arrivée des perturbations.</li>
+        </ul>
+      </section>
+
+      <section id="hourly-daily" class="section" aria-labelledby="hourly-daily-title">
+        <h2 id="hourly-daily-title">Prévisions horaires vs quotidiennes — quand utiliser</h2>
+        <p>Les prévisions horaires sont adaptées aux décisions dans la journée : trajets, heures de départ ou petits événements extérieurs. Les résumés quotidiens sont plus pratiques pour les voyages ou la planification générale.</p>
+
+        <div class="recipe" aria-labelledby="hourly-recipe">
+          <strong id="hourly-recipe">Règle pratique</strong>
+          <ol>
+            <li>Pour les décisions dans les 24 heures, consultez les prévisions horaires et le radar pour choisir la meilleure fenêtre horaire.</li>
+            <li>Pour 1–4 jours, utilisez les prévisions quotidiennes mais revérifiez avec les données horaires la veille.</li>
+            <li>Pour 5+ jours, considérez les prévisions comme des signaux de tendance et construisez des plans flexibles (prévoir des couches, options alternatives).</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="micro" class="section" aria-labelledby="micro-title">
+        <h2 id="micro-title">Microclimats & facteurs locaux — ce que les modèles peuvent manquer</h2>
+        <p>La géographie locale, l'altitude, les îlots de chaleur urbains, la proximité côtière et les effets de vallée créent des microclimats qui divergent des sorties régionales. Tenez compte des connaissances locales et des observations pour planifier.</p>
+
+        <ul>
+          <li>Zones côtières : les brises marines peuvent provoquer des variations rapides de température et des averses localisées.</li>
+          <li>Vallées et cuvettes : accumulation d'air froid pouvant générer gel ou brouillard alors que la région semble clémente.</li>
+          <li>Îlots de chaleur urbains : les villes peuvent être plusieurs degrés plus chaudes la nuit que les zones rurales environnantes.</li>
+        </ul>
+      </section>
+
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Alertes, vigilances & seuils — comment agir</h2>
+        <p>Les alertes signalent des conditions potentiellement dangereuses. Comprenez les types d'alerte et une checklist d'action simple pour chacune.</p>
+
+        <h3>Types d'alerte courants</h3>
+        <ul>
+          <li><strong>Vigilance (watch) :</strong> conditions possibles — préparez‑vous et surveillez l'évolution.</li>
+          <li><strong>Avertissement (warning) :</strong> conditions dangereuses attendues — prenez des mesures de protection.</li>
+          <li><strong>Avis (advisory) :</strong> moins sévère mais susceptible de causer des désagréments — planifiez en conséquence.</li>
+        </ul>
+
+        <div class="recipe" aria-labelledby="alert-recipe">
+          <strong id="alert-recipe">Checklist d'action simple</strong>
+          <ol>
+            <li>Lisez le texte de l'alerte pour connaître timing et zone affectée.</li>
+            <li>Identifiez les actifs critiques (trajet, événement extérieur, matériel) et décidez de reporter, déplacer ou mettre en place des mitigations.</li>
+            <li>Partagez l'alerte avec les parties prenantes et confirmez les plans de contingence.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="plan" class="section" aria-labelledby="plan-title">
+        <h2 id="plan-title">Recettes de planification — prendre des décisions robustes</h2>
+        <p>Planifiez avec incertitude. Préférez des choix conservateurs et des solutions de repli rapides pour réduire les risques de perturbation.</p>
+
+        <div class="recipe" aria-labelledby="commute">
+          <strong id="commute">Trajets & organisation d'événements</strong>
+          <ol>
+            <li>Vérifiez la prévision horaire deux heures avant le départ pour la météo et les précipitations.</li>
+            <li>Si la PoP > 50 % au moment du trajet, prévoyez un itinéraire abrité ou un transport alternatif ; partez plus tôt en cas de fortes pluies ou de neige.</li>
+            <li>Pour un événement extérieur, fixez une échéance décisionnelle et communiquez clairement la contingence aux participants.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="travel">
+          <strong id="travel">Bagages pour un week‑end</strong>
+          <ol>
+            <li>Consultez les tendances 3–7 jours pour les températures moyennes et la probabilité de précipitations.</li>
+            <li>Prévoyez des couches et un équipement imperméable si la prévision est variable ; emportez une protection solaire si c'est clair et plus chaud.</li>
+            <li>Avant le départ, vérifiez le radar local et les prévisions très court terme pour finaliser le choix des vêtements.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="save" class="section" aria-labelledby="save-title">
+        <h2 id="save-title">Sauvegarder, partager & archiver les prévisions</h2>
+        <p>Sauvegarder des prévisions vous permet de comparer prédiction vs réalité — utile pour post‑analyse, jardinage ou expériences.</p>
+
+        <ul>
+          <li><strong>Enregistrer un instantané :</strong> copiez les détails essentiels (heure, PoP, températures) dans une note ou un événement calendrier.</li>
+          <li><strong>Partager :</strong> collez une capture d'écran ou un résumé court avec heures locales pour les collaborateurs.</li>
+          <li><strong>Archiver :</strong> conservez un instantané daté si vous testez la précision des modèles ou documentez des conditions pour des installations ou expériences.</li>
+        </ul>
+
+        <pre class="template">Prévision sauvegardée exemple :
+Ville : Londres
+Date : 2025-11-28
+Horaire : 09:00 12°C 30% pluie → 12:00 14°C 10% pluie
+Notes : Prendre un parapluie pour la réunion du matin</pre>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q :</strong> Quel modèle de prévision dois‑je privilégier ?<br><strong>A :</strong> Aucun modèle n'est universellement meilleur. Pour les décisions importantes, comparez plusieurs sources (service national local, modèles globaux, radar). Les agences locales ont souvent une valeur ajoutée en adaptant les sorties aux conditions locales.</p>
+
+          <p><strong>Q :</strong> Jusqu'à quelle horizon la prévision est‑elle fiable ?<br><strong>A :</strong> Les tendances de température sont généralement fiables 3–5 jours ; la précision du timing des précipitations diminue au‑delà de 48 heures. Adoptez une pensée probabiliste pour les horizons plus lointains.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressources</h2>
+        <ul class="muted">
+          <li><a href="https://timerhaven.com/weather-fr.html">Ouvrir l'outil Météo</a></li>
+          <li><a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a></li>
+          <li><a href="https://www.wmo.int" target="_blank" rel="noopener">Organisation Météorologique Mondiale</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/weather-fr.html" class="cta" aria-label="Ouvrir l'outil Météo">Ouvrir Météo</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions ou retours ? Contactez‑nous : <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lisez notre <a href="/fr/privacy/">Politique de confidentialité</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Retour à l'outil" button -->
+  <a href="https://timerhaven.com/weather-fr.html" class="return-to-tool" id="returnToToolWeather" aria-label="Retour à la Météo">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Retour à la Météo</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWeather');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

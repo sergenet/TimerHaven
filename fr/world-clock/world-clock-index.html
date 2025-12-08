@@ -1,18 +1,199 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>world-clock — Guide (fr)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for world-clock guide (fr)">
+  <meta charset="utf-8" />
+  <title>Horloge mondiale — Comparer les fuseaux & planifier en toute confiance | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guide complet pour utiliser l'Horloge mondiale : sélectionner des zones, lire les offsets, planifier des réunions entre régions, pièges liés aux changements d'heure et astuces d'automatisation." />
+  <link rel="canonical" href="https://timerhaven.com/fr/world-clock/world-clock-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Utiliser une horloge mondiale pour planifier",
+        "description":"Comparer plusieurs fuseaux horaires, afficher les heures locales des participants et éviter les confusions liées aux changements d'heure. Ce guide comprend des recettes de planification, des conseils de conversion et des idées d'automatisation.",
+        "image":"https://timerhaven.com/assets/images/world-clock-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["Horloge mondiale (TimerHaven)","Calendrier","Informations sur les fuseaux des participants"],
+        "step":[
+          {"@type":"HowToStep","name":"Choisir des points de référence","text":"Définissez la référence de l'organisateur et ajoutez les fuseaux des participants pour comparer les heures locales."},
+          {"@type":"HowToStep","name":"Surveiller les changements d'heure","text":"Vérifiez les règles d'heure d'été et confirmez les horaires autour des dates de transition."},
+          {"@type":"HowToStep","name":"Partager les heures locales","text":"Communiquez le créneau choisi en indiquant l'heure locale de l'organisateur et celle des participants pour réduire l'ambiguïté."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Comment gérer les transitions d'heure d'été ?","acceptedAnswer":{"@type":"Answer","text":"Évitez, si possible, de programmer des événements pendant les dates de transition ; sinon, confirmez explicitement les heures locales et incluez les identifiants de fuseau (IANA) dans les invitations."}},
+          {"@type":"Question","name":"Faut‑il afficher plusieurs heures locales dans les invitations ?","acceptedAnswer":{"@type":"Answer","text":"Oui — afficher l'heure de l'organisateur et celle du participant réduit les erreurs, en particulier pour les équipes distribuées."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">world-clock — Guide (fr)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Horloge mondiale — Comparer les fuseaux et planifier sereinement</h1>
+
+      <div class="author" role="articleauthor" aria-label="Auteur de l'article">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Par Serge Shammas</strong> — auteur spécialisé travail distribué & planification</div>
+          <div class="meta">Publié : 2025-11-24 · Temps de lecture : 12–16 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Planifier entre fuseaux horaires est souvent source de confusion. Une horloge mondiale fiable vous aide à comparer les heures locales, à éviter les pièges des changements d'heure et à communiquer clairement les horaires de réunion. Ce guide couvre les bases des fuseaux, les recettes de planification, les pièges DST, l'usage des identifiants IANA, des astuces d'automatisation et des modes de partage réduisant les erreurs.</p>
+
+      <nav class="toc" aria-label="Table des matières">
+        <a href="#basics">Notions de fuseau</a> ·
+        <a href="#dst">Heure d'été & pièges</a> ·
+        <a href="#planning">Recettes de planification</a> ·
+        <a href="#naming">Utiliser les identifiants IANA & labels clairs</a> ·
+        <a href="#automation">Automatisation & conseils calendrier</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="basics" class="section" aria-labelledby="basics-title">
+        <h2 id="basics-title">Notions de base — offsets, UTC et heure locale</h2>
+        <p>Les fuseaux horaires sont définis par rapport au Temps Universel Coordonné (UTC) avec des offsets (ex. UTC+1). Pour éviter l'ambiguïté, communiquez toujours l'heure affichée et le fuseau (ou l'offset) lors de la planification entre lieux différents.</p>
+
+        <ul>
+          <li><strong>Référence UTC :</strong> utilisez UTC pour coordonner des systèmes globaux et éviter les ambiguïtés locales.</li>
+          <li><strong>Heures locales pour les personnes :</strong> pour les invitations, privilégiez l'heure locale du destinataire — affichez à la fois l'heure de l'organisateur et celle du participant pour réduire les erreurs.</li>
+          <li><strong>24 h vs 12 h :</strong> utilisez le format adapté à votre public — le format 24 h évite les confusions AM/PM.</li>
+        </ul>
+      </section>
+
+      <section id="dst" class="section" aria-labelledby="dst-title">
+        <h2 id="dst-title">Heure d'été — pièges fréquents</h2>
+        <p>Les transitions d'heure d'été modifient les offsets locaux et causent des erreurs de planning, surtout autour des dates de changement. Évitez de planifier des événements récurrents proches des transitions ou incluez systématiquement l'identifiant de fuseau dans les invitations.</p>
+
+        <h3>Règles pratiques</h3>
+        <ul>
+          <li>Évitez de fixer des échéances critiques ou réunions transversales le jour d'un changement d'heure.</li>
+          <li>Indiquez explicitement le fuseau (ex. "09:00 America/Los_Angeles (PDT)") au lieu d'un nom local variable.</li>
+          <li>À la confirmation, affichez l'heure locale du participant et l'horodatage UTC comme référence définitive.</li>
+        </ul>
+      </section>
+
+      <section id="planning" class="section" aria-labelledby="planning-title">
+        <h2 id="planning-title">Recettes de planification — réduire les frictions</h2>
+        <p>Utilisez l'horloge mondiale pour choisir des créneaux équitables et communiquer clairement les heures.</p>
+
+        <div class="recipe" aria-labelledby="small-meeting">
+          <strong id="small-meeting">Petite équipe distribuée — réunion 30 min</strong>
+          <ol>
+            <li>Recueillez les fenêtres horaires préférées des participants (matinée/après-midi locale).</li>
+            <li>Affichez chaque créneau candidat en heure locale pour chaque participant à l'aide de l'horloge mondiale.</li>
+            <li>Proposez 2–3 créneaux et finalisez rapidement ; incluez les heures organisateur et participant dans la description de l'invitation.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="global">
+          <strong id="global">Town‑hall global — minimiser la contrainte</strong>
+          <ol>
+            <li>Sélectionnez un créneau évitant les heures extrêmes pour la majorité ; faites tourner l'horaire sur des sessions répétées pour répartir la contrainte.</li>
+            <li>Enregistrez et partagez la session pour ceux qui ne peuvent pas assister en direct.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="naming" class="section" aria-labelledby="naming-title">
+        <h2 id="naming-title">Utiliser les identifiants IANA & labels clairs</h2>
+        <p>Les noms de fuseau IANA (Europe/London, America/New_York) sont sans ambiguïté et intègrent les règles DST. Lorsque vous indiquez des heures dans un message ou une invitation, affichez le label lisible et l'identifiant IANA ou l'offset UTC pour plus de clarté.</p>
+
+        <pre class="template">Exemple de ligne d'invitation :
+Réunion : Sync projet
+Heure : 2025-11-30 09:00 America/Los_Angeles (UTC-8) — 17:00 Europe/London (UTC+0)
+Ordre du jour : ...</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Automatisation & conseils calendrier</h2>
+        <p>Rendez la planification prévisible grâce à l'automatisation et des pratiques calendaires explicites.</p>
+
+        <ul>
+          <li><strong>Spécifiez le fuseau de l'événement :</strong> incluez le fuseau de l'organisateur dans les métadonnées de l'événement pour que les calendriers des participants convertissent correctement.</li>
+          <li><strong>Utilisez des liens avec conversion :</strong> convertissez et collez les heures locales pour les participants clés dans la description de l'événement.</li>
+          <li><strong>Outils de planification :</strong> servez‑vous d'outils qui proposent des créneaux optimaux en fonction des fuseaux et des heures de travail des participants.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q :</strong> Que faire si des participants voient des heures différentes ?<br><strong>A :</strong> Confirmez le fuseau de l'événement et incluez l'heure UTC dans l'invitation. Incitez les participants à ouvrir les détails de l'événement dans leur application calendrier pour voir la conversion automatique.</p>
+
+          <p><strong>Q :</strong> Faut‑il toujours planifier en UTC ?<br><strong>A :</strong> L'UTC est excellent pour les systèmes et l'automatisation, mais pour la communication humaine affichez les heures locales et utilisez UTC en second recours. Les gens comprennent mieux les heures locales ; l'UTC élimine l'ambiguïté pour les aspects techniques.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressources</h2>
+        <ul class="muted">
+          <li><a href="https://timerhaven.com/world-clock-fr.html">Ouvrir l'outil Horloge mondiale</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">Identifiants de fuseaux IANA</a></li>
+          <li><a href="https://timeanddate.com" target="_blank" rel="noopener">timeanddate.com — conversions & DST</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/world-clock-fr.html" class="cta" aria-label="Ouvrir Horloge mondiale">Ouvrir Horloge mondiale</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions ou retours ? Contactez‑nous : <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lisez notre <a href="/fr/privacy/">Politique de confidentialité</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Retour à l'outil" button -->
+  <a href="https://timerhaven.com/world-clock-fr.html" class="return-to-tool" id="returnToToolWorldClock" aria-label="Retour à l'Horloge mondiale">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Retour à l'Horloge mondiale</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWorldClock');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

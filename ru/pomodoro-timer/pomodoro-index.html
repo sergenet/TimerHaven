@@ -2,294 +2,365 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>Таймер Помодоро — Практическое руководство для фокуса и измерения | TimerHaven</title>
+  <title>Таймер Помодоро — Практическое руководство по фокусной работе | TimerHaven</title>
+  <meta name="description" content="Подробное руководство по технике Помодоро: практические рабочие процессы, пошаговые инструкции, шаблоны, кейсы и отладка, чтобы помочь вам сосредоточиться и получить измеримые результаты.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Подробное руководство по технике Помодоро: настройка, рабочие рецепты, логирование сессий, интеграция с Notes и Task Timer, командные практики и метрики для улучшения планирования.">
   <link rel="canonical" href="https://timerhaven.com/ru/pomodoro-index.html">
-  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/pomodoro-index.html">
-  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/pomodoro-index.html">
-  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/pomodoro-index.html">
-  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/pomodoro-index.html">
-  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/pomodoro-index.html">
-  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/pomodoro-index.html">
-  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/pomodoro-index.html">
-  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/pomodoro-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta property="og:title" content="Таймер Помодоро — Практическое руководство и рабочие процессы">
+  <meta property="og:description" content="Подробное руководство по технике Помодоро: практические рабочие процессы, пошаговые инструкции, шаблоны, кейсы и отладка, чтобы помочь вам сосредоточиться и получить измеримые результаты.">
+  <meta property="og:image" content="/assets/images/pomodoro-snapshot.png">
+  <meta property="og:url" content="https://timerhaven.com/ru/pomodoro-index.html">
 
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@graph":[
+    "@context": "https://schema.org",
+    "@graph": [
       {
-        "@type":"HowTo",
-        "name":"Как использовать технику Помодоро для продуктивной работы",
-        "description":"Пошаговый рабочий процесс: выбрать задачу, настроить временные интервалы, логировать прерывания, анализировать результаты и улучшать оценки.",
-        "image":"https://timerhaven.com/assets/images/pomodoro-snapshot.png",
-        "totalTime":"PT2H",
-        "supply":["Pomodoro Timer (TimerHaven)","Notes","Task Timer / Таблица"],
-        "step":[
-          {"@type":"HowToStep","name":"Выберите задачу и микро‑цель","text":"Определите измеримый результат на один Pomodoro (например, 'Написать 300 слов вступления')."},
-          {"@type":"HowToStep","name":"Настройте интервалы","text":"Выберите 25/5, 50/10 или 90/20 в зависимости от типа работы."},
-          {"@type":"HowToStep","name":"Запустите таймер и работайте","text":"Полное погружение: отключите уведомления, закрывайте вкладки с отвлекающим контентом."},
-          {"@type":"HowToStep","name":"Логируйте прерывания и результат","text":"Фиксируйте коротко причину прерывания и итог сессии в Notes или Task Timer."},
-          {"@type":"HowToStep","name":"Анализируйте и корректируйте","text":"Экспортируйте данные, посчитайте медиану/среднее и корректируйте планирование."}
+        "@type": "HowTo",
+        "name": "Используйте технику Помодоро для фокусной работы",
+        "description": "Практический рабочий процесс Помодоро: настройка, запуск, запись и обзор с вариантами и командными шаблонами.",
+        "image": "https://timerhaven.com/assets/images/pomodoro-snapshot.png",
+        "totalTime": "PT3H",
+        "supply": ["Таймер (браузер или телефон)", "Заметки или блокнот", "Список задач"],
+        "tool": ["Инструмент TimerHaven Pomodoro", "Task Timer (опционально)"],
+        "step": [
+          {"@type":"HowToStep","name":"Выберите измеримую задачу","text":"Запишите краткую цель (одно предложение) и до трёх подпунктов, которые нужно выполнить в следующем блоке."},
+          {"@type":"HowToStep","name":"Подготовьте окружение","text":"Отключите уведомления, подготовьте рабочее место и воду. Откройте таймер Pomodoro, установите стандартный интервал (25/5) или предпочитаемое разделение."},
+          {"@type":"HowToStep","name":"Запустите и сосредоточьтесь","text":"Запустите таймер и работайте исключительно над выбранной задачей до сигнала. Если возникло прерывание, зафиксируйте его и решите — поставить паузу или перезапустить."},
+          {"@type":"HowToStep","name":"Короткий перерыв и рефлексия","text":"Сделайте 5‑минутный перерыв, кратко запишите прогресс и подготовьте следующую микро‑цель."},
+          {"@type":"HowToStep","name":"Обзор после четырёх циклов","text":"После четырёх Помодоро сделайте длинный перерыв (15–30 минут) и просмотрите заметки для улучшений."}
         ]
       },
       {
-        "@type":"FAQPage",
-        "mainEntity":[
-          {"@type":"Question","name":"Можно ли настраивать длительности?","acceptedAnswer":{"@type":"Answer","text":"Да — вы свободны менять интервалы. Попробуйте разные настройки и сравните по качеству сессий и числу прерываний."}},
-          {"@type":"Question","name":"Как учитывать прерывания?","acceptedAnswer":{"@type":"Answer","text":"Записывайте количество и причину прерываний при каждой сессии — это поможет выявить шаблоны и причины фрагментации работы."}},
-          {"@type":"Question","name":"Подходит ли Помодоро для команд?","acceptedAnswer":{"@type":"Answer","text":"Да — синхронизированные Pomodoro помогают командам уменьшить ад‑хок отвлечения и организовать быстрые проверки в перерывах."}}
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type":"Question","name":"Какие обычные длительности Помодоро?","acceptedAnswer":{"@type":"Answer","text":"Обычные разделения — 25/5 и 50/10. Выберите тот вариант, который соответствует вашей концентрации и типу задачи."}},
+          {"@type":"Question","name":"Что делать при прерывании?","acceptedAnswer":{"@type":"Answer","text":"Если вы можете быстро вернуться к работе (<2 мин), зафиксируйте прерывание и продолжайте. При длительных прерываниях поставьте паузу и перезапустите Помодоро; зафиксируйте это как прерывание для последующего анализа."}},
+          {"@type":"Question","name":"Можно ли использовать Помодоро в команде?","acceptedAnswer":{"@type":"Answer","text":"Да — синхронизируйте Помодоро для общих фокус‑блоков и используйте перерывы для коротких стендапов. Очистите правила коммуникации (только срочные сообщения)."}}
         ]
+      },
+      {
+        "@type":"Person",
+        "name":"Serge Shammas",
+        "url":"https://timerhaven.com/authors/serge-shammas",
+        "image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg"
       }
     ]
   }
   </script>
 
   <style>
-    :root{--brand:#0b63a0;--muted:#6b7c89}
-    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fbfeff;color:#102a43;margin:0;padding:2rem;line-height:1.6}
-    .container{max-width:920px;margin:0 auto}
-    .card{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
-    h1{color:var(--brand);margin-top:0;font-size:1.9rem}
-    .author{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
-    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid rgba(15,23,42,0.06)}
-    .meta{color:var(--muted);font-size:.95rem}
-    .lead{font-size:1.05rem;color:#334;margin-bottom:0.6rem}
-    nav.toc{margin:0.75rem 0;padding:0.4rem 0;border-left:3px solid #eef5fb}
-    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600}
-    .section{margin-top:1.2rem}
-    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem}
-    .case{background:#f8fff7;border-left:4px solid #b7f0c2;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem}
-    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none}
-    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto}
-    table.sample{border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:680px}
-    table.sample th, table.sample td{padding:6px 10px;border:1px solid #eef5fb;text-align:left}
-    .muted{color:var(--muted)}
-    .small{font-size:.95rem;color:#51606b}
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .case{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+
+    /* Floating return-to-tool button (shared pattern used across guides) */
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
+    }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      font-size:16px;
+    }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
   </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <h1 id="title">Таймер Помодоро — Практическое руководство для фокуса и измерения</h1>
+      <h1 id="title">Таймер Помодоро — Практическое руководство по фокусной работе</h1>
 
       <div class="author" role="articleauthor" aria-label="Автор">
-        <img
-          src="https://timerhaven.com/assets/images/authors/serge-shammas-200.jpg"
-          srcset="https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg 2x"
-          width="56" height="56" alt="Фото Serge Shammas"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='https://timerhaven.com/assets/images/authors/avatar-placeholder.png';">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
         <div>
-          <div><strong>Por Serge Shammas</strong></div>
-          <div class="meta">Опубликовано: 2025-10-20 · Обновлено: 2025-11-23 · Время чтения: 8–11 мин</div>
+          <div><strong>Автор — Serge Shammas</strong> — автор по продуктивности и исследователь UX</div>
+          <div class="meta">Опубликовано: 2025-10-20 · Обновлено: 2025-11-21 · Время чтения: 10–12 мин.</div>
         </div>
       </div>
 
       <p class="lead">
-        Помодоро — это не только таймер: это способ структурировать работу, уменьшить стоимость переключения контекста и собрать реальные данные о времени выполнения. Ниже — расширенные рецепты, шаблоны для загрузки, способы логирования и анализ.
+        Техника Помодоро разбивает работу на фокусные интервалы с короткими перерывами. Это руководство содержит практические настройки, варианты для разных задач, командные сценарии, шаблоны логирования и рекомендации по устранению проблем, чтобы вы могли надёжно использовать Помодоро и получать измеримые результаты.
       </p>
 
-      <nav class="toc" aria-label="Содержимое">
-        <a href="#why">Почему Помодоро</a>
+      <nav class="toc" aria-label="Содержание">
+        <a href="#why">Зачем использовать Помодоро</a>
         <a href="#setup">Подготовка</a>
-        <a href="#howto">Шаги</a>
+        <a href="#howto">Пошагово</a>
         <a href="#variants">Варианты</a>
-        <a href="#recipes">Рецепты</a>
-        <a href="#log">Логирование & экспорт</a>
-        <a href="#measure">Метрики & анализ</a>
-        <a href="#team">В команде</a>
-        <a href="#troubleshoot">Проблемы</a>
+        <a href="#recipes">Рецепты и рабочие процессы</a>
+        <a href="#measure">Измерять и улучшать</a>
+        <a href="#team">Помодоро в команде</a>
+        <a href="#troubleshoot">Отладка</a>
         <a href="#faq">FAQ</a>
       </nav>
 
-      <section id="why" class="section">
-        <h2>Почему использовать Помодоро</h2>
-        <p>Короткие интервалы помогают преодолеть инерцию при старте задачи, уменьшают микро‑прокрастинацию и дают регулярные точки для проверки прогресса. Если вы логируете прерывания и длительности — вы получаете данные для реального планирования.</p>
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Зачем использовать Помодоро?</h2>
+        <p>
+          Помодоро превращает пугающую задачу «сделать много» в управляемые микро‑цели. Короткие блоки снижают барьер к началу, уменьшают усталость от принятия решений и позволяют собирать надёжные данные о реальном времени выполнения задач. Со временем эти данные помогают точнее оценивать задачи, минимизировать переключения контекста и проектировать реалистичные ежедневные планы.
+        </p>
       </section>
 
-      <section id="setup" class="section">
-        <h2>Подготовка — минимальный ritual перед стартом</h2>
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Подготовка и окружение</h2>
         <ul>
-          <li>Определите задачу и сформулируйте микро‑цель (одна фраза).</li>
-          <li>Закройте вкладки/приложения, которые не нужны для задачи; включите «Не беспокоить».</li>
-          <li>Откройте Notes или Task Timer для краткой записи прерываний и итогов.</li>
+          <li><strong>Фокус на одной задаче:</strong> запишите одну чёткую цель на предстоящий блок (например: «Черновик: раздел проекта X — 300 слов»).</li>
+          <li><strong>Устраните отвлечения:</strong> закройте или заглушите чаты, включите режим «Не беспокоить» на телефоне и приготовьте всё необходимое (справочные материалы, файлы, стакан воды).</li>
+          <li><strong>Выберите таймер:</strong> используйте инструмент TimerHaven Pomodoro в браузере или простой физический таймер. Убедитесь, что звуковые или визуальные сигналы подходят для вашего рабочего места.</li>
         </ul>
       </section>
 
-      <section id="howto" class="section">
-        <h2>Шаги — классический цикл (25/5)</h2>
+      <section id="howto" class="section" aria-labelledby="howto-title">
+        <h2 id="howto-title">Пошаговое Помодоро (25/5)</h2>
+
+        <div class="workflow" aria-labelledby="setup-steps">
+          <strong id="setup-steps">Краткий чек‑лист</strong>
+          <ol>
+            <li>Выберите одну измеримую задачу и запишите микро‑цель в одно предложение.</li>
+            <li>Установите таймер на 25 минут и работайте без мультизадачности.</li>
+            <li>Когда прозвонит сигнал — немедленно остановитесь и сделайте 5‑минутный перерыв.</li>
+            <li>Во время перерыва запишите одну короткую заметку (прогресс, блокер).</li>
+            <li>Повторяйте. После четырёх Помодоро сделайте длительный перерыв 15–30 минут и просмотрите заметки.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Малые задачи: объединяйте несколько связанных пунктов в одно Помодоро. Большие задачи: разбивайте на последовательные Помодоро и используйте краткий обзор между ними для корректировки объёма.</p>
+
+        <figure>
+          <img class="screenshot" src="/assets/images/pomodoro-snapshot.png" alt="Таймер Помодоро — пример интерфейса">
+          <figcaption class="muted">TimerHaven Pomodoro — запуск, пауза и журнал сессий.</figcaption>
+        </figure>
+      </section>
+
+      <section id="variants" class="section" aria-labelledby="variants-title">
+        <h2 id="variants-title">Варианты и когда их применять</h2>
+        <ul>
+          <li><strong>25/5 (классика):</strong> хорошо для общих задач и новичков; частые перерывы снижают умственное утомление.</li>
+          <li><strong>50/10 (глубокий фокус):</strong> лучше для сложного решения задач или программирования, где цена прерывания высока.</li>
+          <li><strong>90/20 (блоки потока):</strong> для длительной творческой работы; используйте редко и только при очень низкой вероятности прерываний.</li>
+          <li><strong>Пакетирование задач:</strong> объединяйте короткие схожие задачи (письма, быстрые ревью) в один Помодоро, чтобы снизить переключения контекста.</li>
+        </ul>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Рецепты и рабочие процессы</h2>
+
         <div class="workflow">
+          <strong>Рецепт — Быстрый черновик (25/5)</strong>
           <ol>
-            <li>Выберите задачу и напишите микро‑цель.</li>
-            <li>Запустите таймер на 25 минут и работайте без переключений.</li>
-            <li>При краткой отвлечении (&lt;2 мин) отметьте причину и продолжайте; при долгой — остановите и перезапустите сессии.</li>
-            <li>Пауза 5 минут — короткая активность (встать, выпить воды), затем следующий цикл.</li>
-            <li>После 4 Pomodoro — длинная пауза 15–30 минут и обзор результатов.</li>
+            <li>Набросайте 3 буллета для раздела, который будете писать.</li>
+            <li>Запустите одно Помодоро, чтобы писать без редактирования.</li>
+            <li>Во время 5‑минутного перерыва преобразуйте буллет в абзац. Повторяйте, пока черновик не готов.</li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>Рецепт — Глубокий спринт (50/10)</strong>
+          <ol>
+            <li>Запланируйте два подряд 50‑минутных блока для большой задачи.</li>
+            <li>Начните таймер и работайте в зоне без отвлечений; используйте физический маркер (например, карточку «не беспокоить»).</li>
+            <li>После спринта зафиксируйте прерывания и прогресс; скорректируйте цель следующей сессии.</li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>Рецепт — Подготовка к встрече (25/5 + обзор)</strong>
+          <ol>
+            <li>Используйте одно Помодоро для сбора материалов и наброска ключевых пунктов.</li>
+            <li>Второе Помодоро — репетиция и финализация 1–2‑минутного резюме.</li>
+            <li>После этого сделайте длинный перерыв, чтобы избежать усталости перед встречей.</li>
           </ol>
         </div>
       </section>
 
-      <section id="variants" class="section">
-        <h2>Варианты — как выбрать интервалы</h2>
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Измерять, логировать и улучшать</h2>
+        <p>
+          Чтобы Помодоро приносил пользу, логируйте каждую сессию. Минимальные полезные поля: дата, задача, планируемая длительность, фактическая длительность (без учёта перерывов), количество прерываний и 1‑предложенная заметка. Ведите журнал в простой таблице или экспортируйте из Task Timer.
+        </p>
+
+        <h3>Ключевые метрики для отслеживания</h3>
         <ul>
-          <li><strong>25/5 —</strong> общий сценарий, подходит для большинства задач и обучения.</li>
-          <li><strong>50/10 —</strong> лучше для глубокого мышления и кодинга (меньше переключений контекста).</li>
-          <li><strong>90/20 —</strong> длительные творческие сессии, требующие длительного погружения.</li>
-          <li><strong>Гибрид:</strong> используйте 25/5 для рутинных задач и 50/10 для комплексных.</li>
+          <li><strong>Средняя фактическая длительность</strong> по задаче или тегу (среднее/медиана).</li>
+          <li><strong>Коэффициент прерываний</strong> (сессии с прерываниями / всего сессий).</li>
+          <li><strong>Соотношение выполнения</strong> (планируемые Помодоро vs требуемые Помодоро).</li>
         </ul>
 
-        <p class="small">Рекомендация: протестируйте каждую настройку 1–2 недели и сравните среднюю продуктивность и % прерываний.</p>
+        <h3>Шаблоны для таблиц</h3>
+        <p>Примеры формул (Google Sheets):</p>
+        <pre class="template">=AVERAGEIF(TagRange,"project-alpha",ActualMinutesRange)
+=MEDIAN(IF(TagRange="project-alpha",ActualMinutesRange))  // формула массива
+=COUNTIFS(TagRange,"project-alpha",InterruptionsRange,">0") / COUNTIF(TagRange,"project-alpha")</pre>
       </section>
 
-      <section id="recipes" class="section">
-        <h2>Рецепты — готовые шаблоны работы</h2>
-
-        <div class="recipe">
-          <strong>Быстрый набор (25/5)</strong>
-          <ol>
-            <li>3 помодоро подряд на отдельные подпункты задачи.</li>
-            <li>5‑мин пауза — фиксировать прогресс в Notes.</li>
-            <li>Если задача осталась — планировать следующий слот в календаре.</li>
-          </ol>
-        </div>
-
-        <div class="recipe">
-          <strong>Глубокий спринт (50/10)</strong>
-          <ol>
-            <li>Два подряд 50‑минутных блока, 10‑минутный отдых между ними.</li>
-            <li>На долгой паузе делайте обзор и пометки для следующей сессии.</li>
-          </ol>
-        </div>
-
-        <div class="recipe">
-          <strong>Командный Pomodoro</strong>
-          <ol>
-            <li>Синхронизация старта у всей команды.</li>
-            <li>На паузах 1‑мин объявления блокировок; после 4 циклов 15‑мин ретроспектива.</li>
-          </ol>
-        </div>
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Использование Помодоро в команде</h2>
+        <p>
+          Командное Помодоро синхронизирует фокус: все работают одновременно, а перерывы выравниваются для быстрых синков. Правила снижают трение:
+        </p>
+        <ul>
+          <li>Определите «срочные» каналы для прерываний только в экстренных случаях.</li>
+          <li>Используйте синхронизированные таймеры (запуск в фиксированные минуты) и используйте время перерыва для коротких стендапов (30–60 секунд на человека).</li>
+          <li>Фиксируйте общие блокеры в общем документе заметок во время перерывов.</li>
+        </ul>
       </section>
 
-      <section id="log" class="section">
-        <h2>Логирование сессий & шаблоны для экспорта</h2>
-        <p>Регистрация: дата, задача, длительность план/факт, количество прерываний, краткая заметка. Это минимальный набор для полезного анализа.</p>
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Отладка и распространённые проблемы</h2>
+        <h3>Проблема: частые прерывания</h3>
+        <p>
+          Логируйте прерывания неделю, чтобы выявить паттерны. Если прерывают люди — согласуйте выделенные «фокусные» окна. Для неизбежных прерываний (поддержка) переключитесь на пакетирование коротких задач в Помодоро.
+        </p>
 
-        <h3>Шаблон журнала Pomodoro (.txt)</h3>
-        <p class="muted">Скачать локально и использовать для быстрой записи:</p>
-        <p><a href="#" id="downloadPomTemplate" class="cta">Скачать шаблон журнала (.txt)</a></p>
-        <pre class="template" id="pomTxtTemplate" aria-hidden="true">Журнал Pomodoro
+        <h3>Проблема: задачи слишком длинные или расплывчатые</h3>
+        <p>
+          Разбейте большие задачи на подзадачи, которые укладываются в 1–3 Помодоро. Если всё ещё велика — выделяйте последовательные Помодоро и учитывайте блок как мульти‑Помодоро для анализа.
+        </p>
+
+        <h3>Поддержание точности таймера</h3>
+        <p class="small-note">Троттлинг вкладок в браузере на мобильных устройствах: используйте приложение с нативными уведомлениями, если точность важна для измерений.</p>
+      </section>
+
+      <section id="download" class="section" aria-labelledby="download-title">
+        <h2 id="download-title">Скачать — шаблон сессии</h2>
+        <p class="muted">Ведите простой журнал, чтобы измерять недельный ритм — скачайте и используйте шаблон ниже.</p>
+        <p><a href="#" id="downloadPomodoro" class="cta" aria-label="Скачать шаблон сессии Pomodoro">Скачать шаблон сессии (.txt)</a></p>
+        <pre id="pomTemplate" class="template" aria-hidden="true">Журнал сессий Помодоро
 Дата: {{YYYY-MM-DD}}
-Задача: [Короткое название]
-План (min): 25
-Факт (min): 
-Прерывания: 0
-Причины прерываний:
-Короткое резюме / следующие шаги:</pre>
-
-        <h3>Шаблон CSV для массового экспорта / тестовых данных</h3>
-        <pre class="template" id="pomCsvTemplate" aria-hidden="true">date,task,planned_minutes,actual_minutes,interruptions,notes
-2025-11-01,Ревью PR #123,25,30,1,"Перерыв на встречу"</pre>
+Задача:
+Помодоро №1: старт __:__ финиш __:__ длительность 25 минут
+Помодоро №2: старт __:__ финиш __:__ длительность 25 минут
+Короткие перерывы:
+Прерывания (#):
+Заметки / следующие шаги:</pre>
 
         <script>
-          document.getElementById('downloadPomTemplate').addEventListener('click', function(e){
+          document.getElementById('downloadPomodoro').addEventListener('click', function(e){
             e.preventDefault();
-            var text = document.getElementById('pomTxtTemplate').textContent;
+            var text = document.getElementById('pomTemplate').textContent;
             var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
             var a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'pomodoro-journal-ru.txt';
+            a.href = url;
+            a.download = 'pomodoro-session-template-ru.txt';
             document.body.appendChild(a);
             a.click();
-            setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 150);
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
           });
         </script>
       </section>
 
-      <section id="measure" class="section">
-        <h2>Метрики & анализ — улучшайте планирование на данных</h2>
-        <p>Импортируйте CSV в Google Sheets и рассчитывайте:</p>
-        <ul>
-          <li>Среднее фактическое время по типу задачи</li>
-          <li>Медиану (устойчива к выбросам)</li>
-          <li>Долю прерванных сессий</li>
-          <li>Оценка качества сессий (0–5)</li>
-        </ul>
+      <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title">Краткие кейсы</h2>
 
-        <h3>Полезные формулы (Google Sheets)</h3>
-        <pre class="template">=AVERAGEIF(TagRange,"project-alpha",ActualMinutesRange)
-=MEDIAN(IF(TagRange="project-alpha",ActualMinutesRange))  // формула массива
-=COUNTIFS(TagRange,"project-alpha",InterruptionsRange,">0") / COUNTIF(TagRange,"project-alpha")</pre>
-
-        <p class="small">Подсказка: храните колонку quality_rating и анализируйте не только время, но и «качество» сессий — это показывает, насколько был продуктивен блок.</p>
-      </section>
-
-      <section id="team" class="section">
-        <h2>Pomodoro для команд — правила и пример процесса</h2>
-        <p>Для команд важно договориться о границах и канале для быстрых экстренных случаев (например, Slack #urgent). Ниже — проверенный шаблон.</p>
-
-        <div class="workflow">
-          <strong>Командный процесс (пример)</strong>
-          <ol>
-            <li>Ежедневно: 2 синхронизированных Pomodoro утром для "плавного старта".</li>
-            <li>Во время паузы: каждый кратко пишет блокирующую проблему.</li>
-            <li>После 4 циклов: 15‑мин общий разбор и назначение владельцев задач.</li>
-          </ol>
-        </div>
-      </section>
-
-      <section id="troubleshoot" class="section">
-        <h2>Проблемы и решения</h2>
-        <ul>
-          <li><strong>Проблема:</strong> постоянные прерывания — <strong>Решение:</strong> договориться о «фокус‑часах» и канале #urgent.</li>
-          <li><strong>Проблема:</strong> недооценка времени — <strong>Решение:</strong> используйте медиану реальных данных вместо средней.</li>
-          <li><strong>Проблема:</strong> выгорание при 90/20 — <strong>Решение:</strong> корректируйте длительность и добавляйте дни с лёгким расписанием.</li>
-        </ul>
-      </section>
-
-      <section id="examples" class="section">
-        <h2>Примеры из практики</h2>
         <div class="case">
-          <strong>Кейс — Разработчик (Илья)</strong>
-          <p>Илья начал с 25/5, затем перешёл на 50/10 для ревью кода. Он анализировал CSV и увидел, что средняя длительность ревью — 75 минут, поэтому теперь планирует 2×50 блоков или один 90‑минутный.</p>
+          <strong>Инженер — Айша</strong>
+          <p>
+            Айша вела учёт задач две недели и обнаружила, что отладка в среднем занимает 3 Помодоро (~75 минут), а не 1, как она предполагала. Она начала выделять более крупные блоки и планировать код‑ревью отдельно, что уменьшило переключение контекста и повысило предсказуемость доставки.
+          </p>
         </div>
 
         <div class="case">
-          <strong>Кейс — Студентка (Ольга)</strong>
-          <p>Ольга комбинирует Pomodoro и интервальное повторение: 25/5 для заучивания и запись результатов в Notes, что улучшило retention по тестам.</p>
+          <strong>Фрилансер — Джона</strong>
+          <p>
+            Джона использовал Помодоро, чтобы ограничить время на оценку предложений. Сгруппировав оценку предложений в один ежедневный спринт, он повысил скорость завершения предложений, а его почасовой доход вырос за счёт меньшего числа переключений на посторонние задачи.
+          </p>
         </div>
       </section>
 
-      <section id="faq" class="section">
-        <h2>FAQ</h2>
-        <div class="faq">
-          <p><strong>В: Работает ли таймер при закрытой вкладке?</strong><br><strong>О:</strong> Некоторые браузеры приостанавливают фоновые вкладки. Для точности держите вкладку активной или используйте локальный журнал как страховку.</p>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Можно ли адаптировать Помодоро для встреч?<br><strong>Ответ:</strong> Используйте Помодоро для подготовки и последующей работы. Для самих встреч выделяйте непрерывное время и избегайте запуска новых Помодоро во время встречи.</p>
 
-          <p><strong>В: Как учитывать мультизадачность?</strong><br><strong>О:</strong> Разделяйте задачи на подзадачи и выделяйте отдельный Pomodoro на каждую, чтобы избежать смешивания контекста.</p>
+          <p><strong>Вопрос:</strong> Является ли Помодоро панацеей продуктивности?<br><strong>Ответ:</strong> Нет. Помодоро помогает многим, но не всем. Используйте данные (журналы сессий), чтобы понять, улучшает ли это ваш поток, и адаптируйте подход.</p>
 
-          <p><strong>В: Где хранить экспорт?</strong><br><strong>О:</strong> Локально или в защищённом хранилище, если вам нужна синхронизация между устройствами — интегрируйте с вашим облачным workflow вручную.</p>
+          <p><strong>Вопрос:</strong> Где хранить журналы сессий?<br><strong>Ответ:</strong> Простая таблица (Google Sheets/Excel) или экспорт из Task Timer подойдёт. Экспортируйте еженедельно и вычисляйте средние по тегам для планирования.</p>
         </div>
       </section>
 
-      <section id="screens" class="section">
-        <h2>Скриншоты — что подготовить</h2>
-        <p class="small">Если вы хотите добавить изображения, подготовьте (по одному для 1x и 2x):</p>
-        <ul>
-          <li><strong>pomodoro-running-en@1x.jpg</strong> — окно таймера в работе (большой обратный отсчёт), подпись: "Начните блок 25 минут".</li>
-          <li><strong>pomodoro-log-en@1x.jpg</strong> — сводка после 4 Pomodoro с заметками, подпись: "Рефлексия и планирование".</li>
-        </ul>
-        <p class="small">Примечание: картинки могут быть на английском интерфейсе — я добавлю локализованные подписи и alt‑текст при вставке.</p>
-      </section>
+      <p class="muted" style="margin-top:1rem;">Связанные инструменты: <a href="/notes-ru.html">Заметки</a> · <a href="/timer-ru.html#startBtn">Task Timer</a> · <a href="/calendar-ru.html">Календарь</a></p>
 
-      <p class="muted" style="margin-top:1rem;">Инструменты: <a href="/ru/notes-index.html">Notes</a> · <a href="/ru/task-timer-index.html">Task Timer</a> · <a href="/ru/calendar-planning-index.html">Календарь</a></p>
-
-      <p style="margin-top:1rem;"><a href="/pomodoro-ru.html" class="cta">Открыть Таймер Помодоро</a></p>
+      <p style="margin-top:1.2rem;">
+        <a href="/pomodoro-ru.html" class="cta" aria-label="Открыть инструмент Pomodoro">Открыть Pomodoro</a>
+      </p>
 
       <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
-        <p>Комментарии и обратная связь: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>.</p>
+        <p>Вопросы или отзывы? Свяжитесь с нами по адресу <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Политика конфиденциальности: <a href="/ru/privacy/">Privacy Policy</a>.</p>
       </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Pomodoro" button -->
+  <a href="/pomodoro-ru.html"
+     class="return-to-tool"
+     id="returnToToolPomodoro"
+     aria-label="Вернуться к Pomodoro">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К Pomodoro</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolPomodoro');
+      if (!btn) return;
+      // keyboard activation
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      // subtle opacity change when at page top vs scrolled
+      function toggleOpacity(){
+        try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){}
+      }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

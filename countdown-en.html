@@ -9,348 +9,385 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
-    .main-container { max-width: 1200px; margin: 2rem auto; display:flex; justify-content:center; align-items:flex-start; min-height: 90vh; padding:0 1rem; box-sizing:border-box; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; padding: 0 12px; }
+    .center-row { width:100%; display:flex; justify-content:center; align-items:flex-start; }
     .tool-card {
       background: #fff;
       border-radius: 16px;
       box-shadow: 0 2px 12px #e0e7ef;
-      width: 420px;
-      padding: 1.5rem 1.3rem;
+      width: 100%;
+      max-width: 520px;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 1.6rem 1.3rem;
       box-sizing: border-box;
     }
-    .tool-card h3 {
-      font-size: 1.35em;
-      font-weight: 700;
-      margin-bottom: .45rem;
-      display:flex;
-      align-items:center;
-      gap:.3rem;
-      color:#185a9d;
-    }
-    .read-guide {
-      display:inline-block;
-      margin: .25rem 0 .9rem 0;
-      padding:.45rem .7rem;
-      border-radius:8px;
-      background:#0d6efd; /* overridden by shared theme if present */
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      font-size:.95rem;
-    }
-    .small-muted { color:#6b7c89; font-size:.95rem; margin-bottom:.8rem; }
-
-    .countdown-row { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:.6rem; }
-    .countdown-group { display:flex; align-items:center; gap:.5rem; }
-    .countdown-label { font-weight:600; color:#102a43; min-width:65px; text-align:right; }
-
-    /* Inputs use text so we can show leading zeros; styled to look like number fields */
-    .countdown-input {
-      width:80px;
-      text-align:center;
-      font-variant-numeric: tabular-nums;
-      padding: .375rem .5rem;
-    }
-
-    /* Spinner buttons next to each input to mimic native arrows */
-    .spin {
-      display:inline-flex;
-      flex-direction:column;
-      border-radius:6px;
-      overflow:hidden;
-      border:1px solid #e4edf5;
-      margin-left: 6px;
-      height: 36px;
-    }
-    .spin button {
-      display:block;
-      width:28px;
-      height:18px;
-      border: none;
-      background: #fff;
-      padding: 0;
-      margin: 0;
-      line-height: 1;
-      cursor: pointer;
-    }
-    .spin button:active { background:#f1f5f9; }
-    .spin .up { border-bottom:1px solid #eef2f6; }
-    .spin .icon { font-size:10px; color:#374151; }
-
-    #display { font-size:2em; margin-top:1em; text-align:center; }
-
-    .faq-section { margin-top:1.1rem; margin-bottom:0.3rem; font-size:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
+    .tool-card h3 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; color: #185a9d; }
+    .help-section { margin-bottom: 1rem; color:#51606b; }
+    .countdown-row { display:flex; gap:1.25rem; align-items:flex-start; justify-content:center; flex-wrap:wrap; margin-bottom:.8rem; }
+    .time-group { display:flex; flex-direction:column; align-items:center; gap:.35rem; min-width:92px; }
+    .time-group label { font-weight:600; font-size:.95rem; margin:0; text-align:center; }
+    .time-input { width:120px; text-align:center; padding:.375rem .5rem; }
+    .controls { display:flex; gap:.6rem; justify-content:center; margin-top:.6rem; flex-wrap:wrap; align-items:center; }
+    #display { font-size:2em; margin-top:1.2rem; text-align:center; }
+    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1rem; background: #f7fafc; border-radius: 8px; padding: 1rem; box-shadow: 0 1px 4px #e0e7ef; }
     .faq-section summary { font-weight:700; font-size:1.02rem; cursor:pointer; }
-    .back-link { display:inline-block; margin-bottom:0.8rem; color:var(--brand, #0d6efd); text-decoration:none; font-weight:700; }
-    .back-link:hover { text-decoration:underline; }
+    .back-link { display:inline-block; margin-bottom:0.8rem; color:#007bff; text-decoration:none; font-weight:700; }
+    .back-link:hover { text-decoration: underline; }
+    .read-guide { display:inline-flex; align-items:center; justify-content:center; width:auto; align-self:flex-start; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:#007bff; color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; box-sizing:border-box; }
+    .beep-indicator { display:inline-block; margin-left:.6rem; padding:.25rem .5rem; border-radius:999px; font-weight:700; color:#fff; background:#ffb703; font-size:.85rem; }
+    @media (max-width: 820px) { .tool-card{max-width:97vw;} .countdown-row{justify-content:center;} .time-input{width:96px;} }
 
-    .controls-center { text-align:center; margin-top:.8rem; }
-
-    @media (max-width:900px) {
-      .tool-card { width:94vw; padding:1rem; }
-      .countdown-row { justify-content:center; }
-      .countdown-label { min-width: 0; text-align:left; }
+    /* lightweight non-blocking modal (centered) */
+    .timeup-modal-backdrop {
+      position:fixed; inset:0; background: rgba(0,0,0,0.36); display:none; align-items:center; justify-content:center; z-index:12000;
     }
+    .timeup-modal {
+      background:#fff; padding:1.1rem 1.2rem; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,0.18); max-width:360px; width:92%;
+    }
+    .timeup-modal h4 { margin:0 0 .6rem 0; font-size:1.05rem;}
+    .timeup-modal p { margin:0 0 .8rem 0; color:#22313f; }
   </style>
 </head>
 <body>
 
-  <main class="main-container">
-    <section class="tool-card" role="main" aria-labelledby="tool-title">
+<div class="main-container">
+  <div class="center-row">
+    <div class="tool-card" role="main" aria-labelledby="tool-title">
       <a href="index.html" class="back-link" id="back-link">← Back to Main Menu</a>
 
       <h3 id="tool-title"><i class="fa fa-stopwatch-20"></i> Countdown Timer</h3>
-      <a id="read-guide-btn" class="read-guide" href="countdown-how-to.html" role="button">Read full guide</a>
 
-      <div class="help-section small-muted" id="tool-help">Set a countdown timer for deadlines, events, or meetings.</div>
+      <a id="read-guide-btn" class="read-guide" href="https://timerhaven.com/en/countdown-timer/countdown-index.html" role="button" target="_blank" rel="noopener">Read full guide</a>
 
-      <!-- Inputs are text to allow "00" display; custom spinner controls provide arrows -->
-      <div class="countdown-row" aria-label="Countdown inputs">
-        <div class="countdown-group" style="flex:1;">
-          <label class="countdown-label" for="minutes">Minutes:</label>
-          <div style="display:flex; align-items:center;">
-            <input type="text" id="minutes" class="form-control countdown-input" inputmode="numeric" pattern="[0-9]*" placeholder="00" aria-label="Minutes" maxlength="3">
-            <div class="spin" aria-hidden="true">
-              <button type="button" class="up" data-target="minutes" data-delta="1" title="Increase minutes"><span class="icon">▲</span></button>
-              <button type="button" class="down" data-target="minutes" data-delta="-1" title="Decrease minutes"><span class="icon">▼</span></button>
-            </div>
+      <div class="help-section" id="tool-help">Set a countdown timer for deadlines, events, or meetings.</div>
+
+      <div class="countdown">
+        <div class="countdown-row" aria-label="Countdown inputs">
+          <div class="time-group">
+            <label for="hours">Hours</label>
+            <input type="number" id="hours" class="form-control time-input" inputmode="numeric" min="0" placeholder="00" aria-label="Hours" maxlength="3" value="00">
+          </div>
+
+          <div class="time-group">
+            <label for="minutes">Minutes</label>
+            <input type="number" id="minutes" class="form-control time-input" inputmode="numeric" min="0" placeholder="00" aria-label="Minutes" maxlength="3" value="00">
+          </div>
+
+          <div class="time-group">
+            <label for="seconds">Seconds</label>
+            <input type="number" id="seconds" class="form-control time-input" inputmode="numeric" min="0" max="59" placeholder="00" aria-label="Seconds" maxlength="2" value="00">
           </div>
         </div>
 
-        <div class="countdown-group" style="flex:1;">
-          <label class="countdown-label" for="seconds">Seconds:</label>
-          <div style="display:flex; align-items:center;">
-            <input type="text" id="seconds" class="form-control countdown-input" inputmode="numeric" pattern="[0-9]*" placeholder="00" aria-label="Seconds" maxlength="2">
-            <div class="spin" aria-hidden="true">
-              <button type="button" class="up" data-target="seconds" data-delta="1" title="Increase seconds"><span class="icon">▲</span></button>
-              <button type="button" class="down" data-target="seconds" data-delta="-1" title="Decrease seconds"><span class="icon">▼</span></button>
-            </div>
-          </div>
+        <div class="controls" role="toolbar" aria-label="Timer controls">
+          <button id="startBtn" class="btn btn-success"><i class="fa fa-play"></i> Start</button>
+          <button id="pauseBtn" class="btn btn-secondary"><i class="fa fa-pause"></i> Pause</button>
+          <button id="resetBtn" class="btn btn-danger"><i class="fa fa-refresh"></i> Reset</button>
+          <button id="stopBeepBtn" class="btn btn-outline-dark" title="Stop sound" disabled><i class="fa fa-volume-off"></i> Stop Beep</button>
+          <span id="beepIndicator" class="beep-indicator" style="display:none">Beep playing</span>
         </div>
-      </div>
 
-      <div id="display">00:00</div>
-
-      <div class="controls-center">
-        <button class="btn btn-success" id="startBtn"><i class="fa fa-play"></i> Start</button>
-        <button class="btn btn-secondary" id="pauseBtn"><i class="fa fa-pause"></i> Pause</button>
-        <button class="btn btn-danger" id="resetBtn"><i class="fa fa-refresh"></i> Reset</button>
+        <div id="display" aria-live="polite">00:00:00</div>
       </div>
 
       <details class="faq-section">
         <summary id="faq-title">FAQs</summary>
-        <ul id="faq-list" style="padding-left:1em; margin-top:.5rem;"></ul>
+        <ul id="faq-list" style="margin-top:.5rem;"></ul>
       </details>
-    </section>
-  </main>
+    </div>
+  </div>
+</div>
+
+<!-- non-blocking "time's up" modal -->
+<div id="timeupBackdrop" class="timeup-modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="timeup-modal" role="document" aria-labelledby="timeupTitle">
+    <h4 id="timeupTitle">Time's up!</h4>
+    <p>The countdown has finished.</p>
+    <div style="text-align:right">
+      <button id="timeupOkBtn" class="btn btn-primary">OK</button>
+    </div>
+  </div>
+</div>
 
 <script>
+  // keep English UI for standalone
   localStorage.setItem('timerhavenLang','en');
 
   const countdownTranslations = {
     en: {
-      "back-link": "← Back to Main Menu",
-      "tool-title": "Countdown Timer",
-      "tool-help": "Set a countdown timer for deadlines, events, or meetings.",
-      "minutes": "Minutes",
-      "seconds": "Seconds",
-      "start": "Start",
-      "pause": "Pause",
-      "resume": "Resume",
-      "reset": "Reset",
-      "display": "00:00",
-      "alert-end": "Time's up!",
-      "faq-title": "FAQs",
-      "faq-list": `<li><b>Will the timer keep running if I switch tabs?</b> Yes, as long as this page is open.</li>
-        <li><b>Can I set a timer for hours?</b> Enter minutes up to any value you need.</li>
-        <li><b>Can I pause the timer?</b> Yes, use the "Pause" button.</li>`,
-      "howto-article-btn": "Read full guide",
-      "howto-article-link": "countdown-how-to.html"
+      "language-label":"Language:",
+      "back-link":"Back to Main Menu",
+      "tool-title":"Countdown Timer",
+      "tool-help":"Set a countdown timer for deadlines, events, or meetings.",
+      "hours":"Hours","minutes":"Minutes","seconds":"Seconds",
+      "start":"Start","pause":"Pause","resume":"Resume","reset":"Reset",
+      "display":"00:00:00","alert-end":"Time's up!","faq-title":"FAQs",
+      "faq-list":`<li><b>Will the timer keep running if I switch tabs?</b> Yes, as long as this page is open.</li>
+        <li><b>Can I set a timer for long durations?</b> Yes — use Hours + Minutes for longer timers.</li>
+        <li><b>Can I pause the timer?</b> Yes, use the "Pause" button.</li>`
     }
   };
 
-  function getLang() {
-    try { return (localStorage.getItem('timerhavenLang') || 'en').slice(0,2); } catch(e) { return 'en'; }
+  function getLang(){ try{ const l = localStorage.getItem('timerhavenLang') || 'en'; return (l && l.slice(0,2)) || 'en'; }catch(e){return 'en';} }
+
+  // audio context + continuous beep
+  let audioCtx = null, beepOsc = null, beepGain = null, beepPlaying = false;
+
+  function ensureAudioContext() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){ audioCtx = null; }
+    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{});
+    return !!audioCtx;
   }
 
-  function pad2(n) {
-    const s = String(Math.abs(parseInt(n, 10) || 0));
-    return s.length < 2 ? ('0' + s) : s;
+  function updateStopBeepUI() {
+    const btn = document.getElementById('stopBeepBtn');
+    const indicator = document.getElementById('beepIndicator');
+    if (!btn || !indicator) return;
+    btn.disabled = !beepPlaying;
+    indicator.style.display = beepPlaying ? 'inline-block' : 'none';
   }
 
-  function parseInputValueText(el) {
-    if (!el) return 0;
-    const v = String(el.value || '').replace(/[^\d]/g, '');
-    if (v === '') return 0;
-    const n = parseInt(v, 10);
-    return Number.isFinite(n) ? n : 0;
+  // Robust startContinuousBeep / stopBeep replacements
+  function startContinuousBeep(frequency = 880, gainLevel = 0.18) {
+    try {
+      // Ensure audio context is created and resumed from a user gesture
+      if (!ensureAudioContext()) {
+        console.warn('AudioContext unavailable — cannot play beep');
+        return false;
+      }
+
+      // If something is already playing, stop first
+      try { stopBeep(); } catch(e){ /* ignore */ }
+
+      // Create oscillator + gain
+      beepOsc = audioCtx.createOscillator();
+      beepGain = audioCtx.createGain();
+
+      // Oscillator setup
+      beepOsc.type = 'sine';
+      beepOsc.frequency.value = frequency;
+
+      // Connect nodes
+      beepOsc.connect(beepGain);
+      beepGain.connect(audioCtx.destination);
+
+      // Immediately set gain to audible level (no zero ramp) to avoid inaudible state
+      try {
+        const now = audioCtx.currentTime || 0;
+        // Use setValueAtTime for reliability, then small ramp for smoothness
+        beepGain.gain.setValueAtTime(gainLevel, now);
+      } catch (e) {
+        // Fallback if scheduling fails
+        try { beepGain.gain.value = gainLevel; } catch(_) {}
+      }
+
+      // Start oscillator
+      try {
+        beepOsc.start();
+      } catch (e) {
+        // Some browsers require start time param
+        try { beepOsc.start(audioCtx.currentTime || 0); } catch (err) { console.warn('osc.start() failed', err); }
+      }
+
+      // Mark playing and update UI
+      beepPlaying = true;
+      updateStopBeepUI && updateStopBeepUI();
+      console.info('beep started', { frequency, gainLevel });
+      return true;
+    } catch (err) {
+      console.warn('startContinuousBeep error', err);
+      // Clean up partially-created nodes
+      try { if (beepOsc) { beepOsc.disconnect(); beepOsc = null; } } catch(e){}
+      try { if (beepGain) { beepGain.disconnect(); beepGain = null; } } catch(e){}
+      beepPlaying = false;
+      updateStopBeepUI && updateStopBeepUI();
+      return false;
+    }
+  }
+
+  function stopBeep() {
+    try {
+      if (beepOsc) {
+        try { beepOsc.stop(); } catch(e){ /* ignore */ }
+        try { beepOsc.disconnect(); } catch(e){ /* ignore */ }
+      }
+    } catch(e){}
+    // ensure references are cleared
+    beepOsc = null;
+    try { if (beepGain) { try { beepGain.disconnect(); } catch(e){} } } catch(e){}
+    beepGain = null;
+    // Do NOT immediately close the AudioContext here — closing prevents quick re-use on some devices.
+    // But if you prefer to close to release hardware, uncomment:
+    // if (audioCtx) { try { audioCtx.close(); } catch(e){} audioCtx = null; }
+    beepPlaying = false;
+    updateStopBeepUI && updateStopBeepUI();
+    console.info('beep stopped');
   }
 
   function applyLanguage(lang) {
-    lang = lang || getLang();
+    lang = (lang || getLang()).slice(0,2);
     const t = countdownTranslations[lang] || countdownTranslations['en'];
     document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-
-    const back = document.getElementById('back-link'); if (back) back.textContent = t['back-link'];
-    const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-stopwatch-20"></i> ${t['tool-title']}`;
-    const help = document.getElementById('tool-help'); if (help) help.textContent = t['tool-help'];
-
-    const startBtn = document.getElementById('startBtn'); if (startBtn) startBtn.textContent = ' ' + (t['start'] || 'Start');
-    const pauseBtn = document.getElementById('pauseBtn'); if (pauseBtn) pauseBtn.textContent = ' ' + (t['pause'] || 'Pause');
-    const resetBtn = document.getElementById('resetBtn'); if (resetBtn) resetBtn.textContent = ' ' + (t['reset'] || 'Reset');
-
-    const readBtn = document.getElementById('read-guide-btn'); if (readBtn) { readBtn.textContent = t['howto-article-btn']; readBtn.href = t['howto-article-link']; }
-
-    const faqTitle = document.getElementById('faq-title'); if (faqTitle) faqTitle.textContent = t['faq-title'];
-    const faqList = document.getElementById('faq-list'); if (faqList) faqList.innerHTML = t['faq-list'];
-    const disp = document.getElementById('display'); if (disp) disp.textContent = t['display'] || '00:00';
+    const back = document.getElementById('back-link'); if (back) back.textContent = '← ' + (t['back-link'] || '');
+    const tt = document.getElementById('tool-title'); if (tt) tt.innerHTML = `<i class="fa fa-stopwatch-20"></i> ${t['tool-title'] || ''}`;
+    const help = document.getElementById('tool-help'); if (help) help.textContent = t['tool-help'] || '';
+    const hrs = document.getElementById('hours'); const mins = document.getElementById('minutes'); const secs = document.getElementById('seconds');
+    if (hrs) { hrs.placeholder = t['hours'] || 'Hours'; if (!hrs.value) hrs.value = '00'; }
+    if (mins) { mins.placeholder = t['minutes'] || 'Minutes'; if (!mins.value) mins.value = '00'; }
+    if (secs) { secs.placeholder = t['seconds'] || 'Seconds'; if (!secs.value) secs.value = '00'; }
+    const startBtn = document.getElementById('startBtn'); const pauseBtn = document.getElementById('pauseBtn'); const resetBtn = document.getElementById('resetBtn');
+    if (startBtn) startBtn.innerHTML = '<i class="fa fa-play"></i> ' + (t['start'] || 'Start');
+    if (pauseBtn) pauseBtn.innerHTML = '<i class="fa fa-pause"></i> ' + (t['pause'] || 'Pause');
+    if (resetBtn) resetBtn.innerHTML = '<i class="fa fa-refresh"></i> ' + (t['reset'] || 'Reset');
+    const faqTitle = document.getElementById('faq-title'); if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+    const faqList = document.getElementById('faq-list'); if (faqList) faqList.innerHTML = t['faq-list'] || '';
+    const readBtn = document.getElementById('read-guide-btn'); if (readBtn) { readBtn.href = 'https://timerhaven.com/en/countdown-timer/countdown-index.html'; readBtn.setAttribute('target','_blank'); readBtn.setAttribute('rel','noopener'); }
+    const disp = document.getElementById('display'); if (disp) disp.textContent = t['display'] || '00:00:00';
   }
 
-  let timerInterval = null;
-  let totalSeconds = 0;
-  let paused = false;
+  window.addEventListener('storage', function(e){ if (e.key === 'timerhavenLang') applyLanguage((e.newValue||'en').slice(0,2)); });
 
-  function updateDisplayAndInputs() {
-    const mins = Math.floor(totalSeconds / 60);
+  let timerInterval = null; let totalSeconds = 0; let paused = false;
+
+  function updateDisplay() {
+    const hrs = Math.floor(totalSeconds / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
     const secs = totalSeconds % 60;
-    const disp = document.getElementById('display');
-    if (disp) disp.textContent = String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
-
-    const minInput = document.getElementById('minutes');
-    const secInput = document.getElementById('seconds');
-    if (minInput) minInput.value = mins < 100 ? pad2(mins) : String(mins);
-    if (secInput) secInput.value = pad2(secs);
+    document.getElementById('display').textContent =
+      String(hrs).padStart(2,'0') + ':' + String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
   }
 
-  function adjustInput(targetId, delta) {
-    const el = document.getElementById(targetId);
+  function parseInputValue(id) {
+    const el = document.getElementById(id);
+    if (!el) return 0;
+    const v = String(el.value || '').replace(/[^\d]/g, '');
+    return v === '' ? 0 : Math.max(0, parseInt(v,10));
+  }
+
+  function padInput(elId) {
+    const el = document.getElementById(elId);
     if (!el) return;
-    let n = parseInputValueText(el);
-    n = Math.max(0, n + delta);
-    if (targetId === 'seconds') {
-      if (n > 59) n = 59;
-    }
-    el.value = (targetId === 'minutes' && n >= 100) ? String(n) : pad2(n);
-    const mins = parseInputValueText(document.getElementById('minutes'));
-    const secs = parseInputValueText(document.getElementById('seconds'));
-    totalSeconds = Math.max(0, mins * 60 + secs);
-    updateDisplayAndInputs();
+    let n = parseInt(el.value);
+    if (!Number.isFinite(n) || n < 0) n = 0;
+    if (elId === 'seconds') n = Math.max(0, Math.min(59, n));
+    el.value = n < 10 ? String(n).padStart(2,'0') : String(n);
   }
 
-  function handleInputKey(e) {
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      const delta = e.key === 'ArrowUp' ? 1 : -1;
-      adjustInput(e.target.id, delta);
-    }
+  // non-blocking modal helpers
+  function showTimeupModal() {
+    const bd = document.getElementById('timeupBackdrop');
+    if (!bd) return;
+    bd.style.display = 'flex';
+    bd.setAttribute('aria-hidden','false');
+  }
+  function hideTimeupModal() {
+    const bd = document.getElementById('timeupBackdrop');
+    if (!bd) return;
+    bd.style.display = 'none';
+    bd.setAttribute('aria-hidden','true');
   }
 
-  function attachSpinnerRepeat(button) {
-    let timer = null;
-    const delta = parseInt(button.getAttribute('data-delta'), 10) || 1;
-    const target = button.getAttribute('data-target');
-    const step = () => adjustInput(target, delta);
-    button.addEventListener('mousedown', (ev) => {
-      ev.preventDefault();
-      step();
-      timer = setInterval(step, 120);
-    });
-    ['mouseup','mouseleave','mouseout'].forEach(evt => {
-      button.addEventListener(evt, () => { if (timer) { clearInterval(timer); timer = null; } });
-    });
-    button.addEventListener('click', (ev) => { ev.preventDefault(); });
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener('DOMContentLoaded', function() {
     applyLanguage(getLang());
-
-    totalSeconds = 0;
-    const minInput = document.getElementById('minutes');
-    const secInput = document.getElementById('seconds');
-    if (minInput) minInput.value = '00';
-    if (secInput) secInput.value = '00';
-    updateDisplayAndInputs();
-
-    [minInput, secInput].forEach(el => {
-      if (!el) return;
-      el.addEventListener('keydown', function(e) {
-        if (['Backspace','Delete','Tab','Escape','Enter','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) return;
-        if (e.ctrlKey || e.metaKey) return;
-        if (!/^\d$/.test(e.key)) e.preventDefault();
-      });
-      el.addEventListener('blur', function(e) {
-        const id = e.target.id;
-        const n = parseInputValueText(e.target);
-        if (id === 'seconds') {
-          const v = Math.max(0, Math.min(59, n));
-          e.target.value = pad2(v);
-        } else {
-          e.target.value = n < 100 ? pad2(n) : String(n);
-        }
-        const mins = parseInputValueText(document.getElementById('minutes'));
-        const secs = parseInputValueText(document.getElementById('seconds'));
-        totalSeconds = Math.max(0, mins * 60 + secs);
-        updateDisplayAndInputs();
-      });
-      el.addEventListener('focus', function(){ if (this.value === '00') this.value = ''; });
-      el.addEventListener('keyup', handleInputKey);
-    });
-
-    document.querySelectorAll('.spin button').forEach(btn => attachSpinnerRepeat(btn));
+    totalSeconds = 0; updateDisplay();
 
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const resetBtn = document.getElementById('resetBtn');
+    const stopBeepBtn = document.getElementById('stopBeepBtn');
+    const timeupOkBtn = document.getElementById('timeupOkBtn');
 
-    startBtn && startBtn.addEventListener('click', function() {
-      if (timerInterval) return;
+    if (startBtn) {
+      startBtn.addEventListener('click', function() {
+        // resume/create audio context on user gesture
+        ensureAudioContext();
 
-      const minsVal = parseInputValueText(document.getElementById('minutes'));
-      const secsVal = parseInputValueText(document.getElementById('seconds'));
-      totalSeconds = Math.max(0, minsVal * 60 + secsVal);
-      if (totalSeconds <= 0) {
-        updateDisplayAndInputs();
-        return;
-      }
+        if (timerInterval) return;
+        const h = parseInputValue('hours');
+        const m = parseInputValue('minutes');
+        const s = parseInputValue('seconds');
+        totalSeconds = Math.max(0, h*3600 + m*60 + s);
+        updateDisplay();
+        if (totalSeconds <= 0) return;
+        paused = false;
+        timerInterval = setInterval(function() {
+          if (!paused && totalSeconds > 0) {
+            totalSeconds--;
+            updateDisplay();
+          }
+          if (totalSeconds <= 0) {
+            clearInterval(timerInterval); timerInterval = null;
+            totalSeconds = 0;
+            updateDisplay(); // ensure 00:00:00
+            // start beep then show modal shortly after to avoid blocking audio
+            try { startContinuousBeep(920, 0.18); } catch(e){}
+            updateStopBeepUI();
+            setTimeout(() => {
+              // show non-blocking modal
+              showTimeupModal();
+            }, 160);
+          }
+        }, 1000);
+      });
+    }
 
-      paused = false;
-      if (pauseBtn) pauseBtn.textContent = ' ' + (countdownTranslations[getLang()]?.pause || 'Pause');
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function() {
+        paused = !paused;
+        const lang = getLang(); const t = countdownTranslations[lang] || countdownTranslations['en'];
+        this.innerHTML = (paused ? '<i class="fa fa-play"></i> ' + (t['resume'] || 'Resume') : '<i class="fa fa-pause"></i> ' + (t['pause'] || 'Pause'));
+      });
+    }
 
-      updateDisplayAndInputs();
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+        totalSeconds = 0; paused = false;
+        stopBeep();
+        const hrsEl = document.getElementById('hours');
+        const minsEl = document.getElementById('minutes');
+        const secsEl = document.getElementById('seconds');
+        if (hrsEl) hrsEl.value = '00';
+        if (minsEl) minsEl.value = '00';
+        if (secsEl) secsEl.value = '00';
+        updateDisplay();
+        const lang = getLang(); const t = countdownTranslations[lang] || countdownTranslations['en'];
+        const pauseBtnEl = document.getElementById('pauseBtn');
+        if (pauseBtnEl) pauseBtnEl.innerHTML = '<i class="fa fa-pause"></i> ' + (t['pause'] || 'Pause');
+        hideTimeupModal();
+      });
+    }
 
-      timerInterval = setInterval(function() {
-        if (!paused && totalSeconds > 0) {
-          totalSeconds--;
-          updateDisplayAndInputs();
-        }
-        if (totalSeconds <= 0) {
-          clearInterval(timerInterval);
-          timerInterval = null;
-          const t = countdownTranslations[getLang()] || countdownTranslations['en'];
-          try { alert(t['alert-end'] || "Time's up!"); } catch(e){}
-        }
-      }, 1000);
+    if (stopBeepBtn) {
+      stopBeepBtn.addEventListener('click', function() {
+        stopBeep();
+      });
+    }
+
+    if (timeupOkBtn) {
+      timeupOkBtn.addEventListener('click', function() {
+        stopBeep();
+        hideTimeupModal();
+      });
+    }
+
+    ['hours','minutes','seconds'].forEach(id => {
+      const el = document.getElementById(id); if (!el) return;
+      el.addEventListener('blur', function(){ padInput(id); });
+      el.addEventListener('keydown', function(e){
+        if (['Backspace','Delete','ArrowLeft','ArrowRight','Tab','Enter'].includes(e.key)) return;
+        if (e.ctrlKey||e.metaKey) return;
+        if (!/^\d$/.test(e.key)) e.preventDefault();
+      });
     });
 
-    pauseBtn && pauseBtn.addEventListener('click', function() {
-      paused = !paused;
-      const t = countdownTranslations[getLang()] || countdownTranslations['en'];
-      this.textContent = ' ' + (paused ? (t['resume'] || 'Resume') : (t['pause'] || 'Pause'));
-    });
-
-    resetBtn && resetBtn.addEventListener('click', function() {
-      if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
-      paused = false;
-      totalSeconds = 0;
-      const minInputEl = document.getElementById('minutes');
-      const secInputEl = document.getElementById('seconds');
-      if (minInputEl) minInputEl.value = '00';
-      if (secInputEl) secInputEl.value = '00';
-      updateDisplayAndInputs();
-      const t = countdownTranslations[getLang()] || countdownTranslations['en'];
-      const pauseBtnEl = document.getElementById('pauseBtn');
-      if (pauseBtnEl) pauseBtnEl.textContent = ' ' + (t['pause'] || 'Pause');
-    });
+    padInput('hours'); padInput('minutes'); padInput('seconds'); updateStopBeepUI();
   });
 </script>
 

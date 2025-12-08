@@ -1,18 +1,239 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>habit-tracker — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for habit-tracker guide (ru)">
+  <meta charset="utf-8" />
+  <title>Отслеживание привычек — Формируйте последовательность простыми ритуалами | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Практическое руководство по использованию Habit Tracker для формирования и поддержания привычек: постановка целей, дизайн привычек, жетоны, метрики, автоматизация и командные шаблоны." />
+  <link rel="canonical" href="https://timerhaven.com/ru/habit-tracker/habit-tracker-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Создавайте и поддерживайте привычки с Habit Tracker",
+        "description":"Пошаговые рабочие процессы для создания эффективных привычек, поддержания серии, измерения прогресса и масштабирования от отдельной привычки до недельных рутин.",
+        "image":"https://timerhaven.com/assets/images/habit-tracker-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Habit Tracker (TimerHaven)","Блокнот или приложение для заметок","Календарь"],
+        "step":[
+          {"@type":"HowToStep","name":"Выберите ключевую привычку","text":"Выберите одно простое действие, которое легко выполнить и которое даёт значительный эффект."},
+          {"@type":"HowToStep","name":"Начните с малого и привяжите к триггеру","text":"Привяжите новую привычку к существующему ритуалу (после кофе, перед почтой). Начинайте с крошечных действий."},
+          {"@type":"HowToStep","name":"Отслеживайте ежедневно","text":"Отмечайте выполнение привычки каждый день в трекере; фиксируйте помехи и причины пропусков."},
+          {"@type":"HowToStep","name":"Проводите еженедельный обзор","text":"Подводите итоги по сериям и корректируйте сложность или время, чтобы повысить последовательность."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Сколько привычек стоит отслеживать?","acceptedAnswer":{"@type":"Answer","text":"Начните с 1–3 привычек. Концентрация и последовательность важнее широты. Постепенно добавляйте новые привычки, когда старые закрепятся."}},
+          {"@type":"Question","name":"Как восстановить прерванную серию?","acceptedAnswer":{"@type":"Answer","text":"Зафиксируйте, что послужило причиной пропуска, при необходимости снизьте ожидания, и начните заново как можно скорее — перезапуск важнее ошибки."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">habit-tracker — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Отслеживание привычек — Формируйте привычки, которые сохраняются</h1>
+
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — эксперт по дизайну привычек и продуктивности</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 12–16 мин.</div>
+        </div>
+      </div>
+
+      <p class="lead">Небольшие, последовательные действия складываются в значимые результаты. Habit Tracker помогает превратить намерения в ежедневную практику. В этом руководстве описывается выбор привычек, уменьшение трения, измерение прогресса, управление сериями, восстановление после сбоев и командные сценарии — всё, чтобы привычки прижились надолго.</p>
+
+      <nav class="toc" aria-label="Содержание">
+        <a href="#choose">Выберите правильные привычки</a> ·
+        <a href="#design">Дизайн маленьких привычек</a> ·
+        <a href="#track">Ежедневное отслеживание</a> ·
+        <a href="#measure">Измерения и метрики</a> ·
+        <a href="#streaks">Серии и мотивация</a> ·
+        <a href="#recover">Восстановление после сбоев</a> ·
+        <a href="#team">Команда и ответственность</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="choose" class="section" aria-labelledby="choose-title">
+        <h2 id="choose-title">Выберите правильные привычки — начните с влияния</h2>
+        <p>Не все привычки одинаковы. Начните с одной‑двух «ключевых» привычек, которые дают высокий эффект (физкультура, утреннее планирование, сортировка почты). Ключевая привычка упрощает другие действия и быстро даёт видимый результат, что поддерживает мотивацию.</p>
+
+        <ul>
+          <li><strong>Сначала влияние:</strong> выбирайте привычки, которые напрямую приближают ваши цели.</li>
+          <li><strong>Начинайте с малого:</strong> если задача пугает — уменьшите её до минимального действия (1 отжимание, 2 минуты чтения).</li>
+          <li><strong>Конкретика:</strong> определите, что считается «сделано» — например, «прочитать 1 страницу», а не «читать больше».</li>
+        </ul>
+      </section>
+
+      <section id="design" class="section" aria-labelledby="design-title">
+        <h2 id="design-title">Дизайн маленьких привычек — ниже трение, выше последовательность</h2>
+        <p>Используйте подход «Tiny Habits»: сделайте действие лёгким, привяжите его к триггеру и отметьте завершение. Интерфейс Habit Tracker упрощает шаг отметки — чем легче отметить выполнение, тем выше вероятность сохранить привычку.</p>
+
+        <div class="recipe">
+          <strong>Рецепт маленькой привычки</strong>
+          <ol>
+            <li>Триггер: привяжите привычку к надёжному ежедневному сигналу (например, после утреннего кофе).</li>
+            <li>Мини‑действие: выберите минимальную версию, которую сможете выполнить даже в усталом состоянии.</li>
+            <li>Мгновенная отметка: откройте Habit Tracker и нажмите «Отметить выполнено» (или используйте сочетание клавиш, если доступно).</li>
+            <li>Награда: выполните маленькое поощрение (галочка, короткая заметка), чтобы замкнуть цикл.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Совет: последовательность привычек (habit chaining) уменьшает переключения контекста — «после того как почистил зубы, я напишу 1 предложение в дневнике».</p>
+      </section>
+
+      <section id="track" class="section" aria-labelledby="track-title">
+        <h2 id="track-title">Ежедневные рабочие процессы для отслеживания</h2>
+        <p>Последовательность зависит от видимости привычки. Используйте Habit Tracker ежедневно — либо утром, либо в фиксированное время (вечером). Записывайте как выполнения, так и короткие заметки о помехах или причинах промахов.</p>
+
+        <h3>Пример ежедневной рутины</h3>
+        <ol>
+          <li>Утро: просмотрите привычки на день и при необходимости добавьте контекст.</li>
+          <li>В течение дня: отмечайте выполненные привычки по мере их завершения.</li>
+          <li>Вечер: быстрый обзор — зафиксируйте причины пропусков и при необходимости перенесите задачу.</li>
+        </ol>
+      </section>
+
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Измерения и метрики — держите всё просто</h2>
+        <p>Измерение помогает оставаться честным. Отслеживайте несколько полезных метрик и еженедельно анализируйте их, чтобы улучшать время и дизайн привычек.</p>
+
+        <h3>Минимальные метрики</h3>
+        <ul>
+          <li><strong>Дни отслеживания:</strong> количество дней, когда вы отметили выполнение привычки.</li>
+          <li><strong>Процент выполнения:</strong> выполненные дни / запланированные дни.</li>
+          <li><strong>Длина серии:</strong> текущая последовательность подряд выполненных дней.</li>
+          <li><strong>Причины пропусков:</strong> короткие коды причин (поездка, болезнь, забыл).</li>
+        </ul>
+
+        <pre class="template">CSV столбцы:
+date,habit,done,reason,notes
+2025-11-24,Пить воду,1,,Бутылка на столе</pre>
+      </section>
+
+      <section id="streaks" class="section" aria-labelledby="streaks-title">
+        <h2 id="streaks-title">Серии и мотивация — используйте разумно</h2>
+        <p>Серии могут мотивировать, но они хрупки. Используйте их, чтобы сформировать ритм, а не как способ наказания. Если серия прервана, сосредоточьтесь на быстром перезапуске вместо переживаний.</p>
+
+        <h3>Здоровые правила для серий</h3>
+        <ul>
+          <li>Держите цели реалистичными (ежедневные привычки проще; для некоторых подойдут недельные).</li>
+          <li>Установите мягкие правила для особых дней (поездки/праздники) — функция «отложено» или «извинено» полезна.</li>
+          <li>Отмечайте вехи (7, 30, 90 дней) небольшой наградой.</li>
+        </ul>
+      </section>
+
+      <section id="recover" class="section" aria-labelledby="recover-title">
+        <h2 id="recover-title">Восстановление после сбоев — начинайте быстро</h2>
+        <p>Сбои — нормальная часть процесса. Быстрый план восстановления уменьшает негативные последствия и помогает вернуть импульс.</p>
+
+        <div class="recipe">
+          <strong>Рутина восстановления</strong>
+          <ol>
+            <li>Запишите причину пропуска (одна строка).</li>
+            <li>Скорректируйте план (снизьте размер привычки, поменяйте триггер или время дня).</li>
+            <li>Начните снова немедленно — не откладывайте до понедельника.</li>
+            <li>Еженедельно анализируйте паттерны и вносите корректировки.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Команда и схемы ответственности</h2>
+        <p>Команды могут использовать привычки для совместных ритмов (ежедневный стендап, итог дня). Делайте командные привычки добровольными и фокусируйтесь на общих результатах, а не на контроле.</p>
+
+        <ul>
+          <li><strong>Совместные ритуалы:</strong> короткие привычки, улучшающие координацию (например, ежедневное обновление статуса тикета).</li>
+          <li><strong>Партнёрская система:</strong> объединяйтесь с коллегой для еженедельных чек‑инов по прогрессу.</li>
+          <li><strong>Агрегированные метрики:</strong> делитесь обезличенными показателями выполнения для улучшения команды, а не для контроля отдельных людей.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Устранение неполадок и распространённые проблемы</h2>
+        <ul>
+          <li><strong>Нет времени на отметку:</strong> добавьте однонажатие «Отметить сделано» или используйте голосовую заметку для быстрой записи выполнения.</li>
+          <li><strong>Слишком много привычек:</strong> сократите до 1–3 приоритетных и заморозьте остальные, пока первые не станут стабильными.</li>
+          <li><strong>Ложные срабатывания:</strong> убедитесь, что «выполнено» действительно означает завершение — важнее качество, чем формальное нажатие.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Через какое время привычка становится автоматической?<br><strong>Ответ:</strong> Различается: простые привычки могут закрепиться за недели; сложные — за месяцы. Сосредоточьтесь на последовательности, а не на фиксированных сроках.</p>
+
+          <p><strong>Вопрос:</strong> Нужно ли отмечать каждый день?<br><strong>Ответ:</strong> Ежедневное отслеживание помогает выстроить ритм. Для некоторых привычек практичнее недельная частота — согласуйте частоту с природой привычки.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/habit-tracker-ru.html">Открыть Habit Tracker</a></li>
+          <li><a href="https://jamesclear.com/habits" target="_blank" rel="noopener">Atomic Habits — James Clear</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/habit-tracker-ru.html" class="cta" aria-label="Открыть Habit Tracker">Открыть Habit Tracker</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Политика конфиденциальности: <a href="/ru/privacy/">Privacy Policy</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/habit-tracker-ru.html" class="return-to-tool" id="returnToToolHabit" aria-label="Вернуться к Habit Tracker">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К Habit Tracker</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolHabit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

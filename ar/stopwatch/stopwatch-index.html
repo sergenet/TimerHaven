@@ -1,18 +1,229 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>stopwatch — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for stopwatch guide (ar)">
+  <meta charset="utf-8" />
+  <title>الكرونو — قياس الأداء، الفواصل الزمنية والتقدّم | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل شامل لاستخدام الكرونو للإنتاجية، التدريب، التجارب والاجتماعات. يشمل أنماط التوقيت، أفضل الممارسات لللفات، ملاحظات الدقة، واستكشاف الأخطاء." />
+  <link rel="canonical" href="https://timerhaven.com/ar/stopwatch/stopwatch-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"استخدام الكرونو بفعالية",
+        "description":"ابدأ، أوقف مؤقتًا، سجّل لفّات وقيّم الوقت المنقضي للتجارب، التمارين، الاجتماعات والعمل الإنتاجي. يغطي هذا الدليل سير العمل، استخدام اللفات، جمع البيانات، ملاحظات الدقة واستكشاف الأخطاء.",
+        "image":"https://timerhaven.com/assets/images/stopwatch-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["الكرونو (TimerHaven)","دفتر ملاحظات أو جدول بيانات","مستشعر معدل ضربات اختياري للاستخدام الرياضي"],
+        "step":[
+          {"@type":"HowToStep","name":"حدد الهدف","text":"قرّر ما الذي تقيسه (مدة مهمة، أداء فاصل، زمن الإكمال)."},
+          {"@type":"HowToStep","name":"ابدأ وسجّل اللفات","text":"استخدم زر ابدأ واضغط "Lap" عند نقاط تحقق محدّدة؛ وسّم أو صدّر أوقات اللفات عند الحاجة."},
+          {"@type":"HowToStep","name":"راجع وحلل","text":"اجمع بيانات اللفات في جدول بيانات واحسب المتوسطات، أفضل الأوقات والتباين لفهم الأداء."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"هل سيستمر الكرونو في العمل إذا غيّرت التبويب؟","acceptedAnswer":{"@type":"Answer","text":"نعم — يحسب الكرونو الوقت المنقضي استنادًا إلى الطوابع الزمنية (البدء + الآن) لذا يظل دقيقًا حتى لو أصبح التبويب في الخلفية. قد تقلل بعض الصفحات من تحديث واجهة المستخدم لكن ليس من حساب الوقت المنقضي."}},
+          {"@type":"Question","name":"كيف أسجل اللفات؟","acceptedAnswer":{"@type":"Answer","text":"اضغط زر "Lap" لالتقاط الوقت المنقضي الحالي. صدّر أو انسخ الأوقات للاحتفاظ بسجلات للتحليل لاحقًا."}},
+          {"@type":"Question","name":"هل الكرونو دقيق بما يكفي للتجارب؟","acceptedAnswer":{"@type":"Answer","text":"بالنسبة لمعظم استخدامات الإنتاجية والتدريب نعم. للتوقيت العلمي عالي الدقة استخدم أجهزة مخصصة أو تطبيقات محلية ذات ضوابط زمنية في الوقت الفعلي."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;text-align:right;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;justify-content:flex-end;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">stopwatch — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">الكرونو — قياس الوقت المنقضي، الفواصل والتقدّم</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب عن الإنتاجية والقياس</div>
+          <div class="meta">نُشر: 2025-11-24 · وقت القراءة: 10–15 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">الكرونو هو أداة التوقيت الأبسط لكن تطبيقاته واسعة: قياس مدد المهام، توقيت فواصل التدريب، تسجيل أزمنة التجارب، أو فرض فترات الأجندة في الاجتماعات. يغطي هذا الدليل سير العمل العملي، أفضل ممارسات اللفات، التقاط البيانات، ملاحظات الدقة، وكيفية استخدام بيانات الكرونو لتحسين الأداء.</p>
+
+      <nav class="toc" aria-label="فهرس المحتوى">
+        <a href="#when">متى تستخدم الكرونو</a>
+        <a href="#start">أساسيات البدء/الإيقاف/اللفة</a>
+        <a href="#workflows">سير العمل العملي</a>
+        <a href="#data">جمع وتحليل بيانات اللفات</a>
+        <a href="#precision">ملاحظات الدقة والبيئة</a>
+        <a href="#integration">التكاملات والتصديرات</a>
+        <a href="#troubleshoot">استكشاف الأخطاء</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="when" class="section" aria-labelledby="when-title">
+        <h2 id="when-title">متى تستخدم الكرونو</h2>
+        <p>يبرع الكرونو عندما تحتاج لقياس الوقت المنقضي بدقّة لنشاط محدود. السيناريوهات الشائعة:</p>
+        <ul>
+          <li><strong>تجارب الإنتاجية:</strong> قياس المدة الحقيقية لمهمة مقابل تقديرك.</li>
+          <li><strong>التدريب والفواصل:</strong> تسجيل تقسيمات اللفات للجري أو التمارين.</li>
+          <li><strong>اختبارات قابلية الاستخدام والتجارب:</strong> قياس زمن إكمال مهمة لأغراض القياس المرجعي.</li>
+          <li><strong>الاجتماعات:</strong> توقيت بنود الأجندة وتوزيع أدوار الحديث بصورة عادلة.</li>
+        </ul>
+      </section>
+
+      <section id="start" class="section" aria-labelledby="start-title">
+        <h2 id="start-title">البدء، الإيقاف المؤقت واللفة — الأساسيات المهمة</h2>
+        <p>تعتمد الكرونوات الحديثة عادةً على الطوابع الزمنية فتبقى دقيقة حتى عند تقليل تحديث واجهة المستخدم. المفاهيم الرئيسية:</p>
+        <ul>
+          <li><strong>البدء:</strong> سجّل الطابع الزمني لبدء القياس (Date.now()).</li>
+          <li><strong>الوقت المنقضي:</strong> احسب الآن − وقت البدء (بالإضافة إلى أي زمن مجمّع سابق عند الاستئناف بعد إيقاف مؤقت).</li>
+          <li><strong>إيقاف مؤقت/استئناف:</strong> عند الإيقاف، خزّن الوقت المجمّع وأزل وقت البدء؛ عند الاستئناف اضبط البدء = الآن − المجمّع.</li>
+          <li><strong>اللفة:</strong> سجّل الوقت المنقضي الحالي كتقسيمة لفة — ويمكن إعادة ضبط عدّاد اللفة إذا أردت أوقاتاً لكل لفة (فارق بين المجموع ومدة اللفة).</li>
+        </ul>
+
+        <p class="small-note">نمطان للفة: (أ) تقسيمات تراكمية (الوقت منذ البداية الكاملة) و(ب) مدد اللفة (الوقت منذ اللفة السابقة). قرّر أيهما تحتاج قبل التسجيل.</p>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">سير العمل العملي بالكرونو</h2>
+
+        <div class="recipe" aria-labelledby="timing-task">
+          <strong id="timing-task">زمن الإكمال (تقدير المهام)</strong>
+          <ol>
+            <li>حدد الهدف: "اكتب المقدّمة — المسودة الأولى".</li>
+            <li>ابدأ الكرونو عند بدء المهمة؛ تجنّب تعدد المهام أثناء القياس.</li>
+            <li>استخدم "لفة" لتحديد نقاط تحقق ذات معنى (اكتمال المخطط، إنجاز الفقرة الأولى).</li>
+            <li>عند الانتهاء، سجّل الإجمالي المنقضي في مهمة أو ملاحظة التقويم.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="interval-training">
+          <strong id="interval-training">تدريب متقطّع (دورات قابلة للتكرار)</strong>
+          <ol>
+            <li>استخدم "لفة" لتعليم كل فترة؛ إذا كنت تقيس الراحة استخدم "إيقاف مؤقت" لالتقاط زمن الراحة بشكل منفصل.</li>
+            <li>صدّر اللفات لحساب متوسط زمن الفترة، أفضل زمن والتباين لمتابعة تحسّن اللياقة.</li>
+            <li>استخدم قواعد إحماء وتهدئة ثابتة لمقارنات صالحة عبر الجلسات.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">نصيحة: لسير العمل القابل للتكرار، اتّبع طقساً قصيراً قبل البدء (فتح المواد، ضبط الموقف) حتى يقيس الكرونو جهدًا قابلاً للمقارنة.</p>
+      </section>
+
+      <section id="data" class="section" aria-labelledby="data-title">
+        <h2 id="data-title">جمع وتحليل بيانات اللفات</h2>
+        <p>تفيد أرقام اللفات الخام أكثر عندما تُجمع. صدّر أو انسخ اللفات إلى جدول بيانات واحسب مقاييس بسيطة:</p>
+        <ul>
+          <li><strong>المتوسط (Mean)</strong> — زمن النموذج لكل لفة/تكرار.</li>
+          <li><strong>الوسيط (Median)</strong> — مقاوم للقيم الشاذة.</li>
+          <li><strong>الانحراف المعياري / التباين</strong> — يقيس الاتساق.</li>
+          <li><strong>الأفضل / الأسوأ</strong> — تتبع أفضل وأسوأ أداء.</li>
+        </ul>
+
+        <pre class="template">أعمدة CSV: index,split_seconds,lap_seconds,timestamp
+1,30.12,30.12,2025-11-24T10:02:12Z</pre>
+
+        <p>استخدم هذه المقاييس في المراجعات الأسبوعية لاكتشاف الاتجاهات وتحديد متى حسّنت تغييرات العملية السرعة أو الاتساق.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">ملاحظات الدقة والبيئة</h2>
+        <p>الكرونوات في المتصفح دقيقة للاستخدام اليومي، لكن اعرف القيود:</p>
+        <ul>
+          <li><strong>تقليل نشاط الواجهة:</strong> قد تقلّل التبويبات في الخلفية من تردد تحديث الواجهة لكن ليس من حساب الوقت المنقضي إذا نُفّذ باستخدام الطوابع الزمنية.</li>
+          <li><strong>سكون النظام / وضع النوم:</strong> إذا دخل الجهاز وضع النوم، سيتقدّم الوقت الفعلي — احسب هذا عند تحليل الجلسات.</li>
+          <li><strong>الحاجة إلى دقة عالية:</strong> التوقيتات العلمية أو مزامنة الصوت/الفيديو تتطلب أدوات متخصّصة (مؤقتات أجهزة، توقيت DAW، أو أنظمة مزامنة NTP).</li>
+        </ul>
+      </section>
+
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">التكاملات والتصديرات</h2>
+        <p>تتيح أدوات الكرونو الجيدة نسخ أو تصدير قوائم اللفات لتحليل لاحق. أفكار للتكامل:</p>
+        <ul>
+          <li><strong>تسجيل المهام:</strong> ألحق الوقت المنقضي ببنود المهمة أو أوصاف حدث التقويم.</li>
+          <li><strong>تصدير CSV:</strong> استورد بيانات اللفات في جداول لتحليل الاتجاهات.</li>
+          <li><strong>API / Webhooks:</strong> أرسل أحداث التوقيت إلى خادم لتخزين تاريخ الجلسات في لوحة متابعة شخصية.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">استكشاف الأخطاء</h2>
+        <ul>
+          <li><strong>المؤقت لا يظهر التحديث:</strong> بعض المتصفحات تقلّل عمليات إعادة الطلاء؛ اعتمد على القيمة النهائية للوقت بدلاً من مشاهدة كل نبضة.</li>
+          <li><strong>اللفات لا تُحفظ بعد إعادة التحميل:</strong> استخدم التصدير أو أداة تحفظ اللفات في localStorage إذا كنت بحاجة لسجلات دائمة.</li>
+          <li><strong>طابع زمني بالمنطقة الزمنية خاطئ:</strong> خزّن الطوابع الزمنية بصيغة ISO UTC لتجنّب الالتباس عند التجميع عبر أجهزة.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> هل أستطيع قياس مهام متوازية متعددة بكرونو واحد؟<br><strong>ج:</strong> ممكن باستخدام دلالات لفة دقيقة (وسّم كل لفة)، لكن المهام المتوازية أسهل بإستخدام مؤقتات متعددة أو Task Timer يدعم مؤقتات متزامنة.</p>
+
+          <p><strong>س:</strong> كيف يجب أن أوسم اللفات؟<br><strong>ج:</strong> استخدم تسميات قصيرة ومتسقة (مثل "إحماء"، "تكرار 1"، "نقطة مراجعة"). إذا كانت الأداة لا تدعم الوسم، سجّل ملاحظة ذات طابع زمني في نظام المهام مع رقم اللّفة المصاحب.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/stopwatch-ar.html">افتح أداة الكرونو</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Stopwatch" target="_blank" rel="noopener">الكرونو — ويكيبيديا</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/stopwatch-ar.html" class="cta" aria-label="افتح الكرونو">افتح الكرونو</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>أسئلة أو ملاحظات؟ تواصل معنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- زر العودة للأداة -->
+  <a href="/stopwatch-ar.html" class="return-to-tool" id="returnToToolStopwatch" aria-label="العودة إلى الكرونو">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى الكرونو</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolStopwatch');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

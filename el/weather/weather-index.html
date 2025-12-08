@@ -1,18 +1,244 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>weather — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for weather guide (el)">
+  <meta charset="utf-8" />
+  <title>Καιρός — Πώς να βρείτε, ερμηνεύσετε και σχεδιάσετε | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Πρακτικός οδηγός για το εργαλείο Καιρού: επιλογή τοποθεσιών, ερμηνεία προβλέψεων, σχεδιασμός ταξιδιών, ειδοποιήσεις, μικροκλίματα και αποθήκευση προβλέψεων." />
+  <link rel="canonical" href="https://timerhaven.com/el/weather/weather-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Χρησιμοποιήστε τις προβλέψεις καιρού αποτελεσματικά",
+        "description":"Βρείτε και ερμηνεύστε προβλέψεις καιρού για τον σχεδιασμό καθημερινών δραστηριοτήτων και ταξιδιών. Αυτός ο οδηγός εξηγεί τύπους προβλέψεων, ανάγνωση πιθανοτήτων, σχεδιασμό με αβεβαιότητα, ειδοποιήσεις, επιρροές μικροκλίματος και αποθήκευση προβλέψεων.",
+        "image":"https://timerhaven.com/assets/images/weather-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["Εργαλείο Καιρού (TimerHaven)","Ημερολόγιο","Σχέδιο ταξιδιού ή λίστα ελέγχου"],
+        "step":[
+          {"@type":"HowToStep","name":"Επιλέξτε σωστή τοποθεσία","text":"Αναζητήστε κατά πόλη ή χρησιμοποιήστε εντοπισμό θέσης για ακριβείς συντεταγμένες."},
+          {"@type":"HowToStep","name":"Διαλέξτε τύπο πρόβλεψης","text":"Κατανοήστε τις ωριαίες, ημερήσιες και μακροπρόθεσμες προβλέψεις και τι εξυπηρετεί η καθεμία."},
+          {"@type":"HowToStep","name":"Σχεδιάστε με αβεβαιότητα","text":"Χρησιμοποιήστε πιθανότητες και εύρη για να πάρετε ανθεκτικές αποφάσεις (φορέστε στρώσεις, θέστε ευέλικτες ώρες συναντήσεων)."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Πόσο ακριβείς είναι οι βραχυπρόθεσμες προβλέψεις;","acceptedAnswer":{"@type":"Answer","text":"Οι βραχυπρόθεσμες προβλέψεις (0–3 ημέρες) είναι γενικά αξιόπιστες για θερμοκρασία και πιθανότητα βροχής, αλλά η ακρίβεια ποικίλλει ανάλογα με την περιοχή και την ανάλυση του μοντέλου."}},
+          {"@type":"Question","name":"Πρέπει να εμπιστεύομαι τις ωριαίες ή τις ημερήσιες προβλέψεις;","acceptedAnswer":{"@type":"Answer","text":"Χρησιμοποιήστε ωριαίες προβλέψεις για άμεσες αποφάσεις (επόμενες 24 ώρες) και ημερήσιες συνοψεις για προγραμματισμό μακρύτερα."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    /* Floating return button */
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">weather — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Καιρός — Πώς να βρίσκετε, ερμηνεύετε και χρησιμοποιείτε προβλέψεις</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας άρθρου">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας για ταξίδια & σχεδιασμό</div>
+          <div class="meta">Δημοσιεύτηκε: 2025-11-24 · Χρόνος ανάγνωσης: 12–18 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Οι προβλέψεις καιρού δεν είναι μόνο για μετεωρολόγους — είναι εργαλεία λήψης αποφάσεων. Είτε σχεδιάζετε τη μετακίνηση, ένα σαββατοκύριακο ή εργασία στο πεδίο, το να γνωρίζετε ποια πρόβλεψη να διαλέξετε, πώς να διαβάζετε πιθανότητες και πώς να σχεδιάζετε με αβεβαιότητα καθιστά τα σχέδιά σας πιο ανθεκτικά και άνετα. Αυτός ο οδηγός εξηγεί τύπους προβλέψεων, ανάγνωση πιθανότητας βροχής, μικροκλίματα, ειδοποιήσεις και πρακτικές συνταγές σχεδιασμού.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#types">Τύποι προβλέψεων</a> ·
+        <a href="#ppo">Πιθανότητα βροχής & PoP</a> ·
+        <a href="#hourly-daily">Ωριαίες vs ημερήσιες προβλέψεις</a> ·
+        <a href="#micro">Μικροκλίματα & τοπικοί παράγοντες</a> ·
+        <a href="#alerts">Ειδοποιήσεις, προειδοποιήσεις & όρια</a> ·
+        <a href="#plan">Συνταγές σχεδιασμού</a> ·
+        <a href="#save">Αποθήκευση & κοινοποίηση προβλέψεων</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="types" class="section" aria-labelledby="types-title">
+        <h2 id="types-title">Τύποι προβλέψεων — επιλέξτε την κατάλληλη</h2>
+        <p>Οι προβλέψεις υπάρχουν σε διάφορες μορφές. Επιλέξτε αυτή που ταιριάζει στον ορίζοντα λήψης απόφασης και στο επίπεδο λεπτομέρειας που χρειάζεστε:</p>
+        <ul>
+          <li><strong>Nowcast / βραχυπρόθεσμες (0–6 ώρες):</strong> καλύτερες για άμεσες αποφάσεις· χρησιμοποιούν υψηλής ανάλυσης ραντάρ και τοπικές παρατηρήσεις.</li>
+          <li><strong>Βραχυπρόθεσμες (6–72 ώρες):</strong> κατάλληλες για καθημερινό σχεδιασμό — θερμοκρασία, χρονικά παράθυρα βροχής και άνεμος είναι σχετικά αξιόπιστα.</li>
+          <li><strong>Μεσοπρόθεσμες (3–7 ημέρες):</strong> χρήσιμες για προγραμματισμό ταξιδιών αλλά αντιμετωπίζετε λεπτομέρειες (χρονοπρογραμματισμό) ως κατά προσέγγιση· επικεντρωθείτε σε τάσεις.</li>
+          <li><strong>Μακροπρόθεσμες (7+ ημέρες):</strong> δίνουν γενικά σήματα (πιο θερμό/δροσερό από το μέσο όρο) και πρέπει να χρησιμοποιούνται για γενικές προσδοκίες, όχι για συγκεκριμένα προγράμματα.</li>
+        </ul>
+      </section>
+
+      <section id="ppo" class="section" aria-labelledby="ppo-title">
+        <h2 id="ppo-title">Βροχόπτωση και πιθανότητα — πώς να διαβάζετε την πιθανότητα βροχής</h2>
+        <p>Η πιθανότητα βροχόπτωσης (PoP) παρεξηγείται συχνά. Η PoP δείχνει την πιθανότητα ότι θα σημειωθεί μετρήσιμη βροχόπτωση σε μία τοποθεσία κατά τη διάρκεια μιας περιόδου — δεν λέει άμεσα πόσο θα πέσει.</p>
+
+        <ul>
+          <li><strong>Ερμηνεία PoP:</strong> 20% σημαίνει μικρή πιθανότητα — καλό να πάρετε ένα ελαφρύ μπουφάν ή ομπρέλα αν είστε προσεκτικοί· 60–80% σημαίνει να σχεδιάσετε εναλλακτικές ή να αναβληθεί δραστηριότητα σε εξωτερικούς χώρους.</li>
+          <li><strong>Ένταση vs πιθανότητα:</strong> Ελέγξτε πάντα την αναμενόμενη ένταση και διάρκεια. Μια 30% πιθανότητα για δυνατή βροχή 10 λεπτών μπορεί να είναι πιο διαταρακτική από μια 60% πιθανότητα αδύναμης βροχής.</li>
+          <li><strong>Χρησιμοποιήστε ραντάρ για χρονοπρογραμματισμό:</strong> Για άμεσες αποφάσεις συμβουλευτείτε ζωντανό ραντάρ για κίνηση καταιγίδων και χρονολόγηση.</li>
+        </ul>
+      </section>
+
+      <section id="hourly-daily" class="section" aria-labelledby="hourly-daily-title">
+        <h2 id="hourly-daily-title">Ωριαίες vs ημερήσιες προβλέψεις — πότε να χρησιμοποιείτε καθεμία</h2>
+        <p>Οι ωριαίες προβλέψεις είναι καλύτερες για προγραμματισμό εντός της ημέρας: μετακινήσεις, ώρες έναρξης ή σύντομα outdoor events. Οι ημερήσιες συνοψεις είναι πιο πρακτικές για ταξίδια και γενικό προγραμματισμό.</p>
+
+        <div class="recipe" aria-labelledby="hourly-recipe">
+          <strong id="hourly-recipe">Πρακτικός κανόνας</strong>
+          <ol>
+            <li>Για αποφάσεις εντός 24 ωρών, συμβουλευτείτε ωριαίες προβλέψεις και ραντάρ για να επιλέξετε το καλύτερο παράθυρο χρόνου.</li>
+            <li>Για σχεδιασμό 1–4 ημερών, χρησιμοποιήστε ημερήσιες προβλέψεις αλλά ξαναελέγξτε με ωριαία δεδομένα την προηγούμενη ημέρα.</li>
+            <li>Για 5+ ημέρες, αντιμετωπίστε τις προβλέψεις ως τάσεις και φτιάξτε ευέλικτα σχέδια (πακετάρετε στρώσεις, κρατήστε εναλλακτικές ημερομηνίες).</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="micro" class="section" aria-labelledby="micro-title">
+        <h2 id="micro-title">Μικροκλίματα & τοπικοί παράγοντες — τι μπορεί να χάσουν τα μοντέλα</h2>
+        <p>Τοπική γεωγραφία, υψόμετρο, αστικές ζώνες θερμότητας, η εγγύτητα στη θάλασσα και κοιλάδες μπορούν να δημιουργήσουν μικροκλίματα που αποκλίνουν από περιφερειακά μοντέλα. Όταν σχεδιάζετε, λάβετε υπόψη τη γνώση του τόπου και τα παρατηρησιακά δεδομένα.</p>
+
+        <ul>
+          <li>Παράκτιες περιοχές: θαλάσσιες αύρες μπορούν να προκαλέσουν γρήγορες μεταβολές θερμοκρασίας και τοπικές μπόρες.</li>
+          <li>Κοιλάδες / λεκάνες: συγκέντρωση ψυχρού αέρα μπορεί να δημιουργήσει παγετό ή ομίχλη ακόμη και όταν οι περιφερειακές προβλέψεις δείχνουν ήπια.</li>
+          <li>Αστικές θερμικές νησίδες: οι πόλεις μπορεί να είναι μερικούς βαθμούς θερμότερες τη νύχτα σε σχέση με τις γύρω αγροτικές περιοχές.</li>
+        </ul>
+      </section>
+
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Ειδοποιήσεις, προειδοποιήσεις & όρια — πώς να αντιδράσετε</h2>
+        <p>Οι ειδοποιήσεις εκδίδονται όταν οι συνθήκες ενδέχεται να είναι επικίνδυνες. Κατανοήστε τους κοινούς τύπους ειδοποιήσεων και μια λίστα ενεργειών για κάθε περίπτωση.</p>
+
+        <h3>Συνήθης ταξινόμηση ειδοποιήσεων</h3>
+        <ul>
+          <li><strong>Watch (Παρακολούθηση):</strong> οι συνθήκες είναι πιθανές — προετοιμαστείτε και παρακολουθήστε.</li>
+          <li><strong>Warning (Προειδοποίηση):</strong> αναμένονται επικίνδυνες συνθήκες — λάβετε προστατευτικά μέτρα.</li>
+          <li><strong>Advisory (Σύσταση):</strong> λιγότερο σοβαρό αλλά μπορεί να προκαλέσει ενόχληση — προγραμματίστε ανάλογα.</li>
+        </ul>
+
+        <div class="recipe" aria-labelledby="alert-recipe">
+          <strong id="alert-recipe">Απλή λίστα ενεργειών για ειδοποιήσεις</strong>
+          <ol>
+            <li>Διαβάστε το κείμενο της ειδοποίησης για χρονοδιάγραμμα και επηρεαζόμενη περιοχή.</li>
+            <li>Εντοπίστε κρίσιμα στοιχεία (ταξίδι, υπαίθριες εκδηλώσεις, εξοπλισμός) και αποφασίστε αν θα καθυστερήσετε, μεταφέρετε ή προχωρήσετε με μέτρα μείωσης κινδύνου.</li>
+            <li>Κοινοποιήστε την ειδοποίηση σε ενδιαφερόμενους (ομάδα, συμμετέχοντες) και επιβεβαιώστε σχέδια εναλλακτικής λύσης.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="plan" class="section" aria-labelledby="plan-title">
+        <h2 id="plan-title">Συνταγές σχεδιασμού — πάρτε ανθεκτικές αποφάσεις</h2>
+        <p>Σχεδιάστε με αβεβαιότητα. Χρησιμοποιήστε συντηρητικές επιλογές και γρήγορες εφεδρικές λύσεις για να μειώσετε τις πιθανότητες διαταραχής.</p>
+
+        <div class="recipe" aria-labelledby="commute">
+          <strong id="commute">Μετακίνηση & σχεδιασμός εκδηλώσεων</strong>
+          <ol>
+            <li>Ελέγξτε ωριαία πρόβλεψη δύο ώρες πριν από την αναχώρηση για χρονοπρογραμματισμό και βροχόπτωση.</li>
+            <li>Αν PoP > 50% κοντά στην ώρα ταξιδιού, προγραμματίστε προστατευτική διαδρομή ή εναλλακτική μεταφορά· φύγετε νωρίτερα για δυνατή βροχή ή χιόνι.</li>
+            <li>Για υπαίθρια εκδηλώσεις, ορίστε προθεσμία απόφασης και κοινοποιήστε ξεκάθαρη εναλλακτική στους συμμετέχοντες.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="travel">
+          <strong id="travel">Πακετάρισμα σαββατοκύριακού</strong>
+          <ol>
+            <li>Ελέγξτε τάσεις 3–7 ημερών για μέσες θερμοκρασίες και πιθανότητα βροχής.</li>
+            <li>Πακετάρετε στρώσεις και αντιανεμικά/αδιάβροχα αν οι προβλέψεις δείχνουν μεταβλητότητα· πάρτε προστασία από ήλιο αν προβλέπεται ζέστη και λιακάδα.</li>
+            <li>Πριν την αναχώρηση ελέγξτε τοπικό ραντάρ και βραχυπρόθεσμες προβλέψεις για να κλείσετε τις επιλογές ενδυμασίας.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="save" class="section" aria-labelledby="save-title">
+        <h2 id="save-title">Αποθήκευση, κοινοποίηση & αρχειοθέτηση προβλέψεων</h2>
+        <p>Η αποθήκευση προβλέψεων σας επιτρέπει να συγκρίνετε προβλεπόμενο vs πραγματικό και αργότερα — χρήσιμο για ανασκόπηση εκδηλώσεων, κηπουρική ή πειράματα.</p>
+
+        <ul>
+          <li><strong>Αποθήκευση στιγμιότυπου:</strong> αντιγράψτε τα βασικά στοιχεία πρόβλεψης (χρόνος, PoP, θερμοκρασίες) σε μια σημείωση ή σε ένα γεγονός ημερολογίου.</li>
+          <li><strong>Κοινοποίηση:</strong> στείλτε screenshot ή σύντομη περίληψη με τοπικές ώρες σε συνεργάτες.</li>
+          <li><strong>Αρχειοθέτηση:</strong> κρατήστε μια ημερομηνιακή καταγραφή αν ελέγχετε ακρίβεια μοντέλων ή τεκμηριώνετε συνθήκες για εγκαταστάσεις/πειράματα.</li>
+        </ul>
+
+        <pre class="template">Δείγμα αποθηκευμένης πρόβλεψης:
+Πόλη: Λονδίνο
+Ημερομηνία: 2025-11-28
+Ωριαία: 09:00 12°C 30% βροχή → 12:00 14°C 10% βροχή
+Σημειώσεις: Φέρτε ομπρέλα για πρωινή συνάντηση</pre>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Ε:</strong> Ποιο μοντέλο πρόγνωσης πρέπει να εμπιστεύομαι;<br><strong>Α:</strong> Δεν υπάρχει πάντα ένα καλύτερο μοντέλο. Για αποφάσεις μεγάλης σημασίας συγκρίνετε πολλαπλές πηγές (εθνική υπηρεσία, παγκόσμια μοντέλα, ραντάρ). Οι τοπικές μετεωρολογικές υπηρεσίες συχνά προσαρμόζουν τα μοντέλα στις τοπικές συνθήκες.</p>
+
+          <p><strong>Ε:</strong> Πόσο μπροστά μπορώ να βασιστώ σε μια πρόβλεψη;<br><strong>Α:</strong> Οι τάσεις θερμοκρασίας είναι συνήθως αξιόπιστες για 3–5 ημέρες· ο χρονοπρογραμματισμός βροχής πέραν των 48 ωρών γίνεται λιγότερο βέβαιος. Χρησιμοποιήστε πιθανοτική σκέψη όσο προχωράτε στον χρόνο.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Πόροι</h2>
+        <ul class="muted">
+          <li><a href="/weather-el.html">Άνοιγμα εργαλείου Καιρού</a></li>
+          <li><a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a></li>
+          <li><a href="https://www.wmo.int" target="_blank" rel="noopener">World Meteorological Organization</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/weather-el.html" class="cta" aria-label="Άνοιγμα εργαλείου Καιρού">Άνοιγμα Καιρού</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε στο <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/el/privacy/">Πολιτική Απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/weather-el.html" class="return-to-tool" id="returnToToolWeather" aria-label="Επιστροφή στο Καιρό">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Προς Καιρό</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWeather');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

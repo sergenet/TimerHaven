@@ -2,279 +2,297 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
+  <title>Notas — Guía práctica para tomar notas accionables | TimerHaven</title>
+  <meta name="description" content="Cómo usar Notas de forma eficaz con los flujos Pomodoro y Task Timer. Incluye HowTo paso a paso, FAQ, capturas, plantilla descargable y datos estructurados.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Notas — TimerHaven</title>
-  <meta name="description" content="Notas rápidas y privadas con TimerHaven. Captura ideas, sigue flujos de trabajo probados y exporta una checklist — todo almacenado localmente.">
+  <link rel="canonical" href="https://timerhaven.com/es/notes/notes-index.html">
+  <meta name="author" content="Serge Shammas">
 
-  <!-- Canonical and hreflang for multilingual setup -->
-  <link rel="canonical" href="https://timerhaven.com/es/notes-index.html">
-  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/notes-index.html">
-  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/notes-index.html">
-  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/notes-index.html">
-  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/notes-index.html">
-  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/notes-index.html">
-  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/notes-index.html">
-  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/notes-index.html">
-  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/notes-index.html">
-
-  <!-- Author structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Serge Shammas",
-    "image": "https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg",
-    "url": "https://timerhaven.com/authors/serge-shammas",
-    "sameAs": []
-  }
-  </script>
-
-  <!-- HowTo + FAQ structured data -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@graph":[
       {
         "@type":"HowTo",
-        "name":"Capturar, taggear y convertir notas en acción con TimerHaven Notes",
-        "description":"Flujo práctico para capturar notas rápidas, etiquetarlas, convertir elementos accionables en tareas y revisar semanalmente.",
+        "name":"Capturar, etiquetar y convertir notas con TimerHaven Notes",
+        "description":"Un flujo práctico para capturar notas rápidas, etiquetarlas con contexto, convertir elementos accionables en tareas y revisar semanalmente usando Pomodoro y Task Timer.",
         "image":"https://timerhaven.com/assets/images/notes-snapshot.png",
         "totalTime":"PT30M",
-        "supply":["TimerHaven Notes","Pomodoro Timer (TimerHaven)","Task Timer or spreadsheet"],
+        "supply":["TimerHaven Notes","Temporizador Pomodoro (TimerHaven)","Hoja de cálculo (opcional)"],
         "step":[
-          {"@type":"HowToStep","name":"Captura rápida","text":"Crear un título de una línea, añadir 2–4 bullets con contexto y asignar un tag corto."},
-          {"@type":"HowToStep","name":"Tag y priorización","text":"Usa tags consistentes (#task, #idea, #research, #quick) y marca acción si es urgente."},
-          {"@type":"HowToStep","name":"Convertir en tarea o programar","text":"Si requiere trabajo, conviértela en Task Timer o crea un evento en el calendario con la nota adjunta."},
-          {"@type":"HowToStep","name":"Revisión periódica","text":"Realiza triage diario (5–10 min) y una revisión semanal (15–30 min) para procesar y planificar."}
+          {"@type":"HowToStep","name":"Capturar una nota concisa","text":"Crea una nota con un título de una línea y 2–4 viñetas que describan la idea, el contexto o los pasos."},
+          {"@type":"HowToStep","name":"Etiquetar y priorizar","text":"Añade una etiqueta corta de contexto y un marcador de prioridad; marca como accionable si debe hacerse pronto."},
+          {"@type":"HowToStep","name":"Convertir a tarea o programar","text":"Si la nota requiere trabajo, conviértela en una entrada de Task Timer o evento de calendario y adjunta el ID de la nota para contexto."},
+          {"@type":"HowToStep","name":"Revisar regularmente","text":"Realiza un triage diario para acciones rápidas y una revisión semanal para procesar los elementos restantes."}
         ]
       },
       {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "¿Se hacen copias de seguridad de mis notas en línea?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No — las Notas se almacenan localmente en tu navegador por defecto. Usa la opción de exportar para guardar una copia que controles."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Cómo uso Notas junto con el Pomodoro?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Escribe un esquema o lista de tareas en Notas, luego ejecuta sesiones Pomodoro para cada ítem y registra el progreso en Notas después de cada bloque."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Puedo descargar una plantilla o checklist?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sí — utiliza el enlace 'Descargar Checklist' en esta página para guardar una checklist lista para usar en formato .txt."
-            }
-          }
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"¿Las notas se almacenan localmente o en la nube?","acceptedAnswer":{"@type":"Answer","text":"Por defecto las notas se almacenan localmente en tu navegador. Puedes exportarlas a un archivo para copia de seguridad o sincronizarlas manualmente en otro dispositivo."}},
+          {"@type":"Question","name":"¿Con qué frecuencia debo revisar las notas?","acceptedAnswer":{"@type":"Answer","text":"Un triage diario breve (5–10 minutos) mantiene los elementos accionables; una revisión profunda semanal (15–30 minutos) es ideal para procesar y planificar."}},
+          {"@type":"Question","name":"¿Puedo usar Notas con Pomodoro?","acceptedAnswer":{"@type":"Answer","text":"Sí — elige una sola nota como objetivo Pomodoro antes de iniciar la sesión y usa los descansos para anotar progreso o convertir viñetas en tareas."}}
         ]
-      }
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
     ]
   }
   </script>
 
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;background:#f6fbff;color:#123;margin:0;padding:2rem;line-height:1.6;}
-    .container{max-width:940px;margin:0 auto;}
-    .card{background:#fff;border-radius:10px;padding:2rem;box-shadow:0 8px 28px rgba(0,0,0,0.06);}
-    h1{color:#125a9c;margin-top:0;}
-    .meta{color:#6b7c89;font-size:0.95rem;margin-bottom:1rem;}
-    .lead{font-size:1.05rem;color:#334;}
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
     .section{margin-top:1.1rem;}
-    .cta{display:inline-block;margin-top:1rem;padding:0.5rem 1rem;border-radius:6px;background:#125a9c;color:#fff;text-decoration:none;}
-    .muted{color:#6b7c89;font-size:0.95rem;}
-    .case{background:#f8fbff;border-left:4px solid #a7d0ff;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
-    .workflow{background:#fff6f0;border-left:4px solid #ffd1a7;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
-    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
-    .faq{margin-top:1rem;background:#f3f7fb;padding:1rem;border-radius:8px;}
-    table.sample th, table.sample td { padding: 6px 10px; border: 1px solid #eef5fb; text-align:left; }
-
-    /* Author card styles */
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
     .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
-    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid rgba(15,23,42,0.06);}
-    .author .byline{font-weight:700;color:#102a43;}
-    .author .meta{margin:0;color:#6b7c89;}
-    @media (max-width:520px){
-      .author{flex-direction:row;gap:.6rem}
-      .author img{width:48px;height:48px}
+    .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    table.sample{border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:680px;}
+    table.sample td, table.sample th{border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:left;}
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
     }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      font-size:16px;
+    }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
   </style>
 </head>
 <body>
-  <main class="container" role="main" aria-labelledby="title">
-    <article class="card">
-      <h1 id="title">Notas — Captura ideas de forma rápida y privada</h1>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Notas — Captura, etiqueta y convierte ideas en trabajo</h1>
 
-      <!-- Author card with Serge Shammas picture (absolute JPG URLs to avoid WEBP fallback issues) -->
-      <div class="author" role="articleauthor" aria-label="Autor">
-        <img
-          src="https://timerhaven.com/assets/images/authors/serge-shammas-200.jpg"
-          srcset="https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg 2x"
-          width="56" height="56"
-          alt="Photo of Serge Shammas"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='https://timerhaven.com/assets/images/authors/avatar-placeholder.png';">
+      <div class="author" role="articleauthor" aria-label="Autor del artículo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
         <div>
-          <div class="byline">Por <strong>Serge Shammas</strong></div>
-          <div class="meta">Publicado: 2025-10-22 · Última actualización: 2025-11-22</div>
+          <div><strong>Por Serge Shammas</strong> — redactor de productividad e investigador UX</div>
+          <div class="meta">Publicado: 2025-10-22 · Última actualización: 2025-11-21 · Tiempo de lectura: 10–12 min</div>
         </div>
       </div>
 
-      <p class="lead">
-        Notas de TimerHaven es un editor rápido y sin distracciones para capturar ideas, actas breves, checklists y fragmentos de investigación.
-        Tus notas permanecen en el dispositivo por defecto; exporta cuando necesites moverlas a otro sistema.
-      </p>
+      <p class="lead">Las notas son el puente entre ideas fugaces y trabajo terminado. Esta guía muestra un enfoque práctico y orientado a la medición: captura notas concisas, etiqueta con contexto, convierte elementos accionables en trabajo cronometrado (Pomodoro/Task Timer) y revisa semanalmente para que tus notas generen resultados en lugar de acumularse.</p>
 
-      <!-- rest of content unchanged -->
-      <section class="section">
-        <h2>Por qué importa esta herramienta</h2>
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#why">Por qué importan las buenas notas</a>
+        <a href="#capture">Mejores prácticas de captura</a>
+        <a href="#structure">Estructura & etiquetas</a>
+        <a href="#workflows">Flujos con Pomodoro & Task Timer</a>
+        <a href="#templates">Plantillas</a>
+        <a href="#review">Revisión diaria & semanal</a>
+        <a href="#search">Búsqueda & recuperación</a>
+        <a href="#cases">Casos de uso</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Por qué importan las buenas notas</h2>
         <p>
-          Capturar ideas inmediatamente evita pérdidas de contexto. Notas reduce la fricción para anotar y ofrece exportaciones sencillas cuando quieras archivar o compartir.
+          La mayoría de las ideas desaparecen porque se registran mal o no se vinculan a la acción. Una buena nota es breve, contextual y accionable. Debe responder tres preguntas rápidas: ¿Qué es? ¿Por qué importa? ¿Cuál es el siguiente paso? Cuando tus notas están estructuradas así, se convierten en una fuente fiable de tareas, investigación o referencia.
         </p>
       </section>
 
-      <section class="section">
-        <h2>Mini casos (ejemplos reales)</h2>
+      <section id="capture" class="section" aria-labelledby="capture-title">
+        <h2 id="capture-title">Captura — rápida, enfocada, mínima</h2>
 
-        <div class="case">
-          <strong>Caso — Redactor freelance (Sara)</strong>
-          <p>
-            Sara necesitaba redactar un artículo de 1.200 palabras con poco tiempo. Usó Notas para crear el esquema en 6 minutos, hizo dos Pomodoros de 25 minutos
-            para redactar y una sesión de 15 minutos para editar. Registró los tiempos en Task Timer para afinar estimaciones futuras.
-          </p>
-        </div>
-
-        <div class="case">
-          <strong>Caso — Responsable de proyecto (Carlos)</strong>
-          <p>
-            Carlos preparó la lista de criterios de aceptación para un sprint en Notas, la exportó como .txt y la importó al sistema de gestión del equipo. Esto redujo cambios de contexto en las reuniones.
-          </p>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Recetas de workflow — copia y usa</h2>
-
-        <div class="workflow">
-          <strong>Receta 1 — Captura rápida → Pomodoro</strong>
+        <div class="workflow" aria-labelledby="capture-check">
+          <strong id="capture-check">Checklist de captura</strong>
           <ol>
-            <li>Abre Notas y escribe un esquema de 3 puntos para la tarea.</li>
-            <li>Inicia un Pomodoro (25/5) y trabaja en el punto #1 hasta que suene el temporizador.</li>
-            <li>Anota el progreso en Notas tras cada sesión y repite.</li>
-          </ol>
-        </div>
-
-        <div class="workflow">
-          <strong>Receta 2 — Notas → Task Timer para estimaciones</strong>
-          <ol>
-            <li>Lista subtareas en Notas con duración estimada.</li>
-            <li>Mide una subtarea con Task Timer y vuelve a Notas para registrar el tiempo real.</li>
-            <li>Usa los promedios registrados para ajustar estimaciones futuras.</li>
-          </ol>
-        </div>
-
-        <div class="workflow">
-          <strong>Receta 3 — Plan diario con Calendario</strong>
-          <ol>
-            <li>Crea la lista «Enfoque diario» en Notas.</li>
-            <li>Reserva bloques en <a href="/es/calendar-planning-index.html">Calendario</a> para cada elemento.</li>
-            <li>Utiliza Pomodoro dentro de esos bloques y guarda notas de sesión en Notas.</li>
+            <li><strong>Título:</strong> Resultado en una línea (no el proceso) — p. ej., "Borrador: Introducción de la propuesta".</li>
+            <li><strong>Viñetas:</strong> 2–4 viñetas concisas describiendo puntos clave, recursos o restricciones.</li>
+            <li><strong>Etiqueta:</strong> Añade una etiqueta principal (#task, #idea, #research) y un contexto opcional (#projectX, #meeting).</li>
+            <li><strong>Indicador de acción:</strong> Marca como accionable si requiere trabajo pronto; de lo contrario, márcala como referencia.</li>
           </ol>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Checklist descargable</h2>
-        <p class="muted">Haz clic para descargar una checklist lista para usar (.txt):</p>
-        <p><a href="#" id="downloadChecklist" class="cta">Descargar Checklist de Notas</a></p>
-        <pre class="template" id="checkTemplate" aria-hidden="true">Checklist diaria de Notas
-- Fecha: {{YYYY-MM-DD}}
-- Top 3 tareas:
-  1.
-  2.
-  3.
-- Referencias rápidas / enlaces:
-- Sesiones Pomodoro planeadas: [25/5 x 4]
-- Exportar nota al terminar</pre>
+      <section id="structure" class="section" aria-labelledby="structure-title">
+        <h2 id="structure-title">Estructura & etiquetas — mantener las notas buscables</h2>
+        <p>
+          Una convención consistente de nombres y etiquetas transforma las notas de ruido a una base de conocimiento buscable. Usa etiquetas cortas y predecibles y evita etiquetas demasiado libres que varíen en puntuación o ortografía.
+        </p>
+
+        <h3>Taxonomía de etiquetas sugerida</h3>
+        <ul>
+          <li><strong>#task</strong> Elementos accionables que harás.</li>
+          <li><strong>#idea</strong> Conceptos que merece la pena conservar pero no son accionables aún.</li>
+          <li><strong>#research</strong> Enlaces, datos o resúmenes para trabajo posterior.</li>
+          <li><strong>#quick</strong> Elementos accionables estimados en menos de 5 minutos.</li>
+        </ul>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Flujos: vincula notas con trabajo cronometrado</h2>
+
+        <h3>Workflow rápido de un solo Pomodoro</h3>
+        <ol>
+          <li>Elige una nota <strong>#task</strong> como tu objetivo Pomodoro.</li>
+          <li>Inicia un Pomodoro de 25 minutos en TimerHaven; trabaja solo en los elementos de esa nota.</li>
+          <li>Durante la pausa de 5 minutos, añade una línea con el progreso en la nota.</li>
+          <li>Tras el bloque, convierte las viñetas completadas en entradas de Task Timer y revisa las duraciones.</li>
+        </ol>
+      </section>
+
+      <section id="templates" class="section" aria-labelledby="templates-title">
+        <h2 id="templates-title">Plantillas — inicio rápido</h2>
+        <p>Utiliza estas plantillas para una captura consistente. Haz clic para descargar una plantilla de texto lista para usar.</p>
+        <p><a href="#" id="downloadNotes" class="cta" aria-label="Descargar plantilla de Notas">Descargar plantilla de notas (.txt)</a></p>
+
+        <pre id="notesTemplate" class="template" aria-hidden="true">Título: [Enunciado del resultado]
+Etiquetas: #task #projectX
+1) Viñeta — contexto / enlace
+2) Viñeta — recurso / paso
+3) Viñeta — restricción / nota
+Acción: [convertir a tarea / programar / archivar]</pre>
+
         <script>
-          document.getElementById('downloadChecklist').addEventListener('click', function(e){
+          document.getElementById('downloadNotes').addEventListener('click', function(e){
             e.preventDefault();
-            var text = document.getElementById('checkTemplate').textContent;
+            var text = document.getElementById('notesTemplate').textContent;
             var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
             var url = URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
-            a.download = 'notas-checklist.txt';
+            a.download = 'notes-template-es.txt';
             document.body.appendChild(a);
             a.click();
-            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 100);
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
           });
         </script>
       </section>
 
-      <section class="section">
-        <h2>Ideas para capturas de pantalla (anotadas)</h2>
-        <p class="muted">Añade estas imágenes para que la página sea única:<br>
-        - screenshot-1: editor con una checklist corta, anotar “Captura rápida y exportación”.<br>
-        - screenshot-2: Notas + Task Timer mostrando una nota de sesión guardada (leyenda: “Registra tiempo por tarea”).</p>
-      </section>
-
-      <section class="section">
-        <h2>Consejos avanzados</h2>
+      <section id="review" class="section" aria-labelledby="review-title">
+        <h2 id="review-title">Triage: revisión diaria y semanal</h2>
+        <h3>Revisión diaria (5–10 minutos)</h3>
         <ul>
-          <li><strong>Plantillas rápidas:</strong> Mantén cabeceras reutilizables (acta de reunión) al inicio de Notas para reutilizarlas fácilmente.</li>
-          <li><strong>Captura con teclado:</strong> Abre Notas con un marcador o pestaña fija para pegar ideas sin fricción.</li>
-          <li><strong>Seguridad ligera:</strong> Para contenido sensible, copia y cifra localmente antes de exportar; etiqueta los archivos exportados.</li>
+          <li>Escanea rápidamente las notas nuevas y marca los elementos urgentes <strong>#task</strong> o <strong>#quick</strong>.</li>
+          <li>Convierte cualquier viñeta accionable en una entrada de Task Timer o en un hueco de calendario si necesita tiempo programado.</li>
+          <li>Archiva las referencias puras o muévelas a una carpeta de proyecto.</li>
+        </ul>
+
+        <h3>Revisión semanal profunda (15–30 minutos)</h3>
+        <ul>
+          <li>Abre todas las notas etiquetadas <strong>#idea</strong> y decide: acción, investigación o archivo.</li>
+          <li>Agrupa notas relacionadas en una nota de proyecto y planifica los siguientes pasos (recetas Pomodoro o estimaciones Task Timer).</li>
+          <li>Exporta un breve resumen semanal si mantienes métricas personales.</li>
         </ul>
       </section>
 
-      <section class="section">
-        <h2>FAQ</h2>
-        <div class="faq">
-          <p><strong>P: ¿Puedo usar Notas para guardar fragmentos de código?</strong><br>
-          <strong>R:</strong> Sí — es ideal para snippets pequeños. Para colecciones de código más grandes, exporta a un gestor de snippets o repositorio.</p>
+      <section id="search" class="section" aria-labelledby="search-title">
+        <h2 id="search-title">Búsqueda y recuperación — haz las notas encontrables</h2>
+        <p>Mantén etiquetas cortas y usa prefijos en títulos para filtrar rápidamente (p. ej., "Idea:", "Task:", "Ref:"). Usa los filtros de la herramienta Notas para mostrar etiquetas, fechas o palabras clave. Para archivos grandes, exporta las notas y conserva una copia de seguridad en la nube.</p>
 
-          <p><strong>P: ¿Cómo paso mis notas a otro dispositivo?</strong><br>
-          <strong>R:</strong> Usa la función Exportar para descargar un .txt y luego impórtalo o pégalo en el otro dispositivo. Para sincronización continua usa tu propio servicio en la nube.</p>
+        <table class="sample" aria-hidden="false">
+          <thead><tr><th>Campo</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>Título</td><td>Borrador: titular de la landing</td></tr>
+            <tr><td>Etiquetas</td><td>#task #marketing</td></tr>
+            <tr><td>Viñetas</td><td>Audiencia objetivo, beneficio clave, idea CTA</td></tr>
+          </tbody>
+        </table>
+      </section>
 
-          <p><strong>P: ¿Es seguro LocalStorage?</strong><br>
-          <strong>R:</strong> LocalStorage mantiene los datos en el dispositivo. Es seguro frente a servidores remotos pero accesible a cualquiera con acceso al dispositivo o perfil del navegador; cifra notas muy sensibles.</p>
+      <section id="cases" class="section" aria-labelledby="cases-title">
+        <h2 id="cases-title">Breves estudios de caso</h2>
+
+        <div class="case">
+          <strong>Product Manager — Imani</strong>
+          <p>Imani usa notas durante llamadas con stakeholders para capturar decisiones y puntos de acción. Convierte cualquier acción en una entrada de Task Timer en la misma sesión y agenda un Pomodoro para el seguimiento la mañana siguiente.</p>
+        </div>
+
+        <div class="case">
+          <strong>Investigador — Alex</strong>
+          <p>Alex etiqueta notas con #research y guarda enlaces de fuentes. Las revisiones semanales le permiten ensamblar rápidamente resúmenes bibliográficos combinando viñetas relacionadas en un único documento.</p>
         </div>
       </section>
 
-      <section class="section">
-        <h2>Plantilla práctica (opcional)</h2>
-        <p>Si quieres una plantilla práctica para actas de reunión, copia y pega la siguiente plantilla al crear nuevas notas:</p>
-        <pre class="template">Acta de reunión
-Fecha: {{YYYY-MM-DD}}
-Asistentes:
-- 
-Decisiones:
-- 
-Acciones:
-- [ ] Responsable — Fecha límite
-Notas adicionales:</pre>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Preguntas frecuentes</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ¿Puedo exportar notas a otras herramientas?<br><strong>R:</strong> Sí — exporta como texto plano o CSV e impórtalas en otras apps. Usa títulos y etiquetas coherentes para facilitar el mapeo.</p>
+
+          <p><strong>P:</strong> ¿Con qué frecuencia debo revisar las notas?<br><strong>R:</strong> Un triage diario breve (5–10 minutos) mantiene la lista accionable; una revisión completa semanal es recomendable.</p>
+
+          <p><strong>P:</strong> ¿Hay una política de retención recomendada?<br><strong>R:</strong> Conserva las notas accionables hasta completarlas; archiva referencias de más de 1–2 años salvo que sean esenciales.</p>
+        </div>
       </section>
 
-      <section class="section">
-        <h2>Recursos y herramientas relacionadas</h2>
-        <p class="muted">Guías relacionadas: <a href="/es/pomodoro-index.html">Pomodoro</a> · <a href="/es/task-timer-index.html">Task Timer</a> · <a href="/es/calendar-planning-index.html">Calendario</a></p>
-      </section>
+      <p class="muted" style="margin-top:1rem;">Herramientas relacionadas: <a href="/pomodoro-es.html">Pomodoro</a> · <a href="/timer.html#startBtn">Task Timer</a> · <a href="/calendar-es.html">Calendario</a></p>
 
-      <p style="margin-top:1.2rem;"><a href="/notes-es.html" class="cta" aria-label="Abrir herramienta Notas">Abrir herramienta Notas</a></p>
+      <p style="margin-top:1.2rem;">
+        <a href="/notes-es.html" class="cta" aria-label="Abrir herramienta Notas">Abrir Notas</a>
+      </p>
 
-      <footer style="margin-top:1.5rem;color:#6b7c89;font-size:0.95rem;">
-        <p>¿Preguntas o sugerencias? Escríbenos a <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>.</p>
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas o comentarios? Contáctanos en <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lee nuestra <a href="/es/privacy/">Política de privacidad</a>.</p>
       </footer>
     </article>
   </main>
+
+  <!-- Botón flotante "Volver a Notas" -->
+  <a href="/notes-es.html"
+     class="return-to-tool"
+     id="returnToToolNotes"
+     aria-label="Volver a Notas">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver a Notas</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolNotes');
+      if (!btn) return;
+      // activación por teclado
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      // ajuste sutil de opacidad según scroll
+      function toggleOpacity(){
+        try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){}
+      }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

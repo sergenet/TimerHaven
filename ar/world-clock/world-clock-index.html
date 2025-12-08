@@ -1,18 +1,200 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>world-clock — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for world-clock guide (ar)">
+  <meta charset="utf-8" />
+  <title>الساعة العالمية — قارن المناطق الزمنية وحدد مواعيد بثقة | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل شامل لاستخدام الساعة العالمية: اختيار المناطق، قراءة الإزاحات، تخطيط الاجتماعات عبر المناطق، مشكلات التوقيت الصيفي، ونصائح للأتمتة." />
+  <link rel="canonical" href="https://timerhaven.com/ar/world-clock/world-clock-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"استخدم الساعة العالمية للجدولة",
+        "description":"قارن بين مناطق زمنية متعددة، اعرض الأوقات المحلية للمشاركين، وتجنب ارتباك التوقيت الصيفي. يتضمن هذا الدليل وصفات تخطيط، نصائح التحويل، وأفكار للأتمتة.",
+        "image":"https://timerhaven.com/assets/images/world-clock-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["الساعة العالمية (TimerHaven)","تقويم","معلومات مناطق زمنية للمشاركين"],
+        "step":[
+          {"@type":"HowToStep","name":"اختر نقاط مرجعية","text":"اختر مرجع المنظم وأضف مناطق المشاركين لمقارنة الأوقات المحلية."},
+          {"@type":"HowToStep","name":"راقب تغيّر التوقيت الصيفي","text":"تحقق من قواعد التوقيت الصيفي وتأكد من الأوقات حول تواريخ الانتقال."},
+          {"@type":"HowToStep","name":"شارك الأوقات المحلية","text":"شارك الفترات المختارة مع عرض وقت المنظم ووقت كل مشارك لتقليل الالتباس."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"كيف أتعامل مع تغييرات التوقيت الصيفي؟","acceptedAnswer":{"@type":"Answer","text":"تجنّب الجدولة في تواريخ انتقال التوقيت الصيفي إذا أمكن؛ وإلا فتحقق من الأوقات محليًا وأدرج معرفات المنطقة الزمنية (IANA) في الدعوات."}},
+          {"@type":"Question","name":"هل أعرض عدة أوقات محلية في الدعوات؟","acceptedAnswer":{"@type":"Answer","text":"نعم — عرض وقت المنظم ووقت المشارك المحلي يقلل الأخطاء، خاصةً للفرق الموزعة."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;text-align:right;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;justify-content:flex-end;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">world-clock — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">الساعة العالمية — قارن المناطق الزمنية وحدد مواعيد بثقة</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب حول العمل الموزع والجدولة</div>
+          <div class="meta">نُشر: 2025-11-24 · وقت القراءة: 12–16 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">الجدولة عبر المناطق الزمنية مصدر شائع للالتباس. تساعدك ساعة عالمية موثوقة في مقارنة الأوقات المحلية، تجنّب مشكلات التوقيت الصيفي، والتواصل الواضح لأوقات الاجتماعات. يغطي هذا الدليل أساسيات المناطق الزمنية، وصفات تخطيط الاجتماعات، مصائد التوقيت الصيفي، تسمية المناطق باستخدام IANA، نصائح للأتمتة وأنماط المشاركة التي تقلّل الأخطاء.</p>
+
+      <nav class="toc" aria-label="فهرس المحتوى">
+        <a href="#basics">أساسيات المناطق الزمنية</a> ·
+        <a href="#dst">التوقيت الصيفي ومصائد</a> ·
+        <a href="#planning">وصفات تخطيط الاجتماعات</a> ·
+        <a href="#naming">استخدم معرفات IANA وتسميات واضحة</a> ·
+        <a href="#automation">الأتمتة ونصائح التقويم</a> ·
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="basics" class="section" aria-labelledby="basics-title">
+        <h2 id="basics-title">أساسيات المناطق الزمنية — الإزاحات وUTC والوقت المحلي</h2>
+        <p>تعُرّف المناطق الزمنية بالنسبة إلى توقيت العالم المنسّق (UTC) بواسطة إزاحات (مثال: UTC+1). للوضوح، اذكر دائمًا كلًا من الوقت وسُنة المنطقة أو الإزاحة عند الجدولة عبر مواقع مختلفة.</p>
+
+        <ul>
+          <li><strong>مرجع UTC:</strong> استخدم UTC عند تنسيق أنظمة عالمية لتجنّب الغموض المحلي.</li>
+          <li><strong>الأوقات المحلية البشرية:</strong> في الدعوات فضّل عرض الأوقات المحلية للمستلمين — اعرض وقت المنظم ووقت المستلم لتقليل الأخطاء.</li>
+          <li><strong>‏24 ساعة مقابل 12 ساعة:</strong> استخدم التنسيق الذي يفضّله جمهورك — 24 ساعة يقلّل الالتباس بين AM/PM.</li>
+        </ul>
+      </section>
+
+      <section id="dst" class="section" aria-labelledby="dst-title">
+        <h2 id="dst-title">التوقيت الصيفي — مصائد شائعة</h2>
+        <p>انتقالات التوقيت الصيفي يمكن أن تغيّر الإزاحات المحلية وتسبب أخطاء في الجدولة، لا سيما حول تواريخ الانتقال. تجنّب جدولة أحداث دورية بالقرب من تواريخ تغيير التوقيت الصيفي أو أدرج دائمًا معرفات المناطق الزمنية في الدعوات.</p>
+
+        <h3>قواعد عملية</h3>
+        <ul>
+          <li>تجنّب جدولة مواعيد حرجة أو اجتماعات عابرة للمناطق في الأيام التي تتضمن انتقال التوقيت الصيفي.</li>
+          <li>اذكر المنطقة الزمنية صراحة (مثال: "09:00 America/Los_Angeles (PDT)") بدلًا من الاعتماد على أسماء محلية قد تتغير معناها.</li>
+          <li>عند التأكيد مع المشاركين، اعرض وقتهم المحلي والطابع الزمني UTC كمرجع حاسم.</li>
+        </ul>
+      </section>
+
+      <section id="planning" class="section" aria-labelledby="planning-title">
+        <h2 id="planning-title">وصفات لتخطيط الاجتماعات — قلّل الاحتكاك</h2>
+        <p>استخدم الساعة العالمية لاختيار فترات عادلة وللتواصل الواضح للأوقات.</p>
+
+        <div class="recipe" aria-labelledby="small-meeting">
+          <strong id="small-meeting">فريق صغير موزع — اجتماع 30 دقيقة</strong>
+          <ol>
+            <li>اجمع نوافذ التوافر المفضلة للمشاركين (صباحهم/بعد الظهر المحلي).</li>
+            <li>استخدم الساعة العالمية لعرض كل فترة مرشّحة بتوقيت كل مشارك المحلي.</li>
+            <li>اعرض 2–3 فترات واختر بسرعة؛ أدرج أوقات منظم ومشارك محلي في وصف الدعوة.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="global">
+          <strong id="global">اجتماع عام عالمي — قلّل الأعباء</strong>
+          <ol>
+            <li>اختر نافذة تتجنّب الساعات المبكرة جدًا أو المتأخرة لمعظم المشاركين؛ دوّر الأوقات عبر الأحداث المتكررة لتقاسم الإزعاج.</li>
+            <li>سجّل وشارك الجلسة لمن لا يستطيع الحضور مباشرة.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="naming" class="section" aria-labelledby="naming-title">
+        <h2 id="naming-title">استخدم معرفات IANA وتسميات واضحة</h2>
+        <p>أسماء مناطق IANA (مثل Europe/London, America/New_York) لا لبس فيها وتراعي قواعد التوقيت الصيفي. عند إدراج الأوقات في الرسائل أو الدعوات، اعرض الوسم المقروء ومعرّف IANA أو إزاحة UTC للتوضيح.</p>
+
+        <pre class="template">سطر مثال في الدعوة:
+Meeting: Project sync
+Time: 2025-11-30 09:00 America/Los_Angeles (UTC-8) — 17:00 Europe/London (UTC+0)
+Agenda: ...</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">الأتمتة ونصائح التقويم</h2>
+        <p>اجعل الجدولة متوقعة عبر الأتمتة وممارسات واضحة في التقويم.</p>
+
+        <ul>
+          <li><strong>اضبط مناطق التقويم لكل حدث:</strong> أدرج منطقة منظم الحدث في بيانات الحدث حتى تحوّل تقاويم الحضور الأوقات بشكل صحيح.</li>
+          <li><strong>استخدم روابط زمنية واعية بالمنطقة:</strong> حوّل والصق الأوقات المحلية للأطراف الرئيسية داخل وصف الحدث.</li>
+          <li><strong>استخدم أدوات الجدولة:</strong> استعن بأدوات تقترح نوافذ مثالية بناءً على مناطق وتوافر المشاركين.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> ماذا لو رأى المشاركون أوقاتًا مختلفة؟<br><strong>ج:</strong> أكد منطقة الحدث وضمّن توقيت UTC في الدعوة. شجّع المشاركين على فتح تفاصيل الحدث في تطبيق التقويم لديهم لرؤية الأوقات المحوّلة تلقائيًا.</p>
+
+          <p><strong>س:</strong> هل يجب أن أجدول دائمًا بتوقيت UTC؟<br><strong>ج:</strong> UTC ممتاز للأنظمة والأتمتة، لكن للاتصال البشري اعرض الأوقات المحلية مع UTC كمرجع احتياطي. الناس يفهمون الأوقات المحلية أفضل؛ UTC يزيل الغموض في الجداول التقنية.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/world-clock-ar.html">افتح أداة الساعة العالمية</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">قائمة مناطق قاعدة بيانات IANA</a></li>
+          <li><a href="https://timeanddate.com" target="_blank" rel="noopener">timeanddate.com — تحويلات والتوقيت الصيفي</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/world-clock-ar.html" class="cta" aria-label="افتح الساعة العالمية">افتح الساعة العالمية</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>أسئلة أو ملاحظات؟ تواصل معنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- زر العودة للأداة -->
+  <a href="/world-clock-ar.html" class="return-to-tool" id="returnToToolWorldClock" aria-label="العودة إلى الساعة العالمية">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى الساعة العالمية</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWorldClock');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

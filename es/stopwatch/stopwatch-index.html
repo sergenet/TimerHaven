@@ -1,18 +1,228 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>stopwatch — Guide (es)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for stopwatch guide (es)">
+  <meta charset="utf-8" />
+  <title>Cronómetro — Medir rendimiento, intervalos y progreso | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía completa para usar un cronómetro en productividad, entrenamiento, experimentos y reuniones. Incluye patrones de temporización, buenas prácticas de vueltas, notas de precisión y resolución de problemas." />
+  <link rel="canonical" href="https://timerhaven.com/es/stopwatch/stopwatch-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Usar un cronómetro eficazmente",
+        "description":"Inicia, pausa, registra vueltas y mide el tiempo transcurrido para experimentos, entrenamientos, reuniones y tareas de productividad. Esta guía cubre workflows, uso de vueltas, captura de datos, advertencias sobre precisión y resolución de problemas.",
+        "image":"https://timerhaven.com/assets/images/stopwatch-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Cronómetro (TimerHaven)","Cuaderno o hoja de cálculo","Monitor de frecuencia cardíaca opcional para fitness"],
+        "step":[
+          {"@type":"HowToStep","name":"Seleccionar objetivo","text":"Decide qué vas a medir (duración de una tarea, rendimiento por intervalos, tiempo hasta completar)."},
+          {"@type":"HowToStep","name":"Iniciar y registrar vueltas","text":"Usa el control de Inicio y presiona Vueltas en puntos definidos; etiqueta o exporta los tiempos de vuelta si es necesario."},
+          {"@type":"HowToStep","name":"Revisar y analizar","text":"Recopila los datos de las vueltas en una hoja de cálculo y calcula medias, mejores tiempos y varianza para entender el rendimiento."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"¿El cronómetro seguirá funcionando si cambio de pestaña?","acceptedAnswer":{"@type":"Answer","text":"Sí — el cronómetro calcula el tiempo transcurrido a partir de horodatajes (inicio + ahora) por lo que permanece preciso incluso si la pestaña está en segundo plano. Algunas páginas pueden limitar las actualizaciones de la interfaz, pero no el cálculo del tiempo transcurrido."}},
+          {"@type":"Question","name":"¿Cómo registro las vueltas?","acceptedAnswer":{"@type":"Answer","text":"Pulsa el botón Vueltas para capturar el tiempo transcurrido actual. Exporta o copia los tiempos para conservar registros y analizarlos después."}},
+          {"@type":"Question","name":"¿Es suficientemente preciso el cronómetro para experimentos?","acceptedAnswer":{"@type":"Answer","text":"Para la mayoría de usos de productividad y entrenamiento, sí. Para cronometrajes científicos de alta precisión, usa hardware dedicado o apps nativas con garantías de tiempo real."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">stopwatch — Guide (es)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Cronómetro — Medir tiempo transcurrido, intervalos y progreso</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor del artículo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Por Serge Shammas</strong> — redactor sobre productividad y medición</div>
+          <div class="meta">Publicado: 2025-11-24 · Tiempo de lectura: 10–15 min</div>
+        </div>
+      </div>
+
+      <p class="lead">El cronómetro es el instrumento de medición más sencillo, pero sus aplicaciones son muy diversas: medir la duración de tareas, cronometrar intervalos deportivos, registrar tiempos de experimentos o controlar segmentos de reuniones. Esta guía trata workflows prácticos, buenas prácticas de vueltas, captura de datos, advertencias de precisión y cómo usar los datos del cronómetro para mejorar el rendimiento.</p>
+
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#when">Cuándo usar un cronómetro</a>
+        <a href="#start">Inicio/pausa/vuelta — aspectos básicos</a>
+        <a href="#workflows">Workflows prácticos</a>
+        <a href="#data">Recopilar y analizar datos de vueltas</a>
+        <a href="#precision">Precisión & notas de entorno</a>
+        <a href="#integration">Integraciones & exportaciones</a>
+        <a href="#troubleshoot">Resolución de problemas</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="when" class="section" aria-labelledby="when-title">
+        <h2 id="when-title">Cuándo usar un cronómetro</h2>
+        <p>El cronómetro es ideal cuando necesitas medir con precisión el tiempo transcurrido en una actividad acotada. Escenarios comunes:</p>
+        <ul>
+          <li><strong>Experimentos de productividad:</strong> medir cuánto tarda realmente una tarea frente a tu estimación.</li>
+          <li><strong>Entrenamientos & intervalos:</strong> registrar splits por vueltas para carreras, series o entrenamientos.</li>
+          <li><strong>Pruebas de usabilidad & experimentos:</strong> medir tiempo hasta completar tareas para benchmarking.</li>
+          <li><strong>Reuniones:</strong> cronometrar puntos de la agenda y repartir tiempos de intervención de forma equitativa.</li>
+        </ul>
+      </section>
+
+      <section id="start" class="section" aria-labelledby="start-title">
+        <h2 id="start-title">Inicio, pausa & vuelta — nociones que importan</h2>
+        <p>Los cronómetros web modernos suelen apoyarse en horodatados para mantener la precisión incluso cuando la UI se ralentiza. Conceptos clave:</p>
+        <ul>
+          <li><strong>Inicio:</strong> registra un horodatado de inicio (Date.now()).</li>
+          <li><strong>Transcurrido:</strong> calcula ahora − inicio (sumando el tiempo acumulado si se reanuda tras una pausa).</li>
+          <li><strong>Pausa/reanudar:</strong> al pausar, guarda el tiempo acumulado; reanuda estableciendo inicio = now − acumulado.</li>
+          <li><strong>Vuelta:</strong> registra el tiempo transcurrido actual como un split — opcionalmente reinicia el contador de vuelta para obtener duraciones de vuelta individuales.</li>
+        </ul>
+
+        <p class="small-note">Dos modos de vueltas: (A) splits acumulativos (tiempo desde el inicio) y (B) duraciones de vuelta (tiempo desde la vuelta anterior). Decide el modo antes de registrar.</p>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Workflows prácticos</h2>
+
+        <div class="recipe" aria-labelledby="timing-task">
+          <strong id="timing-task">Tiempo hasta completar (estimación de tareas)</strong>
+          <ol>
+            <li>Define el objetivo: "Redactar la introducción — 1.º borrador".</li>
+            <li>Inicia el cronómetro al comenzar la tarea; evita el multitasking durante la medición.</li>
+            <li>Usa Vueltas para marcar checkpoints significativos (esquema completo, primer párrafo listo).</li>
+            <li>Al terminar, registra el tiempo total en tu tarea o nota de calendario.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="interval-training">
+          <strong id="interval-training">Entrenamiento por intervalos (ciclos repetibles)</strong>
+          <ol>
+            <li>Usa Vueltas para marcar cada intervalo; si cronometra descansos, usa Pausa para capturar la duración de descanso por separado.</li>
+            <li>Exporta las vueltas para calcular tiempo medio por intervalo, mejor tiempo y varianza para seguir la mejora física.</li>
+            <li>Usa reglas consistentes de calentamiento y enfriamiento para comparaciones válidas entre sesiones.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Consejo: para workflows repetibles, sigue un ritual corto previo (abrir material, ajustar postura) para que el cronómetro mida un esfuerzo comparable.</p>
+      </section>
+
+      <section id="data" class="section" aria-labelledby="data-title">
+        <h2 id="data-title">Recopilar y analizar datos de vueltas</h2>
+        <p>Los tiempos brutos de vueltas son más útiles cuando se agregan. Exporta o copia las vueltas en un tableur y calcula métricas simples:</p>
+        <ul>
+          <li><strong>Media (average)</strong> — tiempo típico por vuelta/iteración.</li>
+          <li><strong>Médiana</strong> — robusta frente a valores atípicos.</li>
+          <li><strong>Desviación estándar / varianza</strong> — mide la consistencia.</li>
+          <li><strong>Mejor / peor</strong> — seguimiento de casos extremos.</li>
+        </ul>
+
+        <pre class="template">CSV columnas: index,split_seconds,lap_seconds,timestamp
+1,30.12,30.12,2025-11-24T10:02:12Z</pre>
+
+        <p>Usa estas métricas en revisiones semanales para detectar tendencias e identificar cuándo cambios de proceso mejoraron velocidad o consistencia.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Precisión & notas de entorno</h2>
+        <p>Los cronómetros en navegadores son precisos para uso habitual, pero conoce sus límites:</p>
+        <ul>
+          <li><strong>Throttling de UI:</strong> las pestañas en segundo plano pueden reducir la frecuencia de repintado, pero no el cálculo del tiempo si se usan horodatados.</li>
+          <li><strong>Sueño del sistema / suspensión:</strong> si el dispositivo entra en suspensión, el tiempo de pared avanzará — tenlo en cuenta al analizar sesiones.</li>
+          <li><strong>Necesidades de alta precisión:</strong> sincronización científica o audio/video requiere herramientas especializadas (temporizadores hardware, timecode DAW, sistemas sincronizados por NTP).</li>
+        </ul>
+      </section>
+
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Integraciones & exportaciones</h2>
+        <p>Buenas herramientas de cronómetro permiten copiar o exportar listas de vueltas para análisis posteriores. Ideas de integración:</p>
+        <ul>
+          <li><strong>Registro de tareas:</strong> añade el tiempo transcurrido a ítems de tarea o a la descripción de un evento de calendario.</li>
+          <li><strong>Export CSV:</strong> importa los datos de vueltas en hojas de cálculo para análisis de tendencias.</li>
+          <li><strong>API / Webhooks:</strong> envía eventos de temporización a un backend para almacenar el historial de sesiones y alimentar un panel personal.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Resolución de problemas</h2>
+        <ul>
+          <li><strong>Temporizador que no actualiza la vista:</strong> algunos navegadores limitan el repaint; confía en el valor final del tiempo transcurrido en lugar de cada tic.</li>
+          <li><strong>Vueltas no guardadas tras recargar:</strong> usa exportación o una herramienta que persista vueltas en localStorage si necesitas registros duraderos.</li>
+          <li><strong>Zona horaria incorrecta en horodatados:</strong> almacena los horodatados en ISO UTC para evitar confusiones al agregar datos entre dispositivos.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ¿Puedo medir múltiples tareas en paralelo con un solo cronómetro?<br><strong>R:</strong> Es posible con semánticas cuidadosas de vueltas (etiqueta cada vuelta), pero para tareas paralelas es más sencillo usar varios temporizadores o un Task Timer que admita timers simultáneos.</p>
+
+          <p><strong>P:</strong> ¿Cómo debería etiquetar las vueltas?<br><strong>R:</strong> Usa etiquetas cortas y consistentes (ej. "Calentamiento", "Rep 1", "Checkpoint revisión"). Si la herramienta no soporta etiquetas, registra una nota con horodatado en tu sistema de tareas junto al índice de la vuelta.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Recursos</h2>
+        <ul class="muted">
+          <li><a href="/stopwatch-es.html">Abrir la herramienta Cronómetro</a></li>
+          <li><a href="https://es.wikipedia.org/wiki/Cron%C3%B3metro" target="_blank" rel="noopener">Cronómetro — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/stopwatch-es.html" class="cta" aria-label="Abrir Cronómetro">Abrir Cronómetro</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas o comentarios? Contáctanos en <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lee nuestra <a href="/es/privacy/">Política de privacidad</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Botón flotante "Volver a la herramienta" -->
+  <a href="/stopwatch-es.html" class="return-to-tool" id="returnToToolStopwatch" aria-label="Volver al Cronómetro">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver al Cronómetro</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolStopwatch');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

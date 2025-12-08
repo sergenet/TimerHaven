@@ -1,18 +1,223 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>meeting-planner — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for meeting-planner guide (ar)">
+  <meta charset="utf-8" />
+  <title>مخطط الاجتماعات — جدولة اجتماعات فعّالة عبر مناطق زمنية | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل لتنظيم وتنسيق الاجتماعات: أنماط الدعوات، التخطيط بمراعاة المناطق الزمنية، تصميم الأجندة، وصفات الجدولة ومشاركة اقتراحات الأوقات." />
+  <link rel="canonical" href="https://timerhaven.com/ar/meeting-planner/meeting-planner-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"خطوات تخطيط اجتماعات فعّالة",
+        "description":"وصفات عملية لجدولة الاجتماعات عبر المناطق الزمنية، إعداد الأجندات، إدارة المناقشات بكفاءة، ومشاركة أوقات الاجتماع.",
+        "image":"https://timerhaven.com/assets/images/meeting-planner-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["مخطط الاجتماعات (TimerHaven)","تقويم","مناطق زمنية للمشاركين"],
+        "step":[
+          {"@type":"HowToStep","name":"جمع المناطق الزمنية","text":"اجمع المنطقة الزمنية أو المدينة المفضلة لكل مشارك."},
+          {"@type":"HowToStep","name":"اختيار نوافذ مرشحة","text":"اقترح 2–3 أوقات مرشّحة تقلّل من العبء عبر المناطق الزمنية."},
+          {"@type":"HowToStep","name":"المشاركة والتأكيد","text":"شارك الأوقات بصيغة منظم→الوقت المحلي للمشارك لتقليل الالتباس؛ أكّد اختيار توقيت واحد وأرسل دعوة تقويم."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"كم عدد الخيارات التي ينبغي أن أقترح؟","acceptedAnswer":{"@type":"Answer","text":"اقترح 2–3 نوافذ معقولة. الكثير من الخيارات يبطئ القرار؛ والقليل جدًا قد يمنع التوافق."}},
+          {"@type":"Question","name":"هل يجب أن أعرض دائمًا وقت المشارك المحلي؟","acceptedAnswer":{"@type":"Answer","text":"نعم — عرض وقت المنظم ووقت المشارك المحلي يقلل الأخطاء ويزيد الوضوح."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;text-align:right;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-right:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;justify-content:flex-end;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">meeting-planner — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">مخطط الاجتماعات — جدولة اجتماعات أفضل عبر المناطق الزمنية</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب في الاجتماعات والتعاون</div>
+          <div class="meta">نشر: 2025-11-24 · وقت القراءة: 12–18 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">إدارة الاجتماعات بين مناطق زمنية مختلفة أو مع فرق موزعة تتطلب وضوحًا وتعاطفًا. يساعدك مخطط الاجتماعات على اقتراح الأوقات، عرض الأوقات المحلية للمشاركين، واختيار الفترات التي تقلل الإزعاج. يغطي هذا الدليل جمع المشاركين، اختيار نوافذ زمنية، تصميم الأجندة، أفضل ممارسات المشاركة، ومخاطر المناطق الزمنية.</p>
+
+      <nav class="toc" aria-label="فهرس المحتوى">
+        <a href="#collect">جمع المشاركين والمناطق الزمنية</a> ·
+        <a href="#propose">اقتراح الأوقات بشكل فعّال</a> ·
+        <a href="#agenda">تصميم الأجندة</a> ·
+        <a href="#timezone">مخاطر المناطق الزمنية</a> ·
+        <a href="#sync">وصفات للاجتماعات المتزامنة</a> ·
+        <a href="#share">المشاركة والتأكيد</a> ·
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="collect" class="section" aria-labelledby="collect-title">
+        <h2 id="collect-title">جمع المشاركين والمناطق الزمنية</h2>
+        <p>ابدأ بجمع المنطقة الزمنية أو المدينة المفضلة لكل مدعو ونوافذ توافره (صباحًا/بعد الظهر). استخدم الأداة لتخزين المدن وحساب الأوقات المحلية بسرعة.</p>
+
+        <h3>نصائح عملية</h3>
+        <ul>
+          <li>اسأل المشاركين عن ساعاتهم المفضلة للاجتماع (بتوقيتهم المحلي).</li>
+          <li>اسمح للمشاركين بتحديد "لا قبل" أو "لا بعد" لتضييق النوافذ.</li>
+          <li>يفضّل اختيار نوافذ منتصف النهار للمشاركة الواسعة إن أمكن — فهي تقلل من الساعات المتطرفة لمعظم المناطق.</li>
+        </ul>
+      </section>
+
+      <section id="propose" class="section" aria-labelledby="propose-title">
+        <h2 id="propose-title">اقترح الأوقات بفعالية — اجعل الخيارات قليلة</h2>
+        <p>اعرض 2–3 فترات معقولة بدلًا من استطلاع مفتوح. استخدم الأداة لعرض وقت المنظم المحلي → وقت المشارك المحلي لتقليل الالتباس.</p>
+
+        <div class="recipe">
+          <strong>وصفة اقتراح الفترات</strong>
+          <ol>
+            <li>اختر 2–3 نوافذ مرشّحة تلبي قيود الأغلبية.</li>
+            <li>شارك القائمة مع الأوقات المحلية لكل مشارك (منظم → مشارك محلي).</li>
+            <li>اطلب تأكيد التفضيل أو الإبلاغ عن التعارضات وأتمّ الاختيار بسرعة.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="agenda" class="section" aria-labelledby="agenda-title">
+        <h2 id="agenda-title">صمّم أجندة قصيرة — قسّم الوقت وحدّد القرارات</h2>
+        <p>الأجندة تُركّز النتائج. تضمّن الأهداف، تخصيص الوقت، الأدوار (مُيسّر، كاتب ملاحظات)، والقرارات أو المخرجات المتوقعة.</p>
+
+        <ul>
+          <li><strong>ابدأ بالهدف:</strong> جملة واحدة لنتيجة الاجتماع.</li>
+          <li><strong>قسّم البنود زمنياً:</strong> خصّص دقائق لكل موضوع وراقب الوقت أثناء الاجتماع.</li>
+          <li><strong>اختم بالقرارات والمسؤولين:</strong> اترك دائمًا 5 دقائق لتأكيد الخطوات التالية والمسؤولين عنها.</li>
+        </ul>
+      </section>
+
+      <section id="timezone" class="section" aria-labelledby="timezone-title">
+        <h2 id="timezone-title">مخاطر المناطق الزمنية والوقت الصيفي</h2>
+        <p>احذر تغييرات التوقيت الصيفي وأسماء المناطق الغامضة. عندما أمكن، استخدم معرفات IANA (مثال: Europe/London) واظهر الإزاحات الزمنية الصريحة.</p>
+
+        <h3>قائمة تحقق</h3>
+        <ul>
+          <li>تحقق من التاريخ وما إذا كان التوقيت الصيفي ينطبق على كل منطقة مشارك.</li>
+          <li>اعرض أسماء المناطق الزمنية والإزاحة (مثال: GMT+1) في الاتصالات.</li>
+          <li>اختبر الروابط ودعوات التقويم بحساب مشارك نموذجي عند جدولة أحداث مهمة.</li>
+        </ul>
+      </section>
+
+      <section id="sync" class="section" aria-labelledby="sync-title">
+        <h2 id="sync-title">وصفات للاجتماعات المتزامنة</h2>
+        <p>هنا وصفات لأنواع الاجتماعات الشائعة تساعدك على إدارتها بكفاءة.</p>
+
+        <div class="recipe">
+          <strong>اجتماع وقوف يومي (15 دقيقة)</strong>
+          <ol>
+            <li>مؤقت صارم لـ15 دقيقة. يجيب كل مشارك عن ثلاثة أسئلة (الأمس/اليوم/العقبات).</li>
+            <li>الميسّر يحتفظ بالوقت ويرجّع المناقشات المعمّقة كمتابعات.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>اجتماع اتخاذ قرار (30–60 دقيقة)</strong>
+          <ol>
+            <li>وزّع مواد ما قبل القراءة قبل 24–48 ساعة.</li>
+            <li>ابدأ بمعايير القرار والخيارات؛ امنح مناقشة قصيرة ثم اختتم بالتصويت أو قرار المالك.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="share" class="section" aria-labelledby="share-title">
+        <h2 id="share-title">شارك، أكّد وأرسل الدعوات</h2>
+        <p>عند تأكيد فترة، أرسل دعوة تقويم تتضمن أوقاتًا واضحة مع وعي بالمناطق الزمنية، الأجندة والمرفقات. أضف ملاحظة قصيرة "ما الذي يجب التحضير له" والنتائج المتوقعة.</p>
+
+        <ul>
+          <li>ضمّن رابطًا لملاحظات الاجتماع أو المستند التعاوني في الدعوة.</li>
+          <li>أدرج القرارات أو المخرجات المتوقعة في وصف الدعوة.</li>
+          <li>اضبط رؤية الحدث على "مشغول" لحماية الوقت.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">استكشاف الأخطاء</h2>
+        <ul>
+          <li><strong>التباس بشأن الوقت:</strong> أعد إرسال الأوقات مع تسميات محلية للمشاركين إذا حدث اختلاف.</li>
+          <li><strong>تغييرات مناطق زمنية في آخر لحظة:</strong> أكّد وقت المشارك واعرض بديلًا إذا لزم.</li>
+          <li><strong>غياب الحضور:</strong> سجّل من لم يحضر وأعد الجدولة مع عدد قليل من النوافذ المرشّحة.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> كيف أتعامل مع فرق موزعة كبيرة جدًا؟<br><strong>ج:</strong> قسمهم إلى مجموعات عمل أصغر أو استخدم التحديثات غير المتزامنة؛ الاجتماعات المتزامنة الكبيرة مكلفة وغالبًا ما تكون غير فعّالة.</p>
+
+          <p><strong>س:</strong> هل يجب أن أعرض دائماً منطقتين زمنيتين؟ <br><strong>ج:</strong> اعرض دائمًا وقت المنظم ووقت المشارك المحلي؛ عند وجود مشاركين متعددين فكر في جدول يبيّن الأوقات المحلية للموعد المختار.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/meeting-planner-ar.html">افتح أداة مخطط الاجتماعات</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">قائمة مناطق زمنية IANA</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/meeting-planner-ar.html" class="cta" aria-label="افتح مخطط الاجتماعات">افتح مخطط الاجتماعات</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>أسئلة أو ملاحظات؟ تواصل معنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- زر العودة للأداة -->
+  <a href="/meeting-planner-ar.html" class="return-to-tool" id="returnToToolMeeting" aria-label="العودة إلى مخطط الاجتماعات">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى مخطط الاجتماعات</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolMeeting');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

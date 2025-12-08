@@ -1,18 +1,204 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>world-clock — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for world-clock guide (ru)">
+  <meta charset="utf-8" />
+  <title>Мировые часы — Сравнивайте часовые пояса и планируйте уверенно | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Полное руководство по использованию Мировых часов: выбор зон, чтение смещений, планирование встреч по регионам, подводные камни переходов на летнее время и советы по автоматизации." />
+  <link rel="canonical" href="https://timerhaven.com/ru/world-clock/world-clock-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <meta property="og:title" content="Мировые часы — Сравнивайте часовые пояса и планируйте уверенно">
+  <meta property="og:description" content="Руководство по выбору зон, учёту переходов на летнее время и практикам, которые упрощают планирование встреч в разных часовых поясах.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/world-clock-snapshot.png">
+  <meta property="og:url" content="https://timerhaven.com/ru/world-clock/world-clock-index.html">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Использование Мировых часов для планирования",
+        "description":"Сравнивайте часовые пояса, показывайте локальные времена участников и избегайте путаницы из‑за переходов на летнее время. Включает рецепты планирования, советы по именованию зон и идеи автоматизации.",
+        "image":"https://timerhaven.com/assets/images/world-clock-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["Мировые часы (TimerHaven)","Календарь","Информация о часовом поясе участников"],
+        "step":[
+          {"@type":"HowToStep","name":"Выберите опорные зоны","text":"Определите зону организатора и добавьте зоны участников для сравнения локального времени."},
+          {"@type":"HowToStep","name":"Учитывайте переходы DST","text":"Проверьте правила перехода на летнее/зимнее время и подтвердите расписание вокруг дат переходов."},
+          {"@type":"HowToStep","name":"Делитесь локальным временем","text":"Отправляйте предложения с указанием времени организатора и локального времени участников для уменьшения неоднозначности."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Как поступать при переходе на летнее время?","acceptedAnswer":{"@type":"Answer","text":"По возможности избегайте планирования на даты перехода. Если это невозможно — явно подтверждайте локальное время и включайте идентификаторы часовых поясов (IANA) в приглашениях."}},
+          {"@type":"Question","name":"Нужно ли показывать несколько локальных времён в приглашениях?","acceptedAnswer":{"@type":"Answer","text":"Да — показ организаторского и локального времени участников снижает вероятность ошибок, особенно в распределённых командах."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">world-clock — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Мировые часы — сравнение часовых поясов и уверенное планирование</h1>
+
+      <div class="author" role="articleauthor" aria-label="Автор статьи">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — специалист по распределённой работе и планированию</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 12–16 мин</div>
+        </div>
+      </div>
+
+      <p class="lead">Планирование в разных часовых поясах часто приводит к путанице. Надёжные мировые часы помогают сравнивать локальное время, избегать проблем с переходом на летнее время и чётко коммуницировать время встреч. В этом руководстве — основы по часовым поясам, рецепты планирования встреч, ловушки DST, использование IANA‑идентификаторов, советы по автоматизации и шаблоны для обмена, которые снижают количество ошибок.</p>
+
+      <nav class="toc" aria-label="Оглавление">
+        <a href="#basics">Основы часовых поясов</a> ·
+        <a href="#dst">Переходы на летнее время</a> ·
+        <a href="#planning">Рецепты планирования встреч</a> ·
+        <a href="#naming">IANA‑идентификаторы и понятные метки</a> ·
+        <a href="#automation">Автоматизация и советы для календаря</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="basics" class="section" aria-labelledby="basics-title">
+        <h2 id="basics-title">Основы — смещения, UTC и локальное время</h2>
+        <p>Часовые пояса определяются относительно Координированного всемирного времени (UTC) через смещения (например, UTC+1). При кросс‑зонном планировании всегда указывайте и локальное время, и зону (или смещение) для ясности.</p>
+
+        <ul>
+          <li><strong>Ссылка на UTC:</strong> используйте UTC для технической координации, чтобы избежать локальной неоднозначности.</li>
+          <li><strong>Локальные человеческие времена:</strong> в приглашениях предпочтительнее показывать локальное время получателя — указывайте одновременно время организатора и участников.</li>
+          <li><strong>24‑часовой vs 12‑часовой формат:</strong> используйте формат, который понятен вашей аудитории — 24‑часовой формат снижает путаницу AM/PM.</li>
+        </ul>
+      </section>
+
+      <section id="dst" class="section" aria-labelledby="dst-title">
+        <h2 id="dst-title">Переходы на летнее/зимнее время — распространённые проблемы</h2>
+        <p>Переходы на летнее/зимнее время изменяют локальные смещения и часто приводят к ошибкам планирования, особенно вблизи дат перехода. По возможности избегайте планирования регулярных событий на такие дни и всегда включайте идентификаторы часовых поясов в приглашения.</p>
+
+        <h3>Практические правила</h3>
+        <ul>
+          <li>Не планируйте критические дедлайны или кросс‑зонные встречи в дни перехода на DST.</li>
+          <li>Явно указывайте зону (например, "09:00 America/Los_Angeles (PDT)") вместо неоднозначных локальных названий.</li>
+          <li>При подтверждении со стороны участников показывайте их локальное время и UTC‑метку как окончательный референс.</li>
+        </ul>
+      </section>
+
+      <section id="planning" class="section" aria-labelledby="planning-title">
+        <h2 id="planning-title">Рецепты планирования — минимизируем трение</h2>
+        <p>Используйте мировые часы, чтобы выбирать справедливые слоты и ясно сообщать время.</p>
+
+        <div class="recipe" aria-labelledby="small-meeting">
+          <strong id="small-meeting">Небольшая распределённая команда — 30‑минутная встреча</strong>
+          <ol>
+            <li>Соберите предпочтительные окна участников (утро/день локально).</li>
+            <li>Покажите в мировых часах каждый кандидат‑слот в локальном времени участников.</li>
+            <li>Предложите 2–3 варианта и быстро финализируйте; включите в приглашение локальное время организатора и участников.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="global">
+          <strong id="global">Глобальный town‑hall — минимизируем неудобства</strong>
+          <ol>
+            <li>Выберите окно, которое избегает крайнего раннего или позднего времени для большинства; при регулярных событиях чередуйте время, чтобы распределить неудобства.</li>
+            <li>Записывайте и делитесь записью для тех, кто не может присутствовать вживую.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="naming" class="section" aria-labelledby="naming-title">
+        <h2 id="naming-title">Используйте IANA‑идентификаторы и понятные метки</h2>
+        <p>IANA‑имена зон (например, Europe/London, America/New_York) однозначны и учитывают правила DST. Включайте в сообщения и приглашения как читаемую метку, так и IANA‑идентификатор или UTC‑смещение.</p>
+
+        <pre class="template">Пример строки приглашения:
+Meeting: Project sync
+Time: 2025-11-30 09:00 America/Los_Angeles (UTC-8) — 17:00 Europe/London (UTC+0)
+Agenda: ...</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Автоматизация и советы для календаря</h2>
+        <p>Сделайте планирование предсказуемым с помощью автоматизации и явных правил работы с календарём.</p>
+
+        <ul>
+          <li><strong>Указывайте часовой пояс события:</strong> в метаданных события указывайте часовой пояс организатора, чтобы календари участников правильно конвертировали время.</li>
+          <li><strong>Используйте ссылки с учётом зон:</strong> вставляйте локальные времена ключевых участников в описание события.</li>
+          <li><strong>Применяйте инструменты для планирования:</strong> используйте сервисы, которые предлагают оптимальные окна с учётом часовых поясов и рабочего времени участников.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Что делать, если участники видят разное время?<br><strong>Ответ:</strong> Подтвердите часовой пояс события и укажите UTC‑время в приглашении. Попросите участников открыть детали события в календарном приложении — там время автоматически конвертируется.</p>
+
+          <p><strong>Вопрос:</strong> Всегда ли планировать в UTC?<br><strong>Ответ:</strong> UTC хорош для систем и автоматизации, но для людей показывайте локальное время, а UTC используйте как резервный вариант. Люди проще воспринимают локальное время, а UTC устраняет неоднозначность в техническом контексте.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/world-clock-ru.html">Открыть инструмент «Мировые часы»</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA — список часовых поясов</a></li>
+          <li><a href="https://timeanddate.com" target="_blank" rel="noopener">timeanddate.com — конвертации и информация по DST</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/world-clock-ru.html" class="cta" aria-label="Открыть Мировые часы">Открыть Мировые часы</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Прочитайте нашу <a href="/ru/privacy/">Политику конфиденциальности</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/world-clock-ru.html" class="return-to-tool" id="returnToToolWorldClock" aria-label="Вернуться к Мировым часам">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К Мировым часам</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWorldClock');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

@@ -1,18 +1,228 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>stopwatch — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for stopwatch guide (de)">
+  <meta charset="utf-8" />
+  <title>Stoppuhr — Dauer, Intervalle & Fortschritt messen | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Umfassender Leitfaden zur Verwendung einer Stoppuhr für Produktivität, Training, Experimente und Meetings. Enthält Timing‑Muster, Best Practices für Runden, Hinweise zur Genauigkeit und Fehlerbehebung." />
+  <link rel="canonical" href="https://timerhaven.com/de/stopwatch/stopwatch-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Stoppuhr effektiv nutzen",
+        "description":"Starten, pausieren, Runden erfassen und verstrichene Zeit für Experimente, Workouts, Meetings und Produktivitätsaufgaben messen. Diese Anleitung behandelt Workflows, Runden‑Best Practices, Datenerfassung, Genauigkeits‑Hinweise und Troubleshooting.",
+        "image":"https://timerhaven.com/assets/images/stopwatch-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Stoppuhr (TimerHaven)","Notizbuch oder Tabellenkalkulation","Optional: Herzfrequenzmesser für Fitnessanwendungen"],
+        "step":[
+          {"@type":"HowToStep","name":"Ziel festlegen","text":"Bestimmen Sie, was Sie messen (Dauer einer Aufgabe, Intervalle, time‑to‑complete)."},
+          {"@type":"HowToStep","name":"Starten und Runden erfassen","text":"Starten Sie die Stoppuhr und drücken Sie bei definierten Checkpoints Lap; beschriften oder exportieren Sie Runden bei Bedarf."},
+          {"@type":"HowToStep","name":"Überprüfen und analysieren","text":"Sammeln Sie Runden‑Daten in einer Tabelle und berechnen Sie Mittelwerte, Bestzeiten und Varianz, um Leistung zu verstehen."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Läuft die Stoppuhr weiter, wenn ich die Registerkarte wechsle?","acceptedAnswer":{"@type":"Answer","text":"Ja — eine gute Stoppuhr berechnet verstrichene Zeit anhand von Zeitstempeln (Start + jetzt), sodass die Messung auch bei Hintergrund‑Tabs korrekt bleibt. Manche Browser drosseln nur die UI‑Aktualisierung."}},
+          {"@type":"Question","name":"Wie protokolliere ich Runden?","acceptedAnswer":{"@type":"Answer","text":"Drücken Sie Lap, um die aktuelle verstrichene Zeit zu erfassen. Exportieren oder kopieren Sie die Zeiten für spätere Auswertung."}},
+          {"@type":"Question","name":"Ist die Stoppuhr für Experimente präzise genug?","acceptedAnswer":{"@type":"Answer","text":"Für viele Produktivitäts‑ und Trainingszwecke ja. Für hochpräzise wissenschaftliche Messungen sollten Sie jedoch spezielle Hardware oder native Anwendungen mit Echtzeitgarantien verwenden."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">stopwatch — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Stoppuhr — Verstrichene Zeit, Intervalle & Fortschritt messen</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Produktivität & Messung</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 10–15 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Eine Stoppuhr ist das einfachste Zeitmessinstrument, ihre Einsatzmöglichkeiten sind aber vielfältig: Aufgabenlaufzeiten messen, Intervalle beim Training aufzeichnen, Experimentlaufzeiten dokumentieren oder Meeting‑Abschnitte timen. Dieser Leitfaden erklärt praktische Workflows, Best Practices für Runden, Datenerfassung, Genauigkeitsgrenzen und wie Sie Stoppuhrdaten zur Leistungsverbesserung nutzen.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#when">Wann eine Stoppuhr sinnvoll ist</a>
+        <a href="#start">Start / Pause / Lap — Grundlagen</a>
+        <a href="#workflows">Praktische Workflows</a>
+        <a href="#data">Rundendaten sammeln & analysieren</a>
+        <a href="#precision">Genauigkeit & Umgebungs‑Hinweise</a>
+        <a href="#integration">Integrationen & Exporte</a>
+        <a href="#troubleshoot">Fehlerbehebung</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="when" class="section" aria-labelledby="when-title">
+        <h2 id="when-title">Wann eine Stoppuhr sinnvoll ist</h2>
+        <p>Stoppuhren sind ideal, wenn Sie verstrichene Zeit für eine abgegrenzte Aktivität messen möchten. Häufige Szenarien:</p>
+        <ul>
+          <li><strong>Produktivitäts‑Experimente:</strong> messen, wie lange eine Aufgabe tatsächlich dauert im Vergleich zur Schätzung.</li>
+          <li><strong>Training & Intervalle:</strong> Runden‑Splits beim Laufen, Sets oder Workouts erfassen.</li>
+          <li><strong>Usability‑Tests & Experimente:</strong> time‑to‑complete für Benchmarks messen.</li>
+          <li><strong>Meetings:</strong> Agendapunkte timen und faire Redezeiten sicherstellen.</li>
+        </ul>
+      </section>
+
+      <section id="start" class="section" aria-labelledby="start-title">
+        <h2 id="start-title">Start, Pause & Lap — wichtige Grundlagen</h2>
+        <p>Moderne Web‑Stoppuhren basieren üblicherweise auf Zeitstempeln, sodass sie auch bei UI‑Throttling korrekt bleiben. Wichtige Konzepte:</p>
+        <ul>
+          <li><strong>Start:</strong> Start‑Zeitstempel erfassen (Date.now()).</li>
+          <li><strong>Verstrichene Zeit:</strong> jetzt − Start berechnen (plus ggf. bereits angesammelte Zeit nach Pausen).</li>
+          <li><strong>Pause/Resume:</strong> bei Pause akkumulierte Zeit speichern; beim Fortsetzen Start = jetzt − akkumulierte.</li>
+          <li><strong>Lap:</strong> aktuellen verstrichenen Wert als Round‑Split speichern — ggf. zwischen kumulativen Splits und Lap‑Dauern unterscheiden.</li>
+        </ul>
+
+        <p class="small-note">Zwei Lap‑Modi: (A) kumulative Splits (Zeit seit Beginn) und (B) Lap‑Dauern (Zeit seit vorheriger Runde). Legen Sie vor Messbeginn fest, welche Variante Sie benötigen.</p>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Praktische Workflows mit der Stoppuhr</h2>
+
+        <div class="recipe" aria-labelledby="timing-task">
+          <strong id="timing-task">Time‑to‑complete (Aufgabenschätzung)</strong>
+          <ol>
+            <li>Ziel festlegen: z. B. „Intro schreiben — Entwurf“.</li>
+            <li>Stoppuhr beim Start aktivieren; während der Messung nicht multitasken.</li>
+            <li>Mit Lap sinnvolle Checkpoints markieren (Outline fertig, erster Absatz fertig).</li>
+            <li>Am Ende Gesamtzeit in Task‑Notiz oder Kalender vermerken.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="interval-training">
+          <strong id="interval-training">Intervalltraining (wiederholbare Zyklen)</strong>
+          <ol>
+            <li>Für jede Runde Lap drücken; bei Pausen Pause verwenden, um Ruhezeit separat zu erfassen.</li>
+            <li>Runden exportieren, um Mittelwert, Bestzeit und Varianz zu berechnen und Fortschritt zu verfolgen.</li>
+            <li>Konsequente Warm‑up/Cool‑down‑Regeln nutzen, damit Sessions vergleichbar bleiben.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Tipp: Für wiederholbare Workflows ein kurzes Pre‑Start‑Ritual (Material öffnen, Haltung einnehmen) einhalten, damit die Messung vergleichbar ist.</p>
+      </section>
+
+      <section id="data" class="section" aria-labelledby="data-title">
+        <h2 id="data-title">Rundendaten sammeln und analysieren</h2>
+        <p>Roh‑Rundendaten sind am nützlichsten, wenn sie aggregiert werden. Exportieren oder kopieren Sie Runden in eine Tabelle und berechnen Sie einfache Kennzahlen:</p>
+        <ul>
+          <li><strong>Durchschnitt (Mittelwert)</strong> — typische Zeit pro Runde/Iteration.</li>
+          <li><strong>Median</strong> — robust gegenüber Ausreißern.</li>
+          <li><strong>Std. Abweichung / Varianz</strong> — misst Konstanz.</li>
+          <li><strong>Best / Worst</strong> — Best‑ und Schlechtzeiten dokumentieren.</li>
+        </ul>
+
+        <pre class="template">CSV‑Spalten: index,split_seconds,lap_seconds,timestamp
+1,30.12,30.12,2025-11-24T10:02:12Z</pre>
+
+        <p>Nutzen Sie diese Kennzahlen in Wochenreviews, um Trends zu erkennen und Prozessänderungen auf ihre Wirkung hin zu bewerten.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Genauigkeit & Umgebungs‑Hinweise</h2>
+        <p>Browser‑Stoppuhren sind für Alltagszwecke ausreichend, kennen Sie jedoch die Grenzen:</p>
+        <ul>
+          <li><strong>UI‑Throttling:</strong> Hintergrund‑Tabs können die UI‑Aktualisierung drosseln, nicht aber die Zeitrechnung, wenn diese auf Zeitstempeln basiert.</li>
+          <li><strong>Systemschlaf:</strong> Bei Schlaf des Geräts läuft die Wanduhr weiter — berücksichtigen Sie dies bei der Auswertung.</li>
+          <li><strong>Hohe Präzision:</strong> Für wissenschaftliche oder AV‑Synchronisation nutzen Sie spezialisierte Tools (Hardware‑Timer, DAW‑Timecode, NTP‑sync).</li>
+        </ul>
+      </section>
+
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Integrationen & Exporte</h2>
+        <p>Gute Stoppuhr‑Tools erlauben das Kopieren oder Exportieren von Rundenlisten. Integrationsideen:</p>
+        <ul>
+          <li><strong>Task‑Logging:</strong> verstrichene Zeit an Tasks oder Kalendereinträge anhängen.</li>
+          <li><strong>CSV‑Export:</strong> Runden in Tabellen importieren für Trendanalysen.</li>
+          <li><strong>API / Webhooks:</strong> Timing‑Ereignisse an ein Backend senden, um Sitzungsverläufe für Dashboards zu speichern.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Fehlerbehebung</h2>
+        <ul>
+          <li><strong>Timer wird nicht in Echtzeit angezeigt:</strong> Manche Browser drosseln Repaints; verlassen Sie sich auf den Endwert der verstrichenen Zeit statt auf jeden Tick.</li>
+          <li><strong>Runden nach Reload verschwunden:</strong> Nutzen Sie Export oder Werkzeuge, die Runden in localStorage persistieren, wenn dauerhafte Aufzeichnungen nötig sind.</li>
+          <li><strong>Falsche Zeitstempel‑Zeitzone:</strong> Speichern Sie Zeitstempel idealerweise als ISO‑UTC, um Verwirrung bei der Aggregation über Geräte hinweg zu vermeiden.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Kann ich mehrere parallele Aufgaben mit einer Stoppuhr messen?<br><strong>A:</strong> Mit eindeutiger Lap‑Semantik möglich (jede Runde labeln), aber für parallele Tasks eignen sich mehrere Timer oder ein Task‑Timer mit gleichzeitigen Timern besser.</p>
+
+          <p><strong>F:</strong> Wie sollte ich Runden beschriften?<br><strong>A:</strong> Verwenden Sie kurze, konsistente Labels (z. B. "Warmup", "Rep 1", "Review"). Falls das Tool keine Labels unterstützt, notieren Sie in Ihrem Tasksystem einen Zeitstempel zusammen mit dem Rundenindex.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/stopwatch-de.html">Stoppuhr‑Tool öffnen</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Stopwatch" target="_blank" rel="noopener">Stoppuhr — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/stopwatch-de.html" class="cta" aria-label="Stoppuhr‑Tool öffnen">Stoppuhr‑Tool öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktieren Sie uns unter <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/de/privacy/">Datenschutzerklärung</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/stopwatch-de.html" class="return-to-tool" id="returnToToolStopwatch" aria-label="Zurück zur Stoppuhr">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zur Stoppuhr</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolStopwatch');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

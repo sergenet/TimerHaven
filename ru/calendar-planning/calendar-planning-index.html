@@ -2,10 +2,11 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>Планирование календаря — Блокируйте время для глубокой работы | TimerHaven</title>
+  <title>Планирование в календаре — резервируйте время для фокуса | TimerHaven</title>
+  <meta name="description" content="Планируйте глубокую работу и блоки концентрации с помощью Pomodoro и Таймера задач. Практические рецепты, шаблон ICS, советы по измерению, координация команды и отладка.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Практическое руководство по планированию фокусных блоков, Pomodoro‑серий и недельных обзоров. Шаблоны .ics, метрики и командные шаблоны для TimerHaven.">
-  <link rel="canonical" href="https://timerhaven.com/ru/calendar-planning-index.html">
+  <link rel="canonical" href="https://timerhaven.com/ru/calendar-planning/calendar-planning-index.html">
+  <meta name="author" content="Serge Shammas">
 
   <script type="application/ld+json">
   {
@@ -13,188 +14,234 @@
     "@graph":[
       {
         "@type":"HowTo",
-        "name":"Планирование глубокой работы с помощью календаря",
-        "description":"Пошаговый план: блокировать время, добавлять контекст, запускать Pomodoro/90‑минутные блоки и анализировать результаты.",
+        "name":"Планирование глубокой работы с помощью блоков в календаре",
+        "description":"Пошаговый рабочий процесс для планирования Pomodoro или более длинных блоков фокуса в календаре, сохранения контекста и проверки результатов для защиты концентрации и измерения прогресса.",
         "image":"https://timerhaven.com/assets/images/calendar-snapshot.png",
         "totalTime":"PT3H",
-        "supply":["Календарь (TimerHaven или другой с .ics)","Pomodoro Timer","Заметки / чеклист"],
+        "supply":["Календарное приложение","Pomodoro‑таймер (TimerHaven)","Таймер задач","Заметки"],
         "step":[
-          {"@type":"HowToStep","name":"Определите результат","text":"Запишите в заголовке, что вы хотите получить (например, 'Подготовить резюме — 400 слов')."},
-          {"@type":"HowToStep","name":"Добавьте контекст","text":"В описании события вставьте 2–4 пункта с ссылками, файлами или чеклистом."},
-          {"@type":"HowToStep","name":"Отметьте как «занят» и настройте напоминания","text":"Установите статус события 'занят' и добавьте напоминания 24ч/30м; при необходимости — 5м для подготовки."},
-          {"@type":"HowToStep","name":"Выполните и зафиксируйте","text":"Проведите Pomodoro или 90‑120мин блок, учитывайте прерывания и сохраните краткий результат в описании события."}
+          {"@type":"HowToStep","name":"Выберите чёткий результат","text":"Выберите одно конкретное достижение для блока. Запишите его в виде заявления о результате (например: «Черновик итогового резюме — 400 слов»)."},
+          {"@type":"HowToStep","name":"Заблокируйте время и прикрепите контекст","text":"Создайте событие, установите статус 'Занят', вставьте краткий чек‑лист или заметку в описание, чтобы можно было начать сразу."},
+          {"@type":"HowToStep","name":"Проводите концентрированные интервалы","text":"Запускайте Pomodoro или более длинные интервалы внутри блока, фиксируйте перебои и используйте перерывы для быстрых заметок."},
+          {"@type":"HowToStep","name":"Проведите обзор и дальнейшие действия","text":"После блока обновите заметки/Таймер задач, зафиксируйте результаты и решите последующие шаги."}
         ]
       },
       {
-        "@type":"Article",
-        "headline":"Планирование календаря — защищайте время для важной работы",
-        "image":["https://timerhaven.com/assets/images/calendar-snapshot.png"],
-        "author":{"@type":"Person","name":"Serge Shammas"},
-        "publisher":{"@type":"Organization","name":"TimerHaven","logo":{"@type":"ImageObject","url":"https://timerhaven.com/assets/images/timerhaven-logo.png"}},
-        "datePublished":"2025-10-28",
-        "dateModified":"2025-11-23",
-        "description":"Практическое руководство и шаблоны для превращения календаря в инструмент защиты времени и улучшения планирования."
-      }
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Какую длительность блоков выбрать для глубокой работы?","acceptedAnswer":{"@type":"Answer","text":"90–120 минут эффективно для многих когнитивных задач. Для продолжительной творческой работы рассмотрите 2‑часовые блоки с ясным ритуалом начала и хорошим контекстом."}},
+          {"@type":"Question","name":"Отображать ли блоки как 'Занят'?","acceptedAnswer":{"@type":"Answer","text":"Да — пометка 'Занят' сигнализирует коллегам, что вы недоступны, и снижает случайные прерывания."}},
+          {"@type":"Question","name":"Как измерять эффективность планирования в календаре?","acceptedAnswer":{"@type":"Answer","text":"Отслеживайте конверсию заблокированного времени в выполненные результаты и регистрируйте перебои через Таймер задач. Еженедельный обзор метрик (выполненные результаты, перебои, время выполнения) покажет прогресс."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
     ]
   }
   </script>
 
   <style>
-    :root{--brand:#0b63a0;--muted:#6b7c89}
-    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fbfeff;color:#102a43;margin:0;padding:2rem;line-height:1.6;}
-    .container{max-width:920px;margin:0 auto}
-    .card{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
-    h1{color:var(--brand);margin-top:0;font-size:1.9rem}
-    .lead{font-size:1.05rem;color:#334;margin-bottom:.6rem}
-    .author{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
-    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:1px solid rgba(15,23,42,0.06)}
-    .meta{color:var(--muted);font-size:.95rem}
-    nav.toc{margin:.75rem 0;padding:.4rem 0;border-left:3px solid #eef5fb}
-    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600}
-    .section{margin-top:1.2rem}
-    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:.9rem;border-radius:8px;margin-bottom:.9rem}
-    .workflow{background:#f0fbff;border-left:4px solid #bfe7ff;padding:.9rem;border-radius:8px;margin-bottom:.9rem}
-    .cta{display:inline-block;padding:.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none}
-    pre.template{background:#f3f7fb;padding:.75rem;border-radius:6px;overflow:auto}
-    .muted{color:var(--muted)}
-    .small-note{font-size:.95rem;color:#51606b}
-    table.sample{border-collapse:collapse;margin-top:.5rem;width:100%;max-width:680px}
-    table.sample td, table.sample th{border:1px solid #eef5fb;padding:.35rem .6rem;text-align:left}
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    table.sample{border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:740px;}
+    table.sample td, table.sample th{border:1px solid #eef5fb;padding:0.35rem 0.6rem;text-align:left;}
+
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
+    }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px; }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
   </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <h1 id="title">Планирование календаря — Блокируйте время для глубокой работы</h1>
+      <h1 id="title">Планирование в календаре — резервируйте время для фокуса и продуктивности</h1>
 
-      <div class="author" role="articleauthor" aria-label="Автор">
-        <img src="https://timerhaven.com/assets/images/authors/serge-shammas-200.jpg"
-          srcset="https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg 2x"
-          width="56" height="56" alt="Фото Serge Shammas" loading="lazy"
-          onerror="this.onerror=null;this.src='https://timerhaven.com/assets/images/authors/avatar-placeholder.png';">
+      <div class="author" role="articleauthor" aria-label="Автор статьи">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
         <div>
-          <div><strong>Автор: Serge Shammas</strong></div>
-          <div class="meta">Опубликовано: 2025-10-28 · Обновлено: 2025-11-23</div>
+          <div><strong>Автор: Сергей Шаммас</strong> — автор по продуктивности и исследователь UX</div>
+          <div class="meta">Опубликовано: 2025-10-28 · Обновлено: 2025-11-21 · Время чтения: 10–15 мин</div>
         </div>
       </div>
 
-      <p class="lead">Блокирование времени в календаре — самый надежный способ защитить фокус. Ниже — рабочие рецепты (Pomodoro, 90–120 мин), шаблоны .ics, измерения и практики для командной работы.</p>
+      <p class="lead">Блокирование времени в календаре — лучшая защита для сосредоточенной работы. Это руководство содержит практические рецепты для блоков Pomodoro, глубоких сессий 90–120 минут, методик еженедельного планирования, советов по измерению и схем координации команды, чтобы ваш календарь стал инструментом продуктивности, а не просто расписанием.</p>
 
       <nav class="toc" aria-label="Оглавление">
-        <a href="#why">Почему календарь</a>
-        <a href="#plan">Планирование блоков</a>
-        <a href="#pomodoro">Pomodoro внутри блоков</a>
-        <a href="#deep">Блоки 90–120 мин</a>
-        <a href="#weekly">Еженедельное планирование</a>
-        <a href="#measure">Метрики</a>
+        <a href="#why">Почему календарное планирование работает</a>
+        <a href="#plan">План: блоки, ориентированные на результат</a>
+        <a href="#pomodoro">Серия Pomodoro в календаре</a>
+        <a href="#deep">Глубокие блоки 90–120 минут</a>
+        <a href="#weekly">Рецепт еженедельного планирования</a>
+        <a href="#measure">Измерять и улучшать</a>
         <a href="#team">Координация команды</a>
-        <a href="#ics">Шаблоны .ics</a>
+        <a href="#ics">Шаблон ICS</a>
         <a href="#faq">FAQ</a>
       </nav>
 
-      <section id="why" class="section">
-        <h2>Зачем планировать через календарь</h2>
-        <p>Календарь делает план видимым и уменьшает когнитивную нагрузку. Блоки с контекстом (чеклист, ссылки) позволяют начать работу сразу, без поиска материалов.</p>
-        <p class="small-note">Совет: отмечайте блоки как <em>занят</em>, чтобы снизить вероятность внезапных приглашений.</p>
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Почему календарное планирование работает</h2>
+        <p>
+          Календарь превращает намерения в обязательства: он делает время видимым для вас и других, снижает когнитивную нагрузку памяти и создаёт предсказуемые окна для концентрации. В сочетании с кратким контекстом (заметки/чек‑листы) и измерением (журналы Таймера задач/Pomodoro) блоки календаря становятся инструментом обучения — они показывают, сколько времени занимает работа и где можно улучшиться.
+        </p>
       </section>
 
-      <section id="plan" class="section">
-        <h2>План: создание блоков, дающих результат</h2>
+      <section id="plan" class="section" aria-labelledby="plan-title">
+        <h2 id="plan-title">План: создавайте блоки, ориентированные на результат</h2>
+        <p>
+          При создании блока всегда начинайте с результата, а не с вида работы. Результаты измеримы и уменьшают неоднозначность.
+        </p>
+
         <ul>
-          <li><strong>Цель в заголовке:</strong> оформляйте заголовок как результат (например, "Часть статьи — 1500 слов").</li>
-          <li><strong>Контекст в описании:</strong> вставьте 3 bullets, ссылки и файлы — всё в описании события.</li>
-          <li><strong>Теги и оценка:</strong> добавляйте префикс проекта (ALPHA –) и предполагаемое время.</li>
-          <li><strong>Напоминания:</strong> 24ч и 30м; при необходимости — короткое напоминание перед стартом (5м).</li>
+          <li><strong>Формулировка результата:</strong> «Черновик: итоговое резюме — 400 слов.»</li>
+          <li><strong>Оценка длительности:</strong> Используйте последние данные Таймера задач при наличии; иначе давайте запас.</li>
+          <li><strong>Контекст:</strong> Вставьте 3 пункта чек‑листа и ссылки на ресурсы в описание события, чтобы можно было начать сразу.</li>
+          <li><strong>Видимость:</strong> Пометьте как 'Занят' и при необходимости добавьте краткую заметку в командный канал («В глубокой работе 10:00–12:00 — только срочно»).</li>
         </ul>
+
+        <div class="small-note muted">Подсказка: заложите 10–20% запаса на неизвестные при оценке времени для сложных задач.</div>
       </section>
 
-      <section id="pomodoro" class="section">
-        <h2>Pomodoro‑серии внутри блока</h2>
+      <section id="pomodoro" class="section" aria-labelledby="pomodoro-title">
+        <h2 id="pomodoro-title">Серия Pomodoro в календаре</h2>
+        <p>
+          Pomodoro часто используют как серию внутри календарного блока — либо как отдельные повторяющиеся 25‑минутные события с паузами, либо как одно длинное событие, содержащее несколько Pomodoro. Оба подхода работают; выберите тот, что удобен вашей системе и команде.
+        </p>
+
+        <div class="recipe" aria-labelledby="pomodoro-recipe">
+          <strong id="pomodoro-recipe">Рецепт Pomodoro для календаря (2‑часовой блок)</strong>
+          <ol>
+            <li>Заблокируйте 2 часа с названием‑результатом (напр.: «2× Pomodoro: завершить введение отчёта»).</li>
+            <li>В описании события перечислите два Pomodoro: задачи и контрольные точки.</li>
+            <li>Запустите первый 25‑минутный Pomodoro в TimerHaven и добавьте ID заметки в описание события (вставьте короткую заметку или URL).</li>
+            <li>Используйте 5‑минутные перерывы для одной фразы о прогрессе и растяжки; после 4‑го Pomodoro сделайте длинный перерыв 15–30 минут.</li>
+            <li>После блока добавьте строку с результатом в событие (что выполнено), чтобы событие было кратким журналом.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Если предпочитаете отдельные события, создайте четыре 25‑минутных события и пронумеруйте их (Pomodoro 1/4, Pomodoro 2/4 …), чтобы календарь визуально показывал ритм.</p>
+      </section>
+
+      <section id="deep" class="section" aria-labelledby="deep-title">
+        <h2 id="deep-title">Глубокие блоки 90–120 минут</h2>
+        <p>
+          Для сложной когнитивной работы (архитектура, длинный текст, планирование) более длинные непрерывные блоки работают лучше. Используйте ясный ритуал перед началом и обзор по завершении.
+        </p>
+
         <div class="recipe">
-          <strong>Рецепт — 2‑часовой блок с Pomodoro</strong>
+          <strong>Рецепт Deep Work 90</strong>
           <ol>
-            <li>Заблокируйте 2 часа, опишите цель и 4 чекпоинта.</li>
-            <li>Выполните 4 Pomodoro (25/5), в перерывах делайте краткие заметки в описании.</li>
-            <li>По окончании добавьте одну строку «Результат:» — будет удобным логом в календаре.</li>
+            <li>Заблокируйте 90 минут, укажите результат в названии и прикрепите чек‑лист или ссылки.</li>
+            <li>Выполните 5–10 минут подготовительного ритуала (перечитать бриф, открыть три нужных документа).</li>
+            <li>Работайте весь блок с минимальными необходимыми прерываниями; при срочной помехе зафиксируйте её и продолжите позже.</li>
+            <li>После блока зафиксируйте результат в описании события и оцените прогресс (0–5) для ретроспективы.</li>
           </ol>
         </div>
-        <p class="small-note">Если прерываний много, попробуйте 50/10 — меньше переключений контекста.</p>
+
+        <p>Два преимущества: (1) снижение переключения контекста и (2) удобство измерения результатов при еженедельном обзоре.</p>
       </section>
 
-      <section id="deep" class="section">
-        <h2>Длинные блоки (90–120 минут)</h2>
-        <p>90–120 минут полезны для задач, требующих глубокого погружения. Рекомендации:</p>
-        <ul>
-          <li>Ритуал старта 5–10 минут (прочитать бриф, открыть файлы).</li>
-          <li>Сформулируйте первый микро‑результат.</li>
-          <li>Учтите прерывания и после блока оцените его качество (0–5).</li>
-        </ul>
-      </section>
+      <section id="weekly" class="section" aria-labelledby="weekly-title">
+        <h2 id="weekly-title">Еженедельное планирование — практичный ритуал</h2>
+        <p>
+          Еженедельное планирование связывает ваш календарь с реальностью выполненной работы. Сделайте быстрый обзор заблокированного времени и логов Таймера задач за прошлую неделю, затем распределите Deep‑Work‑блоки следующей недели по реальным данным.
+        </p>
 
-      <section id="weekly" class="section">
-        <h2>Еженедельное планирование — 30–45 минут</h2>
         <ol>
-          <li>Экспортируйте Task Timer за прошлую неделю, чтобы увидеть реальные затраты и типы прерываний.</li>
-          <li>Определите 3 приоритета на следующую неделю и заблокируйте время (утренние слоты лучше подходят для фокуса).</li>
-          <li>Оставьте буфер ~20–30% на встречи и неожиданности.</li>
-          <li>Перенесите незавершенные элементы в новые конкретные блоки с обновленными описаниями.</li>
+          <li>Экспортируйте сессии Таймера задач за прошлую неделю и суммируйте перебои по слотам.</li>
+          <li>Определите три приоритетных результата на следующую неделю и заблокируйте для них время (лучше по утрам или в окне пиковой продуктивности).</li>
+          <li>Оставьте буферные слоты для встреч и ад‑hoc задач — стремитесь к 60–70% планируемой глубокой работы для гибкости.</li>
         </ol>
+
+        <div class="small-note muted">Пример: если задача в среднем занимала 3×25 минут на прошлой неделе, забронируйте один 90‑минутный слот вместо трёх 25‑минутных, чтобы сохранить поток работы.</div>
       </section>
 
-      <section id="measure" class="section">
-        <h2>Метрики и анализ</h2>
-        <p>Базовые метрики для анализа:</p>
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Измерять и улучшать — что отслеживать</h2>
+        <p>
+          Измерение завершает цикл. Отслеживайте несколько простых метрик и проверяйте их еженедельно, чтобы улучшать планирование.
+        </p>
+
+        <h3>Минимально полезные метрики</h3>
         <ul>
-          <li>Запланированные блоки vs завершенные</li>
-          <li>Фактическое время vs оценка</li>
-          <li>Доля прерванных блоков</li>
-          <li>Оценка качества сеанса (0–5)</li>
+          <li><strong>Запланированные блоки</strong> — количество забронированных блоков для глубокой работы.</li>
+          <li><strong>Выполненные блоки</strong> — сколько блоков завершились планируемым результатом.</li>
+          <li><strong>Уровень прерываний</strong> — доля блоков с прерываниями (регистрировать через Таймер задач).</li>
+          <li><strong>Время до завершения</strong> — фактические минуты до завершения vs оценка.</li>
         </ul>
 
-        <h3>Формулы (Google Sheets)</h3>
-        <pre class="template">=AVERAGEIF(ProjectRange,"ALPHA",ActualMinutesRange)
-=MEDIAN(IF(ProjectRange="ALPHA",ActualMinutesRange))  // array‑formula
-=COUNTIFS(ProjectRange,"ALPHA",InterruptedRange,">0") / COUNTIF(ProjectRange,"ALPHA")</pre>
-
-        <p class="small-note">Рекомендуемые столбцы при экспорте: date,event_title,planned_minutes,actual_minutes,interruptions,quality_rating,notes</p>
+        <h3>Простая формула для таблицы</h3>
+        <pre class="template">Columns: date,event_title,planned_minutes,actual_minutes,interruptions,notes
+Calculate:
+Average completion time: =AVERAGE(actual_minutes_range)
+Interruption rate: =COUNTIF(interruptions_range,">0")/COUNTA(interruptions_range)</pre>
       </section>
 
-      <section id="team" class="section">
-        <h2>Координация команды</h2>
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Паттерны координации команды</h2>
         <ul>
-          <li>Договоритесь об общих фокус‑окнах (например, 10:00–12:00).</li>
-          <li>Канал <code>#urgent</code> только для реальных экстренных случаев.</li>
-          <li>Короткие проверки в перерывах вместо новых митингов.</li>
+          <li><strong>Общие окна фокуса:</strong> члены команды договариваются о календарных окнах для синхронной глубокой работы — это снижает чат и встречи в эти периоды.</li>
+          <li><strong>Короткие проверки в перерывах:</strong> используйте 5–10 минут перерыва для быстрых статусов или проблем, вместо полноценной встречи.</li>
+          <li><strong>Уважать 'Занят':</strong> воспринимайте блоки со статусом 'Занят' как реальное рабочее время; разрешайте срочные исключения только при чётких правилах эскалации.</li>
         </ul>
-
-        <div class="workflow">
-          <strong>Шаблон — командный Pomodoro</strong>
-          <ol>
-            <li>Одновременный старт Pomodoro; 25 мин работы, 5 мин перерыв.</li>
-            <li>В перерыве краткие заметки о блокировках; лидер собирает темы для устранения.</li>
-            <li>После 4 циклов — 15 мин обзор и план действий.</li>
-          </ol>
-        </div>
       </section>
 
-      <section id="ics" class="section">
-        <h2>Шаблоны и скачивание .ics</h2>
-        <p class="muted">Скачайте шаблон .ics для импорта в Google/Outlook/Apple Calendar.</p>
-        <p><a href="#" id="downloadIcs" class="cta">Скачать шаблон .ics</a></p>
-
-        <pre class="template" id="icsTemplate" aria-hidden="true">BEGIN:VCALENDAR
+      <section id="ics" class="section" aria-labelledby="ics-title">
+        <h2 id="ics-title">Шаблон ICS — импорт Pomodoro‑блока</h2>
+        <p class="muted">Скачайте и импортируйте этот ICS в большинство календарей как стартовый Pomodoro‑блок.</p>
+        <p><a href="#" id="downloadIcs" class="cta" aria-label="Скачать шаблон ICS">Скачать шаблон ICS</a></p>
+        <pre id="icsTemplate" class="template" aria-hidden="true">BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//TimerHaven//Pomodoro Block Template//RU
 BEGIN:VEVENT
 UID:{{UID}}
 DTSTAMP:{{UTC_NOW}}
-DTSTART:20251110T090000Z
-DTEND:20251110T103000Z
-SUMMARY:Pomodoro Focus — [Цель]
+DTSTART:{{START_UTC}}
+DTEND:{{END_UTC}}
+SUMMARY:Pomodoro Focus — [Результат]
 DESCRIPTION:Checklist:
 - Пункт 1
 - Пункт 2
-Notes: Ссылка на заметки (ID)
+Notes: вставьте здесь URL или ID заметки.
 STATUS:BUSY
 END:VEVENT
 END:VCALENDAR</pre>
@@ -206,7 +253,7 @@ END:VCALENDAR</pre>
             var now = new Date();
             var uid = 'ph-' + Math.floor(Math.random()*900000+100000) + '@timerhaven.com';
             var stamp = now.toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
-            var content = template.replace('{{UID}}', uid).replace('{{UTC_NOW}}', stamp);
+            var content = template.replace('{{UID}}', uid).replace('{{UTC_NOW}}', stamp).replace('{{START_UTC}}','20251110T090000Z').replace('{{END_UTC}}','20251110T103000Z');
             var blob = new Blob([content], {type:'text/calendar;charset=utf-8'});
             var url = URL.createObjectURL(blob);
             var a = document.createElement('a');
@@ -219,61 +266,57 @@ END:VCALENDAR</pre>
         </script>
       </section>
 
-      <section id="troubleshoot" class="section">
-        <h2>Проблемы и быстрые решения</h2>
-        <ul>
-          <li><strong>Частые прерывания:</strong> договоритесь о «тихих» окнах и определите, какие прерывания действительно срочные.</li>
-          <li><strong>Постоянные недо‑оценки:</strong> собирайте две недели реальных данных и используйте медиану для переоценки задач.</li>
-          <li><strong>Митинги, пожирающие время:</strong> ограничьте стандартную длину встречи до 30–45 минут и выделяйте буферы.</li>
-        </ul>
-      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>В:</strong> Нужно ли показывать блоки как 'Занят'?<br><strong>О:</strong> Да — отмечайте блоки фокуса как 'Занят', чтобы сократить количество прерываний и показать доступность.</p>
 
-      <section id="examples" class="section">
-        <h2>Практические примеры</h2>
-        <div class="workflow">
-          <strong>Пример — продакт‑менеджер</strong>
-          <ol>
-            <li>09:00–10:30 — Deep Work: приоритизация roadmap (90 мин)</li>
-            <li>10:30–11:00 — buffer / почта</li>
-            <li>11:00–12:30 — Pomodoro‑спринт: черновик PRD</li>
-          </ol>
-        </div>
+          <p><strong>В:</strong> Как быть с внезапными встречами?<br><strong>О:</strong> Оставляйте 10–20% еженедельного буфера для реактивной работы. Если встреча сдвигает блок, перепланируйте его сразу и запишите причину для анализа.</p>
 
-        <div class="workflow">
-          <strong>Пример — фрилансер</strong>
-          <ol>
-            <li>08:00–09:00 — обзор почты и план</li>
-            <li>09:00–11:00 — оплачиваемый блок для клиента A (2 ч)</li>
-            <li>11:30–12:00 — сохранение заметок и экспорт</li>
-          </ol>
+          <p><strong>В:</strong> Как часто смотреть эффективность планирования?<br><strong>О:</strong> Делайте быструю еженедельную проверку (запланировано vs выполнено) и ежемесячный обзор для выявления трендов.</p>
         </div>
       </section>
 
-      <section id="faq" class="section">
-        <h2>FAQ</h2>
-        <div class="faq">
-          <p><strong>В: Помечать ли блоки как «занят»?</strong><br><strong>О:</strong> Да — это уменьшает количество прерываний и объясняет вашу недоступность.</p>
-          <p><strong>В: Как поделиться блоком?</strong><br><strong>О:</strong> Экспорт .ics и отправка по почте или добавление в общий календарь.</p>
-          <p><strong>В: Можно ли автоматизировать создание блоков?</strong><br><strong>О:</strong> Да — используйте шаблоны или автоматические сценарии/shortcuts.</p>
-        </div>
-      </section>
-
-      <section id="resources" class="section">
-        <h2>Ресурсы</h2>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
         <ul class="muted">
-          <li><a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" target="_blank" rel="noopener">Pomodoro Technique — справка</a></li>
-          <li><a href="https://calendar.google.com" target="_blank" rel="noopener">Google Calendar — импорт .ics</a></li>
+          <li><a href="https://calendar.google.com" target="_blank" rel="noopener">Google Календарь — шаблоны событий и импорт</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Pomodoro_Technique" target="_blank" rel="noopener">Техника Pomodoro — оригинальное описание</a></li>
         </ul>
       </section>
 
-      <p class="muted" style="margin-top:1rem;">Связанные инструменты: <a href="/ru/notes-index.html">Notes</a> · <a href="/ru/pomodoro-index.html">Pomodoro</a> · <a href="/ru/task-timer-index.html">Task Timer</a></p>
+      <p class="muted" style="margin-top:1rem;">Связанные инструменты: <a href="/ru/pomodoro/pomodoro-index.html">Pomodoro</a> · <a href="/ru/notes/notes-index.html">Заметки</a> · <a href="/ru/timer/timer-index.html#startBtn">Таймер задач</a></p>
 
-      <p style="margin-top:1.2rem;"><a href="/calendar-ru.html" class="cta" aria-label="Открыть Календарь">Открыть Календарь</a></p>
+      <p style="margin-top:1.2rem;">
+        <a href="/calendar-ru.html" class="cta" aria-label="Открыть инструмент Календарь">Открыть Календарь</a>
+      </p>
 
-      <footer style="margin-top:1.4rem;color:var(--muted);font-size:.95rem;">
-        <p>Вопросы или предложения: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>.</p>
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Прочтите нашу <a href="/ru/privacy/">Политику конфиденциальности</a>.</p>
       </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Calendar" button (returns to the calendar tool) -->
+  <a href="/calendar-ru.html"
+     class="return-to-tool"
+     id="returnToToolCalendar"
+     aria-label="Вернуться в Календарь">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Вернуться в Календарь</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCalendar');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

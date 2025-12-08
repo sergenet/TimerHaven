@@ -1,18 +1,250 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>countdown — Guide (es)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for countdown guide (es)">
+  <meta charset="utf-8" />
+  <title>Temporizador de cuenta atrás — Planifica plazos y mantente concentrado | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía completa para usar el temporizador de cuenta atrás: planificar plazos, elegir duraciones, flujos de trabajo para reuniones y sesiones de concentración, alertas y resolución de problemas." />
+  <link rel="canonical" href="https://timerhaven.com/es/countdown/countdown-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Usar un temporizador de cuenta atrás de forma eficaz",
+        "description":"Configurar y gestionar temporizadores para plazos, reuniones, sesiones de trabajo concentrado y recordatorios. Esta guía cubre la planificación, patrones prácticos, opciones de notificación y buenas prácticas para maximizar la conciencia del tiempo.",
+        "image":"https://timerhaven.com/assets/images/countdown-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Temporizador de cuenta atrás (TimerHaven)","Calendario o lista de tareas","Notificaciones sonoras en teléfono o equipo"],
+        "step":[
+          {"@type":"HowToStep","name":"Decidir el propósito","text":"Elija si el temporizador es para un plazo próximo, una reunión o una sesión de trabajo concentrado."},
+          {"@type":"HowToStep","name":"Fijar la duración","text":"Introduzca minutos y segundos; para reuniones use minutos completos; para concentración use intervalos consistentes con su flujo de trabajo."},
+          {"@type":"HowToStep","name":"Seleccionar la notificación","text":"Active el pitido o la notificación de escritorio para no perder el final; pruebe el volumen y los permisos."},
+          {"@type":"HowToStep","name":"Ejecutar y revisar","text":"Inicie el temporizador y anote interrupciones; tras la sesión registre seguimientos o tareas pendientes."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"¿El temporizador sigue funcionando si cambio de pestaña?","acceptedAnswer":{"@type":"Answer","text":"Sí — los navegadores modernos mantienen los temporizadores JS mientras la pestaña esté abierta. El enlentecimiento en segundo plano puede afectar la precisión en algunos navegadores, pero el cuenta atrás seguirá descontando."}},
+          {"@type":"Question","name":"¿Puedo configurar temporizadores muy largos?","acceptedAnswer":{"@type":"Answer","text":"Sí — introduzca los minutos que necesite según lo permita la interfaz. Para conteos muy largos, considere registrar la hora de finalización en su calendario también."}},
+          {"@type":"Question","name":"¿Qué opciones de notificación son mejores?","acceptedAnswer":{"@type":"Answer","text":"Use tanto un pitido audible como una notificación de escritorio si es posible. Para reuniones, elija un tono más fuerte; para sesiones de concentración, una campana suave suele ser mejor."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">countdown — Guide (es)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Temporizador de cuenta atrás — Usa los plazos para concentrarte y terminar</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor del artículo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Por Serge Shammas</strong> — escritor sobre productividad e investigador UX</div>
+          <div class="meta">Publicado: 2025-11-24 · Tiempo de lectura: 12–16 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Los temporizadores de cuenta atrás son una herramienta simple pero poderosa para crear urgencia, gestionar reuniones y proteger ventanas cortas de concentración. Esta guía cubre configuraciones prácticas para sesiones de trabajo, reuniones y rutinas personales; la elección de alertas y su nivel de detalle; la integración con calendarios y flujos Pomodoro; y la resolución de problemas de permisos y precisión.</p>
+
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#why">Por qué ayudan los cuenta atrás</a>
+        <a href="#setup">Elegir duración y opciones</a>
+        <a href="#workflows">Flujos de trabajo prácticos</a>
+        <a href="#alerts">Notificaciones y accesibilidad</a>
+        <a href="#integration">Integración con calendario & Pomodoro</a>
+        <a href="#precision">Precisión & throttling en segundo plano</a>
+        <a href="#troubleshoot">Resolución de problemas</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Por qué ayudan los cuenta atrás</h2>
+        <p>Un plazo cambia el comportamiento. Un cuenta atrás visible enfoca la atención al convertir el tiempo abierto en un recurso concreto. Para muchas tareas, un temporizador corto crea una “impulso” que reduce la procrastinación y facilita un punto de parada claro — ideal para el triage de correo, ediciones rápidas o ejercicios temporizados como practicar una presentación.</p>
+
+        <p>Use un cuenta atrás cuando necesite:</p>
+        <ul>
+          <li>Segmentos de trabajo claramente acotados (p. ej. sesiones de 15 minutos).</li>
+          <li>Señales visuales para gestionar reuniones y descansos.</li>
+          <li>Un recordatorio fiable de que se acerca un plazo, para priorizar acciones ahora en vez de más tarde.</li>
+        </ul>
+      </section>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Elegir duración y opciones</h2>
+        <p>Elija la duración con un propósito. Diferentes tareas se benefician de distintas longitudes. Para un primer intento, prefiera una duración ligeramente conservadora y ajústela después de medir el tiempo real necesario.</p>
+
+        <h3>Duraciones comunes y cuándo usarlas</h3>
+        <ul>
+          <li><strong>5–10 minutos:</strong> comprobaciones rápidas, pequeñas tareas de orden o microdescansos.</li>
+          <li><strong>15–30 minutos:</strong> triage de correo, ediciones cortas o ráfagas de aprendizaje concentrado.</li>
+          <li><strong>45–90 minutos:</strong> trabajo concentrado más largo o segmentos de reunión (combine con rituales de preparación).</li>
+          <li><strong>Duraciones personalizadas:</strong> use minutos exactos para ensayos o entrevistas temporizadas (p. ej. 12 o 20 minutos).</li>
+        </ul>
+
+        <h3>Opciones a considerar</h3>
+        <ul>
+          <li><strong>Pitido vs notificación de escritorio:</strong> sonido si no mira la pantalla; notificaciones de escritorio para trabajo silencioso con indicación visual.</li>
+          <li><strong>Inicio automático del siguiente periodo:</strong> para cadenas de intervalos (p. ej. repetidos) active con cuidado para evitar sorpresas.</li>
+          <li><strong>Pausar/reanudar:</strong> útil para mantener el tiempo restante cuando se produce una interrupción.</li>
+        </ul>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Flujos de trabajo prácticos</h2>
+        <p>A continuación hay flujos de trabajo que asocian necesidades comunes con patrones de temporizador. Úselos como punto de partida y adáptelos a su ritmo.</p>
+
+        <div class="recipe" aria-labelledby="email-tidy">
+          <strong id="email-tidy">Triage de correo — 25 minutos</strong>
+          <ol>
+            <li>Fije 25 minutos. Limpie la bandeja de entrada solo de mensajes de alta prioridad.</li>
+            <li>Use los primeros 5 minutos para escanear y marcar; emplee los 20 restantes en resolver o delegar.</li>
+            <li>Al final, archive o posponga los elementos restantes; registre los seguimientos en su sistema de tareas.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="meeting">
+          <strong id="meeting">Reuniones — aviso al final de la agenda</strong>
+          <ol>
+            <li>Establezca un cuenta atrás para los últimos 5 minutos de la reunión para sacar a la superficie acciones y decisiones.</li>
+            <li>Muéstrelo o comparta la pantalla para que todos conozcan el tiempo restante.</li>
+            <li>Use un tono más fuerte al final para que participantes remotos lo noten inmediatamente.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="focus">
+          <strong id="focus">Ejercicio de concentración — 45 minutos</strong>
+          <ol>
+            <li>Reserve 45 minutos y ajuste el cuenta atrás.</li>
+            <li>Haga un ritual corto de preparación (esquema + abrir referencias) de 3–5 minutos.</li>
+            <li>Trabaje sin interrupciones; si ocurre una, anótela y reanude.</li>
+            <li>Al finalizar, registre el progreso y planifique el siguiente paso.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Notificaciones & accesibilidad</h2>
+        <p>Las notificaciones enlazan el temporizador con su comportamiento. Elija modos que encajen con su contexto: oficina, teletrabajo o concentración en silencio.</p>
+
+        <h3>Buenas prácticas</h3>
+        <ul>
+          <li>Active las notificaciones de escritorio en el navegador y pruebe los permisos una vez.</li>
+          <li>Elija un sonido audible pero no sobresaltante para uso frecuente; reserve tonos más fuertes para plazos críticos.</li>
+          <li>Para accesibilidad: asegure buen contraste visual del cuenta atrás y considere la vibración en móviles si está disponible.</li>
+        </ul>
+      </section>
+
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Integración con calendario & Pomodoro</h2>
+        <p>Los cuenta atrás son más potentes cuando se usan junto a un plan. Úselos con bloques de calendario o secuencias Pomodoro para que la medición del tiempo se relacione con resultados.</p>
+
+        <ul>
+          <li><strong>Marcadores en el calendario:</strong> añada la hora de fin planificada al evento para que los participantes sepan cuándo espera terminar.</li>
+          <li><strong>Encadenamiento Pomodoro:</strong> utilice cuenta atrás para duraciones personalizadas (p. ej. 40/10) y registre los ciclos completados en su registro de tareas.</li>
+          <li><strong>Preparación de reunión:</strong> un breve cuenta atrás antes de que termine la reunión le permite cambiar de contexto y resumir decisiones eficazmente.</li>
+        </ul>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Precisión & throttling en segundo plano</h2>
+        <p>Los temporizadores en navegadores suelen ser precisos para usos de usuario, pero pueden verse afectados por el throttling cuando una pestaña no está visible. Si la precisión es crítica (p. ej. eventos en directo), considere enfoques complementarios:</p>
+
+        <ul>
+          <li>Use notificaciones del sistema o una app de alarma como señal redundante.</li>
+          <li>Mantenga la pestaña abierta y visible durante cuentas críticas, o utilice una app nativa para temporización ultra precisa.</li>
+          <li>Para cuentas largas, establezca una hora de fin absoluta (y opcionalmente añada un evento en el calendario) para tener una referencia independiente del temporizador de la página.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Resolución de problemas</h2>
+        <ul>
+          <li><strong>Notificaciones bloqueadas:</strong> autorice las notificaciones en la configuración del sitio (Configuración del sitio → Notificaciones).</li>
+          <li><strong>Sonido no audible:</strong> compruebe el volumen del sistema y permita reproducción automática si la web lo necesita; algunos navegadores silencia el audio hasta la interacción del usuario.</li>
+          <li><strong>El temporizador parece pausado:</strong> mantenga la pestaña abierta; el throttling puede reducir la frecuencia de los "ticks" pero no tiene por qué romper el cálculo de la hora de fin.</li>
+          <li><strong>Problemas en móvil:</strong> los navegadores móviles pueden suspender páginas en segundo plano; considere usar un recordatorio nativo o el calendario como backup.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Preguntas frecuentes</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ¿Puedo usar cuenta atrás para recordatorios recurrentes?<br><strong>R:</strong> Para recordatorios recurrentes, use eventos de calendario o recordatorios de tareas. El Temporizador de cuenta atrás es ideal para sesiones inmediatas y puntuales.</p>
+
+          <p><strong>P:</strong> ¿El temporizador me alertará si mi pantalla está bloqueada?<br><strong>R:</strong> Las pestañas pueden suspenderse si el dispositivo entra en reposo. Para alertas con pantalla bloqueada, use una alarma del dispositivo o una notificación del calendario.</p>
+
+          <p><strong>P:</strong> ¿Puedo fijar la duración en horas?<br><strong>R:</strong> Sí — introduzca los minutos equivalentes (p. ej. 120 minutos para 2 horas) o use un flujo de trabajo con hora de finalización absoluta junto con su calendario.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Recursos</h2>
+        <ul class="muted">
+          <li><a href="/countdown-es.html">Abrir la herramienta Temporizador</a></li>
+          <li><a href="https://es.wikipedia.org/wiki/Cuenta_regresiva" target="_blank" rel="noopener">Cuenta regresiva — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/countdown-es.html" class="cta" aria-label="Abrir Temporizador de cuenta atrás">Abrir Temporizador</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas o comentarios? Contáctenos en <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lea nuestra <a href="/es/privacy/">Política de privacidad</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Botón flotante "Volver a la herramienta" -->
+  <a href="https://timerhaven.com/countdown-es.html" class="return-to-tool" id="returnToToolCountdown" aria-label="Volver al Temporizador de cuenta atrás">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver al Temporizador</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCountdown');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

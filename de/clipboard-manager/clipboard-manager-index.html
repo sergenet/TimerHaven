@@ -1,18 +1,278 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>clipboard-manager — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for clipboard-manager guide (de)">
+  <meta charset="utf-8" />
+  <title>Zwischenablage‑Manager — Snippets speichern & wiederverwenden | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Praktischer Leitfaden für den Zwischenablage‑Manager: schnelle Capture‑Workflows, Organisation, Export/Import, Tastenkürzel, Sicherheitsrichtlinien und Team‑Nutzung." />
+  <link rel="canonical" href="https://timerhaven.com/de/clipboard-manager/clipboard-manager-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Effektives Zwischenablagen‑Management",
+        "description":"Speichern, organisieren und wiederverwenden Sie kurze Text‑Snippets mit einem lokalen Zwischenablage‑Manager. Dieses HowTo beschreibt Capture‑Workflows, Backups, Tastenkürzel und Datenschutzaspekte.",
+        "image":"https://timerhaven.com/assets/images/clipboard-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Zwischenablage‑Manager (lokal)","Browser","Notizen","Task Timer"],
+        "step":[
+          {"@type":"HowToStep","name":"Schnell erfassen","text":"Fügen Sie das Snippet in den Manager ein und speichern Sie es mit einem optionalen Tag oder Titel."},
+          {"@type":"HowToStep","name":"Organisieren","text":"Gruppieren Sie Clips mit Tags oder Namenskonventionen (projekt:thema). Nutzen Sie die Suche zur schnellen Auffindbarkeit."},
+          {"@type":"HowToStep","name":"Wiederverwenden","text":"Kopieren Sie Clips in das aktive Dokument oder fügen Sie sie über die Manager‑Controls ein. Verwenden Sie Tastenkürzel für Geschwindigkeit."},
+          {"@type":"HowToStep","name":"Sichern","text":"Exportieren Sie Clips als JSON zur Sicherung; importieren Sie zur Wiederherstellung oder Übertragung auf ein anderes Gerät."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Wo werden Clips gespeichert?","acceptedAnswer":{"@type":"Answer","text":"Lokal im Browser (localStorage). Sie verlassen Ihr Gerät nicht, es sei denn, Sie exportieren sie."}},
+          {"@type":"Question","name":"Wie sichere oder transferiere ich Clips?","acceptedAnswer":{"@type":"Answer","text":"Nutzen Sie die Export‑Funktion (JSON) und importieren Sie die Datei auf dem Zielgerät."}},
+          {"@type":"Question","name":"Sind Zwischenablage‑Manager sicher?","acceptedAnswer":{"@type":"Answer","text":"Lokale Manager sind vergleichsweise sicher; speichern Sie keine sensiblen Geheimnisse im Klartext."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    table.sample{border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:740px;}
+    table.sample td, table.sample th{border:1px solid #eef5fb;padding:0.35rem 0.6rem;text-align:left;}
+    /* Floating return-to-tool button (shared pattern used across guides) */
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
+    }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      font-size:16px;
+    }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">clipboard-manager — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Zwischenablage‑Manager — Snippets speichern & wiederverwenden</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Produktivitätsautor und UX‑Forscher</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 10–14 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Ein leichter Zwischenablage‑Manager hilft, kleine, wiederverwendbare Textstücke (E‑Mail‑Vorlagen, Code‑Snippets, IDs) zu speichern, damit Sie sie schnell einfügen können. Dieser Leitfaden beschreibt Capture‑Workflows, Organisation, Backups, Tastenkürzel, Datenschutz und Team‑Nutzung.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#why">Warum ein Manager</a>
+        <a href="#capture">Capture</a>
+        <a href="#organize">Organisieren</a>
+        <a href="#reuse">Wiederverwenden</a>
+        <a href="#backup">Backup</a>
+        <a href="#security">Sicherheit</a>
+        <a href="#team">Team</a>
+        <a href="#troubleshoot">Fehlerbehebung</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section">
+        <h2>Warum ein Zwischenablage‑Manager wichtig ist</h2>
+        <p>Moderne Arbeit wiederholt viele kurze Texte über Anwendungen hinweg. Ein Manager reduziert Reibung, verringert Fehler und speichert Kontext.</p>
+        <ul>
+          <li><strong>Tempo:</strong> Zugriff in zwei Klicks oder per Shortcut.</li>
+          <li><strong>Konsistenz:</strong> Wiederverwendung geprüfter Texte.</li>
+          <li><strong>Gedächtnis:</strong> Suchbare Kurzzeit‑Sammlung für laufende Aufgaben.</li>
+          <li><strong>Sicherung:</strong> Export/Import der Snippets.</li>
+        </ul>
+      </section>
+
+      <section id="capture" class="section">
+        <h2>Capture — schnell speichern</h2>
+        <div class="recipe">
+          <strong>Capture‑Rezept</strong>
+          <ol>
+            <li>Wenn Sie etwas Nützliches kopieren, öffnen Sie den Manager und fügen es ein; speichern Sie nur ein logisches Stück.</li>
+            <li>Fügen Sie einen kurzen Titel oder Tag hinzu (z. B. "Rechnung: Acme — IBAN").</li>
+            <li>Speichern; das Snippet erscheint oben in der Liste.</li>
+            <li>Regelmäßig aufräumen und veraltete Clips löschen.</li>
+          </ol>
+        </div>
+        <p class="small-note">Tipp: Bei mehrzeiligem Text hilft ein Titel, die Suche zu präzisieren.</p>
+      </section>
+
+      <section id="organize" class="section">
+        <h2>Organisieren & suchen</h2>
+        <p>Setzen Sie auf einfache, schnelle Strukturen: Titel, Tags, Namenskonventionen.</p>
+        <h3>Modell</h3>
+        <ul>
+          <li><strong>Titel:</strong> 3–6 Wörter.</li>
+          <li><strong>Tag:</strong> projekt, client, template, code.</li>
+          <li><strong>Vorschau:</strong> keine sehr großen Texte.</li>
+        </ul>
+      </section>
+
+      <section id="reuse" class="section">
+        <h2>Wiederverwenden & Tastenkürzel</h2>
+        <ul>
+          <li><span class="kbd">Ctrl/Cmd+Shift+V</span> — Manager öffnen & letzten Clip einfügen.</li>
+          <li><span class="kbd">Ctrl/Cmd+Alt+C</span> — Schnellaufnahme (Fokus bereit zum Einfügen).</li>
+          <li><span class="kbd">Pfeiltasten</span> — navigieren; <span class="kbd">Enter</span> kopieren.</li>
+        </ul>
+        <p class="small-note">Falls Clipboard‑Schreiben blockiert ist, nutzen Sie die Kopier‑Schaltfläche in der UI.</p>
+      </section>
+
+      <section id="backup" class="section">
+        <h2>Export / Import & Backups</h2>
+        <div class="recipe">
+          <strong>Backup‑Routine (5 Minuten)</strong>
+          <ol>
+            <li>Wöchentlich JSON exportieren.</li>
+            <li>Export sicher speichern (Cloud verschlüsselt oder Passwort‑Vault).</li>
+            <li>Beim Gerätewechsel JSON importieren.</li>
+            <li>Datum im Dateinamen (clipboard-backup-YYYYMMDD.json).</li>
+          </ol>
+        </div>
+
+        <pre class="template">CSV‑Beispiel:
+title,text,tags,created
+Invoice: Acme,"Acct: 123-45-678",finance;client,2025-11-21T10:15:00Z</pre>
+      </section>
+
+      <section id="security" class="section">
+        <h2>Sicherheit & Datenschutz</h2>
+        <ul>
+          <li>Keine Passwörter, privaten Schlüssel oder PINs im Klartext speichern.</li>
+          <li>Exports bei Bedarf verschlüsseln.</li>
+          <li>Auf gemeinsam genutzten Geräten Clips exportieren und löschen.</li>
+          <li>Alte sensible Clips regelmäßig entfernen.</li>
+        </ul>
+        <p class="small-note">Technisch: Clips werden in localStorage gespeichert — bleiben lokal, außer Sie exportieren.</p>
+      </section>
+
+      <section id="team" class="section">
+        <h2>Team‑Workflows</h2>
+        <p>Für teamrelevante Texte verwenden Sie ein gemeinsames Repository; persönliche Clips bleiben lokal.</p>
+      </section>
+
+      <section id="troubleshoot" class="section">
+        <h2>Fehlerbehebung</h2>
+        <ul>
+          <li>Clips weg: Browser‑Speicher Einstellungen prüfen; Import der letzten Sicherung nutzen.</li>
+          <li>Einfügen blockiert: Berechtigungen prüfen.</li>
+          <li>Export fehlschlägt: Schreibrechte prüfen.</li>
+          <li>Lange Listen langsam: Favoriten nutzen oder aufräumen.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section">
+        <h2>FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Wo werden Clips gespeichert?<br><strong>A:</strong> Lokal im Browser (localStorage).</p>
+          <p><strong>F:</strong> Kann ich von einem anderen Gerät importieren?<br><strong>A:</strong> Ja, per JSON‑Import.</p>
+          <p><strong>F:</strong> Gibt es Limits?<br><strong>A:</strong> localStorage hat eine Größenbegrenzung; für umfangreiche Bibliotheken regelmäßig exportieren.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section">
+        <h2>Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/de/clipboard-manager/clipboard-manager-index.html">Clipboard Manager öffnen</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank" rel="noopener">localStorage — MDN</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Clipboard_(computing)" target="_blank" rel="noopener">Clipboard (computing) — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/clipboard-manager-de.html" class="cta" aria-label="Clipboard Manager öffnen">Clipboard Manager öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen? Schreiben Sie an <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/de/privacy/">Datenschutzrichtlinie</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Clipboard Manager" button (points to root-level tool page) -->
+  <a href="https://timerhaven.com/clipboard-manager-de.html"
+     class="return-to-tool"
+     id="returnToTool"
+     aria-label="Zurück zum Clipboard Manager">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zurück zum Clipboard Manager</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToTool');
+      if (!btn) return;
+      // Keyboard support (Enter / Space)
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        }
+      });
+      // Toggle opacity slightly on scroll so it doesn't distract at top of page
+      function toggleVisibility(){
+        try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){}
+      }
+      window.addEventListener('scroll', toggleVisibility);
+      toggleVisibility();
+    })();
+  </script>
 </body>
 </html>

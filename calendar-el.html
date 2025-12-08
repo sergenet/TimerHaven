@@ -80,6 +80,14 @@
       .calendar-select{width:48%; max-width:220px; margin-top:.45rem;}
       .calendar-nav{margin-right:.5rem;}
     }
+
+    /* CTA link style (blue text) — ensure visible blue link for "Read full guide" */
+    .cta {
+      color: #0d6efd;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .cta:hover { text-decoration: underline; color: #0b5ed7; }
   </style>
 <!-- Defensive override: force true horizontal table layout for the calendar -->
 <style id="calendar-table-fix">
@@ -141,6 +149,12 @@
 <div class="help-section">
 <b id="tool-help">Κάντε κλικ σε οποιαδήποτε ημέρα για να προσθέσετε/δείτε/επεξεργαστείτε τις σημειώσεις σας. Υποστηρίζονται πολλές σημειώσεις ανά ημέρα και αποθηκεύονται!</b>
 </div>
+
+<!-- ADDED: visible "Read full guide" blue link under the help text -->
+<p style="margin-top:0.6rem;">
+  <a class="cta" href="/el/calendar-planning/calendar-planning-index.html" aria-label="Διαβάστε το πλήρες άρθρο">Διαβάστε το πλήρες άρθρο</a>
+</p>
+
 <!-- Header controls (buttons + month/year selects) -->
 <div aria-label="Навигация календаря" class="calendar-header">
 <div aria-label="Навигация месяц/год" class="calendar-nav" role="toolbar">
@@ -204,7 +218,7 @@
       de: "Deutsch",
       ru: "Русский",
       el: "Ελληνικά",
-      es: "Españол",
+      es: "Español",
       ar: "العربية"
     };
 
@@ -458,5 +472,5 @@
     <a href="terms.html">Όροι</a> •
     <a href="contact.html">Επικοινωνία</a>
 </footer>
-<p style="margin-top:1rem;"><a class="cta" href="/el/calendar/calendar-index.html">Read full guide</a></p></body>
+</body>
 </html>

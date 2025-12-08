@@ -1,18 +1,250 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>countdown — Guide (fr)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for countdown guide (fr)">
+  <meta charset="utf-8" />
+  <title>Minuteur (Countdown) — Planifiez les échéances et restez concentré | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guide complet pour utiliser le minuteur : planification des échéances, choix des durées, workflows pour réunions et sessions de concentration, notifications et dépannage." />
+  <link rel="canonical" href="https://timerhaven.com/fr/countdown/countdown-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Utiliser efficacement le minuteur de compte à rebours",
+        "description":"Configurer et gérer des minuteurs pour échéances, réunions, sessions de travail concentré et rappels. Ce guide couvre la planification, les schémas pratiques, les choix de notification et les bonnes pratiques pour optimiser la gestion du temps.",
+        "image":"https://timerhaven.com/assets/images/countdown-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Minuteur (TimerHaven)","Calendrier ou liste de tâches","Notifications sonores sur téléphone ou bureau"],
+        "step":[
+          {"@type":"HowToStep","name":"Définir le but","text":"Choisissez si le minuteur sert pour une échéance, une réunion ou une session de travail concentré."},
+          {"@type":"HowToStep","name":"Régler la durée","text":"Entrez les minutes et secondes ; pour les réunions préférez des minutes entières ; pour le travail concentré utilisez des intervalles adaptés à votre méthode."},
+          {"@type":"HowToStep","name":"Sélectionner la notification","text":"Activez le bip ou la notification de bureau pour ne pas manquer la fin ; testez le volume et les permissions."},
+          {"@type":"HowToStep","name":"Lancer et revoir","text":"Démarrez le minuteur et notez les interruptions ; après la session, enregistrez les suivis ou tâches manquées."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Le minuteur continue-t-il si je change d'onglet ?","acceptedAnswer":{"@type":"Answer","text":"Oui — les navigateurs modernes maintiennent les timers JS tant que l'onglet reste ouvert. Le throttling en arrière‑plan peut affecter la précision sur certains navigateurs, mais le compte à rebours poursuivra le décompte."}},
+          {"@type":"Question","name":"Puis-je définir des minuteurs très longs ?","acceptedAnswer":{"@type":"Answer","text":"Oui — saisissez le nombre de minutes souhaité selon les limites de l'UI. Pour des durées très longues, pensez à enregistrer l'heure de fin dans votre calendrier également."}},
+          {"@type":"Question","name":"Quelles options de notification sont recommandées ?","acceptedAnswer":{"@type":"Answer","text":"Utilisez à la fois un bip audible et une notification de bureau si possible. Pour les réunions, privilégiez un son plus fort ; pour des sessions de concentration, une sonnerie douce est préférable."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">countdown — Guide (fr)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Minuteur — Utiliser les échéances pour se concentrer et terminer</h1>
+
+      <div class="author" role="articleauthor" aria-label="Auteur de l'article">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Par Serge Shammas</strong> — auteur spécialisé en productivité et chercheur UX</div>
+          <div class="meta">Publié : 2025-11-24 · Temps de lecture : 12–16 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Les minuteurs créent une urgence productive : ils aident à gérer les réunions, protéger des fenêtres courtes de concentration et faire avancer les tâches. Ce guide présente des configurations pratiques pour le travail, les réunions et les routines personnelles ; le choix des alertes ; l’intégration avec le calendrier ou le Pomodoro ; et le dépannage des problèmes de permissions ou de précision.</p>
+
+      <nav class="toc" aria-label="Table des matières">
+        <a href="#why">Pourquoi les compte à rebours aident</a>
+        <a href="#setup">Choisir durée & options</a>
+        <a href="#workflows">Workflows pratiques</a>
+        <a href="#alerts">Notifications & accessibilité</a>
+        <a href="#integration">Intégration calendrier & Pomodoro</a>
+        <a href="#precision">Précision & throttling</a>
+        <a href="#troubleshoot">Dépannage</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Pourquoi les compte à rebours aident</h2>
+        <p>Une échéance modifie le comportement : un compte à rebours visible transforme un temps indéfini en une ressource concrète. Pour de nombreuses tâches, un minuteur court crée une « poussée » qui réduit la procrastination et facilite un point d’arrêt clair — utile pour trier les emails, faire des corrections ciblées ou s’entraîner à une présentation.</p>
+
+        <p>Utilisez un compte à rebours lorsque vous avez besoin de :</p>
+        <ul>
+          <li>Segments de travail clairement bornés (ex. sessions de 15 minutes).</li>
+          <li>Repères visuels pour gérer réunions et pauses.</li>
+          <li>Rappels fiables qu’une échéance approche, afin de prioriser maintenant plutôt que plus tard.</li>
+        </ul>
+      </section>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Choisir la durée et les options</h2>
+        <p>Choisissez la durée en fonction du but. Pour un premier essai, soyez légèrement conservateur, puis ajustez après avoir mesuré le temps réel nécessaire.</p>
+
+        <h3>Durées courantes et usages</h3>
+        <ul>
+          <li><strong>5–10 minutes :</strong> vérifications rapides, petite organisation, micro‑pauses.</li>
+          <li><strong>15–30 minutes :</strong> tri d’emails, révisions courtes, apprentissages ciblés.</li>
+          <li><strong>45–90 minutes :</strong> travail profond ou segments de réunion (accompagnés d’un rituel de préparation).</li>
+          <li><strong>Durées personnalisées :</strong> pour répétitions ou interviews time‑boxed (ex. 12 ou 20 minutes).</li>
+        </ul>
+
+        <h3>Options à considérer</h3>
+        <ul>
+          <li><strong>Bip vs notification de bureau :</strong> son si vous ne regardez pas l’écran ; notification visuelle pour un travail calme.</li>
+          <li><strong>Démarrage automatique :</strong> utile pour des chaînes d’intervalles ; activez‑le prudemment.</li>
+          <li><strong>Pause/reprise :</strong> pratique pour conserver le temps restant en cas d’interruption.</li>
+        </ul>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Workflows pratiques</h2>
+        <p>Voici des modèles applicables à des besoins courants. Adaptez‑les à votre rythme.</p>
+
+        <div class="recipe" aria-labelledby="email-tidy">
+          <strong id="email-tidy">Triage d’e‑mail — 25 minutes</strong>
+          <ol>
+            <li>Réglez 25 minutes. Traitez uniquement les messages prioritaires.</li>
+            <li>Consacrez 5 minutes au scan et 20 minutes à la résolution ou délégation.</li>
+            <li>En fin de session, archivez ou snoozez les éléments restants ; consignez les suivis.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="meeting">
+          <strong id="meeting">Réunions — alerte en fin d’ordre du jour</strong>
+          <ol>
+            <li>Programmez un compte à rebours pour les 5 dernières minutes afin de clarifier décisions et actions.</li>
+            <li>Affichez le compte à rebours ou partagez l’écran pour que tous voient le temps restant.</li>
+            <li>Choisissez un son plus fort pour la fin afin que les participants à distance le remarquent.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="focus">
+          <strong id="focus">Session de concentration — 45 minutes</strong>
+          <ol>
+            <li>Bloquez 45 minutes et réglez le minuteur.</li>
+            <li>Faites un rituel de préparation (3–5 minutes : plan + ouvrir les documents).</li>
+            <li>Travaillez sans interruption ; notez les interruptions si elles surviennent et reprenez.</li>
+            <li>En fin de session, consignez l’avancement et planifiez la suite.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Notifications & accessibilité</h2>
+        <p>Les notifications relient le minuteur à votre comportement. Adaptez les modes à votre contexte (bureau, télétravail, concentration silencieuse).</p>
+
+        <h3>Bonnes pratiques</h3>
+        <ul>
+          <li>Activez les notifications de bureau et testez les permissions une fois.</li>
+          <li>Choisissez un son audible mais non surprenant pour un usage fréquent ; réservez un ton fort pour les échéances critiques.</li>
+          <li>Pour l’accessibilité : assurez un contraste élevé et envisagez la vibration sur mobile si disponible.</li>
+        </ul>
+      </section>
+
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Intégration avec le calendrier & le Pomodoro</h2>
+        <p>Les compte à rebours sont plus efficaces quand ils s’inscrivent dans un plan. Associez‑les à des blocs de calendrier ou à des séquences Pomodoro pour aligner le chronométrage sur les résultats.</p>
+
+        <ul>
+          <li><strong>Indiquer l’heure de fin :</strong> ajoutez l’heure de fin prévue à l’événement calendrier pour indiquer quand vous comptez terminer.</li>
+          <li><strong>Chaînage Pomodoro :</strong> utilisez des compte à rebours pour des durées personnalisées (ex. 40/10) puis enregistrez les cycles dans votre journal de tâches.</li>
+          <li><strong>Préparation de réunion :</strong> un court compte à rebours avant la réunion permet de basculer de contexte et résumer efficacement.</li>
+        </ul>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Précision & throttling en arrière‑plan</h2>
+        <p>Les timers de navigateur sont généralement suffisants pour l’usage utilisateur, mais le throttling peut affecter la précision quand un onglet est en arrière‑plan. Si la précision est critique :</p>
+
+        <ul>
+          <li>Utilisez une notification système ou une application d’alarme en redondance.</li>
+          <li>Gardez l’onglet ouvert et visible durant les comptes critiques ou utilisez une app native pour une précision maximale.</li>
+          <li>Pour de longues durées, définissez une heure de fin absolue (et eventuellement ajoutez un événement calendrier) pour conserver une référence indépendante du timer de la page.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Dépannage</h2>
+        <ul>
+          <li><strong>Notifications bloquées :</strong> autorisez les notifications dans les paramètres du site (Paramètres du site → Notifications).</li>
+          <li><strong>Son inaudible :</strong> vérifiez le volume système et autorisez l’autoplay si nécessaire ; certains navigateurs muent l’audio tant qu’il n’y a pas d’interaction utilisateur.</li>
+          <li><strong>Le minuteur semble en pause :</strong> gardez l’onglet ouvert ; le throttling peut réduire la fréquence des "ticks" mais pas forcément casser le calcul d’heure de fin.</li>
+          <li><strong>Problèmes mobiles :</strong> les navigateurs mobiles peuvent suspendre les pages en arrière‑plan ; utilisez un rappel natif ou le calendrier en secours.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q :</strong> Puis‑je utiliser des compte à rebours pour des rappels récurrents ?<br><strong>A :</strong> Pour les rappels récurrents, préférez les événements calendrier ou les rappels de tâches. Le minuteur est idéal pour des sessions immédiates et ponctuelles.</p>
+
+          <p><strong>Q :</strong> Le minuteur m’alertera‑t‑il si mon écran est verrouillé ?<br><strong>A :</strong> Les onglets peuvent être suspendus si l’appareil dort. Pour des alertes en mode verrouillé, utilisez une alarme système ou une notification calendrier.</p>
+
+          <p><strong>Q :</strong> Puis‑je définir le minuteur en heures ?<br><strong>A :</strong> Oui — saisissez les minutes équivalentes (ex. 120 minutes pour 2 heures) ou utilisez une stratégie d’heure de fin via le calendrier.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressources</h2>
+        <ul class="muted">
+          <li><a href="/countdown-fr.html">Ouvrir l'outil Minuteur</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Countdown" target="_blank" rel="noopener">Compte à rebours — Wikipédia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/countdown-fr.html" class="cta" aria-label="Ouvrir le Minuteur">Ouvrir le Minuteur</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Des questions ou un retour ? Contactez‑nous à <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lisez notre <a href="/fr/privacy/">Politique de confidentialité</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Countdown" button (points to flat tool page) -->
+  <a href="https://timerhaven.com/countdown-fr.html" class="return-to-tool" id="returnToToolCountdown" aria-label="Retourner au Minuteur">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Retour au Minuteur</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCountdown');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

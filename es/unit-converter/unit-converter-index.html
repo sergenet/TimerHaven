@@ -1,18 +1,225 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>unit-converter — Guide (es)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for unit-converter guide (es)">
+  <meta charset="utf-8" />
+  <title>Convertidor de unidades — Convertir unidades con precisión y evitar errores | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía completa sobre la conversión de unidades: sistemas de unidades, precisión, redondeo, advertencias sobre temperatura, recetas de conversión para ingeniería, cocina y viajes, y automatización en hojas de cálculo." />
+  <link rel="canonical" href="https://timerhaven.com/es/unit-converter/unit-converter-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Convertir unidades de forma fiable",
+        "description":"Entienda las familias de unidades, la precisión y el redondeo, los casos especiales (temperatura) y recetas de conversión habituales para uso diario y profesional.",
+        "image":"https://timerhaven.com/assets/images/unit-converter-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Convertidor de unidades (TimerHaven)","Tablas de referencia o manual técnico","Hoja de cálculo"],
+        "step":[
+          {"@type":"HowToStep","name":"Identificar la familia de unidades","text":"Decida si está convirtiendo longitud, masa, temperatura, volumen, etc."},
+          {"@type":"HowToStep","name":"Elegir referencia y precisión","text":"Seleccione factores de conversión autorizados y determine la precisión decimal requerida."},
+          {"@type":"HowToStep","name":"Aplicar la conversión y redondear","text":"Convierta y formatee el resultado con el redondeo apropiado para la presentación o el cálculo."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"¿Por qué son diferentes las conversiones de temperatura?","acceptedAnswer":{"@type":"Answer","text":"Las conversiones de temperatura son transformaciones afines (incluyen un desplazamiento y una escala), por lo que no se puede convertir una diferencia de temperatura de la misma forma que una lectura absoluta sin ajustar los desplazamientos."}},
+          {"@type":"Question","name":"¿Cuántos decimales debo mostrar?","acceptedAnswer":{"@type":"Answer","text":"Depende del contexto: precios—2 decimales; tolerancias de ingeniería—más decimales según se requiera (3–6); trabajo científico—use cifras significativas adecuadas a la precisión del instrumento."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">unit-converter — Guide (es)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Convertidor de unidades — Convertir unidades con precisión y conocer los riesgos</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor del artículo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Por Serge Shammas</strong> — redactor en usabilidad e ingeniería</div>
+          <div class="meta">Publicado: 2025-11-24 · Tiempo de lectura: 10–15 min</div>
+        </div>
+      </div>
+
+      <p class="lead">La conversión de unidades es habitual en viajes, cocina, ingeniería y software. Pequeños errores en unidades o en redondeos pueden producir desviaciones significativas. Esta guía explica las familias de unidades, reglas de precisión, conversiones de temperatura, patrones de presentación, recetas en hojas de cálculo y consejos prácticos para evitar errores comunes.</p>
+
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#families">Familias de unidades & fundamentos</a>
+        <a href="#precision">Precisión & reglas de redondeo</a>
+        <a href="#temperature">Temperatura — casos especiales</a>
+        <a href="#recipes">Recetas de conversión comunes</a>
+        <a href="#spreadsheet">Ejemplos en hojas de cálculo & scripts</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="families" class="section" aria-labelledby="families-title">
+        <h2 id="families-title">Familias de unidades & fundamentos</h2>
+        <p>Las unidades pertenecen a familias (longitud, masa, temperatura, volumen, tiempo, área, energía, etc.). Siempre convierta dentro de la misma familia y use factores de conversión autorizados.</p>
+
+        <ul>
+          <li><strong>Longitud:</strong> metro, kilómetro, milla, pie, pulgada.</li>
+          <li><strong>Masa / peso:</strong> kilogramo, gramo, libra, onza.</li>
+          <li><strong>Volumen:</strong> litro, mililitro, galón (diferencias US/UK), taza.</li>
+          <li><strong>Temperatura:</strong> Celsius, Fahrenheit, Kelvin (transformaciones afines).</li>
+        </ul>
+
+        <p>Para trabajos críticos de ingeniería, consulte las normas nacionales (NIST, BIPM) para factores exactos y definiciones de unidades.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Precisión & reglas de redondeo</h2>
+        <p>Decida la precisión según el propósito. Un redondeo demasiado agresivo crea sesgo sistemático; mostrar demasiada precisión puede implicar exactitud falsa.</p>
+
+        <h3>Directrices por contexto</h3>
+        <ul>
+          <li><strong>Uso diario / compras:</strong> 2 decimales para moneda y cantidades que se muestran a usuarios finales.</li>
+          <li><strong>Cocina:</strong> redondee a unidades sensatas (cucharaditas, gramos) y ofrezca alternativas (métrico & imperial).</li>
+          <li><strong>Ingeniería:</strong> muestre cifras significativas que coincidan con la precisión del instrumento (3–6+ decimales según tolerancia).</li>
+          <li><strong>Analítica:</strong> almacene valores crudos con alta precisión y redondee solo en la capa de presentación.</li>
+        </ul>
+
+        <p>Muestre siempre las unidades junto a los números y considere mostrar el factor de conversión o una marca temporal "a fecha de" para tasas dinámicas (por ejemplo, conversiones de moneda).</p>
+      </section>
+
+      <section id="temperature" class="section" aria-labelledby="temperature-title">
+        <h2 id="temperature-title">Temperatura — conversiones especiales</h2>
+        <p>Las conversiones de temperatura son afines: requieren escalado y desplazamiento. Convertir una temperatura absoluta difiere de convertir una variación de temperatura.</p>
+
+        <ul>
+          <li>Convierta valores absolutos correctamente:
+            <ul>
+              <li>C → F: F = C × 9/5 + 32</li>
+              <li>F → C: C = (F − 32) × 5/9</li>
+              <li>C ↔ K: K = C + 273.15</li>
+            </ul>
+          </li>
+          <li>Para una variación de temperatura (Δ): convierta solo con la escala (ΔC × 9/5 = ΔF) — no aplique desplazamientos.</li>
+        </ul>
+
+        <p>Error típico: "Un cambio de 10°C es 18°F" es correcto como diferencia; pero convertir 10°C (valor absoluto) a °F requiere añadir 32 tras escalar.</p>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Recetas de conversión comunes</h2>
+
+        <div class="recipe">
+          <strong>Longitud: millas ↔ kilómetros</strong>
+          <ol>
+            <li>Use el factor: 1 mile = 1.60934 kilometers.</li>
+            <li>Ejemplo: 5 miles × 1.60934 = 8.0467 km → muestre 8.05 km para uso típico.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Peso: libras ↔ kilogramos</strong>
+          <ol>
+            <li>Use el factor: 1 lb = 0.45359237 kg.</li>
+            <li>Ejemplo: 150 lb × 0.45359237 = 68.0389 kg → muestre 68.04 kg (2 decimales) o 68.0 para redondeo médico según el contexto.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Volumen: onzas fluidas & tazas (US)</strong>
+          <ol>
+            <li>1 taza US = 8 onzas fluidas US = 236.588 mL.</li>
+            <li>Verifique diferencias regionales: las tazas y galones UK/imperiales tienen valores distintos.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="spreadsheet" class="section" aria-labelledby="spreadsheet-title">
+        <h2 id="spreadsheet-title">Ejemplos en hoja de cálculo & scripts</h2>
+        <p>Fórmulas comunes y patrones de script ayudan a automatizar conversiones a escala.</p>
+
+        <h3>Ejemplo en hoja (Google Sheets / Excel)</h3>
+        <pre class="template">Convertir millas en A2 a kilómetros:
+=ROUND(A2 * 1.60934, 2)</pre>
+
+        <h3>Fragmento JavaScript</h3>
+        <pre class="template">function convertLength(val, fromFactor, toFactor) {
+  // donde los factores están expresados en metros por unidad
+  return val * (fromFactor / toFactor);
+}
+// ejemplo: miles->km: milesFactor=1609.34, kmFactor=1000
+</pre>
+
+        <p class="small-note">Almacene factores canónicos en un único lugar y reutilícelos para evitar inconsistencias entre hojas o en el código.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ¿Por qué a veces las conversiones imperial vs métrico parecen "raras"?<br><strong>R:</strong> Porque el redondeo y las decisiones de presentación difieren; además, algunos factores publicados (p. ej. galones) varían según la región (US vs UK). Verifique siempre la definición que está usando.</p>
+
+          <p><strong>P:</strong> ¿Cómo muestro ambas unidades a los usuarios?<br><strong>R:</strong> Presente unidad primaria y secundaria (p. ej., 68.04 kg (150 lb)) y coloque primero la unidad preferida por el usuario cuando sea posible.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Recursos</h2>
+        <ul class="muted">
+          <li><a href="/unit-converter-es.html">Abrir la herramienta Convertidor de unidades</a></li>
+          <li><a href="https://www.nist.gov/pml/weights-and-measures/metric-si" target="_blank" rel="noopener">NIST — Unidades SI</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/unit-converter-es.html" class="cta" aria-label="Abrir Convertidor de unidades">Abrir Convertidor de unidades</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas o comentarios? Contáctanos en <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lee nuestra <a href="/es/privacy/">Política de privacidad</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Botón flotante "Volver a la herramienta" -->
+  <a href="/unit-converter-es.html" class="return-to-tool" id="returnToToolUnit" aria-label="Volver al Convertidor de unidades">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver al Convertidor</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolUnit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

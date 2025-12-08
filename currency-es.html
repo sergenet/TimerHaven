@@ -1,96 +1,119 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<title>Conversor de monedas — TimerHaven</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Convierte monedas con tasas en tiempo real." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
-    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
-    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 340px; height: 340px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
-    .article-card h2 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; }
-    .article-card ul, .article-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; }
-    .article-card .btn { align-self: stretch; font-weight: 600; border-radius: 8px; margin-top: 0.2em; margin-bottom: 0; box-sizing: border-box; }
-    .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: left; position: relative; z-index: 1; }
-    .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
-    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
+  <meta charset="UTF-8">
+  <title>Conversor de monedas — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convierte monedas con tasas en tiempo real.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tool-theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html,body{height:100%}
+    body { background:var(--bg); font-family: 'Montserrat', Arial, sans-serif; color:var(--text-dark,#102a43); margin:0; padding:2rem; }
+
+    /* Centered single-tool layout (matches other upgraded tools) */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      min-height: 90vh;
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+    .center-row { width:100%; display:flex; justify-content:center; align-items:flex-start; }
+    .tool-card {
+      background:var(--card);
+      border-radius:16px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.06);
+      padding:1.6rem 1.5rem;
+      box-sizing: border-box;
+      width:100%;
+      max-width:520px;
+    }
+
+    /* Standard blue used across tools for Back link and Read full guide */
+    .back-link { display:inline-block; margin-bottom:.75rem; color:#007bff !important; text-decoration:none; font-weight:700; }
     .back-link:hover { text-decoration: underline; }
-    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
-    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
-    .tip-section { margin-top: 0.5em; text-align: center; font-size: 1.08em; color: #43cea2; background: #f6fbfa; padding: 0.6em; border-radius: 8px; font-weight: 500; min-height: 2em; word-break: break-word; }
-    /* language-indicator CSS removed on purpose to prevent the visible floating indicator */
-    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; } }
-    @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; } }
-    details[open] summary::after { content: " ▲"; font-size: 0.9em; }
-    details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
-    details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
-    .howto-mobile { margin-bottom: 1em; }
-    .tips-mobile { margin-top: 1.5em; margin-bottom: 0.5em; }
-    .converter-form { display: flex; gap: 0.5em; margin-bottom: 1em; flex-wrap: wrap; }
-    .converter-result { font-weight: bold; font-size: 1.12em; margin-bottom: 1em; }
+
+    .tool-title { font-size:1.35rem; margin:0 0 .4rem 0; display:flex; align-items:center; gap:.4rem; color:#185a9d; }
+    .tool-help { color:var(--muted); margin-bottom:.8rem; }
+
+    /* Read guide (compact blue button, opens new tab) */
+    .read-guide {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:auto;
+      margin:.35rem 0 .8rem 0;
+      padding:.45rem .7rem;
+      border-radius:8px;
+      background:#007bff !important;
+      color:#fff !important;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+      border:none;
+      box-sizing:border-box;
+      box-shadow:0 6px 18px rgba(0,123,255,0.12);
+    }
+    .read-guide:focus { outline:3px solid rgba(0,123,255,0.12); outline-offset:3px; }
+
+    .converter-form { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center; }
+    .converter-result { font-weight:700; font-size:1.12rem; margin-bottom:1rem; color:var(--text-dark,#102a43); }
+    details.faq-section summary { cursor:pointer; padding:.2rem 0; font-weight:700; }
+    details.faq-section ul { margin-top:.5rem; color:var(--muted); padding-left:1rem; }
+    @media (max-width:900px) { .tool-card { padding:1rem; } .converter-form { justify-content:center; } }
   </style>
 </head>
 <body>
-<script>try{ localStorage.setItem('timerhavenLang','es'); }catch(e){}</script>
-<div class="main-container">
-<div class="center-row">
-<div class="article-card">
-<div>
-<h2 id="howto-title"></h2>
-<ol id="howto-steps"></ol>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
-</div>
-<div class="tool-card">
-<details class="howto-mobile" id="howto-mobile">
-<summary><h4 id="howto-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
-<ol id="howto-mobile-steps"></ol>
-</details>
-<a class="back-link" href="index.html" id="back-link"></a>
-<h3 id="tool-title"></h3>
-<div class="tool-help" id="tool-help"></div>
-<div class="converter-section">
-<form class="converter-form" id="currencyForm">
-<input class="form-control" id="amount" min="0" placeholder="" step="any" style="max-width:100px;" type="number"/>
-<select class="form-select" id="fromCurrency" style="max-width:120px;"></select>
-<span style="font-size:1.3em;">→</span>
-<select class="form-select" id="toCurrency" style="max-width:120px;"></select>
-<button class="btn btn-primary btn-sm" id="convert-btn" type="submit"></button>
-</form>
-<div class="converter-result" id="result"></div>
-</div>
-<details class="faq-section">
-<summary id="faq-title"></summary>
-<ul id="faq-list" style="padding-left: 1em;"></ul>
-</details>
-<details class="tips-mobile" id="tips-mobile">
-<summary><h4 id="tips-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
-<ul id="tips-mobile-list"></ul>
-</details>
-</div>
-<div class="article-card">
-<div>
-<h2 id="tips-title"></h2>
-<ul id="tips-list"></ul>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
-</div>
-</div>
-</div>
-<script>
+  <script>try{ localStorage.setItem('timerhavenLang','es'); }catch(e){};</script>
+
+  <main class="main-container" role="main">
+    <div class="center-row">
+      <section class="tool-card" aria-labelledby="tool-title">
+        <a href="index.html" class="back-link" id="back-link">← Volver al menú principal</a>
+
+        <div id="tool-title" class="tool-title"><i class="fa fa-dollar-sign"></i> Conversor de monedas</div>
+
+        <!-- Read full guide button (canonical Spanish path) -->
+        <a id="read-guide-btn" class="read-guide" href="https://timerhaven.com/es/currency/currency-index.html" role="button" target="_blank" rel="noopener">Leer artículo completo</a>
+
+        <div class="tool-help" id="tool-help">Convierte monedas con tasas en tiempo real.</div>
+
+        <div class="converter-section">
+          <form class="converter-form" id="currencyForm">
+            <input type="number" min="0" step="any" id="amount" class="form-control" placeholder="" style="max-width:120px;">
+            <select id="fromCurrency" class="form-select" style="max-width:140px;"></select>
+            <span style="font-size:1.3em;">→</span>
+            <select id="toCurrency" class="form-select" style="max-width:140px;"></select>
+            <button type="submit" class="btn btn-primary btn-sm" id="convert-btn">Convertir</button>
+          </form>
+          <div id="result" class="converter-result">El resultado aparece aquí.</div>
+        </div>
+
+        <details class="faq-section" style="margin-top:0.6rem;">
+          <summary id="faq-title">Preguntas frecuentes</summary>
+          <ul id="faq-list" style="padding-left:1em;"></ul>
+        </details>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // -- Currency Converter JS using ExchangeRate-API --
     const apiKey = "5f484bfa921ef56c9c279660";
-    const currencyList = ["USD","EUR","GBP","JPY","AUD","CAD","CHF","CNY","SEK","NZD","MXN","SGD","HKD","NOK","KRW","TRY","INR","RUB","BRL","ZAR"];
+    const currencyList = [
+      "USD","EUR","GBP","JPY","AUD","CAD","CHF","CNY","SEK","NZD","MXN","SGD","HKD","NOK","KRW","TRY","INR","RUB","BRL","ZAR"
+    ];
 
     const currencyTranslations = {
       en: {
         "language-label": "Language:",
-        "back-link": "Back to Main Menu",
+        "back-link": "← Back to Main Menu",
         "tool-title": "Currency Converter",
         "tool-help": "Convert currencies using live exchange rates.",
         "amount": "Amount",
@@ -103,27 +126,11 @@
         "faq-title": "FAQs",
         "faq-list": `<li><b>Are exchange rates live?</b> Yes, rates update regularly from the API.</li>
           <li><b>Can I convert between any currency?</b> Most global currencies are supported.</li>
-          <li><b>Is this free?</b> Yes, all tools on TimerHaven are free.</li>`,
-        "howto-title": '<i class="fa fa-dollar-sign"></i> How to Use Currency Converter',
-        "howto-steps": `<li><b>Select currencies:</b> Choose the currencies you want to convert between.</li>
-          <li><b>Enter amount:</b> Type the amount you want to convert.</li>
-          <li><b>View result:</b> The converted amount shows instantly.</li>`,
-        "howto-article-btn": "Read Full Article",
-        "howto-article-link": "currency-how-to.html",
-        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Currency Productivity Tips',
-        "tips-list": `<li><b>Double-check rates:</b> For large transfers, confirm rates with your bank.</li>
-          <li><b>Keep a history:</b> Record conversions for budgeting.</li>
-          <li><b>Use for travel:</b> Convert local prices on the go.</li>`,
-        "tips-article-btn": "Read Full Article",
-        "tips-article-link": "currency-tips.html"
+          <li><b>Is this free?</b> Yes, all tools on TimerHaven are free.</li>`
       },
-      fr: { /* French strings (same as other files) */ },
-      de: { /* German strings */ },
-      ru: { /* Russian strings */ },
-      el: { /* Greek strings */ },
       es: {
         "language-label": "Idioma:",
-        "back-link": "Volver al menú principal",
+        "back-link": "← Volver al menú principal",
         "tool-title": "Conversor de monedas",
         "tool-help": "Convierte monedas con tasas en tiempo real.",
         "amount": "Cantidad",
@@ -142,18 +149,17 @@
           <li><b>Introduce cantidad:</b> Escribe la cantidad a convertir.</li>
           <li><b>Ver resultado:</b> El resultado aparece al instante.</li>`,
         "howto-article-btn": "Leer artículo completo",
-        "howto-article-link": "currency-how-to-es.html",
+        "howto-article-link": "https://timerhaven.com/es/currency/currency-index.html",
         "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos para convertir monedas',
         "tips-list": `<li><b>Verifica las tasas:</b> Para grandes transferencias, consulta el banco.</li>
           <li><b>Mantén un historial:</b> Guarda tus conversiones para controlar gastos.</li>
           <li><b>Usa en viajes:</b> Convierte precios locales rápidamente.</li>`,
         "tips-article-btn": "Leer artículo completo",
         "tips-article-link": "currency-tips-es.html"
-      },
-      ar: { /* Arabic strings */ }
+      }
     };
 
-    const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
+    const langNames = { en: "English", es: "Español", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", ar: "العربية" };
 
     function populateCurrencySelects() {
       const from = document.getElementById('fromCurrency');
@@ -170,39 +176,57 @@
     populateCurrencySelects();
 
     function getLang() {
-      try { const l = localStorage.getItem('timerhavenLang') || 'es'; return (l && l.slice(0,2)) || 'es'; } catch (e) { return 'es'; }
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'es';
+        return (l && l.slice(0,2)) || 'es';
+      } catch (e) {
+        return 'es';
+      }
     }
 
     function applyLanguage(lang) {
       lang = (lang || getLang()).slice(0,2);
       const t = currencyTranslations[lang] || currencyTranslations['es'];
+
+      // direction
       document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-      if (document.getElementById('language-label')) document.getElementById('language-label').textContent = t['language-label'] || 'Idioma:';
-      if (document.getElementById('language-name')) document.getElementById('language-name').textContent = langNames[lang] || lang;
-      if (document.getElementById('back-link')) document.getElementById('back-link').textContent = t['back-link'] || '';
-      if (document.getElementById('tool-title')) document.getElementById('tool-title').innerHTML = `<i class="fa fa-dollar-sign"></i> ${t['tool-title'] || ''}`;
-      if (document.getElementById('tool-help')) document.getElementById('tool-help').textContent = t['tool-help'] || '';
-      if (document.getElementById('amount')) document.getElementById('amount').placeholder = t['amount'] || '';
-      if (document.getElementById('convert-btn')) document.getElementById('convert-btn').textContent = t['convert'] || 'Convertir';
-      if (document.getElementById('result')) document.getElementById('result').textContent = t['result-placeholder'] || '';
-      if (document.getElementById('faq-title')) document.getElementById('faq-title').textContent = t['faq-title'] || '';
-      if (document.getElementById('faq-list')) document.getElementById('faq-list').innerHTML = t['faq-list'] || '';
-      if (document.getElementById('howto-title')) document.getElementById('howto-title').innerHTML = t['howto-title'] || '';
-      if (document.getElementById('howto-steps')) document.getElementById('howto-steps').innerHTML = t['howto-steps'] || '';
-      if (document.getElementById('howto-article-btn')) { document.getElementById('howto-article-btn').textContent = t['howto-article-btn'] || ''; document.getElementById('howto-article-btn').href = t['howto-article-link'] || ''; }
-      if (document.getElementById('tips-title')) document.getElementById('tips-title').innerHTML = t['tips-title'] || '';
-      if (document.getElementById('tips-list')) document.getElementById('tips-list').innerHTML = t['tips-list'] || '';
-      if (document.getElementById('tips-article-btn')) { document.getElementById('tips-article-btn').textContent = t['tips-article-btn'] || ''; document.getElementById('tips-article-btn').href = t['tips-article-link'] || ''; }
-      if (document.getElementById('howto-mobile-title')) document.getElementById('howto-mobile-title').innerHTML = t['howto-title'] || '';
-      if (document.getElementById('howto-mobile-steps')) document.getElementById('howto-mobile-steps').innerHTML = t['howto-steps'] || '';
-      if (document.getElementById('tips-mobile-title')) document.getElementById('tips-mobile-title').innerHTML = t['tips-title'] || '';
-      if (document.getElementById('tips-mobile-list')) document.getElementById('tips-mobile-list').innerHTML = t['tips-list'] || '';
+
+      // UI text updates
+      const back = document.getElementById('back-link');
+      if (back) back.textContent = t['back-link'] || '';
+
+      const toolTitle = document.getElementById('tool-title');
+      if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-dollar-sign"></i> ${t['tool-title'] || ''}`;
+
+      const help = document.getElementById('tool-help');
+      if (help) help.textContent = t['tool-help'] || '';
+
+      const amount = document.getElementById('amount');
+      if (amount) amount.placeholder = t['amount'] || '';
+
+      const convertBtn = document.getElementById('convert-btn');
+      if (convertBtn) convertBtn.textContent = t['convert'] || 'Convertir';
+
+      const resultEl = document.getElementById('result');
+      if (resultEl) resultEl.textContent = t['result-placeholder'] || '';
+
+      const faqTitle = document.getElementById('faq-title');
+      if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+      const faqList = document.getElementById('faq-list');
+      if (faqList) faqList.innerHTML = t['faq-list'] || '';
+
+      // Ensure "Read full guide" uses the Spanish URL
+      const readBtn = document.getElementById('read-guide-btn');
+      if (readBtn) {
+        const guideUrl = t['howto-article-link'] || (`https://timerhaven.com/${lang}/currency/currency-index.html`);
+        readBtn.href = guideUrl;
+        readBtn.textContent = t['howto-article-btn'] || 'Leer artículo completo';
+        readBtn.target = '_blank';
+        readBtn.rel = 'noopener';
+      }
     }
 
-    window.addEventListener('storage', function(e) {
-      if (e.key === 'timerhavenLang') applyLanguage((e.newValue || 'es').slice(0,2));
-    });
-
+    // Form submit: perform conversion via ExchangeRate API
     document.getElementById('currencyForm').addEventListener('submit', function(e){
       e.preventDefault();
       const amountVal = parseFloat(document.getElementById('amount').value);
@@ -210,11 +234,14 @@
       const toCur = document.getElementById('toCurrency').value;
       const lang = getLang();
       const t = currencyTranslations[lang] || currencyTranslations['es'];
+
       if (isNaN(amountVal) || amountVal <= 0) {
         document.getElementById('result').innerText = t['amount-error'] || "Por favor introduce una cantidad válida.";
         return;
       }
+
       document.getElementById('result').innerText = t['fetching'] || "Obteniendo tasa...";
+
       fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${fromCur}/${toCur}/${amountVal}`)
         .then(r => r.json())
         .then(data => {
@@ -231,16 +258,23 @@
         });
     });
 
+    // Initialize
     document.addEventListener('DOMContentLoaded', function(){
-      applyLanguage(getLang());
       populateCurrencySelects();
+      applyLanguage(getLang());
+    });
+
+    // React to language changes from other tabs
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') applyLanguage((e.newValue || 'es').slice(0,2));
     });
   </script>
-<footer>
-    © 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br/>
-<a href="privacy.html">Política de privacidad</a> •
-    <a href="terms.html">Términos</a> •
+
+  <footer style="text-align:center;margin-top:1.2rem;color:var(--muted);">
+    &copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br>
+    <a href="privacy.html">Política de privacidad</a> &bull;
+    <a href="terms.html">Términos</a> &bull;
     <a href="contact.html">Contacto</a>
-</footer>
-<p style="margin-top:1rem;"><a class="cta" href="/es/currency/currency-index.html">Read full guide</a></p></body>
+  </footer>
+</body>
 </html>

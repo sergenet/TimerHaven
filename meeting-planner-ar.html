@@ -1,255 +1,386 @@
-<!DOCTYPE html>
-
-<html dir="rtl" lang="ar">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<title>مخطط الاجتماعات — TimerHaven</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="ابحث عن أفضل وقت للاجتماع للجميع في أي مكان في العالم." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; direction: rtl; }
-    .main-container { max-width: 1200px; margin: 2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
-    .center-row { display:flex; gap:2em; width:100%; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card {
-      background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef;
-      width:340px; min-width:220px; max-width:340px; min-height:500px;
-      flex:1 1 340px; display:flex; flex-direction:column; padding:2em 1.3em 1em; box-sizing:border-box; overflow:hidden;
-      text-align:right;
+  <meta charset="utf-8"/>
+  <title>مخطط الاجتماعات — TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="ابحث عن أفضل وقت للاجتماع للجميع في أي مكان في العالم."/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/tool-theme.css">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html,body{height:100%}
+    body{
+      background:var(--bg);
+      font-family:'Montserrat',Arial,sans-serif;
+      color:var(--text-dark,#102a43);
+      margin:0;padding:2rem;
+      direction:rtl;
     }
-    .article-card { padding:1.2em; min-height:200px; }
-    .back-link { display:inline-block; margin-bottom:1em; color:#007bff; text-decoration:none; font-weight:bold; font-size:1em; }
-    .back-link:hover { text-decoration:underline; }
-    .faq-section { margin-top:1.1em; margin-bottom:0.3em; font-size:1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; direction:rtl; text-align:right; }
-    .faq-section summary { font-weight:bold; font-size:1.07em; cursor:pointer; margin-bottom:0.5em; }
-    .article-links { display:flex; flex-direction:column; gap:.5rem; margin-top:.6rem; }
-    .participant-item { background:#f7fafc; border-radius:8px; padding:.6rem; margin-bottom:.6rem; display:flex; justify-content:space-between; align-items:center; gap:.6rem; direction:rtl; }
-    .meeting-times-grid { display:flex; flex-direction:column; gap:.4rem; margin-top:.6rem; }
-    .time-suggestion { display:flex; gap:.6rem; align-items:center; justify-content:space-between; padding:.45rem .6rem; border-radius:8px; background:#fff; border:1px solid #eef6f3; direction:rtl; }
+    .container{max-width:720px;margin:0 auto}
+    .card{background:var(--card);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:1.6rem 1.5rem;box-sizing:border-box}
+    .back-link{display:inline-block;margin-bottom:.75rem;color:#007bff !important;text-decoration:none;font-weight:700;direction:ltr}
+    .back-link:hover{text-decoration:underline}
+    .tool-title{font-size:1.35rem;margin:0 0 .4rem 0;display:flex;align-items:center;gap:.4rem;color:#185a9d;justify-content:flex-end}
+    .cta{
+      display:inline-block;margin:.35rem 0 .8rem 0;padding:.45rem .7rem;border-radius:8px;background:#007bff !important;color:#fff !important;
+      text-decoration:none;font-weight:700;font-size:.95rem;border:none;box-shadow:0 6px 18px rgba(0,123,255,0.08);
+    }
+    .tool-help{color:var(--muted);margin-bottom:.8rem;text-align:right}
+    .meeting-form-row{margin-bottom:.8rem}
+    .participant-item{background:#f7fafc;border-radius:8px;padding:.6rem;margin-bottom:.6rem;display:flex;justify-content:space-between;align-items:center;gap:.6rem;direction:rtl}
+    .meeting-times-grid{display:flex;flex-direction:column;gap:.4rem;margin-top:.6rem}
+    .time-suggestion{display:flex;gap:.6rem;align-items:center;justify-content:space-between;padding:.45rem .6rem;border-radius:8px;background:#fff;border:1px solid #eef6f3;direction:rtl}
+    .faq-section{margin-top:1.1rem;margin-bottom:0.3rem;font-size:1rem;background:#f7fafc;border-radius:8px;padding:1rem;box-shadow:0 1px 4px #e0e7ef;direction:rtl;text-align:right}
+    .faq-section summary{cursor:pointer;padding:.35em 0;font-weight:700;font-size:1.02rem}
+    @media (max-width:900px){ .card{padding:1rem} }
   </style>
 </head>
 <body>
-<div class="main-container">
-<div class="center-row">
-<!-- Left article card: How-to (Arabic) -->
-<div aria-labelledby="howto-heading" class="article-card">
-<h2 id="howto-heading">كيفية استخدام مخطط الاجتماعات</h2>
-<ol>
-<li>أضف المشاركين ومناطقهم الزمنية.</li>
-<li>اختر تاريخًا ووقتًا مقترحًا.</li>
-<li>تحقق من الأوقات المحلية وشارك الموعد النهائي.</li>
-</ol>
+  <script>try{ localStorage.setItem('timerhavenLang','ar'); }catch(e){}</script>
 
-</div>
-<!-- Center tool card (Arabic) -->
-<div class="tool-card" id="tool-card">
-<!-- removed in-page language selector: language controlled by main menu -->
-<a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i> العودة إلى القائمة الرئيسية</a>
-<h3 style="display:flex;align-items:center;gap:.6rem;justify-content:flex-end;"><span id="tool-title">مخطط الاجتماعات</span> <i class="fa fa-users"></i></h3>
-<form id="meetingForm" onsubmit="return false;">
-<div class="meeting-form-row mb-2">
-<label for="participantName">اسم المشارك</label>
-<input autocomplete="off" class="form-control" id="participantName" placeholder="أدخل الاسم (مثال: أحمد)" type="text"/>
-</div>
-<div class="meeting-form-row mb-2">
-<label for="participantCity">المنطقة الزمنية / المدينة</label>
-<select autocomplete="off" class="form-select" id="participantCity"></select>
-</div>
-<div class="mb-2 d-flex gap-2" style="justify-content:flex-end;">
-<button class="btn btn-success btn-participant" id="addParticipant" type="button"><i class="fa fa-plus"></i> أضف مشارك</button>
-<button class="btn btn-outline-secondary" id="clearParticipants" title="مسح المشاركين" type="button"><i class="fa fa-eraser"></i></button>
-</div>
-</form>
-<div class="participant-list mb-3" id="participantList"></div>
-<div class="meeting-form-row mb-2">
-<label for="meetingDate">اختر التاريخ</label>
-<input class="form-control" id="meetingDate" type="date"/>
-</div>
-<div class="meeting-form-row mb-2">
-<label for="meetingTime">اختر الوقت</label>
-<input class="form-control" id="meetingTime" type="time"/>
-<button class="btn btn-primary btn-sm mt-2" id="calcTimes" type="button"><i class="fa fa-clock"></i> عرض الأوقات</button>
-</div>
-<div aria-live="polite" class="mt-2" id="meetingTimes"></div>
-<details class="faq-section mt-3">
-<summary>الأسئلة الشائعة</summary>
-<ul style="padding-right:1em;">
-<li><b>كم عدد المشاركين؟</b> أضف العدد الذي تحتاجه.</li>
-<li><b>ما هي المناطق الزمنية؟</b> اختر من أكثر من 30 مدينة شائعة.</li>
-<li><b>كيف أشارك؟</b> انسخ الأوقات وشاركها مع المشاركين.</li>
-</ul>
-</details>
-<!-- extra article link removed from bottom of tool card -->
-</div>
-<!-- Right article card: Tips (Arabic) -->
-<div aria-labelledby="tips-heading" class="article-card">
-<h2 id="tips-heading">نصائح لاجتماعات أكثر إنتاجية</h2>
-<ul>
-<li>خطط مسبقًا لاختيار وقت مناسب للجميع.</li>
-<li>أرسل دعوات التقويم لتجنب الالتباس.</li>
-<li>تحقق من المناطق الزمنية قبل الإرسال.</li>
-</ul>
+  <main class="container" role="main">
+    <section class="card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">← العودة إلى القائمة الرئيسية</a>
 
-</div>
-</div>
-</div>
+      <div id="tool-title" class="tool-title"><i class="fa fa-users"></i> مخطط الاجتماعات</div>
+
+      <p style="margin:0 0 .6rem 0; text-align:right;">
+        <a id="read-guide-btn" class="cta" href="https://timerhaven.com/ar/meeting-planner/meeting-planner-index.html" role="button" target="_blank" rel="noopener">اقرأ المقال</a>
+      </p>
+
+      <div class="tool-help" id="tool-help">ابحث عن أفضل وقت للاجتماع للجميع عبر المناطق الزمنية، أضف المشاركين، واختر الوقت الأنسب.</div>
+
+      <!-- Participants -->
+      <form id="meetingForm" onsubmit="return false;">
+        <div class="meeting-form-row">
+          <label for="participantName" id="participant-name-label">اسم المشارك</label>
+          <input autocomplete="off" type="text" id="participantName" class="form-control" placeholder="أدخل الاسم (مثال: أحمد)">
+        </div>
+
+        <div class="meeting-form-row">
+          <label for="participantCity" id="city-label">المنطقة الزمنية / المدينة</label>
+          <select id="participantCity" class="form-select"></select>
+        </div>
+
+        <div style="display:flex;gap:.5rem;align-items:center;justify-content:flex-end">
+          <button type="button" class="btn btn-success btn-participant" id="add-participant-btn"><i class="fa fa-plus"></i> <span id="add-participant-btn-text">أضف مشارك</span></button>
+          <button type="button" class="btn btn-outline-secondary" id="clear-participants-btn" title="مسح المشاركين"><i class="fa fa-eraser"></i></button>
+        </div>
+      </form>
+
+      <div id="participantList" style="margin-top:1rem;"></div>
+
+      <div class="meeting-form-row">
+        <label for="meetingDate" id="meeting-date-label">اختر التاريخ</label>
+        <input type="date" id="meetingDate" class="form-control">
+      </div>
+
+      <div class="meeting-form-row">
+        <label for="meetingTimeSelect" id="meeting-time-label">اختر الوقت (مقترح)</label>
+        <select id="meetingTimeSelect" class="form-select"></select>
+      </div>
+
+      <div id="meetingTimes" aria-live="polite"></div>
+
+      <details class="faq-section" id="faq-section">
+        <summary id="faq-title">الأسئلة الشائعة</summary>
+        <ul id="faq-list" style="padding-right:1em;"></ul>
+      </details>
+    </section>
+  </main>
+
 <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
 <script>
-    // City list (Arabic labels where practical)
-    const cities = [
-      {value:"", label:"اختر مدينة/منطقة زمنية"},
-      {value:"America/New_York", label:"نيويورك 🇺🇸"},
-      {value:"America/Chicago", label:"شيكاغو 🇺🇸"},
-      {value:"America/Los_Angeles", label:"لوس أنجلوس 🇺🇸"},
-      {value:"America/Toronto", label:"تورونتو 🇨🇦"},
-      {value:"Europe/London", label:"لندن 🇬🇧"},
-      {value:"Europe/Paris", label:"باريس 🇫🇷"},
-      {value:"Europe/Berlin", label:"برلين 🇩🇪"},
-      {value:"Europe/Moscow", label:"موسكو 🇷🇺"},
-      {value:"Europe/Istanbul", label:"إسطنبول 🇹🇷"},
-      {value:"Asia/Dubai", label:"دبي 🇦🇪"},
-      {value:"Asia/Kolkata", label:"كولكاتا 🇮🇳"},
-      {value:"Asia/Shanghai", label:"شنغهاي 🇨🇳"},
-      {value:"Asia/Tokyo", label:"طوكيو 🇯🇵"},
-      {value:"Asia/Singapore", label:"سنغافورة 🇸🇬"},
-      {value:"Asia/Jakarta", label:"جاكرتا 🇮🇩"},
-      {value:"Australia/Sydney", label:"سيدني 🇦🇺"},
-      {value:"Pacific/Auckland", label:"أوكلاند 🇳🇿"},
-      {value:"America/Sao_Paulo", label:"ساو باولو 🇧🇷"},
-      {value:"America/Mexico_City", label:"مكسيكو سيتي 🇲🇽"},
-      {value:"Africa/Johannesburg", label:"جوهانسبرغ 🇿🇦"},
-      {value:"Africa/Cairo", label:"القاهرة 🇪🇬"},
-      {value:"Africa/Nairobi", label:"نيروبي 🇰🇪"},
-      {value:"Asia/Seoul", label:"سيول 🇰🇷"},
-      {value:"Asia/Hong_Kong", label:"هونغ كونغ 🇭🇰"},
-      {value:"Asia/Bangkok", label:"بانكوك 🇹🇭"},
-      {value:"Asia/Manila", label:"مانيلا 🇵🇭"},
-      {value:"Europe/Madrid", label:"مدريد 🇪🇸"},
-      {value:"Europe/Rome", label:"روما 🇮🇹"},
-      {value:"Europe/Warsaw", label:"وارسو 🇵🇱"},
-      {value:"Europe/Amsterdam", label:"أمستردام 🇳🇱"},
-      {value:"Europe/Athens", label:"أثينا 🇬🇷"},
-      {value:"America/Vancouver", label:"فانكوفر 🇨🇦"}
-    ];
+/* Arabic translations and behavior modeled on the English tool */
+const translations = {
+  ar: {
+    "back-link":"← العودة إلى القائمة الرئيسية",
+    "tool-title":"مخطط الاجتماعات",
+    "participant-name-label":"اسم المشارك",
+    "participant-name-placeholder":"أدخل الاسم (مثال: أحمد)",
+    "city-label":"المنطقة الزمنية / المدينة",
+    "add-participant-btn-text":"أضف مشارك",
+    "meeting-date-label":"اختر التاريخ",
+    "meeting-time-label":"اختر الوقت (مقترح)",
+    "howto-article-btn":"اقرأ المقال",
+    "howto-article-link":"https://timerhaven.com/ar/meeting-planner/meeting-planner-index.html",
+    "faq-list":[
+      {"bold":"كم عدد المشاركين؟","text":"أضف العدد الذي تحتاجه."},
+      {"bold":"ما هي المناطق الزمنية؟","text":"اختر من أكثر من 30 مدينة شائعة أو منطقة زمنية."},
+      {"bold":"كيف أشارك؟","text":"انسخ الأوقات وشاركها مع المشاركين."}
+    ],
+    "enter-name-msg":"يرجى إدخال اسم المشارك.",
+    "select-city-msg":"يرجى اختيار مدينة / منطقة زمنية.",
+    "select-date-time-msg":"يرجى اختيار التاريخ والوقت.",
+    "no-participants-yet":"لا يوجد مشاركون حتى الآن.",
+    "meeting-times-heading":"أوقات الاجتماع (المنظم محليًا → المشاركون محليًا)"
+  }
+};
 
-    function populateCities() {
-      const sel = document.getElementById('participantCity');
-      sel.innerHTML = '';
-      cities.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c.value;
-        opt.textContent = c.label;
-        sel.appendChild(opt);
-      });
+const localizedArticles = {
+  howto: { ar:'https://timerhaven.com/ar/meeting-planner/meeting-planner-index.html' },
+  tips: { ar:'meeting-tips-ar.html' }
+};
+
+function getLang(){ try{ const l = localStorage.getItem('timerhavenLang') || 'ar'; return (l && l.slice(0,2)) || 'ar'; } catch(e){ return 'ar'; } }
+
+function applyLanguage(lang){
+  lang = (lang || getLang()).slice(0,2);
+  const t = translations[lang] || translations.ar;
+  document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+  const back = document.getElementById('back-link'); if (back) back.textContent = t['back-link'] || '';
+  const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.textContent = t['tool-title'] || '';
+  const participantLabel = document.getElementById('participant-name-label'); if (participantLabel) participantLabel.textContent = t['participant-name-label'] || '';
+  const participantInput = document.getElementById('participantName'); if (participantInput) participantInput.placeholder = t['participant-name-placeholder'] || '';
+  const cityLabel = document.getElementById('city-label'); if (cityLabel) cityLabel.textContent = t['city-label'] || '';
+  const addBtnText = document.getElementById('add-participant-btn-text'); if (addBtnText) addBtnText.textContent = t['add-participant-btn-text'] || '';
+
+  document.getElementById("meeting-date-label").textContent = t["meeting-date-label"] || '';
+  document.getElementById("meeting-time-label").textContent = t["meeting-time-label"] || '';
+
+  const faqList = document.getElementById("faq-list");
+  faqList.innerHTML = "";
+  (t["faq-list"] || []).forEach(faq => {
+    const li = document.createElement("li");
+    li.innerHTML = `<b>${faq.bold}</b> ${faq.text}`;
+    faqList.appendChild(li);
+  });
+
+  const howtoBtn = document.getElementById("read-guide-btn");
+  if (howtoBtn) {
+    howtoBtn.href = localizedArticles.howto[lang] || localizedArticles.howto.ar;
+    howtoBtn.textContent = t['howto-article-btn'] || 'اقرأ المقال';
+    howtoBtn.target = '_blank';
+    howtoBtn.rel = 'noopener';
+  }
+
+  populateCities();
+  populateTimeSelect();
+  updateMeetingTimes();
+}
+
+/* meeting planner logic */
+const { DateTime } = luxon;
+const LS_PARTICIPANTS = 'meetingPlannerParticipants';
+const LS_DATE = 'meetingPlannerDate';
+const LS_TIME = 'meetingPlannerTime';
+
+const cities = [
+  {value:"", label:"اختر مدينة/منطقة زمنية"},
+  {value:"America/New_York", label:"نيويورك 🇺🇸"},
+  {value:"America/Chicago", label:"شيكاغو 🇺🇸"},
+  {value:"America/Los_Angeles", label:"لوس أنجلوس 🇺🇸"},
+  {value:"America/Toronto", label:"تورونتو 🇨🇦"},
+  {value:"Europe/London", label:"لندن 🇬🇧"},
+  {value:"Europe/Paris", label:"باريس 🇫🇷"},
+  {value:"Europe/Berlin", label:"برلين 🇩🇪"},
+  {value:"Europe/Moscow", label:"موسكو 🇷🇺"},
+  {value:"Europe/Istanbul", label:"إسطنبول 🇹🇷"},
+  {value:"Asia/Dubai", label:"دبي 🇦🇪"},
+  {value:"Asia/Kolkata", label:"كولكاتا 🇮🇳"},
+  {value:"Asia/Shanghai", label:"شنغهاي 🇨🇳"},
+  {value:"Asia/Tokyo", label:"طوكيو 🇯🇵"},
+  {value:"Asia/Singapore", label:"سنغافورة 🇸🇬"},
+  {value:"Asia/Jakarta", label:"جاكرتا 🇮🇩"},
+  {value:"Australia/Sydney", label:"سيدني 🇦🇺"},
+  {value:"Pacific/Auckland", label:"أوكلاند 🇳🇿"},
+  {value:"America/Sao_Paulo", label:"ساو باولو 🇧🇷"},
+  {value:"America/Mexico_City", label:"مكسيكو سيتي 🇲🇽"},
+  {value:"Africa/Johannesburg", label:"جوهانسبرغ 🇿🇦"},
+  {value:"Africa/Cairo", label:"القاهرة 🇪🇬"},
+  {value:"Africa/Nairobi", label:"نيروبي 🇰🇪"},
+  {value:"Asia/Seoul", label:"سيول 🇰🇷"},
+  {value:"Asia/Hong_Kong", label:"هونغ كونغ 🇭🇰"},
+  {value:"Asia/Bangkok", label:"بانكوك 🇹🇭"},
+  {value:"Asia/Manila", label:"مانيلا 🇵🇭"},
+  {value:"Europe/Madrid", label:"مدريد 🇪🇸"},
+  {value:"Europe/Rome", label:"روما 🇮🇹"},
+  {value:"Europe/Warsaw", label:"وارسو 🇵🇱"},
+  {value:"Europe/Amsterdam", label:"أمستردام 🇳🇱"},
+  {value:"Europe/Athens", label:"أثينا 🇬🇷"},
+  {value:"America/Vancouver", label:"فانكوفر 🇨🇦"}
+];
+
+function populateCities(){
+  const sel = document.getElementById('participantCity');
+  if (!sel) return;
+  sel.innerHTML = '';
+  cities.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.value;
+    opt.textContent = c.label;
+    sel.appendChild(opt);
+  });
+}
+
+function loadParticipants(){
+  try {
+    const raw = localStorage.getItem(LS_PARTICIPANTS);
+    window.participants = raw ? JSON.parse(raw) : [];
+  } catch(e){
+    window.participants = [];
+  }
+}
+function saveParticipants(){
+  try { localStorage.setItem(LS_PARTICIPANTS, JSON.stringify(window.participants || [])); } catch(e) {}
+}
+
+function renderParticipants(){
+  const container = document.getElementById('participantList');
+  container.innerHTML = '';
+  const lang = getLang();
+  const t = translations[lang] || translations.ar;
+  if (!window.participants || window.participants.length === 0) {
+    container.innerHTML = `<div style="color:#888;">${t['no-participants-yet'] || 'لا يوجد مشاركون حتى الآن.'}</div>`;
+    return;
+  }
+  window.participants.forEach((p, idx) => {
+    const el = document.createElement('div');
+    el.className = 'participant-item';
+    el.innerHTML = `<div style="min-width:0;text-align:right;"><div style="font-weight:700;">${escapeHtml(p.name)}</div><div style="font-size:.9em;color:#666;">${escapeHtml(p.city)}</div></div>
+      <div style="display:flex;gap:.5rem;"><button class="btn btn-outline-danger btn-sm" onclick="removeParticipant(${idx})" aria-label="حذف المشارك"><i class="fa fa-trash"></i></button></div>`;
+    container.appendChild(el);
+  });
+}
+
+function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
+
+document.addEventListener('DOMContentLoaded', function(){
+  applyLanguage(getLang());
+  populateCities();
+  populateTimeSelect();
+  loadParticipants();
+  renderParticipants();
+  loadMeetingSettings();
+  updateMeetingTimes();
+});
+
+document.getElementById('add-participant-btn').addEventListener('click', function(){
+  const name = document.getElementById('participantName').value.trim();
+  const city = document.getElementById('participantCity').value;
+  const lang = getLang();
+  const t = translations[lang] || translations.ar;
+  if (!name) { alert(t['enter-name-msg'] || 'يرجى إدخال اسم المشارك.'); return; }
+  if (!city) { alert(t['select-city-msg'] || 'يرجى اختيار مدينة / منطقة زمنية.'); return; }
+  window.participants = window.participants || [];
+  window.participants.push({ name, city });
+  saveParticipants();
+  document.getElementById('participantName').value = '';
+  document.getElementById('participantCity').selectedIndex = 0;
+  renderParticipants();
+  updateMeetingTimes();
+});
+
+document.getElementById('clear-participants-btn').addEventListener('click', function(){
+  if (!window.participants || window.participants.length === 0) return;
+  if (!confirm('هل تريد مسح كل المشاركين؟')) return;
+  window.participants = [];
+  saveParticipants();
+  renderParticipants();
+  updateMeetingTimes();
+});
+
+window.removeParticipant = function(idx){
+  if (!window.participants) return;
+  window.participants.splice(idx,1);
+  saveParticipants();
+  renderParticipants();
+  updateMeetingTimes();
+};
+
+function populateTimeSelect(){
+  const sel = document.getElementById('meetingTimeSelect');
+  if (!sel) return;
+  const lang = getLang(); const t = translations[lang] || translations.ar;
+  sel.innerHTML = '';
+  const placeholder = document.createElement('option'); placeholder.value=''; placeholder.textContent = '— ' + (t['meeting-time-label']||'اختر الوقت') + ' —'; sel.appendChild(placeholder);
+  for(let h=0; h<24; h++){
+    for(let m=0; m<60; m+=30){
+      const hr = String(h).padStart(2,'0');
+      const min = String(m).padStart(2,'0');
+      const opt = document.createElement('option');
+      opt.value = `${hr}:${min}`;
+      opt.textContent = `${hr}:${min}`;
+      sel.appendChild(opt);
     }
+  }
+  if (!sel.value) {
+    const now = DateTime.local().startOf('minute');
+    const minutes = now.minute;
+    const next = now.plus({ minutes: (minutes < 30 ? (30 - minutes) : (60 - minutes)) });
+    const v = `${String(next.hour).padStart(2,'0')}:${String(Math.floor(next.minute/30)*30).padStart(2,'0')}`;
+    sel.value = v;
+  }
+}
 
-    const LS_KEY = 'meetingPlannerParticipants';
-    function loadParticipants() {
-      try {
-        const raw = localStorage.getItem(LS_KEY);
-        window.participants = raw ? JSON.parse(raw) : [];
-      } catch(e) {
-        window.participants = [];
+function loadMeetingSettings(){
+  try {
+    const d = localStorage.getItem(LS_DATE) || '';
+    const t = localStorage.getItem(LS_TIME) || '';
+    if (d) document.getElementById('meetingDate').value = d;
+    if (t) document.getElementById('meetingTimeSelect').value = t;
+  } catch(e){}
+}
+function saveMeetingSettings(){ try{ localStorage.setItem(LS_DATE, document.getElementById('meetingDate').value); localStorage.setItem(LS_TIME, document.getElementById('meetingTimeSelect').value); }catch(e){} }
+
+function updateMeetingTimes(){
+  const date = document.getElementById('meetingDate').value;
+  const time = document.getElementById('meetingTimeSelect').value;
+  const out = document.getElementById('meetingTimes');
+  const lang = getLang();
+  const t = translations[lang] || translations.ar;
+  if (!date || !time) { out.innerHTML = `<div style="color:#888;">${t['select-date-time-msg'] || 'يرجى اختيار التاريخ والوقت.'}</div>`; return; }
+  if (!window.participants || window.participants.length === 0) { out.innerHTML = `<div style="color:#888;">${t['no-participants-yet'] || 'لا يوجد مشاركون حتى الآن.'}</div>`; return; }
+  const localISO = `${date}T${time}`;
+  let organizer = DateTime.fromISO(localISO);
+  if (!organizer.isValid) { out.innerHTML = `<div style="color:#b00;">${t['select-date-time-msg'] || 'يرجى اختيار التاريخ والوقت.'}</div>`; return; }
+  let html = `<div style="font-weight:700;margin-bottom:.4rem;">${t['meeting-times-heading'] || 'أوقات الاجتماع (المنظم محلي → المشاركون محليًا)'}</div>`;
+  html += `<div class="meeting-times-grid">`;
+  html += `<div class="time-suggestion"><div style="text-align:right;"><b>المنظم</b> (${escapeHtml(organizer.zoneName)})</div><div>${escapeHtml(organizer.toLocaleString(DateTime.DATETIME_FULL))}</div></div>`;
+  window.participants.forEach(p => {
+    let dt;
+    try { dt = organizer.setZone(p.city); } catch(e) { dt = null; }
+    const label = dt ? dt.toLocaleString(DateTime.DATETIME_FULL) : 'منطقة زمنية غير صالحة';
+    html += `<div class="time-suggestion"><div style="text-align:right;"><b>${escapeHtml(p.name)}</b> <span style="color:#666;">(${escapeHtml(p.city)})</span></div><div>${escapeHtml(label)}</div></div>`;
+  });
+  html += `</div>`;
+  out.innerHTML = html;
+  saveMeetingSettings();
+}
+
+document.getElementById('calcTimes').addEventListener('click', updateMeetingTimes);
+document.getElementById('meetingDate').addEventListener('input', updateMeetingTimes);
+document.getElementById('meetingTimeSelect').addEventListener('change', updateMeetingTimes);
+
+// react to language changes (update UI / optional redirect to localized pages)
+window.addEventListener('storage', function(e){
+  if (e.key === 'timerhavenLang') {
+    applyLanguage((e.newValue || 'ar').slice(0,2));
+    try {
+      const lang = (e.newValue || 'ar').slice(0,2).toLowerCase();
+      const supported = ['es','fr','de','ru','el','ar'];
+      if (supported.indexOf(lang) !== -1) {
+        const localized = location.pathname.replace(/(meeting-planner)(\.html)?$/i, '$1-' + lang + '.html');
+        const target = (localized === location.pathname) ? ('/meeting-planner-' + lang + '.html') : localized;
+        if (target && (target !== location.pathname + location.search + location.hash)) {
+          location.replace(target + location.search + location.hash);
+        }
       }
-    }
-    function saveParticipants() {
-      try { localStorage.setItem(LS_KEY, JSON.stringify(window.participants || [])); } catch(e) {}
-    }
-    function renderParticipants() {
-      const container = document.getElementById('participantList');
-      container.innerHTML = '';
-      if (!window.participants || window.participants.length === 0) {
-        container.innerHTML = '<div style="color:#888;">لا يوجد مشاركون حتى الآن.</div>';
-        return;
-      }
-      window.participants.forEach((p, idx) => {
-        const el = document.createElement('div');
-        el.className = 'participant-item';
-        el.innerHTML = `<div style="min-width:0; text-align:right;"><div style="font-weight:700;">${escapeHtml(p.name)}</div><div style="font-size:.9em;color:#666;">${escapeHtml(p.city)}</div></div>
-          <div style="display:flex;gap:.5rem;"><button class="btn btn-outline-danger btn-sm" onclick="removeParticipant(${idx})" aria-label="حذف المشارك"><i class="fa fa-trash"></i></button></div>`;
-        container.appendChild(el);
-      });
-    }
-    function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
+    } catch(err){}
+  }
+});
 
-    document.getElementById('addParticipant').addEventListener('click', function(){
-      const name = document.getElementById('participantName').value.trim();
-      const city = document.getElementById('participantCity').value;
-      if (!name) { alert('يرجى إدخال اسم المشارك.'); return; }
-      if (!city) { alert('يرجى اختيار مدينة / منطقة زمنية.'); return; }
-      window.participants = window.participants || [];
-      window.participants.push({ name, city });
-      saveParticipants();
-      document.getElementById('participantName').value = '';
-      document.getElementById('participantCity').selectedIndex = 0;
-      renderParticipants();
-      updateMeetingTimes();
-    });
+</script>
 
-    document.getElementById('clearParticipants').addEventListener('click', function(){
-      if (!window.participants || window.participants.length === 0) return;
-      if (!confirm('هل تريد مسح كل المشاركين؟')) return;
-      window.participants = [];
-      saveParticipants();
-      renderParticipants();
-      updateMeetingTimes();
-    });
-
-    window.removeParticipant = function(idx){
-      if (!window.participants) return;
-      window.participants.splice(idx,1);
-      saveParticipants();
-      renderParticipants();
-      updateMeetingTimes();
-    };
-
-    // Luxon usage
-    const { DateTime } = luxon;
-    function updateMeetingTimes(){
-      const date = document.getElementById('meetingDate').value;
-      const time = document.getElementById('meetingTime').value;
-      const out = document.getElementById('meetingTimes');
-      const tlang = {
-        noDateTime: "يرجى اختيار التاريخ والوقت.",
-        noParticipants: "لا يوجد مشاركون حتى الآن.",
-        heading: "أوقات الاجتماع (المنظم محلي → المشاركون محلياً)"
-      };
-      if (!date || !time) { out.innerHTML = `<div style="color:#888;">${tlang.noDateTime}</div>`; return; }
-      if (!window.participants || window.participants.length === 0) { out.innerHTML = `<div style="color:#888;">${tlang.noParticipants}</div>`; return; }
-      const localISO = `${date}T${time}`;
-      let organizer = DateTime.fromISO(localISO);
-      if (!organizer.isValid) { out.innerHTML = `<div style="color:#b00;">${tlang.noDateTime}</div>`; return; }
-      let html = `<div style="font-weight:700;margin-bottom:.4rem;">${tlang.heading}</div>`;
-      html += `<div class="meeting-times-grid">`;
-      html += `<div class="time-suggestion"><div style="text-align:right;"><b>المنظم</b> (${escapeHtml(organizer.zoneName)})</div><div>${escapeHtml(organizer.toLocaleString(DateTime.DATETIME_FULL))}</div></div>`;
-      window.participants.forEach(p => {
-        let dt;
-        try { dt = organizer.setZone(p.city); } catch(e) { dt = null; }
-        const label = dt ? dt.toLocaleString(DateTime.DATETIME_FULL) : 'منطقة زمنية غير صالحة';
-        html += `<div class="time-suggestion"><div style="text-align:right;"><b>${escapeHtml(p.name)}</b> <span style="color:#666;">(${escapeHtml(p.city)})</span></div><div>${escapeHtml(label)}</div></div>`;
-      });
-      html += `</div>`;
-      out.innerHTML = html;
-    }
-
-    document.getElementById('calcTimes').addEventListener('click', updateMeetingTimes);
-
-    // Init
-    document.addEventListener('DOMContentLoaded', function(){
-      populateCities();
-      loadParticipants();
-      renderParticipants();
-      try {
-        const savedDate = localStorage.getItem('meetingPlannerDate');
-        const savedTime = localStorage.getItem('meetingPlannerTime');
-        if (savedDate) document.getElementById('meetingDate').value = savedDate;
-        if (savedTime) document.getElementById('meetingTime').value = savedTime;
-      } catch(e){}
-    });
-
-    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){} });
-    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){} });
-  </script>
-<p style="margin-top:1rem;"><a class="cta" href="/ar/meeting-planner/meeting-planner-index.html">Read full guide</a></p></body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+<footer style="direction:rtl;text-align:right;margin-top:1.2rem;color:var(--muted);">
+  &copy; 2025 TimerHaven. جميع الأدوات مجانية وتحترم الخصوصية.<br/>
+  <a href="privacy.html">سياسة الخصوصية</a> &bull;
+  <a href="terms.html">الشروط</a> &bull;
+  <a href="contact.html">اتصل بنا</a>
+</footer>
+</body>
 </html>

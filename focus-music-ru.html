@@ -1,231 +1,263 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<title>Музыка для концентрации — TimerHaven</title>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="Слушайте музыку, помогающую концентрироваться. Выберите белый шум, дождь, альфа-волны, классику, шум океана или атмосферу кафе." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; }
-    .main-container { max-width:1200px; margin:2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
-    .center-row, .card-row { display:flex; gap:2em; width:100%; justify-content:center; align-items:stretch; }
-    .article-card, .tool-card {
-      background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef;
-      min-width:220px; max-width:340px; width:340px; min-height:500px;
-      flex:1 1 340px; display:flex; flex-direction:column; padding:2em 1.3em 1em; box-sizing:border-box;
-      text-align:left; overflow:hidden;
-    }
-    .article-card h2, .tool-card h3 { font-size:1.35em; font-weight:700; margin-bottom:.4em; display:flex; gap:.3em; align-items:center; }
-    .music-player { margin-bottom:1em; }
-    .music-player label { margin-left:.5em; font-size:1em; }
-    .faq-section { margin-top:1.1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; }
-    .back-link { display:inline-block; margin-bottom:1em; color:#007bff; text-decoration:none; font-weight:700; }
+  <meta charset="utf-8"/>
+  <title>Музыка для концентрации — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Слушайте музыку, помогающую концентрироваться. Выберите белый шум, дождь, альфа-волны, классику, шум океана или атмосферу кафе."/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/css/tool-theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html,body{height:100%}
+    body { background:var(--bg); font-family: 'Montserrat', Arial, sans-serif; color:var(--text-dark,#102a43); margin:0; padding:2rem; }
+
+    .container { max-width:720px; margin:0 auto; }
+    .card { background:var(--card); border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.06); padding:1.6rem 1.5rem; box-sizing:border-box; }
+
+    /* Back link and title styles to match other upgraded tools */
+    .back-link { display:inline-block; margin-bottom:.75rem; color:#007bff !important; text-decoration:none; font-weight:700; }
     .back-link:hover { text-decoration:underline; }
-    @media (max-width:1100px){ .main-container{padding:0 8px;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
-    @media (max-width:800px){ .center-row{flex-direction:column;align-items:center;} .article-card{display:none!important;} }
-    details[open] summary::after{ content:" ▲"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" ▼"; font-size:.9em; }
+    .tool-title { font-size:1.35rem; margin:0 0 .4rem 0; display:flex; align-items:center; gap:.4rem; color:#185a9d; }
+
+    .read-guide {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin:.25rem 0 .9rem 0;
+      padding:.45rem .7rem;
+      border-radius:8px;
+      background:#007bff !important;
+      color:#fff !important;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+      border:none;
+      box-shadow:0 6px 18px rgba(0,123,255,0.08);
+    }
+
+    .help-section { color:var(--muted); margin-bottom:.8rem; }
+    .music-player label { margin-left:.5rem; display:block; margin-bottom:.3rem; font-weight:600; }
+    .faq-section { margin-top: 1.1rem; margin-bottom: 0.3rem; font-size: 1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
+    .faq-section summary { font-weight:700; font-size:1.02rem; cursor:pointer; }
+    .faq-section ul { padding-left:1em; margin-top:.5rem; color:var(--muted); }
+
+    .player-controls {
+      display:flex;
+      gap:0.5rem;
+      align-items:center;
+      margin-bottom:.6rem;
+    }
+    .player-controls .btn {
+      padding: .28rem .6rem;
+      font-size: .95rem;
+      line-height: 1;
+      width: auto;
+    }
+
+    @media (max-width:900px) { .card { padding:1rem; } }
   </style>
 </head>
 <body>
-<!-- Force Russian for local testing -->
-<script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){}</script>
-<div class="main-container">
-<div class="center-row">
-<div class="article-card">
-<div>
-<h2 id="howto-title"></h2>
-<ol id="howto-steps"></ol>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
-</div>
-<div class="tool-card">
-<a class="back-link" href="index.html" id="back-link"></a>
-<h3 id="tool-title"></h3>
-<div class="help-section" id="tool-help"></div>
-<div class="music-player">
-<label for="music-select" id="music-label"></label>
-<select aria-label="Выберите плейлист" class="form-select mb-2" id="music-select">
-<option value="white"></option>
-<option value="rain"></option>
-<option value="alpha"></option>
-<option value="classical"></option>
-<option value="ocean"></option>
-<option value="cafe"></option>
-</select>
-<label for="music-loop" id="loop-label" style="display:flex;align-items:center;gap:.5rem;">
-<input aria-label="Зациклить трек" id="music-loop" type="checkbox"/>
-<span id="loop-label-text"></span>
-</label>
-</div>
-<button class="btn btn-primary w-100 mb-2" id="play-btn">Воспроизвести</button>
-<button class="btn btn-danger w-100 mb-2" id="stop-btn">Стоп</button>
-<audio controls="" id="focus-audio" style="display:none;"></audio>
-<details class="faq-section mt-2">
-<summary id="faq-title"></summary>
-<ul id="faq-list" style="padding-left:1em;"></ul>
-</details>
-</div>
-<div class="article-card">
-<div>
-<h2 id="tips-title"></h2>
-<ul id="tips-list"></ul>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
-</div>
-</div>
-</div>
-<script>
-  // Test audio tracks (SoundHelix)
-  const tracks = {
-    white:    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    rain:     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    alpha:    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-    classical:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-    ocean:    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-    cafe:     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
-  };
+  <script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){};</script>
 
-  // Complete translations object (all languages included to avoid partial/missing keys)
-  const focusMusicTranslations = {
-    en: {
-      "language-label":"Language:","back-link":"Back to Main Menu","tool-title":"Focus Music",
-      "tool-help":"Enhance your concentration and productivity with music scientifically shown to help focus. Choose soothing sounds: white noise, rain, alpha waves, classical, ocean waves, or cafe ambience.",
-      "music-label":"Select a playlist:","music-white":"White Noise","music-rain":"Rain","music-alpha":"Alpha Waves",
-      "music-classical":"Classical","music-ocean":"Ocean Waves","music-cafe":"Cafe Ambience","loop-label":"Loop track",
-      "play":"Play","stop":"Stop","faq-title":"FAQs",
-      "faq-list":`<li><b>Can I loop tracks?</b> Yes, use the Loop checkbox or audio controls after pressing Play.</li>
-        <li><b>Does this work offline?</b> No, tracks stream from the server.</li>
-        <li><b>Can I add my own music?</b> Not yet—let us know if you want this.</li>`,
-      "howto-title":'<i class="fa fa-music"></i> How to Use Focus Music',
-      "howto-steps":`<li><b>Select a playlist:</b> Choose music for focus or relaxation.</li>
-        <li><b>Play and adjust volume:</b> Use the controls to adjust playback.</li>
-        <li><b>Switch tracks:</b> Try different music styles to see what works best.</li>`,
-      "howto-article-btn":"Read Full Article","howto-article-link":"focus-music-how-to.html",
-      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Focus Music Productivity Tips',
-      "tips-list":`<li><b>Experiment with genres:</b> Try different playlists for various work modes.</li>
-        <li><b>Use headphones:</b> Block distractions with quality headphones.</li>
-        <li><b>Volume matters:</b> Keep the sound low enough for concentration.</li>`,
-      "tips-article-btn":"Read Full Article","tips-article-link":"focus-music-tips.html"
-    },
-    fr: { "language-label":"Langue :", "back-link":"Retour au menu principal", "tool-title":"Musique pour la Concentration", "tool-help":"Boostez votre concentration avec une musique adaptée. Выберите bruit blanc, pluie, ondes alpha, classique, bruit d'océan ou ambiance café.", "music-label":"Choisissez une playlist :", "music-white":"Bruit blanc", "music-rain":"Pluie", "music-alpha":"Ondes alpha", "music-classical":"Classique", "music-ocean":"Vagues de l'océan", "music-cafe":"Ambiance кафе", "loop-label":"Boucler le morceau", "play":"Lecture", "stop":"Arrêter", "faq-title":"FAQ", "faq-list":`<li><b>Peut-on boucler les morceaux ?</b> Oui, utilisez la case Boucle ou les contrôles audio.</li><li><b>Fonctionne hors ligne ?</b> Non, la musique est diffusée depuis le serveur.</li><li><b>Peut-on ajouter sa propre musique ?</b> Pas encore—dites-nous si vous le souhaitez !</li>`, "howto-title":'<i class="fa fa-music"></i> Comment utiliser la Musique pour la Concentration', "howto-steps":`<li><b>Choisissez une playlist :</b> Sélectionnez la musique qui vous convient.</li><li><b>Lancez et ajustez le volume :</b> Utilisez les contrôles pour régler la lecture.</li><li><b>Changez de style :</b> Essayez différents genres pour trouver celui qui vous aide le plus.</li>`, "howto-article-btn":"Lire l'article complet", "howto-article-link":"focus-music-how-to-fr.html", "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour la Musique Concentration', "tips-list":`<li><b>Variez les genres :</b> Essayez plusieurs playlists selon vos besoins.</li><li><b>Utilisez un casque :</b> Isolez-vous des distractions.</li><li><b>Volume adapté :</b> Gardez звук умеренным для концентрации.</li>`, "tips-article-btn":"Lire l'article complet","tips-article-link":"focus-music-tips-fr.html" },
-    de: { "language-label":"Sprache:", "back-link":"Zurück zum Hauptmenü", "tool-title":"Fokus-Musik", "tool-help":"Verbessern Sie Ihre Konzentration mit Musik: Weißes Rauschen, Regen, Alpha-Wellen, Klassik, Meeresrauschen oder Café-Geräusche.", "music-label":"Playlist auswählen:", "music-white":"Weißes Rauschen", "music-rain":"Regen", "music-alpha":"Alpha-Wellen", "music-classical":"Klassik", "music-ocean":"Meeresrauschen", "music-cafe":"Café-Atmosphäre", "loop-label":"Titel wiederholen", "play":"Abspielen", "stop":"Stopp", "faq-title":"FAQ", "faq-list":`<li><b>Können Titel wiederholt werden?</b> Ja, nutzen Sie die Checkbox oder die Audio-Steuerung.</li><li><b>Offline nutzbar?</b> Nein, Musik wird gestreamt.</li><li><b>Eigene Musik hinzufügen?</b> Noch nicht—sagen Sie uns Bescheid!</li>`, "howto-title":'<i class="fa fa-music"></i> So nutzt du Fokus-Musик', "howto-steps":`<li><b>Playlist auswählen:</b> Wählen Sie Musik für Fokus или Entspannung.</li><li><b>Abspielen & Lautstärke einstellen:</b> Mit den Steuerelementen Musik starten und regulieren.</li><li><b>Genres wechseln:</b> Testen Sie различные Stile für besten Effekt.</li>`, "howto-article-btn":"Vollständigen Artikel lesen", "howto-article-link":"focus-music-how-to-de.html", "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps für Fokus-Musik', "tips-list":`<li><b>Genres ausprobieren:</b> Testen Sie verschiedene Playlists für verschiedene Aufgaben.</li><li><b>Kopfhörer nutzen:</b> Blenden Sie Störungen aus.</li><li><b>Auf Lautstärke achten:</b> Nicht zu laut für optimale Konzentration.</li>`,"tips-article-btn":"Vollständigen Artikel lesen","tips-article-link":"focus-music-tips-de.html"},
-    ru: {
-      "language-label":"Язык:","back-link":"Назад в главное меню","tool-title":"Музыка для концентрации",
-      "tool-help":"Улучшите концентрацию с помощью музыки: белый шум, дождь, альфа-волны, классика, шум океана или атмосфера кафе.",
-      "music-label":"Выберите плейлист:","music-white":"Белый шум","music-rain":"Дождь","music-alpha":"Альфа-волны","music-classical":"Классика","music-ocean":"Шум океана","music-cafe":"Кафе",
-      "loop-label":"Зациклить трек","play":"Воспроизвести","stop":"Стоп","faq-title":"Частые вопросы",
-      "faq-list":`<li><b>Можно зациклить трек?</b> Да, используйте галочку или управление плеером.</li>
-        <li><b>Работает оффлайн?</b> Нет, музыка транслируется с сервера.</li>
-        <li><b>Можно добавить свою музыку?</b> Пока нет—дайте знать, если нужно!</li>`,
-      "howto-title":'<i class="fa fa-music"></i> Как пользоваться Музыкой для концентрации',
-      "howto-steps":`<li><b>Выберите плейлист:</b> Музыка для фокуса или релакса.</li>
-        <li><b>Запуск и громкость:</b> Управляйте воспроизведением и громкостью.</li>
-        <li><b>Меняйте треки:</b> Экспериментируйте с жанрами для лучшего эффекта.</li>`,
-      "howto-article-btn":"Читать полный текст","howto-article-link":"focus-music-how-to-ru.html",
-      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по Музыке для концентрации',
-      "tips-list":`<li><b>Экспериментируйте с жанрами:</b> Разные плейлисты для разных задач.</li>
-        <li><b>Используйте наушники:</b> Максимально блокируйте шум.</li>
-        <li><b>Контроль громкости:</b> Не слишком громко для концентрации.</li>`,"tips-article-btn":"Читать полный текст","tips-article-link":"focus-music-tips-ru.html"
-    },
-    el: { "language-label":"Γλώσσα:","back-link":"Επιστροφή στο κύριο μενού","tool-title":"Μουσική Συγκέντρωσης","tool-help":"Βελτιώστε τη συγκέντρωση με μουσική: λευκός θόρυβος, βροχή, άλφα κύματα, κλασική, κύματα ωκεανού ή ατμόσφαιρα καφέ.","music-label":"Επιλέξτε playlist:","music-white":"Λευκός θόρυβος","music-rain":"Βροχή","music-alpha":"Άλφα κύματα","music-classical":"Κλασική","music-ocean":"Κύματα ωκεανού","music-cafe":"Ατμόσφαιρα καφέ","loop-label":"Επανάληψη κομματιού","play":"Αναπαραγωγή","stop":"Διακοπή","faq-title":"Συχνές Ερωτήσεις","faq-list":`<li><b>Μπορώ να επαναλάβω κομμάτια;</b> Ναι, με το κουμπί ή τα χειριστήρια audio.</li><li><b>Λειτουργεί offline;</b> Όχι, η μουσική μεταδίδεται από τον server.</li><li><b>Μπορώ να προσθέσω δική μου μουσική;</b> Όχι ακόμα—πείτε μας αν το θέλετε!</li>`,"howto-title":'<i class="fa fa-music"></i> Πώς να χρησιμοποιήσετε τη Μουσική Συγκέντρωσης',"howto-steps":`<li><b>Επιλέξτε playlist:</b> Μουσική για συγκέντρωση ή χαλάρωση.</li><li><b>Παίξτε & ρυθμίστε ένταση:</b> Χρησιμοποιήστε τα χειριστήρια για αναπαραγωγή/ένταση.</li><li><b>Αλλάξτε είδος:</b> Δοκιμάστε διαφορετικές μουσικές για καλύτερη συγκέντρωση.</li>`,"howto-article-btn":"Διαβάστε το πλήρες άρθρο","howto-article-link":"focus-music-how-to-el.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές για Μουσική Συγκέντρωσης',"tips-list":`<li><b>Πειραματιστείτε με είδη:</b> Δοκιμάστε διαφορετικές playlists.</li><li><b>Χρησιμοποιήστε ακουστικά:</b> Μειώστε τους περισπασμούς.</li><li><b>Ένταση χαμηλά:</b> Για καλύτερη συγκέντρωση.</li>`,"tips-article-btn":"Διαβάστε το πλήρες άρθρο","tips-article-link":"focus-music-tips-el.html" },
-    es: { "language-label":"Idioma:","back-link":"Volver al menú principal","tool-title":"Música para concentrarse","tool-help":"Mejora tu concentración con música: ruido blanco, lluvia, ondas alfa, clásica, olas, o ambiente de café.","music-label":"Selecciona una lista:","music-white":"Ruido blanco","music-rain":"Lluvia","music-alpha":"Ondas alfa","music-classical":"Clásica","music-ocean":"Olas","music-cafe":"Ambiente de café","loop-label":"Repetir pista","play":"Reproducir","stop":"Detener","faq-title":"Preguntas frecuentes","faq-list":`<li><b>¿Puedo repetir la pista?</b> Sí, usa el botón o los controles de audio.</li><li><b>¿Funciona offline?</b> No, las pistas se transmiten desde el servidor.</li><li><b>¿Puedo agregar mi música?</b> No todavía—¡dínoslo si lo quieres!</li>`,"howto-title":'<i class="fa fa-music"></i> Cómo usar Música para concentrarse',"howto-steps":`<li><b>Selecciona lista:</b> Escoge música para concentración o relajación.</li><li><b>Reproduce y ajusta volumen:</b> Usa los controles para regular.</li><li><b>Cambia de estilo:</b> Prueba diferentes géneros y elige el que mejor funcione.</li>`,"howto-article-btn":"Leer artículo completo","howto-article-link":"focus-music-how-to-es.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos Música de concentración',"tips-list":`<li><b>Prueba géneros:</b> Testea varias playlists para cada tarea.</li><li><b>Usa auriculares:</b> Bloquea distracciones.</li><li><b>Volumen bajo:</b> Mantén el sonido suave para concentrarte.</li>`,"tips-article-btn":"Leer artículo completo","tips-article-link":"focus-music-tips-es.html" },
-    ar: { "language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"موسيقى التركيز","tool-help":"عزز تركيزك بإيقاعات علمية: ضوضاء بيضاء، مطر، موجات ألفا، كلاسيك، أمواج البحر أو أجواء المقهى.","music-label":"اختر قائمة تشغيل:","music-white":"ضوضاء بيضاء","music-rain":"مطر","music-alpha":"موجات ألفا","music-classical":"كلاسيك","music-ocean":"أمواج البحر","music-cafe":"أجواء مقهى","loop-label":"تكرار المقطع","play":"تشغيل","stop":"إيقاف","faq-title":"الأسئلة الشائعة","faq-list":`<li><b>هل يمكن تكرار المقطع؟</b> نعم، استخدم التكرار أو أدوات الصوت.</li><li><b>هل يعمل بدون إنترنت؟</b> لا، تُبث الموسيقى من الخادم.</li><li><b>هل يمكن إضافة موسيقاك؟</b> ليس بعد—أخبرنا إذا رغبت بذلك!</li>`,"howto-title":'<i class="fa fa-music"></i> كيفية استخدام موسيقى التركيز',"howto-steps":`<li><b>اختر قائمة تشغيل:</b> موسيقى للتركيز أو الاسترخاء.</li><li><b>شغل وعدل الصوت:</b> استخدم أدوات التحكم.</li><li><b>غيّر المقطوعات:</b> جرب أنماطًا مختلفة للتركيز الأفضل.</li>`,"howto-article-btn":"اقرأ المقال الكامل","howto-article-link":"focus-music-how-to-ar.html","tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح لموسيقى التركيز',"tips-list":`<li><b>جرب الأنواع المختلفة:</b> قوائم تشغيل متنوعة لكل مهمة.</li><li><b>استخدم سماعات الرأس:</b> احجب المشتتات.</li><li><b>حافظ على انخفاض الصوت:</b> لمزيد من التركيز.</li>`,"tips-article-btn":"اقرأ المقال الكامل","tips-article-link":"focus-music-tips-ar.html" }
-  };
+  <main class="container" role="main">
+    <section class="card tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">← Назад в главное меню</a>
 
-  const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
+      <div id="tool-title" class="tool-title"><i class="fa fa-music"></i> Музыка для концентрации</div>
 
-  function getLang() { try { const l = localStorage.getItem('timerhavenLang') || 'ru'; return (l && l.slice(0,2)) || 'ru'; } catch(e){ return 'ru'; } }
+      <!-- Read full guide button (canonical Russian path; opens in new tab) -->
+      <p style="margin:0 0 .6rem 0;">
+        <a id="read-guide-btn" class="read-guide" href="https://timerhaven.com/ru/focus-music/focus-music-index.html" role="button" target="_blank" rel="noopener">Читать полный текст</a>
+      </p>
 
-  function applyLanguage(lang) {
-    lang = (lang || getLang()).slice(0,2);
-    const t = focusMusicTranslations[lang] || focusMusicTranslations['ru'];
-    document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      <div class="help-section" id="tool-help">Улучшите концентрацию и продуктивность с помощью музыки, которая по исследованиям помогает фокусироваться. Выберите успокаивающие звуки: белый шум, дождь, альфа-волны, классику, шум океана или атмосферу кафе.</div>
 
-    if (document.getElementById('back-link')) document.getElementById('back-link').textContent = t['back-link'] || '';
-    if (document.getElementById('tool-title')) document.getElementById('tool-title').innerHTML = `<i class="fa fa-music"></i> ${t['tool-title'] || ''}`;
-    if (document.getElementById('tool-help')) document.getElementById('tool-help').textContent = t['tool-help'] || '';
+      <div class="music-player">
+        <label for="music-select" id="music-label">Выберите плейлист:</label>
+        <select id="music-select" class="form-select mb-2" style="max-width:360px;">
+          <option value="white">Белый шум</option>
+          <option value="rain">Дождь</option>
+          <option value="alpha">Альфа-волны</option>
+          <option value="classical">Классика</option>
+          <option value="ocean">Шум океана</option>
+          <option value="cafe">Атмосфера кафе</option>
+        </select>
 
-    const musicLabel = document.getElementById('music-label');
-    if (musicLabel) musicLabel.textContent = t['music-label'] || '';
-    const ms = document.getElementById('music-select');
-    if (ms && ms.options) {
-      ms.options[0].text = t['music-white'] || 'Белый шум';
-      ms.options[1].text = t['music-rain'] || 'Дождь';
-      ms.options[2].text = t['music-alpha'] || 'Альфа-волны';
-      ms.options[3].text = t['music-classical'] || 'Классика';
-      ms.options[4].text = t['music-ocean'] || 'Шум океана';
-      ms.options[5].text = t['music-cafe'] || 'Кафе';
+        <div class="form-check mb-2" style="display:inline-block; margin-right:12px;">
+          <input class="form-check-input" type="checkbox" id="music-loop">
+          <label class="form-check-label" for="music-loop" id="loop-label-text">Зациклить трек</label>
+        </div>
+
+        <div class="player-controls" role="toolbar" aria-label="Audio controls">
+          <button class="btn btn-primary btn-sm" id="play-btn" aria-label="Play">Воспроизвести</button>
+          <button class="btn btn-danger btn-sm" id="stop-btn" aria-label="Stop">Стоп</button>
+        </div>
+
+        <audio id="focus-audio" style="display:none;" controls></audio>
+      </div>
+
+      <details class="faq-section">
+        <summary id="faq-title">Частые вопросы</summary>
+        <ul id="faq-list">
+          <li><b>Можно зациклить трек?</b> Да — включите «Зациклить трек» или используйте управление плеером после нажатия Воспроизвести.</li>
+          <li><b>Работает офлайн?</b> Нет — треки стримятся с удалённых серверов, требуется подключение к интернету.</li>
+          <li><b>Можно добавить свою музыку?</b> Пока нет. Если вам нужна эта функция, сообщите нам, и мы рассмотрим её добавление.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+
+  <script>
+    const tracks = {
+      white:    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      rain:     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+      alpha:    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+      classical:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+      ocean:    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+      cafe:     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"
+    };
+
+    const focusMusicTranslations = {
+      en: {
+        "language-label":"Language:",
+        "back-link":"← Back to Main Menu",
+        "tool-title":"Focus Music",
+        "tool-help":"Enhance your concentration and productivity with music scientifically shown to help focus. Choose soothing sounds: white noise, rain, alpha waves, classical, ocean waves, or cafe ambience.",
+        "music-label":"Select a playlist:",
+        "music-white":"White Noise",
+        "music-rain":"Rain",
+        "music-alpha":"Alpha Waves",
+        "music-classical":"Classical",
+        "music-ocean":"Ocean Waves",
+        "music-cafe":"Cafe Ambience",
+        "loop-label":"Loop track",
+        "play":"Play",
+        "stop":"Stop",
+        "faq-title":"FAQs",
+        "faq-list": `<li><b>Can I loop tracks?</b> Yes — enable the "Loop track" checkbox or use the audio player's loop control after pressing Play.</li>
+          <li><b>Does this work offline?</b> No — tracks stream from remote servers, so an internet connection is required.</li>
+          <li><b>Can I add my own music?</b> Not yet. If you'd like this feature, tell us and we'll evaluate adding user uploads or playlist imports.</li>`
+      },
+      ru: {
+        "language-label":"Язык:",
+        "back-link":"← Назад в главное меню",
+        "tool-title":"Музыка для концентрации",
+        "tool-help":"Улучшите концентрацию и продуктивность с помощью музыки, которая помогает фокусироваться. Выберите успокаивающие звуки: белый шум, дождь, альфа-волны, классику, шум океана или атмосферу кафе.",
+        "music-label":"Выберите плейлист:",
+        "music-white":"Белый шум",
+        "music-rain":"Дождь",
+        "music-alpha":"Альфа-волны",
+        "music-classical":"Классика",
+        "music-ocean":"Шум океана",
+        "music-cafe":"Атмосфера кафе",
+        "loop-label":"Зациклить трек",
+        "play":"Воспроизвести",
+        "stop":"Стоп",
+        "faq-title":"Частые вопросы",
+        "faq-list": `<li><b>Можно зациклить трек?</b> Да — включите «Зациклить трек» или используйте управление плеером после нажатия Воспроизвести.</li>
+          <li><b>Работает офлайн?</b> Нет — треки стримятся с удалённых серверов, требуется подключение к интернету.</li>
+          <li><b>Можно добавить свою музыку?</b> Пока нет. Если вам нужна эта функция, сообщите нам, и мы рассмотрим её добавление.</li>`
+      }
+      // other languages can be added if desired
+    };
+
+    function getLang() {
+      try { return (localStorage.getItem('timerhavenLang') || 'ru').slice(0,2); } catch (e) { return 'ru'; }
     }
 
-    const loopText = document.getElementById('loop-label-text');
-    if (loopText) loopText.textContent = t['loop-label'] || 'Зациклить трек';
-    const playBtn = document.getElementById('play-btn');
-    const stopBtn = document.getElementById('stop-btn');
-    if (playBtn) playBtn.textContent = t['play'] || 'Воспроизвести';
-    if (stopBtn) stopBtn.textContent = t['stop'] || 'Стоп';
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0,2);
+      const t = focusMusicTranslations[lang] || focusMusicTranslations['ru'];
+      document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
-    const faqTitle = document.getElementById('faq-title');
-    if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
-    const faqList = document.getElementById('faq-list');
-    if (faqList) faqList.innerHTML = t['faq-list'] || '';
+      const back = document.getElementById('back-link');
+      if (back) back.textContent = t['back-link'] || '';
 
-    const howtoTitle = document.getElementById('howto-title');
-    const howtoSteps = document.getElementById('howto-steps');
-    if (howtoTitle) howtoTitle.innerHTML = t['howto-title'] || '';
-    if (howtoSteps) howtoSteps.innerHTML = t['howto-steps'] || '';
-    const howtoBtn = document.getElementById('howto-article-btn');
-    if (howtoBtn) { howtoBtn.textContent = t['howto-article-btn'] || ''; howtoBtn.href = t['howto-article-link'] || ''; }
+      const toolTitle = document.getElementById('tool-title');
+      if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-music"></i> ${t['tool-title'] || ''}`;
 
-    const tipsTitle = document.getElementById('tips-title');
-    const tipsList = document.getElementById('tips-list');
-    const tipsBtn = document.getElementById('tips-article-btn');
-    if (tipsTitle) tipsTitle.innerHTML = t['tips-title'] || '';
-    if (tipsList) tipsList.innerHTML = t['tips-list'] || '';
-    if (tipsBtn) { tipsBtn.textContent = t['tips-article-btn'] || ''; tipsBtn.href = t['tips-article-link'] || ''; }
-  }
+      const help = document.getElementById('tool-help');
+      if (help) help.textContent = t['tool-help'] || '';
 
-  window.addEventListener('storage', function(e) {
-    if (e.key === 'timerhavenLang') applyLanguage((e.newValue || 'ru').slice(0,2));
-  });
+      const musicLabel = document.getElementById('music-label');
+      if (musicLabel) musicLabel.textContent = t['music-label'] || '';
 
-  function playMusic() {
-    const sel = document.getElementById('music-select').value;
-    const audio = document.getElementById('focus-audio');
-    audio.src = tracks[sel];
-    audio.loop = document.getElementById('music-loop').checked;
-    audio.style.display = 'block';
-    audio.load();
-    audio.play().catch(()=>{ /* ignore autoplay errors */ });
-  }
-  function stopMusic() {
-    const audio = document.getElementById('focus-audio');
-    audio.pause();
-    audio.currentTime = 0;
-    audio.style.display = 'none';
-  }
+      const ms = document.getElementById('music-select');
+      if (ms && ms.options) {
+        ms.options[0].text = t['music-white'] || 'Белый шум';
+        ms.options[1].text = t['music-rain'] || 'Дождь';
+        ms.options[2].text = t['music-alpha'] || 'Альфа-волны';
+        ms.options[3].text = t['music-classical'] || 'Классика';
+        ms.options[4].text = t['music-ocean'] || 'Шум океана';
+        ms.options[5].text = t['music-cafe'] || 'Атмосфера кафе';
+      }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    applyLanguage(getLang());
+      const loopText = document.getElementById('loop-label-text');
+      if (loopText) loopText.textContent = t['loop-label'] || 'Зациклить трек';
 
-    const playBtn = document.getElementById('play-btn');
-    const stopBtn = document.getElementById('stop-btn');
-    const loopCb = document.getElementById('music-loop');
+      const playBtn = document.getElementById('play-btn');
+      if (playBtn) playBtn.textContent = t['play'] || 'Воспроизвести';
 
-    if (playBtn) playBtn.addEventListener('click', playMusic);
-    if (stopBtn) stopBtn.addEventListener('click', stopMusic);
-    if (loopCb) loopCb.addEventListener('change', function(){ document.getElementById('focus-audio').loop = this.checked; });
+      const stopBtn = document.getElementById('stop-btn');
+      if (stopBtn) stopBtn.textContent = t['stop'] || 'Стоп';
 
-    // Safety: some browsers/local-file cases leave option.text empty until JS runs; ensure options are populated
-    const ms = document.getElementById('music-select');
-    if (ms && (!ms.options[0].text || ms.options[0].text.trim() === "")) applyLanguage(getLang());
-  });
-</script>
-<footer>
-  © 2025 TimerHaven. Все инструменты бесплатны и защищают приватность.<br/>
-<a href="privacy.html">Политика конфиденциальности</a> • <a href="terms.html">Условия</a> • <a href="contact.html">Контакты</a>
-</footer>
-<p style="margin-top:1rem;"><a class="cta" href="/ru/focus-music/focus-music-index.html">Read full guide</a></p></body>
+      const faqTitle = document.getElementById('faq-title');
+      if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+
+      const faqList = document.getElementById('faq-list');
+      if (faqList) faqList.innerHTML = t['faq-list'] || '';
+
+      const readBtn = document.getElementById('read-guide-btn');
+      if (readBtn) { readBtn.textContent = (t['howto-article-btn'] || 'Читать полный текст'); readBtn.href = (t['howto-article-link'] || 'https://timerhaven.com/ru/focus-music/focus-music-index.html'); }
+    }
+
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') applyLanguage((e.newValue || 'ru').slice(0,2));
+    });
+
+    function playMusic() {
+      const sel = document.getElementById('music-select').value;
+      const audio = document.getElementById('focus-audio');
+      audio.src = tracks[sel];
+      audio.loop = document.getElementById('music-loop').checked;
+      audio.style.display = 'block';
+      audio.load();
+      audio.play().catch(()=>{});
+    }
+    function stopMusic() {
+      const audio = document.getElementById('focus-audio');
+      audio.pause();
+      audio.currentTime = 0;
+      audio.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      applyLanguage(getLang());
+
+      const playBtn = document.getElementById('play-btn');
+      const stopBtn = document.getElementById('stop-btn');
+      const loopCb = document.getElementById('music-loop');
+
+      if (playBtn) playBtn.addEventListener('click', playMusic);
+      if (stopBtn) stopBtn.addEventListener('click', stopMusic);
+      if (loopCb) loopCb.addEventListener('change', function(){ document.getElementById('focus-audio').loop = this.checked; });
+
+      // Safety: ensure option text is populated for local-file quirks
+      const ms = document.getElementById('music-select');
+      if (ms && (!ms.options[0].text || ms.options[0].text.trim() === "")) applyLanguage(getLang());
+    });
+  </script>
+
+  <footer style="text-align:center;margin-top:1.2rem;color:var(--muted);">
+    &copy; 2025 TimerHaven. Все инструменты бесплатны и защищают приватность.<br/>
+    <a href="privacy.html">Политика конфиденциальности</a> &bull;
+    <a href="terms.html">Условия</a> &bull;
+    <a href="contact.html">Контакты</a>
+  </footer>
+
+  <p style="margin-top:1rem;"><a class="cta" href="/ru/focus-music/focus-music-index.html">Читать полный текст</a></p>
+</body>
 </html>

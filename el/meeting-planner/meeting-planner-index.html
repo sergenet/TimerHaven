@@ -1,18 +1,221 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>meeting-planner — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for meeting-planner guide (el)">
+  <meta charset="utf-8" />
+  <title>Σχεδιαστής Συναντήσεων — Προγραμματίστε αποδοτικές συναντήσεις σε πολλαπλές ζώνες ώρας | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Οδηγός για τον προγραμματισμό και τον συντονισμό συναντήσεων: πρότυπα προσκλήσεων, σχεδιασμός με ζώνες ώρας, σχεδίαση ατζέντας, ρεσεπτές προγραμματισμού και κοινή χρήση προτάσεων χρόνου." />
+  <link rel="canonical" href="https://timerhaven.com/el/meeting-planner/meeting-planner-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Σχεδιάστε αποδοτικές συναντήσεις",
+        "description":"Πρακτικές συνταγές για προγραμματισμό σε πολλαπλές ζώνες ώρας, προετοιμασία ατζέντας, οργάνωση αποτελεσματικών συζητήσεων και κοινή χρήση προτεινόμενων χρόνων.",
+        "image":"https://timerhaven.com/assets/images/meeting-planner-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Σχεδιαστής Συναντήσεων (TimerHaven)","Ημερολόγιο","Ζώνες ώρας συμμετεχόντων"],
+        "step":[
+          {"@type":"HowToStep","name":"Συλλέξτε ζώνες ώρας","text":"Συγκεντρώστε τις προτιμώμενες ζώνες ώρας ή πόλεις κάθε συμμετέχοντα."},
+          {"@type":"HowToStep","name":"Επιλέξτε παράθυρα","text":"Χρησιμοποιήστε το εργαλείο για να προτείνετε 2–3 ώρες που ελαχιστοποιούν την ενόχληση ανάμεσα στις ζώνες."},
+          {"@type":"HowToStep","name":"Κοινοποιήστε και επιβεβαιώστε","text":"Μοιραστείτε τους χρόνους ως οργανωτής‑τοπικός → συμμετέχων‑τοπικός για λιγότερη σύγχυση· επιβεβαιώστε και στείλτε πρόσκληση ημερολογίου."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Πόσες επιλογές πρέπει να προτείνω;","acceptedAnswer":{"@type":"Answer","text":"Προτείνετε 2–3 ρεαλιστικά παράθυρα. Πολλές επιλογές καθυστερούν την απόφαση· λίγες ίσως αποκλείσουν διαθεσιμότητα."}},
+          {"@type":"Question","name":"Πρέπει πάντα να δείχνω τοπικές ώρες των συμμετεχόντων;","acceptedAnswer":{"@type":"Answer","text":"Ναι — η εμφάνιση χρόνου οργανωτή και συμμετέχοντα μειώνει τα λάθη και αυξάνει την εμπιστοσύνη."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">meeting-planner — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Σχεδιαστής Συναντήσεων — Προγραμματίστε καλύτερες συναντήσεις σε ζώνες ώρας</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας άρθρου">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας για συναντήσεις & συνεργασία</div>
+          <div class="meta">Δημοσιεύτηκε: 2025-11-24 · Χρόνος ανάγνωσης: 12–18 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Η οργάνωση συναντήσεων σε διαφορετικές ζώνες ώρας ή για κατανεμημένες ομάδες απαιτεί σαφήνεια και ενσυναίσθηση. Ο Σχεδιαστής Συναντήσεων βοηθά να προτείνετε χρόνους, να οπτικοποιήσετε τις τοπικές ώρες των συμμετεχόντων και να επιλέξετε παράθυρα που μειώνουν την ενόχληση. Αυτός ο οδηγός καλύπτει συλλογή συμμετεχόντων, επιλογή χρονικών παραθύρων, σχεδίαση ατζέντας, βέλτιστες πρακτικές κοινοποίησης και προβλήματα με ζώνες ώρας.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#collect">Συλλογή συμμετεχόντων & ζωνών</a> ·
+        <a href="#propose">Αποτελεσματική πρόταση χρόνων</a> ·
+        <a href="#agenda">Σχεδιάστε την ατζέντα</a> ·
+        <a href="#timezone">Προβλήματα ζωνών ώρας</a> ·
+        <a href="#sync">Συνταγές συγχρονικών συναντήσεων</a> ·
+        <a href="#share">Κοινοποίηση & επιβεβαίωση</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="collect" class="section" aria-labelledby="collect-title">
+        <h2 id="collect-title">Συλλέξτε συμμετέχοντες και ζώνες ώρας</h2>
+        <p>Ξεκινήστε συλλέγοντας την προτιμώμενη ζώνη ώρας ή πόλη κάθε προσκεκλημένου και τα διαθέσιμα παράθυρά τους (πρωί/απόγευμα). Χρησιμοποιήστε τον σχεδιαστή για να αποθηκεύσετε πόλεις και να υπολογίσετε γρήγορα τις τοπικές ώρες.</p>
+
+        <h3>Πρακτικές συμβουλές</h3>
+        <ul>
+          <li>Ρωτήστε τους συμμετέχοντες για τις προτιμώμενες ώρες τους (τοπική ώρα).</li>
+          <li>Επιτρέψτε δηλώσεις "όχι νωρίτερα από" ή "όχι αργότερα από" για να περιορίσετε τα παράθυρα.</li>
+          <li>Προτιμήστε μεσημβρινά παράθυρα για ευρεία συμμετοχή, όταν αυτό είναι εφικτό — μειώνουν τα ακραία ωράρια για τις περισσότερες περιοχές.</li>
+        </ul>
+      </section>
+
+      <section id="propose" class="section" aria-labelledby="propose-title">
+        <h2 id="propose-title">Προτείνετε χρόνους — κρατήστε τις επιλογές περιορισμένες</h2>
+        <p>Προσφέρετε 2–3 λογικά παράθυρα αντί ενός ανοιχτού poll. Χρησιμοποιήστε το εργαλείο για να δείξετε οργανωτής‑τοπικός → συμμετέχων‑τοπικός χρόνο και να μειώσετε τη σύγχυση.</p>
+
+        <div class="recipe">
+          <strong>Συνταγή πρότασης slot</strong>
+          <ol>
+            <li>Επιλέξτε 2–3 υποψήφια παράθυρα που ικανοποιούν τις περισσότερες περιοριστικές συνθήκες.</li>
+            <li>Μοιραστείτε τη λίστα με τις τοπικές ώρες για κάθε συμμετέχοντα (οργανωτής → συμμετέχων τοπικά).</li>
+            <li>Ζητήστε επιβεβαίωση προτίμησης ή συγκρούσεων και οριστικοποιήστε γρήγορα.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="agenda" class="section" aria-labelledby="agenda-title">
+        <h2 id="agenda-title">Σχεδιάστε σύντομη ατζέντα — χρονοπεριορίστε και αγκυρώστε αποφάσεις</h2>
+        <p>Η ατζέντα οδηγεί στα αποτελέσματα. Συμπεριλάβετε στόχους, κατανομή χρόνου, ρόλους (συντονιστής, σημειογράφος) και αναμενόμενες αποφάσεις ή παραδόσεις.</p>
+
+        <ul>
+          <li><strong>Ξεκινήστε με στόχο:</strong> μια πρόταση που περιγράφει το επιδιωκόμενο αποτέλεσμα της συνάντησης.</li>
+          <li><strong>Χρονοπεριορίστε θέματα:</strong> ορίστε λεπτά για κάθε θέμα και παρακολουθήστε τον χρόνο κατά τη συνάντηση.</li>
+          <li><strong>Ολοκληρώστε με αποφάσεις & υπεύθυνους:</strong> αφιερώστε πάντα 5 λεπτά για επιβεβαίωση επόμενων βημάτων και υπευθύνων.</li>
+        </ul>
+      </section>
+
+      <section id="timezone" class="section" aria-labelledby="timezone-title">
+        <h2 id="timezone-title">Προβλήματα ζωνών ώρας & θερινή ώρα</h2>
+        <p>Προσέξτε τις αλλαγές θερινής ώρας και τα ασαφή ονόματα ζωνών. Όποτε είναι δυνατό, χρησιμοποιήστε IANA identifiers (π.χ. Europe/London) και εμφανίστε ρητά τα offsets.</p>
+
+        <h3>Checklist</h3>
+        <ul>
+          <li>Επιβεβαιώστε την ημερομηνία και αν ισχύει DST σε κάθε ζώνη του συμμετέχοντα.</li>
+          <li>Δείξτε ονόματα ζωνών και offsets (π.χ. GMT+1) στις επικοινωνίες.</li>
+          <li>Δοκιμάστε συνδέσμους και προσκλήσεις ημερολογίου σε δείγμα λογαριασμού συμμετέχοντα για κρίσιμα γεγονότα.</li>
+        </ul>
+      </section>
+
+      <section id="sync" class="section" aria-labelledby="sync-title">
+        <h2 id="sync-title">Συνταγές συγχρονικών συναντήσεων</h2>
+        <p>Ακολουθούν συνταγές για κοινά είδη συναντήσεων που βοηθούν στη λειτουργική τους διεξαγωγή.</p>
+
+        <div class="recipe">
+          <strong>Standup (15 λεπτά)</strong>
+          <ol>
+            <li>Αυστηρός χρονοδιακόπτης 15 λεπτών. Κάθε συμμετέχων απαντά σε τρεις ερωτήσεις (χθες/σήμερα/εμπόδια).</li>
+            <li>Ο συντονιστής διαχειρίζεται τον χρόνο και παραπέμπει βαθύτερες συζητήσεις ως follow‑ups.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Συνεδρία λήψης αποφάσεων (30–60 λεπτά)</strong>
+          <ol>
+            <li>Αποστολή υλικού προανάγνωσης 24–48 ώρες πριν.</li>
+            <li>Ξεκινήστε με τα κριτήρια απόφασης και τις επιλογές· επιτρέψτε σύντομη συζήτηση και κλείστε με ψήφο ή απόφαση υπεύθυνου.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="share" class="section" aria-labelledby="share-title">
+        <h2 id="share-title">Κοινοποίηση, επιβεβαίωση & αποστολή προσκλήσεων</h2>
+        <p>Όταν επιβεβαιώσετε ένα slot, στείλτε πρόσκληση ημερολογίου με σαφείς, timezone‑aware χρόνους, ατζέντα και συνημμένα. Συμπεριλάβετε ένα σύντομο "τι να προετοιμάσετε" και τα αναμενόμενα αποτελέσματα.</p>
+
+        <ul>
+          <li>Περιλάβετε σύνδεσμο στο σημείωμα της συνάντησης ή σε συνεργατικό έγγραφο στην πρόσκληση.</li>
+          <li>Καταγράψτε τις αναμενόμενες αποφάσεις ή παραδοτέα στην περιγραφή της πρόσκλησης.</li>
+          <li>Ορίστε ορατότητα "Busy" για το γεγονός ώστε να προστατεύσετε το slot.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Αντιμετώπιση προβλημάτων</h2>
+        <ul>
+          <li><strong>Σύγχυση σχετικά με ώρα:</strong> στείλτε ξανά τους χρόνους με τοπικές ετικέτες συμμετεχόντων αν υπάρχει ασυμφωνία.</li>
+          <li><strong>Τελευταίας στιγμής αλλαγές ζωνών:</strong> επιβεβαιώστε την τοπική ώρα του συμμετέχοντα και προτείνετε εναλλακτική αν χρειαστεί.</li>
+          <li><strong>Απουσίες:</strong> καταγράψτε ποιος δεν μπόρεσε να παρευρεθεί και επαναπρογραμματίστε με λίγα υποψήφια παράθυρα.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> Πώς διαχειρίζομαι πολύ μεγάλες κατανεμημένες ομάδες;<br><strong>A:</strong> Χωρίστε σε μικρότερες ομάδες εργασίας ή χρησιμοποιήστε ασύγχρονες ενημερώσεις· μεγάλες συγχρονικές συναντήσεις είναι δαπανηρές και συχνά αναποτελεσματικές.</p>
+
+          <p><strong>Q:</strong> Πρέπει πάντα να δείχνω δύο ζώνες ώρας?<br><strong>A:</strong> Δείχνετε πάντα τον οργανωτή και την τοπική ώρα του συμμετέχοντα· όταν υπάρχουν πολλοί συμμετέχοντες, σκεφτείτε έναν πίνακα τοπικών ωρών για το επιλεγμένο slot.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Πόροι</h2>
+        <ul class="muted">
+          <li><a href="/meeting-planner-el.html">Άνοιγμα εργαλείου Σχεδιαστής Συναντήσεων</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA — λίστα ζωνών ώρας</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/meeting-planner-el.html" class="cta" aria-label="Άνοιγμα Σχεδιαστή Συναντήσεων">Άνοιγμα Σχεδιαστή Συναντήσεων</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε μαζί μας: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/el/privacy/">Πολιτική Απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/meeting-planner-el.html" class="return-to-tool" id="returnToToolMeeting" aria-label="Επιστροφή στο Σχεδιαστή Συναντήσεων">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Προς Σχεδιαστή Συναντήσεων</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolMeeting');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

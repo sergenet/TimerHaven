@@ -1,18 +1,192 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>currency — Guide (es)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for currency guide (es)">
+  <meta charset="utf-8" />
+  <title>Convertidor de divisas — Convertir tipos & flujos de trabajo inteligentes | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía de alto valor para la conversión de divisas: elegir fuentes de tipos, redondeo y presentación, consejos para viajes, uso empresarial y automatización de conversiones." />
+  <link rel="canonical" href="https://timerhaven.com/es/currency/currency-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Conversión práctica de divisas",
+        "description":"Cómo convertir divisas de forma fiable, elegir fuentes de tipos, presentar conversiones a los usuarios y gestionar el redondeo y necesidades comerciales.",
+        "image":"https://timerhaven.com/assets/images/currency-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Convertidor de divisas (TimerHaven)","API de tipos o tasas bancarias","Hoja de cálculo"],
+        "step":[
+          {"@type":"HowToStep","name":"Elegir la fuente","text":"Decida si necesita tipos mid‑market o los tipos de bancos (los bancos/servicios de transferencia aplican márgenes)."},
+          {"@type":"HowToStep","name":"Definir el redondeo","text":"Elija el redondeo de presentación (2 decimales para precios, 4–6 para los tipos en análisis)."},
+          {"@type":"HowToStep","name":"Mostrar el contexto","text":"Muestre el tipo, el importe convertido y la marca temporal para que los usuarios sepan cuándo se aplicó la cotización."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"¿Los tipos del convertidor son en tiempo real?","acceptedAnswer":{"@type":"Answer","text":"Las herramientas de conversión pueden obtener tipos mid‑market en tiempo real desde APIs, pero los tipos de transferencia bancaria pueden diferir debido a márgenes y comisiones."}},
+          {"@type":"Question","name":"¿Debo redondear los importes convertidos?","acceptedAnswer":{"@type":"Answer","text":"Sí — presente los importes redondeados de forma adecuada a la divisa (2 decimales para la mayoría de fiats) y muestre el tipo con mayor precisión si procede."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">currency — Guide (es)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Convertidor de divisas — Guía práctica para conversiones fiables</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor del artículo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Por Serge Shammas</strong> — redactor sobre pagos & productividad</div>
+          <div class="meta">Publicado: 2025-11-24 · Tiempo de lectura: 12–16 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Un convertidor de divisas debe hacer más que mostrar números: debe comunicar contexto — qué tipo se usó, cuándo se aplicó y si las comisiones están incluidas. Esta guía explica las fuentes de tipos, opciones de presentación, patrones para viajes y empresas, reglas de redondeo y formas de automatizar conversiones frecuentes.</p>
+
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#sources">Fuentes de tipos</a>
+        <a href="#presentation">Presentación & redondeo</a>
+        <a href="#travel">Viajes & presupuestos</a>
+        <a href="#business">Empresas & fijación de precios</a>
+        <a href="#automation">Automatización & scripts</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="sources" class="section" aria-labelledby="sources-title">
+        <h2 id="sources-title">Fuentes de tipos — elija según su necesidad</h2>
+        <p>No todos los tipos son iguales. Los tipos mid‑market (punto medio entre compra/venta en el mercado interbancario) son los que proveen la mayoría de las APIs públicas. Los bancos y proveedores de pagos aplican márgenes y comisiones; para precios de cara al cliente, considere usar cotizaciones del proveedor o mostrar tanto el tipo mid‑market como una estimación del coste final incluyendo comisiones.</p>
+
+        <h3>Fuentes comunes</h3>
+        <ul>
+          <li><strong>APIs de tipos de cambio:</strong> APIs gratuitas o de pago (buenas para tipos mid‑market).</li>
+          <li><strong>Cotizaciones bancarias:</strong> más precisas para pagos pero a menudo requieren login o una clave API del banco/partner de pagos.</li>
+          <li><strong>Tipos de procesadores de tarjeta:</strong> usados en transacciones con tarjeta e incluyen spread y comisiones de conversión.</li>
+        </ul>
+      </section>
+
+      <section id="presentation" class="section" aria-labelledby="presentation-title">
+        <h2 id="presentation-title">Presentación & redondeo — la claridad genera confianza</h2>
+        <p>Muestre el importe convertido, el tipo usado y la marca temporal. Las reglas de redondeo importan: para precios muestre dos decimales en monedas fiat; para análisis muestre más precisión en el tipo.</p>
+
+        <div class="recipe" aria-labelledby="display-recipe">
+          <strong id="display-recipe">Formato mínimo de visualización</strong>
+          <ol>
+            <li>Importe convertido (redondeado para mostrar) — ej. 123,45 EUR</li>
+            <li>Tipo — ej. 1.234567 (muestre 4–6 decimales)</li>
+            <li>Marca temporal o etiqueta "a fecha de" — para que el usuario sepa cuándo aplicó la cotización</li>
+            <li>Opcional: atribución del proveedor si usa una fuente de datos de pago</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="travel" class="section" aria-labelledby="travel-title">
+        <h2 id="travel-title">Consejos para viajes & presupuestos</h2>
+        <p>Al viajar, pequeñas diferencias por redondeo se acumulan. Use tipos mid‑market en vivo para estimaciones rápidas, pero tenga en cuenta las comisiones probables al presupuestar retiradas en efectivo o pagos con tarjeta.</p>
+
+        <ul>
+          <li>En retiradas ATM, espere comisiones adicionales del cajero y del banco; presupuestar un 3–5 % adicional sobre la estimación mid‑market.</li>
+          <li>Mantenga un pequeño colchón diario al convertir para viajes para evitar subestimar los gastos.</li>
+        </ul>
+      </section>
+
+      <section id="business" class="section" aria-labelledby="business-title">
+        <h2 id="business-title">Empresas & patrones de precios</h2>
+        <p>Para facturas y precios, sea explícito: facture en la moneda del cliente con una conversión cotizada o facture en su moneda y muestre una estimación convertida al cliente. Incluya el tipo y la marca temporal en facturas para transparencia.</p>
+
+        <h3>Receta de factura</h3>
+        <pre class="template">Campos de factura a incluir:
+- Importe (moneda del vendedor)
+- Importe convertido (moneda del comprador) con redondeo
+- Tipo utilizado
+- Marca temporal del tipo
+- Nota: "Tipo suministrado por [proveedor]"</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Automatización & scripts</h2>
+        <p>Automatice conversiones frecuentes con scripts sencillos o fórmulas de hoja de cálculo. Muchas APIs devuelven JSON, por lo que puede obtener y calcular conversiones en una hoja o utilidad pequeña.</p>
+
+        <h3>Fórmula de hoja de cálculo</h3>
+        <pre class="template">Si el tipo está en B2 y el importe en A2:
+=ROUND(A2 * B2, 2)</pre>
+
+        <p class="small-note">Para tareas recurrentes, cachee tipos y actualice con una cadencia sensata (p. ej. cada hora) para evitar alcanzar límites de APIs gratuitas.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ¿Debería usar siempre el tipo mid‑market?<br><strong>R:</strong> Los tipos mid‑market son excelentes para estimaciones. Para facturación o transferencias reales, use cotizaciones del proveedor que incluyan comisiones y spreads.</p>
+
+          <p><strong>P:</strong> ¿Con qué frecuencia se actualizan los tipos?<br><strong>R:</strong> Muchas APIs actualizan cada minuto; su elección depende de la necesidad y de los límites de la API.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Recursos</h2>
+        <ul class="muted">
+          <li><a href="https://timerhaven.com/currency-es.html">Abrir herramienta Convertidor de divisas</a></li>
+          <li><a href="https://exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate API</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/currency-es.html" class="cta" aria-label="Abrir Convertidor de divisas">Abrir Convertidor</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas o comentarios? Contáctenos en <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lea nuestra <a href="/es/privacy/">Política de privacidad</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Botón flotante "Volver a la herramienta" -->
+  <a href="https://timerhaven.com/currency-es.html" class="return-to-tool" id="returnToToolCurrency" aria-label="Volver al Convertidor de divisas">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver al Convertidor</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCurrency');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

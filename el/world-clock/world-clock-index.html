@@ -1,18 +1,199 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>world-clock — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for world-clock guide (el)">
+  <meta charset="utf-8" />
+  <title>Παγκόσμιο Ρολόι — Συγκρίνετε Ζώνες Ώρας & Προγραμματίστε με Σιγουριά | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Ολοκληρωμένος οδηγός για το Παγκόσμιο Ρολόι: επιλογή ζωνών, ανάγνωση offsets, προγραμματισμός συναντήσεων μεταξύ περιοχών, παγίδες θερινής ώρας και συμβουλές αυτοματισμού." />
+  <link rel="canonical" href="https://timerhaven.com/el/world-clock/world-clock-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Χρησιμοποιήστε το Παγκόσμιο Ρολόι για προγραμματισμό",
+        "description":"Συγκρίνετε πολλαπλές ζώνες ώρας, δείξτε τοπικές ώρες για συμμετέχοντες και αποφύγετε τη σύγχυση της θερινής ώρας. Ο οδηγός αυτός περιλαμβάνει συνταγές σχεδιασμού, συμβουλές μετατροπής και ιδέες αυτοματισμού.",
+        "image":"https://timerhaven.com/assets/images/world-clock-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["Παγκόσμιο Ρολόι (TimerHaven)","Ημερολόγιο","Πληροφορίες ζώνης ώρας συμμετεχόντων"],
+        "step":[
+          {"@type":"HowToStep","name":"Επιλέξτε σημεία αναφοράς","text":"Διαλέξτε μια αναφορά οργανωτή και προσθέστε ζώνες συμμετεχόντων για να συγκρίνετε τοπικές ώρες."},
+          {"@type":"HowToStep","name":"Παρακολουθήστε τις αλλαγές DST","text":"Ελέγξτε τους κανόνες θερινής ώρας και επιβεβαιώστε τις ώρες γύρω από τις ημερομηνίες μετάβασης."},
+          {"@type":"HowToStep","name":"Κοινοποιήστε τοπικές ώρες","text":"Μοιραστείτε το επιλεγμένο slot με οργανωτή‑τοπική και συμμετέχων‑τοπική ώρα για να μειώσετε την ασάφεια."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Πώς διαχειρίζομαι τις μεταβάσεις θερινής ώρας;","acceptedAnswer":{"@type":"Answer","text":"Αν είναι δυνατόν, προγραμματίστε μακριά από ημερομηνίες μετάβασης DST· αλλιώς επιβεβαιώστε ρητά τις τοπικές ώρες και συμπεριλάβετε αναγνωριστικά ζώνης (IANA) στις προσκλήσεις."}},
+          {"@type":"Question","name":"Θα πρέπει να δείχνω πολλαπλές τοπικές ώρες στις προσκλήσεις;","acceptedAnswer":{"@type":"Answer","text":"Ναι — η εμφάνιση ώρας οργανωτή και συμμετέχοντα μειώνει τα λάθη, ειδικά για κατανεμημένες ομάδες."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">world-clock — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Παγκόσμιο Ρολόι — Συγκρίνετε Ζώνες Ώρας και Προγραμματίστε με Σιγουριά</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας άρθρου">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας για κατανεμημένη εργασία & προγραμματισμό</div>
+          <div class="meta">Δημοσιεύτηκε: 2025-11-24 · Χρόνος ανάγνωσης: 12–16 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Ο προγραμματισμός σε διαφορετικές ζώνες ώρας προκαλεί συχνά σύγχυση. Ένα αξιόπιστο παγκόσμιο ρολόι βοηθά να συγκρίνετε τοπικές ώρες, να αποφύγετε παγίδες θερινής ώρας και να επικοινωνείτε καθαρά τις ώρες συναντήσεων. Ο οδηγός αυτός καλύπτει βασικά για ζώνες ώρας, συνταγές προγραμματισμού, προβλήματα με DST, χρήση αναγνωριστικών IANA, ιδέες αυτοματισμού και μοτίβα κοινοποίησης που μειώνουν τα λάθη.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#basics">Βασικά για ζώνες ώρας</a> ·
+        <a href="#dst">Θερινή ώρα & παγίδες</a> ·
+        <a href="#planning">Συνταγές προγραμματισμού</a> ·
+        <a href="#naming">Χρησιμοποιήστε IANA & καθαρές ετικέτες</a> ·
+        <a href="#automation">Αυτοματισμός & συμβουλές ημερολογίου</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="basics" class="section" aria-labelledby="basics-title">
+        <h2 id="basics-title">Βασικά για ζώνες ώρας — offsets, UTC και τοπική ώρα</h2>
+        <p>Οι ζώνες ώρας ορίζονται σε σχέση με τον Συντονισμένο Παγκόσμιο Χρόνο (UTC) με offsets (π.χ. UTC+1). Για σαφήνεια, πάντα επικοινωνείτε τόσο την ώρα όσο και τη ζώνη (ή το offset) όταν προγραμματίζετε μεταξύ τοποθεσιών.</p>
+
+        <ul>
+          <li><strong>Αναφορά UTC:</strong> χρησιμοποιήστε UTC για συντονισμό συστημάτων ώστε να αποφύγετε τοπικές ασάφειες.</li>
+          <li><strong>Τοπικές ώρες για ανθρώπους:</strong> για προσκλήσεις προτιμήστε τις τοπικές ώρες των παραληπτών — δείξτε και την ώρα του οργανωτή και του συμμετέχοντα ώστε να μειωθούν τα λάθη.</li>
+          <li><strong>24ωρο vs 12ωρο:</strong> χρησιμοποιήστε τη μορφή που προτιμά το κοινό σας — το 24ωρο μειώνει τη σύγχυση AM/PM.</li>
+        </ul>
+      </section>
+
+      <section id="dst" class="section" aria-labelledby="dst-title">
+        <h2 id="dst-title">Θερινή ώρα — κοινές παγίδες</h2>
+        <p>Οι μεταβάσεις της θερινής ώρας μπορούν να αλλάξουν τα τοπικά offsets και να προκαλέσουν σφάλματα στον προγραμματισμό, ειδικά γύρω από τις ημερομηνίες μετάβασης. Αποφύγετε τον προγραμματισμό επαναλαμβανόμενων γεγονότων κοντά σε μεταβάσεις DST ή συμπεριλάβετε πάντα αναγνωριστικά ζώνης στις προσκλήσεις.</p>
+
+        <h3>Πρακτικοί κανόνες</h3>
+        <ul>
+          <li>Αποφύγετε κρίσιμες προθεσμίες ή διασυνοριακές συναντήσεις τις ημέρες που περιλαμβάνουν μεταβάσεις DST.</li>
+          <li>Δηλώστε ρητά τη ζώνη ώρας (π.χ. "09:00 America/Los_Angeles (PDT)") αντί να βασίζεστε σε τοπικά ονόματα που αλλάζουν σημασία.</li>
+          <li>Κατά την επιβεβαίωση, δείξτε την τοπική ώρα του συμμετέχοντα και το UTC timestamp ως οριστική αναφορά.</li>
+        </ul>
+      </section>
+
+      <section id="planning" class="section" aria-labelledby="planning-title">
+        <h2 id="planning-title">Συνταγές προγραμματισμού — μειώστε τη τριβή</h2>
+        <p>Χρησιμοποιήστε το παγκόσμιο ρολόι για να επιλέγετε ισότιμα παράθυρα και να επικοινωνείτε τις ώρες με σαφήνεια.</p>
+
+        <div class="recipe" aria-labelledby="small-meeting">
+          <strong id="small-meeting">Μικρή διανεμημένη ομάδα — συνάντηση 30 λεπτών</strong>
+          <ol>
+            <li>Συλλέξτε τις προτιμητέες ώρες των συμμετεχόντων (τοπικό πρωί/απόγευμα).</li>
+            <li>Χρησιμοποιήστε το παγκόσμιο ρολόι για να εμφανίσετε κάθε υποψήφιο slot στην τοπική ώρα κάθε συμμετέχοντα.</li>
+            <li>Προσφέρετε 2–3 επιλογές και οριστικοποιήστε γρήγορα· συμπεριλάβετε οργανωτή και συμμετέχοντα τοπικές ώρες στην περιγραφή της πρόσκλησης.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="global">
+          <strong id="global">Παγκόσμιο town‑hall — ελαχιστοποιήστε την ενόχληση</strong>
+          <ol>
+            <li>Επιλέξτε παράθυρο που αποφεύγει ακραίες πρωινές/βραδινές ώρες για τους περισσότερους συμμετέχοντες· εναλλάσσετε ώρες σε επαναλαμβανόμενες εκδηλώσεις για να μοιράζετε την ενόχληση.</li>
+            <li>Καταγράψτε και μοιραστείτε τη συνεδρία για όσους δεν μπορούν να παρακολουθήσουν ζωντανά.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="naming" class="section" aria-labelledby="naming-title">
+        <h2 id="naming-title">Χρησιμοποιήστε IANA αναγνωριστικά & καθαρές ετικέτες</h2>
+        <p>Τα ονόματα ζωνών IANA (Europe/London, America/New_York) είναι αδιαμφισβήτητα και λαμβάνουν υπόψη τους κανόνες DST. Όταν συμπεριλαμβάνετε ώρες σε μηνύματα ή προσκλήσεις, δείξτε τόσο την ανθρώπινη ετικέτα όσο και το IANA αναγνωριστικό ή το UTC offset για σαφήνεια.</p>
+
+        <pre class="template">Παράδειγμα γραμμής πρόσκλησης:
+Meeting: Project sync
+Time: 2025-11-30 09:00 America/Los_Angeles (UTC-8) — 17:00 Europe/London (UTC+0)
+Agenda: ...</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Αυτοματισμός & συμβουλές ημερολογίου</h2>
+        <p>Κάντε τον προγραμματισμό προβλέψιμο με αυτοματισμούς και σαφείς πρακτικές ημερολογίου.</p>
+
+        <ul>
+          <li><strong>Ορίστε ζώνη ώρας σε κάθε συμβάν:</strong> συμπεριλάβετε τη ζώνη του οργανωτή στα μεταδεδομένα του συμβάντος ώστε τα ημερολόγια των συμμετεχόντων να μετατρέπουν σωστά.</li>
+          <li><strong>Χρησιμοποιήστε συνδέσμους με ζώνες ώρας:</strong> μετατρέψτε και επικολλήστε τοπικές ώρες για βασικούς συμμετέχοντες στην περιγραφή του συμβάντος.</li>
+          <li><strong>Χρησιμοποιήστε εργαλεία προγραμματισμού:</strong> εκμεταλλευτείτε εργαλεία που προτείνουν βέλτιστα παράθυρα με βάση τις ζώνες και τις εργάσιμες ώρες των συμμετεχόντων.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Ε:</strong> Τι γίνεται αν οι συμμετέχοντες βλέπουν διαφορετικές ώρες;<br><strong>Α:</strong> Επιβεβαιώστε τη ζώνη του γεγονότος και συμπεριλάβετε την ώρα UTC στην πρόσκληση. Ενθαρρύνετε τους συμμετέχοντες να ανοίξουν τις λεπτομέρειες του γεγονότος στο ημερολόγιό τους για αυτόματη μετατροπή.</p>
+
+          <p><strong>Ε:</strong> Πρέπει πάντα να προγραμματίζω σε UTC;<br><strong>Α:</strong> Το UTC είναι εξαιρετικό για συστήματα και αυτοματισμό, αλλά για ανθρώπινη επικοινωνία δείξτε τις τοπικές ώρες και χρησιμοποιήστε το UTC ως fallback. Οι άνθρωποι κατανοούν καλύτερα τις τοπικές ώρες· το UTC αφαιρεί την ασάφεια σε τεχνικά προγράμματα.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Πόροι</h2>
+        <ul class="muted">
+          <li><a href="/world-clock-el.html">Άνοιγμα εργαλείου Παγκόσμιο Ρολόι</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA time zones</a></li>
+          <li><a href="https://timeanddate.com" target="_blank" rel="noopener">timeanddate.com — μετατροπές & DST</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/world-clock-el.html" class="cta" aria-label="Άνοιγμα Παγκόσμιου Ρολογιού">Άνοιγμα Παγκόσμιου Ρολογιού</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε στο <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/el/privacy/">Πολιτική Απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/world-clock-el.html" class="return-to-tool" id="returnToToolWorldClock" aria-label="Επιστροφή στο Παγκόσμιο Ρολόι">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Προς Παγκόσμιο Ρολόι</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWorldClock');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

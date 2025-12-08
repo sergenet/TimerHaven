@@ -1,18 +1,228 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>stopwatch — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for stopwatch guide (ru)">
+  <meta charset="utf-8" />
+  <title>Секундомер — Измеряйте результаты, интервалы и прогресс | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Подробное руководство по использованию секундомера для продуктивности, тренировок, экспериментов и встреч. Включает шаблоны тайминга, лучшие практики для кругов (lap), заметки по точности и устранение неполадок." />
+  <link rel="canonical" href="https://timerhaven.com/ru/stopwatch/stopwatch-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Эффективное использование секундомера",
+        "description":"Запускайте, ставьте на паузу, фиксируйте круги (lap) и измеряйте прошедшее время для экспериментов, тренировок, встреч и продуктивной работы. Руководство покрывает рабочие процессы, использование кругов, сбор данных, замечания по точности и устранение неполадок.",
+        "image":"https://timerhaven.com/assets/images/stopwatch-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Секундомер (TimerHaven)","Блокнот или таблица","Опционально: пульсометр для тренировок"],
+        "step":[
+          {"@type":"HowToStep","name":"Определите цель","text":"Решите, что вы измеряете (длительность задачи, интервальная производительность, время до завершения)."},
+          {"@type":"HowToStep","name":"Запуск и запись кругов","text":"Нажмите Старт и фиксируйте круги в заданных контрольных точках; при необходимости помечайте или экспортируйте времена кругов."},
+          {"@type":"HowToStep","name":"Просмотрите и проанализируйте","text":"Соберите данные о кругах в таблицу и вычислите средние, лучшие результаты и дисперсию, чтобы понять динамику производительности."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Будет ли секундомер работать при переключении вкладок?","acceptedAnswer":{"@type":"Answer","text":"Да — секундомеры обычно вычисляют прошедшее время по меткам времени (start + now), поэтому остаются точными даже если вкладка в фоне. Некоторые браузеры могут троттлить обновление интерфейса, но не сам расчёт прошедшего времени."}},
+          {"@type":"Question","name":"Как фиксировать круги (lap)?","acceptedAnswer":{"@type":"Answer","text":"Нажимайте кнопку Lap, чтобы зафиксировать текущее прошедшее время. Экспортируйте или копируйте времена, чтобы сохранить записи для дальнейшего анализа."}},
+          {"@type":"Question","name":"Достаточно ли секундомера для экспериментов с высокой точностью?","acceptedAnswer":{"@type":"Answer","text":"Для большинства задач продуктивности и тренировок — да. Для научных измерений высокой точности лучше использовать специализированное оборудование или нативные приложения с гарантиями реального времени."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">stopwatch — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Секундомер — измеряйте прошедшее время, интервалы и прогресс</h1>
+
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — автор по продуктивности и измерениям</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 10–15 мин.</div>
+        </div>
+      </div>
+
+      <p class="lead">Секундомер — самый простой измерительный инструмент, но области его применения широки: измерение длительности задач, тайминг интервалов в тренировках, логирование времени выполнения экспериментов или контроль пунктов повестки на встречах. Руководство описывает рабочие процессы, лучшие практики для кругов (lap), сбор данных, нюансы точности и использование результатов для улучшения производительности.</p>
+
+      <nav class="toc" aria-label="Содержание">
+        <a href="#when">Когда использовать секундомер</a>
+        <a href="#start">Старт/пауза/круги</a>
+        <a href="#workflows">Практические рабочие процессы</a>
+        <a href="#data">Сбор и анализ данных по кругам</a>
+        <a href="#precision">Точность и особенности окружения</a>
+        <a href="#integration">Интеграции и экспорт</a>
+        <a href="#troubleshoot">Устранение неполадок</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="when" class="section" aria-labelledby="when-title">
+        <h2 id="when-title">Когда использовать секундомер</h2>
+        <p>Секундомеры особенно полезны, когда требуется аккуратно измерить прошедшее время для ограниченной активности. Распространённые сценарии:</p>
+        <ul>
+          <li><strong>Эксперименты по продуктивности:</strong> измеряйте, сколько реально занимает задача по сравнению с вашей оценкой.</li>
+          <li><strong>Тренировки и интервалы:</strong> фиксируйте сплиты для пробежек, подходов или интервалов.</li>
+          <li><strong>Юзабилити‑тесты и эксперименты:</strong> измеряйте время на выполнение задач для бенчмаркинга.</li>
+          <li><strong>Встречи:</strong> таймируйте пункты повестки и следите за равномерностью выступлений.</li>
+        </ul>
+      </section>
+
+      <section id="start" class="section" aria-labelledby="start-title">
+        <h2 id="start-title">Старт, пауза и круги — базовые принципы</h2>
+        <p>Современные веб‑секундомеры обычно опираются на метки времени, поэтому остаются точными даже при троттлинге интерфейса. Основные концепции:</p>
+        <ul>
+          <li><strong>Старт:</strong> фиксируйте метку времени запуска (Date.now()).</li>
+          <li><strong>Прошедшее:</strong> вычисляйте now − start (с учётом ранее накопленного времени при возобновлении после паузы).</li>
+          <li><strong>Пауза/возобновление:</strong> при паузе сохраняйте накопленное прошедшее и очищайте текущий старт; при возобновлении выставляйте start = now − accumulated.</li>
+          <li><strong>Круг (Lap):</strong> фиксируйте текущее прошедшее время как сплит — при необходимости сбрасывайте счётчик кругов, если вам нужны продолжительности отдельных кругов (разница между типами: накопленный сплит vs длительность круга).</li>
+        </ul>
+
+        <p class="small-note">Два режима кругов: (A) накопленные сплиты (время с начала) и (B) длительности кругов (время с предыдущего круга). Решите заранее, что вам нужно, прежде чем записывать.</p>
+      </section>
+
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Практические рабочие процессы</h2>
+
+        <div class="recipe" aria-labelledby="timing-task">
+          <strong id="timing-task">Время до завершения (оценка задач)</strong>
+          <ol>
+            <li>Определите цель: «Написать вступление — первый черновик».</li>
+            <li>Запустите секундомер в начале задачи; избегайте многозадачности во время измерения.</li>
+            <li>Используйте Lap для отметки значимых контрольных точек (написание плана, завершение первого абзаца).</li>
+            <li>По завершении запишите общее прошедшее в задаче или заметке в календаре.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="interval-training">
+          <strong id="interval-training">Интервальные тренировки (повторяемые циклы)</strong>
+          <ol>
+            <li>Нажимайте Lap для фиксации каждого интервала; если нужно засечь отдых, используйте Pause, чтобы отдельно измерить время восстановления.</li>
+            <li>Экспортируйте круги, чтобы вычислять среднее время интервала, лучший результат и дисперсию для отслеживания прогресса.</li>
+            <li>Соблюдайте стабильные правила разминки и заминки для корректных сравнений между сессиями.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Подсказка: для повторяемых рабочих процессов заведите короткий ритуал перед стартом (открыть материалы, проверить позу), чтобы измерения были сопоставимы.</p>
+      </section>
+
+      <section id="data" class="section" aria-labelledby="data-title">
+        <h2 id="data-title">Сбор и анализ данных по кругам</h2>
+        <p>Сырые времена кругов полезны при агрегации. Экспортируйте или копируйте круги в таблицу и вычисляйте простые метрики:</p>
+        <ul>
+          <li><strong>Среднее (mean)</strong> — типичное время на круг/итерацию.</li>
+          <li><strong>Медиана</strong> — устойчива к выбросам.</li>
+          <li><strong>Стандартное отклонение / дисперсия</strong> — мера согласованности.</li>
+          <li><strong>Лучший / худший</strong> — отслеживайте лучшие и худшие результаты.</li>
+        </ul>
+
+        <pre class="template">CSV столбцы: index,split_seconds,lap_seconds,timestamp
+1,30.12,30.12,2025-11-24T10:02:12Z</pre>
+
+        <p>Используйте эти метрики в недельных обзорах, чтобы находить тренды и понимать, когда изменения процесса улучшили скорость или стабильность.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Точность и особенности окружения</h2>
+        <p>Веб‑секундомеры подходят для повседневных задач, но учтите ограничения:</p>
+        <ul>
+          <li><strong>Троттлинг интерфейса:</strong> фоновые вкладки могут реже обновлять UI, но корректная реализация на основе меток времени сохраняет точность расчёта.</li>
+          <li><strong>Сон системы / режим сна:</strong> при уходе устройства в спящий режим значение wall‑clock продвинется — учитывайте это при анализе сессий.</li>
+          <li><strong>Высокая точность:</strong> для научных задач или синхронизации A/V используйте специализированные инструменты (аппаратные таймеры, таймкод DAW, системы, синхронизированные по NTP).</li>
+        </ul>
+      </section>
+
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Интеграции и экспорт</h2>
+        <p>Хорошие инструменты секундомера позволяют копировать или экспортировать список кругов для последующего анализа. Идеи интеграции:</p>
+        <ul>
+          <li><strong>Лог задач:</strong> добавляйте прошедшее время в элементы задач или описания событий в календаре.</li>
+          <li><strong>Экспорт CSV:</strong> импортируйте данные кругов в таблицы для анализа трендов.</li>
+          <li><strong>API / Webhooks:</strong> отправляйте события тайминга на бэкенд для хранения истории сессий в личных дашбордах.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Устранение неполадок</h2>
+        <ul>
+          <li><strong>Таймер не обновляется визуально:</strong> некоторые браузеры троттлят перерисовку; опирайтесь на итоговый прошедший результат, а не на каждую «тик‑»обновление.</li>
+          <li><strong>Круги не сохраняются после перезагрузки:</strong> используйте экспорт или инструмент, который сохраняет круги в localStorage, если вам нужны долгосрочные записи.</li>
+          <li><strong>Неправильный часовой пояс в метках времени:</strong> храните метки в ISO UTC, чтобы избежать путаницы при агрегации с разных устройств.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Можно ли измерять несколько параллельных задач одним секундомером?<br><strong>Ответ:</strong> Возможно при аккуратной семантике кругов (помечайте каждый круг), но для параллельных задач удобнее несколько таймеров или Task Timer с поддержкой одновременных таймеров.</p>
+
+          <p><strong>Вопрос:</strong> Как помечать круги?<br><strong>Ответ:</strong> Используйте короткие, последовательные метки (напр., «Разминка», «Повтор 1», «Контроль»). Если инструмент не поддерживает метки, записывайте заметку с временной меткой в системе задач рядом с индексом круга.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/stopwatch-ru.html">Открыть секундомер</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Stopwatch" target="_blank" rel="noopener">Stopwatch — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/stopwatch-ru.html" class="cta" aria-label="Открыть секундомер">Открыть секундомер</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Прочитайте нашу <a href="/ru/privacy/">Политику конфиденциальности</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/stopwatch-ru.html" class="return-to-tool" id="returnToToolStopwatch" aria-label="Вернуться к секундомеру">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К секундомеру</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolStopwatch');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

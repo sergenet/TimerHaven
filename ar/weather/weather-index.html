@@ -1,18 +1,245 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>weather — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for weather guide (ar)">
+  <meta charset="utf-8" />
+  <title>الطقس العالمي — تحقق وفهم وخطط | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل عملي لاستخدام أداة الطقس: اختيار المواقع، تفسير التنبؤات، التخطيط للرحلات، التنبيهات، الميكرو مناخات، وحفظ التنبؤات للرجوع لاحقًا." />
+  <link rel="canonical" href="https://timerhaven.com/ar/weather/weather-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"استخدم التنبؤات الجوية بفعالية",
+        "description":"اعثر على التنبؤات وفسرها للتخطيط اليومي والرحلات. يشرح هذا الدليل أنواع التنبؤات، قراءة الاحتمالات، التخطيط مع عدم اليقين، التنبيهات، اعتبار الميكرو مناخات، وحفظ التنبؤات.",
+        "image":"https://timerhaven.com/assets/images/weather-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["أداة الطقس (TimerHaven)","تقويم","خطة سفر أو قائمة تحضير"],
+        "step":[
+          {"@type":"HowToStep","name":"اختر الموقع الصحيح","text":"ابحث بالمدينة أو استخدم تحديد الموقع الجغرافي للحصول على إحداثيات دقيقة."},
+          {"@type":"HowToStep","name":"اختر نوع التنبؤ","text":"افهم الفارق بين التنبؤات بالساعة، اليومية وطويلة المدى ومتى يستخدم كل منها."},
+          {"@type":"HowToStep","name":"خطط مع عدم اليقين","text":"استعمل الاحتمالات والمدى لصنع قرارات مرنة (احزم طبقات، حدد مواعيد بديلة للاجتماعات الخارجية)."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"ما مدى دقة التنبؤات قصيرة المدى؟","acceptedAnswer":{"@type":"Answer","text":"التنبؤات قصيرة المدى (0–3 أيام) عادةً موثوقة لدرجات الحرارة واحتمالية الهطول، لكن الدقة تختلف حسب المنطقة ودقة النموذج."}},
+          {"@type":"Question","name":"هل أثق بالتنبؤات بالساعة أم اليومية؟","acceptedAnswer":{"@type":"Answer","text":"استخدم التنبؤات بالساعة للقرارات الفورية (24 ساعة المقبلة) والملخصات اليومية للتخطيط على مدى أبعد."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;text-align:right;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;justify-content:flex-end;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    /* زر عائم للعودة للأداة */
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">weather — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">الطقس — كيفية العثور على التنبؤات وقراءتها واستخدامها</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب في السفر والتخطيط</div>
+          <div class="meta">نشر: 2025-11-24 · وقت القراءة: 12–18 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">التنبؤات الجوية ليست حكراً على المهتمين بالطقس — بل هي أدوات قرار. سواء كنت تخطط للذهاب إلى العمل، رحلة نهاية أسبوع، أو عمل ميداني، فإن معرفة كيفية اختيار التنبؤ المناسب، قراءة الاحتمالات، والتخطيط مع عدم اليقين تجعل خططك أكثر مرونة وراحة. يشرح هذا الدليل أنواع التنبؤات، تفسير احتمال الهطول، تأثيرات الميكرو مناخ، التنبيهات والمراقبات، حفظ التنبؤات، ووصفات تخطيط عملية.</p>
+
+      <nav class="toc" aria-label="فهرس المحتوى">
+        <a href="#types">أنواع التنبؤات</a> ·
+        <a href="#ppo">قراءة الهطول والاحتمالات</a> ·
+        <a href="#hourly-daily">الساعة مقابل اليوم — متى تستخدم كلٍ منها</a> ·
+        <a href="#micro">الميكرو مناخ والعوامل المحلية</a> ·
+        <a href="#alerts">التنبيهات والمراقبات والعتبات</a> ·
+        <a href="#plan">وصفات التخطيط</a> ·
+        <a href="#save">حفظ ومشاركة وأرشفة التنبؤات</a> ·
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="types" class="section" aria-labelledby="types-title">
+        <h2 id="types-title">أنواع التنبؤات — اختر المناسب</h2>
+        <p>تتوفر التنبؤات بأشكال متعددة. اختر ما يتناسب مع أفق القرار ومستوى التفاصيل المطلوب:</p>
+        <ul>
+          <li><strong>التنبؤ الفوري / قصير المدى (0–6 ساعات):</strong> الأفضل للقرارات الفورية؛ غالبًا ما يعتمد على رادار عالي الدقة وملاحظات محلية.</li>
+          <li><strong>قصير المدى (6–72 ساعة):</strong> مناسب للتخطيط اليومي — حرارة، نوافذ الهطول، وتوقعات الرياح تكون موثوقة نسبيًا.</li>
+          <li><strong>متوسط المدى (3–7 أيام):</strong> مفيد لتخطيط الرحلات لكن اعتبر التفاصيل تقريبية؛ ركّز على الاتجاهات والتغيّرات الكبرى.</li>
+          <li><strong>طويل المدى (أكثر من 7 أيام):</strong> يعطي إشارات عامة (أدفأ/أبرد من المتوسط) ويُستخدم للتوقعات العامة وليس للجداول الزمنية المحددة.</li>
+        </ul>
+      </section>
+
+      <section id="ppo" class="section" aria-labelledby="ppo-title">
+        <h2 id="ppo-title">الهطول والاحتمالات — كيف تقرأ فرصة المطر</h2>
+        <p>غالبًا ما يُساء فهم احتمال الهطول (PoP). يمثل PoP احتمال حدوث هطول قابل للقياس في موقع محدد خلال فترة زمنية. لا يعبر مباشرة عن كمية الهطول.</p>
+
+        <ul>
+          <li><strong>تفسير PoP:</strong> 20٪ يعني فرصة متواضعة — من الحكمة حمل طبقة خفيفة أو مظلة إذا رغبت في الحذر؛ 60–80٪ يعني خطط بديلة أو تأجيل الأنشطة الخارجية إذا أمكن.</li>
+          <li><strong>الشدة مقابل الاحتمال:</strong> تحقق دائمًا من الشدة والمدة المتوقعة. فرصة 30٪ لهطول شديد لمدة 10 دقائق قد تكون أكثر تعطيلًا من 60٪ لسبب زخّ خفيف.</li>
+          <li><strong>استخدم الرادار للتوقيت:</strong> للقرارات الفورية، راجع رادار مباشر لمتابعة حركة العواصف وتوقيتها.</li>
+        </ul>
+      </section>
+
+      <section id="hourly-daily" class="section" aria-labelledby="hourly-daily-title">
+        <h2 id="hourly-daily-title">الساعة مقابل اليوم — متى تستخدم كلٍ منهما</h2>
+        <p>التنبؤات بالساعة أفضل للتخطيط خلال اليوم: التنقلات، أوقات البدء، أو فعاليات خارجية قصيرة. الملخّصات اليومية أكثر ملاءمة للرحلات والتخطيط العام.</p>
+
+        <div class="recipe" aria-labelledby="hourly-recipe">
+          <strong id="hourly-recipe">قاعدة عملية</strong>
+          <ol>
+            <li>للقرارات خلال 24 ساعة، راجع التنبؤات بالساعة والرادار لاختيار أفضل نافذة زمنية.</li>
+            <li>للتخطيط خلال 1–4 أيام، استخدم التنبؤات اليومية لكن أعد التحقق بالبيانات بالساعة قبل اليوم الموعود.</li>
+            <li>لمدة 5 أيام فأكثر، اعتبر التنبؤات مؤشرات اتجاهية وابنِ خططًا مرنة (احزم طبقات، احتفظ بتواريخ بديلة).</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="micro" class="section" aria-labelledby="micro-title">
+        <h2 id="micro-title">الميكرو مناخ والعوامل المحلية — ما قد تفوته النماذج</h2>
+        <p>الجغرافيا المحلية، الارتفاع، جزر الحرارة الحضرية، القرب من الساحل، وتأثيرات الوديان يمكن أن تخلق ميكرو مناخات تنحرف عن مخرجات النماذج الإقليمية. اعتبر المعرفة المحلية والبيانات الرصدية عند التخطيط.</p>
+
+        <ul>
+          <li>المناطق الساحلية: نسيم البحر يمكن أن يسبب تقلبات سريعة في الحرارة وزخات محلية.</li>
+          <li>الوديان والح basins: تجمع الهواء البارد قد يسبب صقيعًا أو ضبابًا حتى لو بدا التنبؤ الإقليمي معتدلاً.</li>
+          <li>جزر الحرارة الحضرية: قد تكون المدن بعدة درجات أكثر دفئًا ليلًا من الضواحي الريفية المحيطة.</li>
+        </ul>
+      </section>
+
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">التنبيهات والمراقبات والعتبات — كيف تتصرف</h2>
+        <p>تصدر التنبيهات عند توقع ظروف خطرة. افهم أنواع التنبيهات وقائمة إجراءات بسيطة لكل نوع.</p>
+
+        <h3>أنواع التنبيهات الشائعة</h3>
+        <ul>
+          <li><strong>مراقبة (Watch):</strong> الاحتمالات موجودة — استعد وراقب الوضع.</li>
+          <li><strong>تحذير (Warning):</strong> ظروف خطرة متوقعة — اتخذ إجراءات وقائية.</li>
+          <li><strong>إشعار (Advisory):</strong> أقل شدة لكن قد يسبب إزعاجًا — خطط وفقًا لذلك.</li>
+        </ul>
+
+        <div class="recipe" aria-labelledby="alert-recipe">
+          <strong id="alert-recipe">قائمة إجراءات بسيطة عند التنبيهات</strong>
+          <ol>
+            <li>اقرأ نص التنبيه لتعرّف التوقيت والمنطقة المتأثرة.</li>
+            <li>حدّد الأصول الحرجة (السفر، فعاليات خارجية، معدات) وقرّر التأجيل أو النقل أو المتابعة مع تدابير تخفيف.</li>
+            <li>شارك التنبيه مع الأطراف المعنية (الفريق، المشاركين) ووافق على خطط الطوارئ.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="plan" class="section" aria-labelledby="plan-title">
+        <h2 id="plan-title">وصفات التخطيط — صنع قرارات مرنة</h2>
+        <p>خطّط مع عدم اليقين. استخدم خيارات محافظة وخيارات بديلة سريعة لتقليل مخاطر التعطيل.</p>
+
+        <div class="recipe" aria-labelledby="commute">
+          <strong id="commute">التنقل والتخطيط للفعاليات</strong>
+          <ol>
+            <li>راجع التنبؤ بالساعة قبل ساعتين من المغادرة لمعرفة التوقيت والهطول.</li>
+            <li>إذا كانت PoP &gt; 50٪ عند وقت السفر، خطط لمسار محمي أو وسّع وقت الرحلة؛ غادر مبكرًا في حالة مطر أو ثلج كثيف.</li>
+            <li>للفعاليات الخارجية، حدّد موعد قرار نهائي وبلّغ المشاركين بخطة بديلة واضحة.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="travel">
+          <strong id="travel">حزم الملابس لرحلة نهاية الأسبوع</strong>
+          <ol>
+            <li>راجع اتجاهات 3–7 أيام لدرجات الحرارة المتوقعة واحتمالية الهطول.</li>
+            <li>احزم طبقات وعتاد واقٍ من الماء إذا أظهر التنبؤ تقلبًا؛ أحضر واقيًا شمسيًا إن كان الجو صافياً ودافئًا.</li>
+            <li>قبل المغادرة، راجع الرادار والتنبؤات قصيرة المدى لتحديد اختيارات الملابس النهائية.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="save" class="section" aria-labelledby="save-title">
+        <h2 id="save-title">حفظ ومشاركة وأرشفة التنبؤات</h2>
+        <p>حفظ التنبؤات يمكّنك من مقارنة المتوقّع مقابل الفعلي لاحقًا — مفيد للمراجعات بعد الحدث أو للبستنة أو للتجارب.</p>
+
+        <ul>
+          <li><strong>حفظ لقطة:</strong> انسخ تفاصيل التنبؤ الرئيسية (الوقت، PoP، درجات الحرارة) في ملاحظة أو حدث تقويم.</li>
+          <li><strong>مشاركة:</strong> الصق لقطة شاشة قصيرة أو ملخّصًا مع الأوقات المحلية للمشاركين.</li>
+          <li><strong>أرشفة:</strong> احتفظ بلقطة مؤرخة إذا كنت تختبر دقة النماذج أو توثّق الظروف لتركيبات أو تجارب.</li>
+        </ul>
+
+        <pre class="template">نموذج تنبؤ محفوظ:
+المدينة: لندن
+التاريخ: 2025-11-28
+بالساعة: 09:00 12°C 30% مطر → 12:00 14°C 10% مطر
+ملاحظات: احمل مظلة لاجتماع الصباح</pre>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> أي نموذج تنبؤ ينبغي أن أثق به؟<br><strong>ج:</strong> لا يوجد نموذج واحد مثالي دائمًا. للقرارات ذات التأثير العالي، قارن مصادر متعددة (الهيئة الوطنية المحلية، النماذج العالمية، الرادار). تضيف وكالات الأرصاد المحلية قيمة عبر تكييف مخرجات النماذج مع الظروف المحلية.</p>
+
+          <p><strong>س:</strong> إلى أي مدى يمكنني الاعتماد على التنبؤ؟<br><strong>ج:</strong> عادةً تُعتبر اتجاهات درجات الحرارة موثوقة حتى 3–5 أيام؛ توقيت الهطول يصبح أقل يقينًا بعد 48 ساعة. استخدم التفكير الاحتمالي للمدى الأبعد.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/weather-ar.html">افتح أداة الطقس</a></li>
+          <li><a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a></li>
+          <li><a href="https://www.wmo.int" target="_blank" rel="noopener">المنظمة العالمية للأرصاد الجوية</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/weather-ar.html" class="cta" aria-label="افتح أداة الطقس">افتح أداة الطقس</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>أسئلة أو ملاحظات؟ راسلنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- زر عائد إلى الأداة -->
+  <a href="/weather-ar.html" class="return-to-tool" id="returnToToolWeather" aria-label="العودة إلى الطقس">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى الطقس</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWeather');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

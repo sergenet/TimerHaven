@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Unit Converter — Convert Units Precisely & Avoid Mistakes | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Comprehensive guide to unit conversion: unit systems, precision, rounding, temperature caveats, conversion recipes for engineering, cooking and travel, and spreadsheet automation." />
+  <link rel="canonical" href="https://timerhaven.com/en/unit-converter/unit-converter-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Convert units reliably",
+        "description":"Understand unit families, precision and rounding, special cases (temperature), and common conversion recipes for everyday and professional use.",
+        "image":"https://timerhaven.com/assets/images/unit-converter-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Unit Converter (TimerHaven)","Reference tables or technical handbook","Spreadsheet"],
+        "step":[
+          {"@type":"HowToStep","name":"Identify unit family","text":"Decide whether you are converting length, weight, temperature, volume, etc."},
+          {"@type":"HowToStep","name":"Choose reference and precision","text":"Select authoritative conversion factors and determine required decimal precision."},
+          {"@type":"HowToStep","name":"Apply conversion and round","text":"Convert and format the result with appropriate rounding for display or calculation."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Why are temperature conversions different?","acceptedAnswer":{"@type":"Answer","text":"Temperature conversions are affine transformations (they include an offset and a scale), so you cannot convert temperature differences the same way as absolute readings without adjusting for offsets."}},
+          {"@type":"Question","name":"How many decimals should I show?","acceptedAnswer":{"@type":"Answer","text":"It depends on context: prices—2 decimals; engineering tolerances—more decimals as required (3–6); scientific work—use significant figures appropriate to instrument precision."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Unit Converter — Convert Units Accurately & Understand Pitfalls</h1>
+
+      <div class="author" role="articleauthor" aria-label="Article author">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>By Serge Shammas</strong> — usability & engineering writer</div>
+          <div class="meta">Published: 2025-11-24 · Reading time: 10–15 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Unit conversion is routine in travel, cooking, engineering, and software. Small mistakes in units or rounding can produce significant errors. This guide explains unit families, precision rules, temperature conversions, presentation patterns, spreadsheet and API recipes, and practical tips to avoid common mistakes.</p>
+
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#families">Unit families & fundamentals</a>
+        <a href="#precision">Precision & rounding rules</a>
+        <a href="#temperature">Temperature pitfalls</a>
+        <a href="#recipes">Common conversion recipes</a>
+        <a href="#spreadsheet">Spreadsheet & script examples</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="families" class="section" aria-labelledby="families-title">
+        <h2 id="families-title">Unit families & fundamentals</h2>
+        <p>Units belong to families (length, mass, temperature, volume, time, area, energy, etc.). Always convert within the same family and pick authoritative conversion factors.</p>
+
+        <ul>
+          <li><strong>Length:</strong> meter, kilometer, mile, foot, inch.</li>
+          <li><strong>Mass / weight:</strong> kilogram, gram, pound, ounce.</li>
+          <li><strong>Volume:</strong> liter, milliliter, gallon (US/UK differences), cup.</li>
+          <li><strong>Temperature:</strong> Celsius, Fahrenheit, Kelvin (affine transforms).</li>
+        </ul>
+
+        <p>For engineering-critical work, reference national standards (NIST, BIPM) for exact factors and unit definitions.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Precision & rounding rules</h2>
+        <p>Decide precision based on purpose. Overly aggressive rounding creates systematic bias; overly precise display can imply false accuracy.</p>
+
+        <h3>Guidelines by context</h3>
+        <ul>
+          <li><strong>Everyday / shopping:</strong> 2 decimal places for currency and amounts that are presented to end-users.</li>
+          <li><strong>Cooking:</strong> round to sensible units (teaspoons, grams) and provide alternatives (metric & imperial).</li>
+          <li><strong>Engineering:</strong> display significant figures matching instrument precision (3–6+ decimals depending on tolerance).</li>
+          <li><strong>Analytics:</strong> store raw values at high precision and round only on presentation layers.</li>
+        </ul>
+
+        <p>Always show units alongside numbers and consider showing the conversion factor or "as of" timestamp for dynamic rates (e.g., currency conversions).</p>
+      </section>
+
+      <section id="temperature" class="section" aria-labelledby="temperature-title">
+        <h2 id="temperature-title">Temperature — special-case conversions</h2>
+        <p>Temperature conversions are affine: they require scaling and shifting. Converting an absolute temperature differs from converting temperature differences.</p>
+
+        <ul>
+          <li>Convert absolute values correctly:
+            <ul>
+              <li>C → F: F = C × 9/5 + 32</li>
+              <li>F → C: C = (F − 32) × 5/9</li>
+              <li>C ↔ K: K = C + 273.15</li>
+            </ul>
+          </li>
+          <li>Converting a temperature change (Δ): convert with the scale only (multiply by 9/5 for ΔC → ΔF) — do not apply offsets.</li>
+        </ul>
+
+        <p>Example mistake: "A change of 10°C is 18°F" is correct; but converting 10°C (absolute) to Fahrenheit requires adding 32 after scaling.</p>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Common conversion recipes</h2>
+
+        <div class="recipe">
+          <strong>Length: miles ↔ kilometers</strong>
+          <ol>
+            <li>Use factor: 1 mile = 1.60934 kilometers.</li>
+            <li>Example: 5 miles × 1.60934 = 8.0467 km → display 8.05 km for typical usage.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Weight: pounds ↔ kilograms</strong>
+          <ol>
+            <li>Use factor: 1 lb = 0.45359237 kg.</li>
+            <li>Example: 150 lb × 0.45359237 = 68.0389 kg → display 68.04 kg (2 decimals) or 68.0 for medical rounding depending on context.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Volume: fluid ounces & cups (US)</strong>
+          <ol>
+            <li>1 US cup = 8 US fluid ounces = 236.588 mL.</li>
+            <li>Check regional differences: UK/Imperial cups and gallons have different values.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="spreadsheet" class="section" aria-labelledby="spreadsheet-title">
+        <h2 id="spreadsheet-title">Spreadsheet & script examples</h2>
+        <p>Common formulas and script patterns help automate conversions at scale.</p>
+
+        <h3>Spreadsheet example (Google Sheets / Excel)</h3>
+        <pre class="template">Convert miles in A2 to kilometers:
+=ROUND(A2 * 1.60934, 2)</pre>
+
+        <h3>JavaScript snippet</h3>
+        <pre class="template">function convertLength(val, fromFactor, toFactor) {
+  // where factors are expressed in meters per unit
+  return val * (fromFactor / toFactor);
+}
+// example: miles->km: milesFactor=1609.34, kmFactor=1000
+</pre>
+
+        <p class="small-note">Store canonical factors in one place and reuse them to avoid inconsistencies across sheets or code.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> Why do imperial vs metric conversions sometimes look "off"?<br><strong>A:</strong> Because rounding and display choices differ; also, some published factors (e.g., for gallons) vary by region (US vs UK). Always check which definition you're using.</p>
+
+          <p><strong>Q:</strong> How do I show both units for users?<br><strong>A:</strong> Present primary and secondary units (e.g., 68.04 kg (150 lb)) and place the unit the user prefers first when possible.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Resources</h2>
+        <ul class="muted">
+          <li><a href="/unit-converter-en.html">Open Unit Converter tool</a></li>
+          <li><a href="https://www.nist.gov/pml/weights-and-measures/metric-si" target="_blank" rel="noopener">NIST — SI units</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/unit-converter-en.html" class="cta" aria-label="Open Unit Converter">Open Unit Converter</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions or feedback? Contact us at <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Read our <a href="/privacy/">Privacy Policy</a>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/unit-converter-en.html" class="return-to-tool" id="returnToToolUnit" aria-label="Return to Unit Converter">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Return to Unit Converter</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolUnit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
+</body>
+</html>

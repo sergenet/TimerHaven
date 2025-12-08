@@ -1,18 +1,239 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>habit-tracker — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for habit-tracker guide (el)">
+  <meta charset="utf-8" />
+  <title>Παρακολούθηση Συνηθειών — Δημιουργήστε συνέπεια με απλές ρουτίνες | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Πρακτικός οδηγός για χρήση του Habit Tracker για τη διαμόρφωση και διατήρηση ρουτινών: στοχοθεσία, σχεδιασμός συνηθειών, streaks, μετρήσεις, αυτοματοποίηση και μοτίβα ομαδικών συνηθειών." />
+  <link rel="canonical" href="https://timerhaven.com/el/habit-tracker/habit-tracker-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Δημιουργήστε και διατηρήστε συνήθειες με το Habit Tracker",
+        "description":"Βήμα‑βήμα ροές εργασίας για δημιουργία αποτελεσματικών συνηθειών, διατήρηση streaks, μέτρηση προόδου και επέκταση από μεμονωμένες συνήθειες σε εβδομαδιαίες ρουτίνες.",
+        "image":"https://timerhaven.com/assets/images/habit-tracker-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Habit Tracker (TimerHaven)","Σημειωματάριο ή εφαρμογή Σημειώσεων","Ημερολόγιο"],
+        "step":[
+          {"@type":"HowToStep","name":"Επιλέξτε μια σημαντική συνήθεια","text":"Διαλέξτε μια μικρή ενέργεια που είναι εύκολη στην ολοκλήρωση και προσφέρει σημαντικό όφελος."},
+          {"@type":"HowToStep","name":"Ξεκινήστε μικρά & δεσμεύστε σε ένα trigger","text":"Συνδέστε τη νέα συνήθεια με μια υπάρχουσα ρουτίνα (μετά τον καφέ, πριν τα email). Ξεκινήστε με πολύ μικρές επαναλήψεις."},
+          {"@type":"HowToStep","name":"Καταγράφετε καθημερινά","text":"Σημειώστε τη συνήθεια ως ολοκληρωμένη κάθε μέρα στο tracker· καταγράψτε διακοπές ή λόγους απουσίας."},
+          {"@type":"HowToStep","name":"Ανασκόπηση εβδομαδιαία","text":"Συνοψίστε streaks και προσαρμόστε τη δυσκολία ή το χρονοδιάγραμμα για βελτίωση της συνέπειας."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Πόσες συνήθειες πρέπει να παρακολουθώ;","acceptedAnswer":{"@type":"Answer","text":"Ξεκινήστε με 1–3 συνήθειες. Η εστίαση και η συνέπεια υπερτερούν της ποικιλίας. Προσθέστε σταδιακά νέες συνήθειες όταν οι προηγούμενες έχουν σταθεροποιηθεί."}},
+          {"@type":"Question","name":"Πώς ανακτώ ένα σπασμένο streak;","acceptedAnswer":{"@type":"Answer","text":"Καταγράψτε τι προκάλεσε την αποτυχία, επαναπροσδιορίστε τις προσδοκίες αν χρειάζεται και ξεκινήστε αμέσως ξανά — η επανεκκίνηση είναι πιο σημαντική από το λάθος."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">habit-tracker — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Habit Tracker — Σχεδιάστε συνήθειες που μένουν</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας άρθρου">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας για σχεδιασμό συνηθειών & παραγωγικότητα</div>
+          <div class="meta">Δημοσιεύτηκε: 2025-11-24 · Χρόνος ανάγνωσης: 12–16 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Μικρές, συνεπείς ενέργειες συσσωρεύονται σε σημαντικά αποτελέσματα. Το Habit Tracker σας βοηθά να μετατρέψετε τις προθέσεις σε καθημερινή πρακτική. Αυτός ο οδηγός εξηγεί την επιλογή συνηθειών, τη μείωση τριβής, τη μέτρηση, τη διαχείριση streaks, στρατηγικές επανόρθωσης και τη χρήση σε ομάδες, ώστε να διαμορφώσετε σταθερές συνήθειες.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#choose">Επιλέξτε τις σωστές συνήθειες</a> ·
+        <a href="#design">Σχεδιάστε μικρές συνήθειες</a> ·
+        <a href="#track">Καθημερινές ροές εργασίας</a> ·
+        <a href="#measure">Μέτρηση & μετρικά</a> ·
+        <a href="#streaks">Streaks και κίνητρο</a> ·
+        <a href="#recover">Ανάκτηση από αστοχίες</a> ·
+        <a href="#team">Ομαδική χρήση & υπευθυνότητα</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="choose" class="section" aria-labelledby="choose-title">
+        <h2 id="choose-title">Επιλέξτε τις σωστές συνήθειες — ξεκινήστε από το αποτέλεσμα</h2>
+        <p>Δεν έχουν όλες οι συνήθειες ίση αξία. Ξεκινήστε με μία ή δύο "keystone" συνήθειες που προσφέρουν μοχλό (άσκηση, πρωινός προγραμματισμός, ταξινόμηση email). Μια keystone συνήθεια απλοποιεί άλλες συμπεριφορές και προσφέρει ορατά οφέλη γρήγορα, ενισχύοντας το κίνητρο.</p>
+
+        <ul>
+          <li><strong>Προτεραιότητα στο αντίκτυπο:</strong> Διαλέξτε συνήθειες που συμβάλλουν άμεσα στους στόχους σας.</li>
+          <li><strong>Ξεκινήστε μικρά:</strong> αν μια συνήθεια φαίνεται αφόρητη, μειώστε την σε ένα μικρό βήμα (1 κάμψη, 2 λεπτά ανάγνωσης).</li>
+          <li><strong>Συγκεκριμενοποίηση:</strong> ορίστε τι σημαίνει "ολοκληρώθηκε" — π.χ. "Διάβασε 1 σελίδα" αντί για "Διάβασε περισσότερο".</li>
+        </ul>
+      </section>
+
+      <section id="design" class="section" aria-labelledby="design-title">
+        <h2 id="design-title">Σχεδιάστε μικρές συνήθειες — λιγότερη τριβή, περισσότερη συνέπεια</h2>
+        <p>Χρησιμοποιήστε την προσέγγιση "Tiny Habits": κάντε τη δράση εύκολη, συνδέστε την με ένα trigger και γιορτάστε την ολοκλήρωση. Το UI του Habit Tracker κάνει τη σήμανση γρήγορη — όσο πιο εύκολο είναι να σημειώσετε, τόσο πιο πιθανό είναι να συνεχίσετε.</p>
+
+        <div class="recipe">
+          <strong>Συνταγή για tiny habit</strong>
+          <ol>
+            <li>Trigger: συνδέστε τη συνήθεια με ένα αξιόπιστο καθημερινό σήμα (π.χ. μετά τον πρωινό καφέ).</li>
+            <li>Μικρή ενέργεια: επιλέξτε μια ελάχιστη εκδοχή που μπορείτε να κάνετε ακόμη και όταν είστε κουρασμένοι.</li>
+            <li>Άμεση σήμανση: ανοίξτε το Habit Tracker και πατήστε "Σημείωσε ως ολοκληρωμένο" (ή χρησιμοποιήστε συντόμευση πληκτρολογίου).</li>
+            <li>Αμοιβή: κάντε μια μικρή γιορτή (δέσμευση, σύντομη σημείωση) για να κλείσετε τον κύκλο.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Συμβουλή: το chaining (αλυσίδωση) μειώνει το switching context — "Μετά που βουρτσίζω τα δόντια, θα γράψω 1 πρόταση στο ημερολόγιο."</p>
+      </section>
+
+      <section id="track" class="section" aria-labelledby="track-title">
+        <h2 id="track-title">Καθημερινές ροές εργασίας παρακολούθησης</h2>
+        <p>Η συνέπεια εξαρτάται από την ορατότητα της συνήθειας. Χρησιμοποιήστε το Habit Tracker πρώτα το πρωί ή σε σταθερή ώρα (π.χ. τέλος ημέρας). Καταγράψτε τόσο τις ολοκληρώσεις όσο και σύντομες σημειώσεις για αιτίες αστοχίας ή τριβής.</p>
+
+        <h3>Παράδειγμα καθημερινής ρουτίνας</h3>
+        <ol>
+          <li>Πρωί: ανασκόπηση των σημερινών συνηθειών και προσθήκη πλαισίου αν χρειάζεται.</li>
+          <li>Κατά τη διάρκεια της ημέρας: σημειώστε τις συνήθειες όταν τις ολοκληρώνετε.</li>
+          <li>Βράδυ: γρήγορη ανασκόπηση — καταγράψτε λόγους απουσίας και επαναπρογραμματίστε αν χρειάζεται.</li>
+        </ol>
+      </section>
+
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Μέτρηση & μετρικά — κρατήστε το απλό</h2>
+        <p>Η μέτρηση σας κρατάει ειλικρινείς. Παρακολουθήστε λίγα ουσιώδη μετρικά και ανασκοπήστε εβδομαδιαία για να βελτιώσετε το χρονοδιάγραμμα και το σχεδιασμό.</p>
+
+        <h3>Βασικά μετρικά</h3>
+        <ul>
+          <li><strong>Ημέρες καταγραφής:</strong> αριθμός ημερών που σημειώσατε τη συνήθεια ως ολοκληρωμένη.</li>
+          <li><strong>Ποσοστό ολοκλήρωσης:</strong> ολοκληρωμένες ημέρες / προγραμματισμένες ημέρες.</li>
+          <li><strong>Μήκος streak:</strong> τρέχουσες συνεχόμενες ημέρες ολοκλήρωσης.</li>
+          <li><strong>Λόγοι αστοχίας:</strong> σύντομοι κωδικοί για αιτίες (ταξίδι, ασθένεια, παρέλειψη).</li>
+        </ul>
+
+        <pre class="template">CSV στήλες:
+date,habit,done,reason,notes
+2025-11-24,Drink water,1,,Had bottle at desk</pre>
+      </section>
+
+      <section id="streaks" class="section" aria-labelledby="streaks-title">
+        <h2 id="streaks-title">Streaks & κίνητρο — χρησιμοποιήστε τα με σύνεση</h2>
+        <p>Τα streaks μπορούν να κινητοποιούν αλλά είναι εύθραυστα. Χρησιμοποιήστε τα για να χτίσετε ρουτίνα, όχι για αυτοεπιβαλλόμενη τιμωρία. Αν σπάσει ένα streak, δώστε προτεραιότητα στην άμεση επανεκκίνηση αντί για αυτομαστίγωση.</p>
+
+        <h3>Υγιείς κανόνες για streaks</h3>
+        <ul>
+          <li>Κρατήστε ρεαλιστικούς στόχους streak (οι καθημερινές συνήθειες είναι πιο απλές, κάποιες εβδομαδιαίες είναι αποδεκτές).</li>
+          <li>Χρησιμοποιήστε "soft" κανόνες για ειδικές ημέρες (ταξίδια/διακοπές) — auto‑snooze ή σήμανση ως «εξαιρετική» αν χρειάζεται.</li>
+          <li>Γιορτάστε ορόσημα (7, 30, 90 ημέρες) με μια μικρή ανταμοιβή.</li>
+        </ul>
+      </section>
+
+      <section id="recover" class="section" aria-labelledby="recover-title">
+        <h2 id="recover-title">Ανάκτηση από αστοχίες — επανεκκινήστε άμεσα</h2>
+        <p>Οι αστοχίες είναι φυσιολογικές. Ένα γρήγορο σχέδιο ανάκτησης μειώνει τη ζημιά και βοηθά να ξαναχτίσετε τη δυναμική.</p>
+
+        <div class="recipe">
+          <strong>Ρουτίνα ανάκτησης</strong>
+          <ol>
+            <li>Καταγράψτε τι προκάλεσε το λάθος (μία πρόταση).</li>
+            <li>Προσαρμόστε το σχέδιο (μειώστε το μέγεθος, αλλάξτε trigger ή ώρα της ημέρας).</li>
+            <li>Ξεκινήστε αμέσως — μην περιμένετε μέχρι τη Δευτέρα.</li>
+            <li>Ανασκοπήστε εβδομαδιαία μοτίβα και βελτιώστε το σχεδιασμό.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Ομαδικά μοτίβα & υπευθυνότητα</h2>
+        <p>Οι ομάδες μπορούν να χρησιμοποιούν συνήθειες για κοινούς ρυθμούς (ημερήσιο standup, περίληψη τέλους ημέρας). Κρατήστε τις ομαδικές συνήθειες προαιρετικές και επικεντρωμένες σε κοινά αποτελέσματα αντί για έλεγχο.</p>
+
+        <ul>
+          <li><strong>Κοινές τελετουργίες:</strong> σύντομες συνήθειες που βελτιώνουν τον συντονισμό (π.χ. ενημέρωση κατάστασης ticket καθημερινά).</li>
+          <li><strong>Buddy system:</strong> συνεργαστείτε με συνάδελφο για εβδομαδιαίο έλεγχο προόδου.</li>
+          <li><strong>Συγκεντρωτικά μετρικά:</strong> μοιραστείτε ανωνυμοποιημένα ποσοστά ολοκλήρωσης για βελτίωση της ομάδας, όχι για ατομικό έλεγχο.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Αντιμετώπιση προβλημάτων & συνήθη ζητήματα</h2>
+        <ul>
+          <li><strong>Δεν υπάρχει χρόνος για καταγραφή:</strong> προσθέστε ένα κουμπί "Σημείωσε" με ένα πάτημα ή χρησιμοποιήστε φωνητική σημείωση για γρήγορη καταγραφή.</li>
+          <li><strong>Πάρα πολλές συνήθειες:</strong> μειώστε στις κορυφαίες 1–3 και "παγώστε" τις υπόλοιπες μέχρι να είναι συνεπείς οι πρώτες.</li>
+          <li><strong>Ψευδώς θετικές ενδείξεις:</strong> βεβαιωθείτε ότι το "done" αντικατοπτρίζει πραγματική ολοκλήρωση — προτιμήστε ποιότητα αντί για τυπική σήμανση.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> Πόσος χρόνος χρειάζεται για να γίνει μια συνήθεια αυτόματη;<br><strong>A:</strong> Διαφέρει: μικρές συνήθειες μπορούν να γίνουν ρουτίνα σε εβδομάδες· σύνθετες μπορεί να χρειαστούν μήνες. Εστιάστε στη συνέπεια παρά σε ένα προκαθορισμένο χρονικό διάστημα.</p>
+
+          <p><strong>Q:</strong> Πρέπει να καταγράφω κάθε μέρα;<br><strong>A:</strong> Η καθημερινή καταγραφή χτίζει ρυθμό. Για κάποιες συνήθειες μια εβδομαδιαία συχνότητα μπορεί να είναι πρακτική — ευθυγραμμίστε τη συχνότητα με τη φύση της συνήθειας.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Πόροι</h2>
+        <ul class="muted">
+          <li><a href="/habit-tracker-el.html">Άνοιγμα εργαλείου Habit Tracker</a></li>
+          <li><a href="https://jamesclear.com/habits" target="_blank" rel="noopener">Atomic Habits — James Clear</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/habit-tracker-el.html" class="cta" aria-label="Άνοιγμα Habit Tracker">Άνοιγμα Habit Tracker</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε μαζί μας στο <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/el/privacy/">Πολιτική Απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/habit-tracker-el.html" class="return-to-tool" id="returnToToolHabit" aria-label="Επιστροφή στο Habit Tracker">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Προς Habit Tracker</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolHabit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

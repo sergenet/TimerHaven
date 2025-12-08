@@ -1,18 +1,211 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <title>task-timer — Guide (ar)</title>
+  <title>مؤقت المهام — قياس الوقت وتحسين التقديرات | TimerHaven</title>
+  <meta name="description" content="كيفية استخدام مؤقت المهام لقياس المدة الحقيقية للعمل على المهام، تحليل الانقطاعات، وتحسين التخطيط. يتضمن HowTo، الأسئلة الشائعة، قالب CSV قابل للتحميل وبيانات مهيكلة.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for task-timer guide (ar)">
+  <link rel="canonical" href="https://timerhaven.com/ar/task-timer/task-timer-index.html">
+  <meta name="author" content="Serge Shammas">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "سجّل وحلّل زمن المهام باستخدام مؤقت المهام",
+    "description": "سير عمل لقياس الوقت الفعلي الذي تقضيه في المهام، احتساب الانقطاعات، واستخدام تلك البيانات للتخطيط الأفضل.",
+    "image": "/assets/images/tasktimer-snapshot.png"
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--brand-dark:#09507a;--muted:#6b7c89;--card:#fff;--bg:#fbfeff;--link-blue:#0d6efd}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;text-align:right;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-right:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;justify-content:flex-end;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+
+    .back-link{display:inline-block;margin-bottom:.75rem;color:var(--link-blue) !important;text-decoration:none;font-weight:700}
+    .back-link:hover{text-decoration:underline}
+    .read-guide-btn{display:inline-block;padding:.45rem .7rem;border-radius:8px;background:var(--link-blue);color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;border:none}
+
+    @media (max-width:520px) { .card{padding:1rem} }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">task-timer — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <a href="/ar/index.html" class="back-link" id="back-link">&larr;&nbsp;العودة إلى القائمة الرئيسية</a>
+
+      <h1 id="title">مؤقت المهام — قياس الوقت وتحسين التقديرات</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="56" height="56" alt="Serge Shammas — كاتب إنتاجية وباحث تجربة المستخدم" loading="lazy">
+        <div>
+          <div class="byline"><strong>بقلم Serge Shammas</strong> — كاتب إنتاجية وباحث تجربة المستخدم</div>
+          <div class="meta">نشر: 2025-10-25 · آخر تحديث: 2025-11-21 · وقت القراءة: 7–10 دقائق</div>
+        </div>
+      </div>
+
+      <p class="lead">يساعدك مؤقت المهام على تسجيل الوقت الحقيقي الذي تقضيه في المهام حتى تكتشف الأعمال التي تُقدر بأقل من واقعها، تقيس الانقطاعات، وتحسّن التخطيط. يغطي هذا الدليل الإعداد، ممارسات التسجيل، تصدير CSV ووصفات التحليل.</p>
+
+      <nav class="toc" aria-label="فهرس المحتوى">
+        <a href="#setup">الإعداد</a>
+        <a href="#howto">كيفية التسجيل</a>
+        <a href="#analysis">التصدير والتحليل</a>
+        <a href="#download">التحميل (CSV)</a>
+        <a href="#case-studies">دراسات حالة</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section class="section" id="setup" aria-labelledby="setup">
+        <h2 id="setup">الإعداد والتسمية</h2>
+        <p>استخدم أسماء مهام واضحة وأدرج مدة متوقعة قصيرة بين قوسين (مثل: <em>اكتب اختبارات الوحدة (45m)</em>). أضف وسوماً للمشروع والنوع. تجعل هذه القواعد التنسيقية ملفات CSV المصدّرة أسهل في التحليل — يجب أن تكون الوسوم قصيرة ومتناسقة (project-alpha، meeting، review).</p>
+      </section>
+
+      <section class="section" id="howto" aria-labelledby="howto">
+        <h2>كيفية تسجيل جلسة</h2>
+        <div class="workflow">
+          <strong>التسجيل</strong>
+          <ol>
+            <li>أنشئ إدخال المهمة مع الوقت المتوقع والوسوم.</li>
+            <li>ابدأ مؤقت المهام عند بدء العمل؛ سجّل الانقطاعات في حقل الملاحظات.</li>
+            <li>أوقف المؤقت عند الانتهاء وأضف ملخصًا قصيرًا لما تم إنجازه.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="analysis" aria-labelledby="analysis">
+        <h2>التصدير والتحليل</h2>
+        <p>صدّر ملفات CSV أسبوعية واحسب المتوسطات لكل وسم أو مشروع. المقاييس الأساسية: متوسط الزمن لكل مهمة، الوسيط (أقل حساسية للقيم الشاذة)، ومعدل الانقطاعات (٪ الجلسات التي تعرضت لانقطاع).</p>
+
+        <div class="workflow">
+          <strong>وصفة — المراجعة الأسبوعية</strong>
+          <ol>
+            <li>صدّر جلسات الأسبوع كملف CSV.</li>
+            <li>في جدول البيانات، احسب متوسط المدد حسب الوسم ورتّب المهام الأطول لتحسين التقديرات.</li>
+            <li>استخدم النتائج لإعادة توازن كتل Pomodoro والأحداث في التقويم القادمة.</li>
+          </ol>
+        </div>
+
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">مثال لجدول البيانات</h3>
+          <table class="sample" aria-hidden="false" style="border-collapse:collapse;width:100%;max-width:680px;margin-top:0.5rem;">
+            <thead><tr><th style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">التاريخ</th><th style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">المهمة</th><th style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">الفعلي (دقائق)</th><th style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">الانقطاعات</th></tr></thead>
+            <tbody>
+              <tr><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">2025-11-03</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">مراجعة الشيفرة</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">60</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">1</td></tr>
+              <tr><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">2025-11-04</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">ميزة X</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">120</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">0</td></tr>
+              <tr><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">2025-11-06</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">تصحيح خطأ</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">45</td><td style="border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:right">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="download" aria-labelledby="download">
+        <h2>تحميل — قالب CSV لمؤقت المهام</h2>
+        <p class="muted">استخدم هذا الملف لملء الجلسات يدويًا أو لاختبار عمليات الاستيراد/التصدير.</p>
+        <p><a href="#" id="downloadTaskCsv" class="cta" aria-label="تحميل قالب CSV لمؤقت المهام">تحميل قالب CSV</a></p>
+        <pre id="taskCsvTemplate" class="template" aria-hidden="true">date,task,tag,expected_minutes,actual_minutes,interruptions,notes
+2025-11-01,Write feature X,project-alpha,45,50,1,"Interruption: meeting"</pre>
+        <script>
+          document.getElementById('downloadTaskCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('taskCsvTemplate').textContent;
+            var blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'tasktimer-template-ar.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section class="section" id="case-studies" aria-labelledby="case-studies">
+        <h2>دراسات حالة ونصائح</h2>
+        <div class="workflow">
+          <strong>مطور — باولو</strong>
+          <p>بعد أسبوعين من التتبع اكتشف باولو أن مراجعات الشيفرة تشكّل 20٪ من يومه. جدَول كتل مخصصة للمراجعة وقلّل تفرّق السياق.</p>
+        </div>
+        <div class="workflow">
+          <strong>استشارية — رينا</strong>
+          <p>كانت رينا تسجّل مكالمات العملاء كانقطاعات؛ الآن تحجز فواصل تركيز وتدرج أوقات الاجتماعات المتوقعة لتجنّب الالتزامات المبالغ فيها.</p>
+        </div>
+      </section>
+
+      <section class="section" id="faq" aria-labelledby="faq">
+        <h2 id="faq">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> هل يمكن تشغيل مؤقت المهام جنبًا إلى جنب مع Pomodoro؟<br><strong>ج:</strong> نعم — استخدم مؤقت المهام للتسجيل التفصيلي وPomodoro للكتل المركّزة؛ اربط مدخل مؤقت المهام مع Pomodoro قبل البدء لتحصيل بيانات أنظف.</p>
+          <p><strong>س:</strong> هل هناك تصدير يعمل دون اتصال؟<br><strong>ج:</strong> نعم — تصدير CSV يتم على جهة العميل ويعمل دون اتصال؛ احفظ الملفات محليًا للنسخ الاحتياطية أو النقل.</p>
+          <p><strong>س:</strong> هل يمكنني استيراد CSV من أدوات أخرى؟<br><strong>ج:</strong> حقول القالب بسيطة (date, task, tag, expected_minutes, actual_minutes, interruptions, notes). طابق الحقول في تصديرات الأدوات الأخرى بهذه الأعمدة لاستيرادها أو ملء مجموعة البيانات.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">أدوات ذات صلة: <a href="/notes-ar.html">الملاحظات</a> · <a href="/pomodoro-ar.html">بومودورو</a> · <a href="/calendar-ar.html">التقويم</a></p>
+
+      <p style="margin-top:1.2rem;"><a href="/timer-ar.html#startBtn" class="cta" aria-label="افتح أداة مؤقت المهام" rel="help">افتح أداة مؤقت المهام</a></p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>أسئلة أو ملاحظات؟ تواصل معنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- زر عائد (العودة إلى مؤقت المهام) -->
+  <a
+    href="/timer-ar.html#startBtn"
+    role="button"
+    aria-label="العودة إلى مؤقت المهام"
+    title="العودة إلى مؤقت المهام"
+    data-return-pill="tasktimer"
+    style="position:fixed;left:26px;bottom:26px;z-index:2147483647;display:inline-flex;align-items:center;gap:12px;padding:11px 16px;border-radius:999px;background:linear-gradient(180deg,#2faaff,#0b63a0);color:#fff;font-weight:700;text-decoration:none;box-shadow:0 18px 40px rgba(3,56,102,0.22);cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;backface-visibility:hidden;transform:translateZ(0);">
+    <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.12);color:#fff;font-size:18px;flex:0 0 44px;">↩</span>
+    <span style="font-size:16px;line-height:1;white-space:nowrap;padding-left:6px;">العودة إلى مؤقت المهام</span>
+  </a>
+
+  <script>
+    // Keyboard activation + entrance animation (respects reduced-motion)
+    (function(){
+      try {
+        var pill = document.querySelector('[data-return-pill="tasktimer"]');
+        if (!pill) return;
+        if (!pill.hasAttribute('tabindex')) pill.setAttribute('tabindex','0');
+
+        pill.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pill.click(); }
+        });
+
+        try {
+          var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+          if (!mq || !mq.matches) {
+            pill.style.opacity = '0';
+            pill.style.transform = 'translateY(8px)';
+            window.addEventListener('load', function(){
+              setTimeout(function(){
+                pill.style.transition = 'transform .32s cubic-bezier(.2,.9,.2,1), opacity .28s ease';
+                pill.style.opacity = '1';
+                pill.style.transform = 'translateY(0)';
+              }, 110);
+            });
+          }
+        } catch(e){}
+      } catch(err) { /* silent */ }
+    })();
+  </script>
 </body>
 </html>

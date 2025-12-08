@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
@@ -10,262 +9,135 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
 <style>
-    /* Always reserve scrollbar to avoid layout jumps */
-    html { overflow-y: scroll; }
-
-    :root {
-      --card-bg: #fff;
-      --muted: #6b7c89;
-      --brand: #185a9d;
-    }
-
-    body {
-      background: #f4f7fb;
-      margin: 0;
-      color: #102a43;
-      font-family: "Inter", "Montserrat", Arial, sans-serif;
-    }
-
-    .main-container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      min-height: 90vh;
-    }
-
-    .center-row {
-      display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    .card-base {
-      background: var(--card-bg);
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      padding: 2rem 1.3rem 1rem 1.3rem;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      gap: .6rem;
-      min-height: 500px;
-      width: 340px;
-      min-width: 220px;
-      max-width: 360px;
-      flex: 1 1 340px;
-    }
-
-    .tool-card {
-      max-width: 640px;
-      min-width: 320px;
-      flex: 1 1 640px;
-      padding: 1.8rem 1.3rem;
-    }
-
-    h2,h3 { margin: 0 0 .5rem 0; font-weight: 700; color: #102a43; }
-
-    /* Slightly tighter header so selects fit */
-    .calendar-header {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:.4rem;
-      margin-bottom:.6rem;
-      flex-wrap: nowrap;
-    }
-
-    .calendar-nav { display:flex; gap:.2rem; align-items:center; flex-shrink:0; }
-    /* tighter buttons */
-    .calendar-nav .btn {
-      min-width: 36px;
-      padding: .18rem .4rem;
-      height: 32px;
-      line-height: 1;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .calendar-select {
-      border-radius:8px;
-      padding:.18rem .32rem;
-      border:1px solid #e4edf5;
-      background:#fff;
-      box-shadow:none;
-      font-size:.92rem;
-      height:32px;
-      line-height:1;
-      box-sizing:border-box;
-      -webkit-appearance:none;
-      appearance:none;
-    }
-    /* Narrower to ensure both fit inside the tool card */
-    .calendar-select.month { width: 95px; }
-    .calendar-select.year  { width: 56px; } /* narrow to fit */
-
-    /* Equal columns and centered content */
-    .calendar-table {
-      width: 100%;
-      margin-top: .6rem;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      min-height: 360px;
-      transition: min-height .12s ease;
-      box-sizing: border-box;
-      table-layout: fixed;
-    }
-
-    .calendar-table thead th {
-      width: 14.2857%;
-      text-align: center;
-      font-weight: 700;
-      padding: .6rem .3rem;
-      border-bottom: 1px solid #eef2f6;
-      background: #fff;
-    }
-    .calendar-table tbody td {
-      width: 14.2857%;
-      text-align: center;
-      vertical-align: middle;
-      padding: .5rem .25rem;
-      border: none;
-      height: 52px;
-    }
-
-    .day-cell {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:34px;
-      height:34px;
-      line-height:1;
-      margin:0 auto;
-      padding:0;
-      box-sizing:border-box;
-      cursor:pointer;
-      border-radius:6px;
-      transition: background .12s;
-      outline: none;
-      background: transparent;
-    }
-    .day-cell:hover, .day-cell:focus { background: #eef6fb; }
-
-    .has-note { background: #fff5d6 !important; }
-
-    .calendar-today {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:34px;
-      height:34px;
-      background: linear-gradient(180deg,#e6f7ff 0%,#cfefff 100%);
-      color:#004e73;
-      border-radius:50%;
-      font-weight:700;
-      border:1px solid rgba(0,126,204,0.18);
-      box-shadow: 0 4px 12px rgba(24,144,255,0.08);
-      padding: 0;
-      margin: 0;
-    }
-
-    details.faq-section summary { cursor:pointer; padding: .2rem 0; font-weight:600; }
-    details.faq-section ul { margin-top:.5rem; color:var(--muted); padding-left:1rem; }
-
-    .note-list { list-style:none; padding:0; margin:0 0 1rem 0; }
-    .note-list li { display:flex; gap:.5rem; align-items:center; justify-content:space-between; padding:.4rem .6rem; border-radius:6px; background:#f7fafc; margin-bottom:.5rem; }
-    .note-text { word-break:break-word; flex:1; }
-    .note-meta { color:var(--muted); font-size:.85rem; margin-left:.6rem; white-space:nowrap; }
-    .delete-note-btn { background:none; border:none; color:#c00; cursor:pointer; font-size:1rem; padding:.15rem; }
-
-    @media (max-width: 900px) {
-      .center-row { flex-direction: column; gap:1rem; align-items:stretch; }
-      .calendar-header { flex-wrap: wrap; }
-      .calendar-select.month { width: 100%; }
-      .calendar-select.year { width: 120px; }
-      .calendar-table thead th, .calendar-table tbody td { height: 44px; }
-      .calendar-today { width: 30px; height: 30px; }
-    }
-
-    footer { padding:1rem; text-align:center; color:var(--muted); font-size:.95rem; }
-  </style>
+  /* Use the upgraded single-card styling from the English example */
+  body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; color:#102a43; margin:0; }
+  .main-container { max-width:1200px; margin:2rem auto; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; padding:0 12px; }
+  .center-row { display:flex; flex-direction:column; align-items:center; width:100%; gap:0; }
+  .tool-card, .article-card {
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 2px 12px #e0e7ef;
+    width:100%;
+    max-width:520px;
+    min-width:220px;
+    display:flex;
+    flex-direction:column;
+    padding:1.6rem 1.3rem;
+    margin:0 0 1.2rem 0;
+    box-sizing:border-box;
+  }
+  .article-card h2, .tool-card h3 { font-size:1.35em; font-weight:700; margin-bottom:.4em; display:flex; align-items:center; gap:.3em; }
+  .article-card ol, .article-card ul, .tool-card ol, .tool-card ul { margin-left:1em; margin-bottom:.2em; }
+  .back-link { display:inline-block; margin-bottom:.8rem; color:#007bff; text-decoration:none; font-weight:bold; font-size:1em; }
+  .read-guide { display:inline-flex; align-items:center; justify-content:center; align-self:flex-start; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:#007bff; color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
+  .calendar-header { display:flex; align-items:center; gap:.5rem; margin-bottom:.7rem; white-space:nowrap; }
+  .calendar-nav { display:flex; gap:.25rem; align-items:center; flex-shrink:0; }
+  .calendar-nav .btn { min-width:34px; padding:.18rem .36rem; height:32px; display:inline-flex; align-items:center; justify-content:center; }
+  .calendar-select { border-radius:8px; padding:.18rem .32rem; border:1px solid #e4edf5; background:#fff; font-size:.92rem; height:32px; box-sizing:border-box; }
+  .calendar-select.month { width:120px; }
+  .calendar-select.year { width:88px; }
+  .calendar-table { width:100%; margin-top:.5rem; border-collapse: separate; border-spacing:0; background:#fff; border-radius:8px; overflow:hidden; }
+  .calendar-table th, .calendar-table td { text-align:center; padding:.6em .7em; min-width:36px; max-width:40px; }
+  .day-cell { cursor:pointer; border-radius:6px; transition:background .12s; display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; margin:0 auto; padding:0; box-sizing:border-box; }
+  .day-cell:hover { background:#eef6fb; }
+  .has-note { background:#fff5d6 !important; }
+  .calendar-today { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; background:linear-gradient(180deg,#e6f7ff 0%,#cfefff 100%); color:#004e73; border-radius:50%; font-weight:700; border:1px solid rgba(0,126,204,0.18); box-shadow:0 4px 12px rgba(24,144,255,0.08); padding:0; margin:0; }
+  .help-section { color:#6b7c89; margin-bottom:.25rem; }
+  .faq-section summary { cursor:pointer; padding:.35rem 0; font-weight:700; }
+  .note-list { list-style:none; padding:0; margin:0 0 1rem 0; }
+  .note-list li { background:#f7fafc; border-radius:6px; margin-bottom:.5rem; padding:.4rem .6rem; display:flex; align-items:center; justify-content:space-between; }
+  .note-text { word-break:break-word; flex:1; }
+  .note-meta { color:#6b7c89; font-size:.85rem; margin-left:.6rem; white-space:nowrap; }
+  .delete-note-btn { background:none; border:none; color:#c00; cursor:pointer; font-size:1rem; padding:.15rem; }
+  @media (max-width:1100px) {
+    .main-container{padding:0 8px;}
+    .tool-card{max-width:97vw;}
+    .calendar-select.month{width:95px;}
+    .calendar-select.year{width:72px;}
+  }
+  @media (max-width:800px) {
+    .calendar-select.month{width:100%;}
+    .calendar-select.year{width:120px;}
+  }
+  footer { padding:1rem; text-align:center; color:#6b7c89; font-size:.95rem; }
+</style>
 </head>
 <body>
-<main class="main-container" id="main">
-<div class="center-row">
-<aside class="card-base article-card" id="left-card">
-<h2 id="howto-title"><i class="fa fa-calendar-check"></i> Comment utiliser le Calendrier</h2>
-<ol id="howto-steps">
-<li><strong>Cliquez sur un jour :</strong> Ouvrez la fenêtre pour ajouter/voir plusieurs notes par jour.</li>
-<li><strong>Organisez vos événements :</strong> Chaque note est horodatée et peut être supprimée individuellement.</li>
-<li><strong>Persistant :</strong> Les notes sont enregistrées dans votre navigateur et restent jusqu'à leur suppression.</li>
-</ol>
+  <main class="main-container" id="main">
+    <div class="center-row">
+      <!-- Upgraded single-card layout (matches /en/ example) -->
+      <div class="tool-card" aria-labelledby="tool-title">
+        <a class="back-link" href="index.html" id="back-link" style="color:#007bff;">Retour au menu principal</a>
 
-</aside>
-<section aria-labelledby="tool-title" class="card-base tool-card" id="center-card">
-<a class="back-link" href="index.html" id="back-link" style="margin-bottom:.25rem;display:inline-block;color:var(--brand);font-weight:600;text-decoration:none;">Retour au menu principal</a>
-<h3 id="tool-title"></h3>
-<div id="tool-help" style="color:var(--muted);margin-bottom:.25rem;"></div>
-<div aria-label="Navigation du calendrier" class="calendar-header">
-<div aria-label="Navigation mois/année" class="calendar-nav" role="toolbar">
-<button aria-label="Année précédente" class="btn btn-sm btn-outline-secondary" id="nav-prev-year">«</button>
-<button aria-label="Mois précédent" class="btn btn-sm btn-outline-secondary" id="nav-prev-month">‹</button>
-<button aria-label="Aujourd'hui" class="btn btn-sm btn-outline-secondary" id="nav-today">Aujourd'hui</button>
-<button aria-label="Mois suivant" class="btn btn-sm btn-outline-secondary" id="nav-next-month">›</button>
-<button aria-label="Année suivante" class="btn btn-sm btn-outline-secondary" id="nav-next-year">»</button>
-</div>
-<div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
-<select aria-label="Sélectionner le mois" class="calendar-select month" id="calendar-month-select"></select>
-<select aria-label="Sélectionner l'année" class="calendar-select year" id="calendar-year-select"></select>
-</div>
-</div>
-<table aria-describedby="tool-help" class="calendar-table table" id="calendar-table" role="grid"></table>
-<details class="faq-section" id="faq-section">
-<summary id="faq-title">FAQ ▾</summary>
-<ul id="faq-list"></ul>
-</details>
-</section>
-<aside class="card-base article-card" id="right-card">
-<h2 id="tips-title"><i class="fa fa-lightbulb"></i> Conseils de productivité pour le calendrier</h2>
-<ul id="tips-list">
-<li><strong>Code couleur pour vos notes :</strong> Utilisez des emojis ou des tags pour une organisation visuelle facile.</li>
-<li><strong>Révisez régulièrement :</strong> Vérifiez vos notes et supprimez les événements obsolètes.</li>
-<li><strong>Planifiez à l'avance :</strong> Ajoutez des notes pour les dates futures pour être préparé !</li>
-</ul>
+        <h3 id="tool-title"></h3>
 
-</aside>
-</div>
-</main>
-<!-- Modal -->
-<div aria-hidden="true" aria-labelledby="noteModalLabel" class="modal fade" id="noteModal" tabindex="-1">
-<div class="modal-dialog">
-<div class="modal-content">
-<form autocomplete="off" id="noteForm">
-<div class="modal-header">
-<h5 class="modal-title" id="noteModalLabel">Notes pour <span id="modal-date-label"></span></h5>
-<button aria-label="Fermer" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<div class="modal-body">
-<ul aria-live="polite" class="note-list" id="noteList"></ul>
-<textarea class="form-control" id="noteInput" placeholder="Ajouter une nouvelle note pour ce jour..." rows="3"></textarea>
-</div>
-<div class="modal-footer">
-<button class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn" type="button">Fermer</button>
-<button class="btn btn-success" id="note-add-btn" type="submit">Ajouter la note</button>
-</div>
-</form>
-</div>
-</div>
-</div>
-<footer>© 2025 TimerHaven. Outils gratuits et respectueux de la vie privée.<br/><a href="privacy.html">Politique de confidentialité</a> · <a href="contact.html">Contact</a></footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Force French UI for this file (safe)
-    try { localStorage.setItem('timerhavenLang','fr'); } catch (e) {}
+        <!-- Read full guide button (matches /en/ behavior), opens in new tab -->
+        <a id="read-guide-btn" class="read-guide"
+           href="https://timerhaven.com/fr/calendar-planning/calendar-planning-index.html"
+           role="button" target="_blank" rel="noopener">Lire le guide complet</a>
 
-    // Load notes
+        <div class="help-section">
+          <b id="tool-help"></b>
+        </div>
+
+        <!-- Calendar header w/ nav and selects -->
+        <div class="calendar-header" aria-label="Navigation calendrier">
+          <div class="calendar-nav" role="toolbar" aria-label="Navigation mois/année">
+            <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary" aria-label="Année précédente">«</button>
+            <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary" aria-label="Mois précédent">‹</button>
+            <button id="nav-today" class="btn btn-sm btn-outline-secondary" aria-label="Aujourd'hui">Aujourd'hui</button>
+            <button id="nav-next-month" class="btn btn-sm btn-outline-secondary" aria-label="Mois suivant">›</button>
+            <button id="nav-next-year" class="btn btn-sm btn-outline-secondary" aria-label="Année suivante">»</button>
+          </div>
+
+          <div style="margin-left:auto; display:flex; gap:.45rem; align-items:center;">
+            <select id="calendar-month-select" class="calendar-select month" aria-label="Sélectionner le mois"></select>
+            <select id="calendar-year-select" class="calendar-select year" aria-label="Sélectionner l'année"></select>
+          </div>
+        </div>
+
+        <table class="table calendar-table" id="calendar-table" role="grid"></table>
+
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title">FAQ ▾</summary>
+          <ul id="faq-list"></ul>
+        </details>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form autocomplete="off" id="noteForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noteModalLabel">Notes pour <span id="modal-date-label"></span></h5>
+            <button aria-label="Fermer" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+          </div>
+          <div class="modal-body">
+            <ul aria-live="polite" class="note-list" id="noteList"></ul>
+            <textarea class="form-control" id="noteInput" placeholder="Ajouter une nouvelle note pour ce jour..." rows="3"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn" type="button">Fermer</button>
+            <button class="btn btn-success" id="note-add-btn" type="submit">Ajouter la note</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2025 TimerHaven. Outils gratuits et respectueux de la vie privée.<br/><a href="privacy.html">Politique de confidentialité</a> · <a href="contact.html">Contact</a></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Keep French UI for this file
+    try { localStorage.setItem('timerhavenLang','fr'); } catch(e){}
+
+    // Load notes storage
     let notes = {};
     try { notes = JSON.parse(localStorage.getItem('calendarNotes') || '{}'); } catch(e) { notes = {}; }
 
@@ -279,7 +151,7 @@
       return map[lang] || lang;
     }
 
-    // Translations: English + French (extend if needed)
+    // Translations: English + French (kept from original)
     const translations = {
       en: {
         back_link: "Back to Main Menu",
@@ -306,13 +178,16 @@
         "tool-title": "Calendrier",
         "tool-help": "Cliquez sur n'importe quel jour pour ajouter/voir/modifier vos notes. Plusieurs notes par jour sont enregistrées !",
         "faq-title": "FAQ",
-        "faq-list": `<li><b>Mes notes sont-elles sauvegardées ?</b> Oui ! Les notes sont enregistrées dans votre navigateur et restent jusqu'à leur suppression.</li><li><b>Puis-je ajouter plusieurs notes ?</b> Oui.</li>`,
+        "faq-list": `<li><b>Mes notes sont-elles sauvegardées&nbsp;?</b> Oui ! Les notes sont enregistrées dans votre navigateur et restent jusqu'à leur suppression.</li>
+          <li><b>Puis-je ajouter plusieurs notes&nbsp;?</b> Oui, vous pouvez ajouter autant de notes que vous le souhaitez pour chaque jour.</li>
+          <li><b>Puis-je supprimer des notes&nbsp;?</b> Oui, supprimez les notes individuellement en utilisant l'icône de la corbeille.</li>
+          <li><b>Les notes se synchronisent-elles sur d'autres appareils&nbsp;?</b> Pas encore — les notes sont enregistrées par navigateur. Pour un accès multi-appareils, utilisez des applications cloud.</li>`,
         "howto-title": "<i class='fa fa-calendar-check'></i> Comment utiliser le Calendrier",
-        "howto-steps": `<li><b>Cliquez sur un jour :</b> Ouvrez la fenêtre pour ajouter/voir des notes.</li>`,
-        "howto-article-link": "calendar-how-to-fr.html",
+        "howto-steps": `<li><b>Cliquez sur un jour :</b> Ouvrez la fenêtre pour ajouter/voir des notes.</li><li><b>Organisez vos événements :</b> Chaque note est horodatée et peut être supprimée individuellement.</li><li><b>Persistant :</b> Les notes sont enregistrées dans votre navigateur et restent jusqu'à leur suppression.</li>`,
+        "howto-article-link": "https://timerhaven.com/fr/calendar-planning/calendar-planning-index.html",
         "tips-title": "<i class='fa fa-lightbulb'></i> Conseils de productivité",
-        "tips-list": `<li><b>Codez vos notes :</b> Utilisez des emojis ou des tags.</li>`,
-        "tips-article-link": "calendar-tips-fr.html",
+        "tips-list": `<li><b>Codez vos notes :</b> Utilisez des emojis ou des tags.</li><li><b>Révisez régulièrement :</b> Vérifiez vos notes et supprimez les événements obsolètes.</li><li><b>Planifiez à l'avance :</b> Ajoutez des notes pour les dates futures pour être préparé !</li>`,
+        "tips-article-link": "https://timerhaven.com/fr/calendar-planning/calendar-planning-index.html",
         "noteModalLabel": "Notes pour",
         "noteInput": "Ajouter une nouvelle note pour ce jour...",
         "note-none": "Aucune note pour ce jour.",
@@ -337,21 +212,34 @@
       const obj = translations[lang] || translations['fr'];
       const byId = id => document.getElementById(id);
 
-      if (byId('back-link')) byId('back-link').textContent = obj['back_link'] || obj['back-link'] || '';
+      if (byId('back-link')) byId('back-link').textContent = obj['back_link'] || '';
       if (byId('tool-title')) byId('tool-title').innerHTML = `<i class="fa fa-calendar-days"></i> ${obj['tool-title'] || ''}`;
       if (byId('tool-help')) byId('tool-help').textContent = obj['tool-help'] || '';
       if (byId('faq-title')) byId('faq-title').textContent = obj['faq-title'] || '';
       if (byId('faq-list')) byId('faq-list').innerHTML = obj['faq-list'] || '';
       if (byId('howto-title')) byId('howto-title').innerHTML = obj['howto-title'] || '';
       if (byId('howto-steps')) byId('howto-steps').innerHTML = obj['howto-steps'] || '';
-      if (byId('howto-article-btn')) byId('howto-article-btn').href = obj['howto-article-link'] || byId('howto-article-btn').href || '#';
       if (byId('tips-title')) byId('tips-title').innerHTML = obj['tips-title'] || '';
       if (byId('tips-list')) byId('tips-list').innerHTML = obj['tips-list'] || '';
-      if (byId('tips-article-btn')) byId('tips-article-btn').href = obj['tips-article-link'] || byId('tips-article-btn').href || '#';
       if (byId('noteModalLabel')) byId('noteModalLabel').innerHTML = `${obj['noteModalLabel'] || ''} <span id="modal-date-label"></span>`;
       if (byId('noteInput')) byId('noteInput').placeholder = obj['noteInput'] || '';
       if (byId('note-close-btn')) byId('note-close-btn').textContent = obj['note-close-btn'] || '';
       if (byId('note-add-btn')) byId('note-add-btn').textContent = obj['note-add-btn'] || '';
+
+      // Ensure "Read full guide" uses the language-specific URL
+      const readBtn = document.getElementById('read-guide-btn');
+      if (readBtn) {
+        // If translations provide an explicit howto link, use it; otherwise follow the /{lang}/calendar-planning/... pattern
+        const guideUrl = obj['howto-article-link'] || (`https://timerhaven.com/${lang}/calendar-planning/calendar-planning-index.html`);
+        readBtn.href = guideUrl;
+        // update button text for French (we set it here)
+        readBtn.textContent = (lang === 'fr') ? 'Lire le guide complet' : (lang === 'en' ? 'Read full guide' : readBtn.textContent);
+      }
+
+      // Re-render calendar if already initialized
+      if (typeof currentYear === 'number' && typeof currentMonth === 'number') {
+        renderCalendar(currentYear, currentMonth, lang);
+      }
     }
 
     function populateMonthYearControls(year, month, lang) {
@@ -365,7 +253,7 @@
       monthSelect.innerHTML = '';
       for (let m=0;m<12;m++){ const opt=document.createElement('option'); opt.value=String(m); opt.textContent = monthFormatter.format(new Date(2000,m,1)); if(m===month) opt.selected=true; monthSelect.appendChild(opt); }
 
-      const now = new Date(); const base = now.getFullYear(); const start = base-100; const end = base+100;
+      const now = new Date(); const base = now.getFullYear(); const start = base-5; const end = base+5;
       yearSelect.innerHTML=''; for (let y=start;y<=end;y++){ const opt=document.createElement('option'); opt.value=String(y); opt.textContent=String(y); if(y===year) opt.selected=true; yearSelect.appendChild(opt); }
     }
 
@@ -419,5 +307,5 @@
 
     document.addEventListener('DOMContentLoaded', function(){ const now=new Date(); currentYear=now.getFullYear(); currentMonth=now.getMonth(); initUI(); populateMonthYearControls(currentYear, currentMonth, getLang()); hookupCalendarControls(); renderCalendar(currentYear, currentMonth, getLang()); });
   </script>
-<p style="margin-top:1rem;"><a class="cta" href="/fr/calendar/calendar-index.html">Read full guide</a></p></body>
+</body>
 </html>

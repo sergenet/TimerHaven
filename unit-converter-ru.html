@@ -1,99 +1,74 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Конвертер единиц</title>
-<meta content="Конвертируйте длину, вес, температуру и другие единицы. Узнайте, как пользоваться конвертером, получите советы и статьи." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
-    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-
-    /* Force cards to stretch to the same height and allow content to flow */
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:stretch; flex-wrap:wrap; }
-
-    .article-card, .tool-card {
-      background:#fff;
-      border-radius:16px;
-      box-shadow:0 2px 12px rgba(0,0,0,0.06);
-      padding:1.3rem;
-      box-sizing:border-box;
-      min-width:280px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    /* let cards size naturally but keep a comfortable minimum on desktop */
-    .article-card { width:330px; min-height:360px; align-items:flex-start; padding-bottom:1.2rem; }
-    .tool-card { width:410px; min-width:240px; min-height:360px; padding-bottom:1.2rem; }
-
-    /* Responsive fallback */
-    @media (max-width:900px) {
-      .center-row{flex-direction:column;align-items:center;}
-      .article-card, .tool-card{width:98%; max-width:540px; min-height:auto;}
-    }
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Конвертер единиц — TimerHaven</title>
+  <meta name="description" content="Конвертируйте длину, вес, температуру и другие единицы. Узнайте, как пользоваться конвертером, получите советы и статьи.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff;--link-blue:#0d6efd}
+    html,body{height:100%}
+    body { background:var(--bg); font-family:'Montserrat', Arial, sans-serif; color:#0b2545; margin:0; padding:2rem; }
+    .container { max-width:720px; margin:0 auto; }
+    .card { background:var(--card); border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.06); padding:1.6rem 1.5rem; box-sizing:border-box; }
+    .back-link{display:inline-block;margin-bottom:.75rem;color:var(--link-blue) !important;text-decoration:none;font-weight:700}
+    .back-link:hover{text-decoration:underline}
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .cta { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .9rem; border-radius:999px; background:var(--link-blue); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; box-shadow: 0 6px 18px rgba(13,110,253,0.12); }
     .converter-form { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center; }
-    .converter-result { font-weight:700; font-size:1.12em; margin-bottom:1rem; }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
-    .btn-small { padding:.35rem .7rem; font-size:.9rem; }
-
-    /* Ensure article buttons are block-level, full width, and inside the card */
-    .article-card a.btn,
-    .tool-card a.btn {
-      display:block;
-      width:100%;
-      box-sizing:border-box;
-      text-align:center;
-      margin-top:.6rem;
-      margin-bottom:0;
-    }
-
-    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
+    .converter-result { font-weight:700; font-size:1.12em; margin-bottom:1rem; color:#102a43; }
+    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
+    @media (max-width:900px) { .card{padding:1rem} }
   </style>
 </head>
 <body>
-<div class="page-wrap">
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">Конвертер единиц</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">Конвертируйте длину, вес, температуру и другие единицы. Узнайте, как пользоваться конвертером, получите советы и статьи.</p>
-</div>
-<div class="center-row">
+  <script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){};</script>
 
-<div aria-label="Конвертер единиц" class="tool-card" role="region">
-<div>
-<a class="back-link" href="index.html" style="text-decoration:none; color:#0d6efd; font-weight:600; margin-bottom:.4rem; display:block;">← Назад в главное меню</a>
-<h3><i class="fa fa-ruler-combined"></i> Конвертер единиц</h3>
-<div class="unit-section">
-<form class="converter-form" id="unitForm">
-<select class="form-select" id="typeSelect" style="max-width:140px;">
-<option value="length">Длина</option>
-<option value="weight">Вес</option>
-<option value="temperature">Температура</option>
-</select>
-<input class="form-control" id="inputValue" placeholder="Значение" style="max-width:100px;" type="number"/>
-<select class="form-select" id="fromUnit" style="max-width:140px;"></select>
-<span style="font-size:1.3em;">→</span>
-<select class="form-select" id="toUnit" style="max-width:140px;"></select>
-<button class="btn btn-primary btn-sm" type="submit">Преобразовать</button>
-</form>
-<div class="converter-result" id="unitResult"></div>
-</div>
-</div>
-<details class="faq-section">
-<summary>Часто задаваемые вопросы</summary>
-<p style="margin-top:.6rem;">Введите число, выберите тип и единицы, затем нажмите Преобразовать.</p>
-</details>
-</div>
+  <main class="container" role="main">
+    <article class="card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link">&larr;&nbsp;Назад в главное меню</a>
 
-</div>
-<footer class="site">© 2025 TimerHaven. <a href="privacy.html">Политика</a></footer>
-</div>
-<script>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-ruler-combined" aria-hidden="true"></i> Конвертер единиц</h3>
+
+      <p style="margin:0 0 .6rem 0;">
+        <a id="read-guide-btn" class="cta" href="/ru/unit-converter/unit-converter-index.html" role="button" target="_blank" rel="noopener">Читать полностью</a>
+      </p>
+
+      <div class="unit-section" aria-live="polite">
+        <form class="converter-form" id="unitForm" onsubmit="return false;">
+          <select id="typeSelect" class="form-select" style="max-width:140px;">
+            <option value="length">Длина</option>
+            <option value="weight">Вес</option>
+            <option value="temperature">Температура</option>
+          </select>
+
+          <input type="number" id="inputValue" class="form-control" placeholder="Значение" style="max-width:100px;">
+
+          <select id="fromUnit" class="form-select" style="max-width:120px;"></select>
+          <span style="font-size:1.3em;">→</span>
+          <select id="toUnit" class="form-select" style="max-width:120px;"></select>
+
+          <button id="convertBtn" class="btn btn-primary btn-sm" type="button">Преобразовать</button>
+        </form>
+
+        <div id="unitResult" class="converter-result">Результат появится здесь.</div>
+
+        <details class="faq-section">
+          <summary style="font-weight:700; font-size:1.02rem; cursor:pointer;">Часто задаваемые вопросы</summary>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>Поддерживаются ли все единицы?</b> Включены большинство распространённых единиц.</li>
+            <li><b>Бесплатна ли конвертация?</b> Да — используйте без ограничений.</li>
+            <li><b>Можно ли конвертировать дробные значения?</b> Да — поддерживаются десятичные значения.</li>
+          </ul>
+        </details>
+      </div>
+    </article>
+  </main>
+
+  <script>
+  // Unit definitions and conversion logic (based on English version)
   const unitTypes = {
     length: {
       units: { "Meter": 1, "Kilometer": 1000, "Centimeter": 0.01, "Millimeter": 0.001, "Mile": 1609.34, "Yard": 0.9144, "Foot": 0.3048, "Inch": 0.0254 },
@@ -127,30 +102,39 @@
     });
   }
 
+  // initialize
   const typeSelect = document.getElementById('typeSelect');
-  const initialType = typeSelect.value || 'length';
-  typeSelect.addEventListener('change', function() {
-    populateUnits(this.value);
-  });
-  populateUnits(initialType);
+  typeSelect.addEventListener('change', function() { populateUnits(this.value); });
+  populateUnits('length');
 
-  document.getElementById('unitForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+  function formatNumber(v) {
+    if (typeof v !== 'number' || !isFinite(v)) return v;
+    return parseFloat(v.toFixed(6)).toString();
+  }
+
+  function doConvert() {
     const type = document.getElementById('typeSelect').value;
     const val = parseFloat(document.getElementById('inputValue').value);
     const from = document.getElementById('fromUnit').value;
     const to = document.getElementById('toUnit').value;
     const resultEl = document.getElementById('unitResult');
     if (isNaN(val)) {
-      resultEl.innerText = "Please enter a valid value.";
+      resultEl.innerText = "Пожалуйста, введите корректное значение.";
       return;
     }
     let result = unitTypes[type].convert(val, from, to);
+    if (typeof result === 'number') result = formatNumber(result);
     resultEl.innerText = `${val} ${from} = ${result} ${to}`;
-  });
+  }
 
-  // language selector redirect removed
+  document.getElementById('convertBtn').addEventListener('click', doConvert);
+  document.getElementById('unitForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    doConvert();
+  });
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/ru/unit-converter/unit-converter-index.html">Read full guide</a></p></body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
 </html>

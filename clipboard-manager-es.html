@@ -1,246 +1,319 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<title>Clipboard Manager — TimerHaven (es)</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Save, manage, and organize multiple clipboard snippets." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    :root { --card-bg: #fff; --page-bg: #f4f7fb; --accent: #185a9d; --accent-2: #43cea2; }
-    body { background: var(--page-bg); font-family: 'Montserrat', Arial, sans-serif; margin: 0; }
+  <meta charset="utf-8" />
+  <title>Gestor del Portapapeles — TimerHaven (ES)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guarda fragmentos de texto rápidos para reutilizar más tarde. Los clips se almacenan localmente en tu navegador.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    /* Defensive: force-hide any language indicator that might be present in templates */
-    .language-indicator { display: none !important; visibility: hidden !important; opacity: 0 !important; height: 0 !important; width: 0 !important; }
-
-    /* Layout: columns are flex containers so cards can stretch to equal height */
-    .main-container { max-width: 1200px; margin: 1.5em auto; display: flex; justify-content: center; align-items: stretch; min-height: 70vh; padding: 0 12px; box-sizing: border-box; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 1.5em; width: 100%; }
-
-    /* Each column should be a flex column so the card inside can expand to fill height */
-    .center-row > .col { display: flex; flex-direction: column; flex: 1 1 0; min-width: 240px; }
-
-    .article-card, .tool-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #e0e7ef;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      padding: 1.6em;
-      box-sizing: border-box;
-      text-align: left;
-      overflow: visible;
-      /* force card to stretch to the column height */
-      height: 100%;
+  <style>
+    :root {
+      --brand: #185a9d;
+      --muted: #51606b;
+      --card-bg: #ffffff;
+      /* estándar azul para "Leer guía completa" / "Volver al menú principal" */
+      --standard-blue: #007bff;
+      --success: #198754;
+      --danger: #d9534f;
+      --surface: #fbfdff;
+      --soft-shadow: 0 6px 20px rgba(16,42,67,0.06);
+      --radius: 14px;
     }
 
-    .article-card h2, .tool-card h3 { font-weight: 700; color: var(--accent); margin-bottom: .5em; display:flex; align-items:center; gap:.4em; }
-    .article-card .btn, .tool-card .btn { margin-top: .6em; border-radius: 8px; font-weight:600; }
-    .clips-section { margin-top: 6px; display:flex; flex-direction:column; flex:1 1 auto; }
-    .clips-form { display:flex; gap:.5em; align-items:center; margin-bottom:.6em; }
-    .clips-form input[type="text"] { flex: 1 1 180px; min-width: 0; }
-    .clips-list { margin-top:.6em; max-height: 260px; overflow-y: auto; padding-right: 6px; }
-    .clip-item { background:#f7fafc; border-radius:8px; padding:10px; margin-bottom:8px; display:flex; align-items:center; gap:.8em; }
-    .clip-text { flex:1; word-break:break-word; }
-    .clip-actions .btn { padding:.25rem .5rem; }
-    .faq-section { margin-top: 1em; background:#f7fafc; border-radius:8px; padding: .8em; }
-    details[open] summary::after { content: " ▲"; }
-    details summary::after { content: " ▼"; }
-    .back-link { color: var(--accent); font-weight:700; text-decoration:none; display:inline-block; margin-bottom:.6em; }
-    .back-link i { margin-right:.35em; }
-    footer { text-align:center; color:#666; padding: 1.2rem 0; font-size:.9rem; }
-
-    @media (max-width: 900px) {
-      .main-container { margin: 12px auto; padding: 0 8px; }
-      .center-row { flex-direction: column; gap: 12px; align-items: stretch; }
-      .center-row > .col { min-width: auto; }
-      .article-card, .tool-card { width: 100%; max-width: 680px; }
+    body {
+      background: linear-gradient(180deg, #f5f8fb 0%, #eef6fb 100%);
+      font-family: "Inter", "Montserrat", Arial, sans-serif;
+      color: #22313f;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+
+    header.page-head {
+      text-align: center;
+      padding: 36px 16px 0;
+    }
+    header.page-head h1 {
+      margin: 0;
+      color: var(--brand);
+      font-size: 2.1rem;
+      font-weight: 700;
+    }
+    header.page-head p {
+      margin: 8px auto 18px;
+      max-width: 840px;
+      color: var(--muted);
+    }
+
+    main { display:flex; justify-content:center; padding:18px; }
+
+    .tool-card {
+      width:480px;
+      background:var(--card-bg);
+      border-radius:var(--radius);
+      box-shadow:var(--soft-shadow);
+      padding:20px;
+      box-sizing:border-box;
+    }
+
+    /* Enlace de retorno con el azul estándar */
+    .back-link {
+      display:inline-block;
+      margin-bottom:12px;
+      color: var(--standard-blue) !important;
+      text-decoration:none;
+      font-weight:600;
+    }
+    .back-link:hover { text-decoration:underline; }
+
+    .tool-title {
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      color: var(--brand);
+      font-size:1.25rem;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    /* Botón "Leer guía" en azul estándar */
+    .read-guide {
+      display:inline-flex;
+      padding:.45rem .7rem;
+      border-radius:10px;
+      background:var(--standard-blue) !important;
+      color:#fff !important;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+      border:none;
+      margin-bottom:.8rem;
+      box-shadow: 0 6px 14px rgba(0,123,255,0.09);
+    }
+    .read-guide:hover, .read-guide:focus { background:#0069e6 !important; color:#fff !important; text-decoration:none; }
+
+    .muted {
+      color: var(--muted);
+      margin-bottom:12px;
+      font-size:.95rem;
+      line-height:1.3;
+    }
+
+    .toolbar {
+      display:flex;
+      gap:.5rem;
+      align-items:center;
+      margin-bottom:12px;
+      flex-wrap:wrap;
+    }
+    .toolbar .btn { height:36px; padding:.35rem .6rem; }
+
+    .clipboard-form textarea, .clipboard-form .form-control {
+      width:100%;
+      min-height:92px;
+      border-radius:10px;
+      border:1px solid #e6eef5;
+      padding:12px;
+      box-sizing:border-box;
+      resize:vertical;
+      font-size:.98rem;
+      color:#213041;
+      background:linear-gradient(180deg,#fff,#fbfdff);
+      box-shadow: inset 0 1px 0 rgba(16,42,67,0.02);
+    }
+
+    .form-actions { display:flex; gap:.6rem; margin-top:.6rem; align-items:center; }
+    .form-actions .btn { min-width:72px; border-radius:8px; }
+
+    .clips-list { margin-top:12px; max-height:260px; overflow:auto; display:flex; flex-direction:column; gap:.6rem; padding-right:6px; }
+    .clip-item { background: var(--surface); border-radius:10px; padding:.75rem; display:flex; gap:.6rem; align-items:flex-start; justify-content:space-between; border:1px solid rgba(15,50,80,0.04); }
+    .clip-text { flex:1; word-break:break-word; font-size:.97rem; white-space:pre-wrap; }
+    .clip-actions { display:flex; flex-direction:column; gap:.45rem; align-items:flex-end; flex:0 0 auto; }
+    .clip-actions .btn { font-size:.85rem; padding:.35rem .6rem; min-width:84px; border-radius:8px; }
+
+    .example-card { margin-top:12px; padding:12px; background:#fbfdff; border:1px solid #eef5fb; border-radius:10px; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+
+    .empty-state { display:flex; align-items:center; gap:12px; padding:14px; border-radius:10px; background:linear-gradient(180deg,#ffffff,#fbfdff); border:1px dashed rgba(24,144,255,0.08); color:var(--muted); margin-top:10px; }
+
+    details.faq { margin-top:14px; }
+    @media (max-width:520px) { .tool-card { width:94vw; padding:16px; } .clip-actions { flex-direction:row; } .clip-actions .btn { min-width:64px; } }
   </style>
 </head>
 <body>
-<!-- language selector removed -->
-<div class="main-container" id="page-main">
-<div class="center-row">
-<div class="col">
-<article class="article-card" id="left-article">
-<div class="card-inner" style="display:flex;flex-direction:column;flex:1 1 auto;">
-<header class="card-content" style="flex:1 1 auto;">
-<h2><i class="fa fa-clipboard"></i> Cómo utilizar el Gestor de Portapapeles</h2>
-<ol>
-<li><b>Agregar una nota:</b> Escribe/pega el texto y pulsa <b>Agregar</b>. Aparecerá en la lista.</li>
-<li><b>Copiar una nota:</b> Pulsa <b>Copiar</b> junto al clip.</li>
-<li><b>Eliminar una nota:</b> Pulsa <b>Eliminar</b> para quitar la nota.</li>
-<li><b>Las notas se guardan:</b> Permanecen en el navegador incluso tras cerrar la página.</li>
-</ol>
-</header>
+  <header class="page-head">
+    <h1>Gestor del Portapapeles</h1>
+    <p class="small-muted">Guarda y reutiliza fragmentos de texto. Usa Exportar/Importar para copias de seguridad y restaurarlas cuando lo necesites.</p>
+  </header>
 
-</div>
-</article>
-</div>
-<div class="col">
-<section aria-labelledby="tool-title" class="tool-card" id="tool-card">
-<div class="card-inner" style="display:flex;flex-direction:column;flex:1 1 auto;">
-<div class="card-content" style="flex:1 1 auto;">
-<a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i>Volver al menú principal</a>
-<h3>Gestor de Portapapeles</h3>
-<div aria-label="Clips section" class="clips-section" role="region">
-<form aria-label="Add clip form" class="clips-form" id="clipboardForm">
-<input class="form-control" id="clipInput" placeholder="Escribe o pega tu nota aquí..." type="text"/>
-<button class="btn btn-success" id="add-btn" type="submit">Agregar</button>
-</form>
-<div aria-live="polite" class="clips-list" id="clipsList"></div>
-<details class="faq-section" style="margin-top:12px;">
-<summary>Preguntas frecuentes</summary>
-<ul style="padding-left:1em;">
-<li><b>¿Se guardan mis notas?</b> ¡Sí! Permanecen en tu navegador hasta que las elimines.</li>
-<li><b>¿Puedo copiar una nota?</b> Sí, pulsa <b>Copiar</b> junto a la nota.</li>
-<li><b>¿Cómo elimino una nota?</b> Pulsa <b>Eliminar</b> junto a la nota.</li>
-<li><b>¿Cómo borro todas las notas?</b> Elimina una a una.</li>
-</ul>
-</details>
-</div>
-</div>
-<div aria-hidden="true" class="card-actions" style="margin-top:auto;"></div>
-</div>
-</section>
-</div>
-<div class="col">
-<aside class="article-card" id="right-article">
-<div class="card-inner" style="display:flex;flex-direction:column;flex:1 1 auto;">
-<header class="card-content" style="flex:1 1 auto;">
-<h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos para el Portapapeles</h2>
-<ul>
-<li><b>Agrupa notas:</b> Junta información similar.</li>
-<li><b>Copia información importante:</b> Ahorra tiempo con textos frecuentes.</li>
-<li><b>Elimina clips antiguos:</b> Borra notas obsoletas regularmente.</li>
-</ul>
-</header>
+  <main>
+    <article class="tool-card" role="main" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link">&larr;&nbsp;Volver al menú principal</a>
 
-</div>
-</aside>
-</div>
-</div>
-</div>
-<button id="lh-floating-add" style="display:none;" title="Add (fallback)">Add</button>
-<script>
-    // Clips persistence & UI
+      <div class="tool-title" id="tool-title"><i class="fa fa-clipboard" aria-hidden="true"></i> Gestor del Portapapeles</div>
+
+      <a href="/es/clipboard-manager/clipboard-manager-index.html" class="read-guide" aria-label="Leer guía completa" target="_blank" rel="noopener">Leer guía completa</a>
+
+      <p class="muted">Guarda fragmentos de texto rápidos para reutilizar más tarde. Los clips se almacenan localmente en tu navegador.</p>
+
+      <div class="toolbar" role="toolbar" aria-label="Acciones">
+        <button id="show-info" class="btn btn-outline-secondary btn-sm"><i class="fa fa-info-circle"></i> Info</button>
+        <button id="export-clips" class="btn btn-outline-primary btn-sm"><i class="fa fa-file-export"></i> Exportar</button>
+        <button id="import-clips" class="btn btn-outline-success btn-sm"><i class="fa fa-file-import"></i> Importar</button>
+        <button id="clear-all" class="btn btn-danger btn-sm ms-auto"><i class="fa fa-trash"></i> Borrar todo</button>
+      </div>
+
+      <form id="clipboardForm" class="clipboard-form" aria-label="Agregar nota">
+        <textarea id="clipboardInput" placeholder="Escribe o pega tu nota aquí..." class="form-control" aria-label="Entrada de portapapeles"></textarea>
+        <div class="form-actions">
+          <button type="submit" id="add-btn" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button>
+          <button type="button" id="paste-btn" class="btn btn-outline-secondary"><i class="fa fa-paste"></i> Pegar</button>
+          <button type="button" id="clear-input" class="btn btn-outline-danger"><i class="fa fa-eraser"></i> Borrar</button>
+        </div>
+      </form>
+
+      <div id="clips-list" class="clips-list" aria-live="polite" aria-atomic="true"></div>
+
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="3" width="14" height="18" rx="2" stroke="#cce7ff" stroke-width="1.5" fill="#eaf7ff"/>
+          <rect x="7" y="7" width="10" height="2" rx="1" fill="#cfefff"/>
+          <rect x="7" y="11" width="10" height="2" rx="1" fill="#cfefff"/>
+        </svg>
+        <div>
+          <strong>No hay notas aún</strong>
+          <div style="font-size:.92rem;color:var(--muted)">Agrega una nota o importa clips de ejemplo para comenzar.</div>
+        </div>
+      </div>
+
+      <div class="example-card" role="group" aria-labelledby="example-title">
+        <div style="min-width:0;flex:1 1 260px;">
+          <strong id="example-title">Descargar clips de ejemplo</strong>
+          <div class="muted">Pequeño archivo de respaldo con clips comunes (para importar)</div>
+        </div>
+        <div style="flex:0 0 auto;">
+          <button id="exportDemoBtnInline" class="btn btn-outline-primary btn-sm" aria-label="Descargar ejemplo"><i class="fa fa-download"></i> Ejemplo</button>
+        </div>
+      </div>
+
+      <details class="faq" id="faq-section" style="margin-top:12px;">
+        <summary style="font-weight:700;">Preguntas frecuentes</summary>
+        <div style="margin-top:8px;">
+          <p class="muted" style="margin:0 0 .5rem 0;"><strong>¿Dónde se guardan los clips?</strong> Los clips se guardan localmente en tu navegador. Usa Exportar para descargar una copia de seguridad.</p>
+        </div>
+      </details>
+    </article>
+  </main>
+
+  <footer style="text-align:center;margin-top:8px;color:var(--muted);font-size:13px;padding-bottom:24px;">© 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad. &nbsp; <a href="privacy.html">Política de privacidad</a></footer>
+
+  <script>
+    // Helpers de almacenamiento
+    function safeSet(key, value){ try{ localStorage.setItem(key, value); return true; }catch(e){ return false; } }
+    function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
+
+    const STORAGE_KEY = 'clipboardClips_v1';
+    let clips = JSON.parse(safeGet(STORAGE_KEY) || '[]');
+
+    const clipsList = document.getElementById('clips-list'),
+          clipboardForm = document.getElementById('clipboardForm'),
+          clipboardInput = document.getElementById('clipboardInput'),
+          emptyState = document.getElementById('empty-state');
+
+    function toggleEmptyState() {
+      if (!clips || clips.length === 0) emptyState.style.display = 'flex';
+      else emptyState.style.display = 'none';
+    }
+
+    function escapeHtml(s){ return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    function renderClips(){
+      clipsList.innerHTML = '';
+      if (!clips || clips.length === 0) { toggleEmptyState(); return; }
+      toggleEmptyState();
+      clips.forEach((c,i) => {
+        const item = document.createElement('div'); item.className = 'clip-item';
+        const text = document.createElement('div'); text.className = 'clip-text'; text.innerHTML = (c.pinned ? '<span style="font-weight:700;color:var(--brand);margin-right:.5em;"><i class="fa fa-thumbtack"></i></span>' : '') + escapeHtml(c.text);
+        const actions = document.createElement('div'); actions.className = 'clip-actions';
+
+        const copyBtn = document.createElement('button'); copyBtn.className = 'btn btn-sm btn-outline-success'; copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copiar';
+        copyBtn.onclick = async () => {
+          try { await navigator.clipboard.writeText(c.text); copyBtn.textContent = 'Copiado'; setTimeout(()=>copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copiar',900); }
+          catch (e) { alert('Error al copiar — el navegador puede bloquear el acceso al portapapeles.'); }
+        };
+
+        const editBtn = document.createElement('button'); editBtn.className = 'btn btn-sm btn-outline-secondary'; editBtn.innerHTML = '<i class="fa fa-edit"></i> Editar';
+        editBtn.onclick = () => { clipboardInput.value = c.text; clipboardInput.focus(); };
+
+        const delBtn = document.createElement('button'); delBtn.className = 'btn btn-sm btn-outline-danger'; delBtn.innerHTML = '<i class="fa fa-trash"></i> Eliminar';
+        delBtn.onclick = () => { if (!confirm('¿Eliminar este clip?')) return; clips.splice(i,1); safeSet(STORAGE_KEY, JSON.stringify(clips)); renderClips(); };
+
+        actions.appendChild(copyBtn); actions.appendChild(editBtn); actions.appendChild(delBtn);
+        item.appendChild(text); item.appendChild(actions); clipsList.appendChild(item);
+      });
+    }
+
+    clipboardForm.addEventListener('submit', function(e){ e.preventDefault(); const v = (clipboardInput.value || '').trim(); if (!v) return; clips.unshift({ text: v, created: Date.now(), pinned: false }); safeSet(STORAGE_KEY, JSON.stringify(clips)); clipboardInput.value = ''; renderClips(); });
+
+    document.getElementById('paste-btn') && document.getElementById('paste-btn').addEventListener('click', async () => { try{ const text = await navigator.clipboard.readText(); clipboardInput.value = text; } catch(e){ alert('No se puede leer el portapapeles (permiso denegado).'); } });
+
+    document.getElementById('clear-input') && document.getElementById('clear-input').addEventListener('click', () => { clipboardInput.value = ''; });
+
+    document.getElementById('clear-all') && document.getElementById('clear-all').addEventListener('click', () => { if (!confirm('¿Borrar todos los clips? Esta acción no se puede deshacer.')) return; clips = []; safeSet(STORAGE_KEY, JSON.stringify(clips)); renderClips(); });
+
+    document.getElementById('export-clips') && document.getElementById('export-clips').addEventListener('click', () => {
+      const data = JSON.stringify(clips, null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'clipboard-backup.json';
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('import-clips') && document.getElementById('import-clips').addEventListener('click', () => {
+      const input = document.createElement('input'); input.type = 'file'; input.accept = 'application/json';
+      input.onchange = () => {
+        const file = input.files[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          try {
+            const imported = JSON.parse(evt.target.result);
+            if (!Array.isArray(imported)) throw new Error('Formato inválido');
+            clips = imported.concat(clips);
+            safeSet(STORAGE_KEY, JSON.stringify(clips));
+            renderClips();
+            alert('Clips importados.');
+          } catch (err) {
+            alert('Error al importar: ' + err.message);
+          }
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    });
+
+    document.getElementById('show-info') && document.getElementById('show-info').addEventListener('click', function() {
+      alert('Este Gestor de Portapapeles almacena clips localmente en tu navegador. Usa Exportar para descargar una copia de seguridad.');
+    });
+
     (function(){
-      function safeGet(k){ try { return localStorage.getItem(k); } catch(e) { return null; } }
-      function safeSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e) { return false; } }
-      window.clips = JSON.parse(safeGet('clipboardClips') || '[]');
-      var clips = window.clips || [];
-
-      function escapeHtml(s){ return String(s || '').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-      function renderClips(){
-        var list = document.getElementById('clipsList');
-        if (!list) return;
-        list.innerHTML = '';
-        if (!clips.length) { list.innerHTML = '<div style="color:#888;">No se han añadido notas.</div>'; return; }
-        for (var i=0;i<clips.length;i++){
-          var c = clips[i];
-          var pin = c.pinned ? '<span style="font-weight:700;color:var(--accent);margin-right:.5em;"><i class="fa fa-thumbtack"></i></span>' : '';
-          var div = document.createElement('div');
-          div.className = 'clip-item';
-          div.innerHTML = '<div class="clip-text">' + pin + escapeHtml(c.text) + '</div>' +
-                          '<div style="display:flex;gap:.4rem;align-items:center;">' +
-                          '<button class="btn btn-outline-info btn-sm" data-idx="' + i + '" data-action="pin" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>' +
-                          '<button class="btn btn-outline-success btn-sm" data-idx="' + i + '" data-action="copy" title="Copy"><i class="fa fa-copy"></i></button>' +
-                          '<button class="btn btn-outline-danger btn-sm" data-idx="' + i + '" data-action="remove" title="Remove"><i class="fa fa-trash"></i></button>' +
-                          '</div>';
-          list.appendChild(div);
-        }
-
-        Array.from(list.querySelectorAll('button[data-idx]')).forEach(function(btn){
-          var idx = parseInt(btn.getAttribute('data-idx'), 10);
-          var action = btn.getAttribute('data-action');
-          btn.onclick = function(){
-            if (action === 'copy') {
-              try { navigator.clipboard.writeText(clips[idx].text); } catch(e) {}
-            } else if (action === 'remove') {
-              clips.splice(idx,1); window.clips = clips; safeSet('clipboardClips', JSON.stringify(clips)); renderClips();
-            } else if (action === 'pin') {
-              clips[idx].pinned = !clips[idx].pinned;
-              if (clips[idx].pinned) { var p = clips.splice(idx,1)[0]; clips.unshift(p); }
-              safeSet('clipboardClips', JSON.stringify(clips)); renderClips();
-            }
-          };
-        });
-
-        // after rendering clips, trigger a resize event to let equalizer run
-        setTimeout(function(){ try { window.dispatchEvent(new Event('resize')); } catch(e) {} }, 60);
-      }
-
-      function addClipFromInput(){
-        var input = document.getElementById('clipInput');
-        var text = (input && input.value || '').trim();
-        if (!text) return;
-        clips = clips || [];
-        clips.unshift({ text: text, date: new Date().toLocaleString(), pinned: false });
-        window.clips = clips;
-        safeSet('clipboardClips', JSON.stringify(clips));
-        if (input) input.value = '';
-        renderClips();
-      }
-
-      var form = document.getElementById('clipboardForm');
-      if (form) form.addEventListener('submit', function(e){ e.preventDefault(); addClipFromInput(); });
-
-      window.addClipFromInput = addClipFromInput;
-      window.lhShowClips = function(){ console.log('window.clips', window.clips); return window.clips; };
-
-      window.addEventListener('pagehide', function(){ safeSet('clipboardClips', JSON.stringify(window.clips || [])); });
-      window.addEventListener('beforeunload', function(){ safeSet('clipboardClips', JSON.stringify(window.clips || [])); });
-
-      document.addEventListener('DOMContentLoaded', function(){ clips = window.clips || []; renderClips(); });
+      const btn = document.getElementById('exportDemoBtnInline');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        const sample = [
+          { "text": "Cliente: Acme Corp — notas iniciales", "created": 1700000000000 },
+          { "text": "Login: usuario@ejemplo.com — placeholder", "created": 1700000500000 },
+          { "text": "Resumen política de reembolso — incluir cláusula X", "created": 1700001000000 }
+        ];
+        const blob = new Blob([JSON.stringify(sample, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'clipboard-sample-backup.json';
+        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        const orig = btn.innerHTML; btn.innerHTML = 'Descargado'; btn.disabled = true; setTimeout(()=>{ btn.innerHTML = orig; btn.disabled = false; }, 1200);
+      });
     })();
 
-    // Equalize heights and observe DOM changes (robust)
-    (function(){
-      function equalizeCardHeights(){
-        var cols = Array.from(document.querySelectorAll('.center-row > .col'));
-        if (!cols.length) return;
-        cols.forEach(function(col){ var card = col.querySelector('.article-card, .tool-card'); if (card) card.style.height = ''; });
-        var maxh = 0;
-        cols.forEach(function(col){
-          var card = col.querySelector('.article-card, .tool-card');
-          if (!card) return;
-          var rect = card.getBoundingClientRect();
-          var h = Math.ceil(rect.height);
-          if (h > maxh) maxh = h;
-        });
-        if (maxh > 0) {
-          cols.forEach(function(col){
-            var card = col.querySelector('.article-card, .tool-card');
-            if (card) card.style.height = maxh + 'px';
-          });
-        }
-      }
-      function runRetries() {
-        equalizeCardHeights();
-        setTimeout(equalizeCardHeights, 120);
-        setTimeout(equalizeCardHeights, 420);
-      }
-      var container = document.getElementById('page-main');
-      if (container) {
-        var mo = new MutationObserver(function(){ runRetries(); });
-        mo.observe(container, { childList:true, subtree:true, characterData:true });
-      }
-      window.addEventListener('load', runRetries);
-      window.addEventListener('resize', runRetries);
-      document.addEventListener('DOMContentLoaded', runRetries);
-      window.addEventListener('storage', function(e){ if (e.key === 'timerhavenLang') runRetries(); });
-    })();
+    document.addEventListener('DOMContentLoaded', () => { if (!Array.isArray(clips)) clips = []; renderClips(); toggleEmptyState(); window.__timerhaven_clips = clips; });
   </script>
-<footer>
-    © 2025 TimerHaven. All tools are free and privacy-friendly.<br/>
-<a href="privacy.html">Privacy Policy</a> •
-    <a href="terms.html">Terms</a> •
-    <a href="contact.html">Contact</a>
-</footer>
-<p style="margin-top:1rem;"><a class="cta" href="/es/clipboard-manager/clipboard-manager-index.html">Read full guide</a></p></body>
+</body>
 </html>

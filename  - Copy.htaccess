@@ -1,0 +1,16 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/sergbcqk/TimerHavenWeatherProxy"
+PassengerBaseURI "/"
+PassengerNodejs "/home/sergbcqk/nodevenv/TimerHavenWeatherProxy/18/bin/node"
+PassengerAppType node
+PassengerStartupFile server.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+
+# 301 redirect for world-clock -> world-clock-en (added by assistant)
+# Place this AFTER the Passenger block so the Passenger config remains untouched.
+Redirect 301 /world-clock.html https://timerhaven.com/world-clock-en.html
+# ensure HTML files are served as UTF-8AddDefaultCharset UTF-8<IfModule mod_mime.c>  AddCharset UTF-8 .html .htm</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END

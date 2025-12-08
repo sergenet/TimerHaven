@@ -1,18 +1,242 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>clipboard-manager — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for clipboard-manager guide (el)">
+  <meta charset="utf-8" />
+  <title>Διαχείριση πρόχειρου — Αποθήκευση και επαναχρησιμοποίηση αποσπασμάτων | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Πρακτικός οδηγός για το Clipboard Manager: γρήγορες ροές καταγραφής, οργάνωση, εξαγωγή/εισαγωγή αντιγράφων ασφαλείας, συντομεύσεις πληκτρολογίου, ασφάλεια και χρήση σε ομάδες." />
+  <link rel="canonical" href="https://timerhaven.com/el/clipboard-manager/clipboard-manager-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Αποτελεσματική διαχείριση πρόχειρου",
+        "description":"Αποθηκεύστε, οργανώστε και επαναχρησιμοποιήστε σύντομα αποσπάσματα κειμένου με έναν τοπικό Clipboard Manager. Ο οδηγός περιγράφει ροές καταγραφής, αντίγραφα ασφαλείας, συντομεύσεις και ζητήματα ιδιωτικότητας.",
+        "image":"https://timerhaven.com/assets/images/clipboard-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Τοπικός Clipboard Manager","Πρόγραμμα περιήγησης","Σημειώσεις","Task Timer"],
+        "step":[
+          {"@type":"HowToStep","name":"Γρήγορη καταγραφή","text":"Επικολλήστε ή πληκτρολογήστε το απόσπασμα στον Manager και αποθηκεύστε το με προαιρετικό tag ή σύντομο τίτλο."},
+          {"@type":"HowToStep","name":"Οργάνωση","text":"Ομαδοποιήστε σχετικά clips με tags ή σύμβαση ονοματοδοσίας (π.χ. project:θέμα). Χρησιμοποιήστε την αναζήτηση για γρήγορη εύρεση."},
+          {"@type":"HowToStep","name":"Επαναχρησιμοποίηση","text":"Αντιγράψτε clips στο ενεργό έγγραφο ή χρησιμοποιήστε την επιλογή επικόλλησης από τον Manager. Χρησιμοποιήστε συντομεύσεις για ταχύτητα."},
+          {"@type":"HowToStep","name":"Αντίγραφα ασφαλείας","text":"Εξάγετε clips σε JSON για ασφαλή αντίγραφα· εισάγετε το αρχείο για επαναφορά ή μεταφορά συσκευής."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Πού αποθηκεύονται τα clips;","acceptedAnswer":{"@type":"Answer","text":"Τα clips αποθηκεύονται τοπικά στο πρόγραμμα περιήγησης (localStorage). Δεν φεύγουν από τη συσκευή σας εκτός αν τα εξαγάγετε."}},
+          {"@type":"Question","name":"Πώς κάνω backup ή μεταφορά clips;","acceptedAnswer":{"@type":"Answer","text":"Χρησιμοποιήστε το κουμπί Εξαγωγής για να κατεβάσετε ένα JSON backup. Εισάγετε αυτό το αρχείο στο νέο σας περιβάλλον για να επαναφέρετε τα clips."}},
+          {"@type":"Question","name":"Είναι ασφαλείς οι clipboard managers;","acceptedAnswer":{"@type":"Answer","text":"Οι τοπικοί managers είναι σχετικά ασφαλείς επειδή τα δεδομένα παραμένουν στη συσκευή. Αποφύγετε την αποθήκευση ευαίσθητων κωδικών σε απλό κείμενο."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); opacity:0.98; }
+    .return-to-tool .icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;font-size:16px;}
+    .return-to-tool .label{font-size:0.95rem;}
+    @media (max-width:520px){ .return-to-tool{padding:.45rem .5rem; right:14px; bottom:14px;} .return-to-tool .label{display:none;} .return-to-tool{border-radius:12px;} }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">clipboard-manager — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Διαχείριση πρόχειρου — Capture, οργάνωση και επαναχρησιμοποίηση</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας παραγωγικότητας & ερευνητής UX</div>
+          <div class="meta">Δημοσίευση: 2025-11-24 · Χρόνος ανάγνωσης: 10–14 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Ένα ελαφρύ εργαλείο διαχείρισης πρόχειρου σάς βοηθά να αποθηκεύετε μικρά, επαναχρησιμοποιήσιμα κομμάτια κειμένου — πρότυπα email, αποσπάσματα κώδικα, αναγνωριστικά — ώστε να τα επικολλάτε γρήγορα. Αυτός ο οδηγός καλύπτει πρακτικές ροές καταγραφής, οργάνωσης, αντίγραφα ασφαλείας, συντομεύσεις και θέματα ασφάλειας για προσωπική και ομαδική χρήση.</p>
+
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#why">Γιατί είναι χρήσιμο</a>
+        <a href="#capture">Capture</a>
+        <a href="#organize">Οργάνωση & αναζήτηση</a>
+        <a href="#reuse">Γρήγορη επαναχρησιμοποίηση</a>
+        <a href="#backup">Εξαγωγή / εισαγωγή & αντίγραφα ασφαλείας</a>
+        <a href="#security">Ασφάλεια & ιδιωτικότητα</a>
+        <a href="#team">Χρήση σε ομάδες</a>
+        <a href="#troubleshoot">Αντιμετώπιση προβλημάτων</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section">
+        <h2>Γιατί ένα clipboard manager έχει σημασία</h2>
+        <p>Η σύγχρονη εργασία περιλαμβάνει επανάληψη πολλών μικρών κειμένων μεταξύ εφαρμογών. Ένα clipboard manager μειώνει τη φραγή, μειώνει τα σφάλματα και διατηρεί το πλαίσιο όταν προσθέτετε μια σύντομη σημείωση ή tag σε κάθε clip.</p>
+        <ul>
+          <li><strong>Ταχύτητα:</strong> πρόσβαση σε δύο κλικ ή με συντόμευση.</li>
+          <li><strong>Συνέπεια:</strong> επαναχρησιμοποίηση ελεγμένου κειμένου.</li>
+          <li><strong>Μνήμη:</strong> ένα αναζητήσιμο σύντομο‑term memory για ενεργές εργασίες.</li>
+          <li><strong>Αντίγραφα ασφαλείας:</strong> εξαγωγή και επαναφορά της βιβλιοθήκης clips.</li>
+        </ul>
+      </section>
+
+      <section id="capture" class="section">
+        <h2>Capture — αποθήκευση τη στιγμή που τη χρειάζεσαι</h2>
+        <div class="recipe">
+          <strong>Γρήγορη συνταγή capture</strong>
+          <ol>
+            <li>Αντιγράψτε κάτι χρήσιμο, ανοίξτε το manager και επικολλήστε στο πεδίο: κρατήστε κάθε clip όσο πιο σύντομο και σαφές γίνεται.</li>
+            <li>Προσθέστε έναν σύντομο τίτλο ή tag που το κάνει εύκολο να βρεθεί αργότερα.</li>
+            <li>Αποθηκεύστε — το νέο clip θα εμφανιστεί πρώτο στη λίστα.</li>
+            <li>Καθαρίζετε περιοδικά ή αποθηκεύετε ως αρχείο τα παλαιότερα, για να παραμένει το manager ευκίνητο.</li>
+          </ol>
+        </div>
+        <p class="small-note">Συμβουλή: για πιο μεγάλα, πολυγραμμικά κείμενα, προσθέστε τίτλο για να εμφανίζεται καθαρά στην αναζήτηση.</p>
+      </section>
+
+      <section id="organize" class="section">
+        <h2>Οργάνωση & αναζήτηση — κάντε τα clips εύκολα να βρεθούν</h2>
+        <p>Στόχος: γρήγορη ανάκτηση. Χρησιμοποιήστε tags, σύντομους τίτλους και μια προσαρμοσμένη σύμβαση ονοματοδοσίας.</p>
+
+        <h3>Απλό μοντέλο οργάνωσης</h3>
+        <ul>
+          <li><strong>Τίτλος:</strong> 3–6 λέξεις που περιγράφουν το σκοπό (π.χ. «Email: αίτηση επιστροφής»).</li>
+          <li><strong>Tag:</strong> ένα μικρό tag (project, client, code).</li>
+          <li><strong>Προεπισκόπηση:</strong> αποφεύγετε να αποθηκεύετε πολύ μεγάλα κομμάτια κειμένου.</li>
+        </ul>
+      </section>
+
+      <section id="reuse" class="section">
+        <h2>Γρήγορη επαναχρησιμοποίηση & συντομεύσεις</h2>
+        <p>Η ταχύτητα προέρχεται από τη μνήμη μυϊκής μνήμης. Μάθετε τα βασικά shortcuts και χρησιμοποιήστε paste μέσω του Manager.</p>
+
+        <h3>Συντομεύσεις</h3>
+        <ul>
+          <li><span class="kbd">Ctrl/Cmd+Shift+V</span> — ανοίγει τον manager και επικολλά το τελευταίο clip.</li>
+          <li><span class="kbd">Ctrl/Cmd+Alt+C</span> — γρήγορη καταγραφή (το πεδίο εστίασης είναι έτοιμο για paste).</li>
+          <li><span class="kbd">Βελάκια</span> — πλοήγηση στη λίστα; <span class="kbd">Enter</span> αντιγραφή στην προσωρινή μνήμη.</li>
+        </ul>
+
+        <p class="small-note">Αν ο browser μπλοκάρει εγγραφή στο clipboard, χρησιμοποιήστε το κουμπί αντιγραφής στην UI.</p>
+      </section>
+
+      <section id="backup" class="section">
+        <h2>Εξαγωγή / εισαγωγή & αξιόπιστα αντίγραφα ασφαλείας</h2>
+        <p>Το localStorage είναι βολικό αλλά ευάλωτο. Εξάγετε τακτικά και κρατάτε ένα κρυπτογραφημένο αντίγραφο αν περιέχει ευαίσθητα στοιχεία.</p>
+
+        <div class="recipe">
+          <strong>Ρουτίνα backup (5 λεπτά)</strong>
+          <ol>
+            <li>Εβδομαδιαία: εξάγετε τα clips σε JSON (κουμπί Export).</li>
+            <li>Αποθηκεύστε το αρχείο σε ασφαλή τοποθεσία (cloud backup ή κρυπτογραφημένο vault).</li>
+            <li>Σε αλλαγή συσκευής: εισάγετε το JSON στον νέο browser.</li>
+            <li>Διατηρείστε ονομασία με ημερομηνία (clipboard-backup-YYYYMMDD.json).</li>
+          </ol>
+        </div>
+
+        <pre class="template">Παράδειγμα CSV:
+title,text,tags,created
+Invoice: Acme,"Acct: 123-45-678",finance;client,2025-11-21T10:15:00Z</pre>
+      </section>
+
+      <section id="security" class="section">
+        <h2>Ασφάλεια & ιδιωτικότητα — τι να αποφύγετε</h2>
+        <ul>
+          <li>Μην αποθηκεύετε πλήρως κωδικούς πρόσβασης, ιδιωτικά κλειδιά ή PINs σε απλό κείμενο. Χρησιμοποιήστε password manager για μυστικά.</li>
+          <li>Αν χρειάζεται να αποθηκεύσετε ευαίσθητα tokens, κρυπτογραφήστε το export αρχείο.</li>
+          <li>Σε κοινόχρηστους υπολογιστές: εξάγετε και διαγράψτε τα clips μετά τη χρήση.</li>
+          <li>Ελέγχετε και διαγράφετε παλιά ευαίσθητα clips τακτικά.</li>
+        </ul>
+        <p class="small-note">Σημείωση: ο clipboard manager χρησιμοποιεί localStorage — τα δεδομένα παραμένουν στη συσκευή εκτός αν τα εξάγετε.</p>
+      </section>
+
+      <section id="team" class="section">
+        <h2>Χρήση σε ομάδες — πρακτικά μοτίβα</h2>
+        <ul>
+          <li><strong>Προσωπική γρήγορη χρήση:</strong> προσωπικά templates και προσωρινά στοιχεία.</li>
+          <li><strong>Κοινά canonical κείμενα:</strong> πολιτικές ή επίσημα templates — αποθηκεύστε τα σε κοινόχρηστο repo/wiki.</li>
+          <li><strong>Μεταφορά σε ομάδα:</strong> εξάγετε ένα clip και προσθέστε το σε ένα doc/PR για ανασκόπηση και τυποποίηση.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section">
+        <h2>Αντιμετώπιση προβλημάτων & κοινά ζητήματα</h2>
+        <ul>
+          <li><strong>Clips εξαφανίστηκαν:</strong> ελέγξτε τις ρυθμίσεις αποθήκευσης του browser και εισάγετε το πιο πρόσφατο backup.</li>
+          <li><strong>Το paste μπλοκάρεται:</strong> κάποιοι browsers περιορίζουν εγγραφή στο clipboard — χρησιμοποιήστε το κουμπί copy στην UI.</li>
+          <li><strong>Η εξαγωγή αποτυγχάνει:</strong> ελέγξτε δικαιώματα εγγραφής στο δίσκο.</li>
+          <li><strong>Μεγάλες λίστες αργούν:</strong> κάντε prune ή κρατήστε favorites για καθημερινή χρήση.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section">
+        <h2>FAQ</h2>
+        <div class="muted">
+          <p><strong>Ε:</strong> Πού αποθηκεύονται τα clips;<br><strong>Α:</strong> Τοπικά στο πρόγραμμα περιήγησης (localStorage). Μόνο εάν τα εξαγάγετε θα φύγουν από τη συσκευή.</p>
+
+          <p><strong>Ε:</strong> Μπορώ να τα μεταφέρω σε άλλο μηχάνημα;<br><strong>Α:</strong> Ναι — εξάγετε JSON και εισάγετε στο νέο περιβάλλον.</p>
+
+          <p><strong>Ε:</strong> Υπάρχει όριο στον αριθμό clips;<br><strong>Α:</strong> Το localStorage έχει όριο μερικών MB. Για μεγάλες βάσεις, εξάγετε τακτικά.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section">
+        <h2>Πόροι</h2>
+        <ul class="muted">
+          <li><a href="https://timerhaven.com/clipboard-manager-el.html">Άνοιγμα εργαλείου Clipboard Manager</a></li>
+          <li><a href="https://developer.mozilla.org/el/docs/Web/API/Window/localStorage" target="_blank" rel="noopener">localStorage — MDN</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Clipboard_(computing)" target="_blank" rel="noopener">Clipboard (computing) — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/clipboard-manager-el.html" class="cta" aria-label="Άνοιγμα Clipboard Manager">Άνοιγμα Clipboard Manager</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/el/privacy/">Πολιτική απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Clipboard Manager" button (points to flat tool page) -->
+  <a href="https://timerhaven.com/clipboard-manager-el.html" class="return-to-tool" id="returnToTool" aria-label="Επιστροφή στον Clipboard Manager">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Επιστροφή στον Clipboard Manager</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToTool');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key==='Enter' || e.key===' ') { e.preventDefault(); btn.click(); }});
+      function toggle(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggle);
+      toggle();
+    })();
+  </script>
 </body>
 </html>

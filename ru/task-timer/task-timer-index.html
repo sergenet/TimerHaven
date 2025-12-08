@@ -2,17 +2,209 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>task-timer — Guide (ru)</title>
+  <title>Таймер задач — Измеряйте время и улучшайте оценки | TimerHaven</title>
+  <meta name="description" content="Как использовать Task Timer для измерения реального времени на задачи, анализа прерываний и улучшения оценок. Включает HowTo, FAQ, скачиваемый шаблон CSV и структурированные данные.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for task-timer guide (ru)">
+  <link rel="canonical" href="https://timerhaven.com/ru/task-timer/task-timer-index.html">
+  <meta name="author" content="Serge Shammas">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Записывайте и анализируйте время задач с Task Timer",
+    "description": "Рабочий процесс для измерения фактического времени выполнения задач, учёта прерываний и использования этих данных для лучшего планирования.",
+    "image": "/assets/images/tasktimer-snapshot.png"
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--brand-dark:#09507a;--muted:#6b7c89;--card:#fff;--bg:#fbfeff;--link-blue:#0d6efd}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+
+    .back-link{display:inline-block;margin-bottom:.75rem;color:var(--link-blue) !important;text-decoration:none;font-weight:700}
+    .back-link:hover{text-decoration:underline}
+    .read-guide-btn{display:inline-block;padding:.45rem .7rem;border-radius:8px;background:var(--link-blue);color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;border:none}
+
+    @media (max-width:520px) { .card{padding:1rem} }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">task-timer — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <a href="/ru/index.html" class="back-link" id="back-link">← Назад в главное меню</a>
+
+      <h1 id="title">Таймер задач — Измеряйте время и улучшайте оценки</h1>
+
+      <div class="author" role="articleauthor" aria-label="Автор статьи">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="56" height="56" alt="Serge Shammas — автор по продуктивности и UX‑исследованиям" loading="lazy">
+        <div>
+          <div class="byline"><strong>Автор — Serge Shammas</strong> — автор по продуктивности и UX‑исследователь</div>
+          <div class="meta">Опубликовано: 2025-10-25 · Обновлено: 2025-11-21 · Время чтения: 7–10 мин</div>
+        </div>
+      </div>
+
+      <p class="lead">Task Timer помогает фиксировать реальное время на выполнение задач, выявлять недооценённую работу, измерять прерывания и улучшать планирование. Это руководство охватывает настройку, практику логирования, экспорт CSV и рецепты анализа.</p>
+
+      <nav class="toc" aria-label="Оглавление">
+        <a href="#setup">Настройка</a>
+        <a href="#howto">Как записывать</a>
+        <a href="#analysis">Экспорт и анализ</a>
+        <a href="#download">Скачать CSV</a>
+        <a href="#case-studies">Кейсы</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section class="section" id="setup" aria-labelledby="setup">
+        <h2 id="setup">Настройка и именование</h2>
+        <p>Используйте понятные названия задач и указывайте ожидаемую длительность в скобках (например, <em>Написать модуль тестов (45м)</em>). Добавляйте теги для проекта и типа работы. Последовательность в именах и тегах упрощает анализ экспортированных CSV — теги должны быть короткими и согласованными (project-alpha, meeting, review).</p>
+      </section>
+
+      <section class="section" id="howto" aria-labelledby="howto">
+        <h2>Как записать сессию</h2>
+        <div class="workflow">
+          <strong>Запись</strong>
+          <ol>
+            <li>Создайте запись задачи с ожидаемым временем и тегами.</li>
+            <li>Запустите Task Timer при начале работы; отмечайте прерывания в поле заметок.</li>
+            <li>Остановите таймер по завершении и добавьте короткое резюме выполненного.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="analysis" aria-labelledby="analysis">
+        <h2>Экспорт и анализ</h2>
+        <p>Экспортируйте недельные CSV и вычисляйте средние по тегам или проектам. Ключевые метрики: средняя длительность задачи, медиана (устойчива к выбросам) и коэффициент прерываний (% сессий с прерываниями).</p>
+
+        <div class="workflow">
+          <strong>Рецепт — недельный обзор</strong>
+          <ol>
+            <li>Экспортируйте сессии за неделю в CSV.</li>
+            <li>В таблице вычислите среднюю длительность по тегам и отсортируйте самые долгие задачи для уточнения оценок.</li>
+            <li>Используйте выводы для перераспределения Pomodoro‑блоков и событий в календаре.</li>
+          </ol>
+        </div>
+
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">Пример таблицы</h3>
+          <table class="sample" aria-hidden="false" style="border-collapse:collapse;margin-top:.5rem;width:100%;max-width:680px;">
+            <thead><tr><th style="border:1px solid #eef5fb;padding:.35rem .5rem;text-align:left">Дата</th><th style="border:1px solid #eef5fb;padding:.35rem .5rem;text-align:left">Задача</th><th style="border:1px solid #eef5fb;padding:.35rem .5rem;text-align:left">Фактически (мин)</th><th style="border:1px solid #eef5fb;padding:.35rem .5rem;text-align:left">Прерываний</th></tr></thead>
+            <tbody>
+              <tr><td style="border:1px solid #eef5fb;padding:.35rem .5rem">2025-11-03</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">Code review</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">60</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">1</td></tr>
+              <tr><td style="border:1px solid #eef5fb;padding:.35rem .5rem">2025-11-04</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">Feature X</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">120</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">0</td></tr>
+              <tr><td style="border:1px solid #eef5fb;padding:.35rem .5rem">2025-11-06</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">Bugfix</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">45</td><td style="border:1px solid #eef5fb;padding:.35rem .5rem">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="download" aria-labelledby="download">
+        <h2>Скачать — шаблон CSV для Task Timer</h2>
+        <p class="muted">Используйте этот CSV для ручного добавления сессий или тестирования импорта/экспорта.</p>
+        <p><a href="#" id="downloadTaskCsv" class="cta" aria-label="Скачать шаблон CSV для Task Timer">Скачать шаблон CSV</a></p>
+        <pre id="taskCsvTemplate" class="template" aria-hidden="true">date,task,tag,expected_minutes,actual_minutes,interruptions,notes
+2025-11-01,Write feature X,project-alpha,45,50,1,"Interruption: meeting"</pre>
+        <script>
+          document.getElementById('downloadTaskCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('taskCsvTemplate').textContent;
+            var blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'tasktimer-template-ru.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section class="section" id="case-studies" aria-labelledby="case-studies">
+        <h2>Кейсы и советы</h2>
+        <div class="workflow">
+          <strong>Разработчик — Paolo</strong>
+          <p>Через две недели трекинга Паоло обнаружил, что обзоры кода занимают 20% его рабочего дня. Он выделил отдельные блоки на обзоры и сократил фрагментированное переключение контекста.</p>
+        </div>
+        <div class="workflow">
+          <strong>Консультант — Rina</strong>
+          <p>Рина стала отмечать звонки клиентов как прерывания; теперь она буферизует фокусные блоки и учитывает ожидаемое время встреч, чтобы не перегружать расписание.</p>
+        </div>
+      </section>
+
+      <section class="section" id="faq" aria-labelledby="faq">
+        <h2 id="faq">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Может ли Task Timer работать вместе с Pomodoro?<br><strong>Ответ:</strong> Да — используйте Task Timer для детального логирования, а Pomodoro для фокусных блоков; перед началом свяжите запись Task Timer с Pomodoro для более чистых данных.</p>
+          <p><strong>Вопрос:</strong> Есть ли офлайн‑экспорт?<br><strong>Ответ:</strong> Экспорт CSV выполняется на стороне клиента и работает офлайн; сохраняйте файлы локально для резервных копий или передачи.</p>
+          <p><strong>Вопрос:</strong> Можно ли импортировать CSV из других инструментов?<br><strong>Ответ:</strong> Поля шаблона просты (date, task, tag, expected_minutes, actual_minutes, interruptions, notes). Сопоставьте поля из других экспортов с этими колонками для импорта или заполнения данных.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Связанные инструменты: <a href="/notes-ru.html">Заметки</a> · <a href="/pomodoro-ru.html">Pomodoro</a> · <a href="/calendar-ru.html">Календарь</a></p>
+
+      <p style="margin-top:1.2rem;"><a href="/timer-ru.html#startBtn" class="cta" aria-label="Открыть инструмент Task Timer" rel="help">Открыть Task Timer</a></p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Прочитайте нашу <a href="/ru/privacy/">Политику конфиденциальности</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Возврат к Таймеру задач (плавающая плашка) -->
+  <a
+    href="/timer-ru.html#startBtn"
+    role="button"
+    aria-label="Вернуться к Таймеру задач"
+    title="Вернуться к Таймеру задач"
+    data-return-pill="tasktimer"
+    style="position:fixed;right:26px;bottom:26px;z-index:2147483647;display:inline-flex;align-items:center;gap:12px;padding:11px 16px;border-radius:999px;background:linear-gradient(180deg,#2faaff,#0b63a0);color:#fff;font-weight:700;text-decoration:none;box-shadow:0 18px 40px rgba(3,56,102,0.22);cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;backface-visibility:hidden;transform:translateZ(0);">
+    <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.12);color:#fff;font-size:18px;flex:0 0 44px;">↩</span>
+    <span style="font-size:16px;line-height:1;white-space:nowrap;padding-right:6px;">К Таймеру задач</span>
+  </a>
+
+  <script>
+    // Keyboard activation + входная анимация (учитывает prefers-reduced-motion)
+    (function(){
+      try {
+        var pill = document.querySelector('[data-return-pill="tasktimer"]');
+        if (!pill) return;
+        if (!pill.hasAttribute('tabindex')) pill.setAttribute('tabindex','0');
+
+        pill.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pill.click(); }
+        });
+
+        try {
+          var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+          if (!mq || !mq.matches) {
+            pill.style.opacity = '0';
+            pill.style.transform = 'translateY(8px)';
+            window.addEventListener('load', function(){
+              setTimeout(function(){
+                pill.style.transition = 'transform .32s cubic-bezier(.2,.9,.2,1), opacity .28s ease';
+                pill.style.opacity = '1';
+                pill.style.transform = 'translateY(0)';
+              }, 110);
+            });
+          }
+        } catch(e){}
+      } catch(err) { /* silent */ }
+    })();
+  </script>
 </body>
 </html>

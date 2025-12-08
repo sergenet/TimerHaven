@@ -1,18 +1,225 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>clipboard-manager — Guide (es)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for clipboard-manager guide (es)">
+  <meta charset="utf-8" />
+  <title>Administrador del portapapeles — Guardar y reutilizar fragmentos | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía práctica para usar el Administrador del portapapeles: flujos de captura rápidos, organización, export/import, atajos de teclado, buenas prácticas de seguridad y uso en equipo." />
+  <link rel="canonical" href="https://timerhaven.com/es/clipboard-manager/clipboard-manager-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Gestión efectiva del portapapeles",
+        "description":"Guarda, organiza y reutiliza fragmentos de texto con un gestor local. Esta guía cubre flujos de captura, copias de seguridad, atajos de teclado y consideraciones de privacidad.",
+        "image":"https://timerhaven.com/assets/images/clipboard-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Administrador del portapapeles (local)","Navegador","Notas","Task Timer"],
+        "step":[
+          {"@type":"HowToStep","name":"Captura rápida","text":"Pega o escribe el fragmento en el gestor y guarda con una etiqueta o título corto."},
+          {"@type":"HowToStep","name":"Organizar","text":"Agrupa clips relacionados con etiquetas o una convención de nombres (proyecto:tema). Usa la búsqueda para encontrar clips."},
+          {"@type":"HowToStep","name":"Reutilizar","text":"Copia clips al documento activo o pégalos desde el gestor. Usa atajos para mayor velocidad."},
+          {"@type":"HowToStep","name":"Backup","text":"Exporta los clips en JSON para copia de seguridad; importa para restaurar o transferir a otro dispositivo."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"¿Dónde se guardan los clips?","acceptedAnswer":{"@type":"Answer","text":"Los clips se guardan localmente en el almacenamiento del navegador (localStorage). No salen de tu dispositivo salvo que los exportes."}},
+          {"@type":"Question","name":"¿Cómo hago backup o transfiero clips?","acceptedAnswer":{"@type":"Answer","text":"Usa el botón Exportar para descargar un JSON; luego impórtalo en otro dispositivo con el botón Importar."}},
+          {"@type":"Question","name":"¿Son seguros los gestores de portapapeles?","acceptedAnswer":{"@type":"Answer","text":"Un gestor local es relativamente seguro porque los datos permanecen en el dispositivo. No guardes contraseñas en texto plano; utiliza un gestor de contraseñas para secretos."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .return-to-tool {
+      position:fixed; right:22px; bottom:22px; z-index:1200;
+      display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px;
+      background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18);
+    }
+    .return-to-tool .icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;font-size:16px;}
+    .return-to-tool .label{font-size:0.95rem;}
+    @media (max-width:520px){ .return-to-tool{padding:.45rem .5rem; right:14px; bottom:14px;} .return-to-tool .label{display:none;} .return-to-tool{border-radius:12px;} }
+    .return-to-tool:focus{outline:3px solid rgba(11,99,160,0.18);outline-offset:4px;}
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">clipboard-manager — Guide (es)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Administrador del portapapeles — Captura, organiza y reutiliza</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Por Serge Shammas</strong> — escritor de productividad e investigador UX</div>
+          <div class="meta">Publicado: 2025-11-24 · Tiempo de lectura: 10–14 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Un gestor ligero del portapapeles te ayuda a guardar pequeños fragmentos reutilizables — plantillas, fragmentos de código, IDs — para pegarlos rápidamente. Aquí verás flujos de captura, organización, copias de seguridad, atajos y prácticas de seguridad para uso personal y en equipo.</p>
+
+      <nav class="toc" aria-label="Índice">
+        <a href="#why">Por qué usarlo</a> · <a href="#capture">Captura</a> · <a href="#organize">Organizar</a> · <a href="#reuse">Reutilizar</a> · <a href="#backup">Backup</a> · <a href="#security">Seguridad</a> · <a href="#team">Equipo</a> · <a href="#troubleshoot">Resolver problemas</a> · <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section">
+        <h2>Por qué importa un gestor del portapapeles</h2>
+        <p>El trabajo moderno repite muchos fragmentos de texto entre apps. Un gestor reduce fricción, errores y preserva contexto para tareas en curso.</p>
+        <ul>
+          <li><strong>Velocidad:</strong> acceder en dos clics o con un atajo.</li>
+          <li><strong>Consistencia:</strong> reutilizar texto verificado.</li>
+          <li><strong>Memoria:</strong> una memoria a corto plazo buscable para la tarea.</li>
+          <li><strong>Backup:</strong> exportar y restaurar la biblioteca.</li>
+        </ul>
+      </section>
+
+      <section id="capture" class="section">
+        <h2>Captura — guarda en el momento</h2>
+        <div class="recipe">
+          <strong>Receta de captura rápida</strong>
+          <ol>
+            <li>Copias algo útil → abre el gestor y pega en el campo de entrada.</li>
+            <li>Añade un título o etiqueta breve (ej. "Factura: Acme — IBAN").</li>
+            <li>Guarda; el clip aparecerá primero en la lista.</li>
+            <li>Limpia periódicamente clips obsoletos.</li>
+          </ol>
+        </div>
+        <p class="small-note">Consejo: para textos multilínea, añade un título para facilitar la búsqueda.</p>
+      </section>
+
+      <section id="organize" class="section">
+        <h2>Organizar & buscar</h2>
+        <p>Prioriza recuperación rápida con títulos, etiquetas y convenciones de nombres.</p>
+        <ul>
+          <li><strong>Título:</strong> 3–6 palabras descriptivas.</li>
+          <li><strong>Etiqueta:</strong> proyecto, cliente, plantilla, código.</li>
+          <li><strong>Vista previa:</strong> evita guardar textos enormes.</li>
+        </ul>
+      </section>
+
+      <section id="reuse" class="section">
+        <h2>Reutilizar rápido & atajos</h2>
+        <ul>
+          <li><span class="kbd">Ctrl/Cmd+Shift+V</span> — abrir gestor y pegar el último clip.</li>
+          <li><span class="kbd">Ctrl/Cmd+Alt+C</span> — captura rápida (campo listo para pegar).</li>
+          <li><span class="kbd">Flechas</span> — navegar; <span class="kbd">Enter</span> para copiar.</li>
+        </ul>
+        <p class="small-note">Si el navegador bloquea escritura al portapapeles, usa el botón de copiar en la UI.</p>
+      </section>
+
+      <section id="backup" class="section">
+        <h2>Export / import & backups</h2>
+        <div class="recipe">
+          <strong>Rutina de backup (5 minutos)</strong>
+          <ol>
+            <li>Semanalmente: exporta clips como JSON.</li>
+            <li>Guarda el archivo en un lugar seguro (cloud o bóveda cifrada).</li>
+            <li>Al cambiar de dispositivo: importa el JSON en el nuevo navegador.</li>
+            <li>Archiva con fecha: clipboard-backup-YYYYMMDD.json.</li>
+          </ol>
+        </div>
+
+        <pre class="template">Ejemplo CSV:
+title,text,tags,created
+Invoice: Acme,"Acct: 123-45-678",finance;client,2025-11-21T10:15:00Z</pre>
+      </section>
+
+      <section id="security" class="section">
+        <h2>Seguridad & privacidad</h2>
+        <ul>
+          <li>No guardes contraseñas o claves privadas en texto plano; usa un gestor de contraseñas.</li>
+          <li>Si guardas tokens sensibles, cifra las copias de seguridad.</li>
+          <li>En equipos compartidos, exporta y elimina clips después de usarlos.</li>
+          <li>Revisa y elimina clips sensibles con regularidad.</li>
+        </ul>
+        <p class="small-note">Técnicamente: los clips se almacenan en localStorage → permanecen en tu dispositivo a menos que los exportes.</p>
+      </section>
+
+      <section id="team" class="section">
+        <h2>Patrones para equipos</h2>
+        <p>Para textos canónicos de equipo, usa un repositorio compartido (wiki). El gestor local es ideal para uso personal y efímero.</p>
+      </section>
+
+      <section id="troubleshoot" class="section">
+        <h2>Resolución de problemas</h2>
+        <ul>
+          <li>Clips desaparecen: revisa configuración de almacenamiento del navegador e importa tu último backup.</li>
+          <li>Pegado bloqueado: habilita permisos o usa el botón Copiar.</li>
+          <li>Export falla: revisa permisos de escritura en disco.</li>
+          <li>Listas largas lentas: limpia o usa favoritos.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section">
+        <h2>FAQ</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ¿Dónde se guardan los clips?<br><strong>R:</strong> Localmente en el navegador (localStorage).</p>
+          <p><strong>P:</strong> ¿Puedo importar desde otro dispositivo?<br><strong>R:</strong> Sí — exporta JSON e impórtalo en el otro dispositivo.</p>
+          <p><strong>P:</strong> ¿Hay límite de clips?<br><strong>R:</strong> localStorage tiene un límite (varios MB). Para bibliotecas grandes, exporta regularmente.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section">
+        <h2>Recursos</h2>
+        <ul class="muted">
+          <li><a href="https://timerhaven.com/clipboard-manager-es.html">Abrir la herramienta Clipboard Manager</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank" rel="noopener">localStorage — MDN</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/clipboard-manager-es.html" class="cta" aria-label="Abrir Clipboard Manager">Abrir Clipboard Manager</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas? Escríbenos a <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lee nuestra <a href="/es/privacy/">Política de privacidad</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Clipboard Manager" button (points to flat tool page) -->
+  <a href="https://timerhaven.com/clipboard-manager-es.html"
+     class="return-to-tool"
+     id="returnToTool"
+     aria-label="Volver al Clipboard Manager">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver al Clipboard Manager</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToTool');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggle(){ try{ btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; }catch(e){} }
+      window.addEventListener('scroll', toggle);
+      toggle();
+    })();
+  </script>
 </body>
 </html>

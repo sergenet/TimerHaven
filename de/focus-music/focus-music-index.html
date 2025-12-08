@@ -1,18 +1,194 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>focus-music — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <title>Fokus‑Musik — Klangräume für konzentriertes Arbeiten aufbauen | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Leitfaden zur Nutzung von Fokus‑Musik für Konzentration: Wiedergabelisten wählen, Audiodesign, Schichtungen, Barrierefreiheit und produktive Arbeitsweisen." />
+  <link rel="canonical" href="https://timerhaven.com/de/focus-music/focus-music-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Fokus‑Musik effektiv nutzen",
+        "description":"Wählen und konfigurieren Sie Klangumgebungen, die Konzentration unterstützen — White Noise, Alpha‑Wellen, Regen und ambientale Hintergründe. Die Anleitung behandelt Einrichtung, Lautstärke, Schichtung und Zugänglichkeitsaspekte.",
+        "image":"https://timerhaven.com/assets/images/focus-music-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Focus Music Tool (TimerHaven)","Kopfhörer oder Lautsprecher","Optional: Ambient‑App"],
+        "step":[
+          {"@type":"HowToStep","name":"Genre wählen","text":"Wählen Sie die Klanglandschaft passend zur Aufgabe — ambient oder rhythmisch je nach kognitiver Belastung."},
+          {"@type":"HowToStep","name":"Lautstärke einstellen","text":"Halten Sie die Lautstärke niedrig bis mittel; vermeiden Sie intensive Tracks bei tiefer Konzentration."},
+          {"@type":"HowToStep","name":"Schichten mit Bedacht","text":"Kombinieren Sie dezentes Hintergrundrauschen mit leiser Musik, um Ablenkungen besser zu maskieren."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Welche Musik eignet sich am besten zur Konzentration?","acceptedAnswer":{"@type":"Answer","text":"Das hängt ab: Für repetitive Aufgaben eignen sich leicht getaktete elektronische Tracks oder Alpha‑Wellen. Für kreative Arbeit helfen oft unaufdringliche klassische oder ambientale Stücke."}},
+          {"@type":"Question","name":"Kann ich Kopfhörer verwenden?","acceptedAnswer":{"@type":"Answer","text":"Ja — Kopfhörer verbessern die Immersion und reduzieren Außengeräusche. Für lange Sessions komfortable, latenzarme Modelle wählen."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for focus-music guide (de)">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">focus-music — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Fokus‑Musik — Klangräume gestalten, die Konzentration fördern</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Produktivität & Klangumgebungen</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 12–16 Min.</div>
+        </div>
+      </div>
+
+      <p class="lead">Klang beeinflusst unsere Aufmerksamkeit. Die richtige Hintergrundbeschallung kann Ablenkungen maskieren, Rhythmus unterstützen und das Fokussieren erleichtern. Dieser Leitfaden erklärt, wie Sie Tracks auswählen, Lautstärke und Schichtung einstellen, Sessions strukturieren und Barrierefreiheitsaspekte berücksichtigen.</p>
+
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#choose">Playlist oder Soundscape wählen</a>
+        <a href="#volume">Lautstärke & Ergonomie</a>
+        <a href="#layer">Schichtung & Masking</a>
+        <a href="#sessions">Session‑Design</a>
+        <a href="#access">Barrierefreiheit & Etikette</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="choose" class="section" aria-labelledby="choose-title">
+        <h2 id="choose-title">Playlist oder Soundscape wählen</h2>
+        <p>Verschiedene Aufgaben profitieren von unterschiedlichen Klangprofilen. Stimmen Sie die Klangtextur auf die kognitiven Anforderungen der Aufgabe ab.</p>
+
+        <ul>
+          <li><strong>White Noise / konstanter Grundton:</strong> Hervorragend für tiefe Konzentration und zum Maskieren sporadischer Umgebungsgeräusche.</li>
+          <li><strong>Regen / Natur‑Ambience:</strong> Gut für kreative Arbeit und ruhiges Fokussieren; meist angenehm und wenig aufdringlich.</li>
+          <li><strong>Alpha‑Wellen / minimale Beats:</strong> Leichte rhythmische Struktur hilft bei repetitiven Aufgaben und dem Arbeitstempo.</li>
+          <li><strong>Klassik / Instrumental:</strong> Eignet sich für Lesen und Schreiben, sofern die Musik unaufdringlich und vorhersehbar ist.</li>
+        </ul>
+      </section>
+
+      <section id="volume" class="section" aria-labelledby="volume-title">
+        <h2 id="volume-title">Lautstärke, Hörgesundheit & Ergonomie</h2>
+        <p>Die Lautstärke ist entscheidend für Wirksamkeit und Ohrgesundheit. Halten Sie die Lautstärke so niedrig, dass noch subtile Signale (z. B. Anrufe) wahrnehmbar bleiben, und vermeiden Sie langes lautes Hören.</p>
+
+        <h3>Richtlinien</h3>
+        <ul>
+          <li>Für lange Sessions lieber leisere Pegel (unter ~60 % auf den meisten Geräten).</li>
+          <li>Machen Sie regelmäßig Pausen von den Kopfhörern, um Ermüdung und Hörschäden vorzubeugen.</li>
+          <li>Bevorzugen Sie komfortable Kopfhörer mit guter passiver Geräuschdämpfung statt sehr hoher Lautstärken.</li>
+        </ul>
+      </section>
+
+      <section id="layer" class="section" aria-labelledby="layer-title">
+        <h2 id="layer-title">Schichtung & Masking: Klänge kombinieren</h2>
+        <p>Eine dezente Musikspur über neutralem Hintergrundgeräusch kann das Masking verbessern und trotzdem Rhythmus liefern. Beispiel: leise ambientale Musik + sanfter Regen auf niedriger Lautstärke.</p>
+
+        <div class="recipe">
+          <strong>Einfaches Schichtungs‑Rezept</strong>
+          <ol>
+            <li>Wählen Sie eine neutrale Basis (Weißes Rauschen oder leiser Regen).</li>
+            <li>Fügen Sie eine sanfte Melodiestimme auf niedriger Lautstärke hinzu (ohne Gesang).</li>
+            <li>Testen Sie das Masking — bei zu vielen Ablenkungen die Basis leicht anheben.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="sessions" class="section" aria-labelledby="sessions-title">
+        <h2 id="sessions-title">Session‑Design — Signale und Rituale</h2>
+        <p>Nutzen Sie Klang als Ritual. Start‑ und Endsignale helfen dem Gehirn, schneller in und aus Fokuszuständen zu wechseln.</p>
+
+        <h3>Session‑Muster</h3>
+        <ol>
+          <li>Vorbereitung (2–3 Minuten): Arbeitsplatz einrichten, benötigte Dokumente öffnen.</li>
+          <li>Startsignal: kurzes, prägnantes Geräusch oder ein kurzes Anheben der Lautstärke, um den Beginn zu markieren.</li>
+          <li>Fokus‑Phase (25–90 Minuten): Musik stabil halten; keine häufigen Trackwechsel.</li>
+          <li>Endsignal: sanfter Glockenton oder Ausblenden signalisiert das Ende und erleichtert den Übergang zur Nachbereitung.</li>
+        </ol>
+      </section>
+
+      <section id="access" class="section" aria-labelledby="access-title">
+        <h2 id="access-title">Barrierefreiheit & Etikette</h2>
+        <p>Respektieren Sie andere Menschen und Zugänglichkeitsbedürfnisse. In gemeinschaftlichen Räumen sind Kopfhörer und niedrige Lautstärken zu bevorzugen. Legen Sie bei geteilten Arbeitsräumen gemeinsame Regeln zur Musikwahl fest.</p>
+
+        <ul>
+          <li>In gemeinsamen Umgebungen sind Kopfhörer Pflicht.</li>
+          <li>Stellen Sie ggf. Stille‑Optionen oder Transkripte bereit, wenn aufgezeichnete Inhalte Barrierefreiheitsanforderungen berühren.</li>
+          <li>Prüfen Sie im Team, ob Teilnehmende empfindlich auf Audio‑Signale reagieren oder eine abweichende Arbeitsumgebung benötigen.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Kann Musik die Produktivität verbessern?<br><strong>A:</strong> Ja — für viele Menschen reduziert die passende Klanglandschaft Ablenkungen und unterstützt den Flow. Persönliche Vorlieben variieren; testen Sie verschiedene Playlists und beobachten Sie die eigene Leistung.</p>
+
+          <p><strong>F:</strong> Ist Musik schädlich für komplexes Denken?<br><strong>A:</strong> Bei sehr komplexen Aufgaben (neue Problemlösungen) ist Stille oder sehr niedriges Ambient‑Rauschen oft besser. Musik hilft eher bei Aufgaben, die von Rhythmus oder reduziertem äußeren Lärm profitieren.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/focus-music-de.html">Focus Music Tool öffnen</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Noise" target="_blank" rel="noopener">Ambientes Rauschen & Masking — Forschung</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/focus-music-de.html" class="cta" aria-label="Focus Music öffnen">Focus Music öffnen</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktieren Sie uns unter <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/de/privacy/">Datenschutzerklärung</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/focus-music-de.html" class="return-to-tool" id="returnToToolFocusMusic" aria-label="Zurück zu Focus Music">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zum Focus Music</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolFocusMusic');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

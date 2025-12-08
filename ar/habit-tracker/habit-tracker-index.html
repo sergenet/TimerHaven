@@ -1,18 +1,240 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>habit-tracker — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for habit-tracker guide (ar)">
+  <meta charset="utf-8" />
+  <title>متعقِّب العادات — ابنِ الاتساق بعادات بسيطة | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل عملي لاستخدام متعقِّب العادات لتشكيل الروتين: تحديد الأهداف، تصميم العادات، السلاسل، المقاييس، الأتمتة، وأنماط عادة للفِرَق." />
+  <link rel="canonical" href="https://timerhaven.com/ar/habit-tracker/habit-tracker-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"إنشاء والحفاظ على العادات باستخدام Habit Tracker",
+        "description":"خطوات عملية لإنشاء عادات فعّالة، الحفاظ على السلاسل، قياس التقدم، والتوسّع من عادة واحدة إلى روتينات أسبوعية.",
+        "image":"https://timerhaven.com/assets/images/habit-tracker-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["متعقّب العادات (TimerHaven)","دفتر ملاحظات أو تطبيق ملاحظات","تقويم"],
+        "step":[
+          {"@type":"HowToStep","name":"اختر عادة أساسية","text":"اختر فعلًا صغيرًا سهل الإنجاز ويُنتج فوائد كبيرة."},
+          {"@type":"HowToStep","name":"ابدأ صغيرًا واربط الزناد","text":"اربِط العادة الجديدة بروتين قائم (بعد القهوة، قبل البريد الإلكتروني). ابدأ بتكرارات صغيرة."},
+          {"@type":"HowToStep","name":"سجّل يوميًا","text":"علّم إنجاز العادة يوميًا في المتعقّب؛ سجّل أيضًا الانقطاعات أو أسباب الفشل."},
+          {"@type":"HowToStep","name":"راجع أسبوعيًا","text":"لخص السلاسل وعدِّل الصعوبة أو التوقيت لتحسّن الاتساق."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"كم عدد العادات التي يجب أن أتابع؟","acceptedAnswer":{"@type":"Answer","text":"ابدأ بـ1–3 عادات. التركيز والاتساق أهم من التشتت. أضف عادات تدريجيًا عندما تصبح العادات السابقة مستقرة."}},
+          {"@type":"Question","name":"كيف أستعيد سلسلة مكسورة؟","acceptedAnswer":{"@type":"Answer","text":"سجّل سبب الفشل، عدّل التوقعات إذا لزم الأمر، وابدأ فورًا — العودة السريعة أهم من الفشل ذاته."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;text-align:right;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;justify-content:flex-end;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">habit-tracker — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">متعقّب العادات — صمِّم عادات تستمر</h1>
+
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب في تصميم العادات والإنتاجية</div>
+          <div class="meta">نشر: 2025-11-24 · وقت القراءة: 12–16 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">الأفعال الصغيرة والمتسقة تتراكم لتنتج نتائج مهمة. يساعدك متعقّب العادات على تحويل النوايا إلى ممارسات يومية. يشرح هذا الدليل اختيار العادات، تقليل الاحتكاك، القياس، إدارة السلاسل، استراتيجيات الاسترجاع، واستخدامه على مستوى الفريق لتمكين تحول مستدام.</p>
+
+      <nav class="toc" aria-label="فهرس المحتوى">
+        <a href="#choose">اختر العادات المناسبة</a> ·
+        <a href="#design">صمّم عادات صغيرة</a> ·
+        <a href="#track">سير عمل التتبع اليومي</a> ·
+        <a href="#measure">القياس & المقاييس</a> ·
+        <a href="#streaks">السلاسل والتحفيز</a> ·
+        <a href="#recover">التعافي من الانزلاقات</a> ·
+        <a href="#team">الفريق والمساءلة</a> ·
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="choose" class="section" aria-labelledby="choose-title">
+        <h2 id="choose-title">اختر العادات الصحيحة — ابدأ من حيث الأثر</h2>
+        <p>ليست كل العادات متساوية. ابدأ بعادة أو اثنتين «أساسيتين» توفر تأثيرًا كبيرًا (التمارين، التخطيط الصباحي، فرز البريد). العادة الأساسية تبسّط سلوكيات أخرى وتنتج فوائد سريعة تُغذّي الدافع.</p>
+
+        <ul>
+          <li><strong>الأثر أولًا:</strong> اختر عادات تساهم مباشرة في أهدافك.</li>
+          <li><strong>ابدأ صغيرًا:</strong> إذا كانت العادة مرهقة، صغّرها إلى نسخة دقيقة (تمرين واحد، دقيقة قراءة).</li>
+          <li><strong>التحديد:</strong> حدِّد ماذا يعني "تم" — مثلاً "اقرأ صفحة واحدة" بدلًا من "اقرأ أكثر".</li>
+        </ul>
+      </section>
+
+      <section id="design" class="section" aria-labelledby="design-title">
+        <h2 id="design-title">صمّم عادات صغيرة — خفّض الاحتكاك لزيادة الاتساق</h2>
+        <p>استخدم نهج "العادات الصغيرة": اجعل الفعل سهلاً، اربطه زنادًا، واحتفل عند الإنجاز. واجهة Habit Tracker تجعل خطوة التسجيل سريعة — كلما كانت خطوة التعلِيم أسهل، زاد احتمال الاستمرار.</p>
+
+        <div class="recipe">
+          <strong>وصفة العادة الصغيرة</strong>
+          <ol>
+            <li>الزناد: اربط العادة بإشارة يومية موثوقة (مثلاً بعد القهوة الصباحية).</li>
+            <li>الفعل الصغير: اختر نسخة دقيقة يمكنك تنفيذها حتى عندما تكون متعبًا.</li>
+            <li>التسجيل الفوري: افتح المتعقّب واضغط "وضع علامة منجزة" (أو استخدم اختصار لوحة المفاتيح إذا توفّر).</li>
+            <li>المكافأة: قم بإجراء احتفالي صغير (علامة تحقق أو ملاحظة قصيرة) لإغلاق الحلقة.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">نصيحة محترف: ربط العادات (chaining) يقلّل تبديل السياق — "بعد أن أفرش أسناني، سأكتب جملة واحدة في اليوميات."</p>
+      </section>
+
+      <section id="track" class="section" aria-labelledby="track-title">
+        <h2 id="track-title">سير عمل التتبع اليومي</h2>
+        <p>يعتمد الاتساق على رؤية العادات. استخدم Habit Tracker يوميًا في الصباح أو في وقت ثابت (نهاية اليوم). سجّل الإنجازات وملاحظات قصيرة عن الانقطاعات أو أسباب الاحتكاك.</p>
+
+        <h3>روتين يومي نموذجي</h3>
+        <ol>
+          <li>الصباح: راجع عادات اليوم وأضف سياقًا إذا لزم.</li>
+          <li>أثناء اليوم: ضع علامة "تم" عند إتمام العادات.</li>
+          <li>المساء: مراجعة سريعة — سجّل أسباب الفشل وأعد الجدولة إذا احتجت.</li>
+        </ol>
+      </section>
+
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">القياس & المقاييس — اجعلها بسيطة</h2>
+        <p>القياس يجعلك صادقًا مع نفسك. تتبّع عددًا قليلاً من المقاييس المهمة وراجعها أسبوعيًا لتحسين التوقيت والتصميم.</p>
+
+        <h3>مقاييس أساسية</h3>
+        <ul>
+          <li><strong>أيام مُسجّلة:</strong> عدد الأيام التي علّمت فيها العادة كمنجزة.</li>
+          <li><strong>معدل الإنجاز:</strong> الأيام المنجزة ÷ الأيام المجدولة.</li>
+          <li><strong>طول السلسلة:</strong> عدد الأيام المتتالية الحالية.</li>
+          <li><strong>أسباب الفشل:</strong> رموز قصيرة للأسباب (سفر، مرض، نسيان).</li>
+        </ul>
+
+        <pre class="template">أعمدة CSV:
+date,habit,done,reason,notes
+2025-11-24,اشرب ماء,1,,كان الزجاج على المكتب</pre>
+      </section>
+
+      <section id="streaks" class="section" aria-labelledby="streaks-title">
+        <h2 id="streaks-title">السلاسل & التحفيز — استخدمها بحكمة</h2>
+        <p>السلاسل قد تكون محفّزة لكنها هشة. استخدمها لبناء الإيقاع، لا لمعاقبة نفسك. عند كسر السلسلة، ركّز على البدء مجددًا بسرعة بدل الانغماس في الندم.</p>
+
+        <h3>قواعد سلاسل صحية</h3>
+        <ul>
+          <li>اجعل أهداف السلاسل واقعية (العادات اليومية أسهل؛ بعض العادات الأسبوعية تناسب أيضًا).</li>
+          <li>استخدم قواعد مرنة للأيام الخاصة (سفر/عطلات) — سمح بإرجاء تلقائي أو اعتذار إن لزم.</li>
+          <li>احتفل بالمعالم (7، 30، 90 يومًا) بمكافأة صغيرة.</li>
+        </ul>
+      </section>
+
+      <section id="recover" class="section" aria-labelledby="recover-title">
+        <h2 id="recover-title">التعافي من الانزلاقات — أعد البدء بسرعة</h2>
+        <p>الانزلاقات طبيعية. خطة استرداد سريعة تقلّل الضرر وتعيد الزخم.</p>
+
+        <div class="recipe">
+          <strong>روتين الاسترداد</strong>
+          <ol>
+            <li>سجّل سبب الفشل في سطر واحد.</li>
+            <li>عدّل الخطة (قلّل حجم العادة، غيّر الزناد، أو بدّل وقت اليوم).</li>
+            <li>ابدأ فورًا — لا تنتظر يوم الاثنين.</li>
+            <li>راجع أسبوعيًا النمط وعدّل التصميم.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">الفريق & أنماط المساءلة</h2>
+        <p>يمكن للفرق استخدام العادات لإرساء إيقاعات مشتركة (الوقوف اليومي، ملخّص نهاية اليوم). اجعل العادات الجماعية طوعية ومركزة على النتائج المشتركة بدل المراقبة.</p>
+
+        <ul>
+          <li><strong>طقوس مشتركة:</strong> عادات قصيرة تحسّن التنسيق (مثل تحديث حالة التذكرة يوميًا).</li>
+          <li><strong>نظام الزميل:</strong> تزاوج مع زميل لفحوصات أسبوعية للتقدّم.</li>
+          <li><strong>مقاييس مجمعة:</strong> شارك معدلات الإنجاز المجهولة لتحسين الفريق بدلًا من مراقبة الأفراد.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">استكشاف الأخطاء والمشكلات الشائعة</h2>
+        <ul>
+          <li><strong>لا وقت للتسجيل:</strong> أضف خيار "وضع علامة منجزة" بنقرة واحدة أو استخدم مذكرة صوتية لتسجيل الإنجاز بسرعة.</li>
+          <li><strong>الكثير من العادات:</strong> قلّلها إلى 1–3 أفضل وعلّق الباقي حتى تصبح العادات ثابتة.</li>
+          <li><strong>إيجابيات كاذبة:</strong> تأكد أن "تم" يعني إنجازًا حقيقيًا — الجودة أفضل من التظاهر بالتسجيل.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> كم من الوقت يستغرق أن تصبح العادة تلقائية؟<br><strong>ج:</strong> يختلف: العادات الصغيرة قد تصبح اعتيادية خلال أسابيع؛ العادات المعقدة قد تحتاج أشهر. ركّز على الاتساق بدل جدول زمني محدد.</p>
+
+          <p><strong>س:</strong> هل يجب أن أتابع كل يوم؟<br><strong>ج:</strong> التتبع اليومي يبني الإيقاع. لبعض العادات قد يكون الجدول الأسبوعي عمليًا — ضبّط التكرار حسب طبيعة العادة.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/habit-tracker-ar.html">افتح أداة متعقّب العادات</a></li>
+          <li><a href="https://jamesclear.com/habits" target="_blank" rel="noopener">Atomic Habits — James Clear</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/habit-tracker-ar.html" class="cta" aria-label="افتح متعقّب العادات">افتح متعقّب العادات</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>أسئلة أو ملاحظات؟ تواصل معنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ <a href="/ar/privacy/">سياسة الخصوصية</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- زر عودة للأداة -->
+  <a href="/habit-tracker-ar.html" class="return-to-tool" id="returnToToolHabit" aria-label="العودة إلى متعقّب العادات">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى متعقّب العادات</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolHabit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

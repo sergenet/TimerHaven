@@ -1,18 +1,225 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>unit-converter — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for unit-converter guide (ru)">
+  <meta charset="utf-8" />
+  <title>Конвертер единиц — Точно конвертируйте и избегайте ошибок | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Подробное руководство по конвертации единиц: системы единиц, точность, округление, особенности температуры, рецепты конверсий для инженерии, кулинарии и путешествий, а также автоматизация в таблицах." />
+  <link rel="canonical" href="https://timerhaven.com/ru/unit-converter/unit-converter-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Надёжная конвертация единиц",
+        "description":"Понимание семейств единиц, точности и округления, особых случаев (температура) и распространённых рецептов конверсий для быта и профессиональных задач.",
+        "image":"https://timerhaven.com/assets/images/unit-converter-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Конвертер единиц (TimerHaven)","Справочные таблицы или технический справочник","Таблица (Spreadsheet)"],
+        "step":[
+          {"@type":"HowToStep","name":"Определите семейство единиц","text":"Решите, преобразуете ли вы длину, массу, температуру, объём и т.д."},
+          {"@type":"HowToStep","name":"Выберите эталон и точность","text":"Подберите авторитетные коэффициенты пересчёта и определите требуемую десятичную точность."},
+          {"@type":"HowToStep","name":"Примените конверсию и округлите","text":"Пересчитайте и отформатируйте результат с подходящим округлением для отображения или вычислений."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Почему преобразования температуры особенные?","acceptedAnswer":{"@type":"Answer","text":"Преобразования температуры — аффинные: они включают масштаб и смещение, поэтому преобразование абсолютных значений и преобразование разностей температуры требуют разного обращения."}},
+          {"@type":"Question","name":"Сколько знаков показывать?","acceptedAnswer":{"@type":"Answer","text":"Зависит от контекста: цены — 2 знака; инженерные допуски — больше (3–6); научная работа — значащие цифры по точности прибора."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">unit-converter — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Конвертер единиц — Точно конвертируйте и понимайте подводные камни</h1>
+
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — автор по удобству использования и инженерии</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 10–15 мин</div>
+        </div>
+      </div>
+
+      <p class="lead">Конвертация единиц встречается во время путешествий, готовки, инженерных расчётов и в программировании. Малые ошибки в единицах или округлении могут привести к значительным погрешностям. В этом руководстве — семейства единиц, правила точности, преобразования температуры, шаблоны отображения, формулы для таблиц и практические советы, которые помогут избежать распространённых ошибок.</p>
+
+      <nav class="toc" aria-label="Оглавление">
+        <a href="#families">Семейства единиц и основы</a>
+        <a href="#precision">Точность и правила округления</a>
+        <a href="#temperature">Температура — ловушки</a>
+        <a href="#recipes">Распространённые рецепты конверсии</a>
+        <a href="#spreadsheet">Примеры для таблиц и скриптов</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="families" class="section" aria-labelledby="families-title">
+        <h2 id="families-title">Семейства единиц и основы</h2>
+        <p>Единицы принадлежат к семействам (длина, масса, температура, объём, время, площадь, энергия и т.д.). Всегда конвертируйте внутри одного семейства и используйте авторитетные коэффициенты пересчёта.</p>
+
+        <ul>
+          <li><strong>Длина:</strong> метр, километр, миля, фут, дюйм.</li>
+          <li><strong>Масса / вес:</strong> килограмм, грамм, фунт, унция.</li>
+          <li><strong>Объём:</strong> литр, миллилитр, галлон (US/UK различия), чашка.</li>
+          <li><strong>Температура:</strong> Цельсий, Фаренгейт, Кельвин (аффинные преобразования).</li>
+        </ul>
+
+        <p>Для задач, критичных по точности, ориентируйтесь на национальные стандарты (NIST, BIPM) для точных коэффициентов и определений единиц.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Точность и правила округления</h2>
+        <p>Определите требуемую точность по назначению. Слишком агрессивное округление создаёт систематическую погрешность; избыточная демонстрация точности вводит в заблуждение.</p>
+
+        <h3>Рекомендации по контексту</h3>
+        <ul>
+          <li><strong>Быт / покупки:</strong> 2 десятичных знака для денежных и пользовательских величин.</li>
+          <li><strong>Кулинария:</strong> округляйте до удобных единиц (чайные ложки, граммы) и приводите альтернативы (метрическая и имперская система).</li>
+          <li><strong>Инженерия:</strong> отображайте значащие цифры, соответствующие точности прибора (3–6+ знаков в зависимости от допусков).</li>
+          <li><strong>Аналитика:</strong> храните сырые значения с высокой точностью и округляйте только при отображении.</li>
+        </ul>
+
+        <p>Всегда показывайте единицы рядом с числом и при необходимости указывайте коэффициент или метку «по состоянию на» для динамических величин (например, курсы валют).</p>
+      </section>
+
+      <section id="temperature" class="section" aria-labelledby="temperature-title">
+        <h2 id="temperature-title">Температура — особый случай</h2>
+        <p>Преобразования температуры — аффинные: они требуют масштабирования и смещения. Преобразование абсолютного значения отличается от преобразования разностей температуры.</p>
+
+        <ul>
+          <li>Правильные формулы для абсолютных величин:
+            <ul>
+              <li>C → F: F = C × 9/5 + 32</li>
+              <li>F → C: C = (F − 32) × 5/9</li>
+              <li>C ↔ K: K = C + 273.15</li>
+            </ul>
+          </li>
+          <li>Для изменения температуры (Δ): используйте только масштаб (для ΔC → ΔF умножьте на 9/5) — не применяйте смещения.</li>
+        </ul>
+
+        <p>Пример ошибки: «Изменение на 10°C равно 18°F» — корректно; но перевод абсолютного значения 10°C в °F требует добавить 32 после масштабирования.</p>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Распространённые рецепты конверсии</h2>
+
+        <div class="recipe">
+          <strong>Длина: мили ↔ километры</strong>
+          <ol>
+            <li>Коэффициент: 1 mile = 1.60934 kilometers.</li>
+            <li>Пример: 5 miles × 1.60934 = 8.0467 km → для типичного использования показать 8.05 km.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Вес: фунты ↔ килограммы</strong>
+          <ol>
+            <li>Коэффициент: 1 lb = 0.45359237 kg.</li>
+            <li>Пример: 150 lb × 0.45359237 = 68.0389 kg → показать 68.04 kg (2 знака) или 68.0 для медицинской подачи в зависимости от контекста.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Объём: жидкие унции и чашки (US)</strong>
+          <ol>
+            <li>1 US cup = 8 US fluid ounces = 236.588 mL.</li>
+            <li>Проверяйте региональные различия: чашки и галлоны в UK/Imperial имеют другие значения.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="spreadsheet" class="section" aria-labelledby="spreadsheet-title">
+        <h2 id="spreadsheet-title">Примеры для таблиц и скриптов</h2>
+        <p>Распространённые формулы и шаблоны кода помогают автоматизировать конверсии в масштабе.</p>
+
+        <h3>Пример для таблицы (Google Sheets / Excel)</h3>
+        <pre class="template">Преобразовать мили в километры (ячейка A2):
+=ROUND(A2 * 1.60934, 2)</pre>
+
+        <h3>Фрагмент JavaScript</h3>
+        <pre class="template">function convertLength(val, fromFactor, toFactor) {
+  // где факторы выражены в метрах на единицу
+  return val * (fromFactor / toFactor);
+}
+// пример: miles->km: milesFactor=1609.34, kmFactor=1000
+</pre>
+
+        <p class="small-note">Храните канонические коэффициенты в одном месте и повторно используйте их, чтобы избежать рассогласований между таблицами и кодом.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Почему преобразования между имперской и метрической системами иногда «не точны»?<br><strong>Ответ:</strong> Потому что выбор округления и способы отображения различаются; кроме того, некоторые коэффициенты (например, для галлонов) зависят от региона (US vs UK). Всегда проверяйте, какое определение вы используете.</p>
+
+          <p><strong>Вопрос:</strong> Как показывать обе единицы пользователю?<br><strong>Ответ:</strong> Отображайте основную и вторичную единицы (например, 68.04 kg (150 lb)) и, по возможности, ставьте вначале ту систему, которую предпочитает пользователь.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/unit-converter-ru.html">Открыть Конвертер единиц</a></li>
+          <li><a href="https://www.nist.gov/pml/weights-and-measures/metric-si" target="_blank" rel="noopener">NIST — SI единицы</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/unit-converter-ru.html" class="cta" aria-label="Открыть Конвертер единиц">Открыть Конвертер единиц</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Прочитайте нашу <a href="/ru/privacy/">Политику конфиденциальности</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/unit-converter-ru.html" class="return-to-tool" id="returnToToolUnit" aria-label="Вернуться к Конвертеру единиц">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К Конвертеру единиц</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolUnit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

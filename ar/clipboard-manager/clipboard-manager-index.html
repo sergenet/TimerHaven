@@ -1,18 +1,275 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>clipboard-manager — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for clipboard-manager guide (ar)">
+  <meta charset="utf-8" />
+  <title>مدير الحافظة — احفظ وأعد استخدام المقاطع | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل عملي لاستخدام مدير الحافظة: طرق الالتقاط السريعة، التنظيم، التصدير/الاستيراد للنسخ الاحتياطي، اختصارات لوحة المفاتيح، ممارسات الأمان، واستخدام الفريق." />
+  <link rel="canonical" href="https://timerhaven.com/ar/clipboard-manager/clipboard-manager-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"إدارة الحافظة بفعالية",
+        "description":"خطوات لحفظ وتنظيم وإعادة استخدام مقاطع نصية قصيرة باستخدام مدير الحافظة المحلي. يغطي الدليل طرق الالتقاط، النسخ الاحتياطي، الاختصارات وممارسات الخصوصية.",
+        "image":"https://timerhaven.com/assets/images/clipboard-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["مدير الحافظة (محلي)","المتصفح","ملاحظات","Task Timer"],
+        "step":[
+          {"@type":"HowToStep","name":"التقاط سريع","text":"الصق أو اكتب المقطع في مدير الحافظة واحفظه مع وسم أو عنوان قصير."},
+          {"@type":"HowToStep","name":"التنظيم","text":"نظم المقاطع باستخدام وسوم أو نمط تسمية (project:subject) لتسهيل البحث."},
+          {"@type":"HowToStep","name":"إعادة الاستخدام","text":"انسخ المقاطع إلى المستند الحالي أو استخدم أدوات المدير للصق السريع واختصارات لوحة المفاتيح."},
+          {"@type":"HowToStep","name":"النسخ الاحتياطي","text":"صدّر المقاطع كملف JSON للاحتفاظ بنسخة، واستوردها عند النقل إلى جهاز آخر."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"أين تُخزن المقاطع؟","acceptedAnswer":{"@type":"Answer","text":"تُخزن محلياً داخل localStorage في المتصفح. لن تغادر جهازك إلا إذا صدّرت الملف صراحة."}},
+          {"@type":"Question","name":"كيف أنقل أو أُخذ نسخة احتياطية؟","acceptedAnswer":{"@type":"Answer","text":"استخدم زر التصدير لتنزيل JSON، ثم استورده على الجهاز الآخر عبر زر الاستيراد."}},
+          {"@type":"Question","name":"هل مدير الحافظة آمن؟","acceptedAnswer":{"@type":"Answer","text":"المدير المحلي آمن نسبياً لأنه يبقي البيانات على جهازك؛ مع ذلك تجنب حفظ كلمات المرور أو المفاتيح كنص واضح."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;direction:rtl;}
+    .container{max-width:920px;margin:0 auto;text-align:right;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-right:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .recipe{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;text-align:left;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); }
+    .return-to-tool .icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;font-size:16px;}
+    .return-to-tool .label{font-size:0.95rem;}
+    @media (max-width:520px){ .return-to-tool{left:14px;bottom:14px;} .return-to-tool .label{display:none;} .return-to-tool{border-radius:12px;} }
+    .return-to-tool:focus{outline:3px solid rgba(11,99,160,0.18);outline-offset:4px;}
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">clipboard-manager — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">مدير الحافظة — احفظ، نظم وأعد استخدام المقاطع</h1>
+
+      <div class="author" role="articleauthor" aria-label="المؤلف">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بواسطة Serge Shammas</strong> — كاتب في الإنتاجية وباحث UX</div>
+          <div class="meta">نُشر: 2025-11-24 · وقت القراءة: 10–14 دقيقة</div>
+        </div>
+      </div>
+
+      <p class="lead">أداة مدير الحافظة توفر طريقة سريعة لحفظ القصاصات النصية الصغيرة — قوالب بريد إلكتروني، مقتطفات كود، معرفات — لتتمكن من لصقها بسرعة عند الحاجة. يغطي هذا الدليل أساليب الالتقاط، تنظيم المحتوى، استراتيجيات النسخ الاحتياطي، اختصارات لوحة المفاتيح وممارسات الأمان للفرد والفريق.</p>
+
+      <nav class="toc" aria-label="المحتويات">
+        <a href="#why">لماذا مدير الحافظة</a>
+        <a href="#capture">التقاط</a>
+        <a href="#organize">التنظيم والبحث</a>
+        <a href="#reuse">إعادة الاستخدام والاختصارات</a>
+        <a href="#backup">التصدير / الاستيراد والنسخ الاحتياطي</a>
+        <a href="#security">الأمن والخصوصية</a>
+        <a href="#team">نماذج عمل الفريق</a>
+        <a href="#troubleshoot">استكشاف الأخطاء</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="why" class="section">
+        <h2>لماذا مدير الحافظة مهم</h2>
+        <p>في العمل المعرفي الحديث نكرر كثيراً أجزاء صغيرة من النص بين التطبيقات—هذا يؤدي إلى فقدان وقت وخطأ إنساني. مدير الحافظة يقلل هذا الاحتكاك، يوفر سرعة وإمكانية بحث، ويحافظ على سياق صغير يمكن إرفاقه مع كل مقطع.</p>
+
+        <ul>
+          <li><strong>السرعة:</strong> الوصول إلى المقاطع بنقرة أو اختصار.</li>
+          <li><strong>الاتساق:</strong> إعادة استخدام نص موثوق (سياسات، تواقيع).</li>
+          <li><strong>الذاكرة:</strong> يعمل كذاكرة قصيرة قابلة للبحث للمهام الجارية.</li>
+          <li><strong>النسخ الاحتياطي:</strong> إمكانية التصدير ونقل المكتبة بين الأجهزة.</li>
+        </ul>
+      </section>
+
+      <section id="capture" class="section">
+        <h2>التقاط — احفظ على الفور</h2>
+        <p>الالتقاط يجب أن يكون خالياً من الاحتكاك. عند النسخ، افتح الأداة والصق سريعاً؛ أضف عنوان أو وسم لتسهيل البحث لاحقاً.</p>
+
+        <div class="recipe">
+          <strong>وصفة التقاط سريعة</strong>
+          <ol>
+            <li>عند نسخ نص مفيد: افتح مدير الحافظة والصقه في حقل الإدخال (جعل المقاطع منطقية وقصيرة).</li>
+            <li>أضف عنواناً أو وسمًا قصيراً يصف الغرض (مثال: "Invoice: Acme — IBAN").</li>
+            <li>احفظ؛ سيظهر العنصر في أعلى القائمة (الأحدث أولاً).</li>
+            <li>نظف أو أرشِف المقاطع القديمة كل بضعة أيام للحفاظ على الخفة.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">نصيحة: للمقاطع متعددة الأسطر أضف عنواناً واضحاً ليظهر جيداً في نتائج البحث.</p>
+      </section>
+
+      <section id="organize" class="section">
+        <h2>التنظيم والبحث — اجعل المقاطع قابلة للاكتشاف</h2>
+        <p>الهدف هو الاسترجاع السريع: استخدم وسوماً، عناوين قصيرة ونمط تسمية ثابت.</p>
+
+        <h3>نموذج تنظيم بسيط</h3>
+        <ul>
+          <li><strong>عنوان:</strong> 3–6 كلمات تصف الغرض.</li>
+          <li><strong>وسم:</strong> كلمة أو كلمات قصيرة (project, client, template, code).</li>
+          <li><strong>معاينة:</strong> عرض مقتطف لتجنب حفظ كتل نص كبيرة للغاية.</li>
+        </ul>
+
+        <h3>نصائح للبحث</h3>
+        <ul>
+          <li>ابحث بواسطة العنوان أو الوسم أولاً — استعلامات قصيرة تعيد نتائج دقيقة.</li>
+          <li>استخدم بادئات مثل "email:", "code:", "id:" لتجميع أنواع المقاطع.</li>
+          <li>ثبّت أو قم بوضع إشارة للمقاطع الأكثر استخداماً إن كانت الأداة تدعم ذلك.</li>
+        </ul>
+      </section>
+
+      <section id="reuse" class="section">
+        <h2>إعادة الاستخدام والاختصارات</h2>
+        <p>السرعة تأتي من ذاكرة الحركة. خصص بعض الوقت لتعلم الاختصارات واستخدم الإدخال عبر لوحة المفاتيح.</p>
+
+        <h3>اختصارات عملية</h3>
+        <ul>
+          <li><span class="kbd">Ctrl/Cmd+Shift+V</span> — فتح مدير الحافظة ولصق آخر مقطع.</li>
+          <li><span class="kbd">Ctrl/Cmd+Alt+C</span> — التقاط سريع (فتح الحقل جاهزاً للصق).</li>
+          <li><span class="kbd">مفاتيح الأسهم</span> — التنقل في القائمة؛ <span class="kbd">Enter</span> لنسخ المقطع للمؤقت.</li>
+        </ul>
+
+        <p class="small-note">إذا حظر المتصفح عمليات الكتابة في الحافظة، استخدم زر "نسخ" داخل واجهة الاستخدام.</p>
+      </section>
+
+      <section id="backup" class="section">
+        <h2>التصدير / الاستيراد والنسخ الاحتياطي</h2>
+        <p>التخزين المحلي مريح لكنه عرضة للفقد. صدّر بانتظام واحتفظ بنسخة مشفرة إن احتوت على بيانات حساسة.</p>
+
+        <div class="recipe">
+          <strong>روتين النسخ الاحتياطي (5 دقائق)</strong>
+          <ol>
+            <li>أسبوعياً: صدّر المقاطع كملف JSON عبر زر التصدير.</li>
+            <li>خزن الملف في موقع آمن (سحابي/قبو مشفر).</li>
+            <li>عند تغيير الجهاز: استورد JSON في الجهاز الجديد.</li>
+            <li>احتفظ بأرشيف مؤرخ: clipboard-backup-YYYYMMDD.json</li>
+          </ol>
+        </div>
+
+        <pre class="template">مثال CSV للاستخدام في جدول بيانات:
+title,text,tags,created
+Invoice: Acme,"Acct: 123-45-678",finance;client,2025-11-21T10:15:00Z</pre>
+
+        <p class="small-note muted">ملاحظة: التصدير غالباً ما يكون JSON. إن احتجت CSV فحوّل JSON بواسطة سكربت صغير أو خدمة تحويل.</p>
+      </section>
+
+      <section id="security" class="section">
+        <h2>الأمن والخصوصية — ما يجب تجنبه</h2>
+        <p>مديرو الحافظة يوازنون بين الراحة والمخاطر. باعتبارهم مخزن نصي، تعامل معهم كدفتر ملاحظات محلي: لا تحفظ أسراراً عالية الخطورة كنص صريح.</p>
+
+        <h3>قواعد آمنة</h3>
+        <ul>
+          <li>لا تحفظ كلمات المرور الكاملة أو المفاتيح الخاصة أو أرقام PIN كنص صريح؛ استخدم مدير كلمات مرور.</li>
+          <li>إذا اضطُررت لتخزين رموز حساسة، قم بتشفير ملف التصدير (مثل ZIP بكلمة مرور أو أدوات تشفير).</li>
+          <li>كن حذراً على الأجهزة المشتركة — صدّر ثم احذف المقاطع الحساسة بعد الاستخدام.</li>
+          <li>راجع واحذف المقاطع الحساسة بانتظام.</li>
+        </ul>
+
+        <h3>ملاحظات تقنية</h3>
+        <ul>
+          <li>يحفظ مدير الحافظة البيانات في localStorage داخل المتصفح — هذا يعني أن البيانات تبقى على جهازك ما لم تصدرها.</li>
+          <li>قد تقوم مزامنة المتصفح (مثل Chrome Sync) بمزامنة بعض البيانات حسب إعدادات المستخدم — تحقق من إعداداتك.</li>
+        </ul>
+      </section>
+
+      <section id="team" class="section">
+        <h2>نماذج عمل الفريق</h2>
+        <p>للفرق: احتفظ بالمحتوى الرسمي والقانوني في مستودع مشترك أو wiki؛ استخدم مدير الحافظة المحلي للأشياء الشخصية والمؤقتة. إذا أصبح مقطع مفيداً للفريق، انقله إلى مصدر مشترك.</p>
+
+        <h3>نمط العمل</h3>
+        <ul>
+          <li><strong>استخدام شخصي سريع:</strong> قوالب شخصية، ملاحظات عمل مؤقتة، معرفات.</li>
+          <li><strong>النصوص الرسمية:</strong> سياسات وعبارات قانونية — احفظها في مستودع الفريق وارتبط بها من عنوان المقطع.</li>
+          <li><strong>نمط النقل:</strong> صدر المقطع ثم أضفه كوثيقة/PR في مساحة الفريق للمراجعة والتوحيد.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section">
+        <h2>استكشاف الأخطاء الشائعة</h2>
+        <ul>
+          <li><strong>المقاطع اختفت:</strong> تحقق من إعدادات تخزين المتصفح (حذف البيانات التلقائي أو وضع التصفح الخاص). إذا كان لديك نسخة احتياطية استوردها.</li>
+          <li><strong>اللصق محظور:</strong> بعض المتصفحات تقيّد عمليات الكتابة للclipboard. استخدم زر النسخ في الواجهة أو غيّر أذونات الموقع.</li>
+          <li><strong>فشل التصدير:</strong> تأكد من أذونات الكتابة على القرص واسم ملف صالح لنظام التشغيل.</li>
+          <li><strong>قوائم طويلة بطيئة:</strong> نقّح المقاطع القديمة أو استخدم ميزة "المفضلة" لتثبيت العناصر المستخدمة كثيراً.</li>
+          <li><strong>لا تعمل الاختصارات:</strong> بعض الاختصارات قد تتعارض مع النظام/المتصفح — تأكد من عدم تعارضها أو أعد تعيينها.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section">
+        <h2>الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> أين تُحفظ المقاطع؟<br><strong>ج:</strong> في localStorage داخل المتصفح — تبقى محلياً إلا إذا صدّرتها.</p>
+
+          <p><strong>س:</strong> هل يمكنني استيراد المقاطع من جهاز آخر؟<br><strong>ج:</strong> نعم — صدّر JSON من الجهاز الأول، ثم استورده في الجهاز الآخر.</p>
+
+          <p><strong>س:</strong> هل هناك حدود لعدد المقاطع؟<br><strong>ج:</strong> localStorage محدود عادة بعدد ميغابايت محدود؛ إذا كانت مكتبتك كبيرة، صدّرها دوريًا.</p>
+
+          <p><strong>س:</strong> هل يجب عليّ استخدام مدير حافظة للفريق؟<br><strong>ج:</strong> استخدمه للسرعة الشخصية؛ للمحتوى الرسمي قم بتخزينه في مستودع مشترك حتى يكون مدققاً ومتماثلاً.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section">
+        <h2>الموارد</h2>
+        <ul class="muted">
+          <li><a href="https://timerhaven.com/clipboard-manager-ar.html">افتح أداة Clipboard Manager</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage" target="_blank" rel="noopener">localStorage — MDN</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Clipboard_(computing)" target="_blank" rel="noopener">Clipboard (computing) — Wikipedia</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/clipboard-manager-ar.html" class="cta" aria-label="افتح Clipboard Manager">افتح Clipboard Manager</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>هل لديك أسئلة أو ملاحظات؟ راسلنا على <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. اقرأ سياسة الخصوصية: <a href="/ar/privacy/">Privacy</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to Clipboard Manager" button (points to flat tool page) -->
+  <a href="https://timerhaven.com/clipboard-manager-ar.html" class="return-to-tool" id="returnToTool" aria-label="العودة إلى Clipboard Manager">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى Clipboard Manager</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToTool');
+      if (!btn) return;
+      // keyboard activation
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      // small opacity tweak on scroll
+      function toggle(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggle);
+      toggle();
+    })();
+  </script>
 </body>
 </html>

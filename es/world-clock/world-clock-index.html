@@ -1,18 +1,201 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>world-clock — Guide (es)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for world-clock guide (es)">
+  <meta charset="utf-8" />
+  <title>Reloj mundial — Comparar husos horarios y programar con confianza | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía completa para usar el Reloj mundial: seleccionar zonas, leer offsets, planificar reuniones entre regiones, errores por horario de verano y consejos de automatización." />
+  <link rel="canonical" href="https://timerhaven.com/es/world-clock/world-clock-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Usar un reloj mundial para programar",
+        "description":"Comparar varios husos horarios, mostrar las horas locales de los participantes y evitar confusiones por los cambios de hora. Esta guía incluye recetas de planificación, consejos de conversión e ideas de automatización.",
+        "image":"https://timerhaven.com/assets/images/world-clock-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["Reloj mundial (TimerHaven)","Calendario","Información de husos de los participantes"],
+        "step":[
+          {"@type":"HowToStep","name":"Elegir puntos de referencia","text":"Elija una referencia del organizador y agregue las zonas de los participantes para comparar horas locales."},
+          {"@type":"HowToStep","name":"Vigilar cambios de horario","text":"Revise las reglas de horario de verano y confirme las horas alrededor de las fechas de transición."},
+          {"@type":"HowToStep","name":"Compartir horas locales","text":"Comparta el hueco elegido con la hora local del organizador y la de los participantes para reducir ambigüedad."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"¿Cómo manejo las transiciones de horario de verano?","acceptedAnswer":{"@type":"Answer","text":"Programe evitando las fechas de transición de horario de verano si es posible; si no, confirme las horas locales explícitamente e incluya identificadores de zona (IANA) en las invitaciones."}},
+          {"@type":"Question","name":"¿Debo mostrar varias horas locales en las invitaciones?","acceptedAnswer":{"@type":"Answer","text":"Sí — mostrar la hora del organizador y la del participante reduce errores, especialmente en equipos distribuidos."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">world-clock — Guide (es)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Reloj mundial — Comparar husos y programar con confianza</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor del artículo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Por Serge Shammas</strong> — redactor sobre trabajo distribuido y planificación</div>
+          <div class="meta">Publicado: 2025-11-24 · Tiempo de lectura: 12–16 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Programar entre husos horarios suele generar confusión. Un reloj mundial fiable te ayuda a comparar horas locales, evitar errores por el horario de verano y comunicar claramente los horarios de reunión. Esta guía cubre conceptos básicos de husos, recetas de planificación, trampas del horario de verano, uso de identificadores IANA, consejos de automatización y patrones de compartición que reducen errores.</p>
+
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#basics">Conceptos de huso horario</a> ·
+        <a href="#dst">Horario de verano & trampas</a> ·
+        <a href="#planning">Recetas para planificar reuniones</a> ·
+        <a href="#naming">Usar identificadores IANA & labels claros</a> ·
+        <a href="#automation">Automatización & consejos de calendario</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="basics" class="section" aria-labelledby="basics-title">
+        <h2 id="basics-title">Conceptos básicos — offsets, UTC y hora local</h2>
+        <p>Los husos horarios se definen respecto al Tiempo Universal Coordinado (UTC) con offsets (p. ej., UTC+1). Para mayor claridad, siempre comunica tanto la hora del reloj como el huso (o el offset) al programar entre ubicaciones.</p>
+
+        <ul>
+          <li><strong>Referencia UTC:</strong> usa UTC al coordinar sistemas globales para evitar ambigüedades locales.</li>
+          <li><strong>Horas locales para humanos:</strong> en las invitaciones, prefiere mostrar la hora local del destinatario — muestra ambas, la del organizador y la del participante, para reducir errores.</li>
+          <li><strong>24 h vs 12 h:</strong> utiliza el formato que prefiera tu audiencia — el formato 24 h reduce la confusión AM/PM.</li>
+        </ul>
+      </section>
+
+      <section id="dst" class="section" aria-labelledby="dst-title">
+        <h2 id="dst-title">Horario de verano — trampas comunes</h2>
+        <p>Las transiciones de horario de verano pueden cambiar los offsets locales y causar errores de programación, especialmente alrededor de las fechas de cambio. Evita programar eventos recurrentes cerca de las transiciones o incluye siempre el identificador de huso en las invitaciones.</p>
+
+        <h3>Reglas prácticas</h3>
+        <ul>
+          <li>Evita programar plazos críticos o reuniones interzonales el día de un cambio de horario.</li>
+          <li>Indica explícitamente el huso (ej. "09:00 America/Los_Angeles (PDT)") en lugar de confiar en nombres locales variables.</li>
+          <li>Al confirmar con participantes, muestra su hora local y la hora UTC como referencia definitiva.</li>
+        </ul>
+      </section>
+
+      <section id="planning" class="section" aria-labelledby="planning-title">
+        <h2 id="planning-title">Recetas para planificar reuniones — minimizar fricciones</h2>
+        <p>Usa el reloj mundial para elegir franjas equitativas y comunicar horarios con claridad.</p>
+
+        <div class="recipe" aria-labelledby="small-meeting">
+          <strong id="small-meeting">Pequeño equipo distribuido — reunión de 30 minutos</strong>
+          <ol>
+            <li>Recopila las ventanas preferidas de los participantes (mañana/tarde local).</li>
+            <li>Usa el reloj mundial para mostrar cada franja candidata en la hora local del participante.</li>
+            <li>Ofrece 2–3 franjas y finaliza rápidamente; incluye la hora del organizador y la del participante en la descripción de la invitación.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="global">
+          <strong id="global">Town‑hall global — minimizar la carga</strong>
+          <ol>
+            <li>Elige una franja que evite horas extremas para la mayoría; rota los horarios en eventos repetidos para compartir la incomodidad.</li>
+            <li>Graba y comparte la sesión para quienes no puedan asistir en directo.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="naming" class="section" aria-labelledby="naming-title">
+        <h2 id="naming-title">Usar identificadores IANA & etiquetas claras</h2>
+        <p>Los nombres de zona IANA (Europe/London, America/New_York) son inequívocos e incorporan las reglas DST. Al incluir horas en mensajes o invitaciones, muestra tanto la etiqueta legible como el identificador IANA o el offset UTC para mayor claridad.</p>
+
+        <pre class="template">Línea de invitación ejemplo:
+Reunión: Sync proyecto
+Hora: 2025-11-30 09:00 America/Los_Angeles (UTC-8) — 17:00 Europe/London (UTC+0)
+Agenda: ...</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Automatización & consejos de calendario</h2>
+        <p>Haz la programación predecible con automatización y prácticas explícitas de calendario.</p>
+
+        <ul>
+          <li><strong>Establece husos por evento:</strong> incluye el huso del organizador en los metadatos del evento para que los calendarios de los asistentes conviertan correctamente.</li>
+          <li><strong>Usa enlaces conscientes de huso:</strong> convierte y pega horas locales para asistentes clave en la descripción del evento.</li>
+          <li><strong>Usa herramientas de programación:</strong> aprovecha herramientas que propongan ventanas óptimas según los husos y las horas laborales de los participantes.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> ¿Qué pasa si los participantes ven horas diferentes?<br><strong>A:</strong> Confirma el huso del evento e incluye la hora UTC en la invitación. Anima a los participantes a abrir los detalles del evento en su app de calendario para ver la conversión automática.</p>
+
+          <p><strong>Q:</strong> ¿Siempre debo programar en UTC?<br><strong>A:</strong> UTC es ideal para sistemas y automatización, pero para comunicación humana muestra las horas locales y ofrece UTC como respaldo. La gente entiende mejor las horas locales; UTC elimina ambigüedad para horarios técnicos.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Recursos</h2>
+        <ul class="muted">
+          <li><a href="/world-clock-es.html">Abrir herramienta Reloj mundial</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">Identificadores IANA de husos</a></li>
+          <li><a href="https://timeanddate.com" target="_blank" rel="noopener">timeanddate.com — conversiones & DST</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/world-clock-es.html" class="cta" aria-label="Abrir Reloj mundial">Abrir Reloj mundial</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas o comentarios? Contáctanos en <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lee nuestra <a href="/es/privacy/">Política de privacidad</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Botón flotante "Volver a la herramienta" -->
+  <a href="/world-clock-es.html" class="return-to-tool" id="returnToToolWorldClock" aria-label="Volver al Reloj mundial">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver al Reloj mundial</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWorldClock');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>

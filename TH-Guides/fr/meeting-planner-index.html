@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Meeting Planner — Schedule Efficient Meetings Across Time Zones | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guide to planning and coordinating meetings: invite patterns, time-zone planning, agenda design, scheduling recipes, and sharing time proposals." />
+  <link rel="canonical" href="https://timerhaven.com/en/meeting-planner/meeting-planner-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Plan effective meetings",
+        "description":"Practical recipes for scheduling across time zones, preparing agendas, running efficient discussions, and sharing meeting times.",
+        "image":"https://timerhaven.com/assets/images/meeting-planner-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Meeting Planner (TimerHaven)","Calendar","Participants' time zones"],
+        "step":[
+          {"@type":"HowToStep","name":"Gather time zones","text":"Collect each participant's preferred time zone or city."},
+          {"@type":"HowToStep","name":"Pick candidate windows","text":"Use the planner to propose 2–3 candidate times that minimize hardship across zones."},
+          {"@type":"HowToStep","name":"Share and confirm","text":"Share times as organizer-local → participant-local to reduce confusion; confirm one slot and send calendar invite."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"How many options should I propose?","acceptedAnswer":{"@type":"Answer","text":"Offer 2–3 reasonable windows. Too many options slow decisions; too few may preclude availability."}},
+          {"@type":"Question","name":"Should I always show participant local times?","acceptedAnswer":{"@type":"Answer","text":"Yes — showing both organizer and participant local times reduces errors and builds trust."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Meeting Planner — Schedule Better Meetings Across Time Zones</h1>
+
+      <div class="author" role="articleauthor" aria-label="Article author">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>By Serge Shammas</strong> — meetings & collaboration writer</div>
+          <div class="meta">Published: 2025-11-24 · Reading time: 12–18 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Running meetings across time zones or with distributed teams requires clarity and empathy. The Meeting Planner helps you propose times, visualize participant local times, and select slots that minimize inconvenience. This guide covers participant collection, time-window selection, agenda design, sharing best-practices, and timezone pitfalls.</p>
+
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#collect">Collect participants & zones</a> ·
+        <a href="#propose">Propose times effectively</a> ·
+        <a href="#agenda">Design the agenda</a> ·
+        <a href="#timezone">Time zone pitfalls</a> ·
+        <a href="#sync">Synchronous meeting recipes</a> ·
+        <a href="#share">Share & confirm</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="collect" class="section" aria-labelledby="collect-title">
+        <h2 id="collect-title">Collect participants and time zones</h2>
+        <p>Start by collecting each invitee’s preferred time zone or city and their availability windows (morning/afternoon). Use the planner to store cities and compute local times quickly.</p>
+
+        <h3>Practical tips</h3>
+        <ul>
+          <li>Ask participants for their preferred meeting hours (their local time).</li>
+          <li>Allow people to indicate "no earlier than" or "no later than" constraints to narrow windows.</li>
+          <li>Prefer midday windows for broad participation if possible — they minimize extreme hours for most regions.</li>
+        </ul>
+      </section>
+
+      <section id="propose" class="section" aria-labelledby="propose-title">
+        <h2 id="propose-title">Propose times effectively — keep choices small</h2>
+        <p>Offer 2–3 reasonable slots rather than an open poll. Use the tool to show organizer local time → participant local time to reduce confusion.</p>
+
+        <div class="recipe">
+          <strong>Propose slot recipe</strong>
+          <ol>
+            <li>Pick 2–3 candidate windows that meet the majority constraints.</li>
+            <li>Share the list with local times for each participant (organizer → participant local).</li>
+            <li>Ask for confirmation on preference or conflicts and finalize quickly.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="agenda" class="section" aria-labelledby="agenda-title">
+        <h2 id="agenda-title">Design a short agenda — timebox and anchor decisions</h2>
+        <p>An agenda drives outcomes. Include goals, time allocations, roles (facilitator, note-taker), and expected decisions or outputs.</p>
+
+        <ul>
+          <li><strong>Start with intent:</strong> one-sentence outcome for the meeting.</li>
+          <li><strong>Timebox agenda items:</strong> assign minutes to each topic and track time during the meeting.</li>
+          <li><strong>End with decisions & owners:</strong> always leave 5 minutes to confirm next steps and owners.</li>
+        </ul>
+      </section>
+
+      <section id="timezone" class="section" aria-labelledby="timezone-title">
+        <h2 id="timezone-title">Time zone pitfalls & daylight savings</h2>
+        <p>Beware daylight saving transitions and ambiguous zone names. Where possible, use IANA time zone identifiers (e.g., Europe/London) and show explicit offsets.</p>
+
+        <h3>Checklist</h3>
+        <ul>
+          <li>Confirm the date and whether DST applies in each participant's zone.</li>
+          <li>Display timezone names and offsets (e.g., GMT+1) in communications.</li>
+          <li>Test links and calendar invites in a sample participant account when scheduling critical events.</li>
+        </ul>
+      </section>
+
+      <section id="sync" class="section" aria-labelledby="sync-title">
+        <h2 id="sync-title">Synchronous meeting recipes</h2>
+        <p>Here are recipes for common meeting types that help you run them efficiently.</p>
+
+        <div class="recipe">
+          <strong>Standup (15 minutes)</strong>
+          <ol>
+            <li>Strict timer for 15 minutes. Each participant answers three questions (yesterday/today/blockers).</li>
+            <li>Facilitator keeps time and parks deeper discussions as follow-ups.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Decision meeting (30–60 minutes)</strong>
+          <ol>
+            <li>Pre-read materials distributed 24–48 hours before.</li>
+            <li>Start with the decision criteria and options; allow a short discussion and close with a vote or owner decision.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="share" class="section" aria-labelledby="share-title">
+        <h2 id="share-title">Share, confirm & send invites</h2>
+        <p>When you confirm a slot, send a calendar invite with clear timezone-aware times, agenda, and attachments. Include a short "what to prepare" note and expected outputs.</p>
+
+        <ul>
+          <li>Include a link to the meeting note or collaborative doc in the invite.</li>
+          <li>List the expected decisions or deliverables in the invite description.</li>
+          <li>Use "Busy" visibility for the event to protect the slot.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Troubleshooting</h2>
+        <ul>
+          <li><strong>Confusion about time:</strong> resend times with participant-local labels if there’s a mismatch.</li>
+          <li><strong>Last-minute timezone changes:</strong> confirm participant time and offer an alternative if needed.</li>
+          <li><strong>No-shows:</strong> record who couldn’t attend and reschedule with few candidate times.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> How do I handle very large distributed teams?<br><strong>A:</strong> Break into smaller working groups or use async updates; large synchronous meetings are costly and often inefficient.</p>
+
+          <p><strong>Q:</strong> Should I always show two timezones? <br><strong>A:</strong> Always show organizer and participant local time; when multiple participants are present, consider a table of local times for the chosen slot.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Resources</h2>
+        <ul class="muted">
+          <li><a href="/meeting-planner-en.html">Open Meeting Planner tool</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA time zones</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/meeting-planner-en.html" class="cta" aria-label="Open Meeting Planner">Open Meeting Planner</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions or feedback? Contact us at <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Read our <a href="/privacy/">Privacy Policy</a>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/meeting-planner-en.html" class="return-to-tool" id="returnToToolMeeting" aria-label="Return to Meeting Planner">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Return to Meeting Planner</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolMeeting');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
+</body>
+</html>
