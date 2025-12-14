@@ -98,6 +98,7 @@
       }
     },
     volume: {
+      // US liquid volume units, with Liter as base unit (1 Liter = 1)
       units: { "Liter": 1, "Milliliter": 0.001, "Gallon": 3.78541, "Quart": 0.946353, "Pint": 0.473176, "Cup": 0.236588, "Fluid Ounce": 0.0295735, "Tablespoon": 0.0147868, "Teaspoon": 0.00492892 },
       convert: (val, from, to) => val * unitTypes.volume.units[from] / unitTypes.volume.units[to]
     }

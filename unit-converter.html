@@ -108,6 +108,7 @@
         }
       },
       volume: {
+        // US liquid volume units, with Liter as base unit (1 Liter = 1)
         units: { "Liter": 1, "Milliliter": 0.001, "Gallon": 3.78541, "Quart": 0.946353, "Pint": 0.473176, "Cup": 0.236588, "Fluid Ounce": 0.0295735, "Tablespoon": 0.0147868, "Teaspoon": 0.00492892 },
         convert: (val, from, to) => val * unitTypes.volume.units[from] / unitTypes.volume.units[to]
       }
@@ -197,7 +198,7 @@
     });
 
     function getLang(){ try{ const l = (localStorage.getItem('timerhavenLang') || 'en').slice(0,2); return translations[l] ? l : 'en'; }catch(e){return 'en';} }
-    function applyLanguage(lang){ if(!translations[lang]) lang='en'; const d=translations[lang]; document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if (d[k]!==undefined) el.textContent = d[k]; }); document.title = d.pageTitle || document.title; const v = document.getElementById('inputValue'); if (v) v.placeholder = d['valuePlaceholder'] || 'Value'; const opts = document.querySelectorAll('#typeSelect option'); if (opts.length) { opts[0].textContent = d.optLength || opts[0].textContent; opts[1].textContent = d.optWeight || opts[1].textContent; opts[2].textContent = d.optTemperature || opts[2].textContent; if (opts[3]) opts[3].textContent = d.optVolume || opts[3].textContent; } }
+    function applyLanguage(lang){ if(!translations[lang]) lang='en'; const d=translations[lang]; document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if (d[k]!==undefined) el.textContent = d[k]; }); document.title = d.pageTitle || document.title; const v = document.getElementById('inputValue'); if (v) v.placeholder = d['valuePlaceholder'] || 'Value'; const opts = document.querySelectorAll('#typeSelect option'); opts.forEach((opt, i) => { const key = opt.getAttribute('data-i18n'); if (key && d[key]) opt.textContent = d[key]; }); }
 
     // --- NEW: rewrite How-to and Tips anchors to language-specific filenames
     function rewriteToLocalizedFiles() {
