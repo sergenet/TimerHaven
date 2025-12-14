@@ -148,6 +148,7 @@
   const MSG_UNABLE_LOCATION = "Δεν μπορεί να ληφθεί η τοποθεσία σας.";
   const MSG_FETCH_ERROR = "Σφάλμα ανάκτησης δεδομένων καιρού.";
   const MSG_NOT_FOUND_TEMPLATE = "Δεν βρέθηκε καιρός για «{city}».";
+  const MSG_DETECTING_LOCATION = "Ανίχνευση τοποθεσίας...";
   
   function renderWeatherData(data) {
     return `<b>${data.name}, ${data.sys.country}</b><br>
@@ -211,6 +212,7 @@
       document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_GEO_UNSUPPORTED + '</span>';
       return;
     }
+    document.getElementById('weatherResult').innerHTML = MSG_DETECTING_LOCATION;
     navigator.geolocation.getCurrentPosition(function(pos) {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;

@@ -151,6 +151,7 @@
   const MSG_UNABLE_LOCATION = "No se pudo obtener su ubicación.";
   const MSG_FETCH_ERROR = "Error al obtener datos meteorológicos.";
   const MSG_NOT_FOUND_TEMPLATE = "No se encontró el clima para \"{city}\".";
+  const MSG_DETECTING_LOCATION = "Detectando ubicación...";
 
   function renderWeatherData(data) {
     return `<b>${data.name}, ${data.sys.country}</b><br>
@@ -214,6 +215,7 @@
       document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_GEO_UNSUPPORTED + '</span>';
       return;
     }
+    document.getElementById('weatherResult').innerHTML = MSG_DETECTING_LOCATION;
     navigator.geolocation.getCurrentPosition(function(pos) {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;

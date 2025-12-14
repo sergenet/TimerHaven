@@ -111,6 +111,7 @@
   const MSG_UNABLE_LOCATION = "Unable to get your location.";
   const MSG_FETCH_ERROR = "Error fetching weather data.";
   const MSG_NOT_FOUND_TEMPLATE = "Could not find weather for \"{city}\".";
+  const MSG_DETECTING_LOCATION = "Detecting location...";
 
   function renderWeatherData(data) {
     // Keep original OpenWeatherMap-style rendering compatible with server response
@@ -174,7 +175,7 @@
       document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_GEO_UNSUPPORTED + '</span>';
       return;
     }
-    document.getElementById('weatherResult').innerHTML = 'Detecting location...';
+    document.getElementById('weatherResult').innerHTML = MSG_DETECTING_LOCATION;
     navigator.geolocation.getCurrentPosition(function(pos) {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;

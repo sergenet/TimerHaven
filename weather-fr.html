@@ -148,6 +148,7 @@
   const MSG_UNABLE_LOCATION = "Impossible d'obtenir votre position.";
   const MSG_FETCH_ERROR = "Erreur lors de la récupération des données météo.";
   const MSG_NOT_FOUND_TEMPLATE = "Météo introuvable pour «{city}».";
+  const MSG_DETECTING_LOCATION = "Détection de la position...";
 
   function renderWeatherData(data) {
     return `<b>${data.name}, ${data.sys.country}</b><br>
@@ -211,6 +212,7 @@
       document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_GEO_UNSUPPORTED + '</span>';
       return;
     }
+    document.getElementById('weatherResult').innerHTML = MSG_DETECTING_LOCATION;
     navigator.geolocation.getCurrentPosition(function(pos) {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;

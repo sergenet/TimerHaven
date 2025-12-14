@@ -150,6 +150,7 @@
   const MSG_UNABLE_LOCATION = "Не удалось получить ваше местоположение.";
   const MSG_FETCH_ERROR = "Ошибка получения погодных данных.";
   const MSG_NOT_FOUND_TEMPLATE = "Не удалось найти погоду для \"{city}\".";
+  const MSG_DETECTING_LOCATION = "Определение местоположения...";
 
   function renderWeatherData(data) {
     return `<b>${data.name}, ${data.sys.country}</b><br>
@@ -213,6 +214,7 @@
       document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_GEO_UNSUPPORTED + '</span>';
       return;
     }
+    document.getElementById('weatherResult').innerHTML = MSG_DETECTING_LOCATION;
     navigator.geolocation.getCurrentPosition(function(pos) {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
