@@ -279,6 +279,7 @@
       document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + (translations[getLang()].geoUnsupported || 'Geolocation not supported.') + '</span>';
       return;
     }
+    document.getElementById('weatherResult').innerHTML = 'Detecting location...';
     navigator.geolocation.getCurrentPosition(function(pos) {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
