@@ -10,7 +10,6 @@ export default function App() {
         style={styles.webview}
         startInLoadingState
         geolocationEnabled={true}
-        allowsInlineMediaPlayback={true}
       />
       {Platform.OS === 'android' && <StatusBar barStyle="dark-content" />}
     </View>
