@@ -80,6 +80,7 @@
 <option value="length">Μήκος</option>
 <option value="weight">Βάρος</option>
 <option value="temperature">Θερμοκρασία</option>
+<option value="volume">Όγκος</option>
 </select>
 <input class="form-control" id="inputValue" placeholder="Τιμή" style="max-width:100px;" type="number"/>
 <select class="form-select" id="fromUnit" style="max-width:140px;"></select>
@@ -119,6 +120,11 @@
         if (from === "Fahrenheit" && to === "Kelvin") return (val - 32) * 5/9 + 273.15;
         if (from === "Kelvin" && to === "Fahrenheit") return (val - 273.15) * 9/5 + 32;
       }
+    },
+    volume: {
+      // US liquid volume units, with Liter as base unit (1 Liter = 1)
+      units: { "Liter": 1, "Milliliter": 0.001, "Gallon": 3.78541, "Quart": 0.946353, "Pint": 0.473176, "Cup": 0.236588, "Fluid Ounce": 0.0295735, "Tablespoon": 0.0147868, "Teaspoon": 0.00492892 },
+      convert: (val, from, to) => val * unitTypes.volume.units[from] / unitTypes.volume.units[to]
     }
   };
 
