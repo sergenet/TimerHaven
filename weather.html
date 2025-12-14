@@ -155,7 +155,8 @@
       tip1: "Plan ahead: Check the weather before traveling or events.",
       tip2: "Use location: Get instant local weather updates.",
       tip3: "Save time: Use the dropdown for popular cities.",
-      cityPlaceholder: "Or enter city..."
+      cityPlaceholder: "Or enter city...",
+      detectingLocation: "Detecting location..."
     },
     fr: {
       pageTitle: "Météo mondiale — TimerHaven",
@@ -178,7 +179,8 @@
       tip1: "Planifiez : Vérifiez la météo avant de voyager ou d'organiser un événement.",
       tip2: "Utilisez la localisation : Obtenez des mises à jour météorologiques locales instantanées.",
       tip3: "Gagnez du temps : Utilisez la liste pour les villes populaires.",
-      cityPlaceholder: "Ou saisissez une ville..."
+      cityPlaceholder: "Ou saisissez une ville...",
+      detectingLocation: "Détection de la position..."
     },
     es: {
       pageTitle: "Clima mundial — TimerHaven",
@@ -201,7 +203,8 @@
       tip1: "Planifica: Consulta el clima antes de viajar o realizar eventos.",
       tip2: "Usa la ubicación: Obtén actualizaciones locales instantáneas.",
       tip3: "Ahorra tiempo: Usa el desplegable para ciudades populares.",
-      cityPlaceholder: "O ingresa ciudad..."
+      cityPlaceholder: "O ingresa ciudad...",
+      detectingLocation: "Detectando ubicación..."
     }
   };
 
@@ -279,6 +282,7 @@
       document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + (translations[getLang()].geoUnsupported || 'Geolocation not supported.') + '</span>';
       return;
     }
+    document.getElementById('weatherResult').innerHTML = translations[getLang()].detectingLocation || 'Detecting location...';
     navigator.geolocation.getCurrentPosition(function(pos) {
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;

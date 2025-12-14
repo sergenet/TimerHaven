@@ -9,6 +9,7 @@ export default function App() {
         source={{ uri: 'https://www.timerhaven.com' }}
         style={styles.webview}
         startInLoadingState
+        geolocationEnabled={true}
       />
       {Platform.OS === 'android' && <StatusBar barStyle="dark-content" />}
     </View>
