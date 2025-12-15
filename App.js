@@ -1,8 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View, Platform, StatusBar } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Geolocation from '@react-native-community/geolocation';
+
+// Injected script that provides window.requestNativeLocation() function for web pages
+const INJECTED_BRIDGE_SCRIPT = `
+  (function(){
+    window.requestNativeLocation = function(){
+      window.ReactNativeWebView.postMessage(JSON.stringify({type:'requestNativeLocation'}));
+    };
+  })(); 
+  true;
+`;
 
 export default function App() {
   const webViewRef = useRef(null);
@@ -37,7 +47,7 @@ export default function App() {
       (pos) => {
         const lat = pos.coords.latitude;
         const lon = pos.coords.longitude;
-        const js = `if(window.receiveNativeLocation){window.receiveNativeLocation({latitude:${lat},longitude:${lon}});} if(window._injectedFetchByCoords){window._injectedFetchByCoords(${lat}, ${lon});} true;`;
+        const js = `if(window.receiveNativeLocation){window.receiveNativeLocation({latitude:${JSON.stringify(lat)},longitude:${JSON.stringify(lon)}});} if(window._injectedFetchByCoords){window._injectedFetchByCoords(${JSON.stringify(lat)}, ${JSON.stringify(lon)});} true;`;
         injectJS(js);
       },
       (err) => {
@@ -56,7 +66,12 @@ export default function App() {
 
   function onMessage(event) {
     let data = null;
-    try { data = JSON.parse(event.nativeEvent.data); } catch (e) { /* not JSON */ }
+    try { 
+      data = JSON.parse(event.nativeEvent.data); 
+    } catch (e) { 
+      // Ignore non-JSON messages - WebView may send other message types
+      return;
+    }
     if (data && data.type === 'requestNativeLocation') {
       requestLocationAndInject();
       return;
@@ -71,7 +86,7 @@ export default function App() {
         style={styles.webview}
         startInLoadingState
         onMessage={onMessage}
-        injectedJavaScriptBeforeContentLoaded={`(function(){window.requestNativeLocation = function(){window.ReactNativeWebView.postMessage(JSON.stringify({type:'requestNativeLocation'}));};})(); true;`}
+        injectedJavaScriptBeforeContentLoaded={INJECTED_BRIDGE_SCRIPT}
       />
       {Platform.OS === 'android' && <StatusBar barStyle="dark-content" />}
     </View>
