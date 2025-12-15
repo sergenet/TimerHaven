@@ -14,6 +14,13 @@ const INJECTED_BRIDGE_SCRIPT = `
   true;
 `;
 
+// Geolocation configuration
+const GEOLOCATION_OPTIONS = {
+  enableHighAccuracy: true,
+  timeout: 10000, // 10 seconds
+  maximumAge: 0   // No caching
+};
+
 export default function App() {
   const webViewRef = useRef(null);
 
@@ -54,7 +61,7 @@ export default function App() {
         console.warn('Geolocation error', err);
         injectJS(`if(window.__nativeLocationFailed){window.__nativeLocationFailed(${JSON.stringify(err)});} true;`);
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      GEOLOCATION_OPTIONS
     );
   }
 
