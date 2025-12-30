@@ -111,7 +111,7 @@
       <h3 id="tool-title" class="tool-title" style="color:#185a9d !important;"><i class="fa fa-calendar-days"></i> Calendar</h3>
       <a id="read-guide-btn" class="read-guide" href="en/calendar-planning/calendar-planning-index.html" role="button">Read full guide</a>
 
-      <div class="small-muted" id="tool-help">Click any day to add/view/edit your notes. Multiple notes per day are supported and persist!</div>
+      <div class="small-muted" id="tool-help">Click any day to add/view/edit your notes. Add time tracking: use [HH:MM AM/PM, duration] or [duration] for auto-time calculation!</div>
 
       <div class="calendar-header" aria-label="Calendar navigation">
         <div class="calendar-nav" role="toolbar" aria-label="Month and year navigation">
@@ -148,7 +148,7 @@
         </div>
         <div class="modal-body">
           <ul id="noteList" class="note-list" aria-live="polite"></ul>
-          <textarea id="noteInput" class="form-control" rows="3" placeholder="Add a new note for this day..."></textarea>
+          <textarea id="noteInput" class="form-control" rows="3" placeholder="Add note... Try: 'Meeting [2:00 PM, 60]' or 'Task [30]' for time tracking"></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn">Close</button>
@@ -175,12 +175,13 @@
       en: {
         "back-link":"← Back to Main Menu",
         "tool-title":"Calendar",
-        "tool-help":"Click any day to add/view/edit your notes. Multiple notes per day are supported and persist!",
+        "tool-help":"Click any day to add/view/edit your notes. Add time tracking: use [HH:MM AM/PM, duration] or [duration] for auto-time calculation!",
         "faq-list": `<li><strong>Are my notes saved?</strong> Yes — notes are saved in your browser and remain until you delete them.</li>
                      <li><strong>Can I add more than one note?</strong> Yes — you can add multiple notes per day.</li>
+                     <li><strong>How to use time tracking?</strong> Add notes with format: "Meeting [2:00 PM, 60]" (start time, duration in minutes) or just "Task [30]" (duration only - auto-calculates start from previous note).</li>
                      <li><strong>How to backup?</strong> Use Export to download a backup file you can keep or restore later.</li>`,
         "noteModalLabel":"Notes for",
-        "noteInput":"Add a new note for this day...",
+        "noteInput":"Add note... Try: 'Meeting [2:00 PM, 60]' or 'Task [30]' for time tracking",
         "note-none":"No notes yet for this day.",
         "note-delete":"Delete this note",
         "note-close-btn":"Close",
@@ -298,7 +299,175 @@
       setTimeout(()=>{ try{ input && input.focus(); }catch(e){} }, 120);
     }
 
-    // ... rest of calendar script unchanged ...
+    function renderNoteList(dateStr){
+      const list = document.getElementById('noteList'); if (!list) return; list.innerHTML = '';
+      const dayNotes = notes[dateStr] || [];
+      if (!dayNotes.length) { list.innerHTML = `<li style="color:#888;">${t(getLang(),'note-none')}</li>`; return; }
+      dayNotes.forEach((note, idx) => {
+        const li = document.createElement('li');
+        li.style.cssText = 'display:flex;align-items:center;gap:8px;margin-bottom:8px;padding:8px;background:#f8f9fa;border-radius:6px;';
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.style.cssText = 'flex:1;';
+        
+        const span = document.createElement('span'); 
+        span.className = 'note-text'; 
+        span.style.cssText = 'display:block;margin-bottom:4px;';
+        span.innerHTML = escapeHtml(note.text);
+        
+        const meta = document.createElement('span'); 
+        meta.className = 'note-meta'; 
+        meta.style.cssText = 'display:block;color:#6c757d;font-size:0.85rem;';
+        
+        // Display time info
+        if (note.startTime && note.duration) {
+          const endTime = calculateEndTime(note.startTime, note.duration);
+          meta.textContent = `${note.startTime} - ${endTime} (${note.duration} min) · ${new Date(note.ts).toLocaleString()}`;
+        } else {
+          meta.textContent = new Date(note.ts).toLocaleString();
+        }
+        
+        const btn = document.createElement('button'); 
+        btn.className = 'delete-note-btn'; 
+        btn.style.cssText = 'background:#dc3545;color:white;border:none;border-radius:4px;padding:4px 8px;cursor:pointer;';
+        btn.title = t(getLang(),'note-delete'); 
+        btn.innerHTML = '<i class="fa fa-trash"></i>';
+        btn.addEventListener('click', ()=> deleteNote(dateStr, idx));
+        
+        contentDiv.appendChild(span);
+        contentDiv.appendChild(meta);
+        li.appendChild(contentDiv);
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+    }
+
+    function escapeHtml(s){ 
+      if (!s) return ''; 
+      return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); 
+    }
+
+    function calculateEndTime(startTime, durationMinutes) {
+      // Parse start time (format: HH:MM AM/PM or HH:MM)
+      const match = startTime.match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+      if (!match) return startTime;
+      
+      let hours = parseInt(match[1], 10);
+      const minutes = parseInt(match[2], 10);
+      const period = match[3];
+      
+      // Convert to 24-hour format if needed
+      if (period) {
+        if (period.toUpperCase() === 'PM' && hours !== 12) hours += 12;
+        if (period.toUpperCase() === 'AM' && hours === 12) hours = 0;
+      }
+      
+      // Add duration
+      const totalMinutes = hours * 60 + minutes + parseInt(durationMinutes, 10);
+      const endHours24 = Math.floor(totalMinutes / 60) % 24;
+      const endMinutes = totalMinutes % 60;
+      
+      // Convert back to 12-hour format if original had AM/PM
+      if (period) {
+        const endPeriod = endHours24 >= 12 ? 'PM' : 'AM';
+        const endHours12 = endHours24 % 12 || 12;
+        return `${endHours12}:${String(endMinutes).padStart(2, '0')} ${endPeriod}`;
+      } else {
+        return `${String(endHours24).padStart(2, '0')}:${String(endMinutes).padStart(2, '0')}`;
+      }
+    }
+
+    function getLastNoteEndTime(dateStr) {
+      const dayNotes = notes[dateStr] || [];
+      if (dayNotes.length === 0) return null;
+      
+      const lastNote = dayNotes[dayNotes.length - 1];
+      if (lastNote.startTime && lastNote.duration) {
+        return calculateEndTime(lastNote.startTime, lastNote.duration);
+      }
+      return null;
+    }
+
+    const noteFormEl = document.getElementById('noteForm');
+    noteFormEl && noteFormEl.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!selectedDay) return;
+      const input = document.getElementById('noteInput');
+      const text = (input.value || '').trim();
+      if (!text) return;
+      
+      if (!notes[selectedDay]) notes[selectedDay] = [];
+      
+      // Parse note text for time and duration (format: "Task description [HH:MM AM/PM, duration]" or "Task [duration]")
+      let noteText = text;
+      let startTime = null;
+      let duration = null;
+      
+      // Try to extract time and duration from formats like: "Meeting [2:00 PM, 60]" or "Task [30]"
+      // Pattern 1: Text [time, duration] - e.g., "Meeting [2:00 PM, 60]"
+      let timeMatch = text.match(/^(.*?)\s*\[([0-9:]+\s*(?:AM|PM))\s*,\s*(\d+)\]$/i);
+      if (timeMatch) {
+        noteText = timeMatch[1].trim();
+        startTime = timeMatch[2].trim();
+        duration = timeMatch[3].trim();
+      } else {
+        // Pattern 2: Text [duration] - e.g., "Task [30]"
+        timeMatch = text.match(/^(.*?)\s*\[(\d+)\]$/);
+        if (timeMatch) {
+          noteText = timeMatch[1].trim();
+          duration = timeMatch[2].trim();
+          // Use last note's end time or default start time
+          startTime = getLastNoteEndTime(selectedDay) || '9:00 AM';
+        }
+      }
+      
+      const note = { text: noteText, ts: Date.now() };
+      if (startTime) note.startTime = startTime;
+      if (duration) note.duration = duration;
+      
+      notes[selectedDay].push(note);
+      try { localStorage.setItem('calendarNotes', JSON.stringify(notes)); } catch(e) {}
+      
+      input.value = '';
+      renderNoteList(selectedDay);
+      renderCalendar(currentYear, currentMonth, getLang());
+    });
+
+    window.deleteNote = function(dateStr, idx) {
+      if (!notes[dateStr]) return;
+      notes[dateStr].splice(idx,1);
+      if (!notes[dateStr].length) delete notes[dateStr];
+      try { localStorage.setItem('calendarNotes', JSON.stringify(notes)); } catch(e) {}
+      renderNoteList(dateStr);
+      renderCalendar(currentYear, currentMonth, getLang());
+    };
+
+    function updateCalendarFromSelects(){
+      const m = document.getElementById('calendar-month-select');
+      const y = document.getElementById('calendar-year-select');
+      if (!m || !y) return;
+      renderCalendar(parseInt(y.value,10), parseInt(m.value,10), getLang());
+    }
+
+    function hookupCalendarControls(){
+      const prevYear = document.getElementById('nav-prev-year');
+      const prevMonth = document.getElementById('nav-prev-month');
+      const nextMonth = document.getElementById('nav-next-month');
+      const nextYear = document.getElementById('nav-next-year');
+      const todayBtn = document.getElementById('nav-today');
+
+      if (prevYear) prevYear.addEventListener('click', ()=> renderCalendar(currentYear - 1, currentMonth, getLang()));
+      if (nextYear) nextYear.addEventListener('click', ()=> renderCalendar(currentYear + 1, currentMonth, getLang()));
+      if (prevMonth) prevMonth.addEventListener('click', ()=> { let y=currentYear, m=currentMonth-1; if(m<0){m=11;y--;} renderCalendar(y,m,getLang()); });
+      if (nextMonth) nextMonth.addEventListener('click', ()=> { let y=currentYear, m=currentMonth+1; if(m>11){m=0;y++;} renderCalendar(y,m,getLang()); });
+      if (todayBtn) todayBtn.addEventListener('click', ()=> { const now = new Date(); renderCalendar(now.getFullYear(), now.getMonth(), getLang()); });
+
+      const mSel = document.getElementById('calendar-month-select');
+      const ySel = document.getElementById('calendar-year-select');
+      if (mSel) mSel.addEventListener('change', updateCalendarFromSelects);
+      if (ySel) ySel.addEventListener('change', updateCalendarFromSelects);
+    }
+
     document.addEventListener('DOMContentLoaded', function(){
       const now = new Date();
       currentYear = now.getFullYear();
