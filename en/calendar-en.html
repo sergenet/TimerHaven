@@ -370,7 +370,6 @@
 
     function updateLanguage(lang) {
       lang = lang || getLang();
-      document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
       const obj = translations[lang] || translations['en'];
       const back = document.getElementById('back-link'); back && (back.textContent = obj['back-link']);
       const toolTitle = document.getElementById('tool-title'); toolTitle && (toolTitle.innerHTML = `<i class="fa fa-calendar-days"></i> ${obj['tool-title']}`);

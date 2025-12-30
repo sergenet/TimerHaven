@@ -390,7 +390,7 @@
       const monthSelect = document.getElementById('calendar-month-select');
       const yearSelect = document.getElementById('calendar-year-select');
       if (!monthSelect || !yearSelect) return;
-      const locale = 'ar-SA';
+      const locale = lang;
       const mf = new Intl.DateTimeFormat(locale, { month:'long' });
 
       monthSelect.innerHTML = '';
