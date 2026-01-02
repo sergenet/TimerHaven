@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Network permission (already present) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Add location permissions so the runtime grant actually enables device location for the WebView -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TimerhavenNewApp"
+        tools:targetApi="31">
+
+        <!-- Register the in-app WebView Activity using the class's exact package -->
+        <activity android:name="com.sergenet.timerhaven.WebViewActivity" android:exported="false" />
+
+        <!-- Use the MainActivity's exact fully-qualified package+class name so Android can find it -->
+        <activity
+            android:name="com.sergenet.timerhaven.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.TimerhavenNewApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
