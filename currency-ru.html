@@ -1,14 +1,13 @@
-﻿<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<title>Конвертер валют — TimerHaven</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Конвертируйте валюты по актуальным курсам." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="UTF-8">
+  <title>Конвертер валют — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Конвертируйте валюты по актуальным курсам.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
@@ -37,66 +36,67 @@
     .converter-form { display: flex; gap: 0.5em; margin-bottom: 1em; flex-wrap: wrap; }
     .converter-result { font-weight: bold; font-size: 1.12em; margin-bottom: 1em; }
   </style>
-<script>
-
-</script>
-<script>
-window.__timerhaven_ad_client = "ca-pub-0467059729557007";
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-<!-- Force Russian for local-file testing so opening this local file shows Russian UI -->
-<script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){}</script>
-<div aria-live="polite" class="language-indicator" id="language-indicator" role="status" title="Выбранный язык из главного меню">
-<span class="lang-label" id="language-label">Язык:</span>
-<span class="lang-name" id="language-name">Русский</span>
-</div>
-<div class="main-container">
-<div class="center-row">
-<div class="article-card">
-<div>
-<h2 id="howto-title"></h2>
-<ol id="howto-steps"></ol>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
-</div>
-<div class="tool-card">
-<details class="howto-mobile" id="howto-mobile">
-<summary><h4 id="howto-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
-<ol id="howto-mobile-steps"></ol>
-</details>
-<a class="back-link" href="index.html" id="back-link"></a>
-<h3 id="tool-title"></h3>
-<div class="tool-help" id="tool-help"></div>
-<div class="converter-section">
-<form class="converter-form" id="currencyForm">
-<input aria-label="Сумма" class="form-control" id="amount" min="0" placeholder="" step="any" style="max-width:100px;" type="number"/>
-<select class="form-select" id="fromCurrency" style="max-width:120px;"></select>
-<span style="font-size:1.3em;">→</span>
-<select class="form-select" id="toCurrency" style="max-width:120px;"></select>
-<button class="btn btn-primary btn-sm" id="convert-btn" type="submit"></button>
-</form>
-<div class="converter-result" id="result"></div>
-</div>
-<details class="faq-section">
-<summary id="faq-title"></summary>
-<ul id="faq-list" style="padding-left: 1em;"></ul>
-</details>
-<details class="tips-mobile" id="tips-mobile">
-<summary><h4 id="tips-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
-<ul id="tips-mobile-list"></ul>
-</details>
-</div>
-<div class="article-card">
-<div>
-<h2 id="tips-title"></h2>
-<ul id="tips-list"></ul>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
-</div>
-</div>
-</div>
+  <!-- Force Russian for local-file testing so opening this local file shows Russian UI -->
+  <script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){}</script>
+
+  <div class="language-indicator" id="language-indicator" role="status" aria-live="polite" title="Выбранный язык из главного меню">
+    <span class="lang-label" id="language-label">Язык:</span>
+    <span class="lang-name" id="language-name">Русский</span>
+  </div>
+
+  <div class="main-container">
+    <div class="center-row">
+      <div class="article-card">
+        <div>
+          <h2 id="howto-title"></h2>
+          <ol id="howto-steps"></ol>
+        </div>
+        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
+      </div>
+
+      <div class="tool-card">
+        <details class="howto-mobile" id="howto-mobile">
+          <summary><h4 style="color:#185a9d;display:inline;" id="howto-mobile-title"></h4></summary>
+          <ol id="howto-mobile-steps"></ol>
+        </details>
+        <a href="index.html" class="back-link" id="back-link"></a>
+        <h3 id="tool-title"></h3>
+        <div class="tool-help" id="tool-help"></div>
+
+        <div class="converter-section">
+          <form class="converter-form" id="currencyForm">
+            <input type="number" min="0" step="any" id="amount" class="form-control" placeholder="" style="max-width:100px;" aria-label="Сумма">
+            <select id="fromCurrency" class="form-select" style="max-width:120px;"></select>
+            <span style="font-size:1.3em;">→</span>
+            <select id="toCurrency" class="form-select" style="max-width:120px;"></select>
+            <button type="submit" class="btn btn-primary btn-sm" id="convert-btn"></button>
+          </form>
+          <div id="result" class="converter-result"></div>
+        </div>
+
+        <details class="faq-section">
+          <summary id="faq-title"></summary>
+          <ul id="faq-list" style="padding-left: 1em;"></ul>
+        </details>
+
+        <details class="tips-mobile" id="tips-mobile">
+          <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
+          <ul id="tips-mobile-list"></ul>
+        </details>
+      </div>
+
+      <div class="article-card">
+        <div>
+          <h2 id="tips-title"></h2>
+          <ul id="tips-list"></ul>
+        </div>
+        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
+      </div>
+    </div>
+  </div>
+
 <script>
   const apiKey = "5f484bfa921ef56c9c279660";
   const currencyList = ["USD","EUR","GBP","JPY","AUD","CAD","CHF","CNY","SEK","NZD","MXN","SGD","HKD","NOK","KRW","TRY","INR","RUB","BRL","ZAR"];
@@ -259,11 +259,10 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
       });
   });
 </script>
+
 <footer>
-  © 2025 TimerHaven. Все инструменты бесплатны и защищают приватность.<br/>
-<a href="privacy.html">Политика конфиденциальности</a> • <a href="terms.html">Условия</a> • <a href="contact.html">Контакты</a>
+  &copy; 2025 TimerHaven. Все инструменты бесплатны и защищают приватность.<br>
+  <a href="privacy.html">Политика конфиденциальности</a> &bull; <a href="terms.html">Условия</a> &bull; <a href="contact.html">Контакты</a>
 </footer>
-<p style="margin-top:1rem;"><a class="cta" href="/ru/currency/currency-index.html">Read full guide</a></p></body>
+</body>
 </html>
-
-

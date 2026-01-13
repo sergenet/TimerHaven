@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -6,172 +6,318 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Calendario — TimerHaven</title>
   <meta name="description" content="Guarda y gestiona múltiples notas de calendario fácilmente. Aprende a usar el Calendario, recibe consejos de productividad, FAQ y artículos expertos.">
-  <meta name="author" content="Serge Shammas">
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
   <style>
-    :root { --brand:#185a9d; --muted:#6b7c89; }
+    /* Reserve scrollbar to avoid layout shifts */
+    html { overflow-y: scroll; }
 
-    html,body { height:100%; }
-    body { background:#f4f7fb; margin:0; font-family:Inter, "Helvetica Neue", Arial, sans-serif; color:#102a43; }
+    :root {
+      --card-bg: #fff;
+      --muted: #6b7c89;
+      --brand: #185a9d;
+    }
+
+    body {
+      background: #f4f7fb;
+      margin: 0;
+      color: #102a43;
+      font-family: "Inter", "Montserrat", Arial, sans-serif;
+    }
 
     .main-container {
-      max-width:720px;
-      margin:2.5rem auto;
-      padding:0 1rem;
-      min-height:80vh;
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      min-height: 90vh;
     }
 
+    .center-row {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start; /* top align cards so headers line up */
+      justify-content: center;
+    }
+
+    .card-base {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 2rem 1.3rem 1rem 1.3rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      min-height: 500px;
+      width: 340px;
+      min-width: 220px;
+      max-width: 360px;
+      flex: 1 1 340px;
+    }
+
+    /* center tool is wider */
     .tool-card {
-      width:100%;
-      max-width:640px;
-      background:#fff;
-      border-radius:12px;
-      padding:18px;
-      box-shadow:0 10px 30px rgba(16,42,67,0.06);
-      box-sizing:border-box;
+      max-width: 640px;
+      min-width: 320px;
+      flex: 1 1 640px;
+      padding: 1.8rem 1.3rem;
     }
 
-    .back-link { display:inline-block; margin-bottom:.6rem; color:var(--brand); text-decoration:none; font-weight:700; }
-    .tool-title { font-size:1.35rem; margin:0 0 .5rem 0; display:flex; align-items:center; gap:.5rem; color:var(--brand) !important; }
-    .read-guide {
-      display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .8rem; border-radius:8px; background:var(--brand);
-      color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none;
+    /* only article cards clip overflow so long side content doesn't peek out */
+    .article-card { overflow: hidden; }
+
+    h2, h3 {
+      margin: 0 0 .5rem 0;
+      font-weight: 700;
+      color: #102a43;
     }
-    .small-muted{ color:var(--muted); font-size:.95rem; margin-bottom:.8rem; }
 
-    .calendar-header { display:flex; align-items:center; gap:.6rem; margin-bottom:.8rem; white-space:nowrap; flex-wrap:wrap; justify-content:space-between; }
-    .calendar-nav { display:flex; gap:.35rem; align-items:center; flex-shrink:0; }
-    .calendar-nav .btn { min-width:36px; padding:.2rem .4rem; height:34px; display:inline-flex; align-items:center; justify-content:center; }
+    /* slightly smaller headers so they're not distracting */
+    h2 { font-size: 1.35rem; line-height:1.15; }
+    h3 { font-size: 1.05rem; }
 
-    .right-controls { display:flex; gap:.45rem; align-items:center; flex-shrink:0; min-width:0; }
+    .calendar-header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:.5rem;
+      margin-bottom:.6rem;
+      flex-wrap: nowrap;
+    }
+
+    .calendar-nav {
+      display:flex;
+      gap:.25rem;
+      align-items:center;
+      flex-shrink:0;
+    }
+
+    .calendar-nav .btn {
+      min-width: 40px;
+      padding: .25rem .5rem;
+    }
+
     .calendar-select {
-      border-radius:8px; padding:.18rem .32rem; border:1px solid #e4edf5; background:#fff; font-size:.92rem; height:34px;
-      box-sizing:border-box; flex-shrink:0; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+      border-radius:8px;
+      padding:.25rem .5rem;
+      border:1px solid #e4edf5;
+      background:#fff;
+      box-shadow:none;
+      font-size:.95rem;
+      box-sizing: border-box; /* ensure padding fits inside width */
     }
-    .calendar-select.month { width:120px; max-width:150px; }
-    .calendar-select.year  { width:110px; max-width:150px; }
-    #default-start-time.calendar-select { width:120px; max-width:150px; padding:.18rem .36rem; text-align:center; font-size:.9rem; }
 
-    .calendar-table { width:100%; margin-top:1rem; border-collapse: separate; border-spacing:0; background:#fff; border-radius:8px; overflow:hidden; min-height:360px; table-layout:auto; }
-    .calendar-table thead th { text-align:center; font-weight:700; padding:.6rem .3rem; border-bottom:1px solid #eef2f6; background:#fff; }
-    .calendar-table tbody td { text-align:center; vertical-align:middle; padding:.5rem .25rem; height:52px; }
+    /* month narrower, year wider so year isn't clipped */
+    .calendar-select.month { width: 120px; }
+    .calendar-select.year  { width: 110px; }
 
-    .day-cell { cursor:pointer; border-radius:6px; transition:background .12s; display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; margin:0 auto; padding:0; box-sizing:border-box; }
-    .day-cell:hover, .day-cell:focus { background:#eef6fb; outline:none; }
-    .has-note { background:#fff5d6 !important; }
+    /* Equal columns and centered content */
+    .calendar-table {
+      width: 100%;
+      margin-top: .6rem;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 360px; /* reserve enough height for up to 6 rows */
+      transition: min-height .12s ease;
+      box-sizing: border-box;
+      table-layout: fixed; /* distribute columns evenly */
+    }
 
-    .calendar-today { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; background:linear-gradient(180deg,#e6f7ff 0%,#cfefff 100%); color:#004e73; border-radius:50%; font-weight:700; border:1px solid rgba(0,126,204,0.18); box-shadow:0 4px 12px rgba(24,144,255,0.08); padding:0; margin:0; }
+    .calendar-table thead th {
+      width: 14.2857%;
+      text-align: center;
+      font-weight: 700;
+      padding: .6rem .3rem;
+      border-bottom: 1px solid #eef2f6;
+      background: #fff;
+    }
 
-    .note-list { list-style:none; padding:0; margin:0; }
-    .note-list li { border-radius:6px; margin-bottom:.45rem; background:#f7fafc; padding:.5rem; display:flex; justify-content:space-between; gap:.6rem; align-items:center; }
-    .note-text { flex:1; word-break:break-word; }
-    .note-meta { color:var(--muted); font-size:.9rem; margin-left:.6rem; white-space:nowrap; }
-    .delete-note-btn { background:none; border:none; color:#c00; cursor:pointer; font-size:1rem; padding:.15rem; }
+    .calendar-table tbody td {
+      width: 14.2857%;
+      text-align: center;
+      vertical-align: middle;
+      padding: .5rem .25rem;
+      border: none;
+      height: 52px; /* consistent row height so dates align */
+    }
 
-    details.faq-section summary { cursor:pointer; padding:.2rem 0; font-weight:600; }
+    .day-cell {
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background .12s;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      line-height: 1;
+      margin: 0 auto; /* center horizontally inside the td */
+      padding: 0;
+      box-sizing: border-box;
+      background: transparent;
+    }
+
+    .day-cell:hover, .day-cell:focus { background: #eef6fb; }
+
+    .has-note { background: #fff5d6 !important; }
+
+    .calendar-today {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(180deg,#e6f7ff 0%,#cfefff 100%);
+      color:#004e73;
+      border-radius: 50%;
+      font-weight:700;
+      border: 1px solid rgba(0,126,204,0.18);
+      box-shadow: 0 4px 12px rgba(24,144,255,0.08);
+      padding: 0;
+      margin: 0;
+    }
+
+    details.faq-section summary { cursor:pointer; padding: .2rem 0; font-weight:600; }
     details.faq-section ul { margin-top:.5rem; color:var(--muted); padding-left:1rem; }
 
-    @media (max-width:520px) {
-      .calendar-header { gap:.5rem; }
-      .right-controls { flex:1 1 100%; width:100%; margin-left:0; justify-content:flex-start; }
-      .calendar-select { max-width:48%; }
-      #default-start-time.calendar-select { width:120px; max-width:48%; }
-    }
-  </style>
-<script>
+    .note-list { list-style:none; padding:0; margin:0 0 1rem 0; }
+    .note-list li { display:flex; gap:.5rem; align-items:center; justify-content:space-between; padding:.4rem .6rem; border-radius:6px; background:#f7fafc; margin-bottom:.5rem; }
+    .note-text { word-break:break-word; flex:1; }
+    .note-meta { color:var(--muted); font-size:.85rem; margin-left:.6rem; white-space:nowrap; }
+    .delete-note-btn { background:none; border:none; color:#c00; cursor:pointer; font-size:1rem; padding:.15rem; }
 
-</script>
-<script>
-window.__timerhaven_ad_client = "ca-pub-0467059729557007";
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+    @media (max-width: 900px) {
+      .center-row { flex-direction: column; gap:1rem; align-items:stretch; }
+      .calendar-header { flex-wrap: wrap; }
+      .calendar-select.month { width:100%; }
+      .calendar-select.year  { width:120px; }
+      .calendar-table thead th, .calendar-table tbody td { height:44px; }
+      .calendar-today { width:30px; height:30px; }
+    }
+
+    footer { padding:1rem; text-align:center; color:var(--muted); font-size:.95rem; }
+  </style>
 </head>
 <body>
-  <main class="main-container" role="main">
-    <section class="tool-card" aria-labelledby="tool-title">
-      <a id="back-link" class="back-link" href="index.html">← Volver al menú principal</a>
+  <main class="main-container" id="main">
+    <div class="center-row">
+      <aside class="card-base article-card" id="left-card">
+        <h2 id="howto-title"><i class="fa fa-calendar-check"></i> Cómo usar el Calendario</h2>
+        <ol id="howto-steps">
+          <li><strong>Haz clic en un día:</strong> Abre la ventana para añadir/ver/editar tus notas. ¡Se permiten varias notas por día y se guardan!</li>
+          <li><strong>Organiza tus eventos:</strong> Cada nota tiene marca temporal y puede eliminarse individualmente.</li>
+          <li><strong>Permanente:</strong> Las notas se guardan en tu navegador hasta que las elimines.</li>
+        </ol>
+        <div style="margin-top:auto;">
+          <a id="howto-article-btn" class="btn btn-outline-primary" href="calendar-how-to-es.html">Leer el artículo completo</a>
+        </div>
+      </aside>
 
-      <h3 id="tool-title" class="tool-title"><i class="fa fa-calendar-days"></i> Calendario</h3>
-      <a id="read-guide-btn" class="read-guide" href="https://timerhaven.com/es/calendar-planning/calendar-planning-index.html" role="button" target="_blank" rel="noopener">Leer guía completa</a>
+      <section class="card-base tool-card" id="center-card" aria-labelledby="tool-title">
+        <a id="back-link" class="back-link" href="index.html" style="margin-bottom:.25rem;display:inline-block;color:var(--brand);font-weight:600;text-decoration:none;">Volver al menú principal</a>
 
-      <div class="small-muted" id="tool-help">Haz clic en cualquier día para añadir/ver/editar tus notas. ¡Se permiten varias notas por día y se guardan!</div>
+        <h3 id="tool-title"></h3>
+        <div id="tool-help" style="color:var(--muted);margin-bottom:.25rem;"></div>
 
-      <div class="calendar-header" aria-label="Navegación del calendario">
-        <div class="calendar-nav" role="toolbar" aria-label="Navegación mes/año">
-          <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary" aria-label="Año anterior">«</button>
-          <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary" aria-label="Mes anterior">‹</button>
-          <button id="nav-today" class="btn btn-sm btn-outline-secondary" aria-label="Hoy">Hoy</button>
-          <button id="nav-next-month" class="btn btn-sm btn-outline-secondary" aria-label="Mes siguiente">›</button>
-          <button id="nav-next-year" class="btn btn-sm btn-outline-secondary" aria-label="Año siguiente">»</button>
+        <div class="calendar-header" aria-label="Navegación del calendario">
+          <div class="calendar-nav" role="toolbar" aria-label="Navegación mes/año">
+            <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary" aria-label="Año anterior">«</button>
+            <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary" aria-label="Mes anterior">‹</button>
+            <button id="nav-today" class="btn btn-sm btn-outline-secondary" aria-label="Hoy">Hoy</button>
+            <button id="nav-next-month" class="btn btn-sm btn-outline-secondary" aria-label="Mes siguiente">›</button>
+            <button id="nav-next-year" class="btn btn-sm btn-outline-secondary" aria-label="Año siguiente">»</button>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
+            <select id="calendar-month-select" class="calendar-select month" aria-label="Seleccionar mes"></select>
+            <select id="calendar-year-select" class="calendar-select year" aria-label="Seleccionar año"></select>
+          </div>
         </div>
 
-        <div class="right-controls">
-          <select id="calendar-month-select" class="calendar-select month" aria-label="Seleccionar mes"></select>
-          <select id="calendar-year-select" class="calendar-select year" aria-label="Seleccionar año"></select>
-          <input id="default-start-time" class="calendar-select" type="time" aria-label="Hora inicio por defecto" title="Hora por defecto para la primera nota">
+        <table id="calendar-table" class="calendar-table table" role="grid" aria-describedby="tool-help"></table>
+
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title">Preguntas frecuentes ▾</summary>
+          <ul id="faq-list"></ul>
+        </details>
+      </section>
+
+      <aside class="card-base article-card" id="right-card">
+        <h2 id="tips-title"><i class="fa fa-lightbulb"></i> Consejos de productividad</h2>
+        <ul id="tips-list">
+          <li><strong>Usa código de color:</strong> Usa emojis o etiquetas para una organización visual sencilla.</li>
+          <li><strong>Revisa regularmente:</strong> Verifica tus notas y elimina eventos obsoletos.</li>
+          <li><strong>Planifica con antelación:</strong> Añade notas para fechas futuras para estar preparado.</li>
+        </ul>
+        <div style="margin-top:auto;">
+          <a id="tips-article-btn" class="btn btn-outline-primary" href="calendar-tips-es.html">Leer el artículo completo</a>
         </div>
-      </div>
-
-      <table id="calendar-table" class="calendar-table table" role="grid" aria-describedby="tool-help"></table>
-
-      <details class="faq-section" id="faq-section" style="margin-top:12px;">
-        <summary id="faq-title">Preguntas frecuentes ▾</summary>
-        <ul id="faq-list" style="margin-top:.5rem;"></ul>
-      </details>
-    </section>
+      </aside>
+    </div>
   </main>
 
   <!-- Notes Modal -->
   <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
-    <div class="modal-dialog"><div class="modal-content">
-      <form id="noteForm" autocomplete="off">
-        <div class="modal-header">
-          <h5 class="modal-title" id="noteModalLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <ul id="noteList" class="note-list" aria-live="polite"></ul>
-          <textarea id="noteInput" class="form-control" rows="3" placeholder="Añadir una nueva nota para este día..."></textarea>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn">Cerrar</button>
-          <button type="submit" class="btn btn-success" id="note-add-btn">Añadir nota</button>
-        </div>
-      </form>
-    </div></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="noteForm" autocomplete="off">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noteModalLabel">Notas para <span id="modal-date-label"></span></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <ul id="noteList" class="note-list" aria-live="polite"></ul>
+            <textarea id="noteInput" class="form-control" rows="3" placeholder="Añadir una nueva nota para este día..."></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn">Cerrar</button>
+            <button type="submit" class="btn btn-success" id="note-add-btn">Añadir nota</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
-  <footer style="text-align:center;padding:18px 12px;color:var(--muted);">&copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad. <a href="/privacy.html">Política de privacidad</a> · <a href="/contact.html">Contacto</a></footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <footer>&copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br>
+    <a href="privacy.html">Política de privacidad</a> •
+    <a href="terms.html">Términos</a> •
+    <a href="contact.html">Contacto</a>
+  </footer>
 
   <script>
-    // Ensure the page language selection is forced to Spanish for this file
+    // defensive localStorage write for lang
     try { localStorage.setItem('timerhavenLang','es'); } catch(e) {}
 
-    const STORAGE_KEY = 'calendarNotes_es';
-    const DEFAULT_START_KEY = 'calendarDefaultStart_es';
-
-    // Load notes (supports legacy shapes)
+    // safe load notes
     let notes = {};
-    try { notes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { notes = {}; console.error('notes parse error', e); }
+    try { notes = JSON.parse(localStorage.getItem('calendarNotes') || '{}'); } catch(e) { notes = {}; }
 
     let currentYear, currentMonth, selectedDay;
-    let controlsHooked = false;
+
+    function getLang(){ return localStorage.getItem('timerhavenLang') || 'es'; }
+    function getLocaleForLang(lang){
+      if(!lang) return 'es-ES';
+      const m = { en:'en-US', fr:'fr-FR', de:'de-DE', ru:'ru-RU', el:'el-GR', es:'es-ES', ar:'ar-SA' };
+      return m[lang] || lang;
+    }
 
     const translations = {
       en: {
         "back-link":"Back to Main Menu",
         "tool-title":"Calendar",
         "tool-help":"Click any day to add/view/edit your notes. Multiple notes per day are supported and persist!",
-        "faq-list": `<li><b>Are my notes saved?</b> Yes! Notes are saved in your browser and remain until you delete them.</li>`,
+        "faq-title":"FAQs",
+        "faq-list": `<li><b>Are my notes saved?</b> Yes! Notes are saved in your browser and remain until you delete them.</li>
+          <li><b>Can I add more than one note?</b> Yes.</li>`,
+        "howto-title":"<i class='fa fa-calendar-check'></i> How to Use Calendar",
+        "howto-steps":"<li><b>Click a day:</b> Open the modal to add/view notes.</li>",
+        "howto-article-link":"calendar-how-to.html",
+        "tips-title":"<i class='fa fa-lightbulb'></i> Calendar Productivity Tips",
+        "tips-list":"<li><b>Color code your notes:</b> Use emojis or tags.</li>",
+        "tips-article-link":"calendar-tips.html",
         "noteModalLabel":"Notes for",
         "noteInput":"Add a new note for this day...",
         "note-none":"No notes yet for this day.",
@@ -184,8 +330,15 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
         "back-link":"Volver al menú principal",
         "tool-title":"Calendario",
         "tool-help":"Haz clic en cualquier día para añadir/ver/editar tus notas. ¡Se permiten varias notas por día y se guardan!",
+        "faq-title":"Preguntas frecuentes",
         "faq-list": `<li><b>¿Se guardan mis notas?</b> ¡Sí! Las notas se guardan en tu navegador y permanecen hasta que las elimines.</li>
-                     <li><b>¿Puedo añadir varias notas?</b> Sí.</li>`,
+          <li><b>¿Puedo añadir varias notas?</b> Sí.</li>`,
+        "howto-title":"<i class='fa fa-calendar-check'></i> Cómo usar el Calendario",
+        "howto-steps":"<li><b>Haz clic en un día:</b> Abre la ventana para añadir/ver notas.</li>",
+        "howto-article-link":"calendar-how-to-es.html",
+        "tips-title":"<i class='fa fa-lightbulb'></i> Consejos de productividad",
+        "tips-list":"<li><b>Usa código de color:</b> Usa emojis o etiquetas para una organización visual sencilla.</li>",
+        "tips-article-link":"calendar-tips-es.html",
         "noteModalLabel":"Notas para",
         "noteInput":"Añadir una nueva nota para este día...",
         "note-none":"No hay notas para este día.",
@@ -196,267 +349,79 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
       }
     };
 
-    function getLang() { return localStorage.getItem('timerhavenLang') || 'es'; }
+    function updateLanguage(lang){
+      lang = lang || getLang();
+      const obj = translations[lang] || translations['es'];
+      const el = id => document.getElementById(id);
+      if(el('back-link')) el('back-link').textContent = obj['back-link'];
+      if(el('tool-title')) el('tool-title').innerHTML = `<i class="fa fa-calendar-days"></i> ${obj['tool-title']}`;
+      if(el('tool-help')) el('tool-help').textContent = obj['tool-help'];
+      if(el('faq-list')) el('faq-list').innerHTML = obj['faq-list'];
+      if(el('howto-title')) el('howto-title').innerHTML = obj['howto-title'];
+      if(el('howto-steps')) el('howto-steps').innerHTML = obj['howto-steps'];
+      if(el('tips-title')) el('tips-title').innerHTML = obj['tips-title'];
+      if(el('tips-list')) el('tips-list').innerHTML = obj['tips-list'];
+      if(el('noteModalLabel')) el('noteModalLabel').innerHTML = `${obj['noteModalLabel']} <span id="modal-date-label"></span>`;
+      if(el('noteInput')) el('noteInput').placeholder = obj['noteInput'];
+      if(el('note-close-btn')) el('note-close-btn').textContent = obj['note-close-btn'];
 
-    function t(key) {
-      const lang = getLang() || 'es';
-      return (translations[lang] && translations[lang][key]) ? translations[lang][key] : (translations['en'][key] || '');
+      if(el('note-add-btn')) el('note-add-btn').textContent = obj['note-add-btn'];
     }
 
-    function parseDurationFromText(text) {
-      if (!text || typeof text !== 'string') return null;
-      const rangeMatch = text.match(/(\d{1,3})\s*(?:–|-)\s*(\d{1,3})\s*(?:minutes?|mins?|min|minutos?|minutos)/i);
-      if (rangeMatch) return parseInt(rangeMatch[1], 10);
-      const singleMatch = text.match(/(\d{1,3})\s*(?:minutes?|mins?|min|minutos?|minutos)/i);
-      if (singleMatch) return parseInt(singleMatch[1], 10);
-      return null;
-    }
+    function t(lang,key){ if(translations[lang] && translations[lang][key]) return translations[lang][key]; if(translations['es'] && translations['es'][key]) return translations['es'][key]; return translations['en'][key]||''; }
 
-    function escapeHtml(s) {
-      if (!s) return '';
-      return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
-    }
-
-    function formatTime(date) {
-      if (!(date instanceof Date)) date = new Date(date);
-      return date.toLocaleTimeString('es-ES', { hour:'numeric', minute:'2-digit' });
-    }
-
-    function getDefaultStartTime() { return localStorage.getItem(DEFAULT_START_KEY) || '20:00'; }
-    function setDefaultStartTime(val) { localStorage.setItem(DEFAULT_START_KEY, val); }
-
-    function dateFromDateStrAndTime(dateStr, timeStr) {
-      const [y, m, d] = dateStr.split('-').map(Number);
-      const [hh = 0, mm = 0] = (timeStr || '00:00').split(':').map(Number);
-      return new Date(y, m - 1, d, hh, mm, 0, 0);
-    }
-
-    function migrateLegacyNotes(raw) {
-      if (!Array.isArray(raw)) return [];
-      return raw.map(n => {
-        if (typeof n === 'string') {
-          return { text: n, durationMinutes: parseDurationFromText(n) || null, createdAt: null };
-        }
-        if (n && typeof n === 'object') {
-          const createdAt = n.createdAt ? n.createdAt : (n.ts ? new Date(n.ts).toISOString() : null);
-          return {
-            text: n.text || String(n),
-            durationMinutes: (typeof n.durationMinutes === 'number') ? n.durationMinutes : parseDurationFromText(n.text) || null,
-            createdAt: createdAt
-          };
-        }
-        return { text: String(n), durationMinutes: null, createdAt: null };
-      });
-    }
-
-    function populateMonthYearControls(year, month, lang) {
+    function populateMonthYearControls(year,month,lang){
       lang = lang || getLang();
       const monthSelect = document.getElementById('calendar-month-select');
       const yearSelect = document.getElementById('calendar-year-select');
-      if (!monthSelect || !yearSelect) return;
-      const locale = 'es-ES';
-      const mf = new Intl.DateTimeFormat(locale, { month:'long' });
-
+      if(!monthSelect||!yearSelect) return;
+      const locale = getLocaleForLang(lang);
+      const mf = new Intl.DateTimeFormat(locale,{month:'long'});
       monthSelect.innerHTML = '';
-      for (let m=0;m<12;m++){
-        const opt = document.createElement('option');
-        opt.value = String(m);
-        opt.textContent = mf.format(new Date(2000,m,1));
-        if (m===month) opt.selected = true;
-        monthSelect.appendChild(opt);
-      }
-
-      const now = new Date(); const base = now.getFullYear();
-      const start = base - 50, end = base + 50;
-      yearSelect.innerHTML = '';
-      for (let y=start; y<=end; y++){
-        const opt = document.createElement('option');
-        opt.value = String(y); opt.textContent = String(y);
-        if (y===year) opt.selected = true;
-        yearSelect.appendChild(opt);
-      }
+      for(let m=0;m<12;m++){ const opt=document.createElement('option'); opt.value=String(m); opt.textContent = mf.format(new Date(2000,m,1)); if(m===month) opt.selected=true; monthSelect.appendChild(opt); }
+      const now=new Date(); const base=now.getFullYear(); const start=base-100, end=base+100; yearSelect.innerHTML=''; for(let y=start;y<=end;y++){ const opt=document.createElement('option'); opt.value=String(y); opt.textContent=String(y); if(y===year) opt.selected=true; yearSelect.appendChild(opt); }
     }
 
-    function renderCalendar(year, month, lang) {
-      currentYear = year; currentMonth = month; lang = lang || getLang();
-      const table = document.getElementById('calendar-table');
-      if (table) {
-        const maxRows = 6, rowHeight = 44, headerHeight = 48;
-        table.style.minHeight = (maxRows*rowHeight + headerHeight) + 'px';
-      }
-      populateMonthYearControls(year, month, lang);
-
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month+1, 0).getDate();
-
-      let html = '<thead><tr>';
-      const dayNames = (translations[lang] && translations[lang].days) ? translations[lang].days : translations['en'].days;
-      dayNames.forEach(d => html += `<th scope="col">${d}</th>`);
-      html += '</tr></thead><tbody><tr>';
-
-      for (let i=0;i<firstDay;i++) html += '<td></td>';
-
-      const now = new Date(); const todayY = now.getFullYear(), todayM = now.getMonth(), todayD = now.getDate();
-
-      for (let d=1; d<=daysInMonth; d++){
-        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        const rawDayNotes = notes[dateStr] || [];
-        const dayNotes = migrateLegacyNotes(rawDayNotes);
-        const hasNote = dayNotes.length > 0;
-        if ((firstDay + d - 1) % 7 === 0 && d !== 1) html += '</tr><tr>';
-        const isToday = (d===todayD && month===todayM && year===todayY);
-        const cellClasses = hasNote ? 'has-note' : '';
-        const innerClasses = isToday ? 'day-cell calendar-today' : 'day-cell';
-        html += `<td class="${cellClasses}" role="gridcell" tabindex="0" data-date="${dateStr}" aria-label="${dateStr}"><div class="${innerClasses}">${d}${hasNote ? ' <span title="Notas guardadas">📝</span>' : ''}</div></td>`;
-      }
-
-      html += '</tr></tbody>';
-      if (table) table.innerHTML = html;
-
-      Array.from(document.querySelectorAll('.day-cell')).forEach(cell => {
-        cell.addEventListener('click', function(){ const td = cell.closest('td'); if(!td) return; selectedDay = td.getAttribute('data-date'); showNoteModal(selectedDay); });
-        cell.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); const td = cell.closest('td'); if(!td) return; selectedDay = td.getAttribute('data-date'); showNoteModal(selectedDay); }});
-      });
+    function renderCalendar(year,month,lang){
+      currentYear=year; currentMonth=month; lang=lang||getLang();
+      const locale=getLocaleForLang(lang);
+      const table=document.getElementById('calendar-table'); if(!table) return;
+      const maxRows=6,rowHeight=44,headerHeight=48; table.style.minHeight=(maxRows*rowHeight+headerHeight)+'px';
+      populateMonthYearControls(year,month,lang);
+      const firstDay=new Date(year,month,1).getDay(); const daysInMonth=new Date(year,month+1,0).getDate();
+      let html='<thead><tr>'; const dayNames=(translations[lang]&&translations[lang].days)?translations[lang].days:translations['en'].days; dayNames.forEach(d=>html+=`<th scope="col">${d}</th>`); html+='</tr></thead><tbody><tr>';
+      for(let i=0;i<firstDay;i++) html+='<td></td>';
+      const now=new Date(); const todayY=now.getFullYear(), todayM=now.getMonth(), todayD=now.getDate();
+      for(let d=1;d<=daysInMonth;d++){ const dateStr=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; const dayNotes=notes[dateStr]||[]; const hasNote=dayNotes.length>0; if((firstDay+d-1)%7===0 && d!==1) html+='</tr><tr>'; const isToday=(d===todayD && month===todayM && year===todayY); const cellClasses=hasNote?'has-note':''; const innerClasses=isToday?'day-cell calendar-today':'day-cell'; html+=`<td class="${cellClasses}" role="gridcell" tabindex="0" data-date="${dateStr}" aria-label="${dateStr}"><div class="${innerClasses}">${d}${hasNote? ' <span title="Notas guardadas">📝</span>':''}</div></td>`; }
+      html+='</tr></tbody>'; table.innerHTML=html;
+      Array.from(table.querySelectorAll('.day-cell')).forEach(cell=>{ cell.addEventListener('click',function(){ const td=cell.closest('td'); if(!td) return; selectedDay=td.getAttribute('data-date'); showNoteModal(selectedDay); }); cell.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); const td=cell.closest('td'); if(!td) return; selectedDay=td.getAttribute('data-date'); showNoteModal(selectedDay); } }); });
     }
 
-    function showNoteModal(dateStr) {
-      const label = document.getElementById('modal-date-label'); if (label) label.textContent = dateStr;
-      selectedDay = dateStr;
-      renderNoteList(dateStr);
-      const input = document.getElementById('noteInput'); if (input) input.value = '';
-      const modal = new bootstrap.Modal(document.getElementById('noteModal')); modal.show();
-      setTimeout(()=>{ try{ input && input.focus(); }catch(e){} }, 120);
-    }
+    function showNoteModal(dateStr){ const ml=document.getElementById('modal-date-label'); if(ml) ml.textContent=dateStr; renderNoteList(dateStr); const input=document.getElementById('noteInput'); if(input) input.value=''; const modal=new bootstrap.Modal(document.getElementById('noteModal')); modal.show(); setTimeout(()=>{ try{ input && input.focus(); }catch(e){} },120); }
 
-    function renderNoteList(dateStr) {
-      const ul = document.getElementById('noteList'); if (!ul) return;
-      ul.innerHTML = '';
-      const rawDayNotes = notes[dateStr] || [];
-      const dayNotes = migrateLegacyNotes(rawDayNotes);
+    function renderNoteList(dateStr){ const list=document.getElementById('noteList'); if(!list) return; list.innerHTML=''; const lang=getLang(), locale=getLocaleForLang(lang); const dayNotes=notes[dateStr]||[]; if(!dayNotes.length){ list.innerHTML=`<li style="color:#888;">${t(lang,'note-none')}</li>`; return; } dayNotes.forEach((note,idx)=>{ const li=document.createElement('li'); const text=document.createElement('span'); text.className='note-text'; text.innerHTML=escapeHtml(note.text); const meta=document.createElement('span'); meta.className='note-meta'; try{ meta.textContent=new Date(note.ts).toLocaleString(locale);}catch(e){ meta.textContent=new Date(note.ts).toLocaleString(); } const del=document.createElement('button'); del.className='delete-note-btn'; del.title=t(lang,'note-delete')||'Eliminar'; del.innerHTML='<i class="fa fa-trash"></i>'; del.addEventListener('click',()=> deleteNote(dateStr,idx)); li.appendChild(text); li.appendChild(meta); li.appendChild(del); list.appendChild(li); }); }
 
-      try {
-        if (JSON.stringify(rawDayNotes) !== JSON.stringify(dayNotes)) {
-          notes[dateStr] = dayNotes;
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-        }
-      } catch(e) {}
+    function escapeHtml(s){ if(!s) return ''; return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;'); }
 
-      if (dayNotes.length === 0) {
-        ul.innerHTML = `<li class="list-group-item">${t('note-none')}</li>`;
-        return;
-      }
+    (function attachNoteForm(){ const form=document.getElementById('noteForm'); if(!form) return; form.addEventListener('submit',function(e){ e.preventDefault(); if(!selectedDay) return; const text=(document.getElementById('noteInput').value||'').trim(); if(!text) return; if(!notes[selectedDay]) notes[selectedDay]=[]; notes[selectedDay].push({ text, ts: Date.now() }); try{ localStorage.setItem('calendarNotes', JSON.stringify(notes)); }catch(e){} document.getElementById('noteInput').value=''; renderNoteList(selectedDay); renderCalendar(currentYear, currentMonth, getLang()); }); })();
 
-      let baseTime;
-      if (dayNotes[0] && dayNotes[0].createdAt) {
-        const parsed = new Date(dayNotes[0].createdAt);
-        baseTime = !isNaN(parsed) ? parsed : dateFromDateStrAndTime(dateStr, getDefaultStartTime());
-      } else {
-        baseTime = dateFromDateStrAndTime(dateStr, getDefaultStartTime());
-      }
-      let currentTime = new Date(baseTime.getTime());
+    window.deleteNote=function(dateStr,idx){ if(!notes[dateStr]) return; notes[dateStr].splice(idx,1); if(!notes[dateStr].length) delete notes[dateStr]; try{ localStorage.setItem('calendarNotes', JSON.stringify(notes)); }catch(e){} renderNoteList(dateStr); renderCalendar(currentYear, currentMonth, getLang()); };
 
-      dayNotes.forEach((noteObj, idx) => {
-        const li = document.createElement('li');
-        li.className = 'list-group-item d-flex justify-content-between align-items-start';
-        const duration = (typeof noteObj.durationMinutes === 'number' && !isNaN(noteObj.durationMinutes)) ? noteObj.durationMinutes : parseDurationFromText(noteObj.text) || 5;
+    function updateCalendarFromSelects(){ const m=document.getElementById('calendar-month-select'); const y=document.getElementById('calendar-year-select'); if(!m||!y) return; renderCalendar(parseInt(y.value,10), parseInt(m.value,10), getLang()); }
 
-        const left = document.createElement('div');
-        left.style.flex = '1 1 auto';
-        left.innerHTML = `<div style="font-weight:500;">${escapeHtml(noteObj.text)}</div>
-                          <div style="color:#6b7c89;font-size:.9rem;">Inicio: <strong>${formatTime(currentTime)}</strong> · Duración: ${duration} min</div>`;
-
-        const del = document.createElement('button');
-        del.className = 'btn btn-sm btn-outline-danger ms-3';
-        del.type = 'button';
-        del.setAttribute('aria-label', t('note-delete'));
-        del.innerHTML = '<i class="fa fa-trash-alt"></i>';
-        del.addEventListener('click', function(){
-          const arr = notes[dateStr] || [];
-          arr.splice(idx,1);
-          notes[dateStr] = arr;
-          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(notes)); } catch(e){ console.error('save notes error', e); }
-          renderNoteList(dateStr);
-          renderCalendar(currentYear, currentMonth);
-        });
-
-        li.appendChild(left);
-        li.appendChild(del);
-        ul.appendChild(li);
-
-        currentTime.setMinutes(currentTime.getMinutes() + duration);
-      });
-    }
-
-    function hookupCalendarControls() {
-      if (controlsHooked) return; controlsHooked = true;
-
-      const prevYear=document.getElementById('nav-prev-year'), prevMonth=document.getElementById('nav-prev-month');
-      const nextMonth=document.getElementById('nav-next-month'), nextYear=document.getElementById('nav-next-year');
-      const todayBtn=document.getElementById('nav-today');
-      const mSel=document.getElementById('calendar-month-select'), ySel=document.getElementById('calendar-year-select');
-
-      prevYear && prevYear.addEventListener('click', ()=> renderCalendar(currentYear-1, currentMonth, getLang()));
-      nextYear && nextYear.addEventListener('click', ()=> renderCalendar(currentYear+1, currentMonth, getLang()));
-      prevMonth && prevMonth.addEventListener('click', ()=>{ let y=currentYear,m=currentMonth-1; if(m<0){m=11;y--;} renderCalendar(y,m,getLang()); });
-      nextMonth && nextMonth.addEventListener('click', ()=>{ let y=currentYear,m=currentMonth+1; if(m>11){m=0;y++;} renderCalendar(y,m,getLang()); });
-      todayBtn && todayBtn.addEventListener('click', ()=>{ const n=new Date(); renderCalendar(n.getFullYear(), n.getMonth(), getLang()); });
-
-      if (mSel && ySel) {
-        mSel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
-        ySel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
-      }
-
-      const defaultTimeInput = document.getElementById('default-start-time');
-      if (defaultTimeInput) {
-        defaultTimeInput.value = getDefaultStartTime();
-        defaultTimeInput.addEventListener('change', function(){ setDefaultStartTime(this.value); });
-      }
-
-      const noteForm = document.getElementById('noteForm');
-      if (noteForm) {
-        noteForm.addEventListener('submit', function(e){
-          e.preventDefault();
-          if (!selectedDay) return;
-          const text = (document.getElementById('noteInput').value || '').trim();
-          if (!text) return;
-          const dur = parseDurationFromText(text) || 5;
-          notes[selectedDay] = notes[selectedDay] || [];
-          const existing = notes[selectedDay] || [];
-          let createdAt;
-          if (existing.length === 0) {
-            createdAt = dateFromDateStrAndTime(selectedDay, getDefaultStartTime()).toISOString();
-          } else {
-            createdAt = new Date().toISOString();
-          }
-          const item = { text: text, durationMinutes: dur, createdAt: createdAt };
-          notes[selectedDay].push(item);
-          try { localStorage.setItem(STORAGE_KEY, JSON.stringify(notes)); } catch(e){ console.error('save notes error', e); }
-          document.getElementById('noteInput').value = '';
-          renderNoteList(selectedDay);
-          renderCalendar(currentYear, currentMonth);
-        });
-      }
-    }
+    function hookupCalendarControls(){ const prevYear=document.getElementById('nav-prev-year'), prevMonth=document.getElementById('nav-prev-month'), nextMonth=document.getElementById('nav-next-month'), nextYear=document.getElementById('nav-next-year'), todayBtn=document.getElementById('nav-today'); prevYear && prevYear.addEventListener('click', ()=> renderCalendar(currentYear-1, currentMonth, getLang())); nextYear && nextYear.addEventListener('click', ()=> renderCalendar(currentYear+1, currentMonth, getLang())); prevMonth && prevMonth.addEventListener('click', ()=>{ let y=currentYear,m=currentMonth-1; if(m<0){m=11;y--;} renderCalendar(y,m,getLang()); }); nextMonth && nextMonth.addEventListener('click', ()=>{ let y=currentYear,m=currentMonth+1; if(m>11){m=0;y++;} renderCalendar(y,m,getLang()); }); todayBtn && todayBtn.addEventListener('click', ()=>{ const now=new Date(); renderCalendar(now.getFullYear(), now.getMonth(), getLang()); }); const mSel=document.getElementById('calendar-month-select'), ySel=document.getElementById('calendar-year-select'); mSel && mSel.addEventListener('change', updateCalendarFromSelects); ySel && ySel.addEventListener('change', updateCalendarFromSelects); }
 
     document.addEventListener('DOMContentLoaded', function(){
-      const now=new Date(); currentYear=now.getFullYear(); currentMonth=now.getMonth();
+      const now = new Date();
+      currentYear = now.getFullYear();
+      currentMonth = now.getMonth();
 
-      // populate UI strings in the correct language
-      document.getElementById('back-link') && (document.getElementById('back-link').textContent = t('back-link'));
-      document.getElementById('tool-title') && (document.getElementById('tool-title').innerHTML = `<i class="fa fa-calendar-days"></i> ${t('tool-title')}`);
-      document.getElementById('tool-help') && (document.getElementById('tool-help').textContent = t('tool-help'));
-      document.getElementById('faq-list') && (document.getElementById('faq-list').innerHTML = t('faq-list'));
-      document.getElementById('noteModalLabel') && (document.getElementById('noteModalLabel').innerHTML = `${t('noteModalLabel')} <span id="modal-date-label"></span>`);
-      document.getElementById('noteInput') && (document.getElementById('noteInput').placeholder = t('noteInput'));
-      document.getElementById('note-close-btn') && (document.getElementById('note-close-btn').textContent = t('note-close-btn'));
-      document.getElementById('note-add-btn') && (document.getElementById('note-add-btn').textContent = t('note-add-btn'));
+      try { updateLanguage(getLang()); } catch(e) { /* continue */ }
 
-      populateMonthYearControls(currentYear, currentMonth);
+      populateMonthYearControls(currentYear, currentMonth, getLang());
       hookupCalendarControls();
-      renderCalendar(currentYear, currentMonth);
+      renderCalendar(currentYear, currentMonth, getLang());
     });
   </script>
 </body>
 </html>
-
-

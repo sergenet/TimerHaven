@@ -1,14 +1,13 @@
-﻿<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="el">
 <head>
-<meta charset="utf-8"/>
-<title>Clipboard Manager — TimerHaven (el)</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Save, manage, and organize multiple clipboard snippets." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="UTF-8" />
+  <title>Clipboard Manager — TimerHaven (el)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Save, manage, and organize multiple clipboard snippets." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
     :root { --card-bg: #fff; --page-bg: #f4f7fb; --accent: #185a9d; --accent-2: #43cea2; }
     html,body { height: 100%; margin: 0; }
     body { background: var(--page-bg); font-family: 'Montserrat', Arial, sans-serif; color:#1f2937; }
@@ -66,80 +65,86 @@
       .article-card, .tool-card { width:100%; max-width:680px; }
     }
   </style>
-<script>
-
-</script>
-<script>
-window.__timerhaven_ad_client = "ca-pub-0467059729557007";
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-<!-- top-bar intentionally removed/hidden to avoid accidental language indicator -->
-<div class="main-container" id="page-main">
-<div class="center-row">
-<div class="col">
-<article class="article-card" id="left-article">
-<div style="display:flex;flex-direction:column;flex:1 1 auto;">
-<header style="flex:1 1 auto;">
-<h2><i class="fa fa-clipboard"></i> Πώς να χρησιμοποιήσετε τον Διαχειριστή Πρόχειρου</h2>
-<ol>
-<li><b>Προσθέστε σημείωση:</b> Πληκτρολογήστε/επικολλήστε κείμενο και πατήστε <b>Προσθήκη</b>. Θα εμφανιστεί παρακάτω.</li>
-<li><b>Αντιγραφή σημείωσης:</b> Πατήστε <b>Αντιγραφή</b> δίπλα στο κλιπ.</li>
-<li><b>Διαγραφή σημείωσης:</b> Πατήστε <b>Διαγραφή</b> δίπλα στη σημείωση.</li>
-<li><b>Οι σημειώσεις αποθηκεύονται:</b> Παραμένουν στον browser ακόμα και μετά το κλείσιμο.</li>
-</ol>
-</header>
+  <!-- top-bar intentionally removed/hidden to avoid accidental language indicator -->
 
-</div>
-</article>
-</div>
-<div class="col">
-<section aria-labelledby="tool-title" class="tool-card" id="tool-card">
-<div style="display:flex;flex-direction:column;flex:1 1 auto;">
-<div style="flex:1 1 auto;">
-<a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i>Επιστροφή στο κύριο μενού</a>
-<h3 id="tool-title">Διαχειριστής Πρόχειρου</h3>
-<div aria-label="Clips section" class="clips-section" role="region">
-<form aria-label="Add clip form" class="clips-form" id="clipboardForm">
-<input class="form-control" id="clipInput" placeholder="Πληκτρολογήστε ή επικολλήστε εδώ τη σημείωση..." type="text"/>
-<button class="btn btn-success" id="add-btn" type="submit">Προσθήκη</button>
-</form>
-<div aria-live="polite" class="clips-list" id="clipsList"></div>
-<details class="faq-section" style="margin-top:12px;">
-<summary>Συχνές ερωτήσεις</summary>
-<ul style="padding-left:1em;">
-<li><b>Αποθηκεύονται οι σημειώσεις μου;</b> Ναι! Παραμένουν στον browser μέχρι να διαγραφούν.</li>
-<li><b>Μπορώ να αντιγράψω σημείωση;</b> Ναι, πατήστε <b>Αντιγραφή</b> δίπλα στη σημείωση.</li>
-<li><b>Πώς διαγράφω σημείωση;</b> Πατήστε <b>Διαγραφή</b> δίπλα στη σημείωση.</li>
-<li><b>Πώς διαγράφω όλες τις σημειώσεις;</b> Διαγράψτε μία-μία.</li>
-</ul>
-</details>
-</div>
-</div>
-<div aria-hidden="true" style="margin-top:auto;"></div>
-</div>
-</section>
-</div>
-<div class="col">
-<aside class="article-card" id="right-article">
-<div style="display:flex;flex-direction:column;flex:1 1 auto;">
-<header style="flex:1 1 auto;">
-<h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές για το Πρόχειρο</h2>
-<ul>
-<li><b>Ομαδοποιήστε σημειώσεις:</b> Παρόμοιες πληροφορίες μαζί.</li>
-<li><b>Αντιγράψτε σημαντικά:</b> Εξοικονομήστε χρόνο με συχνά κείμενα.</li>
-<li><b>Διαγράψτε παλιές σημειώσεις:</b> Καθαρίζετε τακτικά τις παλιές σημειώσεις.</li>
-</ul>
-</header>
+  <div class="main-container" id="page-main">
+    <div class="center-row">
+      <div class="col">
+        <article class="article-card" id="left-article">
+          <div style="display:flex;flex-direction:column;flex:1 1 auto;">
+            <header style="flex:1 1 auto;">
+              <h2><i class="fa fa-clipboard"></i> Πώς να χρησιμοποιήσετε τον Διαχειριστή Πρόχειρου</h2>
+              <ol>
+                <li><b>Προσθέστε σημείωση:</b> Πληκτρολογήστε/επικολλήστε κείμενο και πατήστε <b>Προσθήκη</b>. Θα εμφανιστεί παρακάτω.</li>
+                <li><b>Αντιγραφή σημείωσης:</b> Πατήστε <b>Αντιγραφή</b> δίπλα στο κλιπ.</li>
+                <li><b>Διαγραφή σημείωσης:</b> Πατήστε <b>Διαγραφή</b> δίπλα στη σημείωση.</li>
+                <li><b>Οι σημειώσεις αποθηκεύονται:</b> Παραμένουν στον browser ακόμα και μετά το κλείσιμο.</li>
+              </ol>
+            </header>
+            <div style="margin-top:auto;">
+              <a id="left-article-btn" class="btn btn-outline-primary w-100" href="clipboard-how-to-el.html">Διαβάστε το πλήρες άρθρο</a>
+            </div>
+          </div>
+        </article>
+      </div>
 
-</div>
-</aside>
-</div>
-</div>
-</div>
-<button id="lh-floating-add" style="display:none;" title="Add (fallback)">Add</button>
-<script>
+      <div class="col">
+        <section class="tool-card" id="tool-card" aria-labelledby="tool-title">
+          <div style="display:flex;flex-direction:column;flex:1 1 auto;">
+            <div style="flex:1 1 auto;">
+              <a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i>Επιστροφή στο κύριο μενού</a>
+              <h3 id="tool-title">Διαχειριστής Πρόχειρου</h3>
+
+              <div class="clips-section" role="region" aria-label="Clips section">
+                <form id="clipboardForm" class="clips-form" aria-label="Add clip form">
+                  <input type="text" id="clipInput" class="form-control" placeholder="Πληκτρολογήστε ή επικολλήστε εδώ τη σημείωση..." />
+                  <button type="submit" class="btn btn-success" id="add-btn">Προσθήκη</button>
+                </form>
+
+                <div id="clipsList" class="clips-list" aria-live="polite"></div>
+
+                <details class="faq-section" style="margin-top:12px;">
+                  <summary>Συχνές ερωτήσεις</summary>
+                  <ul style="padding-left:1em;">
+                    <li><b>Αποθηκεύονται οι σημειώσεις μου;</b> Ναι! Παραμένουν στον browser μέχρι να διαγραφούν.</li>
+                    <li><b>Μπορώ να αντιγράψω σημείωση;</b> Ναι, πατήστε <b>Αντιγραφή</b> δίπλα στη σημείωση.</li>
+                    <li><b>Πώς διαγράφω σημείωση;</b> Πατήστε <b>Διαγραφή</b> δίπλα στη σημείωση.</li>
+                    <li><b>Πώς διαγράφω όλες τις σημειώσεις;</b> Διαγράψτε μία-μία.</li>
+                  </ul>
+                </details>
+              </div>
+            </div>
+
+            <div style="margin-top:auto;" aria-hidden="true"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col">
+        <aside class="article-card" id="right-article">
+          <div style="display:flex;flex-direction:column;flex:1 1 auto;">
+            <header style="flex:1 1 auto;">
+              <h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές για το Πρόχειρο</h2>
+              <ul>
+                <li><b>Ομαδοποιήστε σημειώσεις:</b> Παρόμοιες πληροφορίες μαζί.</li>
+                <li><b>Αντιγράψτε σημαντικά:</b> Εξοικονομήστε χρόνο με συχνά κείμενα.</li>
+                <li><b>Διαγράψτε παλιές σημειώσεις:</b> Καθαρίζετε τακτικά τις παλιές σημειώσεις.</li>
+              </ul>
+            </header>
+            <div style="margin-top:auto;">
+              <a id="right-article-btn" class="btn btn-outline-primary w-100" href="clipboard-tips-el.html">Διαβάστε το πλήρες άρθρο</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <button id="lh-floating-add" title="Add (fallback)" style="display:none;">Add</button>
+
+  <script>
     // Defensive removal of any leftover language-indicator element in the DOM
     (function(){
       try {
@@ -257,13 +262,12 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
       window.addEventListener('storage', function(e){ if (e.key === 'timerhavenLang') runRetries(); });
     })();
   </script>
-<footer>
-    © 2025 TimerHaven. All tools are free and privacy-friendly.<br/>
-<a href="privacy.html">Privacy Policy</a> •
-    <a href="terms.html">Terms</a> •
+
+  <footer>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br />
+    <a href="privacy.html">Privacy Policy</a> &bull;
+    <a href="terms.html">Terms</a> &bull;
     <a href="contact.html">Contact</a>
-</footer>
-<p style="margin-top:1rem;"><a class="cta" href="/el/clipboard-manager/clipboard-manager-index.html">Read full guide</a></p></body>
+  </footer>
+</body>
 </html>
-
-

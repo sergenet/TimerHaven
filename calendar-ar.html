@@ -1,15 +1,14 @@
-﻿<!DOCTYPE html>
-
+<!doctype html>
 <html lang="ar">
 <head>
-<meta charset="utf-8"/>
-<meta content="notranslate" name="google"/>
-<title>التقويم — TimerHaven</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="سجّل وادِر ملاحظات يومية في التقويم. تعلّم كيفية استخدام التقويم، اطّلع على نصائح الإنتاجية، FAQ ومقالات مفيدة." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <title>التقويم — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="سجّل وادِر ملاحظات يومية في التقويم. تعلّم كيفية استخدام التقويم، اطّلع على نصائح الإنتاجية، FAQ ومقالات مفيدة.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; direction: rtl; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
@@ -37,10 +36,7 @@
     .calendar-nav .btn { min-width:40px; padding:.22rem .45rem; height:34px; line-height:1; display:inline-flex; align-items:center; justify-content:center; }
     .calendar-select { border-radius:8px; padding:.14rem .35rem; border:1px solid #e4edf5; background:#fff; font-size:.9rem; height:34px; line-height:1; display:inline-block; vertical-align:middle; box-sizing:border-box; -webkit-appearance:none; appearance:none; }
     .calendar-select.month { width:110px; }
-    .calendar-select.year { width:90px; }
-    /* Time input */
-    .calendar-select.time { width:110px; padding:.12rem .4rem; text-align:center; }
-
+    .calendar-select.year { width:70px; }
     .calendar-table { width:100%; margin-top:1em; border-collapse:separate; border-spacing:0; background:#fff; border-radius:8px; overflow:hidden; table-layout: fixed; }
     .calendar-table th, .calendar-table td { text-align:center; padding:0.6em 0.7em; min-width:36px; max-width:40px; vertical-align:middle; }
     .day-cell { cursor:pointer; border-radius:6px; transition: background 0.1s; display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; margin:0 auto; }
@@ -50,10 +46,9 @@
     .modal-header { background:#f4f7fb; }
     .modal-footer { background:#f7fafc; }
     .note-list { list-style:none; padding:0; margin-bottom:1em; }
-    .note-list li { background:#f7fafc; border-radius:6px; margin-bottom:0.5em; padding:0.5em 0.8em; display:flex; align-items:center; justify-content:space-between; gap:.6rem; }
+    .note-list li { background:#f7fafc; border-radius:6px; margin-bottom:0.5em; padding:0.5em 0.8em; display:flex; align-items:center; justify-content:space-between; }
     .note-text { word-break:break-word; flex-grow:1; text-align:right; }
-    .note-meta { font-size:0.85em; color:#888; margin-left:1em; text-align:left; }
-    .note-meta.right { margin-left:0; margin-right:1em; text-align:right; }
+    .note-meta { font-size:0.85em; color:#888; margin-right:1em; }
     .delete-note-btn { font-size:0.9em; color:#c00; background:none; border:none; cursor:pointer; }
 
     /* Headline sizes: reduce How-to and make Tips match */
@@ -73,11 +68,12 @@
       .howto-mobile{display:block!important; margin-bottom:1em;}
       .calendar-header{flex-wrap:wrap; justify-content:flex-start;}
       .calendar-select{width:48%; max-width:220px; margin-top:.45rem;}
-      .calendar-nav{margin-left:.5rem;} /* RTL: shift nav spacing */
+      .calendar-nav{margin-right:.5rem;}
     }
   </style>
-<!-- Defensive override: force true horizontal table layout for the calendar -->
-<style id="calendar-table-fix">
+
+  <!-- Defensive override: force true horizontal table layout for the calendar -->
+  <style id="calendar-table-fix">
     #calendar-table, table#calendar-table, .calendar-table {
       display: table !important;
       table-layout: fixed !important;
@@ -114,17 +110,11 @@
     }
     #calendar-table, #calendar-table * { transform: none !important; -webkit-transform: none !important; writing-mode: horizontal-tb !important; -webkit-writing-mode: horizontal-tb !important; }
   </style>
-<script>
-
-</script>
-<script>
-window.__timerhaven_ad_client = "ca-pub-0467059729557007";
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-<!-- Early language detection -->
-<script>
+
+  <!-- Early language detection -->
+  <script>
     (function setLangFromPath(){
       try {
         var path = window.location.pathname || '';
@@ -138,80 +128,102 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
       }
     })();
   </script>
-<div class="main-container">
-<div class="center-row">
 
-<div class="tool-card">
-<!-- Read full guide button added and wired in JS via updateLanguage as well -->
-<a class="back-link" href="index.html" id="back-link">العودة للقائمة الرئيسية</a>
-<h3 id="tool-title"><i class="fa fa-calendar-days"></i> التقويم</h3>
+  <div class="main-container">
+    <div class="center-row">
+      <div class="article-card">
+        <div>
+          <h2 id="howto-title"><i class="fa fa-calendar-check"></i> كيفية استخدام التقويم</h2>
+          <ol id="howto-steps" style="text-align:right">
+            <li><b>انقر على يوم:</b> افتح النافذة لإضافة/عرض ملاحظات متعددة لكل يوم.</li>
+            <li><b>نظّم الأحداث:</b> كل ملاحظة تحصل على طابع زمني ويمكن حذفها بشكل مستقل.</li>
+            <li><b>الحفظ:</b> تُخزن الملاحظات في متصفحك وتبقى حتى حذفها.</li>
+          </ol>
+        </div>
+        <a href="calendar-how-to-ar.html" class="btn btn-outline-primary btn-sm" id="howto-article-btn">اقرأ المقال الكامل</a>
+      </div>
 
-<!-- Read guide button (Arabic guide URL) -->
-<a id="read-guide-btn" class="read-guide" href="/ar/calendar-planning/calendar-planning-index.html" role="button">اقرأ الدليل الكامل</a>
+      <div class="tool-card">
+        <!-- removed the mobile "كيف تستخدم" details to keep the middle card cleaner -->
 
-<div class="help-section">
-<b id="tool-help">انقر على أي يوم لإضافة/عرض/تعديل ملاحظاتك. يمكن إضافة ملاحظات متعددة لكل يوم وتبقى محفوظة!</b>
-</div>
-<!-- Header controls (buttons + month/year selects + default time) -->
-<div aria-label="تنقل التقويم" class="calendar-header">
-  <div aria-label="تنقل شهر/سنة" class="calendar-nav" role="toolbar">
-    <button aria-label="السنة السابقة" class="btn btn-sm btn-outline-secondary" id="nav-prev-year">«</button>
-    <button aria-label="الشهر السابق" class="btn btn-sm btn-outline-secondary" id="nav-prev-month">‹</button>
-    <button aria-label="اليوم" class="btn btn-sm btn-outline-secondary" id="nav-today">اليوم</button>
-    <button aria-label="الشهر التالي" class="btn btn-sm btn-outline-secondary" id="nav-next-month">›</button>
-    <button aria-label="السنة التالية" class="btn btn-sm btn-outline-secondary" id="nav-next-year">»</button>
+        <a href="index.html" class="back-link" id="back-link">العودة للقائمة الرئيسية</a>
+        <h3 id="tool-title"><i class="fa fa-calendar-days"></i> التقويم</h3>
+        <div class="help-section">
+          <b id="tool-help">انقر على أي يوم لإضافة/عرض/تعديل ملاحظاتك. يمكن إضافة ملاحظات متعددة لكل يوم وتبقى محفوظة!</b>
+        </div>
+
+        <!-- Header controls (buttons + month/year selects) -->
+        <div class="calendar-header" aria-label="تنقل التقويم">
+          <div class="calendar-nav" role="toolbar" aria-label="تنقل شهر/سنة">
+            <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary" aria-label="السنة السابقة">«</button>
+            <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary" aria-label="الشهر السابق">‹</button>
+            <button id="nav-today" class="btn btn-sm btn-outline-secondary" aria-label="اليوم">اليوم</button>
+            <button id="nav-next-month" class="btn btn-sm btn-outline-secondary" aria-label="الشهر التالي">›</button>
+            <button id="nav-next-year" class="btn btn-sm btn-outline-secondary" aria-label="السنة التالية">»</button>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
+            <select id="calendar-month-select" class="calendar-select month" aria-label="اختر الشهر"></select>
+            <select id="calendar-year-select" class="calendar-select year" aria-label="اختر السنة"></select>
+          </div>
+        </div>
+
+        <table class="table calendar-table" id="calendar-table" aria-label="التقويم">
+          <!-- populated by JS -->
+        </table>
+
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title">الأسئلة الشائعة</summary>
+          <ul id="faq-list" style="padding-left:1em;text-align:right;">
+            <li><b>هل تحفظ ملاحظاتي؟</b> نعم — تظل الملاحظات في متصفحك حتى تقوم بحذفها.</li>
+            <li><b>هل يمكن إضافة ملاحظات متعددة؟</b> نعم — يمكنك إضافة أي عدد من الملاحظات لكل يوم.</li>
+            <li><b>هل يمكن حذف الملاحظات؟</b> نعم — احذف الملاحظة الفردية عبر أيقونة سلة المحذوفات.</li>
+            <li><b>هل تُزامن الملاحظات على أجهزة متعددة؟</b> حالياً لا — تُخزن محلياً. لاستخدام أجهزة متعددة استخدم خدمات سحابية خارجية.</li>
+          </ul>
+        </details>
+
+        <!-- tips-mobile removed from middle card to keep center clean -->
+      </div>
+
+      <div class="article-card">
+        <div>
+          <h2 id="tips-title"><i class="fa fa-lightbulb"></i> نصائح الإنتاجية</h2>
+          <ul id="tips-list" style="text-align:right;">
+            <li><b>ترميز المشروع:</b> أضف كود المشروع لعناوين الأحداث (مثلاً ALPHA – مراجعة) لتصفية سريعة.</li>
+            <li><b>تذكيرات افتراضية:</b> ضع تذكيرين: قبل 24 ساعة وقبل 30 دقيقة للأحداث المهمة.</li>
+            <li><b>مشاركة بدون سحابة:</b> استخدم تصدير .ics لمشاركة الأحداث بدون مزامنة سحابية.</li>
+          </ul>
+        </div>
+        <a href="calendar-tips-ar.html" class="btn btn-outline-primary btn-sm" id="tips-article-btn">اقرأ المقال الكامل</a>
+      </div>
+    </div>
   </div>
 
-  <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
-    <select aria-label="اختر الشهر" class="calendar-select month" id="calendar-month-select"></select>
-    <select aria-label="اختر السنة" class="calendar-select year" id="calendar-year-select"></select>
-    <!-- Default start time for first note (HH:MM) -->
-    <input id="default-start-time" class="calendar-select time" type="time" aria-label="وقت بداية افتراضي" title="وقت بداية الملاحظة الأولى">
+  <!-- Modal -->
+  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog"><div class="modal-content">
+      <form id="noteForm" autocomplete="off">
+        <div class="modal-header">
+          <h5 class="modal-title" id="noteModalLabel">ملاحظات لـ <span id="modal-date-label"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="اغلاق"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="note-list" id="noteList"></ul>
+          <textarea id="noteInput" class="form-control" rows="3" placeholder="أضف ملاحظة جديدة لهذا اليوم..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn">إغلاق</button>
+          <button type="submit" class="btn btn-success" id="note-add-btn">أضف ملاحظة</button>
+        </div>
+      </form>
+    </div></div>
   </div>
-</div>
 
-<table aria-label="التقويم" class="table calendar-table" id="calendar-table">
-<!-- populated by JS -->
-</table>
-<details class="faq-section" id="faq-section">
-<summary id="faq-title">الأسئلة الشائعة</summary>
-<ul id="faq-list" style="padding-left:1em;text-align:right;">
-<li><b>هل تحفظ ملاحظاتي؟</b> نعم — تظل الملاحظات في متصفحك حتى تقوم بحذفها.</li>
-<li><b>هل يمكن إضافة ملاحظات متعددة؟</b> نعم — يمكنك إضافة أي عدد من الملاحظات لكل يوم.</li>
-<li><b>هل يمكن حذف الملاحظات؟</b> نعم — احذف الملاحظة الفردية عبر أيقونة سلة المحذوفات.</li>
-<li><b>هل تُزامن الملاحظات على أجهزة متعددة؟</b> حالياً لا — تُخزن محلياً. لاستخدام أجهزة متعددة استخدم خدمات سحابية خارجية.</li>
-</ul>
-</details>
-</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-</div>
-</div>
-
-<!-- Modal -->
-<div aria-hidden="true" aria-labelledby="noteModalLabel" class="modal fade" id="noteModal" tabindex="-1">
-<div class="modal-dialog"><div class="modal-content">
-<form autocomplete="off" id="noteForm">
-<div class="modal-header">
-<h5 class="modal-title" id="noteModalLabel">ملاحظات لـ <span id="modal-date-label"></span></h5>
-<button aria-label="اغلاق" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<div class="modal-body">
-<ul class="note-list" id="noteList"></ul>
-<textarea class="form-control" id="noteInput" placeholder="أضف ملاحظة جديدة لهذا اليوم..." rows="3"></textarea>
-</div>
-<div class="modal-footer">
-<button class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn" type="button">إغلاق</button>
-<button class="btn btn-success" id="note-add-btn" type="submit">أضف ملاحظة</button>
-</div>
-</form>
-</div></div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
+  <script>
     // Persistence and state
-    let notes = {};
-    try { notes = JSON.parse(localStorage.getItem('calendarNotes_ar') || '{}'); } catch(e) { notes = {}; console.error('notes parse error', e); }
+    let notes = JSON.parse(localStorage.getItem('calendarNotes_ar') || '{}');
     let currentYear, currentMonth, selectedDay;
 
     function getLang() {
@@ -270,104 +282,65 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
       if (el("tool-help")) el("tool-help").textContent = t["tool-help"];
       if (el("faq-title")) el("faq-title").textContent = t["faq-title"];
       if (el("faq-list")) el("faq-list").innerHTML = t["faq-list"];
-      // set read guide link text and href
-      const readBtn = document.getElementById('read-guide-btn');
-      if (readBtn) {
-        readBtn.textContent = 'اقرأ الدليل الكامل';
-        readBtn.href = '/ar/calendar-planning/calendar-planning-index.html';
-      }
+      if (el("howto-title")) el("howto-title").innerHTML = t["howto-title"];
+      if (el("howto-steps")) el("howto-steps").innerHTML = t["howto-steps"];
       if (el("noteModalLabel")) el("noteModalLabel").innerHTML = `${t["noteModalLabel"]} <span id="modal-date-label"></span>`;
       if (el("noteInput")) el("noteInput").placeholder = t["noteInput"];
       if (el("note-close-btn")) el("note-close-btn").textContent = t["note-close-btn"];
       if (el("note-add-btn")) el("note-add-btn").textContent = t["note-add-btn"];
+      // update month label when language changes
       if (typeof currentYear === 'number' && typeof currentMonth === 'number') {
+        const months = (translations[lang] && translations[lang]["months"]) ? translations[lang]["months"] : translations['en']["months"];
+        const labelEl = document.getElementById('calendar-month-label');
+        if (labelEl) labelEl.textContent = `${months[currentMonth]} ${currentYear}`;
         renderCalendar(currentYear, currentMonth, lang);
       }
     }
 
-    // Utilities: parse durations from text (e.g., "25 minutes", "15–30 minutes")
-    function parseDurationFromText(text) {
-      if (!text || typeof text !== 'string') return null;
-      const rangeMatch = text.match(/(\d{1,3})\s*(?:–|-)\s*(\d{1,3})\s*minutes?/i);
-      if (rangeMatch) return parseInt(rangeMatch[1], 10);
-      const singleMatch = text.match(/(\d{1,3})\s*minutes?/i);
-      if (singleMatch) return parseInt(singleMatch[1], 10);
-      return null;
-    }
-
-    function formatTime(date) {
-      if (!(date instanceof Date)) date = new Date(date);
-      // use Arabic locale when page is Arabic
-      const locale = (getLang() === 'ar') ? 'ar' : undefined;
-      return date.toLocaleTimeString(locale, { hour:'numeric', minute:'2-digit' });
-    }
-
-    function getDefaultStartTime() {
-      return localStorage.getItem('calendarDefaultStart_ar') || '20:00';
-    }
-    function setDefaultStartTime(val) {
-      localStorage.setItem('calendarDefaultStart_ar', val);
-    }
-
-    function dateFromDateStrAndTime(dateStr, timeStr) {
-      const [y, m, d] = dateStr.split('-').map(Number);
-      const [hh = 0, mm = 0] = (timeStr || '00:00').split(':').map(Number);
-      return new Date(y, m - 1, d, hh, mm, 0, 0);
-    }
-
-    // Migrate legacy notes (previously saved as {text, ts}) to objects {text, durationMinutes, createdAt}
-    function migrateLegacyNotes(rawNotes) {
-      if (!Array.isArray(rawNotes)) return [];
-      return rawNotes.map(n => {
-        if (typeof n === 'string') {
-          return { text: n, durationMinutes: parseDurationFromText(n) || null, createdAt: null };
-        }
-        if (n && typeof n === 'object' && ('ts' in n || 'text' in n)) {
-          return {
-            text: n.text || String(n),
-            durationMinutes: (typeof n.durationMinutes === 'number') ? n.durationMinutes : parseDurationFromText(n.text) || null,
-            createdAt: n.createdAt || (n.ts ? new Date(n.ts).toISOString() : null)
-          };
-        }
-        // fallback
-        return { text: String(n), durationMinutes: null, createdAt: null };
-      });
-    }
-
-    // Populate month/year selects (uses translations)
+    // Populate month/year selects (uses explicit translations[lang].months when available)
     function populateMonthYearControls(year, month, lang) {
       lang = lang || getLang();
       const monthSelect = document.getElementById('calendar-month-select');
       const yearSelect = document.getElementById('calendar-year-select');
       if (!monthSelect || !yearSelect) return;
+
+      // Use explicit translated month names when provided to ensure exact wording
       const monthNames = (translations[lang] && translations[lang]["months"]) ? translations[lang]["months"] : null;
+      const locale = (lang === 'ar') ? 'ar' : 'en-US';
 
       monthSelect.innerHTML = '';
-      for (let m=0;m<12;m++){
+      for (let m = 0; m < 12; m++) {
         const opt = document.createElement('option');
         opt.value = String(m);
-        opt.textContent = monthNames ? monthNames[m] : new Intl.DateTimeFormat(lang, { month:'long' }).format(new Date(2000,m,1));
-        if (m===month) opt.selected = true;
+        opt.textContent = monthNames ? monthNames[m] : new Intl.DateTimeFormat(locale, { month: 'long' }).format(new Date(2000,m,1));
+        if (m === month) opt.selected = true;
         monthSelect.appendChild(opt);
       }
 
-      const now = new Date(); const base = now.getFullYear();
+      const now = new Date();
+      const base = now.getFullYear();
       const start = base - 50, end = base + 50;
       yearSelect.innerHTML = '';
-      for (let y=start; y<=end; y++){
+      for (let y = start; y <= end; y++) {
         const opt = document.createElement('option');
-        opt.value = String(y); opt.textContent = String(y);
-        if (y===year) opt.selected = true;
+        opt.value = String(y);
+        opt.textContent = String(y);
+        if (y === year) opt.selected = true;
         yearSelect.appendChild(opt);
       }
     }
 
-    // Calendar renderer (uses created note shape)
+    // Calendar renderer
     function renderCalendar(year, month, lang) {
       currentYear = year;
       currentMonth = month;
       lang = lang || getLang();
       const table = document.getElementById('calendar-table');
+
+      // set month label using translations (will match the select now)
+      const months = (translations[lang] && translations[lang]["months"]) ? translations[lang]["months"] : translations['en']["months"];
+      const labelEl = document.getElementById('calendar-month-label');
+      if (labelEl) labelEl.textContent = `${months[month]} ${year}`;
 
       const firstDay = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -380,20 +353,23 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
       for (let i = 0; i < firstDay; i++) html += `<td></td>`;
 
       const now = new Date();
-      const todayYear = now.getFullYear(), todayMonth = now.getMonth(), todayDay = now.getDate();
+      const todayYear = now.getFullYear();
+      const todayMonth = now.getMonth();
+      const todayDay = now.getDate();
 
       for (let d = 1; d <= daysInMonth; d++) {
         const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        const rawDayNotes = notes[dateStr] || [];
-        const dayNotes = migrateLegacyNotes(rawDayNotes);
+        const dayNotes = notes[dateStr] || [];
         const hasNote = dayNotes.length > 0;
         if ((firstDay + d - 1) % 7 === 0 && d !== 1) html += `</tr><tr>`;
         const isToday = (d === todayDay && month === todayMonth && year === todayYear);
+        // Inline style forces table-cell behaviour even if extension CSS tries to override
         html += `<td class="day-cell${hasNote ? ' has-note' : ''}${isToday ? ' calendar-today' : ''}" data-date="${dateStr}" style="display:table-cell !important; vertical-align:middle;">${d}${hasNote ? ' <span title="ملاحظات محفوظة">📝</span>' : ''}</td>`;
       }
       html += `</tr></tbody>`;
       table.innerHTML = html;
 
+      // Ensure the month/year selects reflect the currently rendered calendar
       populateMonthYearControls(currentYear, currentMonth, lang);
 
       Array.from(document.getElementsByClassName('day-cell')).forEach(cell => {
@@ -404,102 +380,58 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
       });
     }
 
-    // Render notes in modal with sequential start times
+    function showNoteModal(dateStr) {
+      const modalDateLabel = document.getElementById('modal-date-label');
+      if (modalDateLabel) modalDateLabel.textContent = dateStr;
+      renderNoteList(dateStr);
+      document.getElementById('noteInput').value = '';
+      let modal = new bootstrap.Modal(document.getElementById('noteModal'));
+      modal.show();
+    }
+
     function renderNoteList(dateStr) {
       const list = document.getElementById('noteList');
-      if (!list) return;
       list.innerHTML = '';
-      const rawDayNotes = notes[dateStr] || [];
-      const dayNotes = migrateLegacyNotes(rawDayNotes);
-
-      // Persist normalized notes if needed
-      try {
-        if (JSON.stringify(rawDayNotes) !== JSON.stringify(dayNotes)) {
-          notes[dateStr] = dayNotes;
-          localStorage.setItem('calendarNotes_ar', JSON.stringify(notes));
-        }
-      } catch(e){ /* ignore */ }
-
       const lang = getLang();
+      const dayNotes = notes[dateStr] || [];
       if (dayNotes.length === 0) {
         list.innerHTML = `<li style="color:#888;text-align:right;">${translations[lang]["note-none"] || translations['ar']["note-none"]}</li>`;
         return;
       }
-
-      // Determine base time: prefer first note's createdAt, otherwise default to chosen time
-      let baseTime;
-      if (dayNotes[0] && dayNotes[0].createdAt) {
-        const parsed = new Date(dayNotes[0].createdAt);
-        baseTime = !isNaN(parsed) ? parsed : dateFromDateStrAndTime(dateStr, getDefaultStartTime());
-      } else {
-        baseTime = dateFromDateStrAndTime(dateStr, getDefaultStartTime());
-      }
-      let currentTime = new Date(baseTime.getTime());
-
-      dayNotes.forEach((noteObj, idx) => {
-        const duration = (typeof noteObj.durationMinutes === 'number' && !isNaN(noteObj.durationMinutes)) ? noteObj.durationMinutes : parseDurationFromText(noteObj.text) || 5;
-        const li = document.createElement('li');
-        const textSpan = document.createElement('span');
-        textSpan.className = 'note-text';
-        textSpan.innerHTML = escapeHtml(noteObj.text);
-
-        const metaSpan = document.createElement('span');
-        metaSpan.className = 'note-meta right';
-        metaSpan.textContent = `${formatTime(currentTime)} · ${duration} دقيقة`;
-
-        const delBtn = document.createElement('button');
-        delBtn.className = 'delete-note-btn';
-        delBtn.title = translations[lang]["note-delete"] || translations['ar']["note-delete"];
-        delBtn.innerHTML = '<i class="fa fa-trash"></i>';
-        delBtn.addEventListener('click', function(){
-          deleteNote(dateStr, idx);
-        });
-
-        li.appendChild(textSpan);
-        li.appendChild(metaSpan);
-        li.appendChild(delBtn);
-        list.appendChild(li);
-
-        // increment time
-        currentTime.setMinutes(currentTime.getMinutes() + duration);
+      dayNotes.forEach((note, idx) => {
+        list.innerHTML += `
+          <li>
+            <span class="note-text">${escapeHtml(note.text)}</span>
+            <span class="note-meta">${new Date(note.ts).toLocaleString()}</span>
+            <button class="delete-note-btn" title="${translations[lang]["note-delete"] || translations['ar']["note-delete"]}" onclick="deleteNote('${dateStr}',${idx})"><i class="fa fa-trash"></i></button>
+          </li>
+        `;
       });
     }
 
     function escapeHtml(s) {
       if (!s) return '';
-      return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+      return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
     }
 
-    // Add note form
     document.getElementById('noteForm').addEventListener('submit', function(e) {
       e.preventDefault();
       if (!selectedDay) return;
       const text = document.getElementById('noteInput').value.trim();
       if (!text) return;
-      notes[selectedDay] = notes[selectedDay] || [];
-      const dur = parseDurationFromText(text) || 5;
-      // first note uses default start time for that date
-      const existing = notes[selectedDay] || [];
-      let createdAt;
-      if (existing.length === 0) {
-        createdAt = dateFromDateStrAndTime(selectedDay, getDefaultStartTime()).toISOString();
-      } else {
-        createdAt = new Date().toISOString();
-      }
-      const item = { text: text, durationMinutes: dur, createdAt: createdAt };
-      notes[selectedDay].push(item);
-      try { localStorage.setItem('calendarNotes_ar', JSON.stringify(notes)); } catch(e){ console.error('save notes error', e); }
+      if (!notes[selectedDay]) notes[selectedDay] = [];
+      notes[selectedDay].push({ text, ts: Date.now() });
+      localStorage.setItem('calendarNotes_ar', JSON.stringify(notes));
       document.getElementById('noteInput').value = '';
       renderNoteList(selectedDay);
       renderCalendar(currentYear, currentMonth, getLang());
     });
 
-    // Delete note
     window.deleteNote = function(dateStr, idx) {
       if (!notes[dateStr]) return;
       notes[dateStr].splice(idx, 1);
       if (notes[dateStr].length === 0) delete notes[dateStr];
-      try { localStorage.setItem('calendarNotes_ar', JSON.stringify(notes)); } catch(e){ console.error('save notes error', e); }
+      localStorage.setItem('calendarNotes_ar', JSON.stringify(notes));
       renderNoteList(dateStr);
       renderCalendar(currentYear, currentMonth, getLang());
     };
@@ -532,13 +464,6 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
         mSel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
         ySel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
       }
-
-      // default start time input
-      const defaultTimeInput = document.getElementById('default-start-time');
-      if (defaultTimeInput) {
-        defaultTimeInput.value = getDefaultStartTime();
-        defaultTimeInput.addEventListener('change', function(){ setDefaultStartTime(this.value); });
-      }
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -553,11 +478,8 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
     });
   </script>
 
-<footer style="margin-top:1.2rem;text-align:right;color:#6b7c89;font-size:0.95rem;">
+  <footer style="margin-top:1.2rem;text-align:right;color:#6b7c89;font-size:0.95rem;">
     © 2025 TimerHaven. جميع الأدوات مجانية وتحترم الخصوصية.
   </footer>
-<p style="margin-top:1rem;"><a class="cta" href="/ar/calendar/calendar-index.html">قراءة الدليل الكامل</a></p>
 </body>
 </html>
-
-

@@ -1,14 +1,13 @@
-﻿?<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<title>?????? ????????? ??????? � TimerHaven</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="?????????? ?????? ????????? ??????? ??? ?????????, ??????? ??? ??????. ???????, ??? ???????????? ????????, ???????? ?????? ?? ??????????????, FAQ ? ??????." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="UTF-8">
+  <title>Таймер обратного отсчета — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Установите таймер обратного отсчета для дедлайнов, событий или встреч. Узнайте, как пользоваться Таймером, получите советы по продуктивности, FAQ и статьи.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row, .card-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
@@ -71,63 +70,64 @@
       .tool-card,.article-card{width:98vw;max-width:540px;height:auto;}
       .article-card { display: none !important; }
     }
-    details[open] summary::after { content: " ?"; font-size: 0.9em; }
+    details[open] summary::after { content: " ▲"; font-size: 0.9em; }
     details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
-    details:not([open]) summary::after { content: " ?"; font-size: 0.9em; }
+    details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
   </style>
-<script>
-
-</script>
-<script>
-window.__timerhaven_ad_client = "ca-pub-0467059729557007";
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-<!-- Force Russian for local-file testing so opening this local file shows Russian UI -->
-<script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){}</script>
+  <!-- Force Russian for local-file testing so opening this local file shows Russian UI -->
+  <script>try{ localStorage.setItem('timerhavenLang','ru'); }catch(e){}</script>
+
 <div class="main-container">
-<div class="center-row">
-<!-- Article 1 (desktop only) -->
-<div class="article-card">
-<div>
-<h2 id="howto-title"></h2>
-<ol id="howto-steps"></ol>
+  <div class="center-row">
+    <!-- Article 1 (desktop only) -->
+    <div class="article-card">
+      <div>
+        <h2 id="howto-title"></h2>
+        <ol id="howto-steps"></ol>
+      </div>
+      <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
+    </div>
+
+    <!-- Countdown Tool -->
+    <div class="tool-card">
+      <a href="index.html" class="back-link" id="back-link"></a>
+      <h3 id="tool-title"></h3>
+      <div class="help-section" id="tool-help"></div>
+
+      <div class="countdown-section">
+        <div>
+          <input type="number" id="minutes" placeholder="" min="0" class="form-control" aria-label="minutes">
+          <input type="number" id="seconds" placeholder="" min="0" max="59" class="form-control" aria-label="seconds">
+        </div>
+
+        <div style="margin-top:0.8em;">
+          <button class="btn btn-success" id="startBtn"></button>
+          <button class="btn btn-secondary" id="pauseBtn"></button>
+          <button class="btn btn-danger" id="resetBtn"></button>
+        </div>
+
+        <div id="display" aria-live="polite">00:00</div>
+      </div>
+
+      <details class="faq-section">
+        <summary id="faq-title"></summary>
+        <ul id="faq-list" style="padding-left: 1em;"></ul>
+      </details>
+    </div>
+
+    <!-- Article 2 (desktop only) -->
+    <div class="article-card">
+      <div>
+        <h2 id="tips-title"></h2>
+        <ul id="tips-list"></ul>
+      </div>
+      <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
+    </div>
+  </div>
 </div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
-</div>
-<!-- Countdown Tool -->
-<div class="tool-card">
-<a class="back-link" href="index.html" id="back-link"></a>
-<h3 id="tool-title"></h3>
-<div class="help-section" id="tool-help"></div>
-<div class="countdown-section">
-<div>
-<input aria-label="minutes" class="form-control" id="minutes" min="0" placeholder="" type="number"/>
-<input aria-label="seconds" class="form-control" id="seconds" max="59" min="0" placeholder="" type="number"/>
-</div>
-<div style="margin-top:0.8em;">
-<button class="btn btn-success" id="startBtn"></button>
-<button class="btn btn-secondary" id="pauseBtn"></button>
-<button class="btn btn-danger" id="resetBtn"></button>
-</div>
-<div aria-live="polite" id="display">00:00</div>
-</div>
-<details class="faq-section">
-<summary id="faq-title"></summary>
-<ul id="faq-list" style="padding-left: 1em;"></ul>
-</details>
-</div>
-<!-- Article 2 (desktop only) -->
-<div class="article-card">
-<div>
-<h2 id="tips-title"></h2>
-<ul id="tips-list"></ul>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
-</div>
-</div>
-</div>
+
 <script>
   // Full standalone translations and timer logic for Russian (self-contained)
   const countdownTranslations = {
@@ -164,128 +164,128 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
     fr: {
       "language-label": "Langue :",
       "back-link": "Retour au menu principal",
-      "tool-title": "Minuteur D�compte",
-      "tool-help": "D�finissez un compte � rebours pour les �ch�ances, �v�nements ou r�unions.",
+      "tool-title": "Minuteur Décompte",
+      "tool-help": "Définissez un compte à rebours pour les échéances, événements ou réunions.",
       "minutes": "Minutes",
       "seconds": "Secondes",
-      "start": "D�marrer",
+      "start": "Démarrer",
       "pause": "Pause",
       "resume": "Reprendre",
-      "reset": "R�initialiser",
+      "reset": "Réinitialiser",
       "display": "00:00",
-      "alert-end": "Le temps est �coul� !",
+      "alert-end": "Le temps est écoulé !",
       "faq-title": "FAQ",
       "faq-list": `<li><b>Le minuteur continue-t-il si je change d'onglet ?</b> Oui, tant que la page reste ouverte.</li>
-        <li><b>Puis-je d�finir un minuteur pour plusieurs heures ?</b> Saisissez le nombre de minutes souhait�.</li>
+        <li><b>Puis-je définir un minuteur pour plusieurs heures ?</b> Saisissez le nombre de minutes souhaité.</li>
         <li><b>Puis-je mettre le minuteur en pause ?</b> Oui, utilisez le bouton "Pause".</li>`,
-      "howto-title": '<i class="fa fa-stopwatch-20"></i> Comment utiliser le Minuteur D�compte',
-      "howto-steps": `<li><b>D�finir la dur�e :</b> Entrez la dur�e souhait�e.</li>
-        <li><b>D�marrer le minuteur :</b> Cliquez sur "D�marrer" et observez le d�compte.</li>
-        <li><b>R�initial??? ??? ????????? ?? ?????:</b> ??????????? ?????? ??? ?????? ??? ????? ???????.</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> Comment utiliser le Minuteur Décompte',
+      "howto-steps": `<li><b>Définir la durée :</b> Entrez la durée souhaitée.</li>
+        <li><b>Démarrer le minuteur :</b> Cliquez sur "Démarrer" et observez le décompte.</li>
+        <li><b>Réinitialить или поставить на паузу:</b> Используйте кнопки для сброса или паузы таймера.</li>`,
       "howto-article-btn": "Lire l'article complet",
       "howto-article-link": "countdown-how-to-fr.html",
-      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour le Minuteur D�compte',
-      "tips-list": `<li><b>Utilisez le minuteur pour la productivit� :</b> Fixez un compte � rebours ??? ??????????????? ??????.</li>
-        <li><b>Divisez les t�ches :</b> Utilisez des minuteries courtes pour rester sur la bonne voie.</li>
-        <li><b>Analysez votre organisation :</b> ??????? ??????????? ????????? ??????? ??? ????.</li>`,
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour le Minuteur Décompte',
+      "tips-list": `<li><b>Utilisez le minuteur pour la productivité :</b> Fixez un compte à rebours для сосредоточенной работы.</li>
+        <li><b>Divisez les tâches :</b> Utilisez des minuteries courtes pour rester sur la bonne voie.</li>
+        <li><b>Analysez votre organisation :</b> Найдите оптимальные интервалы времени для себя.</li>`,
       "tips-article-btn": "Lire l'article complet",
       "tips-article-link": "countdown-tips-fr.html"
     },
     de: {
       "language-label": "Sprache:",
-      "back-link": "Zur�ck zum Hauptmen�",
+      "back-link": "Zurück zum Hauptmenü",
       "tool-title": "Countdown-Timer",
-      "tool-help": "Stellen Sie einen Countdown f�r Deadlines, Events oder Meetings ein.",
+      "tool-help": "Stellen Sie einen Countdown für Deadlines, Events oder Meetings ein.",
       "minutes": "Minuten",
       "seconds": "Sekunden",
       "start": "Start",
       "pause": "Pause",
       "resume": "Fortsetzen",
-      "reset": "Zur�cksetzen",
+      "reset": "Zurücksetzen",
       "display": "00:00",
       "alert-end": "Zeit ist abgelaufen!",
       "faq-title": "FAQ",
-      "faq-list": `<li><b>L�uft der Timer weiter, wenn ich den Tab wechsle?</b> Ja, solange die Seite ge�ffnet ist.</li>
-        <li><b>Kann ich einen Timer f�r Stunden einstellen?</b> Geben Sie einfach viele Minuten ein.</li>
+      "faq-list": `<li><b>Läuft der Timer weiter, wenn ich den Tab wechsle?</b> Ja, solange die Seite geöffnet ist.</li>
+        <li><b>Kann ich einen Timer für Stunden einstellen?</b> Geben Sie einfach viele Minuten ein.</li>
         <li><b>Kann ich den Timer pausieren?</b> Ja, nutzen Sie den "Pause"-Button.</li>`,
       "howto-title": '<i class="fa fa-stopwatch-20"></i> So nutzt du den Countdown-Timer',
-      "howto-steps": `<li><b>Zeit einstellen:</b> Geben Sie die Dauer f�r den Countdown ein.</li>
+      "howto-steps": `<li><b>Zeit einstellen:</b> Geben Sie die Dauer für den Countdown ein.</li>
         <li><b>Timer starten:</b> Klicken Sie auf "Start" und beobachten Sie den Countdown.</li>
-        <li><b>Zur�cksetzen/Pause:</b> Nutzen Sie die Buttons zum Pausieren oder Zur�cksetzen.</li>`,
-      "howto-article-btn": "Vollst�ndigen Artikel lesen",
+        <li><b>Zurücksetzen/Pause:</b> Nutzen Sie die Buttons zum Pausieren oder Zurücksetzen.</li>`,
+      "howto-article-btn": "Vollständigen Artikel lesen",
       "howto-article-link": "countdown-how-to-de.html",
-      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps f�r den Countdown-Timer',
-      "tips-list": `<li><b>Nutzen Sie den Timer f�r Produktivit�t:</b> Setzen Sie Countdowns f�r konzentriertes Arbeiten.</li>
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps für den Countdown-Timer',
+      "tips-list": `<li><b>Nutzen Sie den Timer für Produktivität:</b> Setzen Sie Countdowns für konzentriertes Arbeiten.</li>
         <li><b>Teilen Sie Aufgaben:</b> Kurze Timer helfen beim Fokus.</li>
-        <li><b>Analysieren Sie Ihren Workflow:</b> Finden Sie die besten Zeitspannen f�r sich.</li>`,
-      "tips-article-btn": "Vollst�ndigen Artikel lesen",
+        <li><b>Analysieren Sie Ihren Workflow:</b> Finden Sie die besten Zeitspannen für sich.</li>`,
+      "tips-article-btn": "Vollständigen Artikel lesen",
       "tips-article-link": "countdown-tips-de.html"
     },
     ru: {
-      "language-label": "????:",
-      "back-link": "????? ? ??????? ????",
-      "tool-title": "?????? ????????? ???????",
-      "tool-help": "?????????? ?????? ????????? ??????? ??? ?????????, ??????? ??? ??????.",
-      "minutes": "??????",
-      "seconds": "???????",
-      "start": "?????",
-      "pause": "?????",
-      "resume": "??????????",
-      "reset": "?????",
+      "language-label": "Язык:",
+      "back-link": "Назад в главное меню",
+      "tool-title": "Таймер обратного отсчета",
+      "tool-help": "Установите таймер обратного отсчета для дедлайнов, событий или встреч.",
+      "minutes": "Минуты",
+      "seconds": "Секунды",
+      "start": "Старт",
+      "pause": "Пауза",
+      "resume": "Продолжить",
+      "reset": "Сброс",
       "display": "00:00",
-      "alert-end": "????? ?????!",
-      "faq-title": "?????? ???????",
-      "faq-list": `<li><b>????? ?? ?????? ????????, ???? ? ????? ????????</b> ??, ???? ???????? ???????.</li>
-        <li><b>????? ?? ?????????? ?????? ?? ?????</b> ??????? ????? ?????????? ?????.</li>
-        <li><b>????? ????????? ?????? ?? ??????</b> ??, ??????????? ?????? "?????".</li>`,
-      "howto-title": '<i class="fa fa-stopwatch-20"></i> ??? ???????????? ???????? ????????? ???????',
-      "howto-steps": `<li><b>?????????? ?????:</b> ??????? ?????? ???????????? ??? ???????.</li>
-        <li><b>????????? ??????:</b> ??????? "?????" ? ???????? ??????.</li>
-        <li><b>????? ??? ?????:</b> ??????????? ?????? ??? ?????? ??? ????? ???????.</li>`,
-      "howto-article-btn": "?????? ?????? ?????",
+      "alert-end": "Время вышло!",
+      "faq-title": "Частые вопросы",
+      "faq-list": `<li><b>Будет ли таймер работать, если я сменю вкладку?</b> Да, пока страница открыта.</li>
+        <li><b>Можно ли установить таймер на часы?</b> Введите любое количество минут.</li>
+        <li><b>Можно поставить таймер на паузу?</b> Да, используйте кнопку "Пауза".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> Как пользоваться Таймером обратного отсчета',
+      "howto-steps": `<li><b>Установите время:</b> Введите нужную длительность для отсчета.</li>
+        <li><b>Запустите таймер:</b> Нажмите "Старт" и смотрите отсчет.</li>
+        <li><b>Сброс или пауза:</b> Используйте кнопки для сброса или паузы таймера.</li>`,
+      "howto-article-btn": "Читать полный текст",
       "howto-article-link": "countdown-how-to-ru.html",
-      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> ?????? ?? ???????',
-      "tips-list": `<li><b>??????????? ?????? ??? ???????????:</b> ??????? ??????? ??? ???????????? ??????.</li>
-        <li><b>?????? ??????:</b> ???????? ??????? ???????? ?? ???????????.</li>
-        <li><b>???????????? ??????? ???????:</b> ??????? ??????????? ????????? ???????.</li>`,
-      "tips-article-btn": "?????? ?????? ?????",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по Таймеру',
+      "tips-list": `<li><b>Используйте таймер для фокусировки:</b> Ставьте отсчеты для продуктивной работы.</li>
+        <li><b>Делите задачи:</b> Короткие таймеры помогают не отвлекаться.</li>
+        <li><b>Анализируйте рабочий процесс:</b> Найдите оптимальные интервалы времени.</li>`,
+      "tips-article-btn": "Читать полный текст",
       "tips-article-link": "countdown-tips-ru.html"
     },
     el: {
-      "language-label": "G??ssa:",
-      "back-link": "?p?st??f? st? ????? �e???",
-      "tool-title": "?????�et?? a?t?st??f?? �?t??s??",
-      "tool-help": "???ste ?????�et?? ??a p???es�?e?, e?d???se?? ? s??a?t?se??.",
-      "minutes": "?ept?",
-      "seconds": "?e?te???epta",
-      "start": "??a???",
-      "pause": "?a?s?",
-      "resume": "S????e?a",
-      "reset": "?pa?af???",
+      "language-label": "Γλώσσα:",
+      "back-link": "Επιστροφή στο κύριο μενού",
+      "tool-title": "Χρονόμετρο αντίστροφης μέτρησης",
+      "tool-help": "Ορίστε χρονόμετρο για προθεσμίες, εκδηλώσεις ή συναντήσεις.",
+      "minutes": "Λεπτά",
+      "seconds": "Δευτερόλεπτα",
+      "start": "Έναρξη",
+      "pause": "Παύση",
+      "resume": "Συνέχεια",
+      "reset": "Επαναφορά",
       "display": "00:00",
-      "alert-end": "????? ??????!",
-      "faq-title": "S????? ???t?se??",
-      "faq-list": `<li><b>?? ?????�et?? ?e?t????e? a? a????? ?a?t??a;</b> ?a?, ?s? ? se??da e??a? a????t?.</li>
-        <li><b>?p??? ?a ???s? ?????�et?? ??a ??e?;</b> ???te ?sa ?ept? ???ete.</li>
-        <li><b>?p??? ?a ???? pa?s?;</b> ?a?, �e t? ???�p? "?a?s?".</li>`,
-      "howto-title": '<i class="fa fa-stopwatch-20"></i> ??? ?a ???s?�?p???sete t? ?????�et?? a?t?st??f?? �?t??s??',
-      "howto-steps": `<li><b>???ste ?????:</b> ??s??ete t? d????e?a ??a t?? a?t?st??f? �?t??s?.</li>
-        <li><b>?e????ste t? ?????�et??:</b> ?at?ste "??a???" ?a? de?te t?? a?t?st??f? �?t??s?.</li>
-        <li><b>?pa?af??? ? pa?s?:</b> ???s?�?p???ste ta ???�p?? ??a epa?af??? ? pa?s?.</li>`,
-      "howto-article-btn": "??a�?ste t? p???e? ?????",
+      "alert-end": "Τέλος χρόνου!",
+      "faq-title": "Συχνές Ερωτήσεις",
+      "faq-list": `<li><b>Το χρονόμετρο λειτουργεί αν αλλάξω καρτέλα;</b> Ναι, όσο η σελίδα είναι ανοιχτή.</li>
+        <li><b>Μπορώ να ορίσω χρονόμετρο για ώρες;</b> Βάλτε όσα λεπτά θέλετε.</li>
+        <li><b>Μπορώ να κάνω παύση;</b> Ναι, με το κουμπί "Παύση".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> Πώς να χρησιμοποιήσετε το Χρονόμετρο αντίστροφης μέτρησης',
+      "howto-steps": `<li><b>Ορίστε χρόνο:</b> Εισάγετε τη διάρκεια για την αντίστροφη μέτρηση.</li>
+        <li><b>Ξεκινήστε το χρονόμετρο:</b> Πατήστε "Έναρξη" και δείτε την αντίστροφη μέτρηση.</li>
+        <li><b>Επαναφορά ή παύση:</b> Χρησιμοποιήστε τα κουμπιά για επαναφορά ή παύση.</li>`,
+      "howto-article-btn": "Διαβάστε το πλήρες άρθρο",
       "howto-article-link": "countdown-how-to-el.html",
-      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> S?��????? ??a t? ?????�et??',
-      "tips-list": `<li><b>???s?�?p???ste t? ??a pa?a??????t?ta:</b> ???ste a?t?st??f? �?t??s? ??a s?????t??s?.</li>
-        <li><b>??a????ste e??as?e?:</b> ????? ?????�et?a ??a ?a??te?? ??????s?.</li>
-        <li><b>??a??ste t? ??? sa?:</b> ??e?te t? d????e?a sa? ta?????e?.</li>`,
-      "tips-article-btn": "??a�?ste t? p???e? ?????",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές για το Χρονόμετρο',
+      "tips-list": `<li><b>Χρησιμοποιήστε το για παραγωγικότητα:</b> Ορίστε αντίστροφη μέτρηση για συγκέντρωση.</li>
+        <li><b>Διαχωρίστε εργασίες:</b> Μικρά χρονόμετρα για καλύτερη οργάνωση.</li>
+        <li><b>Αναλύστε τη ροή σας:</b> Βρείτε τι διάρκεια σας ταιριάζει.</li>`,
+      "tips-article-btn": "Διαβάστε το πλήρες άρθρο",
       "tips-article-link": "countdown-tips-el.html"
     },
     es: {
       "language-label": "Idioma:",
-      "back-link": "Volver al men� principal",
-      "tool-title": "Temporizador de Cuenta Atr�s",
-      "tool-help": "Configura un temporizador para fechas l�mite, eventos o reuniones.",
+      "back-link": "Volver al menú principal",
+      "tool-title": "Temporizador de Cuenta Atrás",
+      "tool-help": "Configura un temporizador para fechas límite, eventos o reuniones.",
       "minutes": "Minutos",
       "seconds": "Segundos",
       "start": "Iniciar",
@@ -293,57 +293,57 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
       "resume": "Continuar",
       "reset": "Restablecer",
       "display": "00:00",
-      "alert-end": "�Se acab� el tiempo!",
+      "alert-end": "¡Se acabó el tiempo!",
       "faq-title": "Preguntas frecuentes",
-      "faq-list": `<li><b>�El temporizador sigue si cambio de pesta�a?</b> S�, mientras la p�gina est� abierta.</li>
-        <li><b>�Puedo poner horas?</b> Pon los minutos que necesites.</li>
-        <li><b>�Puedo pausar?</b> S�, usa el bot�n "Pausa".</li>`,
-      "howto-title": '<i class="fa fa-stopwatch-20"></i> C�mo usar el Temporizador de Cuenta Atr�s',
-      "howto-steps": `<li><b>Establece el tiempo:</b> Introduce la duraci�n para la cuenta atr�s.</li>
-        <li><b>Inicia el temporizador:</b> Haz clic en "Iniciar" y observa la cuenta atr�s.</li>
+      "faq-list": `<li><b>¿El temporizador sigue si cambio de pestaña?</b> Sí, mientras la página esté abierta.</li>
+        <li><b>¿Puedo poner horas?</b> Pon los minutos que necesites.</li>
+        <li><b>¿Puedo pausar?</b> Sí, usa el botón "Pausa".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> Cómo usar el Temporizador de Cuenta Atrás',
+      "howto-steps": `<li><b>Establece el tiempo:</b> Introduce la duración para la cuenta atrás.</li>
+        <li><b>Inicia el temporizador:</b> Haz clic en "Iniciar" y observa la cuenta atrás.</li>
         <li><b>Restablecer o pausar:</b> Usa los botones para restablecer o pausar el temporizador.</li>`,
-      "howto-article-btn": "Leer art�culo completo",
+      "howto-article-btn": "Leer artículo completo",
       "howto-article-link": "countdown-how-to-es.html",
       "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos para el Temporizador',
-      "tips-list": `<li><b>Usa el temporizador para productividad:</b> Cuenta atr�s para sesiones de trabajo enfocadas.</li>
+      "tips-list": `<li><b>Usa el temporizador para productividad:</b> Cuenta atrás para sesiones de trabajo enfocadas.</li>
         <li><b>Divide tareas:</b> Temporizadores cortos para mantener el ritmo.</li>
-        <li><b>Revisa tu flujo:</b> Descubre qu� duraci�n te funciona mejor.</li>`,
-      "tips-article-btn": "Leer art�culo completo",
+        <li><b>Revisa tu flujo:</b> Descubre qué duración te funciona mejor.</li>`,
+      "tips-article-btn": "Leer artículo completo",
       "tips-article-link": "countdown-tips-es.html"
     },
     ar: {
-      "language-label": "?????:",
-      "back-link": "?????? ??? ??????? ????????",
-      "tool-title": "???? ???? ????????",
-      "tool-help": "???? ???? ????? ???????? ?? ??????? ?? ??????????.",
-      "minutes": "?????",
-      "seconds": "?????",
-      "start": "????",
-      "pause": "????? ????",
-      "resume": "???????",
-      "reset": "????? ???",
+      "language-label": "اللغة:",
+      "back-link": "العودة إلى القائمة الرئيسية",
+      "tool-title": "مؤقت العد التنازلي",
+      "tool-help": "اضبط مؤقت للمهل النهائية أو الأحداث أو الاجتماعات.",
+      "minutes": "دقائق",
+      "seconds": "ثواني",
+      "start": "ابدأ",
+      "pause": "إيقاف مؤقت",
+      "resume": "استئناف",
+      "reset": "إعادة ضبط",
       "display": "00:00",
-      "alert-end": "????? ?????!",
-      "faq-title": "??????? ???????",
-      "faq-list": `<li><b>?? ????? ?????? ??? ?????? ??? ????????</b> ???? ????? ?????? ??????.</li>
-        <li><b>?? ?????? ??? ??????</b> ???? ??? ??????? ???? ????.</li>
-        <li><b>?? ???? ??????? ???????</b> ???? ?????? ?? "????? ????".</li>`,
-      "howto-title": '<i class="fa fa-stopwatch-20"></i> ????? ??????? ???? ???? ????????',
-      "howto-steps": `<li><b>???? ?????:</b> ???? ??? ???? ????????.</li>
-        <li><b>???? ??????:</b> ???? "????" ????? ???? ????????.</li>
-        <li><b>????? ??? ?? ????? ????:</b> ?????? ??????? ?????? ????? ?? ??????? ??????.</li>`,
-      "howto-article-btn": "???? ?????? ??????",
+      "alert-end": "انتهى الوقت!",
+      "faq-title": "الأسئلة الشائعة",
+      "faq-list": `<li><b>هل يستمر المؤقت إذا انتقلت بين الصفحات؟</b> نعم، طالما الصفحة مفتوحة.</li>
+        <li><b>هل يمكنني ضبط ساعات؟</b> أدخل عدد الدقائق الذي تريد.</li>
+        <li><b>هل يمكن الإيقاف المؤقت؟</b> نعم، استخدم زر "إيقاف مؤقت".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> كيفية استخدام مؤقت العد التنازلي',
+      "howto-steps": `<li><b>اضبط الوقت:</b> أدخل مدة العد التنازلي.</li>
+        <li><b>ابدأ المؤقت:</b> اضغط "ابدأ" وشاهد العد التنازلي.</li>
+        <li><b>إعادة ضبط أو إيقاف مؤقت:</b> استخدم الأزرار لإعادة الضبط أو الإيقاف المؤقت.</li>`,
+      "howto-article-btn": "اقرأ المقال الكامل",
       "howto-article-link": "countdown-how-to-ar.html",
-      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> ????? ??????',
-      "tips-list": `<li><b>?????? ?????? ?????????:</b> ?? ?????? ?????? ??? ?????.</li>
-        <li><b>??? ??????:</b> ?????? ????? ?????? ??? ???????.</li>
-        <li><b>???? ??? ?????:</b> ????? ?? ??? ?????? ????.</li>`,
-      "tips-article-btn": "???? ?????? ??????",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح للمؤقت',
+      "tips-list": `<li><b>استخدم المؤقت للإنتاجية:</b> عد تنازلي لجلسات عمل مركزة.</li>
+        <li><b>قسم المهام:</b> مؤقتات قصيرة للحفاظ على التركيز.</li>
+        <li><b>راجع سير العمل:</b> اكتشف أي مدة تناسبك أكثر.</li>`,
+      "tips-article-btn": "اقرأ المقال الكامل",
       "tips-article-link": "countdown-tips-ar.html"
     }
   };
 
-  const langNames = { en:"English", fr:"Fran�ais", de:"Deutsch", ru:"???????", el:"????????", es:"Espa�ol", ar:"???????" };
+  const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
 
   function getLang() {
     try {
@@ -364,7 +364,7 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
     // indicator (removed visual element; code will still attempt to update if present)
     const labelEl = document.getElementById('language-label');
     const nameEl = document.getElementById('language-name');
-    if (labelEl) labelEl.textContent = t['language-label'] || '????:';
+    if (labelEl) labelEl.textContent = t['language-label'] || 'Язык:';
     if (nameEl) nameEl.textContent = langNames[lang] || lang;
 
     // main UI strings
@@ -387,9 +387,9 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
     const startBtn = document.getElementById('startBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const resetBtn = document.getElementById('resetBtn');
-    if (startBtn) startBtn.textContent = t['start'] || '?????';
-    if (pauseBtn) pauseBtn.textContent = t['pause'] || '?????';
-    if (resetBtn) resetBtn.textContent = t['reset'] || '?????';
+    if (startBtn) startBtn.textContent = t['start'] || 'Старт';
+    if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Пауза';
+    if (resetBtn) resetBtn.textContent = t['reset'] || 'Сброс';
 
     // faq & howto & tips
     const faqTitle = document.getElementById('faq-title');
@@ -465,7 +465,7 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
         const lang = getLang();
         const t = countdownTranslations[lang] || countdownTranslations['ru'];
         paused = false;
-        if (pauseBtn) pauseBtn.textContent = t['pause'] || '?????';
+        if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Пауза';
 
         timerInterval = setInterval(function() {
           if (!paused && totalSeconds > 0) {
@@ -476,9 +476,9 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
             clearInterval(timerInterval);
             timerInterval = null;
             try {
-              alert(t['alert-end'] || "????? ?????!");
+              alert(t['alert-end'] || "Время вышло!");
             } catch (e) {}
-            if (pauseBtn) pauseBtn.textContent = t['pause'] || '?????';
+            if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Пауза';
           }
         }, 1000);
       });
@@ -489,7 +489,7 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
         paused = !paused;
         const lang = getLang();
         const t = countdownTranslations[lang] || countdownTranslations['ru'];
-        this.textContent = paused ? (t['resume'] || '??????????') : (t['pause'] || '?????');
+        this.textContent = paused ? (t['resume'] || 'Продолжить') : (t['pause'] || 'Пауза');
       });
     }
 
@@ -502,17 +502,16 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
         const lang = getLang();
         const t = countdownTranslations[lang] || countdownTranslations['ru'];
         const pauseBtnEl = document.getElementById('pauseBtn');
-        if (pauseBtnEl) pauseBtnEl.textContent = t['pause'] || '?????';
+        if (pauseBtnEl) pauseBtnEl.textContent = t['pause'] || 'Пауза';
         paused = false;
       });
     }
   });
 </script>
+
 <footer>
-  � 2025 TimerHaven. ??? ??????????? ????????? ? ???????? ???????????.<br/>
-<a href="privacy.html">???????? ??????????????????</a> � <a href="terms.html">???????</a> � <a href="contact.html">????????</a>
+  &copy; 2025 TimerHaven. Все инструменты бесплатны и защищают приватность.<br>
+  <a href="privacy.html">Политика конфиденциальности</a> &bull; <a href="terms.html">Условия</a> &bull; <a href="contact.html">Контакты</a>
 </footer>
-<p style="margin-top:1rem;"><a class="cta" href="/ru/countdown/countdown-index.html">Read full guide</a></p></body>
+</body>
 </html>
-
-

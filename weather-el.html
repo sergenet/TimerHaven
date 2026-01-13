@@ -1,555 +1,280 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Καιρός παγκοσμίως — TimerHaven</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Καιρός παγκοσμίως</title>
   <meta name="description" content="Ελέγξτε τον καιρό για πόλεις σε όλο τον κόσμο άμεσα.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    :root{--brand:#0d6efd;--muted:#6b7c89}
-    html,body { height:100%; }
-    body { background:#f4f7fb; font-family:'Inter','Montserrat', Arial, sans-serif; color:#0b2545; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    .main-container { max-width:920px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:80vh; box-sizing:border-box; }
-    .card { background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.06); width:100%; padding:1.6rem 1.5rem; box-sizing:border-box; }
-    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand); text-decoration:none; font-weight:700; }
-    .back-link:hover { text-decoration:underline; }
-    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .45rem 0; display:flex; align-items:center; gap:.5rem; font-weight:700; }
-    .read-guide-wrap { display:inline-block; margin-bottom:.6rem; }
-    .read-guide { display:inline-flex !important; align-items:center; justify-content:center; padding:.45rem .85rem; border-radius:8px; background:var(--brand); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; white-space:nowrap; box-sizing:border-box; }
-    .lead { color:#374151; margin:0 0 0.9rem 0; font-size:1.05rem; }
+    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
+    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
+    .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
+    .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
+
+    /* Hide the visible language selector while keeping markup and JS intact */
+    .top-row { display: none !important; }
+
+    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
+    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); padding:1.3rem; }
+    .article-card { width:330px; min-width:200px; min-height:340px; height:340px; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; }
+    .tool-card { width:410px; min-width:240px; min-height:330px; display:flex; flex-direction:column; }
+    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
+    .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
     .weather-form-row { display:flex; gap:.5rem; margin-bottom:1rem; align-items:center; flex-wrap:wrap; }
     .weather-result { margin-top:1rem; background:#f7fafc; border-radius:7px; padding:1rem; font-size:1.15em; min-height:48px; }
-    .powered-by { margin-top:0.6rem; font-size:0.92rem; color:var(--muted); }
-    .action-row { display:flex; gap:.7rem; flex-wrap:wrap; align-items:center; margin-top:.4rem; }
-    #getWeatherBtn { min-width:175px; height:42px; font-size:1.07em; background:var(--brand); color:#fff; border:none; border-radius:8px; font-weight:600; box-shadow:0 2px 8px #e0e7ef; cursor:pointer; padding:0 1.1rem; }
-    #useLocationBtn { min-width:175px; height:42px; font-size:1.02rem; background:#444; color:#fff; border-radius:8px; border:none; padding:0 1.1rem; display:inline-flex; align-items:center; gap:.4em; cursor:pointer; justify-content:center; text-align:center; white-space:nowrap; }
-    .unit-toggle { display:inline-flex; gap:6px; align-items:center; margin-left:6px; }
-    .unit-toggle button { border-radius:8px; padding:6px 10px; border:1px solid #e6eef8; background:#fff; cursor:pointer; font-weight:700; }
-    .unit-toggle button.active { background:var(--brand); color:#fff; border-color:var(--brand); }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
-    .forecast-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; margin-top:0.6rem; }
-    @media(min-width:560px) { .forecast-grid { grid-template-columns: repeat(3, 1fr); } }
-    .forecast-day { background:#fff; border-radius:8px; padding:.55rem; box-shadow:0 1px 4px rgba(9,30,66,0.04); text-align:center; font-size:0.95rem; }
-    .forecast-day .day { font-weight:700; color:#0b2545; margin-bottom:.25rem; }
-    .weather-icon { font-size:1.4rem; margin-bottom:.25rem; display:block; }
-    .forecast-day .desc { color:#374151; font-size:.86rem; margin-top:.25rem; }
-    .forecast-day .temp { margin-top:.3rem; color:#185a9d; }
-    @media (max-width:750px) { #getWeatherBtn,#useLocationBtn{width:100%;} .weather-form-row{flex-direction:column;align-items:stretch;} .action-row{flex-direction:column;} }
-  </style>
-<script>
+    .powered-by { margin-top:0.5rem; font-size:0.9em; color:#6b7280; display:flex; align-items:center; gap:.4rem; }
+    .powered-by a { text-decoration:none; color:inherit; font-weight:600; }
+    .powered-by .provider { font-size:0.9em; color:#6b7280; opacity:0.95; }
 
-</script>
-<script>
-window.__timerhaven_ad_client = "ca-pub-0467059729557007";
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+    .action-row { display:flex; gap:.7rem; flex-wrap:wrap; }
+    #getWeatherBtn { width:175px; height:42px; font-size:1.07em; background:#157af6; color:#fff; border:none; border-radius:8px; font-weight:600; box-shadow:0 2px 8px #e0e7ef; cursor:pointer; }
+    #useLocationBtn { background:#444; color:#fff; border-radius:8px; font-size:1.07em; font-weight:600; border:none; padding:0.4em 1.1em; width:175px; height:42px; display:inline-flex; align-items:center; gap:.4em; cursor:pointer; }
+    @media (max-width:750px) { #getWeatherBtn,#useLocationBtn{width:100%;} .weather-form-row{flex-direction:column;align-items:stretch;} .action-row{flex-direction:column;} }
+    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
+
+    /* Strong rule: remove underlines for links in article-card lists and do NOT add underline on hover */
+    .article-card a,
+    .article-card ul a,
+    .article-card ol a,
+    .article-card li a,
+    .article-card ul li a,
+    .article-card ol li a {
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+    .article-card a:hover,
+    .article-card ul a:hover,
+    .article-card ol a:hover,
+    .article-card li a:hover,
+    .article-card ul li a:hover,
+    .article-card ol li a:hover {
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+
+    /* FAQ summary styling so the summary text/icon is visible and sits next to the arrow */
+    .faq-section summary { cursor:pointer; font-weight:700; font-size:1rem; display:flex; align-items:center; gap:.5rem; }
+    .faq-section summary .fa { color:#185a9d; }
+  </style>
 </head>
 <body>
-  <main class="main-container" role="main">
-    <article class="card" aria-labelledby="title">
-      <a href="index.html" class="back-link">&larr; Επιστροφή στο κύριο μενού</a>
+  <div class="page-wrap">
+    <div class="top-row">
+      <label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
+      <select id="language-select-top" class="language-select" aria-label="Language selector">
+        <option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el" selected>Ελληνικά</option><option value="ar">العربية</option>
+      </select>
+    </div>
 
-      <div id="title" class="tool-title"><i class="fa fa-cloud-sun"></i> Καιρός παγκοσμίως</div>
+    <div class="text-center mb-4">
+      <h1 style="margin-bottom:.25rem;">Καιρός παγκοσμίως</h1>
+      <p class="lead" style="color:#374151; margin-bottom:1rem;">Ελέγξτε τον καιρό για πόλεις σε όλο τον κόσμο άμεσα.</p>
+    </div>
 
-      <div class="read-guide-wrap">
-        <a id="read-guide-btn" class="read-guide" href="https://timerhaven.com/el/weather/weather-index.html" target="_blank" rel="noopener">Διαβάστε τον οδηγό</a>
+    <div class="center-row">
+      <div class="article-card" aria-labelledby="howto-title">
+        <div>
+          <h2 id="howto-title"><i class="fa fa-cloud-sun"></i> Πώς να χρησιμοποιήσετε τον καιρό</h2>
+          <ol style="padding-left:1.1rem; color:#374151;">
+            <li><b>Επιλέξτε ή εισάγετε πόλη:</b> Επιλέξτε από τη λίστα ή πληκτρολογήστε τη δική σας.</li>
+            <li><b>Χρήση τοποθεσίας:</b> Πατήστε <strong>Χρήση τοποθεσίας</strong>.</li>
+            <li><b>Δείτε τα αποτελέσματα:</b> Πατήστε <strong>Λήψη καιρού</strong>.</li>
+          </ol>
+        </div>
+        <a href="weather-how-to-el.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Διαβάστε το άρθρο</a>
       </div>
 
-      <p class="lead">Ελέγξτε τον καιρό για πόλεις σε όλο τον κόσμο άμεσα.</p>
+      <div class="tool-card" role="region" aria-label="Global Weather">
+        <a href="index.html" class="back-link">&larr; Επιστροφή στο κύριο μενού</a>
 
-      <form id="weatherForm" autocomplete="off">
-        <div class="weather-form-row">
-          <select id="cityDropdown" class="form-select" title="Επιλέξτε πόλη..." style="min-width:140px;">
-            <option value="">Επιλέξτε πόλη...</option>
-            <option value="New York">Νέα Υόρκη</option>
-            <option value="London">Λονδίνο</option>
-            <option value="Paris">Παρίσι</option>
-            <option value="Berlin">Βερολίνο</option>
-            <option value="Tokyo">Τόκιο</option>
-            <option value="Sydney">Σίδνεϊ</option>
-            <option value="São Paulo">Σάο Πάολο</option>
-            <option value="Moscow">Μόσχα</option>
-            <option value="Dubai">Ντουμπάι</option>
-            <option value="Istanbul">Κωνσταντινούπολη</option>
-            <option value="Johannesburg">Γιοχάνεσμπουργκ</option>
-            <option value="Toronto">Τόροντο</option>
-            <option value="Mexico City">Πόλη του Μεξικού</option>
-            <option value="Los Angeles">Λος Άντζελες</option>
-            <option value="Mumbai">Μουμπάι</option>
-            <option value="Cairo">Κάιρο</option>
-            <option value="Singapore">Σιγκαπούρη</option>
-            <option value="Hong Kong">Χονγκ Κονγκ</option>
-            <option value="Bangkok">Μπανγκόκ</option>
-            <option value="Seoul">Σεούλ</option>
-            <option value="San Francisco">Σαν Φρανσίσκο</option>
-            <option value="Rome">Ρώμη</option>
-            <option value="Kolkata">Κολκάτα</option>
-            <option value="Jakarta">Τζακάρτα</option>
-            <option value="Madrid">Μαδρίτη</option>
-            <option value="Cape Town">Κέιπ Τάουν</option>
-            <option value="Lagos">Λάγος</option>
-            <option value="Melbourne">Μελβούρνη</option>
-            <option value="Beijing">Πεκίνο</option>
-            <option value="Chicago">Σικάγο</option>
-            <option value="Vancouver">Βανκούβερ</option>
-            <option value="Auckland">Όκλαντ</option>
-            <option value="Hanoi">Χανόι</option>
-            <option value="Manila">Μανίλα</option>
-            <option value="Warsaw">Βαρσοβία</option>
-          </select>
+        <!-- Middle visible title intentionally removed to keep the card minimal per request -->
 
-          <input type="text" id="cityInput" class="form-control" placeholder="Ή πληκτρολογήστε πόλη..." title="Ή πληκτρολογήστε πόλη..." style="min-width:160px;">
-        </div>
-
-        <div class="action-row" role="group" aria-label="Δράσεις">
-          <button type="submit" id="getWeatherBtn">Λήψη καιρού</button>
-          <button type="button" id="useLocationBtn"><i class="fa fa-location-arrow"></i> Χρήση τοποθεσίας</button>
-
-          <div class="unit-toggle" role="group" aria-label="Μονάδες">
-            <button type="button" id="unitC" data-unit="C" title="Celsius" aria-pressed="false">°C</button>
-            <button type="button" id="unitF" data-unit="F" title="Fahrenheit" aria-pressed="false">°F</button>
+        <form id="weatherForm" autocomplete="off">
+          <div class="weather-form-row">
+            <select id="cityDropdown" class="form-select" title="Επιλέξτε πόλη..." style="min-width:140px;">
+              <option value="">Επιλέξτε πόλη...</option>
+              <option value="New York">Νέα Υόρκη</option>
+              <option value="London">Λονδίνο</option>
+              <option value="Paris">Παρίσι</option>
+              <option value="Berlin">Βερολίνο</option>
+              <option value="Tokyo">Τόκιο</option>
+              <option value="Sydney">Σίδνεϊ</option>
+              <option value="São Paulo">Σάο Πάολο</option>
+              <option value="Moscow">Μόσχα</option>
+              <option value="Dubai">Ντουμπάι</option>
+              <option value="Istanbul">Κωνσταντινούπολη</option>
+              <option value="Johannesburg">Γιοχάνεσμπουργκ</option>
+              <option value="Toronto">Τόροντο</option>
+              <option value="Mexico City">Πόλη του Μεξικού</option>
+              <option value="Los Angeles">Λος Άντζελες</option>
+              <option value="Mumbai">Μουμπάι</option>
+              <option value="Cairo">Κάιρο</option>
+              <option value="Singapore">Σιγκαπούρη</option>
+              <option value="Hong Kong">Χονγκ Κονγκ</option>
+              <option value="Bangkok">Μπανγκόκ</option>
+              <option value="Seoul">Σεούλ</option>
+              <option value="San Francisco">Σαν Φρανσίσκο</option>
+              <option value="Rome">Ρώμη</option>
+              <option value="Kolkata">Κολκάτα</option>
+              <option value="Jakarta">Τζακάρτα</option>
+              <option value="Madrid">Μαδρίτη</option>
+              <option value="Cape Town">Κέιπ Τάουν</option>
+              <option value="Lagos">Λάγος</option>
+              <option value="Melbourne">Μελβούρνη</option>
+              <option value="Beijing">Πεκίνο</option>
+              <option value="Chicago">Σικάγο</option>
+              <option value="Vancouver">Βανκούβερ</option>
+              <option value="Auckland">Όκλαντ</option>
+              <option value="Hanoi">Χανόι</option>
+              <option value="Manila">Μανίλα</option>
+              <option value="Warsaw">Βαρσοβία</option>
+            </select>
+            <input type="text" id="cityInput" class="form-control" placeholder="Ή πληκτρολογήστε πόλη..." title="Ή πληκτρολογήστε πόλη..." style="min-width:160px;">
           </div>
+
+          <div class="action-row">
+            <button type="submit" id="getWeatherBtn">Λήψη καιρού</button>
+            <button type="button" id="useLocationBtn"><i class="fa fa-location-arrow"></i> Χρήση τοποθεσίας</button>
+          </div>
+        </form>
+
+        <div id="weatherResult" class="weather-result"></div>
+
+        <div class="powered-by">Δεδομένα από <a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a><span class="provider"></span></div>
+
+        <details class="faq-section" style="margin-top:1rem;">
+          <summary><i class="fa fa-play"></i> Συχνές ερωτήσεις</summary>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>Πόσο ακριβής είναι ο καιρός;</b> Τα δεδομένα παρέχονται από Open‑Meteo ή παρόμοια APIs.</li>
+            <li><b>Μπορώ να χρησιμοποιήσω την τοποθεσία μου;</b> Ναι, πατήστε <b>Χρήση τοποθεσίας</b>.</li>
+            <li><b>Μπορώ να εισάγω οποιαδήποτε πόλη;</b> Ναι! Πληκτρολογήστε την πόλη.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="article-card" aria-labelledby="tips-title">
+        <div>
+          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές Καιρού</h2>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>Σχεδιάστε εκ των προτέρων:</b> Ελέγξτε τον καιρό πριν ταξίδια ή εκδηλώσεις.</li><li><b>Χρησιμοποιήστε τοποθεσία:</b> Λάβετε τοπικές ενημερώσεις άμεσα.</li><li><b>Εξοικονομήστε χρόνο:</b> Χρησιμοποιήστε τη λίστα για δημοφιλείς πόλεις.</li>
+          </ul>
         </div>
-      </form>
+        <a href="weather-tips-el.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Διαβάστε το άρθρο</a>
+      </div>
+    </div>
 
-      <div id="weatherResult" class="weather-result" aria-live="polite"></div>
-      <div class="powered-by">Δεδομένα από <a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a></div>
-
-      <details class="faq-section" style="margin-top:1rem;">
-        <summary style="font-weight:700; font-size:1rem;">Συχνές ερωτήσεις</summary>
-        <ul style="padding-left:1.1rem; color:#374151;">
-          <li><strong>Πόσο ακριβής είναι η πληροφορία;</strong> Τα δεδομένα προέρχονται από Open‑Meteo και παρόμοιες υπηρεσίες.</li>
-          <li><strong>Μπορώ να χρησιμοποιήσω την τοποθεσία μου;</strong> Ναι — πατήστε <strong>Χρήση τοποθεσίας</strong>.</li>
-          <li><strong>Μπορώ να εισάγω οποιαδήποτε πόλη;</strong> Ναι — πληκτρολογήστε την πόλη.</li>
-        </ul>
-      </details>
-    </article>
-  </main>
+    <footer class="site">
+      &copy; 2025 TimerHaven. <a href="privacy.html">Πολιτική</a>
+    </footer>
+  </div>
 
   <script>
-  // EL page JS — unified, robust logic:
-  // - instant client-side conversion when possible
-  // - safe re-fetch fallback that preserves panel on failure
-  // - robust unit toggle binding
-  // - geolocation + reverse-geocoding to render place name and set LAST_QUERY
-
-  const PAGE_LANG = 'el';
-  const TEMP_UNIT_KEY = 'timerhavenTempUnit';
-  const DEFAULT_UNIT = 'C';
-  let LAST_QUERY = null;
-
-  function getStoredUnit() { try { const u = localStorage.getItem(TEMP_UNIT_KEY); if (u === 'C' || u === 'F') return u; } catch(e){} return DEFAULT_UNIT; }
-  function setStoredUnit(u) { try { localStorage.setItem(TEMP_UNIT_KEY, u); } catch(e){} }
-
-  function applyUnitUI() {
-    try {
-      const u = getStoredUnit();
-      const c = document.getElementById('unitC'), f = document.getElementById('unitF');
-      if (!c || !f) return;
-      if (u === 'C') { c.classList.add('active'); c.setAttribute('aria-pressed','true'); f.classList.remove('active'); f.setAttribute('aria-pressed','false'); }
-      else { f.classList.add('active'); f.setAttribute('aria-pressed','true'); c.classList.remove('active'); c.setAttribute('aria-pressed','false'); }
-    } catch(e){ console.warn('applyUnitUI error', e); }
-  }
-
-  // Convert current DOM temperatures/wind units without network (fast)
-  function convertDisplayedUnits(targetUnit){
-    try {
-      const el = document.getElementById('weatherResult');
-      if (!el) return false;
-      const prevHTML = el.innerHTML;
-      const hasC = /°\s*C/i.test(prevHTML);
-      const hasF = /°\s*F/i.test(prevHTML);
-      if (!hasC && !hasF) return false;
-      let html = prevHTML;
-      if (targetUnit === 'F') {
-        html = html.replace(/(-?\d+)\s*°\s*C/gi, function(_, n){ const c = parseInt(n,10); return Math.round((c * 9/5) + 32) + '°F'; });
-        html = html.replace(/(\d+(?:\.\d+)?)\s*m\/s/gi, function(_, v){ const mps = parseFloat(v); return Math.round(mps * 2.23694) + ' mph'; });
-      }
-      if (targetUnit === 'C') {
-        html = html.replace(/(-?\d+)\s*°\s*F/gi, function(_, n){ const f = parseInt(n,10); return Math.round((f - 32) * 5/9) + '°C'; });
-        html = html.replace(/(\d+(?:\.\d+)?)\s*mph/gi, function(_, v){ const mph = parseFloat(v); return Math.round((mph / 2.23694)) + ' m/s'; });
-      }
-      if (html !== prevHTML) { el.innerHTML = html; setStoredUnit(targetUnit); applyUnitUI(); return true; }
-      return false;
-    } catch (err) { console.warn('convertDisplayedUnits error', err); return false; }
-  }
-
-  // Reapply last query (prefer network when LAST_QUERY present) else try conversion then safe fallback
-  function reapplyLastQuery() {
-    if (LAST_QUERY) {
-      if (LAST_QUERY.type === 'coords' && LAST_QUERY.lat != null && LAST_QUERY.lon != null) {
-        fetchOpenMeteoForecast(LAST_QUERY.lat, LAST_QUERY.lon).then(fore => { try { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(fore, LAST_QUERY.placeName || ''); } catch(e){} }).catch(()=>{});
-      } else if (LAST_QUERY.type === 'city' && LAST_QUERY.city) { fetchWeather(LAST_QUERY.city); }
-      else if (LAST_QUERY.type === 'backend' && LAST_QUERY.city) { fetchBackendCity(LAST_QUERY.city); }
-      return;
-    }
-
-    const desiredUnit = getStoredUnit();
-    const converted = convertDisplayedUnits(desiredUnit);
-    if (converted) return;
-
-    // Safe fetch fallback (preserve panel on failure)
-    try {
-      const resultEl = document.getElementById('weatherResult');
-      if (!resultEl) return;
-      const prevHTML = resultEl.innerHTML;
-      let place = null;
-      const bold = resultEl.querySelector('b, strong');
-      if (bold && bold.textContent) place = bold.textContent.trim();
-      if (!place) {
-        const lines = (resultEl.textContent || '').split(/\n/).map(s=>s.trim()).filter(Boolean);
-        if (lines.length) {
-          for (const line of lines) {
-            if (/,/.test(line) || /[A-Za-z]/.test(line)) { place = line; break; }
-          }
-          if (!place) place = lines[0];
-        }
-      }
-      if (!place) return;
-      resultEl.innerHTML = 'Φόρτωση...';
-      geocodeCity(place).then(geo => {
-        if (geo && geo.latitude != null && geo.longitude != null) {
-          LAST_QUERY = { type: 'coords', lat: geo.latitude, lon: geo.longitude, placeName: geo.name, city: place };
-          fetchOpenMeteoForecast(geo.latitude, geo.longitude).then(fore => {
-            if (!fore) { resultEl.innerHTML = prevHTML; return; }
-            try { resultEl.innerHTML = renderOpenMeteo(fore, geo.name || place); } catch(e){ resultEl.innerHTML = prevHTML; }
-          }).catch(()=> { resultEl.innerHTML = prevHTML; });
-        } else { resultEl.innerHTML = prevHTML; }
-      }).catch(()=> { resultEl.innerHTML = prevHTML; });
-    } catch (err) { console.warn('reapplyLastQuery fallback error', err); }
-  }
-
-  // Robust unit-toggle binding
-  (function bindUnitToggles() {
-    function findButtons(){
-      const byIdC = document.getElementById('unitC'), byIdF = document.getElementById('unitF');
-      if (byIdC || byIdF) return { c:byIdC, f:byIdF };
-      const byDataC = document.querySelector('button[data-unit="C"], button[data-unit="°C"]');
-      const byDataF = document.querySelector('button[data-unit="F"], button[data-unit="°F"]');
-      if (byDataC || byDataF) return { c:byDataC, f:byDataF };
-      const container = document.querySelector('.unit-toggle') || document.body;
-      let c=null,f=null;
-      container.querySelectorAll('button, [role="button"]').forEach(btn=>{
-        const txt = (btn.textContent||'').trim();
-        if (!c && /°\s*C|Celsius|C$/i.test(txt)) c = btn;
-        if (!f && /°\s*F|Fahrenheit|F$/i.test(txt)) f = btn;
-      });
-      return { c,f };
-    }
-
-    function attach(btn, unit) {
-      if (!btn) return;
-      const handler = function(e) {
-        try {
-          setStoredUnit(unit);
-          if (!LAST_QUERY) {
-            const conv = convertDisplayedUnits(unit);
-            if (conv) return;
-          }
-          applyUnitUI();
-          setTimeout(reapplyLastQuery, 50);
-        } catch(err){ console.warn('unit handler error', err); }
-      };
-      btn.addEventListener('click', handler);
-      try { btn.addEventListener('touchend', function(e){ e.preventDefault(); handler(); }, { passive:false }); } catch(e){}
-      btn.addEventListener('keydown', function(ev){ if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); handler(); } });
-    }
-
-    function init(){
-      const { c, f } = findButtons();
-      attach(c, 'C'); attach(f, 'F');
-      applyUnitUI();
-      if (!(c && f)) {
-        setTimeout(()=>{ const again = findButtons(); attach(again.c,'C'); attach(again.f,'F'); applyUnitUI(); }, 350);
-      }
-
-      document.addEventListener('click', function(e){
-        try {
-          const t = e.target;
-          const unitBtn = t.closest && t.closest('#unitC, #unitF');
-          if (unitBtn) {
-            e.preventDefault();
-            const id = unitBtn.id;
-            const unit = (id === 'unitC') ? 'C' : (id === 'unitF') ? 'F' : null;
-            if (unit) { setStoredUnit(unit); applyUnitUI(); setTimeout(reapplyLastQuery, 50); }
-          }
-        } catch(_) {}
-      });
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
-  })();
-
-  // --- Weather rendering & fetch helpers (same approach used across other language pages) ---
-  function describeWeatherCode(code) {
-    const map = {
-      0:"Καθαρός ουρανός",1:"Κυρίως καθαρός",2:"Μερικώς νεφελώδης",3:"Συννεφιά",
-      45:"Ομίχλη",48:"Ομίχλη με πάγο",51:"Ασθενής ψιλόβροχο",53:"Μέτριος ψιλόβροχος",
-      55:"Πυκνή ψιχάλα",56:"Ασθενής παγωμένος ψιλόβροχος",57:"Πυκνός παγωμένος ψιλόβροχος",
-      61:"Ελαφριά βροχή",63:"Μέτρια βροχή",65:"Συνεχής βροχή",
-      71:"Ελαφριά χιονόπτωση",73:"Μέτρια χιονόπτωση",75:"Ισχυρή χιονόπτωση",
-      80:"Ελαφρές καταιγίδες",81:"Μέτριες καταιγίδες",82:"Ισχυρές καταιγίδες",
-      95:"Καταιγίδα",96:"Καταιγίδα με μικρό χαλάζι",99:"Καταιγίδα με ισχυρό χαλάζι"
-    };
-    return map[code] || String(code);
-  }
-
-  function localizedWeekday(dateStr) { try { const d = new Date(dateStr); return new Intl.DateTimeFormat(PAGE_LANG, { weekday: 'short' }).format(d); } catch(e){ return dateStr; } }
-
-  function getWeatherEmoji(code) {
-    if (code === null || code === undefined) return '•';
-    if (code === 0) return '☀️';
-    if (code === 1 || code === 2) return '🌤️';
-    if (code === 3) return '☁️';
-    if ([45,48].includes(code)) return '🌫️';
-    if ([51,53,55,56,57].includes(code)) return '🌦️';
-    if ([61,63,65,80,81,82].includes(code)) return '🌧️';
-    if ([71,73,75].includes(code)) return '❄️';
-    if ([95,96,99].includes(code)) return '⛈️';
-    return '🌤️';
-  }
-
-  function renderOpenMeteo(forecast, placeName) {
-    const unit = getStoredUnit();
-    const tempSymbol = (unit === 'F') ? '°F' : '°C';
-    const speedUnit = (unit === 'F') ? 'mph' : 'm/s';
-    const cw = forecast.current_weather || {};
-    const daily = forecast.daily || {};
-    const parts = [];
-    const title = `<div style="font-weight:700; margin-bottom:6px;">${placeName || ''}</div>`;
-    const weatherLabel = describeWeatherCode(cw.weathercode);
-    const currentHtml = `<div style="display:flex;gap:.6rem;align-items:center;">
-      <div style="flex:1"><div style="font-weight:700;font-size:1.05rem;">${weatherLabel}</div></div>
-      <div style="text-align:right;min-width:110px">
-        <div style="font-size:1.45rem;font-weight:700;">${typeof cw.temperature === 'number' ? Math.round(cw.temperature) + tempSymbol : 'N/A'}</div>
-        <div style="color:#6b7280;">Άνεμος ${typeof cw.windspeed === 'number' ? Math.round(cw.windspeed) + ' ' + speedUnit : 'N/A'}</div>
-      </div>
-    </div>`;
-    parts.push(title + currentHtml);
-
-    if (daily.time && daily.time.length) {
-      const days = daily.time.map((d,i)=> {
-        const maxT = daily.temperature_2m_max && daily.temperature_2m_max[i] !== undefined ? Math.round(daily.temperature_2m_max[i]) : '—';
-        const minT = daily.temperature_2m_min && daily.temperature_2m_min[i] !== undefined ? Math.round(daily.temperature_2m_min[i]) : '—';
-        const code = daily.weathercode && daily.weathercode[i] !== undefined ? daily.weathercode[i] : null;
-        const desc = code !== null ? describeWeatherCode(code) : '';
-        return { date: d, maxT, minT, code, desc };
-      }).slice(0,7);
-
-      let grid = '<div class="forecast-grid">';
-      days.forEach(day => {
-        grid += `<div class="forecast-day">
-                    <div class="day">${localizedWeekday(day.date)}</div>
-                    <div class="weather-icon">${getWeatherEmoji(day.code)}</div>
-                    <div class="desc">${day.desc}</div>
-                    <div class="temp"><span style="font-weight:700;">${day.maxT}${tempSymbol}</span> / ${day.minT}${tempSymbol}</div>
-                 </div>`;
-      });
-      grid += '</div>';
-      parts.push(grid);
-    }
-
-    return parts.join('');
-  }
-
-  function geocodeCity(city) {
-    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=${PAGE_LANG}`;
-    return fetch(url).then(r => r.json()).then(j => {
-      if (j && Array.isArray(j.results) && j.results.length > 0) {
-        const r0 = j.results[0];
-        return { latitude: r0.latitude, longitude: r0.longitude, name: r0.name + (r0.country ? ', ' + r0.country : '') };
-      }
-      return null;
-    }).catch(()=>null);
-  }
-
-  function fetchOpenMeteoForecast(lat, lon) {
-    const unit = getStoredUnit();
-    const temperature_unit = (unit === 'F') ? 'fahrenheit' : 'celsius';
-    const windspeed_unit = (unit === 'F') ? 'mph' : 'ms';
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&daily=temperature_2m_max,temperature_2m_min,weathercode&current_weather=true&timezone=auto&forecast_days=7&temperature_unit=${temperature_unit}&windspeed_unit=${windspeed_unit}`;
-    return fetch(url).then(r => r.json());
-  }
-
-  function fetchBackendCity(city) {
-    const resultEl = document.getElementById('weatherResult');
-    return fetch(`/weather?city=${encodeURIComponent(city)}`)
-      .then(r => r.json())
-      .then(data => {
-        if (!data || (data.cod && parseInt(data.cod,10) !== 200)) {
-          const err = (data && (data.error || data.message)) || `Δεν βρέθηκαν δεδομένα για "${city}".`;
-          resultEl.innerHTML = `<span style="color:#b00;">${err}</span>`;
-          return null;
-        }
-        LAST_QUERY = { type: 'backend', city };
-        resultEl.innerHTML = renderWeatherData(data);
-        return data;
-      })
-      .catch(() => {
-        resultEl.innerHTML = '<span style="color:#b00;">' + 'Σφάλμα στην ανάκτηση' + '</span>';
-        return null;
-      });
-  }
-
+  // localized JS strings
+  const MSG_PLEASE_SELECT = "Επιλέξτε ή εισάγετε μια πόλη, παρακαλώ.";
+  const MSG_GEO_UNSUPPORTED = "Η γεωτοποθεσία δεν υποστηρίζεται.";
+  const MSG_UNABLE_LOCATION = "Δεν μπορεί να ληφθεί η τοποθεσία σας.";
+  const MSG_FETCH_ERROR = "Σφάλμα ανάκτησης δεδομένων καιρού.";
+  const MSG_NOT_FOUND_TEMPLATE = "Δεν βρέθηκε καιρός για «{city}».";
+  
   function renderWeatherData(data) {
-    const unit = getStoredUnit();
-    let tempStr = (data.main && typeof data.main.temp === 'number') ? Math.round(data.main.temp) + '°C' : 'N/A';
-    if (unit === 'F' && data.main && typeof data.main.temp === 'number') tempStr = Math.round((data.main.temp * 9/5)+32) + '°F';
-    const windUnit = (unit === 'F') ? 'mph' : 'm/s';
-    let wind = data.wind ? data.wind.speed : 'N/A';
-    if (unit === 'F' && data.wind && typeof data.wind.speed === 'number') wind = Math.round(data.wind.speed * 2.23694);
-    return `<b>${data.name}${data.sys && data.sys.country ? ', ' + data.sys.country : ''}</b><br>
-            Καιρός: ${data.weather && data.weather[0] ? data.weather[0].description : 'N/A'}<br>
-            Θερμοκρασία: ${tempStr}<br>
-            Υγρασία: ${data.main ? data.main.humidity : 'N/A'}%<br>
-            Άνεμος: ${wind} ${windUnit}`;
+    return `<b>${data.name}, ${data.sys.country}</b><br>
+            Weather: ${data.weather[0].description}<br>
+            Temperature: ${data.main.temp}&deg;C<br>
+            Humidity: ${data.main.humidity}%<br>
+            Wind: ${data.wind.speed} m/s`;
   }
 
   function fetchWeather(city) {
     const resultEl = document.getElementById('weatherResult');
-    if (!city) { resultEl.innerHTML = '<span style="color:#b00;">' + 'Επιλέξτε ή εισάγετε μια πόλη.' + '</span>'; return; }
-    resultEl.innerHTML = 'Φόρτωση...';
-    geocodeCity(city).then(geo => {
-      if (geo && geo.latitude != null && geo.longitude != null) {
-        LAST_QUERY = { type: 'coords', lat: geo.latitude, lon: geo.longitude, placeName: geo.name, city: city };
-        fetchOpenMeteoForecast(geo.latitude, geo.longitude).then(fore => {
-          if (!fore) return fetchBackendCity(city);
-          try { resultEl.innerHTML = renderOpenMeteo(fore, geo.name || city); } catch (e) { console.error('renderOpenMeteo error', e); resultEl.innerHTML = '<span style="color:#b00;">' + 'Σφάλμα στην εμφάνιση' + '</span>'; }
-        }).catch(()=> fetchBackendCity(city));
-      } else fetchBackendCity(city);
-    }).catch(()=> fetchBackendCity(city));
+    if (!city) {
+      resultEl.innerHTML = '<span style="color:#b00;">' + MSG_PLEASE_SELECT + '</span>';
+      return;
+    }
+    fetch(`/weather?city=${encodeURIComponent(city)}`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.cod !== 200 && data.error) {
+          resultEl.innerHTML = `<span style="color:#b00;">${data.error}</span>`;
+          return;
+        }
+        if (data.cod !== 200) {
+          resultEl.innerHTML = '<span style="color:#b00;">' + MSG_NOT_FOUND_TEMPLATE.replace('{city}', city) + '</span>';
+          return;
+        }
+        resultEl.innerHTML = renderWeatherData(data);
+      })
+      .catch(() => {
+        document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_FETCH_ERROR + '</span>';
+      });
   }
 
-  // UI wiring (city dropdown/input/form)
-  try {
-    document.getElementById('cityDropdown').addEventListener('change', function () { document.getElementById('cityInput').value = this.value; if (this.value) fetchWeather(this.value); });
-    document.getElementById('cityInput').addEventListener('input', function () {
-      const val = this.value.trim(); const dd = document.getElementById('cityDropdown'); let found=false;
-      for (let i=0;i<dd.options.length;i++){ if (dd.options[i].value.toLowerCase()===val.toLowerCase()){ dd.selectedIndex=i; found=true; break; } }
-      if (!found) dd.selectedIndex=0;
+  document.getElementById('cityDropdown').addEventListener('change', function() {
+    document.getElementById('cityInput').value = this.value;
+    if (this.value) fetchWeather(this.value);
+  });
+
+  document.getElementById('cityInput').addEventListener('input', function() {
+    const val = this.value.trim();
+    const dd = document.getElementById('cityDropdown');
+    let found = false;
+    for (let i = 0; i < dd.options.length; i++) {
+      if (dd.options[i].value.toLowerCase() === val.toLowerCase()) {
+        dd.selectedIndex = i;
+        found = true;
+        break;
+      }
+    }
+    if (!found) dd.selectedIndex = 0;
+  });
+
+  document.getElementById('weatherForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const city = document.getElementById('cityInput').value.trim() || document.getElementById('cityDropdown').value;
+    fetchWeather(city);
+  });
+
+  document.getElementById('useLocationBtn').addEventListener('click', function() {
+    if (!navigator.geolocation) {
+      document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_GEO_UNSUPPORTED + '</span>';
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      fetch(`/weather?lat=${lat}&lon=${lon}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data.cod !== 200 && data.error) {
+            document.getElementById('weatherResult').innerHTML = `<span style="color:#b00;">${data.error}</span>`;
+            return;
+          }
+          if (data.cod !== 200) {
+            document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_UNABLE_LOCATION + '</span>';
+            return;
+          }
+          document.getElementById('weatherResult').innerHTML = renderWeatherData(data);
+          document.getElementById('cityInput').value = data.name;
+          document.getElementById('cityDropdown').value = '';
+        })
+        .catch(() => {
+          document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_FETCH_ERROR + '</span>';
+        });
+    }, function() {
+      document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_UNABLE_LOCATION + '</span>';
     });
-    document.getElementById('weatherForm').addEventListener('submit', function(e){ e.preventDefault(); const city = document.getElementById('cityInput').value.trim() || document.getElementById('cityDropdown').value; fetchWeather(city); });
-  } catch(e){ console.warn(e); }
+  });
 
-  try { if (!localStorage.getItem(TEMP_UNIT_KEY)) localStorage.setItem(TEMP_UNIT_KEY, DEFAULT_UNIT); } catch(e){}
-  applyUnitUI();
-
-  // --- Robust geolocation + reverse geocoding IIFE (renders place name, sets LAST_QUERY) ---
-  (function(){
-    const TIMEOUT_MS = 25000;
-    const useBtn = document.getElementById('useLocationBtn');
-    const resultEl = document.getElementById('weatherResult');
-
-    function log(msg){ try { console.debug('[geo] '+msg); } catch(e){} }
-    function show(msg, isError){ if (!resultEl) return; resultEl.innerHTML = isError ? ('<span style="color:#b00;">' + msg + '</span>') : msg; }
-
-    function getPositionWithTimeout(opts){
-      return new Promise((resolve, reject) => {
-        if (!navigator.geolocation) { const err = new Error('Geolocation unavailable'); err.code = 0; return reject(err); }
-        let finished=false;
-        const timer = setTimeout(()=> { if (finished) return; finished=true; const err = new Error('Timeout'); err.code = 3; reject(err); }, TIMEOUT_MS);
-        navigator.geolocation.getCurrentPosition(pos => { if (finished) return; finished=true; clearTimeout(timer); resolve(pos); }, err => { if (finished) return; finished=true; clearTimeout(timer); reject(err); }, opts || { enableHighAccuracy:false, maximumAge:0, timeout:TIMEOUT_MS });
+  // language selector redirect
+  (function() {
+    var sel = document.getElementById('language-select-top');
+    if (sel) {
+      sel.addEventListener('change', function() {
+        var v = this.value || 'en';
+        window.location.href = 'weather-' + v + '.html';
       });
     }
-
-    async function queryPermission(){
-      if (!navigator.permissions || !navigator.permissions.query) return null;
-      try { const p = await navigator.permissions.query({ name: 'geolocation' }); return p.state; } catch(e){ log('permissions.query failed: '+e); return null; }
-    }
-
-    function permissionHelpText(){
-      return `
-        <div style="font-size:0.95rem;line-height:1.3;">
-          Φαίνεται ότι η πρόσβαση στην τοποθεσία έχει μπλοκαριστεί. Για να την ενεργοποιήσετε:
-          <ul>
-            <li>Ανοίξτε το μενού του προγράμματος περιήγησης → Ρυθμίσεις ιστότοπου → Τοποθεσία → επιτρέψτε timerhaven.com</li>
-            <li>Βεβαιωθείτε ότι στις ρυθμίσεις Android είναι ενεργοποιημένη η Τοποθεσία</li>
-            <li>Μην χρησιμοποιείτε λειτουργία ανώνυμης περιήγησης</li>
-          </ul>
-          Ή επικολλήστε τις συντεταγμένες από την εφαρμογή Χάρτες (Κοινή χρήση → Αντιγραφή συντεταγμένων).
-        </div>
-      `;
-    }
-
-    function reverseGeocode(lat, lon) {
-      const url = `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&count=1&language=${PAGE_LANG}`;
-      return fetch(url).then(r => r.ok ? r.json() : null).then(j => {
-        if (j && Array.isArray(j.results) && j.results.length > 0) {
-          const r0 = j.results[0];
-          return (r0.name || '') + (r0.country ? ', ' + r0.country : '');
-        }
-        return '';
-      }).catch(()=> '');
-    }
-
-    async function handleUseLocation(e){
-      e && e.preventDefault && e.preventDefault();
-      show('Εντοπισμός τοποθεσίας...');
-      log('User requested location');
-
-      const perm = await queryPermission().catch(()=>null);
-      log('permission state: '+perm);
-      if (perm === 'denied'){ show(permissionHelpText(), true); return; }
-
-      const attempts = [
-        { enableHighAccuracy:false, maximumAge: 60 * 1000, timeout: TIMEOUT_MS },
-        { enableHighAccuracy:true, maximumAge: 0, timeout: TIMEOUT_MS + 5000 }
-      ];
-
-      for (const opts of attempts) {
-        try {
-          const pos = await getPositionWithTimeout(opts);
-          log('got coords: '+pos.coords.latitude+','+pos.coords.longitude);
-          show('' + pos.coords.latitude.toFixed(4) + ', ' + pos.coords.longitude.toFixed(4) + ' — φόρτωση πρόγνωσης...');
-          const placeName = await reverseGeocode(pos.coords.latitude, pos.coords.longitude).catch(()=>'');
-          LAST_QUERY = { type:'coords', lat: pos.coords.latitude, lon: pos.coords.longitude, placeName: placeName || '' };
-          try { window.LAST_QUERY = LAST_QUERY; } catch(e){}
-          try {
-            const fore = await fetchOpenMeteoForecast(pos.coords.latitude, pos.coords.longitude);
-            if (fore) { try { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(fore, placeName || ''); } catch(err) { console.error('renderOpenMeteo error', err); show('Σφάλμα στην εμφάνιση', true); } }
-            else {
-              if (placeName) fetchBackendCity(placeName); else show('Σφάλμα στην ανάκτηση', true);
-            }
-          } catch (err) {
-            console.error('fetchOpenMeteoForecast error', err);
-            if (placeName) fetchBackendCity(placeName); else show('Σφάλμα στην ανάκτηση', true);
-          }
-          return;
-        } catch (err) {
-          log('getPosition attempt failed: ' + (err && err.code) + ' / ' + (err && err.message));
-        }
-      }
-
-      show('Τοποθεσία μη διαθέσιμη — ελέγξτε τα δικαιώματα/το GPS και δοκιμάστε ξανά.', true);
-    }
-
-    window._injectedFetchByCoords = window._injectedFetchByCoords || async function(lat, lon, placeName){
-      try {
-        if (typeof fetchOpenMeteoForecast === 'function' && typeof renderOpenMeteo === 'function') {
-          let resolvedName = placeName || '';
-          if (!resolvedName) { try { resolvedName = await reverseGeocode(lat, lon); } catch(e){ resolvedName = ''; } }
-          const q = { type:'coords', lat: lat, lon: lon, placeName: resolvedName || '' };
-          LAST_QUERY = q;
-          try { window.LAST_QUERY = q; } catch(e){}
-          const fore = await fetchOpenMeteoForecast(lat, lon);
-          if (fore) { try { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(fore, resolvedName || ''); } catch(e){ console.error('renderOpenMeteo error', e); document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">Σφάλμα στην εμφάνιση</span>'; } }
-          else document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">Σφάλμα στην ανάκτηση</span>';
-        } else { console.log('Coordinates available:', lat, lon); }
-      } catch(e){ console.error(e); }
-    };
-
-    if (useBtn) {
-      try { useBtn.removeEventListener && useBtn.removeEventListener('click', handleUseLocation); } catch(e){}
-      useBtn.addEventListener('click', handleUseLocation);
-    }
-    window.receiveNativeLocation = function(obj){
-      try {
-        const lat = parseFloat(obj.latitude || obj.lat);
-        const lon = parseFloat(obj.longitude || obj.lon || obj.lng);
-        if (!isNaN(lat) && !isNaN(lon)) window._injectedFetchByCoords(lat, lon, obj.name || obj.place || '');
-      } catch(e){ log(e); }
-    };
   })();
   </script>
 
@@ -557,5 +282,3 @@ window.__timerhaven_ad_client = "ca-pub-0467059729557007";
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 </body>
 </html>
-
-
