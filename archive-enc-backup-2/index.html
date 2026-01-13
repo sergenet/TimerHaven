@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Task Timer — TimerHaven</title>
+  <meta name="description" content="Task Timer — измеряйте время на задачи, протоколируйте сессии и улучшайте оценки на основе реальных данных.">
+
+  <link rel="canonical" href="https://timerhaven.com/ru/task-timer/">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer/">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer/">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer/">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer/">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer/">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer/">
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer/">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer/">
+
+  <!-- Person structured data (author) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Serge Shammas",
+    "image": "/assets/images/authors/serge-shammas-400.jpg",
+    "url": "/authors/serge-shammas",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- HowTo / Article structured data (Russian page) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Запись и анализ времени задач с помощью Task Timer",
+        "description":"Пошаговый рабочий процесс для измерения реального времени по задачам, учёта прерываний и использования этих данных для улучшения оценок.",
+        "image":"/assets/images/tasktimer-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Task Timer","Заметки","Таблица"],
+        "step":[
+          {"@type":"HowToStep","name":"Создать задачу","text":"Дайте задаче имя и укажите ожидаемую длительность и теги.","image":"/assets/images/tasktimer-step-1.png"},
+          {"@type":"HowToStep","name":"Запустить таймер и фиксировать прерывания","text":"Запустите Task Timer и записывайте прерывания по мере их возникновения.","image":"/assets/images/tasktimer-step-2.png"},
+          {"@type":"HowToStep","name":"Остановить и экспортировать","text":"Остановите таймер и экспортируйте сессию в CSV для недельного анализа.","image":"/assets/images/tasktimer-step-3.png"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Task Timer — измеряйте время и фиксируйте сессии",
+        "image":["/assets/images/tasktimer-snapshot.png"],
+        "author": {"@type":"Person","name":"Serge Shammas"},
+        "datePublished":"2025-10-25",
+        "dateModified":"2025-11-10",
+        "publisher": {"@type":"Organization","name":"TimerHaven","logo":{"@type":"ImageObject","url":"/assets/images/timerhaven-logo.png"}},
+        "description":"Руководство по использованию Task Timer: запись сессий, учёт прерываний и экспорт CSV для анализа.",
+        "mainEntityOfPage":"/ru/task-timer/",
+        "about": {
+          "@type":"SoftwareApplication",
+          "name":"Task Timer",
+          "url": "/timer-ru.html",
+          "applicationCategory": "Productivity",
+          "operatingSystem": "Web"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fffdfa;color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:#fff;border-radius:10px;padding:2rem;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:#0b5f8a;margin-top:0;}
+    .meta{color:#6b7c89;font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;color:#333;}
+    .section{margin-top:1.1rem;}
+    .cta{display:inline-block;margin-top:1rem;padding:0.6rem 1.1rem;border-radius:8px;background:#0b5f8a;color:#fff;text-decoration:none;}
+    .case{background:#f8fff7;border-left:4px solid #b7f0c2;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    .workflow{background:#fff7fb;border-left:4px solid #f0c2e0;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .faq{margin-top:1rem;background:#f3f7fb;padding:1rem;border-radius:8px;}
+    .muted{color:#6b7c89;font-size:0.95rem;}
+    table.sample {width:100%;border-collapse:collapse;margin-top:0.5rem;}
+    table.sample th, table.sample td {text-align:left;padding:0.4rem;border-bottom:1px solid #eee;font-size:0.95rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    .return-link{display:inline-block;margin-top:1rem;text-decoration:none;color:#0b5f8a;font-weight:600;}
+    .small-text-muted{color:#6b7280;font-size:.95rem;margin:0 0 0.5rem 0;}
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="container">
+    <article class="card" role="main" aria-labelledby="title">
+      <h1 id="title">Task Timer — измеряйте время и фиксируйте сессии</h1>
+
+      <!-- Author card -->
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img
+          src="/assets/images/authors/serge-shammas-200.jpg"
+          srcset="/assets/images/authors/serge-shammas-400.jpg 2x"
+          width="56" height="56"
+          alt="Serge Shammas — productivity writer and UX researcher"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='/assets/images/authors/avatar-placeholder.png';">
+        <div>
+          <div class="byline"><strong>Автор: Serge Shammas</strong> — автор по продуктивности и исследователь UX</div>
+          <div class="meta">Опубликовано: 2025-10-25 · Обновлено: 2025-11-10 · Время чтения: 7 мин</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        Task Timer помогает точно учитывать, сколько времени вы тратите на конкретные задачи. Эти данные используются для улучшения оценок, управления рабочей нагрузкой и подготовки отчётов.
+      </p>
+
+      <!-- Table of contents -->
+      <nav class="toc" aria-label="Содержание" style="margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;">
+        <a href="#setup" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Установка</a>
+        <a href="#howto" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Как записывать</a>
+        <a href="#analysis" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Экспорт & анализ</a>
+        <a href="#download" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Скачать CSV</a>
+        <a href="#case-studies" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Кейсы</a>
+        <a href="#faq" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">FAQ</a>
+      </nav>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Установка и соглашения по именам</h2>
+        <p>Используйте понятные имена задач и указывайте ожидаемую длительность в скобках (например, <em>Написать тесты (45m)</em>). Добавляйте теги для проекта и типа. Такая согласованность облегчает анализ экспортированных CSV — используйте короткие и стабильные теги (client-alpha, meeting, review).</p>
+      </section>
+
+      <section id="howto" class="section" aria-labelledby="howto-title">
+        <h2 id="howto-title">Как записать сессию</h2>
+
+        <div class="workflow">
+          <strong>Запись</strong>
+          <ol>
+            <li>Создайте запись задачи с ожидаемой длительностью и тегами.</li>
+            <li>Нажмите «Старт» в Task Timer и фиксируйте прерывания в поле заметок.</li>
+            <li>Остановите таймер по завершении и добавьте краткое описание проделанной работы.</li>
+          </ol>
+        </div>
+
+        <!-- Example card: Download sample CSV -->
+        <section id="export-demo-inline" class="section export-demo mt-3" aria-labelledby="export-demo-inline-title">
+          <h3 id="export-demo-inline-title" class="h5">Пример: запись Task Timer с экспортом</h3>
+
+          <p class="small-text-muted">Скачать пример CSV</p>
+
+          <div class="card" style="padding:1rem;max-width:740px;background:#fbfdff;border:1px solid #eef5fb;border-radius:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div style="min-width:0;display:flex;gap:0.75rem;align-items:center;flex:1;">
+                <div style="flex:0 0 auto;">
+                  <span style="display:inline-block;width:44px;height:44px;border-radius:6px;background:#fff;border:1px solid #e6eef8;text-align:center;line-height:44px;color:#0d6efd;font-weight:700;">TT</span>
+                </div>
+                <div style="min-width:0;">
+                  <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:nowrap;">
+                    <strong id="demoSessionName" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Написать отчёт</strong>
+                    <small id="demoSessionTags" class="muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">работа, проектX</small>
+                  </div>
+                  <div style="margin-top:.25rem;color:#475569;font-size:.95rem;">
+                    <span id="demoSessionTimer" style="font-weight:600;">25:00</span>
+                    <span class="muted" style="margin-left:.5rem;font-size:.9rem;">(пример)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="flex:0 0 auto;display:flex;gap:.5rem;align-items:center;">
+                <button id="exportDemoBtnInline" class="cta" aria-label="Скачать пример CSV" style="background:#fff;color:#0b5f8a;border:1px solid #cfe8f5;padding:0.4rem 0.8rem;border-radius:6px;">
+                  <!-- inline SVG download icon -->
+                  <svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.35rem;vertical-align:middle" aria-hidden="true" focusable="false">
+                    <path fill="#0d6efd" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"></path>
+                  </svg>
+                  Скачать пример CSV
+                </button>
+              </div>
+            </div>
+
+            <p class="mt-2 mb-0" style="font-size:.9rem;color:#6b7280;">
+              Нажмите кнопку выше, чтобы скачать готовый пример CSV. Для экспорта реальных сессий используйте функцию экспорта в самом Task Timer.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section id="analysis" class="section" aria-labelledby="analysis-title">
+        <h2 id="analysis-title">Экспорт и анализ</h2>
+        <p>Экспортируйте недельные CSV и вычисляйте средние значения по тегам или проектам. Ключевые метрики: среднее время на задачу, медиана (устойчивая к выбросам) и доля сессий с прерываниями (%).</p>
+
+        <div class="workflow">
+          <strong>Рецепт — недельный обзор</strong>
+          <ol>
+            <li>Экспортируйте сессии за неделю в CSV.</li>
+            <li>В таблице вычислите средние значения по тегам и отсортируйте самые долгие задачи для корректировки оценок.</li>
+            <li>Используйте результаты для корректировки Pomodoro‑блоков и календарного планирования.</li>
+          </ol>
+        </div>
+
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">Пример — формулы и интерпретация</h3>
+          <p>Предположим, в экспортируемом файле есть столбцы <code>actual_minutes</code> и <code>interruptions</code> (число прерываний за сессию).</p>
+          <ul>
+            <li>Среднее для тега "project-alpha": =AVERAGEIF(tag_range,"project-alpha",actual_minutes_range)</li>
+            <li>Медиана (устойчива к выбросам): =MEDIAN(IF(tag_range="project-alpha",actual_minutes_range)) — используйте как формулу массива при необходимости.</li>
+            <li>Доля прерываний: =COUNTIFS(tag_range,"project-alpha",interruptions_range,">0") / COUNTIF(tag_range,"project-alpha")</li>
+          </ul>
+
+          <p>Пример сессий (для иллюстрации):</p>
+          <table class="sample" aria-hidden="false">
+            <thead><tr><th>Дата</th><th>Задача</th><th>Реал (мин)</th><th>Прерывания</th></tr></thead>
+            <tbody>
+              <tr><td>2025-11-03</td><td>Code review</td><td>60</td><td>1</td></tr>
+              <tr><td>2025-11-04</td><td>Feature X</td><td>120</td><td>0</td></tr>
+              <tr><td>2025-11-06</td><td>Bugfix</td><td>45</td><td>1</td></tr>
+            </tbody>
+          </table>
+
+          <p class="muted">Пример: среднее = (60+120+45)/3 = 75 мин; доля прерываний = 2/3 = 66,7%.</p>
+        </div>
+      </section>
+
+      <section id="download" class="section" aria-labelledby="download-title">
+        <h2 id="download-title">Скачать — шаблон CSV Task Timer</h2>
+        <p class="muted">Используйте этот CSV для ручного заполнения сессий или тестирования импорта.</p>
+        <p><a href="#" id="downloadCsv" class="cta" aria-label="Скачать шаблон CSV">Скачать шаблон CSV</a></p>
+        <pre class="template" id="csvTemplate" aria-hidden="true">task_name,start_iso,end_iso,duration_minutes,note
+ClientX_ProjectA_Design,2025-01-02T08:30:00Z,2025-01-02T10:00:00Z,90,Initial concept</pre>
+
+        <script>
+          // Template download (localized filename)
+          document.getElementById('downloadCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('csvTemplate').textContent;
+            var blob = new Blob([text], {type:'text/csv;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'task-timer-template-ru.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title">Кейсы и советы</h2>
+        <div class="case">
+          <strong>Консультант — Paolo</strong>
+          <p>Через 2 недели Paolo обнаружил, что ревью кода занимают 20% рабочего дня. Он выделил фиксированные окна для ревью и сократил переключения контекста.</p>
+        </div>
+        <div class="case">
+          <strong>Консультантка — Rina</strong>
+          <p>Rina записывала звонки как прерывания; теперь она планирует буферы и корректирует оценку времени на встречи.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="faq">
+          <p><strong>В: Можно ли изменить единицы отображения?</strong><br>
+          <strong>О:</strong> Основной экран показывает минуты. Для отчётов в часах экспортируйте CSV и суммируйте значения в таблице.</p>
+
+          <p><strong>В: Что делать, если браузер приостанавливает вкладку?</strong><br>
+          <strong>О:</strong> Некоторые браузеры ограничивают фоновые вкладки. Держите Task Timer на активной вкладке или записывайте время вручную.</p>
+
+          <p><strong>В: Хранятся ли данные на сервере?</strong><br>
+          <strong>О:</strong> По умолчанию данные сохраняются локально в браузере (localStorage). Они не передаются на сервер, пока вы не экспортируете и не загрузите CSV сами.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources-title">
+        <h2 id="resources-title">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="https://support.google.com/docs/answer/3093281" target="_blank" rel="noopener noreferrer">Google Sheets — сводные таблицы и формулы (руководство)</a></li>
+        </ul>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Другие инструменты: <a href="/ru/notes/">Заметки</a> · <a href="/ru/pomodoro-timer/">Pomodoro</a> · <a href="/ru/calendar-planning/">Календарь</a></p>
+
+      <!-- Open the localized timer tool -->
+      <p style="margin-top:1.2rem;"><a href="/timer-ru.html#startBtn" class="cta" aria-label="Открыть Task Timer" rel="help">Открыть Task Timer</a></p>
+
+      <!-- Return link -->
+      <p class="return-link"><a href="/timer-ru.html#startBtn" rel="up" aria-label="Вернуться к Task Timer">Вернуться к Task Timer</a></p>
+
+      <footer style="margin-top:1.2rem;color:#6b7c89;font-size:0.95rem;">
+        <p>Есть пожелания или ошибки? Пишите: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Demo export script (stable sample filename) -->
+  <script>
+  (function(){
+    function escapeCsv(v){
+      if (v === null || v === undefined) return '';
+      return '"' + String(v).replace(/"/g,'""') + '"';
+    }
+
+    function downloadCsv(filename, content){
+      var blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function buildDemoSession(){
+      var now = new Date();
+      var start = new Date(now.getTime() - (25*60*1000)); // 25 minutes earlier
+      var task = (document.getElementById('demoSessionName') && document.getElementById('demoSessionName').textContent) || 'Написать отчёт';
+      var tagsText = (document.getElementById('demoSessionTags') && document.getElementById('demoSessionTags').textContent) || '';
+      var tags = tagsText.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+      return {
+        id: 'demo-' + Math.floor(Math.random()*900000+100000),
+        task_name: task.trim(),
+        tags: tags,
+        start_time: start.toISOString(),
+        end_time: now.toISOString(),
+        duration_seconds: 25*60,
+        duration_human: '25:00',
+        notes: 'Пример экспорта из руководства',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+      };
+    }
+
+    function exportSessionAsCsv(session){
+      var header = ['id','task_name','tags','start_time','end_time','duration_seconds','duration_human','notes','timezone'];
+      var row = [
+        session.id || '',
+        session.task_name || '',
+        (session.tags || []).join(';'),
+        session.start_time || '',
+        session.end_time || '',
+        session.duration_seconds != null ? session.duration_seconds : '',
+        session.duration_human || '',
+        session.notes || '',
+        session.timezone || ''
+      ];
+      var csv = header.map(escapeCsv).join(',') + '\n' + row.map(escapeCsv).join(',') + '\n';
+      // Stable sample filename for the example download
+      var filename = 'tasktimer-sample.csv';
+      downloadCsv(filename, csv);
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      var btn = document.getElementById('exportDemoBtnInline');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        try {
+          var session = buildDemoSession();
+          exportSessionAsCsv(session);
+          var orig = btn.innerHTML;
+          btn.innerHTML = 'Скачано';
+          btn.disabled = true;
+          setTimeout(function(){ btn.innerHTML = orig; btn.disabled = false; }, 1200);
+        } catch (e) {
+          console.error('Export error', e);
+          alert('Ошибка при экспорте — см. консоль для деталей.');
+        }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

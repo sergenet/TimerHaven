@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Conversor de monedas — TimerHaven</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Convierte monedas con tasas en tiempo real.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<title>Conversor de monedas â€” TimerHaven</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Convierte monedas con tasas en tiempo real." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
@@ -26,70 +27,67 @@
     @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
     @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; } }
     @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; } }
-    details[open] summary::after { content: " ▲"; font-size: 0.9em; }
+    details[open] summary::after { content: " â–²"; font-size: 0.9em; }
     details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
-    details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
+    details:not([open]) summary::after { content: " â–¼"; font-size: 0.9em; }
     .howto-mobile { margin-bottom: 1em; }
     .tips-mobile { margin-top: 1.5em; margin-bottom: 0.5em; }
     .converter-form { display: flex; gap: 0.5em; margin-bottom: 1em; flex-wrap: wrap; }
     .converter-result { font-weight: bold; font-size: 1.12em; margin-bottom: 1em; }
   </style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-  <script>try{ localStorage.setItem('timerhavenLang','es'); }catch(e){}</script>
-
-  <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
-
-      <div class="tool-card">
-        <details class="howto-mobile" id="howto-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;" id="howto-mobile-title"></h4></summary>
-          <ol id="howto-mobile-steps"></ol>
-        </details>
-        <a href="index.html" class="back-link" id="back-link"></a>
-        <h3 id="tool-title"></h3>
-        <div class="tool-help" id="tool-help"></div>
-
-        <div class="converter-section">
-          <form class="converter-form" id="currencyForm">
-            <input type="number" min="0" step="any" id="amount" class="form-control" placeholder="" style="max-width:100px;">
-            <select id="fromCurrency" class="form-select" style="max-width:120px;"></select>
-            <span style="font-size:1.3em;">→</span>
-            <select id="toCurrency" class="form-select" style="max-width:120px;"></select>
-            <button type="submit" class="btn btn-primary btn-sm" id="convert-btn"></button>
-          </form>
-          <div id="result" class="converter-result"></div>
-        </div>
-
-        <details class="faq-section">
-          <summary id="faq-title"></summary>
-          <ul id="faq-list" style="padding-left: 1em;"></ul>
-        </details>
-
-        <details class="tips-mobile" id="tips-mobile">
-          <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
-          <ul id="tips-mobile-list"></ul>
-        </details>
-      </div>
-
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
-    </div>
-  </div>
-
-  <script>
+<script>try{ localStorage.setItem('timerhavenLang','es'); }catch(e){}</script>
+<div class="main-container">
+<div class="center-row">
+<div class="article-card">
+<div>
+<h2 id="howto-title"></h2>
+<ol id="howto-steps"></ol>
+</div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
+</div>
+<div class="tool-card">
+<details class="howto-mobile" id="howto-mobile">
+<summary><h4 id="howto-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
+<ol id="howto-mobile-steps"></ol>
+</details>
+<a class="back-link" href="index.html" id="back-link"></a>
+<h3 id="tool-title"></h3>
+<div class="tool-help" id="tool-help"></div>
+<div class="converter-section">
+<form class="converter-form" id="currencyForm">
+<input class="form-control" id="amount" min="0" placeholder="" step="any" style="max-width:100px;" type="number"/>
+<select class="form-select" id="fromCurrency" style="max-width:120px;"></select>
+<span style="font-size:1.3em;">â†’</span>
+<select class="form-select" id="toCurrency" style="max-width:120px;"></select>
+<button class="btn btn-primary btn-sm" id="convert-btn" type="submit"></button>
+</form>
+<div class="converter-result" id="result"></div>
+</div>
+<details class="faq-section">
+<summary id="faq-title"></summary>
+<ul id="faq-list" style="padding-left: 1em;"></ul>
+</details>
+<details class="tips-mobile" id="tips-mobile">
+<summary><h4 id="tips-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
+<ul id="tips-mobile-list"></ul>
+</details>
+</div>
+<div class="article-card">
+<div>
+<h2 id="tips-title"></h2>
+<ul id="tips-list"></ul>
+</div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
+</div>
+</div>
+</div>
+<script>
     const apiKey = "5f484bfa921ef56c9c279660";
     const currencyList = ["USD","EUR","GBP","JPY","AUD","CAD","CHF","CNY","SEK","NZD","MXN","SGD","HKD","NOK","KRW","TRY","INR","RUB","BRL","ZAR"];
 
@@ -129,37 +127,37 @@
       el: { /* Greek strings */ },
       es: {
         "language-label": "Idioma:",
-        "back-link": "Volver al menú principal",
+        "back-link": "Volver al menÃº principal",
         "tool-title": "Conversor de monedas",
         "tool-help": "Convierte monedas con tasas en tiempo real.",
         "amount": "Cantidad",
         "convert": "Convertir",
-        "result-placeholder": "El resultado aparece aquí.",
+        "result-placeholder": "El resultado aparece aquÃ­.",
         "fetching": "Obteniendo tasa...",
-        "amount-error": "Por favor introduce una cantidad válida.",
-        "conversion-unavailable": "Conversión no disponible.",
-        "fetch-error": "No se pudo obtener la conversión.",
+        "amount-error": "Por favor introduce una cantidad vÃ¡lida.",
+        "conversion-unavailable": "ConversiÃ³n no disponible.",
+        "fetch-error": "No se pudo obtener la conversiÃ³n.",
         "faq-title": "Preguntas frecuentes",
-        "faq-list": `<li><b>¿Las tasas son en tiempo real?</b> Sí, se actualizan regularmente.</li>
-          <li><b>¿Puedo convertir cualquier moneda?</b> La mayoría de monedas están disponibles.</li>
-          <li><b>¿Es gratis?</b> Sí, todas las herramientas son gratuitas.</li>`,
-        "howto-title": '<i class="fa fa-dollar-sign"></i> Cómo usar el Conversor de monedas',
+        "faq-list": `<li><b>Â¿Las tasas son en tiempo real?</b> SÃ­, se actualizan regularmente.</li>
+          <li><b>Â¿Puedo convertir cualquier moneda?</b> La mayorÃ­a de monedas estÃ¡n disponibles.</li>
+          <li><b>Â¿Es gratis?</b> SÃ­, todas las herramientas son gratuitas.</li>`,
+        "howto-title": '<i class="fa fa-dollar-sign"></i> CÃ³mo usar el Conversor de monedas',
         "howto-steps": `<li><b>Selecciona monedas:</b> Elige las monedas a convertir.</li>
           <li><b>Introduce cantidad:</b> Escribe la cantidad a convertir.</li>
           <li><b>Ver resultado:</b> El resultado aparece al instante.</li>`,
-        "howto-article-btn": "Leer artículo completo",
+        "howto-article-btn": "Leer artÃ­culo completo",
         "howto-article-link": "currency-how-to-es.html",
         "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos para convertir monedas',
         "tips-list": `<li><b>Verifica las tasas:</b> Para grandes transferencias, consulta el banco.</li>
-          <li><b>Mantén un historial:</b> Guarda tus conversiones para controlar gastos.</li>
-          <li><b>Usa en viajes:</b> Convierte precios locales rápidamente.</li>`,
-        "tips-article-btn": "Leer artículo completo",
+          <li><b>MantÃ©n un historial:</b> Guarda tus conversiones para controlar gastos.</li>
+          <li><b>Usa en viajes:</b> Convierte precios locales rÃ¡pidamente.</li>`,
+        "tips-article-btn": "Leer artÃ­culo completo",
         "tips-article-link": "currency-tips-es.html"
       },
       ar: { /* Arabic strings */ }
     };
 
-    const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
+    const langNames = { en: "English", fr: "FranÃ§ais", de: "Deutsch", ru: "Ð ÑƒÑÑÐºÐ¸Ð¹", el: "Î•Î»Î»Î·Î½Î¹ÎºÎ¬", es: "EspaÃ±ol", ar: "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©" };
 
     function populateCurrencySelects() {
       const from = document.getElementById('fromCurrency');
@@ -217,7 +215,7 @@
       const lang = getLang();
       const t = currencyTranslations[lang] || currencyTranslations['es'];
       if (isNaN(amountVal) || amountVal <= 0) {
-        document.getElementById('result').innerText = t['amount-error'] || "Por favor introduce una cantidad válida.";
+        document.getElementById('result').innerText = t['amount-error'] || "Por favor introduce una cantidad vÃ¡lida.";
         return;
       }
       document.getElementById('result').innerText = t['fetching'] || "Obteniendo tasa...";
@@ -229,11 +227,11 @@
             const rate = (Math.round((data.conversion_rate + Number.EPSILON) * 100000) / 100000);
             document.getElementById('result').innerText = `${amountVal} ${fromCur} = ${conv} ${toCur} (Tasa: ${rate})`;
           } else {
-            document.getElementById('result').innerText = t['conversion-unavailable'] || "Conversión no disponible.";
+            document.getElementById('result').innerText = t['conversion-unavailable'] || "ConversiÃ³n no disponible.";
           }
         })
         .catch(() => {
-          document.getElementById('result').innerText = t['fetch-error'] || "No se pudo obtener la conversión.";
+          document.getElementById('result').innerText = t['fetch-error'] || "No se pudo obtener la conversiÃ³n.";
         });
     });
 
@@ -242,12 +240,12 @@
       populateCurrencySelects();
     });
   </script>
-
-  <footer>
-    &copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br>
-    <a href="privacy.html">Política de privacidad</a> &bull;
-    <a href="terms.html">Términos</a> &bull;
+<footer>
+    Â© 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br/>
+<a href="privacy.html">PolÃ­tica de privacidad</a> â€¢
+    <a href="terms.html">TÃ©rminos</a> â€¢
     <a href="contact.html">Contacto</a>
-  </footer>
-</body>
+</footer>
+<p style="margin-top:1rem;"><a class="cta" href="/es/currency/currency-index.html">Read full guide</a></p></body>
 </html>
+

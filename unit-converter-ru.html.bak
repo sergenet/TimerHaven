@@ -1,184 +1,236 @@
-<!doctype html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Конвертер единиц</title>
-  <meta name="description" content="Конвертируйте длину, вес, температуру и другие единицы. Узнайте, как пользоваться конвертером, получите советы и статьи.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
-    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-
-    /* Force cards to stretch to the same height and allow content to flow */
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:stretch; flex-wrap:wrap; }
-
-    .article-card, .tool-card {
-      background:#fff;
-      border-radius:16px;
-      box-shadow:0 2px 12px rgba(0,0,0,0.06);
-      padding:1.3rem;
-      box-sizing:border-box;
-      min-width:280px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    /* let cards size naturally but keep a comfortable minimum on desktop */
-    .article-card { width:330px; min-height:360px; align-items:flex-start; padding-bottom:1.2rem; }
-    .tool-card { width:410px; min-width:240px; min-height:360px; padding-bottom:1.2rem; }
-
-    /* Responsive fallback */
-    @media (max-width:900px) {
-      .center-row{flex-direction:column;align-items:center;}
-      .article-card, .tool-card{width:98%; max-width:540px; min-height:auto;}
-    }
-
-    .converter-form { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center; }
-    .converter-result { font-weight:700; font-size:1.12em; margin-bottom:1rem; }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
-    .btn-small { padding:.35rem .7rem; font-size:.9rem; }
-
-    /* Ensure article buttons are block-level, full width, and inside the card */
-    .article-card a.btn,
-    .tool-card a.btn {
-      display:block;
-      width:100%;
-      box-sizing:border-box;
-      text-align:center;
-      margin-top:.6rem;
-      margin-bottom:0;
-    }
-
-    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>ÐšÐ¾Ð½Ð²ÐµÑ€Ñ‚ÐµÑ€ ÐµÐ´Ð¸Ð½Ð¸Ñ† â€” TimerHaven</title>
+<meta content="ÐšÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð¸Ñ€ÑƒÐ¹Ñ‚Ðµ Ð´Ð»Ð¸Ð½Ñƒ, Ð²ÐµÑ, Ñ‚ÐµÐ¼Ð¿ÐµÑ€Ð°Ñ‚ÑƒÑ€Ñƒ, Ð¾Ð±ÑŠÑ‘Ð¼, Ð¿Ð»Ð¾Ñ‰Ð°Ð´ÑŒ, ÑÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒ, Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸ Ð¼Ð½Ð¾Ð³Ð¾Ðµ Ð´Ñ€ÑƒÐ³Ð¾Ðµ. Ð£Ð´Ð¾Ð±Ð½Ñ‹Ð¹ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚ Ñ Ñ‚Ð¾Ñ‡Ð½Ð¾ÑÑ‚ÑŒÑŽ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ Ð¸ Ð¿Ð¾Ð»ÐµÐ·Ð½Ñ‹Ð¼Ð¸ Ð¾Ð¿Ñ†Ð¸ÑÐ¼Ð¸." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+  :root{--brand:#0b63a0;--muted:#6b7280}
+  body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
+  .page-wrap { max-width:920px; margin:2rem auto; padding:0 1rem; }
+  h1 { color:var(--brand); margin-bottom:.4rem; }
+  .tool-card { background:#fff; border-radius:12px; padding:1.2rem; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+  .controls { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:.8rem; }
+  .converter-form { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin-bottom:.6rem; }
+  .converter-result { font-weight:700; font-size:1.05rem; margin-top:.6rem; min-height:1.4em; }
+  .small-muted { color:var(--muted); font-size:.92rem; margin-top:.4rem; display:block; }
+  .unit-filter { max-width:260px; }
+  .swap-btn, .copy-btn, .mode-btn { border-radius:8px; border:1px solid #e6eef5; background:#fff; padding:.35rem .6rem; cursor:pointer; }
+  input[type="number"] { direction:ltr; text-align:left; }
+  .top-row { display:none !important; }
+  #dataModeContainer { display:none; gap:.6rem; align-items:center; margin-top:.4rem; justify-content:flex-end; }
+  .cta { color:var(--brand); font-weight:700; text-decoration:none; }
+  @media (max-width:640px){ .controls{justify-content:stretch;} .converter-form{justify-content:stretch;} }
+</style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="page-wrap">
-    <div class="text-center mb-4">
-      <h1 style="margin-bottom:.25rem;">Конвертер единиц</h1>
-      <p class="lead" style="color:#374151; margin-bottom:1rem;">Конвертируйте длину, вес, температуру и другие единицы. Узнайте, как пользоваться конвертером, получите советы и статьи.</p>
-    </div>
+<div class="page-wrap">
+  <header class="text-center mb-3">
+    <h1>ÐšÐ¾Ð½Ð²ÐµÑ€Ñ‚ÐµÑ€ ÐµÐ´Ð¸Ð½Ð¸Ñ†</h1>
+    <p class="lead" style="color:#374151; margin:0;">Ð‘Ñ‹ÑÑ‚Ñ€Ð°Ñ ÐºÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð°Ñ†Ð¸Ñ Ð´Ð»Ð¸Ð½Ñ‹, Ð²ÐµÑÐ°, Ñ‚ÐµÐ¼Ð¿ÐµÑ€Ð°Ñ‚ÑƒÑ€Ñ‹, Ð¾Ð±ÑŠÑ‘Ð¼Ð°, Ð¿Ð»Ð¾Ñ‰Ð°Ð´Ð¸, ÑÐºÐ¾Ñ€Ð¾ÑÑ‚Ð¸, Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¸ Ð¿Ñ€Ð¾Ñ‡ÐµÐ³Ð¾.</p>
+  </header>
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-left-ru">
-        <h2 id="howto-left-ru">Как пользоваться конвертером</h2>
-        <ol style="padding-left:1.1rem; color:#374151;">
-          <li><b>Введите значение:</b> Введите число для конвертации.</li>
-          <li><b>Выберите тип:</b> Длина / Вес / Температура.</li>
-          <li><b>Выберите единицы:</b> Укажите исходную и целевую единицы.</li>
-          <li><b>Нажмите Преобразовать:</b> Получите результат сразу.</li>
-        </ol>
-        <a href="unit-how-to-ru.html" class="btn btn-outline-primary btn-sm">Читать статью</a>
+  <section class="tool-card" aria-labelledby="tool-title" role="region">
+    <a class="back-link" href="index.html" style="text-decoration:none; color:var(--brand); font-weight:600;">â† ÐÐ°Ð·Ð°Ð´ Ð² Ð³Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ</a>
+
+    <div class="controls" role="toolbar" aria-label="Controls">
+      <div style="min-width:180px;">
+        <label class="small-muted" for="typeSelect">ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ</label>
+        <select id="typeSelect" class="form-select">
+          <option value="length">Ð”Ð»Ð¸Ð½Ð°</option>
+          <option value="weight">Ð’ÐµÑ</option>
+          <option value="temperature">Ð¢ÐµÐ¼Ð¿ÐµÑ€Ð°Ñ‚ÑƒÑ€Ð°</option>
+          <option value="volume">ÐžÐ±ÑŠÑ‘Ð¼</option>
+          <option value="area">ÐŸÐ»Ð¾Ñ‰Ð°Ð´ÑŒ</option>
+          <option value="speed">Ð¡ÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒ</option>
+          <option value="time">Ð’Ñ€ÐµÐ¼Ñ</option>
+          <option value="pressure">Ð”Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ</option>
+          <option value="energy">Ð­Ð½ÐµÑ€Ð³Ð¸Ñ</option>
+          <option value="power">ÐœÐ¾Ñ‰Ð½Ð¾ÑÑ‚ÑŒ</option>
+          <option value="data">Ð”Ð°Ð½Ð½Ñ‹Ðµ</option>
+          <option value="fuel">Ð¢Ð¾Ð¿Ð»Ð¸Ð²Ð½Ð°Ñ ÑÐºÐ¾Ð½Ð¾Ð¼Ð¸Ñ‡Ð½Ð¾ÑÑ‚ÑŒ</option>
+          <option value="angle">Ð£Ð³Ð¾Ð»</option>
+          <option value="frequency">Ð§Ð°ÑÑ‚Ð¾Ñ‚Ð°</option>
+        </select>
       </div>
 
-      <div class="tool-card" role="region" aria-label="Конвертер единиц">
-        <div>
-          <a href="index.html" class="back-link" style="text-decoration:none; color:#0d6efd; font-weight:600; margin-bottom:.4rem; display:block;">&larr; Назад в главное меню</a>
-          <h3><i class="fa fa-ruler-combined"></i> Конвертер единиц</h3>
-
-          <div class="unit-section">
-            <form class="converter-form" id="unitForm">
-              <select id="typeSelect" class="form-select" style="max-width:140px;">
-                <option value="length">Длина</option>
-                <option value="weight">Вес</option>
-                <option value="temperature">Температура</option>
-              </select>
-
-              <input type="number" id="inputValue" class="form-control" placeholder="Значение" style="max-width:100px;">
-
-              <select id="fromUnit" class="form-select" style="max-width:140px;"></select>
-              <span style="font-size:1.3em;">→</span>
-              <select id="toUnit" class="form-select" style="max-width:140px;"></select>
-
-              <button type="submit" class="btn btn-primary btn-sm">Преобразовать</button>
-            </form>
-
-            <div id="unitResult" class="converter-result"></div>
-          </div>
-        </div>
-
-        <details class="faq-section">
-          <summary>Часто задаваемые вопросы</summary>
-          <p style="margin-top:.6rem;">Введите число, выберите тип и единицы, затем нажмите Преобразовать.</p>
-        </details>
+      <div style="min-width:140px;">
+        <label class="small-muted" for="precisionSelect">Ð¢Ð¾Ñ‡Ð½Ð¾ÑÑ‚ÑŒ (Ð·Ð½Ð°ÐºÐ¾Ð²)</label>
+        <select id="precisionSelect" class="form-select">
+          <option value="6">6</option><option value="5">5</option><option value="4" selected>4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="0">0</option>
+        </select>
       </div>
 
-      <div class="article-card" aria-labelledby="tips-right-ru">
-        <h2 id="tips-right-ru">Советы</h2>
-        <ul style="padding-left:1.1rem; color:#374151;">
-          <li><b>Проверяйте единицы:</b> Убедитесь, что выбрали правильный тип.</li>
-          <li><b>Поменяйте направление:</b> Попробуйте обратную конверсию для проверки.</li>
-          <li><b>Добавьте в закладки:</b> Быстрый доступ в будущем.</li>
-        </ul>
-        <a href="unit-tips-ru.html" class="btn btn-outline-primary btn-sm">Читать статью</a>
+      <div style="min-width:220px;">
+        <label class="small-muted" for="unitFilter">Ð¤Ð¸Ð»ÑŒÑ‚Ñ€ ÐµÐ´Ð¸Ð½Ð¸Ñ†</label>
+        <input id="unitFilter" class="form-control unit-filter" placeholder="Ð¤Ð¸Ð»ÑŒÑ‚Ñ€ (Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€: liter or m)" />
       </div>
     </div>
 
-    <footer class="site">© 2025 TimerHaven. <a href="privacy.html">Политика</a></footer>
-  </div>
+    <form id="unitForm" class="converter-form" aria-label="Converter form">
+      <input id="inputValue" type="number" step="any" class="form-control" placeholder="Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ" style="max-width:130px;" aria-label="Ð—Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ" />
 
-  <script>
+      <select id="fromUnit" class="form-select" style="min-width:170px;"></select>
+
+      <button type="button" id="swapBtn" class="swap-btn" title="ÐŸÐ¾Ð¼ÐµÐ½ÑÑ‚ÑŒ Ð¼ÐµÑÑ‚Ð°Ð¼Ð¸" aria-label="ÐŸÐ¾Ð¼ÐµÐ½ÑÑ‚ÑŒ Ð¼ÐµÑÑ‚Ð°Ð¼Ð¸"><i class="fa fa-exchange-alt"></i></button>
+
+      <select id="toUnit" class="form-select" style="min-width:170px;"></select>
+
+      <button type="submit" class="btn btn-primary btn-sm" id="convertBtn">ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ñ‚ÑŒ</button>
+
+      <button type="button" id="copyBtn" class="copy-btn" title="ÐšÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚" aria-label="ÐšÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚"><i class="fa fa-copy"></i></button>
+    </form>
+
+    <div id="dataModeContainer">
+      <div class="small-muted">Ð ÐµÐ¶Ð¸Ð¼ Ð´Ð°Ð½Ð½Ñ‹Ñ…:</div>
+      <div>
+        <button id="dataModeSI" class="mode-btn">SI</button>
+        <button id="dataModeBin" class="mode-btn">Bin</button>
+      </div>
+    </div>
+
+    <div id="unitResult" class="converter-result" aria-live="polite"></div>
+
+    <div class="small-muted" style="margin-top:.8rem;">Ð˜ÑÑ‚Ð¾Ñ‡Ð½Ð¸Ðº: Ð¾Ð±Ñ‰ÐµÑƒÐ¿Ð¾Ñ‚Ñ€ÐµÐ±Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ ÑÑ‚Ð°Ð»Ð¾Ð½Ð½Ñ‹Ðµ ÐºÐ¾ÑÑ„Ñ„Ð¸Ñ†Ð¸ÐµÐ½Ñ‚Ñ‹. Ð”Ð»Ñ Ð¸Ð½Ð¶ÐµÐ½ÐµÑ€Ð½Ñ‹Ñ… Ð·Ð°Ð´Ð°Ñ‡ Ñ…Ñ€Ð°Ð½Ð¸Ñ‚Ðµ ÐºÐ°Ð½Ð¾Ð½Ð¸Ñ‡ÐµÑÐºÐ¸Ðµ ÐºÐ¾ÑÑ„Ñ„Ð¸Ñ†Ð¸ÐµÐ½Ñ‚Ñ‹ Ñƒ ÑÐµÐ±Ñ.</div>
+
+    <p style="margin-top:1rem; text-align:right;"><a class="cta" href="/ru/unit-converter/unit-converter-index.html">Ð§Ð¸Ñ‚Ð°Ñ‚ÑŒ Ð¿Ð¾Ð»Ð½Ð¾Ðµ Ñ€ÑƒÐºÐ¾Ð²Ð¾Ð´ÑÑ‚Ð²Ð¾</a></p>
+  </section>
+</div>
+
+<script>
+  // full set of units & conversions (canonical keys)
   const unitTypes = {
-    length: {
-      units: { "Meter": 1, "Kilometer": 1000, "Centimeter": 0.01, "Millimeter": 0.001, "Mile": 1609.34, "Yard": 0.9144, "Foot": 0.3048, "Inch": 0.0254 },
-      convert: (val, from, to) => val * unitTypes.length.units[from] / unitTypes.length.units[to]
-    },
-    weight: {
-      units: { "Kilogram": 1, "Gram": 0.001, "Milligram": 0.000001, "Pound": 0.453592, "Ounce": 0.0283495 },
-      convert: (val, from, to) => val * unitTypes.weight.units[from] / unitTypes.weight.units[to]
-    },
-    temperature: {
-      units: { "Celsius": "C", "Fahrenheit": "F", "Kelvin": "K" },
-      convert: (val, from, to) => {
-        if (from === to) return val;
-        if (from === "Celsius" && to === "Fahrenheit") return val * 9/5 + 32;
-        if (from === "Fahrenheit" && to === "Celsius") return (val - 32) * 5/9;
-        if (from === "Celsius" && to === "Kelvin") return val + 273.15;
-        if (from === "Kelvin" && to === "Celsius") return val - 273.15;
-        if (from === "Fahrenheit" && to === "Kelvin") return (val - 32) * 5/9 + 273.15;
-        if (from === "Kelvin" && to === "Fahrenheit") return (val - 273.15) * 9/5 + 32;
-      }
-    }
+    length: { units: { "Meter":1,"Kilometer":1000,"Centimeter":0.01,"Millimeter":0.001,"Mile":1609.344,"Yard":0.9144,"Foot":0.3048,"Inch":0.0254 }, convert:(v,f,t)=> v*unitTypes.length.units[f]/unitTypes.length.units[t] },
+    weight: { units: { "Kilogram":1,"Gram":0.001,"Milligram":0.000001,"Pound":0.45359237,"Ounce":0.028349523125,"Ton (metric)":1000 }, convert:(v,f,t)=> v*unitTypes.weight.units[f]/unitTypes.weight.units[t] },
+    temperature: { units: {"Celsius":"C","Fahrenheit":"F","Kelvin":"K"}, convert:(val,from,to)=>{ if(from===to) return val; if(from==="Celsius"&&to==="Fahrenheit") return val*9/5+32; if(from==="Fahrenheit"&&to==="Celsius") return (val-32)*5/9; if(from==="Celsius"&&to==="Kelvin") return val+273.15; if(from==="Kelvin"&&to==="Celsius") return val-273.15; if(from==="Fahrenheit"&&to==="Kelvin") return (val-32)*5/9+273.15; if(from==="Kelvin"&&to==="Fahrenheit") return (val-273.15)*9/5+32 } },
+    volume: { units: {"Liter":1,"Milliliter":0.001,"Cubic meter":1000,"US gallon":3.785411784,"US quart":0.946352946,"US pint":0.473176473,"Imperial gallon":4.54609,"Cubic inch":0.016387064,"Cubic foot":28.316846592}, convert:(v,f,t)=> v*unitTypes.volume.units[f]/unitTypes.volume.units[t] },
+    area: { units: {"Square meter":1,"Square kilometer":1e6,"Hectare":10000,"Acre":4046.8564224,"Square mile":2589988.110336,"Square foot":0.09290304,"Square yard":0.83612736,"Square inch":0.00064516}, convert:(v,f,t)=> v*unitTypes.area.units[f]/unitTypes.area.units[t] },
+    speed: { units: {"m/s":1,"km/h":1/3.6,"mph":0.44704,"knots":0.514444}, convert:(v,f,t)=> v*unitTypes.speed.units[f]/unitTypes.speed.units[t] },
+    time: { units: {"Second":1,"Minute":60,"Hour":3600,"Day":86400,"Week":604800}, convert:(v,f,t)=> v*unitTypes.time.units[f]/unitTypes.time.units[t] },
+    pressure: { units: {"Pascal":1,"kPa":1000,"Bar":100000,"atm":101325,"psi":6894.757293168}, convert:(v,f,t)=> v*unitTypes.pressure.units[f]/unitTypes.pressure.units[t] },
+    energy: { units: {"Joule":1,"Kilojoule":1000,"Calorie":4.184,"kcal":4184,"Wh":3600}, convert:(v,f,t)=> v*unitTypes.energy.units[f]/unitTypes.energy.units[t] },
+    power: { units: {"Watt":1,"Kilowatt":1000,"Horsepower (metric)":735.49875,"Horsepower (mechanical)":745.69987158227022}, convert:(v,f,t)=> v*unitTypes.power.units[f]/unitTypes.power.units[t] },
+    data: { unitsSI: {"Byte":1,"KB":1e3,"MB":1e6,"GB":1e9,"TB":1e12}, unitsBin: {"Byte":1,"KiB":1024,"MiB":1024**2,"GiB":1024**3,"TiB":1024**4}, convert:(v,f,t,mode='SI')=>{ const table=(mode==='Bin')?unitTypes.data.unitsBin:unitTypes.data.unitsSI; if(!table[f]||!table[t]) return NaN; return v*table[f]/table[t]; } },
+    fuel: { units: {"L/100km":"L100","mpg (US)":"mpgus","mpg (UK)":"mpguk"}, convert:(val,from,to)=>{ if(from===to) return val; const toL100=(v,src)=>{ if(src==="L/100km") return v; if(src==="mpg (US)") return 235.214583/v; if(src==="mpg (UK)") return 282.480936/v; }; const fromL100=(l100,dst)=>{ if(dst==="L/100km") return l100; if(dst==="mpg (US)") return 235.214583/l100; if(dst==="mpg (UK)") return 282.480936/l100; }; const l100=toL100(val,from); return fromL100(l100,to); } },
+    angle: { units: {"Degree":1,"Radian":(180/Math.PI),"Gradian":0.9}, convert:(v,f,t)=> v*unitTypes.angle.units[f]/unitTypes.angle.units[t] },
+    frequency: { units: {"Hz":1,"kHz":1e3,"MHz":1e6,"GHz":1e9}, convert:(v,f,t)=> v*unitTypes.frequency.units[f]/unitTypes.frequency.units[t] }
   };
 
-  function populateUnits(type) {
-    const from = document.getElementById('fromUnit');
-    const to = document.getElementById('toUnit');
-    from.innerHTML = to.innerHTML = '';
-    Object.keys(unitTypes[type].units).forEach(u => {
-      from.innerHTML += `<option value="${u}">${u}</option>`;
-      to.innerHTML += `<option value="${u}">${u}</option>`;
-    });
+  // localStorage keys
+  const LS_KEYS = { lastType:'th_unit_lastType_ru', lastFrom:'th_unit_lastFrom_ru', lastTo:'th_unit_lastTo_ru', lastValue:'th_unit_lastValue_ru', lastPrecision:'th_unit_lastPrecision_ru', dataMode:'th_unit_dataMode_ru' };
+
+  function saveState(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function loadState(k,def){ try{ const v=localStorage.getItem(k); return v!==null? v: def;}catch(e){ return def;} }
+
+  // UI refs
+  const typeSelect = document.getElementById('typeSelect');
+  const fromUnit = document.getElementById('fromUnit');
+  const toUnit = document.getElementById('toUnit');
+  const inputValue = document.getElementById('inputValue');
+  const unitFilter = document.getElementById('unitFilter');
+  const precisionSelect = document.getElementById('precisionSelect');
+  const dataModeContainer = document.getElementById('dataModeContainer');
+  const dataModeSI = document.getElementById('dataModeSI');
+  const dataModeBin = document.getElementById('dataModeBin');
+
+  let currentDataMode = loadState(LS_KEYS.dataMode,'SI');
+
+  function setDataModeUI(){ if(currentDataMode==='SI'){ dataModeSI.style.opacity='1'; dataModeBin.style.opacity='0.6'; } else { dataModeBin.style.opacity='1'; dataModeSI.style.opacity='0.6'; } }
+
+  function getUnitsForType(type){
+    if(type==='data') return (currentDataMode==='Bin')? Object.keys(unitTypes.data.unitsBin): Object.keys(unitTypes.data.unitsSI);
+    if(unitTypes[type] && unitTypes[type].units) return Object.keys(unitTypes[type].units);
+    return [];
   }
 
-  const typeSelect = document.getElementById('typeSelect');
-  const initialType = typeSelect.value || 'length';
-  typeSelect.addEventListener('change', function() {
-    populateUnits(this.value);
-  });
-  populateUnits(initialType);
+  function populateUnits(type){
+    const units = getUnitsForType(type);
+    fromUnit.innerHTML=''; toUnit.innerHTML='';
+    units.forEach(u => {
+      fromUnit.innerHTML += `<option value="${u}">${u}</option>`;
+      toUnit.innerHTML += `<option value="${u}">${u}</option>`;
+    });
+    applyUnitFilter();
+    setDataModeUI();
+    dataModeContainer.style.display = (type==='data') ? 'flex' : 'none';
+    // restore selections
+    const lf = loadState(LS_KEYS.lastFrom,''); const lt = loadState(LS_KEYS.lastTo,'');
+    if(lf && Array.from(fromUnit.options).some(o=>o.value===lf)) fromUnit.value = lf;
+    if(lt && Array.from(toUnit.options).some(o=>o.value===lt)) toUnit.value = lt;
+    if (!fromUnit.value && fromUnit.options.length) fromUnit.selectedIndex = 0;
+    if (!toUnit.value && toUnit.options.length) toUnit.selectedIndex = Math.min(1,toUnit.options.length-1);
+  }
 
-  document.getElementById('unitForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const type = document.getElementById('typeSelect').value;
-    const val = parseFloat(document.getElementById('inputValue').value);
-    const from = document.getElementById('fromUnit').value;
-    const to = document.getElementById('toUnit').value;
+  function applyUnitFilter(){
+    const q = (unitFilter.value||'').toLowerCase().trim();
+    const all = getUnitsForType(typeSelect.value);
+    const filtered = q ? all.filter(u => (u.toLowerCase().includes(q))) : all.slice();
+    const final = filtered.length ? filtered : all;
+    fromUnit.innerHTML = ''; toUnit.innerHTML = '';
+    final.forEach(u => { fromUnit.innerHTML += `<option value="${u}">${u}</option>`; toUnit.innerHTML += `<option value="${u}">${u}</option>`; });
+  }
+
+  function fmt(n,prec){ if(!isFinite(n)) return String(n); return Number(n).toFixed(prec).replace(/\.?0+$/,''); }
+
+  function doConvert(){
+    const type = typeSelect.value;
+    const val = parseFloat(inputValue.value);
+    const from = fromUnit.value;
+    const to = toUnit.value;
+    const prec = parseInt(precisionSelect.value,10);
     const resultEl = document.getElementById('unitResult');
-    if (isNaN(val)) {
-      resultEl.innerText = "Please enter a valid value.";
-      return;
-    }
-    let result = unitTypes[type].convert(val, from, to);
-    resultEl.innerText = `${val} ${from} = ${result} ${to}`;
-  });
+    if(!isFinite(val)){ resultEl.innerText = 'ÐŸÐ¾Ð¶Ð°Ð»ÑƒÐ¹ÑÑ‚Ð°, Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ñ€Ñ€ÐµÐºÑ‚Ð½Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾.'; return; }
+    let result;
+    try {
+      if(type==='data') result = unitTypes.data.convert(val,from,to,currentDataMode==='Bin'?'Bin':'SI');
+      else if(type==='fuel') result = unitTypes.fuel.convert(val,from,to);
+      else result = unitTypes[type].convert(val,from,to);
+    } catch(e){ result = NaN; }
+    if(!isFinite(result)){ resultEl.innerText = 'ÐšÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð°Ñ†Ð¸Ñ Ð½ÐµÐ´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð° Ð´Ð»Ñ Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ñ‹Ñ… ÐµÐ´Ð¸Ð½Ð¸Ñ†.'; return; }
+    const formatted = fmt(result,prec);
+    resultEl.innerText = `${fmt(val,prec)} ${from} = ${formatted} ${to}`;
+    saveState(LS_KEYS.lastType,type); saveState(LS_KEYS.lastFrom,from); saveState(LS_KEYS.lastTo,to); saveState(LS_KEYS.lastValue,inputValue.value); saveState(LS_KEYS.lastPrecision,precisionSelect.value);
+  }
 
-  // language selector redirect removed
-  </script>
+  // events
+  document.getElementById('unitForm').addEventListener('submit', function(e){ e.preventDefault(); doConvert(); });
+  typeSelect.addEventListener('change', function(){ unitFilter.value=''; populateUnits(this.value); });
+  unitFilter.addEventListener('input', applyUnitFilter);
+  precisionSelect.addEventListener('change', doConvert);
+  fromUnit.addEventListener('change', doConvert);
+  toUnit.addEventListener('change', doConvert);
+  document.getElementById('swapBtn').addEventListener('click', ()=>{ const a=fromUnit.value,b=toUnit.value; fromUnit.value=b; toUnit.value=a; doConvert(); });
+  document.getElementById('copyBtn').addEventListener('click', ()=>{ const text = document.getElementById('unitResult').innerText || ''; if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(()=>{ const btn=document.getElementById('copyBtn'); btn.innerHTML='<i class="fa fa-check"></i>'; setTimeout(()=>btn.innerHTML='<i class="fa fa-copy"></i>',900); }).catch(()=>alert('ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ ÑÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ')); } else { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){ alert('ÐšÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð½Ðµ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÐµÑ‚ÑÑ'); } ta.remove(); } });
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  dataModeSI.addEventListener('click', ()=>{ currentDataMode='SI'; saveState(LS_KEYS.dataMode,'SI'); setDataModeUI(); if(typeSelect.value==='data') populateUnits('data'); });
+  dataModeBin.addEventListener('click', ()=>{ currentDataMode='Bin'; saveState(LS_KEYS.dataMode,'Bin'); setDataModeUI(); if(typeSelect.value==='data') populateUnits('data'); });
+
+  // shortcut Ctrl+K focus
+  document.addEventListener('keydown', function(e){ if(e.ctrlKey && (e.key==='k' || e.key==='K')){ e.preventDefault(); inputValue.focus(); inputValue.select(); } });
+
+  // init
+  (function init(){
+    setDataModeUI();
+    const lastType = loadState(LS_KEYS.lastType,'length');
+    if(Array.from(typeSelect.options).some(o=>o.value===lastType)) typeSelect.value = lastType;
+    populateUnits(typeSelect.value);
+    const lastFrom = loadState(LS_KEYS.lastFrom,''), lastTo = loadState(LS_KEYS.lastTo,'');
+    if(lastFrom && Array.from(fromUnit.options).some(o=>o.value===lastFrom)) fromUnit.value = lastFrom;
+    if(lastTo && Array.from(toUnit.options).some(o=>o.value===lastTo)) toUnit.value = lastTo;
+    const lastVal = loadState(LS_KEYS.lastValue,''); if(lastVal) inputValue.value = lastVal;
+    const lastPrecision = loadState(LS_KEYS.lastPrecision,'4'); if(lastPrecision && Array.from(precisionSelect.options).some(o=>o.value===lastPrecision)) precisionSelect.value = lastPrecision;
+    if(inputValue.value) doConvert();
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

@@ -1,13 +1,14 @@
-<!doctype html>
+﻿<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Minuteur Pomodoro — TimerHaven</title>
-  <meta name="description" content="Améliorez votre concentration avec la technique Pomodoro. Apprenez à utiliser le Minuteur Pomodoro, obtenez des conseils, FAQs et articles.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Minuteur Pomodoro â€” TimerHaven</title>
+<meta content="AmÃ©liorez votre concentration avec la technique Pomodoro. Apprenez Ã  utiliser le Minuteur Pomodoro, obtenez des conseils, FAQs et articles." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
@@ -23,99 +24,74 @@
     .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
     .btn-small { padding:.35rem .7rem; font-size:.9rem; }
     footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
+    /* Pomodoro icon styling (tomato emoji + stopwatch) */
+    .pomodoro-emoji { font-size:1.2rem; line-height:1; margin-right:.25rem; }
+    .pomodoro-fa { font-size:1.0rem; color:#e24b3a; margin-right:.25rem; }
     @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
   </style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="page-wrap">
-    <div class="top-row">
-      <label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Langue:</label>
-      <select id="language-select-top" class="language-select" aria-label="Sélecteur de langue">
-        <option value="en">English</option><option value="fr" selected>Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
-      </select>
-    </div>
+<div class="page-wrap">
+<!-- LANGUAGE SELECTOR REMOVED FOR FR VERSION -->
 
-    <div class="text-center mb-4">
-      <h1 style="margin-bottom:.25rem;">Minuteur Pomodoro</h1>
-      <p class="lead" style="color:#374151; margin-bottom:1rem;">Améliorez votre concentration avec la technique Pomodoro. Apprenez à utiliser le Minuteur Pomodoro, obtenez des conseils, FAQs et articles.</p>
-    </div>
+<div class="text-center mb-4">
+<h1 style="margin-bottom:.25rem;">Minuteur Pomodoro</h1>
+<p class="lead" style="color:#374151; margin-bottom:1rem;">AmÃ©liorez votre concentration avec la technique Pomodoro. Apprenez Ã  utiliser le Minuteur Pomodoro, obtenez des conseils, FAQs et articles.</p>
+</div>
+<div class="center-row">
 
-    <div class="center-row">
-      <div class="article-card" aria-labelledby="howto-title">
-        <div>
-          <h2 id="howto-title"><i class="fa fa-apple-whole"></i> Comment utiliser le Minuteur Pomodoro</h2>
-          <ol style="padding-left:1.1rem; color:#374151;">
-            <li><b>Réglez le minuteur :</b> Choisissez la durée de travail et de pause.</li><li><b>Démarrez :</b> Cliquez sur <strong>Démarrer</strong> pour commencer.</li><li><b>Prenez des pauses :</b> Quand le minuteur s&#x27;arrête, faites une courte pause, puis recommencez.</li><li><b>Répétez :</b> Après plusieurs Pomodoros, prenez une pause plus longue.</li>
-          </ol>
-        </div>
-        <a href="pomodoro-how-to-fr.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Lire l&#x27;article</a>
-      </div>
-
-      <div class="tool-card" role="region" aria-label="Minuteur Pomodoro">
-        <!-- Back to main menu (translated and id for potential script localization) -->
-        <a id="backLink" href="index.html" class="d-block mb-2" style="text-decoration:none; color:#0d6efd; font-weight:600;" aria-label="Retour au menu principal">
-          &larr; Retour au menu principal
+<div aria-label="Minuteur Pomodoro" class="tool-card" role="region">
+<!-- Back to main menu (translated and id for potential script localization) -->
+<a aria-label="Retour au menu principal" class="d-block mb-2" href="index.html" id="backLink" style="text-decoration:none; color:#0d6efd; font-weight:600;">
+          â† Retour au menu principal
         </a>
-        <h3><i class="fa fa-apple-whole"></i> Minuteur Pomodoro</h3>
+<!-- Replaced Apple icon with Pomodoro visuals -->
+<h3><span class="pomodoro-emoji" aria-hidden="true">ðŸ…</span><i class="fa fa-stopwatch pomodoro-fa" aria-hidden="true"></i> Minuteur Pomodoro</h3>
+<div aria-live="polite" class="pomodoro-section">
+<div class="form-inline mb-2">
+<label style="font-weight:600;">Travail (min):
+              <input class="form-control" id="workLength" max="60" min="1" style="width:80px; margin-left:.3rem;" type="number" value="25"/>
+</label>
+<label style="font-weight:600;">Pause (min):
+              <input class="form-control" id="breakLength" max="30" min="1" style="width:80px; margin-left:.3rem;" type="number" value="5"/>
+</label>
+</div>
+<div id="pomodoroStatus" style="font-weight:600; margin-bottom:.25rem;">Travail</div>
+<div class="pomodoro-display" id="pomodoroDisplay">25:00</div>
+<div class="controls-row">
+<button class="btn btn-success btn-small" id="startBtn"><i class="fa fa-play"></i> DÃ©marrer</button>
+<button class="btn btn-secondary btn-small" id="pauseBtn"><i class="fa fa-pause"></i> Pause</button>
+<button class="btn btn-danger btn-small" id="resetBtn"><i class="fa fa-refresh"></i> RÃ©initialiser</button>
+</div>
+<div id="pomodoroCycle" style="margin-top:.5rem; color:#185a9d; font-weight:600;">Cycles terminÃ©s: 0</div>
+<div aria-hidden="false" class="toggles" style="margin-top:.5rem;">
+<label style="display:flex; align-items:center; gap:.35rem;"><input id="beepToggle" type="checkbox"/> Bip Ã  la fin</label>
+<label style="display:flex; align-items:center; gap:.35rem;"><input id="notifyToggle" type="checkbox"/> Notification de bureau</label>
+<label style="display:flex; align-items:center; gap:.35rem;"><input id="autoStartToggle" type="checkbox"/> DÃ©marrer automatiquement la pÃ©riode suivante</label>
+</div>
+<details class="faq-section" style="margin-top:1rem;">
+<summary style="font-weight:700; font-size:1rem;">Foire aux questions</summary>
+<ul style="padding-left:1.1rem; color:#374151;">
+<li><b>Qu'est-ce que Pomodoro ?</b> Une technique de productivitÃ© basÃ©e sur des cycles travail/pause.</li>
+<li><b>Puis-je ajuster le minuteur ?</b> Oui â€” adaptez les durÃ©es Ã  votre flux de travail.</li>
+<li><b>Les sessions sont-elles sauvegardÃ©es ?</b> Non â€” les sessions sont rÃ©initialisÃ©es au rechargement.</li>
+</ul>
+</details>
+</div>
+</div>
 
-        <div class="pomodoro-section" aria-live="polite">
-          <div class="form-inline mb-2">
-            <label style="font-weight:600;">Travail (min):
-              <input id="workLength" type="number" min="1" max="60" value="25" class="form-control" style="width:80px; margin-left:.3rem;">
-            </label>
-            <label style="font-weight:600;">Pause (min):
-              <input id="breakLength" type="number" min="1" max="30" value="5" class="form-control" style="width:80px; margin-left:.3rem;">
-            </label>
-          </div>
-
-          <div id="pomodoroStatus" style="font-weight:600; margin-bottom:.25rem;">Travail</div>
-          <div id="pomodoroDisplay" class="pomodoro-display">25:00</div>
-
-          <div class="controls-row">
-            <button id="startBtn" class="btn btn-success btn-small"><i class="fa fa-play"></i> Démarrer</button>
-            <button id="pauseBtn" class="btn btn-secondary btn-small"><i class="fa fa-pause"></i> Pause</button>
-            <button id="resetBtn" class="btn btn-danger btn-small"><i class="fa fa-refresh"></i> Réinitialiser</button>
-          </div>
-
-          <div id="pomodoroCycle" style="margin-top:.5rem; color:#185a9d; font-weight:600;">Cycles terminés: 0</div>
-
-          <div class="toggles" aria-hidden="false" style="margin-top:.5rem;">
-            <label style="display:flex; align-items:center; gap:.35rem;"><input type="checkbox" id="beepToggle"> Bip à la fin</label>
-            <label style="display:flex; align-items:center; gap:.35rem;"><input type="checkbox" id="notifyToggle"> Notification de bureau</label>
-            <label style="display:flex; align-items:center; gap:.35rem;"><input type="checkbox" id="autoStartToggle"> Démarrer automatiquement la période suivante</label>
-          </div>
-
-          <details class="faq-section" style="margin-top:1rem;">
-            <summary style="font-weight:700; font-size:1rem;">Foire aux questions</summary>
-            <ul style="padding-left:1.1rem; color:#374151;">
-              <li><b>Qu&#x27;est-ce que Pomodoro ?</b> Une technique de productivité basée sur des cycles travail/pause.</li>
-<li><b>Puis-je ajuster le minuteur ?</b> Oui — adaptez les durées à votre flux de travail.</li>
-<li><b>Les sessions sont-elles sauvegardées ?</b> Non — les sessions sont réinitialisées au rechargement.</li>
-
-            </ul>
-          </details>
-        </div>
-      </div>
-
-      <div class="article-card" aria-labelledby="tips-title">
-        <div>
-          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils Pomodoro — TimerHaven</h2>
-          <ul style="padding-left:1.1rem; color:#374151;">
-            <li><b>Ne sautez pas les pauses :</b> Elles rechargent votre énergie.</li><li><b>Suivez vos sessions :</b> Notez vos Pomodoros quotidiens.</li><li><b>Personnalisez :</b> Ajustez les durées selon vos tâches.</li>
-          </ul>
-        </div>
-        <a href="pomodoro-tips-fr.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Lire l&#x27;article</a>
-      </div>
-    </div>
-
-    <footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
-      &copy; 2025 TimerHaven. <a href="privacy.html">Politique de confidentialité</a> &bull; <a href="terms.html">Conditions</a> &bull; <a href="contact.html">Contact</a>
-    </footer>
-  </div>
-
-  <script>
+</div>
+<footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
+      Â© 2025 TimerHaven. <a href="privacy.html">Politique de confidentialitÃ©</a> â€¢ <a href="terms.html">Conditions</a> â€¢ <a href="contact.html">Contact</a>
+</footer>
+</div>
+<script>
   (function(){
-    // language selector redirect
+    // language selector redirect (element removed on FR) â€” script remains harmless (it checks element)
     var sel = document.getElementById('language-select-top');
     if (sel) {
       sel.addEventListener('change', function() {
@@ -136,7 +112,7 @@
       var sec = timeLeft % 60;
       document.getElementById('pomodoroDisplay').textContent = String(min).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
       document.getElementById('pomodoroStatus').textContent = isWork ? "Travail" : "Pause";
-      document.getElementById('pomodoroCycle').textContent = "Cycles terminés: " + cycleCount;
+      document.getElementById('pomodoroCycle').textContent = "Cycles terminÃ©s: " + cycleCount;
     }
 
     function setLengths() {
@@ -184,8 +160,8 @@
     setLengths();
   })();
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+<p style="margin-top:1rem;"><a class="cta" href="/fr/pomodoro/pomodoro-index.html">Read full guide</a></p></body>
 </html>
+

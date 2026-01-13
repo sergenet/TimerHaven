@@ -1,18 +1,288 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>unit-converter — Guide (es)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for unit-converter guide (es)">
+  <meta charset="utf-8" />
+  <title>Convertidor de Unidades — Convertir unidades con precisión y evitar errores | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía completa sobre conversión de unidades: sistemas de unidades, precisión y redondeo, casos especiales (temperatura), recetas de conversión para ingeniería, cocina y viaje, y automatización en hojas de cálculo." />
+  <link rel="canonical" href="https://timerhaven.com/es/unit-converter/unit-converter-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "inLanguage":"es",
+        "name":"Convertir unidades de forma fiable",
+        "description":"Entienda las familias de unidades, precisión y redondeo, casos especiales (temperatura) y recetas comunes de conversión para uso diario y profesional.",
+        "image":"https://timerhaven.com/assets/images/unit-converter-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Convertidor de Unidades (TimerHaven)","Tablas de referencia o manual técnico","Hoja de cálculo"],
+        "step":[
+          {"@type":"HowToStep","name":"Identificar la familia de unidades","text":"Decida si va a convertir longitud, masa/peso, temperatura, volumen, etc."},
+          {"@type":"HowToStep","name":"Elegir referencia y precisión","text":"Seleccione factores de conversión autorizados y determine la precisión decimal requerida."},
+          {"@type":"HowToStep","name":"Aplicar la conversión y redondear","text":"Convierta y formatee el resultado aplicando un redondeo apropiado para presentación o cálculo."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "inLanguage":"es",
+        "mainEntity":[
+          {"@type":"Question","name":"¿Por qué las conversiones de temperatura son diferentes?","acceptedAnswer":{"@type":"Answer","text":"Las conversiones de temperatura son transformaciones afines (incluyen escala y desplazamiento), por lo que no se puede convertir una diferencia de temperatura de la misma manera que una lectura absoluta sin ajustar el desplazamiento."}},
+          {"@type":"Question","name":"¿Cuántos decimales debo mostrar?","acceptedAnswer":{"@type":"Answer","text":"Depende del contexto: compras—2 decimales; cocina—redondeos sensatos; ingeniería—cifras significativas según la precisión del instrumento (3–6+)."}} 
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;direction:ltr;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+    a.cta { color:var(--brand); font-weight:700; text-decoration:none; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">unit-converter — Guide (es)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Convertidor de Unidades — Convertir unidades con precisión y comprender trampas</h1>
+
+      <div class="author" role="articleauthor" aria-label="Autor del artículo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Por Serge Shammas</strong> — redactor especializado en usabilidad e ingeniería</div>
+          <div class="meta">Publicado: 2025-11-24 · Tiempo de lectura: 10–15 min</div>
+        </div>
+      </div>
+
+      <p class="lead">La conversión de unidades es habitual en viajes, cocina, ingeniería y software. Errores pequeños en las unidades o el redondeo pueden producir fallos significativos. Esta guía explica familias de unidades, reglas de precisión, conversiones de temperatura, patrones de presentación, ejemplos para hojas de cálculo y APIs, y consejos prácticos para evitar errores comunes. La herramienta de TimerHaven admite muchas familias — longitud, peso, temperatura, volumen, superficie, velocidad, tiempo, presión, energía, potencia, datos (SI y binario), consumo de combustible (L/100km ↔ mpg), ángulo y frecuencia — e incluye ayudas de interfaz para hacer conversiones más seguras.</p>
+
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#families">Familias de unidades y fundamentos</a>
+        <a href="#precision">Precisión y reglas de redondeo</a>
+        <a href="#temperature">Temperatura — casos especiales</a>
+        <a href="#recipes">Recetas comunes de conversión</a>
+        <a href="#spreadsheet">Hojas de cálculo y ejemplos de script</a>
+        <a href="#tool-features">Características de la herramienta</a>
+        <a href="#faq">Preguntas frecuentes</a>
+      </nav>
+
+      <section id="families" class="section" aria-labelledby="families-title">
+        <h2 id="families-title">Familias de unidades y fundamentos</h2>
+        <p>Las unidades pertenecen a familias (longitud, masa/peso, temperatura, volumen, tiempo, superficie, energía, etc.). Convierte siempre dentro de la misma familia y utiliza factores de conversión autorizados. El convertidor soporta las siguientes familias y proporciona unidades habituales por defecto.</p>
+
+        <ul>
+          <li><strong>Longitud:</strong> metro, kilómetro, milla, pie, pulgada.</li>
+          <li><strong>Masa / peso:</strong> kilogramo, gramo, libra, onza.</li>
+          <li><strong>Volumen:</strong> litro, mililitro, metro cúbico, galón (US/Imperial), taza.</li>
+          <li><strong>Superficie:</strong> metro cuadrado, pie cuadrado, yarda cuadrada, acre, hectárea.</li>
+          <li><strong>Temperatura:</strong> Celsius, Fahrenheit, Kelvin (transformaciones afines).</li>
+          <li><strong>Velocidad / Tiempo / Presión / Energía / Potencia:</strong> unidades de ingeniería comunes incluidas.</li>
+          <li><strong>Tamaños de datos:</strong> SI (KB = 1.000) y binario (KiB = 1.024) — seleccionable según el contexto.</li>
+          <li><strong>Consumo de combustible:</strong> L/100km ↔ mpg (US/UK) — fórmulas específicas.</li>
+          <li><strong>Ángulo y frecuencia:</strong> grado/radián y Hz/kHz/MHz.</li>
+        </ul>
+
+        <p class="muted">Para trabajo de ingeniería crítico, consulte estándares nacionales (NIST, BIPM) para factores y definiciones exactas.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Precisión y reglas de redondeo</h2>
+        <p>Decida la precisión según el propósito. Un redondeo excesivo introduce sesgos; demasiada precisión puede implicar exactitud falsa.</p>
+
+        <h3>Guías por contexto</h3>
+        <ul>
+          <li><strong>Uso diario / compras:</strong> 2 decimales suelen ser suficientes.</li>
+          <li><strong>Cocina:</strong> redondee a unidades prácticas (cucharaditas, gramos) y ofrezca alternativas métricas e imperiales.</li>
+          <li><strong>Ingeniería:</strong> muestre cifras significativas acorde a la precisión del instrumento (3–6+ decimales según tolerancia).</li>
+          <li><strong>Análisis:</strong> almacene valores en alta precisión y redondee sólo en la capa de presentación.</li>
+        </ul>
+
+        <p>Siempre muestre la unidad junto al número. Considere mostrar el factor de conversión o la marca temporal cuando se trate de tasas dinámicas (p. ej. divisas). En la herramienta de TimerHaven puede ajustar la precisión de visualización y ver el valor bruto si se ha redondeado.</p>
+      </section>
+
+      <section id="temperature" class="section" aria-labelledby="temperature-title">
+        <h2 id="temperature-title">Temperatura — casos especiales</h2>
+        <p>Las conversiones de temperatura son afines: requieren escala y desplazamiento. Convertir un cambio de temperatura difiere de convertir una temperatura absoluta.</p>
+
+        <ul>
+          <li>Convertir valores absolutos:
+            <ul>
+              <li>C → F: F = C × 9/5 + 32</li>
+              <li>F → C: C = (F − 32) × 5/9</li>
+              <li>C ↔ K: K = C + 273.15</li>
+            </ul>
+          </li>
+          <li>Convertir una diferencia de temperatura (Δ): conviértala sólo por la escala (multiplique por 9/5 para ΔC → ΔF)—no aplique desplazamiento.</li>
+        </ul>
+
+        <p>Ejemplo de error común: "Un cambio de 10°C es 18°F" es correcto para diferencias; pero convertir 10°C absoluto a Fahrenheit requiere añadir 32 tras la escala.</p>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Recetas comunes de conversión</h2>
+
+        <div class="recipe">
+          <strong>Longitud: millas ↔ kilómetros</strong>
+          <ol>
+            <li>Factor: 1 milla = 1.609344 kilómetros.</li>
+            <li>Ejemplo: 5 millas × 1.609344 = 8.04672 km → muestre 8.05 km para uso habitual.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Superficie: metros cuadrados ↔ pies cuadrados</strong>
+          <ol>
+            <li>Factor: 1 m² = 10.7639104 ft² (1 ft² = 0.09290304 m²).</li>
+            <li>Ejemplo: 500 m² × 10.7639104 = 5,381.9552 ft² → muestre 5,382 ft².</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Volumen: galones ↔ litros</strong>
+          <ol>
+            <li>US gallon → litro: 1 US gal = 3.785411784 L; Imperial gallon = 4.54609 L.</li>
+            <li>Ejemplo: 2 US gal × 3.785411784 = 7.570823568 L → muestre 7.571 L.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Consumo de combustible: L/100km ↔ mpg</strong>
+          <ol>
+            <li>Utilice las fórmulas correctas (no un multiplicador simple):
+              <ul>
+                <li>mpg (US) → L/100km: L/100km = 235.214583 / mpg_US</li>
+                <li>L/100km → mpg (US): mpg_US = 235.214583 / L/100km</li>
+                <li>mpg (UK) usa constante ≈ 282.480936</li>
+              </ul>
+            </li>
+            <li>Ejemplo: 30 mpg (US) → L/100km = 235.214583 / 30 ≈ 7.8405 L/100km.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Tamaños de datos: KB/MB (SI) vs KiB/MiB (binario)</strong>
+          <ol>
+            <li>Elija modo: SI usa 1 KB = 1.000 bytes; binario usa 1 KiB = 1.024 bytes.</li>
+            <li>Ejemplo: 1.500.000 bytes → SI = 1.5 MB; binario ≈ 1.4305 MiB.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="spreadsheet" class="section" aria-labelledby="spreadsheet-title">
+        <h2 id="spreadsheet-title">Hojas de cálculo & ejemplos de script</h2>
+        <p>Fórmulas comunes y patrones de script para automatizar conversiones a escala.</p>
+
+        <h3>Ejemplo de hoja (Google Sheets / Excel)</h3>
+        <pre class="template">Convertir millas en A2 a kilómetros:
+=ROUND(A2 * 1.609344, 2)</pre>
+
+        <h3>Fragmento JavaScript</h3>
+        <pre class="template">function convertLength(val, fromFactor, toFactor) {
+  // donde los factores están expresados en metros por unidad
+  return val * (fromFactor / toFactor);
+}
+// Ejemplo: miles->km: milesFactor=1609.344, kmFactor=1000
+</pre>
+
+        <p class="small-note muted">Almacene factores canónicos en un lugar y reutilícelos para evitar inconsistencias entre hojas y código.</p>
+      </section>
+
+      <section id="tool-features" class="section" aria-labelledby="tool-features-title">
+        <h2 id="tool-features-title">Convertidor TimerHaven — características y consejos</h2>
+        <p>La herramienta en línea complementa esta guía. Características clave para evitar errores:</p>
+        <ul>
+          <li><strong>Muchas familias soportadas:</strong> longitud, peso, temperatura, volumen, superficie, velocidad, tiempo, presión, energía, potencia, datos (SI & binario), consumo de combustible, ángulo, frecuencia.</li>
+          <li><strong>Modo datos:</strong> cambie entre SI (1000) y Binario (1024) al convertir tamaños de datos — sólo visible al seleccionar "Datos".</li>
+          <li><strong>Filtro de unidades:</strong> escriba para encontrar rápidamente unidades como "square" o "ft".</li>
+          <li><strong>Swap:</strong> invierta unidades origen/destino sin reescribir.</li>
+          <li><strong>Control de precisión:</strong> elija decimales para la visualización; el valor bruto está disponible si se aplica redondeo.</li>
+          <li><strong>Copiar resultado:</strong> copiar la conversión formateada al portapapeles.</li>
+          <li><strong>Persistencia & atajos:</strong> las últimas configuraciones se guardan en el navegador; <span class="kbd">Ctrl+K</span> enfoca el campo de valor.</li>
+          <li><strong>Comportamiento por defecto seguro:</strong> si no hay conversión directa, la herramienta muestra un mensaje o utiliza factores canónicos como fallback.</li>
+        </ul>
+
+        <p class="muted">Use la herramienta para verificaciones rápidas; para sistemas productivos, guarde factores canónicos y mantenga pruebas.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Preguntas frecuentes</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ¿Por qué algunas conversiones imperial ↔ métrico parecen "incorrectas"?<br>
+          <strong>R:</strong> Porque hay diferencias en definiciones (por ejemplo, diferentes valores de galón), además del redondeo y las decisiones de presentación. Verifique siempre la definición usada.</p>
+
+          <p><strong>P:</strong> ¿Qué modo de datos debo usar — SI o binario?<br>
+          <strong>R:</strong> Use SI (KB = 1000) para capacidades que se anuncian en decimal; use binario (KiB = 1024) para tamaños de memoria y contextos técnicos. La herramienta permite cambiar entre modos.</p>
+
+          <p><strong>P:</strong> ¿Cómo convierto un cambio de temperatura frente a una temperatura absoluta?<br>
+          <strong>R:</strong> Consulte la sección de temperatura: las diferencias se convierten sólo por escala, sin aplicar desplazamientos.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Recursos</h2>
+        <ul class="muted">
+          <li><a href="/unit-converter-es.html">Abrir Convertidor de Unidades</a></li>
+          <li><a href="https://www.nist.gov/pml/weights-and-measures/metric-si" target="_blank" rel="noopener">NIST — Unidades SI</a></li>
+          <li><a href="https://geology.com/units/" target="_blank" rel="noopener">Tablas de conversión & referencias</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/unit-converter-es.html" class="cta" aria-label="Abrir Convertidor de Unidades">Abrir Convertidor de Unidades</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas o comentarios? Contáctanos en <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lee nuestra <a href="/privacy/">Política de privacidad</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/unit-converter-es.html" class="return-to-tool" id="returnToToolUnit" aria-label="Volver al Convertidor de Unidades">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolUnit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

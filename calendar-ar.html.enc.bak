@@ -1,0 +1,563 @@
+﻿<!DOCTYPE html>
+
+<html lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="notranslate" name="google"/>
+<title>Ø§Ù„ØªÙ‚ÙˆÙŠÙ… â€” TimerHaven</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Ø³Ø¬Ù‘Ù„ ÙˆØ§Ø¯ÙØ± Ù…Ù„Ø§Ø­Ø¸Ø§Øª ÙŠÙˆÙ…ÙŠØ© ÙÙŠ Ø§Ù„ØªÙ‚ÙˆÙŠÙ…. ØªØ¹Ù„Ù‘Ù… ÙƒÙŠÙÙŠØ© Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„ØªÙ‚ÙˆÙŠÙ…ØŒ Ø§Ø·Ù‘Ù„Ø¹ Ø¹Ù„Ù‰ Ù†ØµØ§Ø¦Ø­ Ø§Ù„Ø¥Ù†ØªØ§Ø¬ÙŠØ©ØŒ FAQ ÙˆÙ…Ù‚Ø§Ù„Ø§Øª Ù…ÙÙŠØ¯Ø©." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; direction: rtl; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
+    .article-card, .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      width: 340px;
+      min-width: 220px;
+      max-width: 340px;
+      flex: 1 1 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 2em 1.3em 1rem 1.3em;
+      margin: 0;
+      box-sizing: border-box;
+      min-height: 500px;
+    }
+    .tool-card { max-width: 640px; min-width: 320px; }
+    .article-card h2, .tool-card h3 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display:flex; align-items:center; gap:0.3em; }
+    .calendar-header { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.6rem; flex-wrap:nowrap; }
+    .calendar-nav { display:flex; gap:.25rem; align-items:center; flex-shrink:0; }
+    .calendar-nav .btn { min-width:40px; padding:.22rem .45rem; height:34px; line-height:1; display:inline-flex; align-items:center; justify-content:center; }
+    .calendar-select { border-radius:8px; padding:.14rem .35rem; border:1px solid #e4edf5; background:#fff; font-size:.9rem; height:34px; line-height:1; display:inline-block; vertical-align:middle; box-sizing:border-box; -webkit-appearance:none; appearance:none; }
+    .calendar-select.month { width:110px; }
+    .calendar-select.year { width:90px; }
+    /* Time input */
+    .calendar-select.time { width:110px; padding:.12rem .4rem; text-align:center; }
+
+    .calendar-table { width:100%; margin-top:1em; border-collapse:separate; border-spacing:0; background:#fff; border-radius:8px; overflow:hidden; table-layout: fixed; }
+    .calendar-table th, .calendar-table td { text-align:center; padding:0.6em 0.7em; min-width:36px; max-width:40px; vertical-align:middle; }
+    .day-cell { cursor:pointer; border-radius:6px; transition: background 0.1s; display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; margin:0 auto; }
+    .day-cell:hover { background:#e0e7ef; }
+    .has-note { background:#ffeeba !important; }
+    .calendar-today { background:#43cea2 !important; color:#fff !important; border-radius:50% !important; font-weight:bold; box-shadow:0 0 6px #185a9d33; }
+    .modal-header { background:#f4f7fb; }
+    .modal-footer { background:#f7fafc; }
+    .note-list { list-style:none; padding:0; margin-bottom:1em; }
+    .note-list li { background:#f7fafc; border-radius:6px; margin-bottom:0.5em; padding:0.5em 0.8em; display:flex; align-items:center; justify-content:space-between; gap:.6rem; }
+    .note-text { word-break:break-word; flex-grow:1; text-align:right; }
+    .note-meta { font-size:0.85em; color:#888; margin-left:1em; text-align:left; }
+    .note-meta.right { margin-left:0; margin-right:1em; text-align:right; }
+    .delete-note-btn { font-size:0.9em; color:#c00; background:none; border:none; cursor:pointer; }
+
+    /* Headline sizes: reduce How-to and make Tips match */
+    #howto-title { font-size: 1.05em; font-weight:700; }
+    #tips-title { font-size: 1.05em; font-weight:700; }
+
+    @media (max-width:1100px) {
+      .main-container{padding:0 8px;}
+      .center-row{gap:1em;}
+      .tool-card,.article-card{width:97vw;max-width:540px;height:auto;}
+    }
+    @media (max-width:800px) {
+      .main-container{padding:0;}
+      .center-row{flex-direction:column;align-items:center;}
+      .tool-card,.article-card{width:98vw;max-width:540px;height:auto;}
+      .article-card{display:none!important;}
+      .howto-mobile{display:block!important; margin-bottom:1em;}
+      .calendar-header{flex-wrap:wrap; justify-content:flex-start;}
+      .calendar-select{width:48%; max-width:220px; margin-top:.45rem;}
+      .calendar-nav{margin-left:.5rem;} /* RTL: shift nav spacing */
+    }
+  </style>
+<!-- Defensive override: force true horizontal table layout for the calendar -->
+<style id="calendar-table-fix">
+    #calendar-table, table#calendar-table, .calendar-table {
+      display: table !important;
+      table-layout: fixed !important;
+      width: 100% !important;
+      border-collapse: collapse !important;
+      transform: none !important;
+      writing-mode: horizontal-tb !important;
+      -webkit-writing-mode: horizontal-tb !important;
+    }
+    #calendar-table thead, #calendar-table tbody, #calendar-table tr { display: table-row-group !important; }
+    #calendar-table tr { display: table-row !important; }
+    #calendar-table th, #calendar-table td {
+      display: table-cell !important;
+      vertical-align: middle !important;
+      white-space: nowrap !important;
+      float: none !important;
+      position: static !important;
+      width: auto !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+      padding: .6rem .45rem !important;
+    }
+    /* keep day visuals but force table participation */
+    #calendar-table td.day-cell {
+      display: table-cell !important;
+      vertical-align: middle !important;
+      text-align: center !important;
+      width: 34px !important;
+      height: 34px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 50% !important;
+      box-sizing: border-box !important;
+    }
+    #calendar-table, #calendar-table * { transform: none !important; -webkit-transform: none !important; writing-mode: horizontal-tb !important; -webkit-writing-mode: horizontal-tb !important; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- Early language detection -->
+<script>
+    (function setLangFromPath(){
+      try {
+        var path = window.location.pathname || '';
+        if (path.indexOf('-ar.html') !== -1 || path.indexOf('/ar/') !== -1 || /^\/ar(\/|$)/.test(path)) {
+          localStorage.setItem('timerhavenLang', 'ar');
+        } else if (!localStorage.getItem('timerhavenLang')) {
+          localStorage.setItem('timerhavenLang', 'ar');
+        }
+      } catch (err) {
+        console.warn('lang detection error', err);
+      }
+    })();
+  </script>
+<div class="main-container">
+<div class="center-row">
+
+<div class="tool-card">
+<!-- Read full guide button added and wired in JS via updateLanguage as well -->
+<a class="back-link" href="index.html" id="back-link">Ø§Ù„Ø¹ÙˆØ¯Ø© Ù„Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</a>
+<h3 id="tool-title"><i class="fa fa-calendar-days"></i> Ø§Ù„ØªÙ‚ÙˆÙŠÙ…</h3>
+
+<!-- Read guide button (Arabic guide URL) -->
+<a id="read-guide-btn" class="read-guide" href="/ar/calendar-planning/calendar-planning-index.html" role="button">Ø§Ù‚Ø±Ø£ Ø§Ù„Ø¯Ù„ÙŠÙ„ Ø§Ù„ÙƒØ§Ù…Ù„</a>
+
+<div class="help-section">
+<b id="tool-help">Ø§Ù†Ù‚Ø± Ø¹Ù„Ù‰ Ø£ÙŠ ÙŠÙˆÙ… Ù„Ø¥Ø¶Ø§ÙØ©/Ø¹Ø±Ø¶/ØªØ¹Ø¯ÙŠÙ„ Ù…Ù„Ø§Ø­Ø¸Ø§ØªÙƒ. ÙŠÙ…ÙƒÙ† Ø¥Ø¶Ø§ÙØ© Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù…ØªØ¹Ø¯Ø¯Ø© Ù„ÙƒÙ„ ÙŠÙˆÙ… ÙˆØªØ¨Ù‚Ù‰ Ù…Ø­ÙÙˆØ¸Ø©!</b>
+</div>
+<!-- Header controls (buttons + month/year selects + default time) -->
+<div aria-label="ØªÙ†Ù‚Ù„ Ø§Ù„ØªÙ‚ÙˆÙŠÙ…" class="calendar-header">
+  <div aria-label="ØªÙ†Ù‚Ù„ Ø´Ù‡Ø±/Ø³Ù†Ø©" class="calendar-nav" role="toolbar">
+    <button aria-label="Ø§Ù„Ø³Ù†Ø© Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©" class="btn btn-sm btn-outline-secondary" id="nav-prev-year">Â«</button>
+    <button aria-label="Ø§Ù„Ø´Ù‡Ø± Ø§Ù„Ø³Ø§Ø¨Ù‚" class="btn btn-sm btn-outline-secondary" id="nav-prev-month">â€¹</button>
+    <button aria-label="Ø§Ù„ÙŠÙˆÙ…" class="btn btn-sm btn-outline-secondary" id="nav-today">Ø§Ù„ÙŠÙˆÙ…</button>
+    <button aria-label="Ø§Ù„Ø´Ù‡Ø± Ø§Ù„ØªØ§Ù„ÙŠ" class="btn btn-sm btn-outline-secondary" id="nav-next-month">â€º</button>
+    <button aria-label="Ø§Ù„Ø³Ù†Ø© Ø§Ù„ØªØ§Ù„ÙŠØ©" class="btn btn-sm btn-outline-secondary" id="nav-next-year">Â»</button>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
+    <select aria-label="Ø§Ø®ØªØ± Ø§Ù„Ø´Ù‡Ø±" class="calendar-select month" id="calendar-month-select"></select>
+    <select aria-label="Ø§Ø®ØªØ± Ø§Ù„Ø³Ù†Ø©" class="calendar-select year" id="calendar-year-select"></select>
+    <!-- Default start time for first note (HH:MM) -->
+    <input id="default-start-time" class="calendar-select time" type="time" aria-label="ÙˆÙ‚Øª Ø¨Ø¯Ø§ÙŠØ© Ø§ÙØªØ±Ø§Ø¶ÙŠ" title="ÙˆÙ‚Øª Ø¨Ø¯Ø§ÙŠØ© Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰">
+  </div>
+</div>
+
+<table aria-label="Ø§Ù„ØªÙ‚ÙˆÙŠÙ…" class="table calendar-table" id="calendar-table">
+<!-- populated by JS -->
+</table>
+<details class="faq-section" id="faq-section">
+<summary id="faq-title">Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø´Ø§Ø¦Ø¹Ø©</summary>
+<ul id="faq-list" style="padding-left:1em;text-align:right;">
+<li><b>Ù‡Ù„ ØªØ­ÙØ¸ Ù…Ù„Ø§Ø­Ø¸Ø§ØªÙŠØŸ</b> Ù†Ø¹Ù… â€” ØªØ¸Ù„ Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª ÙÙŠ Ù…ØªØµÙØ­Ùƒ Ø­ØªÙ‰ ØªÙ‚ÙˆÙ… Ø¨Ø­Ø°ÙÙ‡Ø§.</li>
+<li><b>Ù‡Ù„ ÙŠÙ…ÙƒÙ† Ø¥Ø¶Ø§ÙØ© Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù…ØªØ¹Ø¯Ø¯Ø©ØŸ</b> Ù†Ø¹Ù… â€” ÙŠÙ…ÙƒÙ†Ùƒ Ø¥Ø¶Ø§ÙØ© Ø£ÙŠ Ø¹Ø¯Ø¯ Ù…Ù† Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù„ÙƒÙ„ ÙŠÙˆÙ….</li>
+<li><b>Ù‡Ù„ ÙŠÙ…ÙƒÙ† Ø­Ø°Ù Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§ØªØŸ</b> Ù†Ø¹Ù… â€” Ø§Ø­Ø°Ù Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø© Ø§Ù„ÙØ±Ø¯ÙŠØ© Ø¹Ø¨Ø± Ø£ÙŠÙ‚ÙˆÙ†Ø© Ø³Ù„Ø© Ø§Ù„Ù…Ø­Ø°ÙˆÙØ§Øª.</li>
+<li><b>Ù‡Ù„ ØªÙØ²Ø§Ù…Ù† Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø¹Ù„Ù‰ Ø£Ø¬Ù‡Ø²Ø© Ù…ØªØ¹Ø¯Ø¯Ø©ØŸ</b> Ø­Ø§Ù„ÙŠØ§Ù‹ Ù„Ø§ â€” ØªÙØ®Ø²Ù† Ù…Ø­Ù„ÙŠØ§Ù‹. Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø£Ø¬Ù‡Ø²Ø© Ù…ØªØ¹Ø¯Ø¯Ø© Ø§Ø³ØªØ®Ø¯Ù… Ø®Ø¯Ù…Ø§Øª Ø³Ø­Ø§Ø¨ÙŠØ© Ø®Ø§Ø±Ø¬ÙŠØ©.</li>
+</ul>
+</details>
+</div>
+
+</div>
+</div>
+
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="noteModalLabel" class="modal fade" id="noteModal" tabindex="-1">
+<div class="modal-dialog"><div class="modal-content">
+<form autocomplete="off" id="noteForm">
+<div class="modal-header">
+<h5 class="modal-title" id="noteModalLabel">Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù„Ù€ <span id="modal-date-label"></span></h5>
+<button aria-label="Ø§ØºÙ„Ø§Ù‚" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<ul class="note-list" id="noteList"></ul>
+<textarea class="form-control" id="noteInput" placeholder="Ø£Ø¶Ù Ù…Ù„Ø§Ø­Ø¸Ø© Ø¬Ø¯ÙŠØ¯Ø© Ù„Ù‡Ø°Ø§ Ø§Ù„ÙŠÙˆÙ…..." rows="3"></textarea>
+</div>
+<div class="modal-footer">
+<button class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn" type="button">Ø¥ØºÙ„Ø§Ù‚</button>
+<button class="btn btn-success" id="note-add-btn" type="submit">Ø£Ø¶Ù Ù…Ù„Ø§Ø­Ø¸Ø©</button>
+</div>
+</form>
+</div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Persistence and state
+    let notes = {};
+    try { notes = JSON.parse(localStorage.getItem('calendarNotes_ar') || '{}'); } catch(e) { notes = {}; console.error('notes parse error', e); }
+    let currentYear, currentMonth, selectedDay;
+
+    function getLang() {
+      return localStorage.getItem('timerhavenLang') || 'ar';
+    }
+
+    const translations = {
+      en: {
+        "back-link": "Back to Main Menu",
+        "tool-title": "Calendar",
+        "tool-help": "Click any day to add/view/edit your notes. Multiple notes per day are supported and persist!",
+        "faq-title": "FAQs",
+        "faq-list": `<li><b>Are my notes saved?</b> Yes! Notes are saved in your browser and remain until you delete them.</li>`,
+        "howto-title": "<i class=\"fa fa-calendar-check\"></i> How to Use Calendar",
+        "howto-steps": `<li><b>Click a day:</b> Open the modal to add/view multiple notes for each day.</li>`,
+        "noteModalLabel": "Notes for",
+        "noteInput": "Add a new note for this day...",
+        "note-none": "No notes yet for this day.",
+        "note-delete": "Delete this note",
+        "note-close-btn": "Close",
+        "note-add-btn": "Add Note",
+        "days": ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+        "months": ["January","February","March","April","May","June","July","August","September","October","November","December"]
+      },
+      ar: {
+        "back-link": "Ø§Ù„Ø¹ÙˆØ¯Ø© Ù„Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©",
+        "tool-title": "Ø§Ù„ØªÙ‚ÙˆÙŠÙ…",
+        "tool-help": "Ø§Ù†Ù‚Ø± Ø¹Ù„Ù‰ Ø£ÙŠ ÙŠÙˆÙ… Ù„Ø¥Ø¶Ø§ÙØ©/Ø¹Ø±Ø¶/ØªØ¹Ø¯ÙŠÙ„ Ù…Ù„Ø§Ø­Ø¸Ø§ØªÙƒ. ÙŠÙ…ÙƒÙ† Ø¥Ø¶Ø§ÙØ© Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù…ØªØ¹Ø¯Ø¯Ø© Ù„ÙƒÙ„ ÙŠÙˆÙ… ÙˆØªØ¨Ù‚Ù‰ Ù…Ø­ÙÙˆØ¸Ø©!",
+        "faq-title": "Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø´Ø§Ø¦Ø¹Ø©",
+        "faq-list": `<li><b>Ù‡Ù„ ØªØ­ÙØ¸ Ù…Ù„Ø§Ø­Ø¸Ø§ØªÙŠØŸ</b> Ù†Ø¹Ù… â€” ØªØ¸Ù„ Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª ÙÙŠ Ù…ØªØµÙØ­Ùƒ Ø­ØªÙ‰ ØªÙ‚ÙˆÙ… Ø¨Ø­Ø°ÙÙ‡Ø§.</li>
+          <li><b>Ù‡Ù„ ÙŠÙ…ÙƒÙ† Ø¥Ø¶Ø§ÙØ© Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù…ØªØ¹Ø¯Ø¯Ø©ØŸ</b> Ù†Ø¹Ù… â€” ÙŠÙ…ÙƒÙ†Ùƒ Ø¥Ø¶Ø§ÙØ© Ø£ÙŠ Ø¹Ø¯Ø¯ Ù…Ù† Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù„ÙƒÙ„ ÙŠÙˆÙ….</li>
+          <li><b>Ù‡Ù„ ÙŠÙ…ÙƒÙ† Ø­Ø°Ù Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§ØªØŸ</b> Ù†Ø¹Ù… â€” Ø§Ø­Ø°Ù Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø© Ø§Ù„ÙØ±Ø¯ÙŠØ© Ø¹Ø¨Ø± Ø£ÙŠÙ‚ÙˆÙ†Ø© Ø³Ù„Ø© Ø§Ù„Ù…Ø­Ø°ÙˆÙØ§Øª.</li>
+          <li><b>Ù‡Ù„ ØªÙØ²Ø§Ù…Ù† Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø¹Ù„Ù‰ Ø£Ø¬Ù‡Ø²Ø© Ù…ØªØ¹Ø¯Ø¯Ø©ØŸ</b> Ø­Ø§Ù„ÙŠØ§Ù‹ Ù„Ø§ â€” ØªÙØ®Ø²Ù† Ù…Ø­Ù„ÙŠØ§Ù‹. Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø£Ø¬Ù‡Ø²Ø© Ù…ØªØ¹Ø¯Ø¯Ø© Ø§Ø³ØªØ®Ø¯Ù… Ø®Ø¯Ù…Ø§Øª Ø³Ø­Ø§Ø¨ÙŠØ© Ø®Ø§Ø±Ø¬ÙŠØ©.</li>`,
+        "howto-title": "<i class=\"fa fa-calendar-check\"></i> ÙƒÙŠÙÙŠØ© Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„ØªÙ‚ÙˆÙŠÙ…",
+        "howto-steps": `<li><b>Ø§Ù†Ù‚Ø± Ø¹Ù„Ù‰ ÙŠÙˆÙ…:</b> Ø§ÙØªØ­ Ø§Ù„Ù†Ø§ÙØ°Ø© Ù„Ø¥Ø¶Ø§ÙØ©/Ø¹Ø±Ø¶ Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù…ØªØ¹Ø¯Ø¯Ø© Ù„ÙƒÙ„ ÙŠÙˆÙ….</li>
+          <li><b>Ù†Ø¸Ù‘Ù… Ø§Ù„Ø£Ø­Ø¯Ø§Ø«:</b> ÙƒÙ„ Ù…Ù„Ø§Ø­Ø¸Ø© ØªØ­ØµÙ„ Ø¹Ù„Ù‰ Ø·Ø§Ø¨Ø¹ Ø²Ù…Ù†ÙŠ ÙˆÙŠÙ…ÙƒÙ† Ø­Ø°ÙÙ‡Ø§ Ø¨Ø´ÙƒÙ„ Ù…Ø³ØªÙ‚Ù„.</li>
+          <li><b>Ø§Ù„Ø­ÙØ¸:</b> ØªÙØ®Ø²Ù† Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª ÙÙŠ Ù…ØªØµÙØ­Ùƒ ÙˆØªØ¨Ù‚Ù‰ Ø­ØªÙ‰ Ø­Ø°ÙÙ‡Ø§.</li>`,
+        "noteModalLabel": "Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù„Ù€",
+        "noteInput": "Ø£Ø¶Ù Ù…Ù„Ø§Ø­Ø¸Ø© Ø¬Ø¯ÙŠØ¯Ø© Ù„Ù‡Ø°Ø§ Ø§Ù„ÙŠÙˆÙ…...",
+        "note-none": "Ù„Ø§ ØªÙˆØ¬Ø¯ Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù„Ù‡Ø°Ø§ Ø§Ù„ÙŠÙˆÙ… Ø¨Ø¹Ø¯.",
+        "note-delete": "Ø­Ø°Ù Ù‡Ø°Ù‡ Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø©",
+        "note-close-btn": "Ø¥ØºÙ„Ø§Ù‚",
+        "note-add-btn": "Ø£Ø¶Ù Ù…Ù„Ø§Ø­Ø¸Ø©",
+        "days": ["Ø§Ù„Ø£Ø­Ø¯","Ø§Ù„Ø¥Ø«Ù†ÙŠÙ†","Ø§Ù„Ø«Ù„Ø§Ø«Ø§Ø¡","Ø§Ù„Ø£Ø±Ø¨Ø¹Ø§Ø¡","Ø§Ù„Ø®Ù…ÙŠØ³","Ø§Ù„Ø¬Ù…Ø¹Ø©","Ø§Ù„Ø³Ø¨Øª"],
+        "months": ["ÙƒØ§Ù†ÙˆÙ† Ø§Ù„Ø«Ø§Ù†ÙŠ","Ø´Ø¨Ø§Ø·","Ø¢Ø°Ø§Ø±","Ù†ÙŠØ³Ø§Ù†","Ø£ÙŠØ§Ø±","Ø­Ø²ÙŠØ±Ø§Ù†","ØªÙ…ÙˆØ²","Ø¢Ø¨","Ø£ÙŠÙ„ÙˆÙ„","ØªØ´Ø±ÙŠÙ† Ø§Ù„Ø£ÙˆÙ„","ØªØ´Ø±ÙŠÙ† Ø§Ù„Ø«Ø§Ù†ÙŠ","ÙƒØ§Ù†ÙˆÙ† Ø§Ù„Ø£ÙˆÙ„"]
+      }
+    };
+
+    function updateLanguage(lang) {
+      lang = lang || getLang();
+      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+      const t = translations[lang] || translations['en'];
+      const el = id => document.getElementById(id);
+      if (el("back-link")) el("back-link").textContent = t["back-link"];
+      if (el("tool-title")) el("tool-title").innerHTML = `<i class="fa fa-calendar-days"></i> ${t["tool-title"]}`;
+      if (el("tool-help")) el("tool-help").textContent = t["tool-help"];
+      if (el("faq-title")) el("faq-title").textContent = t["faq-title"];
+      if (el("faq-list")) el("faq-list").innerHTML = t["faq-list"];
+      // set read guide link text and href
+      const readBtn = document.getElementById('read-guide-btn');
+      if (readBtn) {
+        readBtn.textContent = 'Ø§Ù‚Ø±Ø£ Ø§Ù„Ø¯Ù„ÙŠÙ„ Ø§Ù„ÙƒØ§Ù…Ù„';
+        readBtn.href = '/ar/calendar-planning/calendar-planning-index.html';
+      }
+      if (el("noteModalLabel")) el("noteModalLabel").innerHTML = `${t["noteModalLabel"]} <span id="modal-date-label"></span>`;
+      if (el("noteInput")) el("noteInput").placeholder = t["noteInput"];
+      if (el("note-close-btn")) el("note-close-btn").textContent = t["note-close-btn"];
+      if (el("note-add-btn")) el("note-add-btn").textContent = t["note-add-btn"];
+      if (typeof currentYear === 'number' && typeof currentMonth === 'number') {
+        renderCalendar(currentYear, currentMonth, lang);
+      }
+    }
+
+    // Utilities: parse durations from text (e.g., "25 minutes", "15â€“30 minutes")
+    function parseDurationFromText(text) {
+      if (!text || typeof text !== 'string') return null;
+      const rangeMatch = text.match(/(\d{1,3})\s*(?:â€“|-)\s*(\d{1,3})\s*minutes?/i);
+      if (rangeMatch) return parseInt(rangeMatch[1], 10);
+      const singleMatch = text.match(/(\d{1,3})\s*minutes?/i);
+      if (singleMatch) return parseInt(singleMatch[1], 10);
+      return null;
+    }
+
+    function formatTime(date) {
+      if (!(date instanceof Date)) date = new Date(date);
+      // use Arabic locale when page is Arabic
+      const locale = (getLang() === 'ar') ? 'ar' : undefined;
+      return date.toLocaleTimeString(locale, { hour:'numeric', minute:'2-digit' });
+    }
+
+    function getDefaultStartTime() {
+      return localStorage.getItem('calendarDefaultStart_ar') || '20:00';
+    }
+    function setDefaultStartTime(val) {
+      localStorage.setItem('calendarDefaultStart_ar', val);
+    }
+
+    function dateFromDateStrAndTime(dateStr, timeStr) {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const [hh = 0, mm = 0] = (timeStr || '00:00').split(':').map(Number);
+      return new Date(y, m - 1, d, hh, mm, 0, 0);
+    }
+
+    // Migrate legacy notes (previously saved as {text, ts}) to objects {text, durationMinutes, createdAt}
+    function migrateLegacyNotes(rawNotes) {
+      if (!Array.isArray(rawNotes)) return [];
+      return rawNotes.map(n => {
+        if (typeof n === 'string') {
+          return { text: n, durationMinutes: parseDurationFromText(n) || null, createdAt: null };
+        }
+        if (n && typeof n === 'object' && ('ts' in n || 'text' in n)) {
+          return {
+            text: n.text || String(n),
+            durationMinutes: (typeof n.durationMinutes === 'number') ? n.durationMinutes : parseDurationFromText(n.text) || null,
+            createdAt: n.createdAt || (n.ts ? new Date(n.ts).toISOString() : null)
+          };
+        }
+        // fallback
+        return { text: String(n), durationMinutes: null, createdAt: null };
+      });
+    }
+
+    // Populate month/year selects (uses translations)
+    function populateMonthYearControls(year, month, lang) {
+      lang = lang || getLang();
+      const monthSelect = document.getElementById('calendar-month-select');
+      const yearSelect = document.getElementById('calendar-year-select');
+      if (!monthSelect || !yearSelect) return;
+      const monthNames = (translations[lang] && translations[lang]["months"]) ? translations[lang]["months"] : null;
+
+      monthSelect.innerHTML = '';
+      for (let m=0;m<12;m++){
+        const opt = document.createElement('option');
+        opt.value = String(m);
+        opt.textContent = monthNames ? monthNames[m] : new Intl.DateTimeFormat(lang, { month:'long' }).format(new Date(2000,m,1));
+        if (m===month) opt.selected = true;
+        monthSelect.appendChild(opt);
+      }
+
+      const now = new Date(); const base = now.getFullYear();
+      const start = base - 50, end = base + 50;
+      yearSelect.innerHTML = '';
+      for (let y=start; y<=end; y++){
+        const opt = document.createElement('option');
+        opt.value = String(y); opt.textContent = String(y);
+        if (y===year) opt.selected = true;
+        yearSelect.appendChild(opt);
+      }
+    }
+
+    // Calendar renderer (uses created note shape)
+    function renderCalendar(year, month, lang) {
+      currentYear = year;
+      currentMonth = month;
+      lang = lang || getLang();
+      const table = document.getElementById('calendar-table');
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      let html = `<thead><tr>`;
+      const dayNames = (translations[lang] && translations[lang]["days"]) ? translations[lang]["days"] : translations['en']["days"];
+      dayNames.forEach(day => { html += `<th>${day}</th>`; });
+      html += `</tr></thead><tbody><tr>`;
+
+      for (let i = 0; i < firstDay; i++) html += `<td></td>`;
+
+      const now = new Date();
+      const todayYear = now.getFullYear(), todayMonth = now.getMonth(), todayDay = now.getDate();
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const rawDayNotes = notes[dateStr] || [];
+        const dayNotes = migrateLegacyNotes(rawDayNotes);
+        const hasNote = dayNotes.length > 0;
+        if ((firstDay + d - 1) % 7 === 0 && d !== 1) html += `</tr><tr>`;
+        const isToday = (d === todayDay && month === todayMonth && year === todayYear);
+        html += `<td class="day-cell${hasNote ? ' has-note' : ''}${isToday ? ' calendar-today' : ''}" data-date="${dateStr}" style="display:table-cell !important; vertical-align:middle;">${d}${hasNote ? ' <span title="Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù…Ø­ÙÙˆØ¸Ø©">ðŸ“</span>' : ''}</td>`;
+      }
+      html += `</tr></tbody>`;
+      table.innerHTML = html;
+
+      populateMonthYearControls(currentYear, currentMonth, lang);
+
+      Array.from(document.getElementsByClassName('day-cell')).forEach(cell => {
+        cell.addEventListener('click', function() {
+          selectedDay = this.getAttribute('data-date');
+          showNoteModal(selectedDay);
+        });
+      });
+    }
+
+    // Render notes in modal with sequential start times
+    function renderNoteList(dateStr) {
+      const list = document.getElementById('noteList');
+      if (!list) return;
+      list.innerHTML = '';
+      const rawDayNotes = notes[dateStr] || [];
+      const dayNotes = migrateLegacyNotes(rawDayNotes);
+
+      // Persist normalized notes if needed
+      try {
+        if (JSON.stringify(rawDayNotes) !== JSON.stringify(dayNotes)) {
+          notes[dateStr] = dayNotes;
+          localStorage.setItem('calendarNotes_ar', JSON.stringify(notes));
+        }
+      } catch(e){ /* ignore */ }
+
+      const lang = getLang();
+      if (dayNotes.length === 0) {
+        list.innerHTML = `<li style="color:#888;text-align:right;">${translations[lang]["note-none"] || translations['ar']["note-none"]}</li>`;
+        return;
+      }
+
+      // Determine base time: prefer first note's createdAt, otherwise default to chosen time
+      let baseTime;
+      if (dayNotes[0] && dayNotes[0].createdAt) {
+        const parsed = new Date(dayNotes[0].createdAt);
+        baseTime = !isNaN(parsed) ? parsed : dateFromDateStrAndTime(dateStr, getDefaultStartTime());
+      } else {
+        baseTime = dateFromDateStrAndTime(dateStr, getDefaultStartTime());
+      }
+      let currentTime = new Date(baseTime.getTime());
+
+      dayNotes.forEach((noteObj, idx) => {
+        const duration = (typeof noteObj.durationMinutes === 'number' && !isNaN(noteObj.durationMinutes)) ? noteObj.durationMinutes : parseDurationFromText(noteObj.text) || 5;
+        const li = document.createElement('li');
+        const textSpan = document.createElement('span');
+        textSpan.className = 'note-text';
+        textSpan.innerHTML = escapeHtml(noteObj.text);
+
+        const metaSpan = document.createElement('span');
+        metaSpan.className = 'note-meta right';
+        metaSpan.textContent = `${formatTime(currentTime)} Â· ${duration} Ø¯Ù‚ÙŠÙ‚Ø©`;
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'delete-note-btn';
+        delBtn.title = translations[lang]["note-delete"] || translations['ar']["note-delete"];
+        delBtn.innerHTML = '<i class="fa fa-trash"></i>';
+        delBtn.addEventListener('click', function(){
+          deleteNote(dateStr, idx);
+        });
+
+        li.appendChild(textSpan);
+        li.appendChild(metaSpan);
+        li.appendChild(delBtn);
+        list.appendChild(li);
+
+        // increment time
+        currentTime.setMinutes(currentTime.getMinutes() + duration);
+      });
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+    }
+
+    // Add note form
+    document.getElementById('noteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!selectedDay) return;
+      const text = document.getElementById('noteInput').value.trim();
+      if (!text) return;
+      notes[selectedDay] = notes[selectedDay] || [];
+      const dur = parseDurationFromText(text) || 5;
+      // first note uses default start time for that date
+      const existing = notes[selectedDay] || [];
+      let createdAt;
+      if (existing.length === 0) {
+        createdAt = dateFromDateStrAndTime(selectedDay, getDefaultStartTime()).toISOString();
+      } else {
+        createdAt = new Date().toISOString();
+      }
+      const item = { text: text, durationMinutes: dur, createdAt: createdAt };
+      notes[selectedDay].push(item);
+      try { localStorage.setItem('calendarNotes_ar', JSON.stringify(notes)); } catch(e){ console.error('save notes error', e); }
+      document.getElementById('noteInput').value = '';
+      renderNoteList(selectedDay);
+      renderCalendar(currentYear, currentMonth, getLang());
+    });
+
+    // Delete note
+    window.deleteNote = function(dateStr, idx) {
+      if (!notes[dateStr]) return;
+      notes[dateStr].splice(idx, 1);
+      if (notes[dateStr].length === 0) delete notes[dateStr];
+      try { localStorage.setItem('calendarNotes_ar', JSON.stringify(notes)); } catch(e){ console.error('save notes error', e); }
+      renderNoteList(dateStr);
+      renderCalendar(currentYear, currentMonth, getLang());
+    };
+
+    // Navigation helpers
+    function changeMonth(delta) {
+      let y = currentYear, m = currentMonth + delta;
+      if (m < 0) { m = 11; y -= 1; }
+      if (m > 11) { m = 0; y += 1; }
+      renderCalendar(y, m, getLang());
+    }
+
+    // Hookup nav controls & selects
+    function hookupCalendarControls() {
+      const prevYear=document.getElementById('nav-prev-year');
+      const prevMonth=document.getElementById('nav-prev-month');
+      const nextMonth=document.getElementById('nav-next-month');
+      const nextYear=document.getElementById('nav-next-year');
+      const todayBtn=document.getElementById('nav-today');
+
+      prevYear && prevYear.addEventListener('click', ()=> renderCalendar(currentYear-1, currentMonth, getLang()));
+      nextYear && nextYear.addEventListener('click', ()=> renderCalendar(currentYear+1, currentMonth, getLang()));
+      prevMonth && prevMonth.addEventListener('click', ()=> changeMonth(-1));
+      nextMonth && nextMonth.addEventListener('click', ()=> changeMonth(1));
+      todayBtn && todayBtn.addEventListener('click', ()=> { const n=new Date(); renderCalendar(n.getFullYear(), n.getMonth(), getLang()); });
+
+      const mSel=document.getElementById('calendar-month-select');
+      const ySel=document.getElementById('calendar-year-select');
+      if(mSel && ySel){
+        mSel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
+        ySel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
+      }
+
+      // default start time input
+      const defaultTimeInput = document.getElementById('default-start-time');
+      if (defaultTimeInput) {
+        defaultTimeInput.value = getDefaultStartTime();
+        defaultTimeInput.addEventListener('change', function(){ setDefaultStartTime(this.value); });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const now = new Date();
+      currentYear = now.getFullYear();
+      currentMonth = now.getMonth();
+
+      updateLanguage(getLang());
+      populateMonthYearControls(currentYear, currentMonth, getLang());
+      hookupCalendarControls();
+      renderCalendar(currentYear, currentMonth, getLang());
+    });
+  </script>
+
+<footer style="margin-top:1.2rem;text-align:right;color:#6b7c89;font-size:0.95rem;">
+    Â© 2025 TimerHaven. Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ø¯ÙˆØ§Øª Ù…Ø¬Ø§Ù†ÙŠØ© ÙˆØªØ­ØªØ±Ù… Ø§Ù„Ø®ØµÙˆØµÙŠØ©.
+  </footer>
+<p style="margin-top:1rem;"><a class="cta" href="/ar/calendar/calendar-index.html">Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„Ø¯Ù„ÙŠÙ„ Ø§Ù„ÙƒØ§Ù…Ù„</a></p>
+</body>
+</html>
+
+

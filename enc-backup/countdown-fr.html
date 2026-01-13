@@ -1,0 +1,521 @@
+﻿<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Minuteur D?�compte — TimerHaven</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="D?�finissez un compte ?� rebours pour les ?�ch?�ances, ?�v?�nements ou r?�unions. Apprenez ?� utiliser le Minuteur D?�compte, obtenez des conseils de productivit?�, FAQ et articles." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+    .center-row, .card-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
+    .article-card, .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      min-width: 220px;
+      max-width: 340px;
+      width: 340px;
+      min-height: 500px;
+      flex: 1 1 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 2em 1.3em 1em 1.3em;
+      margin: 0;
+      box-sizing: border-box;
+      text-align: left;
+      overflow: hidden;
+    }
+    .article-card h2, .tool-card h3 {
+      font-size: 1.35em;
+      font-weight: 700;
+      margin-bottom: 0.4em;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+    }
+    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol { 
+      margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; 
+    }
+    .article-card .btn, .tool-card .btn { 
+      align-self: stretch;
+      font-weight: 600; 
+      border-radius: 8px; 
+      margin-top: 0.2em; 
+      margin-bottom: 0; 
+      box-sizing: border-box;
+    }
+    .countdown-section { margin-bottom: 1.5em; }
+    .countdown-section input[type="number"] { width: 100px; display: inline-block; margin-right: 0.5em; }
+    .countdown-section .btn { margin-right: 0.3em; min-width: 80px; margin-bottom: 0.3em;}
+    #display { font-size:2em; margin-top:1em; font-weight:700; color:#185a9d; }
+    .help-section { margin-bottom: 1em; font-size: 1em; }
+    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
+    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
+    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .back-link:hover { text-decoration: underline; }
+
+    @media (max-width: 1100px) {
+      .main-container{padding:0 8px;}
+      .center-row, .card-row{gap:1em;}
+      .tool-card,.article-card{width:97vw;max-width:540px;height:auto;}
+    }
+    @media (max-width: 800px) {
+      .main-container{padding:0;}
+      .center-row, .card-row{flex-direction:column;align-items:center;}
+      .tool-card,.article-card{width:98vw;max-width:540px;height:auto;}
+      .article-card { display: none !important; }
+    }
+    details[open] summary::after { content: " ▲"; font-size: 0.9em; }
+    details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
+    details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- Force French for local-file testing so the local file opens in French -->
+<script>try{ localStorage.setItem('timerhavenLang','fr'); }catch(e){}</script>
+<div class="main-container">
+<div class="center-row">
+<!-- Article 1 (desktop only) -->
+<div class="article-card">
+<div>
+<h2 id="howto-title"></h2>
+<ol id="howto-steps"></ol>
+</div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
+</div>
+<!-- Countdown Tool -->
+<div class="tool-card">
+<a class="back-link" href="index.html" id="back-link"></a>
+<h3 id="tool-title"></h3>
+<div class="help-section" id="tool-help"></div>
+<div class="countdown-section">
+<div>
+<input aria-label="minutes" class="form-control" id="minutes" min="0" placeholder="" type="number"/>
+<input aria-label="seconds" class="form-control" id="seconds" max="59" min="0" placeholder="" type="number"/>
+</div>
+<div style="margin-top:0.8em;">
+<button class="btn btn-success" id="startBtn"></button>
+<button class="btn btn-secondary" id="pauseBtn"></button>
+<button class="btn btn-danger" id="resetBtn"></button>
+</div>
+<div aria-live="polite" id="display">00:00</div>
+</div>
+<!-- Static French FAQ heading & items added so the section is visible even if JS fails -->
+<details class="faq-section">
+<summary id="faq-title">Foire aux questions</summary>
+<ul id="faq-list" style="padding-left: 1em;">
+<li><b>Le minuteur continue-t-il si je change d'onglet ?</b> Oui, tant que la page reste ouverte.</li>
+<li><b>Puis-je d?�finir un minuteur pour plusieurs heures ?</b> Saisissez le nombre de minutes souhait?�.</li>
+<li><b>Puis-je mettre le minuteur en pause ?</b> Oui, utilisez le bouton "Pause".</li>
+</ul>
+</details>
+</div>
+<!-- Article 2 (desktop only) -->
+<div class="article-card">
+<div>
+<h2 id="tips-title"></h2>
+<ul id="tips-list"></ul>
+</div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
+</div>
+</div>
+</div>
+<script>
+  // Full standalone translations and timer logic for French (self-contained)
+  const countdownTranslations = {
+    en: {
+      "language-label": "Language:",
+      "back-link": "Back to Main Menu",
+      "tool-title": "Countdown Timer",
+      "tool-help": "Set a countdown timer for deadlines, events, or meetings.",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Resume",
+      "reset": "Reset",
+      "display": "00:00",
+      "alert-end": "Time's up!",
+      "faq-title": "FAQs",
+      "faq-list": `<li><b>Will the timer keep running if I switch tabs?</b> Yes, as long as this page is open.</li>
+        <li><b>Can I set a timer for hours?</b> Enter minutes up to any value you need.</li>
+        <li><b>Can I pause the timer?</b> Yes, use the "Pause" button.</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> How to Use Countdown Timer',
+      "howto-steps": `<li><b>Set the time:</b> Enter a duration for your countdown.</li>
+        <li><b>Start the timer:</b> Click "Start" and watch the countdown.</li>
+        <li><b>Reset or pause:</b> Use the buttons to reset or pause the timer.</li>`,
+      "howto-article-btn": "Read Full Article",
+      "howto-article-link": "countdown-how-to.html",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Countdown Productivity Tips',
+      "tips-list": `<li><b>Use the timer for productivity:</b> Set a countdown for focused work sessions.</li>
+        <li><b>Break tasks into chunks:</b> Use short timers to keep on track.</li>
+        <li><b>Review your workflow:</b> See which durations help you most.</li>`,
+      "tips-article-btn": "Read Full Article",
+      "tips-article-link": "countdown-tips.html"
+    },
+    fr: {
+      "language-label": "Langue :",
+      "back-link": "Retour au menu principal",
+      "tool-title": "Minuteur D?�compte",
+      "tool-help": "D?�finissez un compte ?� rebours pour les ?�ch?�ances, ?�v?�nements ou r?�unions.",
+      "minutes": "Minutes",
+      "seconds": "Secondes",
+      "start": "D?�marrer",
+      "pause": "Pause",
+      "resume": "Reprendre",
+      "reset": "R?�initialiser",
+      "display": "00:00",
+      "alert-end": "Le temps est ?�coul?� !",
+      "faq-title": "Foire aux questions",
+      "faq-list": `<li><b>Le minuteur continue-t-il si je change d'onglet ?</b> Oui, tant que la page reste ouverte.</li>
+        <li><b>Puis-je d?�finir un minuteur pour plusieurs heures ?</b> Saisissez le nombre de minutes souhait?�.</li>
+        <li><b>Puis-je mettre le minuteur en pause ?</b> Oui, utilisez le bouton "Pause".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> Comment utiliser le Minuteur D?�compte',
+      "howto-steps": `<li><b>D?�finir la dur?�e :</b> Entrez la dur?�e souhait?�e.</li>
+        <li><b>D?�marrer le minuteur :</b> Cliquez sur "D?�marrer" et observez le d?�compte.</li>
+        <li><b>R?�initialiser ou mettre en pause :</b> Utilisez les boutons pour r?�initialiser ou mettre en pause.</li>`,
+      "howto-article-btn": "Lire l'article complet",
+      "howto-article-link": "countdown-how-to-fr.html",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour le Minuteur D?�compte',
+      "tips-list": `<li><b>Utilisez le minuteur pour la productivit?� :</b> Fixez un compte ?� rebours pour des sessions de travail concentr?�.</li>
+        <li><b>Divisez les t?�ches :</b> Utilisez des minuteries courtes pour rester sur la bonne voie.</li>
+        <li><b>Analysez votre organisation :</b> Voyez quelles dur?�es sont les plus efficaces pour vous.</li>`,
+      "tips-article-btn": "Lire l'article complet",
+      "tips-article-link": "countdown-tips-fr.html"
+    },
+    de: {
+      "language-label": "Sprache:",
+      "back-link": "Zur?�ck zum Hauptmen?�",
+      "tool-title": "Countdown-Timer",
+      "tool-help": "Stellen Sie einen Countdown f?�r Deadlines, Events oder Meetings ein.",
+      "minutes": "Minuten",
+      "seconds": "Sekunden",
+      "start": "Start",
+      "pause": "Pause",
+      "resume": "Fortsetzen",
+      "reset": "Zur?�cksetzen",
+      "display": "00:00",
+      "alert-end": "Zeit ist abgelaufen!",
+      "faq-title": "FAQ",
+      "faq-list": `<li><b>L?�uft der Timer weiter, wenn ich den Tab wechsle?</b> Ja, solange die Seite ge?�ffnet ist.</li>
+        <li><b>Kann ich einen Timer f?�r Stunden einstellen?</b> Geben Sie einfach viele Minuten ein.</li>
+        <li><b>Kann ich den Timer pausieren?</b> Ja, nutzen Sie den "Pause"-Button.</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> So utilise du den Countdown-Timer',
+      "howto-steps": `<li><b>Zeit einstellen:</b> Geben Sie die Dauer f?�r den Countdown ein.</li>
+        <li><b>Timer starten:</b> Klicken Sie auf "Start" und beobachten Sie den Countdown.</li>
+        <li><b>Zur?�cksetzen/Pause:</b> Nutzen Sie die Buttons zum Pausieren oder Zur?�cksetzen.</li>`,
+      "howto-article-btn": "Vollst?�ndigen Artikel lesen",
+      "howto-article-link": "countdown-how-to-de.html",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps f?�r den Countdown-Timer',
+      "tips-list": `<li><b>Nutzen Sie den Timer f?�r Produktivit?�t:</b> Setzen Sie Countdowns f?�r konzentriertes Arbeiten.</li>
+        <li><b>Teilen Sie Aufgaben:</b> Kurze Timer helfen beim Fokus.</li>
+        <li><b>Analysieren Sie Ihren Workflow:</b> Finden Sie die besten Zeitspannen f?�r sich.</li>`,
+      "tips-article-btn": "Vollst?�ndigen Artikel lesen",
+      "tips-article-link": "countdown-tips-de.html"
+    },
+    ru: {
+      "language-label": "?�?�?�??:",
+      "back-link": "???�?�?�?� ?� ?�?�?�?�?�?�?� ?�?�?�??",
+      "tool-title": "?�?�?�?�?�?� ?�?�?�?�?�?�?�?�?� ?�?�???�?�?�?�",
+      "tool-help": "?�???�?�?�?�?�?�?�?� ?�?�?�?�?�?� ?�?�?�?�?�?�?�?�?� ?�?�???�?�?�?� ?�?�?? ?�?�?�?�?�?�?�?�?�, ???�?�?�?�?�?� ?�?�?� ?�???�?�?�?�.",
+      "minutes": "?�?�?�?�?�?�",
+      "seconds": "???�???�?�?�?�",
+      "start": "???�?�?�?�",
+      "pause": "???�?�?�?�",
+      "resume": "???�?�?�?�?�?�?�?�?�",
+      "reset": "???�?�?�??",
+      "display": "00:00",
+      "alert-end": "?�?�?�?�?? ?�?�?�?�?�!",
+      "faq-title": "?�?�???�?�?� ?�?�???�?�???�",
+      "faq-list": `<li><b>?�?�?�?�?� ?�?� ?�?�?�?�?�?� ?�?�?�?�?�?�?�?�, ?�???�?� ?? ???�?�?�?? ?�???�?�?�???�?</b> ?�?�, ???�???� ???�?�?�?�?�?�?� ?�?�???�?�?�?�.</li>
+        <li><b>?�?�?�?�?� ?�?� ?�???�?�?�?�?�?�?�?� ?�?�?�?�?�?� ?�?� ?�?�???�?</b> ?�?�?�?�?�?�?� ?�???�?�?� ???�?�?�?�?�???�?�?� ?�?�?�?�?�.</li>
+        <li><b>?�?�?�?�?� ???�???�?�?�?�?�?� ?�?�?�?�?�?� ?�?� ???�?�?�?�?</b> ?�?�, ?�?????�?�?�?�?�?�?�?� ???�?�?????� "???�?�?�?�".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> ???�?? ???�?�?�?�?�?�?�?�?�???? ?�?�?�?�?�?�?�?� ?�?�?�?�?�?�?�?�?� ?�?�???�?�?�?�',
+      "howto-steps": `<li><b>?�???�?�?�?�?�?�?�?� ?�?�?�?�??:</b> ?�?�?�?�?�?�?� ?�?�?�?�?�?? ?�?�?�?�?�?�?�?�?�???�?� ?�?�?? ?�?�???�?�?�?�.</li>
+        <li><b>?�?�???�???�?�?�?� ?�?�?�?�?�?�:</b> ???�?�?�?�?�?� "???�?�?�?�" ?� ???�?�?�?�?�?�?� ?�?�???�?�?�.</li>
+        <li><b>???�?�?�?? ?�?�?� ???�?�?�?�:</b> ???????�?�?�?�?�?�?�?� ???�?�?????� ?�?�?? ???�?�?�???� ?�?�?� ???�?�?�?� ?�?�?�?�?�?�?�.</li>`,
+      "howto-article-btn": "?�?�?�?�?�?� ???�?�?�?�?� ?�?�?????�",
+      "howto-article-link": "countdown-how-to-ru.html",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> ???�?�?�?�?� ???� ?�?�?�?�?�?�?�',
+      "tips-list": `<li><b>???????�?�?�?�?�?�?�?� ?�?�?�?�?�?� ?�?�?? ?�?�???�???�?�?�?�???�:</b> ???�?�?�?�?�?� ?�?�???�?�?�?� ?�?�?? ???�?�?�?�???�?�?�?�?�?� ?�?�?�?�?�?�.</li>
+        <li><b>?�?�?�?�?�?� ?�?�?�?�?�?�:</b> ???�?�?�?�???�?� ?�?�?�?�?�?�?� ???�?�?�?�?�???� ?�?� ?�?�?�?�?�???�?�?�????.</li>
+        <li><b>???�?�?�?�?�?�?�?�?�?�?� ?�?�?�?�?�?�?� ???�?�?�?�????:</b> ???�?�?�?�?�?� ?�???�?�?�?�?�?�?�?�?� ?�?�?�?�?�?�?�?�?� ?�?�?�?�?�?�?�.</li>`,
+      "tips-article-btn": "?�?�?�?�?�?� ???�?�?�?�?� ?�?�?????�",
+      "tips-article-link": "countdown-tips-ru.html"
+    },
+    el: {
+      "language-label": "I�I�I?I�I�I�:",
+      "back-link": "I�I�I�I�I�I?I?I�I� I�I�I? I?I?I?I�I? I�I�I�I?I?",
+      "tool-title": "I�I?I?I�I�I�I�I�I?I? I�I�I�I�I�I�I?I?I�I�I� I�I�I�I?I�I�I�I�",
+      "tool-help": "I?I?I�I�I�I� I�I?I?I�I�I�I�I�I?I? I�I�I� I�I?I?I�I�I�I�I�I�I�, I�I?I�I�I�I?I�I�I�I� I� I�I�I�I�I�I�I�I�I�I�I�.",
+      "minutes": "I�I�I�I�I�",
+      "seconds": "I�I�I�I�I�I?I�I�I�I�I�I�",
+      "start": "I�I�I�I?I�I�",
+      "pause": "I�I�I?I�I�",
+      "resume": "I�I�I�I�I�I�I�I�",
+      "reset": "I�I�I�I�I�I�I?I?I�",
+      "display": "00:00",
+      "alert-end": "I�I�I�I?I� I�I?I�I�I?I�!",
+      "faq-title": "I�I�I�I�I�I� I�I?I�I�I�I�I�I�I�",
+      "faq-list": `<li><b>I�I? I�I?I?I�I�I�I�I�I?I? I�I�I�I�I?I�I?I�I�I� I�I� I�I�I�I�I�I� I?I�I?I�I�I�I�;</b> I?I�I�, I�I�I? I� I�I�I�I�I�I� I�I�I�I�I� I�I�I?I�I�I�I�.</li>
+        <li><b>I�I�I?I?I? I�I� I?I?I�I�I� I�I?I?I�I�I�I�I�I?I? I�I�I� I?I?I�I�;</b> I�I�I�I�I� I�I�I� I�I�I�I�I� I�I�I�I�I�I�.</li>
+        <li><b>I�I�I?I?I? I�I� I?I�I�I� I�I�I?I�I�;</b> I?I�I�, I�I� I�I? I?I?I�I�I�I� "I�I�I?I�I�".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> I�I?I� I�I� I�I?I�I�I�I�I?I�I?I�I�I�I�I�I� I�I? I�I?I?I�I�I�I�I�I?I? I�I�I�I�I�I�I?I?I�I�I� I�I�I�I?I�I�I�I�',
+      "howto-steps": `<li><b>I?I?I�I�I�I� I�I?I�I�I?:</b> I�I�I�I�I�I�I�I� I�I� I�I�I�I?I?I�I�I� I�I�I� I�I�I� I�I�I�I�I�I�I?I?I�I� I�I�I�I?I�I�I�.</li>
+        <li><b>I?I�I?I�I�I�I�I�I� I�I? I�I?I?I�I�I�I�I�I?I?:</b> I�I�I�I�I�I�I� "I�I�I�I?I�I�" I?I�I� I�I�I�I�I� I�I�I� I�I�I�I�I�I�I?I?I�I� I�I�I�I?I�I�I�.</li>
+        <li><b>I�I�I�I�I�I�I?I?I� I� I�I�I?I�I�:</b> I�I?I�I�I�I�I?I�I?I�I�I�I�I� I�I� I?I?I�I�I�I�I� I�I�I� I�I�I�I�I�I�I?I?I� I� I�I�I?I�I�.</li>`,
+      "howto-article-btn": "I�I�I�I�I�I�I�I� I�I? I�I�I�I?I�I� I�I?I�I?I?",
+      "howto-article-link": "countdown-how-to-el.html",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> I�I�I�I�I?I�I�I�I� I�I�I� I�I? I�I?I?I�I�I�I�I�I?I?',
+      "tips-list": `<li><b>I�I?I�I�I�I�I?I�I?I�I�I�I�I� I�I? I�I�I� I�I�I?I�I�I�I�I�I?I�I�I�I�I�:</b> I?I?I�I�I�I� I�I�I�I�I�I�I?I?I�I� I�I�I�I?I�I�I� I�I�I� I�I�I�I?I�I�I�I?I�I�I�.</li>
+        <li><b>I�I�I�I�I�I?I�I�I�I� I�I?I�I�I�I�I�I�:</b> I�I�I?I?I� I�I?I?I�I�I�I�I�I?I� I�I�I� I?I�I�I?I�I�I?I� I?I?I�I�I�I�I�I�.</li>
+        <li><b>I�I�I�I�I?I�I�I� I�I� I?I?I� I�I�I�:</b> I�I?I�I�I�I� I�I� I�I�I�I?I?I�I�I� I�I�I� I�I�I�I?I�I�I�I�I�.</li>`,
+      "howto-article-btn": "I�I�I�I�I�I�I�I� I�I? I�I�I�I?I�I� I�I?I�I?I?",
+      "tips-article-link": "countdown-tips-el.html"
+    },
+    es: {
+      "language-label": "Idioma:",
+      "back-link": "Volver al men?? principal",
+      "tool-title": "Temporizador de Cuenta Atr??s",
+      "tool-help": "Configura un temporizador para fechas l?�mite, eventos o reuniones.",
+      "minutes": "Minutos",
+      "seconds": "Segundos",
+      "start": "Iniciar",
+      "pause": "Pausa",
+      "resume": "Continuar",
+      "reset": "Restablecer",
+      "display": "00:00",
+      "alert-end": "A?Se acab?� el tiempo!",
+      "faq-title": "Preguntas frecuentes",
+      "faq-list": `<li><b>A?El temporizador sigue si cambio de pesta?�a?</b> S?�, mientras la p??gina est?� abierta.</li>
+        <li><b>A?Puedo poner horas?</b> Pon los minutos que necesites.</li>
+        <li><b>A?Puedo pausar?</b> S?�, usa el bot?�n "Pausa".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> C?�mo usar el Temporizador de Cuenta Atr??s',
+      "howto-steps": `<li><b>Establece el tiempo:</b> Introduce la duraci?�n para la cuenta atr??s.</li>
+        <li><b>Inicia el temporizador:</b> Haz clic en "Iniciar" y observa la cuenta atr??s.</li>
+        <li><b>Restablecer o pausar:</b> Usa los botones para restablecer o pausar el temporizador.</li>`,
+      "howto-article-btn": "Leer art?�culo completo",
+      "howto-article-link": "countdown-how-to-es.html",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos para el Temporizador',
+      "tips-list": `<li><b>Usa el temporizador para productividad:</b> Cuenta atr??s para sesiones de trabajo enfocadas.</li>
+        <li><b>Divide tareas:</b> Temporizadores cortos para mantener el ritmo.</li>
+        <li><b>Revisa tu flujo:</b> Descubre qu?� duraci?�n te funciona mejor.</li>`,
+      "tips-article-btn": "Leer art?�culo completo",
+      "tips-article-link": "countdown-tips-es.html"
+    },
+    ar: {
+      "language-label": "?�U�U�???�:",
+      "back-link": "?�U�?�U�?�?� ?�U�U� ?�U�U�?�?�U�?� ?�U�?�?�U??�U??�",
+      "tool-title": "U�?�U�?? ?�U�?�?� ?�U�??U�?�?�U�U?",
+      "tool-help": "?�?�?�?� U�?�U�?? U�U�U�U�U� ?�U�U�U�?�?�U??� ?�U� ?�U�?�?�?�?�?� ?�U� ?�U�?�?�??U�?�?�?�??.",
+      "minutes": "?�U�?�?�U�",
+      "seconds": "?�U�?�U�U?",
+      "start": "?�?�?�?�",
+      "pause": "?�U?U�?�U? U�?�U�??",
+      "resume": "?�?�???�U�?�U?",
+      "reset": "?�?�?�?�?� ?�?�?�",
+      "display": "00:00",
+      "alert-end": "?�U�??U�U� ?�U�U�U�??!",
+      "faq-title": "?�U�?�?�?�U�?� ?�U�?�?�?�?�?�",
+      "faq-list": `<li><b>U�U� U??�??U�?� ?�U�U�?�U�?? ?�?�?� ?�U�??U�U�?? ?�U?U� ?�U�?�U??�?�????</b> U�?�U�?� ?�?�U�U�?� ?�U�?�U??�?� U�U???U�?�?�.</li>
+        <li><b>U�U� U?U�U�U�U�U? ?�?�?� ?�?�?�?�????</b> ?�?�?�U� ?�?�?� ?�U�?�U�?�?�U� ?�U�?�U? ???�U??�.</li>
+        <li><b>U�U� U?U�U�U� ?�U�?�U?U�?�U? ?�U�U�?�U�????</b> U�?�U�?� ?�?�???�?�U� ?�?� "?�U?U�?�U? U�?�U�??".</li>`,
+      "howto-title": '<i class="fa fa-stopwatch-20"></i> U�U?U?U??� ?�?�???�?�?�U� U�?�U�?? ?�U�?�?� ?�U�??U�?�?�U�U?',
+      "howto-steps": `<li><b>?�?�?�?� ?�U�U�U�??:</b> ?�?�?�U� U�?�?� ?�U�?�?� ?�U�??U�?�?�U�U?.</li>
+        <li><b>?�?�?�?� ?�U�U�?�U�??:</b> ?�?�???� "?�?�?�?�" U�?�?�U�?� ?�U�?�?� ?�U�??U�?�?�U�U?.</li>
+        <li><b>?�?�?�?�?� ?�?�?� ?�U� ?�U?U�?�U? U�?�U�??:</b> ?�?�???�?�U� ?�U�?�?�?�?�?� U�?�?�?�?�?� ?�U�?�?�?� ?�U� ?�U�?�U?U�?�U? ?�U�U�?�U�??.</li>`,
+      "howto-article-btn": "?�U�?�?� ?�U�U�U�?�U� ?�U�U�?�U�U�",
+      "howto-article-link": "countdown-how-to-ar.html",
+      "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> U�?�?�?�?� U�U�U�?�U�??',
+      "tips-list": `<li><b>?�?�???�?�U� ?�U�U�?�U�?? U�U�?�U�???�?�U??�:</b> ?�?� ??U�?�?�U�U? U�?�U�?�?�?? ?�U�U� U�?�U�?�?�.</li>
+        <li><b>U�?�U� ?�U�U�U�?�U�:</b> U�?�U�???�?? U�?�U??�?� U�U�?�U??�?� ?�U�U� ?�U�???�U�U??�.</li>
+        <li><b>?�?�?�?� ?�U??� ?�U�?�U�U�:</b> ?�U�???�U? ?�U? U�?�?� ??U�?�?�?�U� ?�U�?�?�.</li>`,
+      "tips-article-btn": "?�U�?�?� ?�U�U�U�?�U� ?�U�U�?�U�U�",
+      "tips-article-link": "countdown-tips-ar.html"
+    }
+  };
+
+  const langNames = { en:"English", fr:"Fran?�ais", de:"Deutsch", ru:"?�?�???????�?�", el:"I�I�I�I�I�I�I?I�", es:"Espa?�ol", ar:"?�U�?�?�?�U??�" };
+
+  function getLang() {
+    try {
+      const l = localStorage.getItem('timerhavenLang') || 'fr';
+      return (l && l.slice(0,2)) || 'fr';
+    } catch (e) {
+      return 'fr';
+    }
+  }
+
+  function applyLanguage(lang) {
+    lang = (lang || getLang()).slice(0,2);
+    const t = countdownTranslations[lang] || countdownTranslations['fr'];
+
+    // direction for RTL languages
+    document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    // main UI strings
+    const back = document.getElementById('back-link');
+    if (back) back.textContent = t['back-link'] || '';
+
+    const toolTitle = document.getElementById('tool-title');
+    if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-stopwatch-20"></i> ${t['tool-title'] || ''}`;
+
+    const help = document.getElementById('tool-help');
+    if (help) help.textContent = t['tool-help'] || '';
+
+    // placeholders
+    const mins = document.getElementById('minutes');
+    const secs = document.getElementById('seconds');
+    if (mins) mins.placeholder = t['minutes'] || '';
+    if (secs) secs.placeholder = t['seconds'] || '';
+
+    // buttons
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    if (startBtn) startBtn.textContent = t['start'] || 'D?�marrer';
+    if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Pause';
+    if (resetBtn) resetBtn.textContent = t['reset'] || 'R?�initialiser';
+
+    // faq & howto & tips
+    const faqTitle = document.getElementById('faq-title');
+    if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+    const faqList = document.getElementById('faq-list');
+    if (faqList) faqList.innerHTML = t['faq-list'] || '';
+
+    const howtoTitle = document.getElementById('howto-title');
+    const howtoSteps = document.getElementById('howto-steps');
+    if (howtoTitle) howtoTitle.innerHTML = t['howto-title'] || '';
+    if (howtoSteps) howtoSteps.innerHTML = t['howto-steps'] || '';
+
+    const howtoBtn = document.getElementById('howto-article-btn');
+    if (howtoBtn) {
+      howtoBtn.textContent = t['howto-article-btn'] || '';
+      howtoBtn.href = t['howto-article-link'] || '';
+    }
+
+    // right-column tips (article)
+    const tipsTitle = document.getElementById('tips-title');
+    const tipsList = document.getElementById('tips-list');
+    const tipsBtn = document.getElementById('tips-article-btn');
+    if (tipsTitle) tipsTitle.innerHTML = t['tips-title'] || '';
+    if (tipsList) tipsList.innerHTML = t['tips-list'] || '';
+    if (tipsBtn) { tipsBtn.textContent = t['tips-article-btn'] || ''; tipsBtn.href = t['tips-article-link'] || ''; }
+
+    // display initial
+    const disp = document.getElementById('display');
+    if (disp) disp.textContent = t['display'] || '00:00';
+  }
+
+  // update UI when localStorage changes in other tabs
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'timerhavenLang') {
+      applyLanguage((e.newValue || 'fr').slice(0,2));
+    }
+  });
+
+  // Timer logic
+  let timerInterval = null;
+  let totalSeconds = 0;
+  let paused = false;
+
+  function updateDisplay() {
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    const disp = document.getElementById('display');
+    if (disp) {
+      disp.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    applyLanguage(getLang());
+
+    totalSeconds = 0;
+    updateDisplay();
+
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    if (startBtn) {
+      startBtn.addEventListener('click', function() {
+        if (timerInterval) return; // already running
+        let minutes = parseInt(document.getElementById('minutes').value, 10);
+        let seconds = parseInt(document.getElementById('seconds').value, 10);
+        minutes = isNaN(minutes) ? 0 : minutes;
+        seconds = isNaN(seconds) ? 0 : seconds;
+        totalSeconds = minutes * 60 + seconds;
+        updateDisplay();
+        if (totalSeconds <= 0) return;
+        const lang = getLang();
+        const t = countdownTranslations[lang] || countdownTranslations['fr'];
+        paused = false;
+        // ensure pause button shows "Pause"
+        if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Pause';
+
+        timerInterval = setInterval(function() {
+          if (!paused && totalSeconds > 0) {
+            totalSeconds--;
+            updateDisplay();
+          }
+          if (totalSeconds <= 0) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            try {
+              alert(t['alert-end'] || "Le temps est ?�coul?� !");
+            } catch (e) {}
+            // reset pause button text
+            if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Pause';
+          }
+        }, 1000);
+      });
+    }
+
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', function() {
+        paused = !paused;
+        const lang = getLang();
+        const t = countdownTranslations[lang] || countdownTranslations['fr'];
+        this.textContent = paused ? (t['resume'] || 'Reprendre') : (t['pause'] || 'Pause');
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        totalSeconds = 0;
+        updateDisplay();
+        const lang = getLang();
+        const t = countdownTranslations[lang] || countdownTranslations['fr'];
+        const pauseBtnEl = document.getElementById('pauseBtn');
+        if (pauseBtnEl) pauseBtnEl.textContent = t['pause'] || 'Pause';
+        paused = false;
+      });
+    }
+  });
+</script>
+<footer>
+  A� 2025 TimerHaven. Tous les outils sont gratuits et respectent la vie priv?�e.<br/>
+<a href="privacy.html">Politique de confidentialit?�</a> •
+  <a href="terms.html">Conditions</a> •
+  <a href="contact.html">Contact</a>
+</footer>
+<p style="margin-top:1rem;"><a class="cta" href="/fr/countdown/countdown-index.html">Read full guide</a></p></body>
+</html>
+
+

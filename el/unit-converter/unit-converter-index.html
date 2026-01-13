@@ -1,18 +1,288 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>unit-converter — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for unit-converter guide (el)">
+  <meta charset="utf-8" />
+  <title>Μετατροπέας Μονάδων — Ακριβείς μετατροπές & αποφυγή λαθών | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Ολοκληρωμένος οδηγός για μετατροπές μονάδων: συστήματα μονάδων, ακρίβεια & στρογγυλοποίηση, ειδικές περιπτώσεις (θερμοκρασία), έτοιμες συνταγές μετατροπών για μηχανική/μαγείρεμα/ταξίδι και αυτοματοποίηση σε υπολογιστικά φύλλα." />
+  <link rel="canonical" href="https://timerhaven.com/el/unit-converter/unit-converter-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "inLanguage":"el",
+        "name":"Πώς να κάνετε αξιόπιστες μετατροπές μονάδων",
+        "description":"Κατανοήστε τις οικογένειες μονάδων, την ακρίβεια και τη στρογγυλοποίηση, ειδικές περιπτώσεις (θερμοκρασία) και κοινές συνταγές μετατροπών για καθημερινή και επαγγελματική χρήση.",
+        "image":"https://timerhaven.com/assets/images/unit-converter-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Μετατροπέας Μονάδων (TimerHaven)","Πίνακες αναφοράς ή τεχνικό εγχειρίδιο","Υπολογιστικό φύλλο"],
+        "step":[
+          {"@type":"HowToStep","name":"Προσδιορίστε την οικογένεια μονάδων","text":"Αποφασίστε αν μετατρέπετε μήκος, βάρος, θερμοκρασία, όγκο κ.λπ."},
+          {"@type":"HowToStep","name":"Επιλέξτε αναφορά και ακρίβεια","text":"Επιλέξτε αξιόπιστους παράγοντες μετατροπής και καθορίστε την απαιτούμενη δεκαδική ακρίβεια."},
+          {"@type":"HowToStep","name":"Εφαρμόστε τη μετατροπή και στρογγυλοποιήστε","text":"Μετατρέψτε και μορφοποιήστε το αποτέλεσμα εφαρμόζοντας κατάλληλη στρογγυλοποίηση για εμφάνιση ή υπολογισμούς."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "inLanguage":"el",
+        "mainEntity":[
+          {"@type":"Question","name":"Γιατί οι μετατροπές θερμοκρασίας είναι διαφορετικές;","acceptedAnswer":{"@type":"Answer","text":"Οι μετατροπές θερμοκρασίας είναι αφινικές (περιλαμβάνουν αναλογία και μετατόπιση), οπότε δεν μπορείτε να μετατρέψετε διαφορές θερμοκρασίας με τον ίδιο τρόπο όπως απόλυτες τιμές χωρίς να λάβετε υπόψη την μετατόπιση."}},
+          {"@type":"Question","name":"Πόσα δεκαδικά να εμφανίζω;","acceptedAnswer":{"@type":"Answer","text":"Εξαρτάται από το πλαίσιο: οικονομικά—2 δεκαδικά; μαγειρική—στρογγυλοποίηση σε κατάλληλες μονάδες; μηχανική—σημαντικά ψηφία ανάλογα με την ανοχή (3–6+)."}} 
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;direction:ltr;text-align:left;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+    a.cta { color:var(--brand); font-weight:700; text-decoration:none; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">unit-converter — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Μετατροπέας Μονάδων — Μετατρέψτε μονάδες με ακρίβεια & μάθετε τα λάθη</h1>
+
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας σε θέματα χρηστικότητας & μηχανικής</div>
+          <div class="meta">Δημοσίευση: 2025-11-24 · Χρόνος ανάγνωσης: 10–15 λεπτά</div>
+        </div>
+      </div>
+
+      <p class="lead">Οι μετατροπές μονάδων είναι καθημερινές σε ταξίδια, μαγειρική, μηχανική και ανάπτυξη λογισμικού. Μικρά λάθη σε μονάδες ή στρογγυλοποίηση μπορούν να προκαλέσουν σημαντικά σφάλματα. Αυτός ο οδηγός εξηγεί τις οικογένειες μονάδων, κανόνες ακρίβειας, μετατροπές θερμοκρασίας, μοτίβα παρουσίασης, παραδείγματα για υπολογιστικά φύλλα/σκριπτά και πρακτικές συμβουλές για να αποφύγετε κοινούς κινδύνους. Η εφαρμογή TimerHaven υποστηρίζει πολλές οικογένειες — μήκος, βάρος, θερμοκρασία, όγκο, επιφάνεια, ταχύτητα, χρόνο, πίεση, ενέργεια, ισχύ, δεδομένα (SI & δυαδικό), οικονομία καυσίμου (L/100km ↔ mpg), γωνία και συχνότητα — και διαθέτει βοηθήματα διεπαφής για ασφαλείς μετατροπές.</p>
+
+      <nav class="toc" aria-label="Πίνακας περιεχομένων">
+        <a href="#families">Οικογένειες μονάδων & Βασικά</a>
+        <a href="#precision">Ακρίβεια & Κανόνες στρογγυλοποίησης</a>
+        <a href="#temperature">Θερμοκρασία — ειδικές περιπτώσεις</a>
+        <a href="#recipes">Συνήθεις συνταγές μετατροπών</a>
+        <a href="#spreadsheet">Υπολογιστικά φύλλα & παραδείγματα κώδικα</a>
+        <a href="#tool-features">Λειτουργίες εργαλείου</a>
+        <a href="#faq">Συχνές ερωτήσεις</a>
+      </nav>
+
+      <section id="families" class="section" aria-labelledby="families-title">
+        <h2 id="families-title">Οικογένειες μονάδων & Βασικά</h2>
+        <p>Οι μονάδες ανήκουν σε οικογένειες (μήκος, μάζα/βάρος, θερμοκρασία, όγκος, χρόνος, επιφάνεια, ενέργεια κ.λπ.). Μετατρέπετε πάντα εντός της ίδιας οικογένειας και επιλέγετε αξιόπιστους παράγοντες μετατροπής. Ο μετατροπέας παρέχει συνήθεις μονάδες και λογικές προεπιλογές για κάθε οικογένεια.</p>
+
+        <ul>
+          <li><strong>Μήκος:</strong> μέτρο (μέτρο), χιλιόμετρο, μίλι, πόδι, ίντσα.</li>
+          <li><strong>Μάζα / Βάρος:</strong> κιλό (κιλόγραμμο), γραμμάριο, λίβρα (pound), ουγγιά.</li>
+          <li><strong>Όγκος:</strong> λίτρο, χιλιοστόλιτρο (ml), κυβικό μέτρο, γαλόνι (US / Imperial), φλιτζάνι.</li>
+          <li><strong>Επιφάνεια:</strong> τετραγωνικό μέτρο, τετραγωνικό πόδι, τετραγωνική γιάρδα, στρέμμα/εκτάριο.</li>
+          <li><strong>Θερμοκρασία:</strong> Κελσίου, Φαρενάιτ, Κέλβιν (αφινικές μετατροπές).</li>
+          <li><strong>Ταχύτητα / Χρόνος / Πίεση / Ενέργεια / Ισχύς:</strong> κοινές τεχνικές μονάδες περιλαμβάνονται.</li>
+          <li><strong>Δεδομένα:</strong> SI (KB = 1.000) και δυαδικό (KiB = 1.024) — διάλεξε το κατάλληλο mode.</li>
+          <li><strong>Κατανάλωση καυσίμου:</strong> L/100km ↔ mpg (US/UK) — ειδικές φόρμουλες.</li>
+          <li><strong>Γωνία & Συχνότητα:</strong> μοίρες/ραδιάνια και Hz/kHz/MHz.</li>
+        </ul>
+
+        <p class="muted">Για κρίσιμες εφαρμογές χρήση των επίσημων πηγών (NIST, BIPM) συνιστάται για απόλυτη ακρίβεια.</p>
+      </section>
+
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Ακρίβεια & Κανόνες στρογγυλοποίησης</h2>
+        <p>Καθόρισε την ακρίβεια ανάλογα με το σκοπό. Υπερβολική στρογγυλοποίηση δημιουργεί συστηματικό σφάλμα, ενώ υπερβολική λεπτομέρεια μπορεί να δώσει ψευδή αίσθηση ακρίβειας.</p>
+
+        <h3>Κατευθυντήριες γραμμές</h3>
+        <ul>
+          <li><strong>Καθημερινά / αγορές:</strong> 2 δεκαδικά συνήθως αρκετά.</li>
+          <li><strong>Μαγειρική:</strong> Στρογγυλοποίηση σε πρακτικές μονάδες (κουταλάκι, γραμμάρια) και παροχή εναλλακτικών (metric & imperial).</li>
+          <li><strong>Μηχανική:</strong> Εμφάνιση σημαντικών ψηφίων ανάλογα με την ακρίβεια της μέτρησης (3–6+).</li>
+          <li><strong>Analytics:</strong> Αποθήκευσε ακατέργαστες τιμές με υψηλή ακρίβεια και στρογγύλευσε μόνο στην παρουσίαση.</li>
+        </ul>
+
+        <p class="muted">Εμφάνιζε πάντα την μονάδα μαζί με τον αριθμό. Σκέψου να προσθέσεις τον παράγοντα μετατροπής ή το χρονικό σήμα για δυναμικούς δείκτες (π.χ. ισοτιμίες).</p>
+      </section>
+
+      <section id="temperature" class="section" aria-labelledby="temperature-title">
+        <h2 id="temperature-title">Θερμοκρασία — ειδική περίπτωση</h2>
+        <p>Οι μετατροπές θερμοκρασίας είναι αφινικές: απαιτούν κλίμακα και μετατόπιση. Η μετατροπή μιας διαφοράς θερμοκρασίας διαφέρει από αυτή μιας απόλυτης τιμής.</p>
+
+        <ul>
+          <li>Μετατροπές απόλυτων τιμών:
+            <ul>
+              <li>C → F: F = C × 9/5 + 32</li>
+              <li>F → C: C = (F − 32) × 5/9</li>
+              <li>C ↔ K: K = C + 273.15</li>
+            </ul>
+          </li>
+          <li>Διαφορές θερμοκρασίας (Δ): μετατρέπονται με τον λόγο μόνο (π.χ. ΔC → ΔF: × 9/5) — χωρίς πρόσθεση μετατόπισης.</li>
+        </ul>
+
+        <p>Παράδειγμα λάθους: "Αλλαγή 10°C είναι 18°F" ισχύει για διαφορά, αλλά 10°C απόλυτη σε Fahrenheit ισούται με 50°F (μετά κλίμακα και πρόσθεση 32).</p>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Συνήθεις συνταγές μετατροπών</h2>
+
+        <div class="recipe">
+          <strong>Μήκος: μίλια ↔ χιλιόμετρα</strong>
+          <ol>
+            <li>Χρησιμοποίησε τον παράγοντα: 1 μίλι = 1.609344 χιλιόμετρα.</li>
+            <li>Παράδειγμα: 5 μίλια × 1.609344 = 8.04672 km → εμφάνιση 8.05 km για συνήθη χρήση.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Επιφάνεια: m² ↔ ft²</strong>
+          <ol>
+            <li>Παράγοντας: 1 τετρ. μέτρο = 10.7639104 τετρ. πόδια.</li>
+            <li>Παράδειγμα: 500 m² × 10.7639104 = 5,381.9552 ft² → εμφάνιση 5,382 ft².</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Όγκος: γαλόνι ↔ λίτρο</strong>
+          <ol>
+            <li>US gallon → λίτρα: 1 US gal = 3.785411784 L; Imperial gal = 4.54609 L.</li>
+            <li>Παράδειγμα: 2 US gal × 3.785411784 = 7.570823568 L → εμφάνιση 7.571 L.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Κατανάλωση καυσίμου: L/100km ↔ mpg</strong>
+          <ol>
+            <li>Χρησιμοποίησε τις σωστές φόρμουλες (όχι απλό πολλαπλασιαστή):
+              <ul>
+                <li>mpg (US) → L/100km: L/100km = 235.214583 / mpg_US</li>
+                <li>L/100km → mpg (US): mpg_US = 235.214583 / L/100km</li>
+                <li>mpg (UK) χρησιμοποιεί ≈ 282.480936</li>
+              </ul>
+            </li>
+            <li>Παράδειγμα: 30 mpg (US) → L/100km = 235.214583 / 30 ≈ 7.8405 L/100km.</li>
+          </ol>
+        </div>
+
+        <div class="recipe">
+          <strong>Δεδομένα: KB/MB (SI) vs KiB/MiB (δυαδικό)</strong>
+          <ol>
+            <li>Επίλεξε modus: SI χρησιμοποιεί 1 KB = 1.000 byte, δυαδικό (Bin) 1 KiB = 1.024 byte.</li>
+            <li>Παράδειγμα: 1.500.000 byte → SI = 1.5 MB; Bin ≈ 1.4305 MiB.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="spreadsheet" class="section" aria-labelledby="spreadsheet-title">
+        <h2 id="spreadsheet-title">Υπολογιστικά φύλλα & παραδείγματα κώδικα</h2>
+        <p>Συνήθεις φόρμουλες και πρότυπα για αυτοματοποίηση μετατροπών.</p>
+
+        <h3>Παράδειγμα (Google Sheets / Excel)</h3>
+        <pre class="template">Μετατροπή μιλίων στο A2 σε χιλιόμετρα:
+=ROUND(A2 * 1.609344, 2)</pre>
+
+        <h3>JavaScript παράδειγμα</h3>
+        <pre class="template">function convertLength(val, fromFactor, toFactor) {
+  // factors are expressed in meters per unit
+  return val * (fromFactor / toFactor);
+}
+// example: miles->km: milesFactor=1609.344, kmFactor=1000
+</pre>
+
+        <p class="muted">Αποθηκεύστε κανόνες/παράγοντες σε κεντρική θέση και επαναχρησιμοποιήστε τους για να αποφύγετε ασυνέπειες.</p>
+      </section>
+
+      <section id="tool-features" class="section" aria-labelledby="tool-features-title">
+        <h2 id="tool-features-title">Μετατροπέας TimerHaven — δυνατότητες & συμβουλές</h2>
+        <p>Το online εργαλείο συμπληρώνει αυτόν τον οδηγό. Σημαντικά χαρακτηριστικά για λιγότερα λάθη:</p>
+        <ul>
+          <li><strong>Πολλές οικογένειες:</strong> μήκος, βάρος, θερμοκρασία, όγκος, επιφάνεια, ταχύτητα, χρόνος, πίεση, ενέργεια, ισχύς, δεδομένα (SI & Bin), κατανάλωση καυσίμου, γωνία, συχνότητα.</li>
+          <li><strong>Modus δεδομένων:</strong> εναλλαγή SI (1000) / Bin (1024) — εμφανίζεται μόνο για την κατηγορία "Δεδομένα".</li>
+          <li><strong>Φίλτρο μονάδων:</strong> πληκτρολογήστε για να βρείτε γρήγορα μονάδες (π.χ. "τετραγωνικό" ή "ft").</li>
+          <li><strong>Swap:</strong> εναλλαγή από/προς χωρίς επαναπληκτρολόγηση.</li>
+          <li><strong>Έλεγχος ακρίβειας:</strong> επιλέξτε δεκαδικά για εμφάνιση — η ακατέργαστη τιμή παραμένει διαθέσιμη εάν γίνει στρογγυλοποίηση.</li>
+          <li><strong>Αντιγραφή αποτελέσματος:</strong> αντιγράψτε το μορφοποιημένο αποτέλεσμα στο clipboard.</li>
+          <li><strong>Περμανεντία & συντομεύσεις:</strong> οι τελευταίες ρυθμίσεις αποθηκεύονται τοπικά · <span class="kbd">Ctrl+K</span> εστιάζει στο πεδίο τιμής.</li>
+          <li><strong>Ασφαλείς συμπεριφορές:</strong> όταν δεν υπάρχει άμεση αντιστοιχία, το εργαλείο εμφανίζει μήνυμα ή χρησιμοποιεί κανόνες ως fallback.</li>
+        </ul>
+
+        <p class="muted">Χρησιμοποιήστε το εργαλείο για γρήγορο έλεγχο· για παραγωγικά συστήματα αποθηκεύστε και διαχειριστείτε κανόνικους παράγοντες μετατροπής.</p>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Συχνές ερωτήσεις</h2>
+        <div class="muted">
+          <p><strong>Ερ.:</strong> Γιατί μερικές μετατροπές imperial↔metric δείχνουν "λάθος";<br>
+          <strong>Απ.:</strong> Δεδομένου ότι ορισμένες μονάδες έχουν διαφορετικούς ορισμούς ανά περιοχή (π.χ. γαλόνι US vs Imperial) και επειδή σύνολα στρογγυλοποίησης/παρουσίασης διαφέρουν. Πάντοτε επιβεβαίωσε τον ορισμό που χρησιμοποιείται.</p>
+
+          <p><strong>Ερ.:</strong> Ποιο modus δεδομένων να επιλέξω — SI ή Bin;<br>
+          <strong>Απ.:</strong> Χρησιμοποίησε SI (KB = 1000) για χωρητικότητες που ανακοινώνονται δεκαδικά· χρησιμοποίησε Bin (KiB = 1024) για τεχνικά/μνήμη-ελαφρώς πλαίσια. Το εργαλείο προσφέρει επιλογή.</p>
+
+          <p><strong>Ερ.:</strong> Πώς διαχειρίζομαι διαφορές θερμοκρασίας vs απόλυτες τιμές;<br>
+          <strong>Απ.:</strong> Δες την ενότητα θερμοκρασίας — διαφορές (Δ) μετατρέπονται μόνο με κλίμακα, χωρίς offset.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Πόροι</h2>
+        <ul class="muted">
+          <li><a href="/unit-converter-el.html">Άνοιγμα Μετατροπέα Μονάδων</a></li>
+          <li><a href="https://www.nist.gov/pml/weights-and-measures/metric-si" target="_blank" rel="noopener">NIST — Μονάδες SI</a></li>
+          <li><a href="https://geology.com/units/" target="_blank" rel="noopener">Πίνακες μετατροπών & αναφορές</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/unit-converter-el.html" class="cta" aria-label="Άνοιγμα Μετατροπέα">Άνοιγμα Μετατροπέα Μονάδων</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε στο <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Διαβάστε την <a href="/privacy/">Πολιτική Απορρήτου</a>.</p>
+      </footer>
     </article>
   </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/unit-converter-el.html" class="return-to-tool" id="returnToToolUnit" aria-label="Επιστροφή στον μετατροπέα">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Επιστροφή</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolUnit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

@@ -1,0 +1,371 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Pomodoro Timer â€” Practical Guide to Focused Work | TimerHaven</title>
+  <meta name="description" content="Comprehensive Pomodoro guide with practical workflows, step-by-step instructions, templates, case studies, and troubleshooting to help you focus and measure results.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="https://timerhaven.com/en/pomodoro-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta property="og:title" content="Pomodoro Timer â€” Practical Guide & Workflows">
+  <meta property="og:description" content="Comprehensive Pomodoro guide with practical workflows, step-by-step instructions, templates, case studies, and troubleshooting to help you focus and measure results.">
+  <meta property="og:image" content="/assets/images/pomodoro-snapshot.png">
+  <meta property="og:url" content="https://timerhaven.com/en/pomodoro-index.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "HowTo",
+        "name": "Use the Pomodoro Technique for focused work",
+        "description": "A practical Pomodoro workflow: setup, run, record, and review Pomodoro sessions with variations and team patterns.",
+        "image": "https://timerhaven.com/assets/images/pomodoro-snapshot.png",
+        "totalTime": "PT3H",
+        "supply": ["Timer (browser or phone)", "Notes app or notebook", "Task list"],
+        "tool": ["TimerHaven Pomodoro tool", "Task Timer (optional)"],
+        "step": [
+          {"@type":"HowToStep","name":"Choose one measurable task","text":"Write a concise goal (one sentence) and up to three sub-items to complete in the next block."},
+          {"@type":"HowToStep","name":"Prepare environment","text":"Silence notifications, set your workspace, and have water nearby. Opening the Pomodoro timer, set the standard interval (25/5) or your preferred split."},
+          {"@type":"HowToStep","name":"Start and focus","text":"Start the timer and work exclusively on the chosen task until it rings. If interrupted, note the interruption and decide whether to pause or restart."},
+          {"@type":"HowToStep","name":"Short break and reflect","text":"Take a 5-minute break, briefly note progress, and prepare the next micro-goal."},
+          {"@type":"HowToStep","name":"Review after four cycles","text":"After four Pomodoros, take a longer break (15â€“30 minutes) and review session notes for improvements."}
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type":"Question","name":"What are common Pomodoro lengths?","acceptedAnswer":{"@type":"Answer","text":"Common splits are 25/5 and 50/10. Choose the split that matches your attention span and task type."}},
+          {"@type":"Question","name":"What to do when interrupted?","acceptedAnswer":{"@type":"Answer","text":"If you can quickly return to work (<2 min), note the interruption and continue. For longer interruptions, pause and restart the Pomodoro; record it as an interruption for later analysis."}},
+          {"@type":"Question","name":"Can I use Pomodoro with a team?","acceptedAnswer":{"@type":"Answer","text":"Yes â€” synchronize Pomodoros for shared focused blocks and use breaks for quick standups. Keep communication rules clear (e.g., urgent messages only)."}}
+        ]
+      },
+      {
+        "@type":"Person",
+        "name":"Serge Shammas",
+        "url":"https://timerhaven.com/authors/serge-shammas",
+        "image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .case{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+
+    /* Floating return-to-tool button (shared pattern used across guides) */
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
+    }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      font-size:16px;
+    }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
+  </style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Pomodoro Timer â€” Practical Guide to Focused Work</h1>
+
+      <div class="author" role="articleauthor" aria-label="Article author">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
+        <div>
+          <div><strong>By Serge Shammas</strong> â€” productivity writer and UX researcher</div>
+          <div class="meta">Published: 2025-10-20 Â· Last updated: 2025-11-21 Â· Reading time: 10â€“12 min</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        The Pomodoro Technique breaks work into focused intervals with short breaks. This guide gives practical setups, variations for different tasks, team workflows, logging and analysis templates, and troubleshooting to help you use Pomodoro reliably and get measurable results.
+      </p>
+
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#why">Why use Pomodoro</a>
+        <a href="#setup">Setup</a>
+        <a href="#howto">Step-by-step</a>
+        <a href="#variants">Variations</a>
+        <a href="#recipes">Recipes & Workflows</a>
+        <a href="#measure">Measure & Improve</a>
+        <a href="#team">Team Pomodoro</a>
+        <a href="#troubleshoot">Troubleshooting</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="why" class="section" aria-labelledby="why-title">
+        <h2 id="why-title">Why use Pomodoro?</h2>
+        <p>
+          Pomodoro converts the intimidating "do a lot" problem into manageable micro-goals. Short blocks reduce the friction to start, reduce decision fatigue, and let you gather reliable data about how long tasks actually take. Over weeks this data helps you sharpen estimates, minimize context switching, and design realistic daily plans.
+        </p>
+      </section>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Preparation & environment</h2>
+        <ul>
+          <li><strong>Single task focus:</strong> Write one clear goal for the upcoming block (e.g., "Draft section: project X â€” 300 words").</li>
+          <li><strong>Remove distractions:</strong> Close or mute chat apps, set phone to Do Not Disturb, and have everything you need (references, files, a glass of water).</li>
+          <li><strong>Pick a timer:</strong> Use the TimerHaven Pomodoro tool in your browser or a simple physical timer. Ensure audible or visual cues match your workplace.</li>
+        </ul>
+      </section>
+
+      <section id="howto" class="section" aria-labelledby="howto-title">
+        <h2 id="howto-title">Step-by-step Pomodoro (25/5)</h2>
+
+        <div class="workflow" aria-labelledby="setup-steps">
+          <strong id="setup-steps">Quick checklist</strong>
+          <ol>
+            <li>Choose a single measurable task and write a one-sentence micro-goal.</li>
+            <li>Set the timer to 25 minutes and start working with no multitasking.</li>
+            <li>When the alarm rings, stop working immediately and take a 5-minute break.</li>
+            <li>Record one short note (progress, blocker) during the break.</li>
+            <li>Repeat. After four Pomodoros, take a 15â€“30 minute long break and review notes.</li>
+          </ol>
+        </div>
+
+        <p class="small-note">Small tasks: combine multiple related items into a single Pomodoro. Large tasks: split into successive Pomodoros and use a brief review between each to adjust scope.</p>
+
+        <figure>
+          <img class="screenshot" src="/assets/images/pomodoro-snapshot.png" alt="Pomodoro timer running â€” sample UI screenshot">
+          <figcaption class="muted">TimerHaven Pomodoro â€” start, pause, and session log.</figcaption>
+        </figure>
+      </section>
+
+      <section id="variants" class="section" aria-labelledby="variants-title">
+        <h2 id="variants-title">Variations and when to use them</h2>
+        <ul>
+          <li><strong>25/5 (Classic):</strong> Great for general tasks and beginners; frequent breaks lower mental fatigue.</li>
+          <li><strong>50/10 (Deep focus):</strong> Better for complex problem solving or coding when interruption cost is high.</li>
+          <li><strong>90/20 (Flow blocks):</strong> For sustained creative work; use sparingly and only when interruptions are very unlikely.</li>
+          <li><strong>Task batching:</strong> Group similar short tasks (emails, quick reviews) into one Pomodoro slot to reduce context switching.</li>
+        </ul>
+      </section>
+
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">Recipes & workflows</h2>
+
+        <div class="workflow">
+          <strong>Recipe â€” Quick Draft (25/5)</strong>
+          <ol>
+            <li>Outline 3 bullets for the section youâ€™ll write.</li>
+            <li>Run one Pomodoro to write without editing.</li>
+            <li>During the 5-minute break, convert bullets into a paragraph. Repeat until draft is complete.</li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>Recipe â€” Deep Sprint (50/10)</strong>
+          <ol>
+            <li>Plan two consecutive 50-minute blocks for a major task.</li>
+            <li>Start the timer and work in a distraction-free zone; use a physical marker (e.g., a timer card) to indicate "do not disturb".</li>
+            <li>After the sprint, record interruptions and progress; adjust the next session goal accordingly.</li>
+          </ol>
+        </div>
+
+        <div class="workflow">
+          <strong>Recipe â€” Meeting Prep (25/5 + review)</strong>
+          <ol>
+            <li>Use one Pomodoro to gather materials and outline key talking points.</li>
+            <li>Use a second Pomodoro to rehearse and finalize a 1â€“2 minute summary.</li>
+            <li>Leave a long break afterward to avoid meeting fatigue.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Measure, log, and improve</h2>
+        <p>
+          To make Pomodoro actionable, log each session. Minimal useful fields: date, task, planned length, actual length (omit breaks), interruptions (count), and a 1â€‘sentence note. Log to a simple spreadsheet or export from a task timer.
+        </p>
+
+        <h3>Key metrics to track</h3>
+        <ul>
+          <li><strong>Average actual minutes</strong> per task or tag (mean/median).</li>
+          <li><strong>Interruption rate</strong> (sessions with interruptions / total sessions).</li>
+          <li><strong>Completion ratio</strong> (planned Pomodoros vs required Pomodoros).</li>
+        </ul>
+
+        <h3>Spreadsheet recipes</h3>
+        <p>Example formulas (Google Sheets):</p>
+        <pre class="template">=AVERAGEIF(TagRange,"project-alpha",ActualMinutesRange)
+=MEDIAN(IF(TagRange="project-alpha",ActualMinutesRange))  // array formula
+=COUNTIFS(TagRange,"project-alpha",InterruptionsRange,">0") / COUNTIF(TagRange,"project-alpha")</pre>
+      </section>
+
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Using Pomodoro with a team</h2>
+        <p>
+          Team Pomodoro synchronizes focus: everyone works simultaneously and breaks align for quick syncs. Rules reduce friction:
+        </p>
+        <ul>
+          <li>Define "urgent" channels for interruptions only.</li>
+          <li>Use synced timers (start at fixed minutes) and use break time for short standups (30â€“60 seconds per person).</li>
+          <li>Record shared blockers in a common notes doc during breaks.</li>
+        </ul>
+      </section>
+
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Troubleshooting & common problems</h2>
+        <h3>Problem: Frequent interruptions</h3>
+        <p>
+          Log interruptions for a week to identify patterns. If interruptors are people, negotiate dedicated "focus" windows. For unavoidable interruptions (support roles), switch to batching short tasks into Pomodoros.
+        </p>
+
+        <h3>Problem: Tasks too long or vague</h3>
+        <p>
+          Break long tasks into subtasks small enough to complete in 1â€“3 Pomodoros. If still too large, allocate consecutive Pomodoros and treat the block as a multi-Pomodoro session; record it as a single higher-level task for analysis.
+        </p>
+
+        <h3>Keeping the timer accurate</h3>
+        <p class="small-note">Browser tab throttling on mobile: use the microphone or an app with native notifications if accuracy matters for measurement.</p>
+      </section>
+
+      <section id="download" class="section" aria-labelledby="download-title">
+        <h2 id="download-title">Download â€” session template</h2>
+        <p class="muted">Keep a simple log to measure weekly cadence â€” download and use the template below.</p>
+        <p><a href="#" id="downloadPomodoro" class="cta" aria-label="Download Pomodoro session template">Download session template (.txt)</a></p>
+        <pre id="pomTemplate" class="template" aria-hidden="true">Pomodoro session log
+Date: {{YYYY-MM-DD}}
+Task:
+Pomodoro #1: start __:__ end __:__ duration 25 minutes
+Pomodoro #2: start __:__ end __:__ duration 25 minutes
+Short breaks:
+Interruptions (#):
+Notes / next steps:</pre>
+
+        <script>
+          document.getElementById('downloadPomodoro').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('pomTemplate').textContent;
+            var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'pomodoro-session-template-en.txt';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title">Short case studies</h2>
+
+        <div class="case">
+          <strong>Engineer â€” Aisha</strong>
+          <p>
+            Aisha tracked tasks for two weeks and discovered her debugging tasks averaged 3 Pomodoros (~75 minutes) vs. her estimate of 1. She started allocating larger blocks and scheduling code review separately, reducing context switching and improving delivery predictability.
+          </p>
+        </div>
+
+        <div class="case">
+          <strong>Freelancer â€” Jonah</strong>
+          <p>
+            Jonah used Pomodoro to limit time spent pricing proposals. By batching proposals into one daily sprint, his proposal completion rate improved while his hourly billing rose because he avoided switching to unrelated tasks.
+          </p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q: Can I adapt Pomodoro to meetings?</strong><br><strong>A:</strong> Use Pomodoro for meeting prep and follow-up. For meetings themselves, block uninterrupted time and avoid starting new Pomodoros mid-meeting.</p>
+
+          <p><strong>Q: Is Pomodoro a productivity silver bullet?</strong><br><strong>A:</strong> No. Pomodoro helps many people but not everyone. Use data (session logs) to decide whether it improves your flow and adjust as needed.</p>
+
+          <p><strong>Q: Where should I store session logs?</strong><br><strong>A:</strong> A simple spreadsheet (Google Sheets/Excel) or your Task Timer export is sufficient. Export weekly and compute averages by tag to guide planning.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Related tools: <a href="/notes-en.html">Notes</a> Â· <a href="/timer.html#startBtn">Task Timer</a> Â· <a href="/calendar-en.html">Calendar</a></p>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/pomodoro-en.html" class="cta" aria-label="Open Pomodoro tool">Open Pomodoro tool</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions or feedback? Contact us at <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Read our <a href="/privacy/">Privacy Policy</a>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Floating "Return to Pomodoro" button -->
+  <a href="/pomodoro-en.html"
+     class="return-to-tool"
+     id="returnToToolPomodoro"
+     aria-label="Return to Pomodoro">
+    <span class="icon" aria-hidden="true">â†©</span>
+    <span class="label">Return to Pomodoro</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolPomodoro');
+      if (!btn) return;
+      // keyboard activation
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      // subtle opacity change when at page top vs scrolled
+      function toggleOpacity(){
+        try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){}
+      }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
+</body>
+</html>
+

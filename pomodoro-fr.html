@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="fr">
 <head>
@@ -24,17 +24,23 @@
     .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
     .btn-small { padding:.35rem .7rem; font-size:.9rem; }
     footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
+    /* Pomodoro icon styling (tomato emoji + stopwatch) */
+    .pomodoro-emoji { font-size:1.2rem; line-height:1; margin-right:.25rem; }
+    .pomodoro-fa { font-size:1.0rem; color:#e24b3a; margin-right:.25rem; }
     @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
   </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Langue:</label>
-<select aria-label="Sélecteur de langue" class="language-select" id="language-select-top">
-<option value="en">English</option><option selected="" value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
-</select>
-</div>
+<!-- LANGUAGE SELECTOR REMOVED FOR FR VERSION -->
+
 <div class="text-center mb-4">
 <h1 style="margin-bottom:.25rem;">Minuteur Pomodoro</h1>
 <p class="lead" style="color:#374151; margin-bottom:1rem;">Améliorez votre concentration avec la technique Pomodoro. Apprenez à utiliser le Minuteur Pomodoro, obtenez des conseils, FAQs et articles.</p>
@@ -46,7 +52,8 @@
 <a aria-label="Retour au menu principal" class="d-block mb-2" href="index.html" id="backLink" style="text-decoration:none; color:#0d6efd; font-weight:600;">
           ← Retour au menu principal
         </a>
-<h3><i class="fa fa-apple-whole"></i> Minuteur Pomodoro</h3>
+<!-- Replaced Apple icon with Pomodoro visuals -->
+<h3><span class="pomodoro-emoji" aria-hidden="true">🍅</span><i class="fa fa-stopwatch pomodoro-fa" aria-hidden="true"></i> Minuteur Pomodoro</h3>
 <div aria-live="polite" class="pomodoro-section">
 <div class="form-inline mb-2">
 <label style="font-weight:600;">Travail (min):
@@ -87,7 +94,7 @@
 </div>
 <script>
   (function(){
-    // language selector redirect
+    // language selector redirect (element removed on FR) — script remains harmless (it checks element)
     var sel = document.getElementById('language-select-top');
     if (sel) {
       sel.addEventListener('change', function() {
@@ -160,3 +167,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 <p style="margin-top:1rem;"><a class="cta" href="/fr/pomodoro/pomodoro-index.html">Read full guide</a></p></body>
 </html>
+
+

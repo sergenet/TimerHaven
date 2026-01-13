@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="ar">
 <head>
-  <meta charset="utf-8">
-  <title>متعقب العادات — TimerHaven</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="تتبّع العادات اليومية وابنِ روتينًا جديدًا.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<title>Ù…ØªØ¹Ù‚Ø¨ Ø§Ù„Ø¹Ø§Ø¯Ø§Øª â€” TimerHaven</title>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="ØªØªØ¨Ù‘Ø¹ Ø§Ù„Ø¹Ø§Ø¯Ø§Øª Ø§Ù„ÙŠÙˆÙ…ÙŠØ© ÙˆØ§Ø¨Ù†Ù Ø±ÙˆØªÙŠÙ†Ù‹Ø§ Ø¬Ø¯ÙŠØ¯Ù‹Ø§." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     /* consistent layout with other language files */
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; direction: rtl; }
     .main-container { max-width:1200px; margin:2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
@@ -39,97 +40,92 @@
     @media (max-width:1100px){ .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
     @media (max-width:800px){ .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card{display:none!important;} .howto-mobile, .tips-mobile{ display:block !important; margin-bottom:1em; } }
     @media (min-width:801px){ .howto-mobile, .tips-mobile { display:none !important; } }
-    details[open] summary::after{ content:" ▲"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" ▼"; font-size:.9em; }
+    details[open] summary::after{ content:" â–²"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" â–¼"; font-size:.9em; }
   </style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body dir="rtl">
-  <!-- Force Arabic for local-file testing -->
-  <script>try{ localStorage.setItem('timerhavenLang','ar'); }catch(e){}</script>
-
-  <div class="main-container">
-    <div class="center-row">
-      <!-- Left article (desktop only) -->
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
-
-      <!-- Central tool card -->
-      <div class="tool-card">
-        <div id="banner" class="banner" style="display:none;"></div>
-        <a href="index.html" class="back-link" id="back-link"></a>
-        <h3 id="tool-title"></h3>
-
-        <div class="stats-bar" id="stats-bar" aria-hidden="true"></div>
-
-        <div class="habit-section">
-          <form class="habit-form" id="habitForm" autocomplete="off">
-            <input type="text" id="habitInput" class="form-control" placeholder="">
-            <button type="submit" class="btn btn-success btn-sm" id="add-btn"></button>
-          </form>
-          <div id="habitList" class="habit-list"></div>
-        </div>
-
-        <details class="faq-section" id="faq-section">
-          <summary id="faq-title"></summary>
-          <ul id="faq-list" style="padding-right:1em;"></ul>
-        </details>
-
-        <!-- Note: removed inline tips block from inside tool-card to avoid duplicate on desktop -->
-      </div>
-
-      <!-- Right article (desktop only) -->
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile-only tips collapsible (outside tool-card). Hidden on desktop. -->
-  <details class="tips-mobile" id="tips-mobile" style="display:none;">
-    <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
-    <ul id="tips-mobile-list" style="padding-right:1em;"></ul>
-  </details>
-
+<!-- Force Arabic for local-file testing -->
+<script>try{ localStorage.setItem('timerhavenLang','ar'); }catch(e){}</script>
+<div class="main-container">
+<div class="center-row">
+<!-- Left article (desktop only) -->
+<div class="article-card">
+<div>
+<h2 id="howto-title"></h2>
+<ol id="howto-steps"></ol>
+</div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
+</div>
+<!-- Central tool card -->
+<div class="tool-card">
+<div class="banner" id="banner" style="display:none;"></div>
+<a class="back-link" href="index.html" id="back-link"></a>
+<h3 id="tool-title"></h3>
+<div aria-hidden="true" class="stats-bar" id="stats-bar"></div>
+<div class="habit-section">
+<form autocomplete="off" class="habit-form" id="habitForm">
+<input class="form-control" id="habitInput" placeholder="" type="text"/>
+<button class="btn btn-success btn-sm" id="add-btn" type="submit"></button>
+</form>
+<div class="habit-list" id="habitList"></div>
+</div>
+<details class="faq-section" id="faq-section">
+<summary id="faq-title"></summary>
+<ul id="faq-list" style="padding-right:1em;"></ul>
+</details>
+<!-- Note: removed inline tips block from inside tool-card to avoid duplicate on desktop -->
+</div>
+<!-- Right article (desktop only) -->
+<div class="article-card">
+<div>
+<h2 id="tips-title"></h2>
+<ul id="tips-list"></ul>
+</div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
+</div>
+</div>
+</div>
+<!-- Mobile-only tips collapsible (outside tool-card). Hidden on desktop. -->
+<details class="tips-mobile" id="tips-mobile" style="display:none;">
+<summary><h4 id="tips-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
+<ul id="tips-mobile-list" style="padding-right:1em;"></ul>
+</details>
 <script>
   // Full Arabic translations for this standalone file
   const habitTranslations = {
     ar: {
-      "language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"متعقب العادات",
-      "habitInput":"اسم العادة","add-btn":"أضف العادة","banner-all-done":"🎉 تم الانتهاء من جميع العادات اليوم! عمل رائع!",
-      "stats-tracked":"المتعقبة: ","stats-done":"تم اليوم: ","stats-best":"أفضل سلسلة: ",
-      "howto-title":'<i class="fa fa-check-double"></i> كيفية استخدام متعقب العادات',
-      "howto-steps":`<li><b>أضف عادة:</b> اكتب عادة يومية وانقر إضافة.</li>
-        <li><b>علّمها منجزة:</b> عندما تُنجز العادة، انقر "منجز".</li>
-        <li><b>احذف/أرشف:</b> احذف أو أرشف العادات التي لا تريد تتبعها.</li>
-        <li><b>كرر يومياً:</b> عد كل يوم لتحديث تقدمك.</li>`,
-      "howto-article-btn":"اقرأ المقال","howto-article-link":"habit-how-to-ar.html",
-      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح',
-      "tips-list":`<li><b>ابدأ صغيراً:</b> اختر عادات سهلة بالبداية.</li>
-        <li><b>تتبع يومياً:</b> الثبات هو مفتاح النجاح.</li>
-        <li><b>احتفل بالتقدم:</b> الانتصارات الصغيرة تحافظ على الدافع.</li>`,
-      "tips-article-btn":"اقرأ المقال","tips-article-link":"habit-tips-ar.html",
-      "tips-mobile-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح',
-      "tips-mobile-list":`<li><b>ابدأ صغيرًا:</b> ابدأ بعادات بسيطة وسهلة.</li>
-        <li><b>راجع السلاسل:</b> راجع تقدمك للبقاء متحفزًا.</li>
-        <li><b>اضف تذكيرات:</b> استخدم تذكيرات التقويم.</li>`,
-      "faq-title":"الأسئلة الشائعة",
-      "faq-list":`<li><b>هل تُحفظ العادات؟</b> نعم، في متصفحك حتى تمسحها.</li>
-        <li><b>هل أستطيع تتبع عدة عادات؟</b> نعم.</li>
-        <li><b>هل تُعرض السلاسل؟</b> نعم لكل عادة.</li>`,
-      "mark-done":"تم","done-today":"تم اليوم","streak":"السلسلة: ","longest":"الأفضل: ",
-      "archive":"أرشفة","unarchive":"استعادة","delete":"حذف","no-habits":"لا توجد عادات بعد."
+      "language-label":"Ø§Ù„Ù„ØºØ©:","back-link":"Ø§Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©","tool-title":"Ù…ØªØ¹Ù‚Ø¨ Ø§Ù„Ø¹Ø§Ø¯Ø§Øª",
+      "habitInput":"Ø§Ø³Ù… Ø§Ù„Ø¹Ø§Ø¯Ø©","add-btn":"Ø£Ø¶Ù Ø§Ù„Ø¹Ø§Ø¯Ø©","banner-all-done":"ðŸŽ‰ ØªÙ… Ø§Ù„Ø§Ù†ØªÙ‡Ø§Ø¡ Ù…Ù† Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø¹Ø§Ø¯Ø§Øª Ø§Ù„ÙŠÙˆÙ…! Ø¹Ù…Ù„ Ø±Ø§Ø¦Ø¹!",
+      "stats-tracked":"Ø§Ù„Ù…ØªØ¹Ù‚Ø¨Ø©: ","stats-done":"ØªÙ… Ø§Ù„ÙŠÙˆÙ…: ","stats-best":"Ø£ÙØ¶Ù„ Ø³Ù„Ø³Ù„Ø©: ",
+      "howto-title":'<i class="fa fa-check-double"></i> ÙƒÙŠÙÙŠØ© Ø§Ø³ØªØ®Ø¯Ø§Ù… Ù…ØªØ¹Ù‚Ø¨ Ø§Ù„Ø¹Ø§Ø¯Ø§Øª',
+      "howto-steps":`<li><b>Ø£Ø¶Ù Ø¹Ø§Ø¯Ø©:</b> Ø§ÙƒØªØ¨ Ø¹Ø§Ø¯Ø© ÙŠÙˆÙ…ÙŠØ© ÙˆØ§Ù†Ù‚Ø± Ø¥Ø¶Ø§ÙØ©.</li>
+        <li><b>Ø¹Ù„Ù‘Ù…Ù‡Ø§ Ù…Ù†Ø¬Ø²Ø©:</b> Ø¹Ù†Ø¯Ù…Ø§ ØªÙÙ†Ø¬Ø² Ø§Ù„Ø¹Ø§Ø¯Ø©ØŒ Ø§Ù†Ù‚Ø± "Ù…Ù†Ø¬Ø²".</li>
+        <li><b>Ø§Ø­Ø°Ù/Ø£Ø±Ø´Ù:</b> Ø§Ø­Ø°Ù Ø£Ùˆ Ø£Ø±Ø´Ù Ø§Ù„Ø¹Ø§Ø¯Ø§Øª Ø§Ù„ØªÙŠ Ù„Ø§ ØªØ±ÙŠØ¯ ØªØªØ¨Ø¹Ù‡Ø§.</li>
+        <li><b>ÙƒØ±Ø± ÙŠÙˆÙ…ÙŠØ§Ù‹:</b> Ø¹Ø¯ ÙƒÙ„ ÙŠÙˆÙ… Ù„ØªØ­Ø¯ÙŠØ« ØªÙ‚Ø¯Ù…Ùƒ.</li>`,
+      "howto-article-btn":"Ø§Ù‚Ø±Ø£ Ø§Ù„Ù…Ù‚Ø§Ù„","howto-article-link":"habit-how-to-ar.html",
+      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Ù†ØµØ§Ø¦Ø­',
+      "tips-list":`<li><b>Ø§Ø¨Ø¯Ø£ ØµØºÙŠØ±Ø§Ù‹:</b> Ø§Ø®ØªØ± Ø¹Ø§Ø¯Ø§Øª Ø³Ù‡Ù„Ø© Ø¨Ø§Ù„Ø¨Ø¯Ø§ÙŠØ©.</li>
+        <li><b>ØªØªØ¨Ø¹ ÙŠÙˆÙ…ÙŠØ§Ù‹:</b> Ø§Ù„Ø«Ø¨Ø§Øª Ù‡Ùˆ Ù…ÙØªØ§Ø­ Ø§Ù„Ù†Ø¬Ø§Ø­.</li>
+        <li><b>Ø§Ø­ØªÙÙ„ Ø¨Ø§Ù„ØªÙ‚Ø¯Ù…:</b> Ø§Ù„Ø§Ù†ØªØµØ§Ø±Ø§Øª Ø§Ù„ØµØºÙŠØ±Ø© ØªØ­Ø§ÙØ¸ Ø¹Ù„Ù‰ Ø§Ù„Ø¯Ø§ÙØ¹.</li>`,
+      "tips-article-btn":"Ø§Ù‚Ø±Ø£ Ø§Ù„Ù…Ù‚Ø§Ù„","tips-article-link":"habit-tips-ar.html",
+      "tips-mobile-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Ù†ØµØ§Ø¦Ø­',
+      "tips-mobile-list":`<li><b>Ø§Ø¨Ø¯Ø£ ØµØºÙŠØ±Ù‹Ø§:</b> Ø§Ø¨Ø¯Ø£ Ø¨Ø¹Ø§Ø¯Ø§Øª Ø¨Ø³ÙŠØ·Ø© ÙˆØ³Ù‡Ù„Ø©.</li>
+        <li><b>Ø±Ø§Ø¬Ø¹ Ø§Ù„Ø³Ù„Ø§Ø³Ù„:</b> Ø±Ø§Ø¬Ø¹ ØªÙ‚Ø¯Ù…Ùƒ Ù„Ù„Ø¨Ù‚Ø§Ø¡ Ù…ØªØ­ÙØ²Ù‹Ø§.</li>
+        <li><b>Ø§Ø¶Ù ØªØ°ÙƒÙŠØ±Ø§Øª:</b> Ø§Ø³ØªØ®Ø¯Ù… ØªØ°ÙƒÙŠØ±Ø§Øª Ø§Ù„ØªÙ‚ÙˆÙŠÙ….</li>`,
+      "faq-title":"Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø´Ø§Ø¦Ø¹Ø©",
+      "faq-list":`<li><b>Ù‡Ù„ ØªÙØ­ÙØ¸ Ø§Ù„Ø¹Ø§Ø¯Ø§ØªØŸ</b> Ù†Ø¹Ù…ØŒ ÙÙŠ Ù…ØªØµÙØ­Ùƒ Ø­ØªÙ‰ ØªÙ…Ø³Ø­Ù‡Ø§.</li>
+        <li><b>Ù‡Ù„ Ø£Ø³ØªØ·ÙŠØ¹ ØªØªØ¨Ø¹ Ø¹Ø¯Ø© Ø¹Ø§Ø¯Ø§ØªØŸ</b> Ù†Ø¹Ù….</li>
+        <li><b>Ù‡Ù„ ØªÙØ¹Ø±Ø¶ Ø§Ù„Ø³Ù„Ø§Ø³Ù„ØŸ</b> Ù†Ø¹Ù… Ù„ÙƒÙ„ Ø¹Ø§Ø¯Ø©.</li>`,
+      "mark-done":"ØªÙ…","done-today":"ØªÙ… Ø§Ù„ÙŠÙˆÙ…","streak":"Ø§Ù„Ø³Ù„Ø³Ù„Ø©: ","longest":"Ø§Ù„Ø£ÙØ¶Ù„: ",
+      "archive":"Ø£Ø±Ø´ÙØ©","unarchive":"Ø§Ø³ØªØ¹Ø§Ø¯Ø©","delete":"Ø­Ø°Ù","no-habits":"Ù„Ø§ ØªÙˆØ¬Ø¯ Ø¹Ø§Ø¯Ø§Øª Ø¨Ø¹Ø¯."
     }
   };
 
-  const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
+  const langNames = { en:"English", fr:"FranÃ§ais", de:"Deutsch", ru:"Ð ÑƒÑÑÐºÐ¸Ð¹", el:"Î•Î»Î»Î·Î½Î¹ÎºÎ¬", es:"EspaÃ±ol", ar:"Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©" };
 
   function getTodayStr() {
     const d = new Date();
@@ -343,10 +339,10 @@
     renderHabits();
   }
 </script>
-
 <footer style="direction:rtl; text-align:right;">
-  &copy; 2025 TimerHaven. جميع الأدوات مجانية وتحترم الخصوصية.<br>
-  <a href="privacy.html">سياسة الخصوصية</a> &bull; <a href="terms.html">الشروط</a> &bull; <a href="contact.html">اتصل بنا</a>
+  Â© 2025 TimerHaven. Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ø¯ÙˆØ§Øª Ù…Ø¬Ø§Ù†ÙŠØ© ÙˆØªØ­ØªØ±Ù… Ø§Ù„Ø®ØµÙˆØµÙŠØ©.<br/>
+<a href="privacy.html">Ø³ÙŠØ§Ø³Ø© Ø§Ù„Ø®ØµÙˆØµÙŠØ©</a> â€¢ <a href="terms.html">Ø§Ù„Ø´Ø±ÙˆØ·</a> â€¢ <a href="contact.html">Ø§ØªØµÙ„ Ø¨Ù†Ø§</a>
 </footer>
-</body>
+<p style="margin-top:1rem;"><a class="cta" href="/ar/habit-tracker/habit-tracker-index.html">Read full guide</a></p></body>
 </html>
+

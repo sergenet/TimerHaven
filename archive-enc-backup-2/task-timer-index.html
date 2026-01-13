@@ -1,0 +1,380 @@
+ï»؟<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Minuteur de Tأ¢che — TimerHaven</title>
+  <meta name="description" content="Minuteur de Tأ¢che — chronomأ©trez des tأ¢ches, enregistrez des sessions et amأ©liorez vos estimations avec le Minuteur de Tأ¢che de TimerHaven.">
+
+  <!-- Canonical and hreflang for multilingual setup -->
+  <link rel="canonical" href="https://timerhaven.com/fr/task-timer/">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer/">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer/">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer/">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer/">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer/">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer/">
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer/">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer/">
+
+  <!-- Person structured data (author) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Serge Shammas",
+    "image": "/assets/images/authors/serge-shammas-400.jpg",
+    "url": "/authors/serge-shammas",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- HowTo / Article structured data (French page) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Enregistrer et analyser le temps de tأ¢ches avec le Minuteur de Tأ¢che",
+        "description":"Workflow pour mesurer le temps rأ©el passأ© sur des tأ¢ches, tenir compte des interruptions et utiliser ces donnأ©es pour amأ©liorer les estimations.",
+        "image":"/assets/images/tasktimer-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Minuteur de Tأ¢che","Notes","Tableur"],
+        "step":[
+          {"@type":"HowToStep","name":"Crأ©er une entrأ©e de tأ¢che","text":"Nommez la tأ¢che et ajoutez la durأ©e prأ©vue et des tags.","image":"/assets/images/tasktimer-step-1.png"},
+          {"@type":"HowToStep","name":"Dأ©marrer le minuteur et noter les interruptions","text":"Dأ©marrez le Minuteur de Tأ¢che et enregistrez les interruptions au fur et أ  mesure.","image":"/assets/images/tasktimer-step-2.png"},
+          {"@type":"HowToStep","name":"Arrأھter et exporter","text":"Arrأھtez le minuteur et exportez la session en CSV pour analyse hebdomadaire.","image":"/assets/images/tasktimer-step-3.png"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Minuteur de Tأ¢che — Chronomأ©trez, enregistrez et amأ©liorez vos estimations",
+        "image":["/assets/images/tasktimer-snapshot.png"],
+        "author": {"@type":"Person","name":"Serge Shammas"},
+        "datePublished":"2025-10-25",
+        "dateModified":"2025-11-10",
+        "publisher": {"@type":"Organization","name":"TimerHaven","logo":{"@type":"ImageObject","url":"/assets/images/timerhaven-logo.png"}},
+        "description":"Guide pour utiliser le Minuteur de Tأ¢che, enregistrer des sessions, gأ©rer les interruptions et exporter des CSV pour l'analyse.",
+        "mainEntityOfPage":"/fr/task-timer/",
+        "about": {
+          "@type":"SoftwareApplication",
+          "name":"Minuteur de Tأ¢che",
+          "url": "/timer-fr.html",
+          "applicationCategory": "Productivity",
+          "operatingSystem": "Web"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fffdfa;color:#122;line-height:1.6;margin:0;padding:2rem;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:#fff;border-radius:10px;padding:2rem;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:#0b5f8a;margin-top:0;}
+    .meta{color:#6b7c89;font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;color:#333;}
+    .section{margin-top:1.1rem;}
+    .cta{display:inline-block;margin-top:1rem;padding:0.5rem 1rem;border-radius:6px;background:#0b5f8a;color:#fff;text-decoration:none;}
+    .case{background:#f8fff7;border-left:4px solid #b7f0c2;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    .workflow{background:#fff7fb;border-left:4px solid #f0c2e0;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .faq{margin-top:1rem;background:#f3f7fb;padding:1rem;border-radius:8px;}
+    .muted{color:#6b7c89;font-size:0.95rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    .return-link{display:inline-block;margin-top:1rem;text-decoration:none;color:#0b5f8a;font-weight:600;}
+    .small-text-muted{color:#6b7280;font-size:.95rem;margin:0 0 0.5rem 0;}
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">Minuteur de Tأ¢che — Chronomأ©trez, enregistrez et amأ©liorez vos estimations</h1>
+
+      <!-- Author card -->
+      <div class="author" role="articleauthor" aria-label="Auteur">
+        <img
+          src="/assets/images/authors/serge-shammas-200.jpg"
+          srcset="/assets/images/authors/serge-shammas-400.jpg 2x"
+          width="56" height="56"
+          alt="Serge Shammas — productivity writer and UX researcher"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='/assets/images/authors/avatar-placeholder.png';">
+        <div>
+          <div class="byline"><strong>Par Serge Shammas</strong> — rأ©dacteur productivitأ© & chercheur UX</div>
+          <div class="meta">Publiأ© : 2025-10-25 آ· Mis أ  jour : 2025-11-10 آ· Temps de lecture : 7 min</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        Le Minuteur de Tأ¢che vous aide أ  mesurer le temps passأ© sur des tأ¢ches individuelles, أ  conserver un historique de sessions et أ  transformer
+        ces donnأ©es en estimations plus fiables. Idأ©al pour freelances, أ©tudiants et أ©quipes qui veulent baser leur planning sur des donnأ©es rأ©elles.
+      </p>
+
+      <!-- Table of contents -->
+      <nav class="toc" aria-label="Table des matiأ¨res" style="margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;">
+        <a href="#setup" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Installation</a>
+        <a href="#howto" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Comment enregistrer</a>
+        <a href="#analysis" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Exporter & analyser</a>
+        <a href="#download" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Tأ©lأ©charger CSV</a>
+        <a href="#case-studies" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">أ‰tudes de cas</a>
+        <a href="#faq" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">FAQ</a>
+      </nav>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Installation & conventions de nommage</h2>
+        <p>Utilisez des noms de tأ¢che clairs et incluez une durأ©e prأ©vue entre parenthأ¨ses (ex. <em>Ecrire tests unitaires (45m)</em>). Ajoutez des tags pour le projet et le type. Cette cohأ©rence facilite l'analyse des CSV exportأ©s — privilأ©giez des tags courts et stables (client-alpha, rأ©union, revue).</p>
+      </section>
+
+      <section id="howto" class="section" aria-labelledby="howto-title">
+        <h2 id="howto-title">Comment enregistrer une session</h2>
+
+        <div class="workflow">
+          <strong>Enregistrer</strong>
+          <ol>
+            <li>Crأ©ez l'entrأ©e de tأ¢che avec la durأ©e estimأ©e et les tags.</li>
+            <li>Dأ©marrez le Minuteur de Tأ¢che quand vous commencez ; notez les interruptions dans le champ notes.</li>
+            <li>Arrأھtez le minuteur أ  la fin et ajoutez un court rأ©sumأ© du travail effectuأ©.</li>
+          </ol>
+        </div>
+
+        <!-- Example card: Download sample CSV -->
+        <section id="export-demo-inline" class="section export-demo mt-3" aria-labelledby="export-demo-inline-title">
+          <h3 id="export-demo-inline-title" class="h5">Exemple : entrأ©e Minuteur de Tأ¢che avec export</h3>
+
+          <p class="small-text-muted">Tأ©lأ©charger un CSV d'exemple</p>
+
+          <div class="card" style="padding:1rem;max-width:740px;background:#fbfdff;border:1px solid #eef5fb;border-radius:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div style="min-width:0;display:flex;gap:0.75rem;align-items:center;flex:1;">
+                <div style="flex:0 0 auto;">
+                  <span style="display:inline-block;width:44px;height:44px;border-radius:6px;background:#fff;border:1px solid #e6eef8;text-align:center;line-height:44px;color:#0d6efd;font-weight:700;">TT</span>
+                </div>
+                <div style="min-width:0;">
+                  <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:nowrap;">
+                    <strong id="demoSessionName" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">أ‰crire le rapport</strong>
+                    <small id="demoSessionTags" class="muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">travail, projetX</small>
+                  </div>
+                  <div style="margin-top:.25rem;color:#475569;font-size:.95rem;">
+                    <span id="demoSessionTimer" style="font-weight:600;">25:00</span>
+                    <span class="muted" style="margin-left:.5rem;font-size:.9rem;">(exemple)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="flex:0 0 auto;display:flex;gap:.5rem;align-items:center;">
+                <button id="exportDemoBtnInline" class="cta" aria-label="Tأ©lأ©charger CSV d'exemple" style="background:#fff;color:#0b5f8a;border:1px solid #cfe8f5;padding:0.4rem 0.8rem;border-radius:6px;">
+                  <!-- inline SVG download icon -->
+                  <svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.35rem;vertical-align:middle" aria-hidden="true" focusable="false">
+                    <path fill="#0d6efd" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"></path>
+                  </svg>
+                  Tأ©lأ©charger CSV d'exemple
+                </button>
+              </div>
+            </div>
+
+            <p class="mt-2 mb-0" style="font-size:.9rem;color:#6b7280;">
+              Cliquez sur le bouton ci‑dessus pour tأ©lأ©charger un fichier CSV d'exemple. Pour exporter vos sessions rأ©elles depuis l'outil, utilisez la commande d'export du Minuteur de Tأ¢che.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section id="analysis" class="section" aria-labelledby="analysis-title">
+        <h2 id="analysis-title">Exporter & analyser</h2>
+        <p>Exportez des CSV hebdomadaires et calculez des moyennes par tag ou projet. Indicateurs clأ©s : durأ©e moyenne par tأ¢che, mأ©diane (moins sensible aux valeurs extrأھmes) et taux d'interruption (% de sessions avec interruptions).</p>
+
+        <div class="workflow">
+          <strong>Recette — revue hebdomadaire</strong>
+          <ol>
+            <li>Exportez les sessions de la semaine au format CSV.</li>
+            <li>Dans le tableur, calculez les durأ©es moyennes par tag et triez les tأ¢ches les plus longues pour affiner les estimations.</li>
+            <li>Utilisez ces informations pour ajuster vos blocs Pomodoro et votre calendrier.</li>
+          </ol>
+        </div>
+
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">Exemple — formules & interprأ©tation</h3>
+          <p>Supposons que votre export contient une colonne <code>actual_minutes</code> et une colonne <code>interruptions</code> avec le nombre d'interruptions par session.</p>
+          <ul>
+            <li>Moyenne pour le tag "projet-alpha" : =AVERAGEIF(tag_range,"projet-alpha",actual_minutes_range)</li>
+            <li>Mأ©diane (moins sensible aux outliers) : =MEDIAN(IF(tag_range="projet-alpha",actual_minutes_range)) — formule matricielle si besoin.</li>
+            <li>Taux d'interruption : =COUNTIFS(tag_range,"projet-alpha",interruptions_range,">0") / COUNTIF(tag_range,"projet-alpha")</li>
+          </ul>
+
+          <p>Exemple de sessions hebdomadaires (illustration) :</p>
+          <table class="sample" style="border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:480px;">
+            <thead><tr><th>Date</th><th>Tأ¢che</th><th>Rأ©el (min)</th><th>Interruptions</th></tr></thead>
+            <tbody>
+              <tr><td>2025-11-03</td><td>Revue de code</td><td>60</td><td>1</td></tr>
+              <tr><td>2025-11-04</td><td>Fonctionnalitأ© X</td><td>120</td><td>0</td></tr>
+              <tr><td>2025-11-06</td><td>Correction de bug</td><td>45</td><td>1</td></tr>
+            </tbody>
+          </table>
+
+          <p class="muted">Exemples : moyenne = (60+120+45)/3 = 75 min ; taux d'interruption = 2/3 = 66,7%.</p>
+        </div>
+      </section>
+
+      <section id="download" class="section" aria-labelledby="download-title">
+        <h2 id="download-title">Tأ©lأ©charger — Modأ¨le CSV du Minuteur de Tأ¢che</h2>
+        <p class="muted">Utilisez ce CSV pour alimenter ou tester vos imports.</p>
+        <p><a href="#" id="downloadCsv" class="cta" aria-label="Tأ©lأ©charger le modأ¨le CSV">Tأ©lأ©charger le modأ¨le CSV</a></p>
+        <pre class="template" id="csvTemplate" aria-hidden="true">task_name,start_iso,end_iso,duration_minutes,note
+Exemple tأ¢che,2025-01-01T09:00:00Z,2025-01-01T09:25:00Z,25,Premiأ¨re أ©bauche</pre>
+
+        <script>
+          // Template download (unchanged)
+          document.getElementById('downloadCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('csvTemplate').textContent;
+            var blob = new Blob([text], {type:'text/csv;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'task-timer-template-fr.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title">أ‰tudes de cas & conseils</h2>
+        <div class="case">
+          <strong>Consultant — Paolo</strong>
+          <p>Aprأ¨s 2 semaines, Paolo a dأ©couvert que la revue de code reprأ©sentait 20% de sa journأ©e. Il a bloquأ© des crأ©neaux dأ©diأ©s et rأ©duit le morcellement du travail.</p>
+        </div>
+        <div class="case">
+          <strong>Consultante — Rina</strong>
+          <p>Rina a enregistrأ© les appels clients comme interruptions ; elle rأ©serve maintenant des blocs de concentration et ajuste le temps prأ©vu pour les rأ©unions.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="faq">
+          <p><strong>Q : Puis-je changer l'unitأ© d'affichage ?</strong><br>
+          <strong>A :</strong> L'affichage principal est en minutes. Pour des rapports en heures, exportez en CSV et calculez des totaux dans un tableur.</p>
+
+          <p><strong>Q : Que faire si le navigateur met en veille l'onglet ?</strong><br>
+          <strong>A :</strong> Certains navigateurs rأ©duisent l'activitأ© d'onglets inactifs. Laissez le Minuteur de Tأ¢che sur un onglet actif ou ajustez les paramأ¨tres du navigateur.</p>
+
+          <p><strong>Q : Mes donnأ©es sont-elles privأ©es ?</strong><br>
+          <strong>A :</strong> Par dأ©faut, les sessions sont stockأ©es localement (localStorage). Elles ne sont pas envoyأ©es أ  un serveur أ  moins d'utiliser une fonction de synchronisation.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources-title">
+        <h2 id="resources-title">Ressources</h2>
+        <ul class="muted">
+          <li><a href="https://support.google.com/docs/answer/3093281" target="_blank" rel="noopener noreferrer">Google Sheets — pivot tables & formules (guide)</a></li>
+        </ul>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Outils associأ©s : <a href="/fr/notes/">Notes</a> آ· <a href="/fr/pomodoro-timer/">Pomodoro</a> آ· <a href="/fr/calendar-planning/">Calendrier</a></p>
+
+      <!-- Open the localized timer tool -->
+      <p style="margin-top:1.2rem;"><a href="/timer-fr.html#startBtn" class="cta" aria-label="Ouvrir l'outil Minuteur de Tأ¢che" rel="help">Ouvrir l'outil Minuteur de Tأ¢che</a></p>
+
+      <!-- Return link -->
+      <p class="return-link"><a href="/timer-fr.html#startBtn" rel="up" aria-label="Retour au Minuteur de Tأ¢che">Retour au Minuteur de Tأ¢che</a></p>
+
+      <footer style="margin-top:1.2rem;color:#6b7c89;font-size:0.95rem;">
+        <p>Commentaires ou amأ©liorations ? أ‰crivez-nous : <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Demo export script (stable sample filename) -->
+  <script>
+  (function(){
+    function escapeCsv(v){
+      if (v === null || v === undefined) return '';
+      return '"' + String(v).replace(/"/g,'""') + '"';
+    }
+
+    function downloadCsv(filename, content){
+      var blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function buildDemoSession(){
+      var now = new Date();
+      var start = new Date(now.getTime() - (25*60*1000)); // 25 minutes earlier
+      var task = (document.getElementById('demoSessionName') && document.getElementById('demoSessionName').textContent) || 'أ‰crire le rapport';
+      var tagsText = (document.getElementById('demoSessionTags') && document.getElementById('demoSessionTags').textContent) || '';
+      var tags = tagsText.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+      return {
+        id: 'demo-' + Math.floor(Math.random()*900000+100000),
+        task_name: task.trim(),
+        tags: tags,
+        start_time: start.toISOString(),
+        end_time: now.toISOString(),
+        duration_seconds: 25*60,
+        duration_human: '25:00',
+        notes: 'Export d\'exemple depuis le guide',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+      };
+    }
+
+    function exportSessionAsCsv(session){
+      var header = ['id','task_name','tags','start_time','end_time','duration_seconds','duration_human','notes','timezone'];
+      var row = [
+        session.id || '',
+        session.task_name || '',
+        (session.tags || []).join(';'),
+        session.start_time || '',
+        session.end_time || '',
+        session.duration_seconds != null ? session.duration_seconds : '',
+        session.duration_human || '',
+        session.notes || '',
+        session.timezone || ''
+      ];
+      var csv = header.map(escapeCsv).join(',') + '\n' + row.map(escapeCsv).join(',') + '\n';
+      // Stable sample filename
+      var filename = 'tasktimer-sample.csv';
+      downloadCsv(filename, csv);
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      var btn = document.getElementById('exportDemoBtnInline');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        try {
+          var session = buildDemoSession();
+          exportSessionAsCsv(session);
+          var orig = btn.innerHTML;
+          btn.innerHTML = 'Tأ©lأ©chargأ©';
+          btn.disabled = true;
+          setTimeout(function(){ btn.innerHTML = orig; btn.disabled = false; }, 1200);
+        } catch (e) {
+          console.error('Export error', e);
+          alert('أ‰chec de l\'export — voir la console pour les dأ©tails.');
+        }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
+
+

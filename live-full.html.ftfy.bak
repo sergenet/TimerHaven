@@ -1,0 +1,890 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title id="page-title">TimerHaven: Productivity Suite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TimerHaven offers free world clocks, countdown timers, alarms, stopwatches, Pomodoro, weather, and currency tools. Boost your productivity with TimerHaven!">
+
+  <!-- Canonical: ensure Search engines index the preferred host -->
+  <link rel="canonical" href="https://timerhaven.com/" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TimerHaven: Productivity Suite">
+  <meta property="og:description" content="Free world clocks, timers, Pomodoro, weather and small productivity tools.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/pomodoro-snapshot.png">
+  <meta property="og:url" content="https://timerhaven.com/">
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- hreflang links for main alternate languages -->
+  <link rel="alternate" href="https://timerhaven.com/" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/ar/" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/" hreflang="x-default" />
+
+  <!-- Optional: theme color for mobile UI -->
+  <meta name="theme-color" content="#185a9d">
+
+  <!-- Performance & Fonts (only once) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <script></script>
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    }
+
+    .language-select {
+      text-align: right;
+      padding: 10px 18px 0 0;
+      margin-bottom: 0.5em;
+    }
+
+    #language-label {
+      color: #185a9d;
+      font-weight: bold;
+      font-size: 1.08em;
+      margin-right: 0.5em;
+      letter-spacing: 0.02em;
+    }
+
+    #lang-select {
+      border: 2px solid #43cea2;
+      background: linear-gradient(90deg, #f4f7fb 60%, #e0f7fa 100%);
+      color: #185a9d;
+      font-weight: 600;
+      border-radius: 7px;
+      padding: 7px 16px;
+      font-size: 1em;
+      box-shadow: 0 2px 8px #e0e7ef;
+      outline: none;
+      transition: border 0.2s, background 0.2s;
+    }
+
+    #lang-select:focus {
+      border-color: #185a9d;
+      background: linear-gradient(90deg, #e0f7fa 60%, #43cea2 100%);
+    }
+
+    .main-header {
+      text-align: center;
+      margin: 2em 0 1em;
+      color: #222;
+      letter-spacing: 1px;
+    }
+    .main-header h1 {
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 0.2em;
+      background: linear-gradient(90deg,#43cea2,#185a9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .main-header p {
+      font-size: 1em;
+      color: #444;
+      margin-top: 0.1em;
+      font-weight: 400;
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      max-width: 900px;
+      margin: 0 auto 2em auto;
+      padding: 0 0.5em;
+    }
+    .menu-card {
+      border-radius: 14px;
+      padding: 0.9em 0.3em 0.7em 0.3em;
+      text-align: center;
+      background: #fff;
+      box-shadow: 0 2px 10px #e0e7ef;
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      cursor: pointer;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 2px solid transparent;
+    }
+    .menu-card:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 4px 18px #b5c6e0;
+      border-color: #43cea2;
+      z-index: 1;
+    }
+    .menu-icon {
+      font-size: 1.7em;
+      margin-bottom: 0.25em;
+      display: inline-block;
+      padding: 0.15em 0.42em;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--card-color1,#43cea2) 40%, var(--card-color2,#185a9d) 100%);
+      color: #fff;
+      box-shadow: 0 1px 4px #c9e2e2;
+    }
+    /* Ensure menu titles are visible (explicit color to avoid CSS inheritance issues) */
+    .menu-title {
+      font-size: 1em;
+      font-weight: bold;
+      margin-bottom: 0.13em;
+      letter-spacing: 0.5px;
+      color: #0a2540; /* explicit dark color so text is visible */
+    }
+    .menu-description {
+      color: #555;
+      font-size: 0.82em;
+      margin-bottom: 0.1em;
+      font-weight: 400;
+      min-height: 0;
+    }
+    .card-calendar   .menu-icon { --card-color1: #a1c4fd; --card-color2: #fd5d47; }
+    .card-clipboard  .menu-icon { --card-color1: #a1c4fd; --card-color2: #43cea2; }
+    .card-countdown  .menu-icon { --card-color1: #43cea2; --card-color2: #185a9d; }
+    .card-currency   .menu-icon { --card-color1: #43cea2; --card-color2: #fcb045; }
+    .card-focus      .menu-icon { --card-color1: #43cea2; --card-color2: #f857a6; }
+    .card-habit      .menu-icon { --card-color1: #f857a6; --card-color2: #43cea2; }
+    .card-meeting    .menu-icon { --card-color1: #c2e9fb; --card-color2: #185a9d; }
+    .card-notes      .menu-icon { --card-color1: #ff5858; --card-color2: #fcb045; }
+    .card-password   .menu-icon { --card-color1: #ffb347; --card-color2: #ffcc33; }
+    .card-pomodoro   .menu-icon { --card-color1: #f857a6; --card-color2: #ff5858; }
+    .card-stopwatch  .menu-icon { --card-color1: #fcb045; --card-color2: #fd5d47; }
+    .card-task       .menu-icon { --card-color1: #fd5d47; --card-color2: #fcb045; }
+    .card-unit       .menu-icon { --card-color1: #fd5d47; --card-color2: #a1c4fd; }
+    .card-weather    .menu-icon { --card-color1: #a1c4fd; --card-color2: #c2e9fb; }
+    .card-world      .menu-icon { --card-color1: #185a9d; --card-color2: #43cea2; }
+
+    /* Pomodoro icon styling (tomato emoji + stopwatch) */
+    .pomodoro-emoji { font-size:1.1em; line-height:1; margin-right:.25rem; vertical-align:middle; }
+    .pomodoro-fa { font-size:1.0em; color:#e24b3a; margin-right:.25rem; vertical-align:middle; }
+
+    @media (max-width: 800px) {
+      .main-header h1 { font-size: 1.2em; }
+      .tool-grid { gap: 8px; }
+      .menu-card { min-height: 90px; padding: 0.6em 0.1em; }
+      .menu-icon { font-size: 1.3em; }
+      .menu-title { font-size: 0.82em; }
+      .menu-description { font-size: 0.70em; }
+    }
+    footer {
+      text-align: center;
+      margin: 1em 0 1em 0;
+      color: #444;
+      font-size: 0.95em;
+    }
+	/* responsive reserve for leaderboard-style ad to avoid layout shift */
+.ad-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* desktop/tablet reserve */
+@media (min-width: 900px) {
+  .ad-wrapper { min-height: 90px; }   /* reserve approx 728x90 leaderboard */
+}
+
+/* mobile reserve */
+@media (max-width: 899px) {
+  .ad-wrapper { min-height: 50px; }   /* reserve approx 320x50 mobile banner */
+}
+  </style>
+
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="language-select">
+    <label for="lang-select"><strong id="language-label">Language:</strong></label>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="fr">Fran├â┬ºais</option>
+      <option value="es">Espa├â┬▒ol</option>
+      <option value="de">Deutsch</option>
+      <option value="ru">├É┬á├æ╞Æ├æ┬ü├æ┬ü├É┬║├É┬╕├É┬╣</option>
+      <option value="el">├ÄΓÇó├Ä┬╗├Ä┬╗├Ä┬╖├Ä┬╜├Ä┬╣├Ä┬║├Ä┬¼</option>
+      <option value="ar">├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÿ┬▒├ÿ┬¿├Ö┼á├ÿ┬⌐</option>
+    </select>
+  </div>
+  <header class="main-header">
+    <h1 id="header-title">├░┼╕ΓÇóΓÇÖ TimerHaven Productivity Suite</h1>
+    <p id="header-desc">Choose a tool below to boost your productivity!</p>
+  </header>
+
+<!-- Homepage leaderboard ad (placeholder reserved; will initialize after consent) -->
+<div class="ad-wrapper" id="th-leaderboard-ad" aria-hidden="false" style="max-width:900px;margin:0 auto;padding:0 1rem;min-height:0;display:flex;align-items:center;justify-content:center;">
+  <div class="th-ad-placeholder" style="width:100%;min-height:50px;display:flex;align-items:center;justify-content:center;"></div>
+</div>
+
+<!-- Consent assets -->
+<link rel="stylesheet" href="/assets/css/consent.css">
+<script src="/assets/js/consent.js" defer></script>
+
+<script>
+  (function(){
+    function initAds(){
+      try {
+        if (window.__timerhaven_ads_initialized) return;
+        window.__timerhaven_ads_initialized = true;
+
+        // inject AdSense script tag (if not already loaded)
+        if (!document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007';
+          s.crossOrigin = 'anonymous';
+          document.head.appendChild(s);
+        }
+
+        // create & insert ins.ad element
+        var container = document.getElementById('th-leaderboard-ad');
+        if (!container) return;
+        var ins = document.createElement('ins');
+        ins.className = 'adsbygoogle';
+        ins.style.display = 'block';
+        ins.setAttribute('data-ad-client', 'ca-pub-0467059729557007');
+        ins.setAttribute('data-ad-slot', '8923180236');
+        ins.setAttribute('data-ad-format', 'auto');
+        ins.setAttribute('data-full-width-responsive', 'true');
+
+        // clear placeholder and append ins
+        container.innerHTML = '';
+        container.appendChild(ins);
+
+        // push ads
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch(e){ console.warn('ad init failed', e); }
+    }
+
+    // If consent already given, load immediately; otherwise wait for grant
+    if (window.timerhavenConsentGiven && window.timerhavenConsentGiven()) {
+      initAds();
+    } else {
+      window.timerhavenLoadAdsAfterConsent && window.timerhavenLoadAdsAfterConsent(initAds);
+    }
+  })();
+</script>
+
+  <main>
+    <div class="tool-grid" id="tools">
+      <a href="calendar-en.html" class="menu-card card-calendar text-decoration-none text-dark" data-tool="calendar-en">
+        <div class="menu-icon"><i class="fa fa-calendar-days"></i></div>
+        <div class="menu-title" id="tool-calendar-title"></div>
+        <div class="menu-description" id="tool-calendar-desc"></div>
+      </a>
+      <a href="clipboard-manager-en.html" class="menu-card card-clipboard text-decoration-none text-dark" data-tool="clipboard-manager-en">
+        <div class="menu-icon"><i class="fa fa-clipboard-list"></i></div>
+        <div class="menu-title" id="tool-clipboard-title"></div>
+        <div class="menu-description" id="tool-clipboard-desc"></div>
+      </a>
+      <a href="countdown-en.html" class="menu-card card-countdown text-decoration-none text-dark" data-tool="countdown-en">
+        <div class="menu-icon"><i class="fa fa-stopwatch-20"></i></div>
+        <div class="menu-title" id="tool-countdown-title"></div>
+        <div class="menu-description" id="tool-countdown-desc"></div>
+      </a>
+      <a href="currency-en.html" class="menu-card card-currency text-decoration-none text-dark" data-tool="currency-en">
+        <div class="menu-icon"><i class="fa fa-dollar-sign"></i></div>
+        <div class="menu-title" id="tool-currency-title"></div>
+        <div class="menu-description" id="tool-currency-desc"></div>
+      </a>
+      <a href="focus-music-en.html" class="menu-card card-focus text-decoration-none text-dark" data-tool="focus-music-en">
+        <div class="menu-icon"><i class="fa fa-music"></i></div>
+        <div class="menu-title" id="tool-focus-title"></div>
+        <div class="menu-description" id="tool-focus-desc"></div>
+      </a>
+      <a href="habit-tracker-en.html" class="menu-card card-habit text-decoration-none text-dark" data-tool="habit-tracker-en">
+        <div class="menu-icon"><i class="fa fa-check-double"></i></div>
+        <div class="menu-title" id="tool-habit-title"></div>
+        <div class="menu-description" id="tool-habit-desc"></div>
+      </a>
+      <a href="meeting-planner-en.html" class="menu-card card-meeting text-decoration-none text-dark" data-tool="meeting-planner-en">
+        <div class="menu-icon"><i class="fa fa-users"></i></div>
+        <div class="menu-title" id="tool-meeting-title"></div>
+        <div class="menu-description" id="tool-meeting-desc"></div>
+      </a>
+      <a href="notes-en.html" class="menu-card card-notes text-decoration-none text-dark" data-tool="notes-en">
+        <div class="menu-icon"><i class="fa fa-note-sticky"></i></div>
+        <div class="menu-title" id="tool-notes-title"></div>
+        <div class="menu-description" id="tool-notes-desc"></div>
+      </a>
+      <a href="password-generator-en.html" class="menu-card card-password text-decoration-none text-dark" data-tool="password-generator-en">
+        <div class="menu-icon"><i class="fa fa-key"></i></div>
+        <div class="menu-title" id="tool-password-title"></div>
+        <div class="menu-description" id="tool-password-desc"></div>
+      </a>
+      <a href="pomodoro-en.html" class="menu-card card-pomodoro text-decoration-none text-dark" data-tool="pomodoro-en">
+        <div class="menu-icon"><span class="pomodoro-emoji" aria-hidden="true">├░┼╕┬ìΓÇª</span><i class="fa fa-stopwatch pomodoro-fa" aria-hidden="true"></i></div>
+        <div class="menu-title" id="tool-pomodoro-title"></div>
+        <div class="menu-description" id="tool-pomodoro-desc"></div>
+      </a>
+      <a href="stopwatch-en.html" class="menu-card card-stopwatch text-decoration-none text-dark" data-tool="stopwatch-en">
+        <div class="menu-icon"><i class="fa fa-clock"></i></div>
+        <div class="menu-title" id="tool-stopwatch-title"></div>
+        <div class="menu-description" id="tool-stopwatch-desc"></div>
+      </a>
+      <a href="timer-en.html" class="menu-card card-task text-decoration-none text-dark" data-tool="timer-en">
+        <div class="menu-icon"><i class="fa fa-hourglass-half"></i></div>
+        <div class="menu-title" id="tool-task-title"></div>
+        <div class="menu-description" id="tool-task-desc"></div>
+      </a>
+      <a href="unit-converter-en.html" class="menu-card card-unit text-decoration-none text-dark" data-tool="unit-converter-en">
+        <div class="menu-icon"><i class="fa fa-ruler-combined"></i></div>
+        <div class="menu-title" id="tool-unit-title"></div>
+        <div class="menu-description" id="tool-unit-desc"></div>
+      </a>
+      <a href="weather-en.html" class="menu-card card-weather text-decoration-none text-dark" data-tool="weather-en">
+        <div class="menu-icon"><i class="fa fa-cloud-sun"></i></div>
+        <div class="menu-title" id="tool-weather-title"></div>
+        <div class="menu-description" id="tool-weather-desc"></div>
+      </a>
+      <a href="world-clock-en.html" class="menu-card card-world text-decoration-none text-dark" data-tool="world-clock-en">
+        <div class="menu-icon"><i class="fa fa-globe"></i></div>
+        <div class="menu-title" id="tool-world-title"></div>
+        <div class="menu-description" id="tool-world-desc"></div>
+      </a>
+    </div>
+  </main>
+  
+  <footer>
+    <div id="footer-copyright"></div>
+    <div id="footer-links">
+      <a href="/about.html" id="footer-about"></a> |
+      <a href="/privacy.html" id="footer-privacy"></a> |
+      <a href="mailto:contact@timerhaven.com" id="footer-contact"></a>
+    </div>
+    <div class="small" id="footer-credit"></div>
+  </footer>
+  <script>
+    // TRANSLATIONS & INITIALIZATION
+    const translations = {
+      en: {
+        "page-title": "TimerHaven: Productivity Suite",
+        "language-label": "Language:",
+        "header-title": "├░┼╕ΓÇóΓÇÖ TimerHaven Productivity Suite",
+        "header-desc": "Choose a tool below to boost your productivity!",
+        "nav-tools": "Tools",
+        "nav-resources": "Resources",
+        "tool-calendar-title": "Calendar",
+        "tool-calendar-desc": "View dates and plan events easily.",
+        "tool-clipboard-title": "Clipboard Manager",
+        "tool-clipboard-desc": "Save and organize text snippets for easy access.",
+        "tool-countdown-title": "Countdown Timer",
+        "tool-countdown-desc": "Countdown to deadlines, events, or meetings.",
+        "tool-currency-title": "Currency Converter",
+        "tool-currency-desc": "Convert currencies using live exchange rates.",
+        "tool-focus-title": "Focus Music",
+        "tool-focus-desc": "Listen to music that helps you concentrate.",
+        "tool-habit-title": "Habit Tracker",
+        "tool-habit-desc": "Track daily habits and build new routines.",
+        "tool-meeting-title": "Meeting Planner",
+        "tool-meeting-desc": "Schedule meetings across time zones with ease.",
+        "tool-notes-title": "Notes",
+        "tool-notes-desc": "Take quick notes and organize your thoughts.",
+        "tool-password-title": "Password Generator",
+        "tool-password-desc": "Create secure, random passwords instantly.",
+        "tool-pomodoro-title": "Pomodoro Timer",
+        "tool-pomodoro-desc": "Boost focus with the Pomodoro technique.",
+        "tool-stopwatch-title": "Stopwatch",
+        "tool-stopwatch-desc": "Measure elapsed time for any activity.",
+        "tool-task-title": "Task Timer",
+        "tool-task-desc": "Track work sessions, focus tasks, and breaks.",
+        "tool-unit-title": "Unit Converter",
+        "tool-unit-desc": "Convert length, weight, temperature, and more units.",
+        "tool-weather-title": "Weather",
+        "tool-weather-desc": "Check current weather anywhere in the world.",
+        "tool-world-title": "World Clock",
+        "tool-world-desc": "See the time anywhere in the world, instantly.",
+        "resources-title": "Recommended Productivity Tools",
+        "resources-timer-desc": "├óΓé¼ΓÇ£ The best visual countdown timer for work, school, and home.",
+        "resources-book-desc": "├óΓé¼ΓÇ£ The classic book on focus and productivity.",
+        "resources-planner-desc": "├óΓé¼ΓÇ£ Organize your life with this legendary paper planner.",
+        "resources-keyboard-desc": "├óΓé¼ΓÇ£ Write anywhere, stay productive!",
+        "resources-affiliate": "As an Amazon Associate, TimerHaven earns from qualifying purchases. Thanks for your support!",
+        "footer-copyright": "&copy; 2025 TimerHaven. All tools are free and privacy-friendly.",
+        "footer-about": "About",
+        "footer-privacy": "Privacy",
+        "footer-contact": "Contact",
+        "footer-credit": "Built by <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Amazon Partner</a>"
+      },
+      fr: {
+  "page-title": "TimerHaven : Suite de Productivit├â┬⌐",
+  "language-label": "Langue :",
+  "header-title": "├░┼╕ΓÇóΓÇÖ Suite de Productivit├â┬⌐ TimerHaven",
+  "header-desc": "Choisissez un outil ci-dessous pour am├â┬⌐liorer votre productivit├â┬⌐ !",
+  "nav-tools": "Outils",
+  "nav-resources": "Ressources",
+  "tool-calendar-title": "Calendrier",
+  "tool-calendar-desc": "Voir les dates et planifier des ├â┬⌐v├â┬⌐nements facilement.",
+  "tool-clipboard-title": "Gestionnaire de Presse-papiers",
+  "tool-clipboard-desc": "Enregistrez et organisez des extraits de texte pour un acc├â┬¿s facile.",
+  "tool-countdown-title": "Minuteur de compte ├â┬á rebours",
+  "tool-countdown-desc": "Compte ├â┬á rebours jusqu'aux ├â┬⌐ch├â┬⌐ances, ├â┬⌐v├â┬⌐nements ou r├â┬⌐unions.",
+  "tool-currency-title": "Convertisseur de devises",
+  "tool-currency-desc": "Convertissez les devises avec des taux de change en direct.",
+  "tool-focus-title": "Musique de concentration",
+  "tool-focus-desc": "├âΓÇ░coutez de la musique qui aide ├â┬á vous concentrer.",
+  "tool-habit-title": "Suivi d'habitudes",
+  "tool-habit-desc": "Suivez les habitudes quotidiennes et d├â┬⌐veloppez de nouvelles routines.",
+  "tool-meeting-title": "Planificateur de r├â┬⌐unions",
+  "tool-meeting-desc": "Planifiez des r├â┬⌐unions dans diff├â┬⌐rents fuseaux horaires facilement.",
+  "tool-notes-title": "Notes",
+  "tool-notes-desc": "Prenez des notes rapides et organisez des pens├â┬⌐es.",
+  "tool-password-title": "G├â┬⌐n├â┬⌐rateur de mots de passe",
+  "tool-password-desc": "Cr├â┬⌐ez des mots de passe s├â┬⌐curis├â┬⌐s et al├â┬⌐atoires instantan├â┬⌐ment.",
+  "tool-pomodoro-title": "Minuteur Pomodoro",
+  "tool-pomodoro-desc": "Am├â┬⌐liorez la concentration avec la technique Pomodoro.",
+  "tool-stopwatch-title": "Chronom├â┬¿tre",
+  "tool-stopwatch-desc": "Mesurez le temps ├â┬⌐coul├â┬⌐ pour toute activit├â┬⌐.",
+  "tool-task-title": "Minuteur de t├â┬óches",
+  "tool-task-desc": "Suivez les sessions de travail, les t├â┬óches et les pauses.",
+  "tool-unit-title": "Convertisseur d'unit├â┬⌐s",
+  "tool-unit-desc": "Convertissez la longueur, le poids, la temp├â┬⌐rature et plus.",
+  "tool-weather-title": "M├â┬⌐t├â┬⌐o",
+  "tool-weather-desc": "Consultez la m├â┬⌐t├â┬⌐o actuelle partout dans le monde.",
+  "tool-world-title": "Horloge mondiale",
+  "tool-world-desc": "Voir l'heure partout dans le monde, instantan├â┬⌐ment.",
+  "resources-title": "Outils de productivit├â┬⌐ recommand├â┬⌐s",
+  "resources-timer-desc": "├óΓé¼ΓÇ£ Le meilleur minuteur visuel pour le travail, l'├â┬⌐cole et la maison.",
+  "resources-book-desc": "├óΓé¼ΓÇ£ Le livre classique sur la concentration et la productivit├â┬⌐.",
+  "resources-planner-desc": "├óΓé¼ΓÇ£ Organisez votre vie avec ce l├â┬⌐gendaire agenda papier.",
+  "resources-keyboard-desc": "├óΓé¼ΓÇ£ ├âΓÇ░crivez partout, restez productif !",
+  "resources-affiliate": "En tant qu'associ├â┬⌐ Amazon, TimerHaven gagne sur les achats qualifi├â┬⌐s. Merci pour votre soutien !",
+  "footer-copyright": "&copy; 2025 TimerHaven. Tous les outils sont gratuits et respectueux de la vie priv├â┬⌐e.",
+  "footer-about": "├âΓé¼ propos",
+  "footer-privacy": "Confidentialit├â┬⌐",
+  "footer-contact": "Contact",
+  "footer-credit": "D├â┬⌐velopp├â┬⌐ par <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Partenaire Amazon</a>"
+},
+      es: {
+  "page-title": "TimerHaven: Suite de Productividad",
+  "language-label": "Idioma:",
+  "header-title": "├░┼╕ΓÇóΓÇÖ Suite de Productividad TimerHaven",
+  "header-desc": "├é┬íElige una herramienta abajo para aumentar tu productividad!",
+  "nav-tools": "Herramientas",
+  "nav-resources": "Recursos",
+  "tool-calendar-title": "Calendario",
+  "tool-calendar-desc": "Consulta fechas y planifica eventos f├â┬ícilmente.",
+  "tool-clipboard-title": "Administrador del Portapapeles",
+  "tool-clipboard-desc": "Guarda y organiza fragmentos de texto para un acceso f├â┬ícil.",
+  "tool-countdown-title": "Temporizador de cuenta regresiva",
+  "tool-countdown-desc": "Cuenta regresiva para fechas l├â┬¡mite, eventos o reuniones.",
+  "tool-currency-title": "Convertidor de moneda",
+  "tool-currency-desc": "Convierte monedas usando tasas de cambio en tiempo real.",
+  "tool-focus-title": "M├â┬║sica de concentraci├â┬│n",
+  "tool-focus-desc": "Escucha m├â┬║sica que te ayuda a concentrarte.",
+  "tool-habit-title": "Rastreador de h├â┬íbitos",
+  "tool-habit-desc": "Registra h├â┬íbitos diarios y crea nuevas rutinas.",
+  "tool-meeting-title": "Planificador de reuniones",
+  "tool-meeting-desc": "Programa reuniones en diferentes zonas horarias f├â┬ícilmente.",
+  "tool-notes-title": "Notas",
+  "tool-notes-desc": "Toma notas r├â┬ípidas y organiza tus ideas.",
+  "tool-password-title": "Generador de contrase├â┬▒as",
+  "tool-password-desc": "Crea contrase├â┬▒as seguras y aleatorias al instante.",
+  "tool-pomodoro-title": "Temporizador Pomodoro",
+  "tool-pomodoro-desc": "Mejora el enfoque con la t├â┬⌐cnica Pomodoro.",
+  "tool-stopwatch-title": "Cron├â┬│metro",
+  "tool-stopwatch-desc": "Mide el tiempo transcurrido para cualquier actividad.",
+  "tool-task-title": "Temporizador de tareas",
+  "tool-task-desc": "Registra sesiones de trabajo, tareas y descansos.",
+  "tool-unit-title": "Convertidor de unidades",
+  "tool-unit-desc": "Convierte longitud, peso, temperatura y m├â┬ís.",
+  "tool-weather-title": "Clima",
+  "tool-weather-desc": "Consulta la clima actual en cualquier parte del mundo.",
+  "tool-world-title": "Reloj mundial",
+  "tool-world-desc": "Consulta la hora en cualquier lugar del mundo al instante.",
+  "resources-title": "Herramientas de productividad recomendadas",
+  "resources-timer-desc": "├óΓé¼ΓÇ£ El mejor temporizador visual para trabajo, escuela y hogar.",
+  "resources-book-desc": "├óΓé¼ΓÇ£ El libro cl├â┬ísico sobre enfoque y productividad.",
+  "resources-planner-desc": "├óΓé¼ΓÇ£ Organiza tu vida con esta legendaria agenda de papel.",
+  "resources-keyboard-desc": "├óΓé¼ΓÇ£ ├é┬íEscribe en cualquier lugar, mantente productivo!",
+  "resources-affiliate": "Como asociado de Amazon, TimerHaven gana con compras elegibles. ├é┬íGracias por tu apoyo!",
+  "footer-copyright": "&copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan tu privacidad.",
+  "footer-about": "Acerca de",
+  "footer-privacy": "Privacidad",
+  "footer-contact": "Contacto",
+  "footer-credit": "Creado por <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+},
+      de: {
+  "page-title": "TimerHaven: Produktivit├â┬ñtssuite",
+  "language-label": "Sprache:",
+  "header-title": "├░┼╕ΓÇóΓÇÖ TimerHaven Produktivit├â┬ñtssuite",
+  "header-desc": "W├â┬ñhle unten ein Tool aus, um deine Produktivit├â┬ñt zu steigern!",
+  "nav-tools": "Werkzeuge",
+  "nav-resources": "Ressourcen",
+  "tool-calendar-title": "Kalender",
+  "tool-calendar-desc": "Termine anzeigen und Veranstaltungen einfach planen.",
+  "tool-clipboard-title": "Zwischenablage-Manager",
+  "tool-clipboard-desc": "Textausschnitte speichern und f├â┬╝r einfachen Zugriff organisieren.",
+  "tool-countdown-title": "Countdown-Timer",
+  "tool-countdown-desc": "Countdown zu Fristen, Veranstaltungen oder Meetings.",
+  "tool-currency-title": "W├â┬ñhrungsrechner",
+  "tool-currency-desc": "W├â┬ñhrungen mit aktuellen Wechselkursen umrechnen.",
+  "tool-focus-title": "Konzentrationsmusik",
+  "tool-focus-desc": "H├â┬╢re Musik, die beim Konzentrieren hilft.",
+  "tool-habit-title": "Gewohnheitstracker",
+  "tool-habit-desc": "T├â┬ñgliche Gewohnheiten verfolgen und neue Routinen aufbauen.",
+  "tool-meeting-title": "Meeting-Planer",
+  "tool-meeting-desc": "Meetings einfach ├â┬╝ber verschiedene Zeitzonen hinweg planen.",
+  "tool-notes-title": "Notizen",
+  "tool-notes-desc": "Schnell Notizen machen und Gedanken organisieren.",
+  "tool-password-title": "Passwortgenerator",
+  "tool-password-desc": "Sichere, zuf├â┬ñllige Passw├â┬╢rter sofort erstellen.",
+  "tool-pomodoro-title": "Pomodoro-Timer",
+  "tool-pomodoro-desc": "Steigere die Konzentration mit der Pomodoro-Technik.",
+  "tool-stopwatch-title": "Stoppuhr",
+  "tool-stopwatch-desc": "Verstrichene Zeit f├â┬╝r jede Aktivit├â┬ñt messen.",
+  "tool-task-title": "Aufgaben-Timer",
+  "tool-task-desc": "Arbeitssitzungen, Aufgaben und Pausen verfolgen.",
+  "tool-unit-title": "Einheitenrechner",
+  "tool-unit-desc": "L├â┬ñnge, Gewicht, Temperatur und mehr Einheiten umrechnen.",
+  "tool-weather-title": "Wetter",
+  "tool-weather-desc": "Das aktuelle Wetter ├â┬╝berall auf der Welt anzeigen.",
+  "tool-world-title": "Weltuhr",
+  "tool-world-desc": "Die Uhrzeit ├â┬╝berall auf der Welt sofort sehen.",
+  "resources-title": "Empfohlene Produktivit├â┬ñtswerkzeuge",
+  "resources-timer-desc": "├óΓé¼ΓÇ£ Der beste visuelle Timer f├â┬╝r Arbeit, Schule und Zuhause.",
+  "resources-book-desc": "├óΓé¼ΓÇ£ Das klassische Buch ├â┬╝ber Fokus und Produktivit├â┬ñt.",
+  "resources-planner-desc": "├óΓé¼ΓÇ£ Organisiere dein Leben mit diesem legend├â┬ñren Papierplaner.",
+  "resources-keyboard-desc": "├óΓé¼ΓÇ£ ├â┼ôberall schreiben, produktiv bleiben!",
+  "resources-affiliate": "Als Amazon-Partner verdient TimerHaven an qualifizierten K├â┬ñufen. Vielen Dank f├â┬╝r deine Unterst├â┬╝tzung!",
+  "footer-copyright": "&copy; 2025 TimerHaven. Alle Werkzeuge sind kostenlos und datenschutzfreundlich.",
+  "footer-about": "├â┼ôber",
+  "footer-privacy": "Datenschutz",
+  "footer-contact": "Kontakt",
+  "footer-credit": "Erstellt von <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+},
+      ru: {
+  "page-title": "TimerHaven: ├É┬¥├É┬░├É┬▒├É┬╛├æΓé¼ ├É┬╕├É┬╜├æ┬ü├æΓÇÜ├æΓé¼├æ╞Æ├É┬╝├É┬╡├É┬╜├æΓÇÜ├É┬╛├É┬▓ ├É┬┤├É┬╗├æ┬Å ├É┬┐├æΓé¼├É┬╛├É┬┤├æ╞Æ├É┬║├æΓÇÜ├É┬╕├É┬▓├É┬╜├É┬╛├æ┬ü├æΓÇÜ├É┬╕",
+  "language-label": "├É┬»├É┬╖├æΓÇ╣├É┬║:",
+  "header-title": "├░┼╕ΓÇóΓÇÖ TimerHaven ├óΓé¼ΓÇ¥ ├É┬¥├É┬░├É┬▒├É┬╛├æΓé¼ ├É┬╕├É┬╜├æ┬ü├æΓÇÜ├æΓé¼├æ╞Æ├É┬╝├É┬╡├É┬╜├æΓÇÜ├É┬╛├É┬▓ ├É┬┤├É┬╗├æ┬Å ├É┬┐├æΓé¼├É┬╛├É┬┤├æ╞Æ├É┬║├æΓÇÜ├É┬╕├É┬▓├É┬╜├É┬╛├æ┬ü├æΓÇÜ├É┬╕",
+  "header-desc": "├ÉΓÇÖ├æΓÇ╣├É┬▒├É┬╡├æΓé¼├É┬╕├æΓÇÜ├É┬╡ ├É┬╜├æ╞Æ├É┬╢├É┬╜├æΓÇ╣├É┬╣ ├É┬╕├É┬╜├æ┬ü├æΓÇÜ├æΓé¼├æ╞Æ├É┬╝├É┬╡├É┬╜├æΓÇÜ ├É┬╜├É┬╕├É┬╢├É┬╡, ├æΓÇí├æΓÇÜ├É┬╛├É┬▒├æΓÇ╣ ├É┬┐├É┬╛├É┬▓├æΓÇ╣├æ┬ü├É┬╕├æΓÇÜ├æ┼Æ ├É┬▓├É┬░├æ╦å├æ╞Æ ├É┬┐├æΓé¼├É┬╛├É┬┤├æ╞Æ├É┬║├æΓÇÜ├É┬╕├É┬▓├É┬╜├É┬╛├æ┬ü├æΓÇÜ├æ┼Æ!",
+  "nav-tools": "├É╦£├É┬╜├æ┬ü├æΓÇÜ├æΓé¼├æ╞Æ├É┬╝├É┬╡├É┬╜├æΓÇÜ├æΓÇ╣",
+  "nav-resources": "├É┬á├É┬╡├æ┬ü├æ╞Æ├æΓé¼├æ┬ü├æΓÇ╣",
+  "tool-calendar-title": "├É┼í├É┬░├É┬╗├É┬╡├É┬╜├É┬┤├É┬░├æΓé¼├æ┼Æ",
+  "tool-calendar-desc": "├É┼╕├æΓé¼├É┬╛├æ┬ü├É┬╝├É┬░├æΓÇÜ├æΓé¼├É┬╕├É┬▓├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬┤├É┬░├æΓÇÜ├æΓÇ╣ ├É┬╕ ├É┬╗├É┬╡├É┬│├É┬║├É┬╛ ├É┬┐├É┬╗├É┬░├É┬╜├É┬╕├æΓé¼├æ╞Æ├É┬╣├æΓÇÜ├É┬╡ ├æ┬ü├É┬╛├É┬▒├æΓÇ╣├æΓÇÜ├É┬╕├æ┬Å.",
+  "tool-clipboard-title": "├É┼ô├É┬╡├É┬╜├É┬╡├É┬┤├É┬╢├É┬╡├æΓé¼ ├É┬▒├æ╞Æ├æΓÇ₧├É┬╡├æΓé¼├É┬░ ├É┬╛├É┬▒├É┬╝├É┬╡├É┬╜├É┬░",
+  "tool-clipboard-desc": "├É┬í├É┬╛├æΓÇª├æΓé¼├É┬░├É┬╜├æ┬Å├É┬╣├æΓÇÜ├É┬╡ ├É┬╕ ├É┬╛├æΓé¼├É┬│├É┬░├É┬╜├É┬╕├É┬╖├æ╞Æ├É┬╣├æΓÇÜ├É┬╡ ├æΓÇÜ├É┬╡├É┬║├æ┬ü├æΓÇÜ├É┬╛├É┬▓├æΓÇ╣├É┬╡ ├æΓÇ₧├æΓé¼├É┬░├É┬│├É┬╝├É┬╡├É┬╜├æΓÇÜ├æΓÇ╣ ├É┬┤├É┬╗├æ┬Å ├É┬▒├æΓÇ╣├æ┬ü├æΓÇÜ├æΓé¼├É┬╛├É┬│├É┬╛ ├É┬┤├É┬╛├æ┬ü├æΓÇÜ├æ╞Æ├É┬┐├É┬░.",
+  "tool-countdown-title": "├É┬ó├É┬░├É┬╣├É┬╝├É┬╡├æΓé¼ ├É┬╛├É┬▒├æΓé¼├É┬░├æΓÇÜ├É┬╜├É┬╛├É┬│├É┬╛ ├É┬╛├æΓÇÜ├æ┬ü├æΓÇí├æΓÇÿ├æΓÇÜ├É┬░",
+  "tool-countdown-desc": "├É┼╛├É┬▒├æΓé¼├É┬░├æΓÇÜ├É┬╜├æΓÇ╣├É┬╣ ├É┬╛├æΓÇÜ├æ┬ü├æΓÇí├æΓÇÿ├æΓÇÜ ├É┬┤├É┬╛ ├É┬┤├É┬╡├É┬┤├É┬╗├É┬░├É┬╣├É┬╜├É┬╛├É┬▓, ├æ┬ü├É┬╛├É┬▒├æΓÇ╣├æΓÇÜ├É┬╕├É┬╣ ├É┬╕├É┬╗├É┬╕ ├É┬▓├æ┬ü├æΓÇÜ├æΓé¼├É┬╡├æΓÇí.",
+  "tool-currency-title": "├É┼í├É┬╛├É┬╜├É┬▓├É┬╡├æΓé¼├æΓÇÜ├É┬╡├æΓé¼ ├É┬▓├É┬░├É┬╗├æ┼╜├æΓÇÜ",
+  "tool-currency-desc": "├É┼í├É┬╛├É┬╜├É┬▓├É┬╡├æΓé¼├æΓÇÜ├É┬╕├æΓé¼├æ╞Æ├É┬╣├æΓÇÜ├É┬╡ ├É┬▓├É┬░├É┬╗├æ┼╜├æΓÇÜ├æΓÇ╣ ├æ┬ü ├É┬╕├æ┬ü├É┬┐├É┬╛├É┬╗├æ┼Æ├É┬╖├É┬╛├É┬▓├É┬░├É┬╜├É┬╕├É┬╡├É┬╝ ├É┬░├É┬║├æΓÇÜ├æ╞Æ├É┬░├É┬╗├æ┼Æ├É┬╜├æΓÇ╣├æΓÇª ├É┬║├æ╞Æ├æΓé¼├æ┬ü├É┬╛├É┬▓.",
+  "tool-focus-title": "├É┼ô├æ╞Æ├É┬╖├æΓÇ╣├É┬║├É┬░ ├É┬┤├É┬╗├æ┬Å ├É┬║├É┬╛├É┬╜├æΓÇá├É┬╡├É┬╜├æΓÇÜ├æΓé¼├É┬░├æΓÇá├É┬╕├É┬╕",
+  "tool-focus-desc": "├É┬í├É┬╗├æ╞Æ├æ╦å├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬╝├æ╞Æ├É┬╖├æΓÇ╣├É┬║├æ╞Æ, ├É┬║├É┬╛├æΓÇÜ├É┬╛├æΓé¼├É┬░├æ┬Å ├É┬┐├É┬╛├É┬╝├É┬╛├É┬│├É┬░├É┬╡├æΓÇÜ ├æ┬ü├É┬╛├æ┬ü├æΓé¼├É┬╡├É┬┤├É┬╛├æΓÇÜ├É┬╛├æΓÇí├É┬╕├æΓÇÜ├æ┼Æ├æ┬ü├æ┬Å.",
+  "tool-habit-title": "├É┬ó├æΓé¼├É┬╡├É┬║├É┬╡├æΓé¼ ├É┬┐├æΓé¼├É┬╕├É┬▓├æΓÇ╣├æΓÇí├É┬╡├É┬║",
+  "tool-habit-desc": "├É┼╛├æΓÇÜ├æ┬ü├É┬╗├É┬╡├É┬╢├É┬╕├É┬▓├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬╡├É┬╢├É┬╡├É┬┤├É┬╜├É┬╡├É┬▓├É┬╜├æΓÇ╣├É┬╡ ├É┬┐├æΓé¼├É┬╕├É┬▓├æΓÇ╣├æΓÇí├É┬║├É┬╕ ├É┬╕ ├É┬▓├æΓÇ╣├æΓé¼├É┬░├É┬▒├É┬░├æΓÇÜ├æΓÇ╣├É┬▓├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬╜├É┬╛├É┬▓├æΓÇ╣├É┬╡.",
+  "tool-meeting-title": "├É┼╕├É┬╗├É┬░├É┬╜├É┬╕├æΓé¼├É┬╛├É┬▓├æΓÇ░├É┬╕├É┬║ ├É┬▓├æ┬ü├æΓÇÜ├æΓé¼├É┬╡├æΓÇí",
+  "tool-meeting-desc": "├É┼╕├É┬╗├É┬░├É┬╜├É┬╕├æΓé¼├æ╞Æ├É┬╣├æΓÇÜ├É┬╡ ├É┬▓├æ┬ü├æΓÇÜ├æΓé¼├É┬╡├æΓÇí├É┬╕ ├É┬▓ ├æΓé¼├É┬░├É┬╖├É┬╜├æΓÇ╣├æΓÇª ├æΓÇí├É┬░├æ┬ü├É┬╛├É┬▓├æΓÇ╣├æΓÇª ├É┬┐├É┬╛├æ┬Å├æ┬ü├É┬░├æΓÇª ├É┬╗├É┬╡├É┬│├É┬║├É┬╛.",
+  "tool-notes-title": "├ÉΓÇö├É┬░├É┬╝├É┬╡├æΓÇÜ├É┬║├É┬╕",
+  "tool-notes-desc": "├ÉΓÇ¥├É┬╡├É┬╗├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬▒├æΓÇ╣├æ┬ü├æΓÇÜ├æΓé¼├æΓÇ╣├É┬╡ ├É┬╖├É┬░├É┬╝├É┬╡├æΓÇÜ├É┬║├É┬╕ ├É┬╕ ├É┬╛├æΓé¼├É┬│├É┬░├É┬╜├É┬╕├É┬╖├æ╞Æ├É┬╣├æΓÇÜ├É┬╡ ├æ┬ü├É┬▓├É┬╛├É┬╕ ├É┬╝├æΓÇ╣├æ┬ü├É┬╗├É┬╕.",
+  "tool-password-title": "├ÉΓÇ£├É┬╡├É┬╜├É┬╡├æΓé¼├É┬░├æΓÇÜ├É┬╛├æΓé¼ ├É┬┐├É┬░├æΓé¼├É┬╛├É┬╗├É┬╡├É┬╣",
+  "tool-password-desc": "├É┬í├É┬╛├É┬╖├É┬┤├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬▒├É┬╡├É┬╖├É┬╛├É┬┐├É┬░├æ┬ü├É┬╜├æΓÇ╣├É┬╡ ├æ┬ü├É┬╗├æ╞Æ├æΓÇí├É┬░├É┬╣├É┬╜├æΓÇ╣├É┬╡ ├É┬┐├É┬░├æΓé¼├É┬╛├É┬╗├É┬╕ ├É┬╝├É┬│├É┬╜├É┬╛├É┬▓├É┬╡├É┬╜├É┬╜├É┬╛.",
+  "tool-pomodoro-title": "├É┬ó├É┬░├É┬╣├É┬╝├É┬╡├æΓé¼ ├É┼╕├É┬╛├É┬╝├É┬╛├É┬┤├É┬╛├æΓé¼├É┬╛",
+  "tool-pomodoro-desc": "├É┼╕├É┬╛├É┬▓├æΓÇ╣├æ╦å├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬║├É┬╛├É┬╜├æΓÇá├É┬╡├É┬╜├æΓÇÜ├æΓé¼├É┬░├æΓÇá├É┬╕├æ┼╜ ├æ┬ü ├É┬┐├É┬╛├É┬╝├É┬╛├æΓÇ░├æ┼Æ├æ┼╜ ├É┬╝├É┬╡├æΓÇÜ├É┬╛├É┬┤├É┬░ ├É┼╕├É┬╛├É┬╝├É┬╛├É┬┤├É┬╛├æΓé¼├É┬╛.",
+  "tool-stopwatch-title": "├É┬í├É┬╡├É┬║├æ╞Æ├É┬╜├É┬┤├É┬╛├É┬╝├É┬╡├æΓé¼",
+  "tool-stopwatch-desc": "├É╦£├É┬╖├É┬╝├É┬╡├æΓé¼├æ┬Å├É┬╣├æΓÇÜ├É┬╡ ├É┬┐├æΓé¼├É┬╛├æ╦å├É┬╡├É┬┤├æ╦å├É┬╡├É┬╡ ├É┬▓├æΓé¼├É┬╡├É┬╝├æ┬Å ├É┬┤├É┬╗├æ┬Å ├É┬╗├æ┼╜├É┬▒├É┬╛├É┬╣ ├É┬░├É┬║├æΓÇÜ├É┬╕├É┬▓├É┬╜├É┬╛├æ┬ü├æΓÇÜ├É┬╕.",
+  "tool-task-title": "├É┬ó├É┬░├É┬╣├É┬╝├É┬╡├æΓé¼ ├É┬╖├É┬░├É┬┤├É┬░├æΓÇí",
+  "tool-task-desc": "├É┼╛├æΓÇÜ├æ┬ü├É┬╗├É┬╡├É┬╢├É┬╕├É┬▓├É┬░├É┬╣├æΓÇÜ├É┬╡ ├æΓé¼├É┬░├É┬▒├É┬╛├æΓÇí├É┬╕├É┬╡ ├æ┬ü├É┬╡├æ┬ü├æ┬ü├É┬╕├É┬╕, ├É┬╖├É┬░├É┬┤├É┬░├æΓÇí├É┬╕ ├É┬╕ ├É┬┐├É┬╡├æΓé¼├É┬╡├æΓé¼├æΓÇ╣├É┬▓├æΓÇ╣.",
+  "tool-unit-title": "├É┼í├É┬╛├É┬╜├É┬▓├É┬╡├æΓé¼├æΓÇÜ├É┬╡├æΓé¼ ├É┬╡├É┬┤├É┬╕├É┬╜├É┬╕├æΓÇá",
+  "tool-unit-desc": "├É┼í├É┬╛├É┬╜├É┬▓├É┬╡├æΓé¼├æΓÇÜ├É┬╕├æΓé¼├æ╞Æ├É┬╣├æΓÇÜ├É┬╡ ├É┬┤├É┬╗├É┬╕├É┬╜├æ╞Æ, ├É┬▓├É┬╡├æ┬ü, ├æΓÇÜ├É┬╡├É┬╝├É┬┐├É┬╡├æΓé¼├É┬░├æΓÇÜ├æ╞Æ├æΓé¼├æ╞Æ ├É┬╕ ├É┬┤├æΓé¼├æ╞Æ├É┬│├É┬╕├É┬╡ ├É┬╡├É┬┤├É┬╕├É┬╜├É┬╕├æΓÇá├æΓÇ╣.",
+  "tool-weather-title": "├É┼╕├É┬╛├É┬│├É┬╛├É┬┤├É┬░",
+  "tool-weather-desc": "├É┬ú├É┬╖├É┬╜├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬░├É┬║├æΓÇÜ├æ╞Æ├É┬░├É┬╗├æ┼Æ├É┬╜├æ╞Æ├æ┼╜ ├É┬┐├É┬╛├É┬│├É┬╛├É┬┤├æ╞Æ ├É┬▓ ├É┬╗├æ┼╜├É┬▒├É┬╛├É┬╝ ├É┬╝├É┬╡├æ┬ü├æΓÇÜ├É┬╡ ├É┬╝├É┬╕├æΓé¼├É┬░.",
+  "tool-world-title": "├É┼ô├É┬╕├æΓé¼├É┬╛├É┬▓├æΓÇ╣├É┬╡ ├æΓÇí├É┬░├æ┬ü├æΓÇ╣",
+  "tool-world-desc": "├É┬ú├É┬╖├É┬╜├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬▓├æΓé¼├É┬╡├É┬╝├æ┬Å ├É┬▓ ├É┬╗├æ┼╜├É┬▒├É┬╛├É┬╣ ├æΓÇÜ├É┬╛├æΓÇí├É┬║├É┬╡ ├É┬╝├É┬╕├æΓé¼├É┬░ ├É┬╝├É┬│├É┬╜├É┬╛├É┬▓├É┬╡├É┬╜├É┬╜├É┬╛.",
+  "resources-title": "├É┬á├É┬╡├É┬║├É┬╛├É┬╝├É┬╡├É┬╜├É┬┤├æ╞Æ├É┬╡├É┬╝├æΓÇ╣├É┬╡ ├É┬╕├É┬╜├æ┬ü├æΓÇÜ├æΓé¼├æ╞Æ├É┬╝├É┬╡├É┬╜├æΓÇÜ├æΓÇ╣ ├É┬┤├É┬╗├æ┬Å ├É┬┐├æΓé¼├É┬╛├É┬┤├æ╞Æ├É┬║├æΓÇÜ├É┬╕├É┬▓├É┬╜├É┬╛├æ┬ü├æΓÇÜ├É┬╕",
+  "resources-timer-desc": "├óΓé¼ΓÇ£ ├ÉΓÇ║├æ╞Æ├æΓÇí├æ╦å├É┬╕├É┬╣ ├É┬▓├É┬╕├É┬╖├æ╞Æ├É┬░├É┬╗├æ┼Æ├É┬╜├æΓÇ╣├É┬╣ ├æΓÇÜ├É┬░├É┬╣├É┬╝├É┬╡├æΓé¼ ├É┬┤├É┬╗├æ┬Å ├æΓé¼├É┬░├É┬▒├É┬╛├æΓÇÜ├æΓÇ╣, ├æ╞Æ├æΓÇí├æΓÇÿ├É┬▒├æΓÇ╣ ├É┬╕ ├É┬┤├É┬╛├É┬╝├É┬░.",
+  "resources-book-desc": "├óΓé¼ΓÇ£ ├É┼í├É┬╗├É┬░├æ┬ü├æ┬ü├É┬╕├æΓÇí├É┬╡├æ┬ü├É┬║├É┬░├æ┬Å ├É┬║├É┬╜├É┬╕├É┬│├É┬░ ├É┬╛ ├É┬║├É┬╛├É┬╜├æΓÇá├É┬╡├É┬╜├æΓÇÜ├æΓé¼├É┬░├æΓÇá├É┬╕├É┬╕ ├É┬╕ ├É┬┐├æΓé¼├É┬╛├É┬┤├æ╞Æ├É┬║├æΓÇÜ├É┬╕├É┬▓├É┬╜├É┬╛├æ┬ü├æΓÇÜ├É┬╕.",
+  "resources-planner-desc": "├óΓé¼ΓÇ£ ├É┼╛├æΓé¼├É┬│├É┬░├É┬╜├É┬╕├É┬╖├æ╞Æ├É┬╣├æΓÇÜ├É┬╡ ├æ┬ü├É┬▓├É┬╛├æ┼╜ ├É┬╢├É┬╕├É┬╖├É┬╜├æ┼Æ ├æ┬ü ├æ┬ì├æΓÇÜ├É┬╕├É┬╝ ├É┬╗├É┬╡├É┬│├É┬╡├É┬╜├É┬┤├É┬░├æΓé¼├É┬╜├æΓÇ╣├É┬╝ ├É┬▒├æ╞Æ├É┬╝├É┬░├É┬╢├É┬╜├æΓÇ╣├É┬╝ ├É┬┐├É┬╗├É┬░├É┬╜├É┬╡├æΓé¼├É┬╛├É┬╝.",
+  "resources-keyboard-desc": "├óΓé¼ΓÇ£ ├É┬á├É┬░├É┬▒├É┬╛├æΓÇÜ├É┬░├É┬╣├æΓÇÜ├É┬╡ ├É┬│├É┬┤├É┬╡ ├æ╞Æ├É┬│├É┬╛├É┬┤├É┬╜├É┬╛, ├É┬╛├æ┬ü├æΓÇÜ├É┬░├É┬▓├É┬░├É┬╣├æΓÇÜ├É┬╡├æ┬ü├æ┼Æ ├É┬┐├æΓé¼├É┬╛├É┬┤├æ╞Æ├É┬║├æΓÇÜ├É┬╕├É┬▓├É┬╜├æΓÇ╣├É┬╝├É┬╕!",
+  "resources-affiliate": "├É┼í├É┬░├É┬║ ├É┬┐├É┬░├æΓé¼├æΓÇÜ├É┬╜├æΓÇÿ├æΓé¼ Amazon, TimerHaven ├É┬┐├É┬╛├É┬╗├æ╞Æ├æΓÇí├É┬░├É┬╡├æΓÇÜ ├É┬┤├É┬╛├æΓÇª├É┬╛├É┬┤ ├æ┬ü ├æ┬ü├É┬╛├É┬╛├æΓÇÜ├É┬▓├É┬╡├æΓÇÜ├æ┬ü├æΓÇÜ├É┬▓├æ╞Æ├æ┼╜├æΓÇ░├É┬╕├æΓÇª ├É┬┐├É┬╛├É┬║├æ╞Æ├É┬┐├É┬╛├É┬║. ├É┬í├É┬┐├É┬░├æ┬ü├É┬╕├É┬▒├É┬╛ ├É┬╖├É┬░ ├É┬▓├É┬░├æ╦å├æ╞Æ ├É┬┐├É┬╛├É┬┤├É┬┤├É┬╡├æΓé¼├É┬╢├É┬║├æ╞Æ!",
+  "footer-copyright": "&copy; 2025 TimerHaven. ├ÉΓÇÖ├æ┬ü├É┬╡ ├É┬╕├É┬╜├æ┬ü├æΓÇÜ├æΓé¼├æ╞Æ├É┬╝├É┬╡├É┬╜├æΓÇÜ├æΓÇ╣ ├É┬▒├É┬╡├æ┬ü├É┬┐├É┬╗├É┬░├æΓÇÜ├É┬╜├æΓÇ╣ ├É┬╕ ├æ╞Æ├É┬▓├É┬░├É┬╢├É┬░├æ┼╜├æΓÇÜ ├É┬▓├É┬░├æ╦å├æ╞Æ ├É┬║├É┬╛├É┬╜├æΓÇ₧├É┬╕├É┬┤├É┬╡├É┬╜├æΓÇá├É┬╕├É┬░├É┬╗├æ┼Æ├É┬╜├É┬╛├æ┬ü├æΓÇÜ├æ┼Æ.",
+  "footer-about": "├É┼╛ ├æ┬ü├É┬░├É┬╣├æΓÇÜ├É┬╡",
+  "footer-privacy": "├É┼í├É┬╛├É┬╜├æΓÇ₧├É┬╕├É┬┤├É┬╡├É┬╜├æΓÇá├É┬╕├É┬░├É┬╗├æ┼Æ├É┬╜├É┬╛├æ┬ü├æΓÇÜ├æ┼Æ",
+  "footer-contact": "├É┼í├É┬╛├É┬╜├æΓÇÜ├É┬░├É┬║├æΓÇÜ",
+  "footer-credit": "├É┬í├É┬╛├É┬╖├É┬┤├É┬░├É┬╜├É┬╛ <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+},
+      el: {
+  "page-title": "TimerHaven: ├Ä┬ú├Ä┬┐├ÅΓÇª├Ä┬»├ÅΓÇ₧├Ä┬▒ ├Ä┬á├Ä┬▒├Å┬ü├Ä┬▒├Ä┬│├ÅΓÇ░├Ä┬│├Ä┬╣├Ä┬║├Å┼Æ├ÅΓÇ₧├Ä┬╖├ÅΓÇ₧├Ä┬▒├ÅΓÇÜ",
+  "language-label": "├ÄΓÇ£├Ä┬╗├Å┼╜├Å╞Æ├Å╞Æ├Ä┬▒:",
+  "header-title": "├░┼╕ΓÇóΓÇÖ TimerHaven ├Ä┬ú├Ä┬┐├ÅΓÇª├Ä┬»├ÅΓÇ₧├Ä┬▒ ├Ä┬á├Ä┬▒├Å┬ü├Ä┬▒├Ä┬│├ÅΓÇ░├Ä┬│├Ä┬╣├Ä┬║├Å┼Æ├ÅΓÇ₧├Ä┬╖├ÅΓÇ₧├Ä┬▒├ÅΓÇÜ",
+  "header-desc": "├ÄΓÇó├ÅΓé¼├Ä┬╣├Ä┬╗├Ä┬¡├Ä┬╛├ÅΓÇ₧├Ä┬╡ ├Ä┬¡├Ä┬╜├Ä┬▒ ├Ä┬╡├Å┬ü├Ä┬│├Ä┬▒├Ä┬╗├Ä┬╡├Ä┬»├Ä┬┐ ├ÅΓé¼├Ä┬▒├Å┬ü├Ä┬▒├Ä┬║├Ä┬¼├ÅΓÇ₧├ÅΓÇ░ ├Ä┬│├Ä┬╣├Ä┬▒ ├Ä┬╜├Ä┬▒ ├Ä┬▒├ÅΓÇª├Ä┬╛├Ä┬«├Å╞Æ├Ä┬╡├ÅΓÇ₧├Ä┬╡ ├ÅΓÇ₧├Ä┬╖├Ä┬╜ ├ÅΓé¼├Ä┬▒├Å┬ü├Ä┬▒├Ä┬│├ÅΓÇ░├Ä┬│├Ä┬╣├Ä┬║├Å┼Æ├ÅΓÇ₧├Ä┬╖├ÅΓÇ₧├Ä┬¼ ├Å╞Æ├Ä┬▒├ÅΓÇÜ!",
+  "nav-tools": "├ÄΓÇó├Å┬ü├Ä┬│├Ä┬▒├Ä┬╗├Ä┬╡├Ä┬»├Ä┬▒",
+  "nav-resources": "├Ä┬á├Å┼Æ├Å┬ü├Ä┬┐├Ä┬╣",
+  "tool-calendar-title": "├ÄΓÇö├Ä┬╝├Ä┬╡├Å┬ü├Ä┬┐├Ä┬╗├Å┼Æ├Ä┬│├Ä┬╣├Ä┬┐",
+  "tool-calendar-desc": "├ÄΓÇ¥├Ä┬╡├Ä┬»├ÅΓÇ₧├Ä┬╡ ├Ä┬╖├Ä┬╝├Ä┬╡├Å┬ü├Ä┬┐├Ä┬╝├Ä┬╖├Ä┬╜├Ä┬»├Ä┬╡├ÅΓÇÜ ├Ä┬║├Ä┬▒├Ä┬╣ ├Å╞Æ├ÅΓÇí├Ä┬╡├Ä┬┤├Ä┬╣├Ä┬¼├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬│├Ä┬╡├Ä┬│├Ä┬┐├Ä┬╜├Å┼Æ├ÅΓÇ₧├Ä┬▒ ├Ä┬╡├Å┬ì├Ä┬║├Ä┬┐├Ä┬╗├Ä┬▒.",
+  "tool-clipboard-title": "├ÄΓÇ¥├Ä┬╣├Ä┬▒├ÅΓÇí├Ä┬╡├Ä┬╣├Å┬ü├Ä┬╣├Å╞Æ├ÅΓÇ₧├Ä┬«├ÅΓÇÜ ├Ä┬á├Å┬ü├Å┼Æ├ÅΓÇí├Ä┬╡├Ä┬╣├Å┬ü├Ä┬┐├ÅΓÇª",
+  "tool-clipboard-desc": "├ÄΓÇÿ├ÅΓé¼├Ä┬┐├Ä┬╕├Ä┬╖├Ä┬║├Ä┬╡├Å┬ì├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬║├Ä┬▒├Ä┬╣ ├Ä┬┐├Å┬ü├Ä┬│├Ä┬▒├Ä┬╜├Å┼╜├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬▒├ÅΓé¼├Ä┬┐├Å╞Æ├ÅΓé¼├Ä┬¼├Å╞Æ├Ä┬╝├Ä┬▒├ÅΓÇ₧├Ä┬▒ ├Ä┬║├Ä┬╡├Ä┬╣├Ä┬╝├Ä┬¡├Ä┬╜├Ä┬┐├ÅΓÇª ├Ä┬│├Ä┬╣├Ä┬▒ ├Ä┬╡├Å┬ì├Ä┬║├Ä┬┐├Ä┬╗├Ä┬╖ ├ÅΓé¼├Å┬ü├Å┼Æ├Å╞Æ├Ä┬▓├Ä┬▒├Å╞Æ├Ä┬╖.",
+  "tool-countdown-title": "├Ä┬º├Å┬ü├Ä┬┐├Ä┬╜├Å┼Æ├Ä┬╝├Ä┬╡├ÅΓÇ₧├Å┬ü├Ä┬┐ ├Ä┬▒├Ä┬╜├ÅΓÇ₧├Ä┬»├Å╞Æ├ÅΓÇ₧├Å┬ü├Ä┬┐├ÅΓÇá├Ä┬╖├ÅΓÇÜ ├Ä┬╝├Ä┬¡├ÅΓÇ₧├Å┬ü├Ä┬╖├Å╞Æ├Ä┬╖├ÅΓÇÜ",
+  "tool-countdown-desc": "├Ä┼ô├Ä┬╡├ÅΓÇ₧├Å┬ü├Ä┬«├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬▒├Ä┬╜├ÅΓÇ₧├Ä┬»├Å╞Æ├ÅΓÇ₧├Å┬ü├Ä┬┐├ÅΓÇá├Ä┬▒ ├Å╞Æ├Ä┬╡ ├ÅΓé¼├Å┬ü├Ä┬┐├Ä┬╕├Ä┬╡├Å╞Æ├Ä┬╝├Ä┬»├Ä┬╡├ÅΓÇÜ, ├Ä┬│├Ä┬╡├Ä┬│├Ä┬┐├Ä┬╜├Å┼Æ├ÅΓÇ₧├Ä┬▒ ├Ä┬« ├Å╞Æ├ÅΓÇª├Ä┬╜├Ä┬▒├Ä┬╜├ÅΓÇ₧├Ä┬«├Å╞Æ├Ä┬╡├Ä┬╣├ÅΓÇÜ.",
+  "tool-currency-title": "├Ä┼ô├Ä┬╡├ÅΓÇ₧├Ä┬▒├ÅΓÇ₧├Å┬ü├Ä┬┐├ÅΓé¼├Ä┬¡├Ä┬▒├ÅΓÇÜ ├Ä┬¥├Ä┬┐├Ä┬╝├Ä┬╣├Å╞Æ├Ä┬╝├Ä┬¼├ÅΓÇ₧├ÅΓÇ░├Ä┬╜",
+  "tool-currency-desc": "├Ä┼ô├Ä┬╡├ÅΓÇ₧├Ä┬▒├ÅΓÇ₧├Å┬ü├Ä┬¡├Å╦å├ÅΓÇ₧├Ä┬╡ ├Ä┬╜├Ä┬┐├Ä┬╝├Ä┬»├Å╞Æ├Ä┬╝├Ä┬▒├ÅΓÇ₧├Ä┬▒ ├Ä┬╝├Ä┬╡ ├Ä┬╢├ÅΓÇ░├Ä┬╜├ÅΓÇ₧├Ä┬▒├Ä┬╜├Ä┬¡├ÅΓÇÜ ├Ä┬╣├Å╞Æ├Ä┬┐├ÅΓÇ₧├Ä┬╣├Ä┬╝├Ä┬»├Ä┬╡├ÅΓÇÜ.",
+  "tool-focus-title": "├Ä┼ô├Ä┬┐├ÅΓÇª├Å╞Æ├Ä┬╣├Ä┬║├Ä┬« ├Ä┬ú├ÅΓÇª├Ä┬│├Ä┬║├Ä┬¡├Ä┬╜├ÅΓÇ₧├Å┬ü├ÅΓÇ░├Å╞Æ├Ä┬╖├ÅΓÇÜ",
+  "tool-focus-desc": "├ÄΓÇÿ├Ä┬║├Ä┬┐├Å┬ì├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬╝├Ä┬┐├ÅΓÇª├Å╞Æ├Ä┬╣├Ä┬║├Ä┬« ├ÅΓé¼├Ä┬┐├ÅΓÇª ├Ä┬▓├Ä┬┐├Ä┬╖├Ä┬╕├Ä┬¼ ├Å╞Æ├ÅΓÇ₧├Ä┬╖ ├Å╞Æ├ÅΓÇª├Ä┬│├Ä┬║├Ä┬¡├Ä┬╜├ÅΓÇ₧├Å┬ü├ÅΓÇ░├Å╞Æ├Ä┬╖.",
+  "tool-habit-title": "├Ä┬á├Ä┬▒├Å┬ü├Ä┬▒├Ä┬║├Ä┬┐├Ä┬╗├Ä┬┐├Å┬ì├Ä┬╕├Ä┬╖├Å╞Æ├Ä┬╖ ├Ä┬ú├ÅΓÇª├Ä┬╜├Ä┬╖├Ä┬╕├Ä┬╡├Ä┬╣├Å┼╜├Ä┬╜",
+  "tool-habit-desc": "├Ä┬á├Ä┬▒├Å┬ü├Ä┬▒├Ä┬║├Ä┬┐├Ä┬╗├Ä┬┐├ÅΓÇª├Ä┬╕├Ä┬«├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬║├Ä┬▒├Ä┬╕├Ä┬╖├Ä┬╝├Ä┬╡├Å┬ü├Ä┬╣├Ä┬╜├Ä┬¡├ÅΓÇÜ ├Å╞Æ├ÅΓÇª├Ä┬╜├Ä┬«├Ä┬╕├Ä┬╡├Ä┬╣├Ä┬╡├ÅΓÇÜ ├Ä┬║├Ä┬▒├Ä┬╣ ├ÅΓÇí├ÅΓÇ₧├Ä┬»├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬╜├Ä┬¡├Ä┬╡├ÅΓÇÜ ├Å┬ü├Ä┬┐├ÅΓÇª├ÅΓÇ₧├Ä┬»├Ä┬╜├Ä┬╡├ÅΓÇÜ.",
+  "tool-meeting-title": "├Ä┬á├Å┬ü├Ä┬┐├Ä┬│├Å┬ü├Ä┬▒├Ä┬╝├Ä┬╝├Ä┬▒├ÅΓÇ₧├Ä┬╣├Å╞Æ├ÅΓÇ₧├Ä┬«├ÅΓÇÜ ├Ä┬ú├ÅΓÇª├Ä┬╜├Ä┬▒├Ä┬╜├ÅΓÇ₧├Ä┬«├Å╞Æ├Ä┬╡├ÅΓÇ░├Ä┬╜",
+  "tool-meeting-desc": "├Ä┬á├Å┬ü├Ä┬┐├Ä┬│├Å┬ü├Ä┬▒├Ä┬╝├Ä┬╝├Ä┬▒├ÅΓÇ₧├Ä┬»├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Å╞Æ├ÅΓÇª├Ä┬╜├Ä┬▒├Ä┬╜├ÅΓÇ₧├Ä┬«├Å╞Æ├Ä┬╡├Ä┬╣├ÅΓÇÜ ├Å╞Æ├Ä┬╡ ├Ä┬┤├Ä┬╣├Ä┬▒├ÅΓÇá├Ä┬┐├Å┬ü├Ä┬╡├ÅΓÇ₧├Ä┬╣├Ä┬║├Ä┬¡├ÅΓÇÜ ├Ä┬╢├Å┼╜├Ä┬╜├Ä┬╡├ÅΓÇÜ ├Å┼╜├Å┬ü├Ä┬▒├ÅΓÇÜ ├Ä┬╡├Å┬ì├Ä┬║├Ä┬┐├Ä┬╗├Ä┬▒.",
+  "tool-notes-title": "├Ä┬ú├Ä┬╖├Ä┬╝├Ä┬╡├Ä┬╣├Å┼╜├Å╞Æ├Ä┬╡├Ä┬╣├ÅΓÇÜ",
+  "tool-notes-desc": "├Ä┼í├Å┬ü├Ä┬▒├ÅΓÇ₧├Ä┬«├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬│├Å┬ü├Ä┬«├Ä┬│├Ä┬┐├Å┬ü├Ä┬╡├ÅΓÇÜ ├Å╞Æ├Ä┬╖├Ä┬╝├Ä┬╡├Ä┬╣├Å┼╜├Å╞Æ├Ä┬╡├Ä┬╣├ÅΓÇÜ ├Ä┬║├Ä┬▒├Ä┬╣ ├Ä┬┐├Å┬ü├Ä┬│├Ä┬▒├Ä┬╜├Å┼╜├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├ÅΓÇ₧├Ä┬╣├ÅΓÇÜ ├Å╞Æ├Ä┬║├Ä┬¡├Å╦å├Ä┬╡├Ä┬╣├ÅΓÇÜ ├Å╞Æ├Ä┬▒├ÅΓÇÜ.",
+  "tool-password-title": "├ÄΓÇ£├Ä┬╡├Ä┬╜├Ä┬╜├Ä┬«├ÅΓÇ₧├Å┬ü├Ä┬╣├Ä┬▒ ├Ä┼í├ÅΓÇ░├Ä┬┤├Ä┬╣├Ä┬║├Å┼╜├Ä┬╜",
+  "tool-password-desc": "├ÄΓÇ¥├Ä┬╖├Ä┬╝├Ä┬╣├Ä┬┐├ÅΓÇª├Å┬ü├Ä┬│├Ä┬«├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Ä┬▒├Å╞Æ├ÅΓÇá├Ä┬▒├Ä┬╗├Ä┬╡├Ä┬»├ÅΓÇÜ, ├ÅΓÇ₧├ÅΓÇª├ÅΓÇí├Ä┬▒├Ä┬»├Ä┬┐├ÅΓÇª├ÅΓÇÜ ├Ä┬║├ÅΓÇ░├Ä┬┤├Ä┬╣├Ä┬║├Ä┬┐├Å┬ì├ÅΓÇÜ ├Ä┬¼├Ä┬╝├Ä┬╡├Å╞Æ├Ä┬▒.",
+  "tool-pomodoro-title": "├Ä┬º├Å┬ü├Ä┬┐├Ä┬╜├Å┼Æ├Ä┬╝├Ä┬╡├ÅΓÇ₧├Å┬ü├Ä┬┐ Pomodoro",
+  "tool-pomodoro-desc": "├ÄΓÇÿ├ÅΓÇª├Ä┬╛├Ä┬«├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├ÅΓÇ₧├Ä┬╖├Ä┬╜ ├Å╞Æ├ÅΓÇª├Ä┬│├Ä┬║├Ä┬¡├Ä┬╜├ÅΓÇ₧├Å┬ü├ÅΓÇ░├Å╞Æ├Ä┬╖ ├Ä┬╝├Ä┬╡ ├ÅΓÇ₧├Ä┬╖├Ä┬╜ ├ÅΓÇ₧├Ä┬╡├ÅΓÇí├Ä┬╜├Ä┬╣├Ä┬║├Ä┬« Pomodoro.",
+  "tool-stopwatch-title": "├Ä┬º├Å┬ü├Ä┬┐├Ä┬╜├Å┼Æ├Ä┬╝├Ä┬╡├ÅΓÇ₧├Å┬ü├Ä┬┐",
+  "tool-stopwatch-desc": "├Ä┼ô├Ä┬╡├ÅΓÇ₧├Å┬ü├Ä┬«├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├ÅΓÇ₧├Ä┬┐├Ä┬╜ ├ÅΓÇí├Å┬ü├Å┼Æ├Ä┬╜├Ä┬┐ ├ÅΓé¼├Ä┬┐├ÅΓÇª ├ÅΓé¼├Ä┬¡├Å┬ü├Ä┬▒├Å╞Æ├Ä┬╡ ├Ä┬│├Ä┬╣├Ä┬▒ ├Ä┬║├Ä┬¼├Ä┬╕├Ä┬╡ ├Ä┬┤├Å┬ü├Ä┬▒├Å╞Æ├ÅΓÇ₧├Ä┬╖├Å┬ü├Ä┬╣├Å┼Æ├ÅΓÇ₧├Ä┬╖├ÅΓÇ₧├Ä┬▒.",
+  "tool-task-title": "├Ä┬º├Å┬ü├Ä┬┐├Ä┬╜├Å┼Æ├Ä┬╝├Ä┬╡├ÅΓÇ₧├Å┬ü├Ä┬┐ ├ÄΓÇó├Å┬ü├Ä┬│├Ä┬▒├Å╞Æ├Ä┬╣├Å┼╜├Ä┬╜",
+  "tool-task-desc": "├Ä┬á├Ä┬▒├Å┬ü├Ä┬▒├Ä┬║├Ä┬┐├Ä┬╗├Ä┬┐├ÅΓÇª├Ä┬╕├Ä┬«├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├Å╞Æ├ÅΓÇª├Ä┬╜├Ä┬╡├Ä┬┤├Å┬ü├Ä┬»├Ä┬╡├ÅΓÇÜ ├Ä┬╡├Å┬ü├Ä┬│├Ä┬▒├Å╞Æ├Ä┬»├Ä┬▒├ÅΓÇÜ, ├Ä┬╡├Å┬ü├Ä┬│├Ä┬▒├Å╞Æ├Ä┬»├Ä┬╡├ÅΓÇÜ ├Ä┬║├Ä┬▒├Ä┬╣ ├Ä┬┤├Ä┬╣├Ä┬▒├Ä┬╗├Ä┬╡├Ä┬»├Ä┬╝├Ä┬╝├Ä┬▒├ÅΓÇ₧├Ä┬▒.",
+  "tool-unit-title": "├Ä┼ô├Ä┬╡├ÅΓÇ₧├Ä┬▒├ÅΓÇ₧├Å┬ü├Ä┬┐├ÅΓé¼├Ä┬¡├Ä┬▒├ÅΓÇÜ ├Ä┼ô├Ä┬┐├Ä┬╜├Ä┬¼├Ä┬┤├ÅΓÇ░├Ä┬╜",
+  "tool-unit-desc": "├Ä┼ô├Ä┬╡├ÅΓÇ₧├Ä┬▒├ÅΓÇ₧├Å┬ü├Ä┬¡├Å╦å├ÅΓÇ₧├Ä┬╡ ├Ä┬╝├Ä┬«├Ä┬║├Ä┬┐├ÅΓÇÜ, ├Ä┬▓├Ä┬¼├Å┬ü├Ä┬┐├ÅΓÇÜ, ├Ä┬╕├Ä┬╡├Å┬ü├Ä┬╝├Ä┬┐├Ä┬║├Å┬ü├Ä┬▒├Å╞Æ├Ä┬»├Ä┬▒ ├Ä┬║├Ä┬▒├Ä┬╣ ├ÅΓé¼├Ä┬╡├Å┬ü├Ä┬╣├Å╞Æ├Å╞Æ├Å┼Æ├ÅΓÇ₧├Ä┬╡├Å┬ü├Ä┬▒.",
+  "tool-weather-title": "├Ä┼í├Ä┬▒├Ä┬╣├Å┬ü├Å┼Æ├ÅΓÇÜ",
+  "tool-weather-desc": "├ÄΓÇ¥├Ä┬╡├Ä┬»├ÅΓÇ₧├Ä┬╡ ├ÅΓÇ₧├Ä┬┐├Ä┬╜ ├ÅΓÇ₧├Å┬ü├Ä┬¡├ÅΓÇí├Ä┬┐├Ä┬╜├ÅΓÇ₧├Ä┬▒ ├Ä┬║├Ä┬▒├Ä┬╣├Å┬ü├Å┼Æ ├Å╞Æ├Ä┬╡ ├Å┼Æ├Ä┬╗├Ä┬┐ ├ÅΓÇ₧├Ä┬┐├Ä┬╜ ├Ä┬║├Å┼Æ├Å╞Æ├Ä┬╝├Ä┬┐.",
+  "tool-world-title": "├Ä┬á├Ä┬▒├Ä┬│├Ä┬║├Å┼Æ├Å╞Æ├Ä┬╝├Ä┬╣├Ä┬┐ ├Ä┬í├Ä┬┐├Ä┬╗├Å┼Æ├Ä┬╣",
+  "tool-world-desc": "├ÄΓÇ¥├Ä┬╡├Ä┬»├ÅΓÇ₧├Ä┬╡ ├ÅΓÇ₧├Ä┬╖├Ä┬╜ ├Å┼╜├Å┬ü├Ä┬▒ ├Å╞Æ├Ä┬╡ ├Å┼Æ├Ä┬╗├Ä┬┐ ├ÅΓÇ₧├Ä┬┐├Ä┬╜ ├Ä┬║├Å┼Æ├Å╞Æ├Ä┬╝├Ä┬┐ ├Ä┬▒├Ä┬╝├Ä┬¡├Å╞Æ├ÅΓÇ░├ÅΓÇÜ.",
+  "resources-title": "├Ä┬á├Å┬ü├Ä┬┐├ÅΓÇ₧├Ä┬╡├Ä┬╣├Ä┬╜├Å┼Æ├Ä┬╝├Ä┬╡├Ä┬╜├Ä┬▒ ├Ä┬╡├Å┬ü├Ä┬│├Ä┬▒├Ä┬╗├Ä┬╡├Ä┬»├Ä┬▒ ├ÅΓé¼├Ä┬▒├Å┬ü├Ä┬▒├Ä┬│├ÅΓÇ░├Ä┬│├Ä┬╣├Ä┬║├Å┼Æ├ÅΓÇ₧├Ä┬╖├ÅΓÇ₧├Ä┬▒├ÅΓÇÜ",
+  "resources-timer-desc": "├óΓé¼ΓÇ£ ├Ä┬ñ├Ä┬┐ ├Ä┬║├Ä┬▒├Ä┬╗├Å┬ì├ÅΓÇ₧├Ä┬╡├Å┬ü├Ä┬┐ ├Ä┬┐├ÅΓé¼├ÅΓÇ₧├Ä┬╣├Ä┬║├Å┼Æ ├ÅΓÇí├Å┬ü├Ä┬┐├Ä┬╜├Å┼Æ├Ä┬╝├Ä┬╡├ÅΓÇ₧├Å┬ü├Ä┬┐ ├Ä┬│├Ä┬╣├Ä┬▒ ├Ä┬╡├Å┬ü├Ä┬│├Ä┬▒├Å╞Æ├Ä┬»├Ä┬▒, ├Å╞Æ├ÅΓÇí├Ä┬┐├Ä┬╗├Ä┬╡├Ä┬»├Ä┬┐ ├Ä┬║├Ä┬▒├Ä┬╣ ├Å╞Æ├ÅΓé¼├Ä┬»├ÅΓÇ₧├Ä┬╣.",
+  "resources-book-desc": "├óΓé¼ΓÇ£ ├Ä┬ñ├Ä┬┐ ├Ä┬║├Ä┬╗├Ä┬▒├Å╞Æ├Ä┬╣├Ä┬║├Å┼Æ ├Ä┬▓├Ä┬╣├Ä┬▓├Ä┬╗├Ä┬»├Ä┬┐ ├Ä┬│├Ä┬╣├Ä┬▒ ├Å╞Æ├ÅΓÇª├Ä┬│├Ä┬║├Ä┬¡├Ä┬╜├ÅΓÇ₧├Å┬ü├ÅΓÇ░├Å╞Æ├Ä┬╖ ├Ä┬║├Ä┬▒├Ä┬╣ ├ÅΓé¼├Ä┬▒├Å┬ü├Ä┬▒├Ä┬│├ÅΓÇ░├Ä┬│├Ä┬╣├Ä┬║├Å┼Æ├ÅΓÇ₧├Ä┬╖├ÅΓÇ₧├Ä┬▒.",
+  "resources-planner-desc": "├óΓé¼ΓÇ£ ├Ä┼╕├Å┬ü├Ä┬│├Ä┬▒├Ä┬╜├Å┼╜├Å╞Æ├ÅΓÇ₧├Ä┬╡ ├ÅΓÇ₧├Ä┬╖ ├Ä┬╢├ÅΓÇ░├Ä┬« ├Å╞Æ├Ä┬▒├ÅΓÇÜ ├Ä┬╝├Ä┬╡ ├Ä┬▒├ÅΓÇª├ÅΓÇ₧├Å┼Æ ├ÅΓÇ₧├Ä┬┐ ├Ä┬╕├Å┬ü├ÅΓÇª├Ä┬╗├Ä┬╣├Ä┬║├Å┼Æ ├Ä┬¡├Ä┬╜├ÅΓÇ₧├ÅΓÇª├ÅΓé¼├Ä┬┐ ├Ä┬╖├Ä┬╝├Ä┬╡├Å┬ü├Ä┬┐├Ä┬╗├Å┼Æ├Ä┬│├Ä┬╣├Ä┬┐.",
+  "resources-keyboard-desc": "├óΓé¼ΓÇ£ ├ÄΓÇ£├Å┬ü├Ä┬¼├Å╦å├ÅΓÇ₧├Ä┬╡ ├ÅΓé¼├Ä┬▒├Ä┬╜├ÅΓÇ₧├Ä┬┐├Å┬ì, ├ÅΓé¼├Ä┬▒├Å┬ü├Ä┬▒├Ä┬╝├Ä┬╡├Ä┬»├Ä┬╜├Ä┬╡├ÅΓÇ₧├Ä┬╡ ├ÅΓé¼├Ä┬▒├Å┬ü├Ä┬▒├Ä┬│├ÅΓÇ░├Ä┬│├Ä┬╣├Ä┬║├Ä┬┐├Ä┬»!",
+  "resources-affiliate": "├Ä┬⌐├ÅΓÇÜ ├Å╞Æ├ÅΓÇª├Ä┬╜├Ä┬╡├Å┬ü├Ä┬│├Ä┬¼├ÅΓÇ₧├Ä┬╖├ÅΓÇÜ ├ÅΓÇ₧├Ä┬┐├ÅΓÇª Amazon, ├ÅΓÇ₧├Ä┬┐ TimerHaven ├Ä┬║├Ä┬╡├Å┬ü├Ä┬┤├Ä┬»├Ä┬╢├Ä┬╡├Ä┬╣ ├Ä┬▒├ÅΓé¼├Å┼Æ ├Ä┬║├Ä┬▒├ÅΓÇ₧├Ä┬¼├Ä┬╗├Ä┬╗├Ä┬╖├Ä┬╗├Ä┬╡├ÅΓÇÜ ├Ä┬▒├Ä┬│├Ä┬┐├Å┬ü├Ä┬¡├ÅΓÇÜ. ├ÄΓÇó├ÅΓÇª├ÅΓÇí├Ä┬▒├Å┬ü├Ä┬╣├Å╞Æ├ÅΓÇ₧├Ä┬┐├Å┬ì├Ä┬╝├Ä┬╡ ├Ä┬│├Ä┬╣├Ä┬▒ ├ÅΓÇ₧├Ä┬╖├Ä┬╜ ├ÅΓÇª├ÅΓé¼├Ä┬┐├Å╞Æ├ÅΓÇ₧├Ä┬«├Å┬ü├Ä┬╣├Ä┬╛├Ä┬« ├Å╞Æ├Ä┬▒├ÅΓÇÜ!",
+  "footer-copyright": "&copy; 2025 TimerHaven. ├Ä┼Æ├Ä┬╗├Ä┬▒ ├ÅΓÇ₧├Ä┬▒ ├Ä┬╡├Å┬ü├Ä┬│├Ä┬▒├Ä┬╗├Ä┬╡├Ä┬»├Ä┬▒ ├Ä┬╡├Ä┬»├Ä┬╜├Ä┬▒├Ä┬╣ ├Ä┬┤├ÅΓÇ░├Å┬ü├Ä┬╡├Ä┬¼├Ä┬╜ ├Ä┬║├Ä┬▒├Ä┬╣ ├ÅΓÇá├Ä┬╣├Ä┬╗├Ä┬╣├Ä┬║├Ä┬¼ ├ÅΓé¼├Å┬ü├Ä┬┐├ÅΓÇÜ ├ÅΓÇ₧├Ä┬┐ ├Ä┬▒├ÅΓé¼├Å┼Æ├Å┬ü├Å┬ü├Ä┬╖├ÅΓÇ₧├Ä┬┐.",
+  "footer-about": "├Ä┬ú├ÅΓÇí├Ä┬╡├ÅΓÇ₧├Ä┬╣├Ä┬║├Ä┬¼",
+  "footer-privacy": "├ÄΓÇÿ├ÅΓé¼├Å┼Æ├Å┬ü├Å┬ü├Ä┬╖├ÅΓÇ₧├Ä┬┐",
+  "footer-contact": "├ÄΓÇó├ÅΓé¼├Ä┬╣├Ä┬║├Ä┬┐├Ä┬╣├Ä┬╜├ÅΓÇ░├Ä┬╜├Ä┬»├Ä┬▒",
+  "footer-credit": "├ÄΓÇ¥├Ä┬╖├Ä┬╝├Ä┬╣├Ä┬┐├ÅΓÇª├Å┬ü├Ä┬│├Ä┬«├Ä┬╕├Ä┬╖├Ä┬║├Ä┬╡ ├Ä┬▒├ÅΓé¼├Å┼Æ <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+},
+      ar: {
+  "page-title": "├ÿ┬¬├ÿ┬º├Ö┼á├ÖΓÇª├ÿ┬▒├ÖΓÇí├ÿ┬º├Ö┬ü├ÖΓÇá: ├ÖΓÇª├ÿ┬¼├ÖΓÇª├Ö╦å├ÿ┬╣├ÿ┬⌐ ├ÿ┬ú├ÿ┬»├Ö╦å├ÿ┬º├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÿ┬Ñ├ÖΓÇá├ÿ┬¬├ÿ┬º├ÿ┬¼├Ö┼á├ÿ┬⌐",
+  "language-label": "├ÿ┬º├ÖΓÇ₧├ÖΓÇ₧├ÿ┬║├ÿ┬⌐:",
+  "header-title": "├░┼╕ΓÇóΓÇÖ ├ÿ┬¬├ÿ┬º├Ö┼á├ÖΓÇª├ÿ┬▒├ÖΓÇí├ÿ┬º├Ö┬ü├ÖΓÇá ├ÖΓÇª├ÿ┬¼├ÖΓÇª├Ö╦å├ÿ┬╣├ÿ┬⌐ ├ÿ┬ú├ÿ┬»├Ö╦å├ÿ┬º├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÿ┬Ñ├ÖΓÇá├ÿ┬¬├ÿ┬º├ÿ┬¼├Ö┼á├ÿ┬⌐",
+  "header-desc": "├ÿ┬º├ÿ┬«├ÿ┬¬├ÿ┬▒ ├ÿ┬ú├ÿ┬»├ÿ┬º├ÿ┬⌐ ├ÖΓÇª├ÖΓÇá ├ÿ┬º├ÖΓÇ₧├ÿ┬ú├ÿ┬│├Ö┬ü├ÖΓÇ₧ ├ÖΓÇ₧├ÿ┬¬├ÿ┬╣├ÿ┬▓├Ö┼á├ÿ┬▓ ├ÿ┬Ñ├ÖΓÇá├ÿ┬¬├ÿ┬º├ÿ┬¼├Ö┼á├ÿ┬¬├Ö╞Æ!",
+  "nav-tools": "├ÿ┬º├ÖΓÇ₧├ÿ┬ú├ÿ┬»├Ö╦å├ÿ┬º├ÿ┬¬",
+  "nav-resources": "├ÿ┬º├ÖΓÇ₧├ÖΓÇª├Ö╦å├ÿ┬º├ÿ┬▒├ÿ┬»",
+  "tool-calendar-title": "├ÿ┬º├ÖΓÇ₧├ÿ┬¬├ÖΓÇÜ├Ö╦å├Ö┼á├ÖΓÇª",
+  "tool-calendar-desc": "├ÿ┬º├ÿ┬╣├ÿ┬▒├ÿ┬╢ ├ÿ┬º├ÖΓÇ₧├ÿ┬¬├Ö╦å├ÿ┬º├ÿ┬▒├Ö┼á├ÿ┬« ├Ö╦å├ÿ┬«├ÿ┬╖├ÿ┬╖ ├ÿ┬º├ÖΓÇ₧├ÿ┬ú├ÿ┬¡├ÿ┬»├ÿ┬º├ÿ┬½ ├ÿ┬¿├ÿ┬│├ÖΓÇí├Ö╦å├ÖΓÇ₧├ÿ┬⌐.",
+  "tool-clipboard-title": "├ÖΓÇª├ÿ┬»├Ö┼á├ÿ┬▒ ├ÿ┬º├ÖΓÇ₧├ÿ┬¡├ÿ┬º├Ö┬ü├ÿ┬╕├ÿ┬⌐",
+  "tool-clipboard-desc": "├ÿ┬º├ÿ┬¡├Ö┬ü├ÿ┬╕ ├Ö╦å├ÖΓÇá├ÿ┬╕├ÖΓÇª ├ÖΓÇª├ÖΓÇÜ├ÿ┬¬├ÿ┬╖├Ö┬ü├ÿ┬º├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÖΓÇá├ÿ┬╡ ├ÖΓÇ₧├ÖΓÇ₧├Ö╦å├ÿ┬╡├Ö╦å├ÖΓÇ₧ ├ÿ┬º├ÖΓÇ₧├ÿ┬│├ÖΓÇí├ÖΓÇ₧.",
+  "tool-countdown-title": "├ÖΓÇª├ÿ┬ñ├ÖΓÇÜ├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÿ┬» ├ÿ┬º├ÖΓÇ₧├ÿ┬¬├ÖΓÇá├ÿ┬º├ÿ┬▓├ÖΓÇ₧├Ö┼á",
+  "tool-countdown-desc": "├ÿ┬╣├ÿ┬» ├ÿ┬¬├ÖΓÇá├ÿ┬º├ÿ┬▓├ÖΓÇ₧├Ö┼á ├ÖΓÇ₧├ÖΓÇ₧├ÖΓÇª├Ö╦å├ÿ┬º├ÿ┬╣├Ö┼á├ÿ┬» ├ÿ┬º├ÖΓÇ₧├ÖΓÇá├ÖΓÇí├ÿ┬º├ÿ┬ª├Ö┼á├ÿ┬⌐ ├ÿ┬ú├Ö╦å ├ÿ┬º├ÖΓÇ₧├ÿ┬ú├ÿ┬¡├ÿ┬»├ÿ┬º├ÿ┬½ ├ÿ┬ú├Ö╦å ├ÿ┬º├ÖΓÇ₧├ÿ┬º├ÿ┬¼├ÿ┬¬├ÖΓÇª├ÿ┬º├ÿ┬╣├ÿ┬º├ÿ┬¬.",
+  "tool-currency-title": "├ÖΓÇª├ÿ┬¡├Ö╦å├ÖΓÇ₧ ├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÖΓÇª├ÖΓÇ₧├ÿ┬º├ÿ┬¬",
+  "tool-currency-desc": "├ÿ┬¡├Ö╦å├ÖΓÇÿ├ÖΓÇ₧ ├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÖΓÇª├ÖΓÇ₧├ÿ┬º├ÿ┬¬ ├ÿ┬¿├ÿ┬º├ÿ┬│├ÿ┬¬├ÿ┬«├ÿ┬»├ÿ┬º├ÖΓÇª ├ÿ┬ú├ÿ┬│├ÿ┬╣├ÿ┬º├ÿ┬▒ ├ÿ┬º├ÖΓÇ₧├ÿ┬╡├ÿ┬▒├Ö┬ü ├ÿ┬º├ÖΓÇ₧├ÿ┬¡├Ö┼á├ÿ┬⌐.",
+  "tool-focus-title": "├ÖΓÇª├Ö╦å├ÿ┬│├Ö┼á├ÖΓÇÜ├ÖΓÇ░ ├ÿ┬º├ÖΓÇ₧├ÿ┬¬├ÿ┬▒├Ö╞Æ├Ö┼á├ÿ┬▓",
+  "tool-focus-desc": "├ÿ┬º├ÿ┬│├ÿ┬¬├ÖΓÇª├ÿ┬╣ ├ÿ┬Ñ├ÖΓÇ₧├ÖΓÇ░ ├ÖΓÇª├Ö╦å├ÿ┬│├Ö┼á├ÖΓÇÜ├ÖΓÇ░ ├ÿ┬¬├ÿ┬│├ÿ┬º├ÿ┬╣├ÿ┬»├Ö╞Æ ├ÿ┬╣├ÖΓÇ₧├ÖΓÇ░ ├ÿ┬º├ÖΓÇ₧├ÿ┬¬├ÿ┬▒├Ö╞Æ├Ö┼á├ÿ┬▓.",
+  "tool-habit-title": "├ÖΓÇª├ÿ┬¬├ÿ┬¬├ÿ┬¿├ÿ┬╣ ├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÿ┬º├ÿ┬»├ÿ┬º├ÿ┬¬",
+  "tool-habit-desc": "├ÿ┬¬├ÿ┬º├ÿ┬¿├ÿ┬╣ ├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÿ┬º├ÿ┬»├ÿ┬º├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├Ö┼á├Ö╦å├ÖΓÇª├Ö┼á├ÿ┬⌐ ├Ö╦å├ÿ┬º├ÿ┬¿├ÖΓÇá├Ö┬É ├ÿ┬▒├Ö╦å├ÿ┬¬├Ö┼á├ÖΓÇá├ÖΓÇ╣├ÿ┬º ├ÿ┬¼├ÿ┬»├Ö┼á├ÿ┬»├ÖΓÇ╣├ÿ┬º.",
+  "tool-meeting-title": "├ÖΓÇª├ÿ┬«├ÿ┬╖├ÿ┬╖ ├ÿ┬º├ÖΓÇ₧├ÿ┬º├ÿ┬¼├ÿ┬¬├ÖΓÇª├ÿ┬º├ÿ┬╣├ÿ┬º├ÿ┬¬",
+  "tool-meeting-desc": "├ÿ┬¼├ÿ┬»├Ö╦å├ÖΓÇ₧ ├ÿ┬º├ÖΓÇ₧├ÿ┬º├ÿ┬¼├ÿ┬¬├ÖΓÇª├ÿ┬º├ÿ┬╣├ÿ┬º├ÿ┬¬ ├ÿ┬╣├ÿ┬¿├ÿ┬▒ ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÖΓÇá├ÿ┬º├ÿ┬╖├ÖΓÇÜ ├ÿ┬º├ÖΓÇ₧├ÿ┬▓├ÖΓÇª├ÖΓÇá├Ö┼á├ÿ┬⌐ ├ÿ┬¿├ÿ┬│├ÖΓÇí├Ö╦å├ÖΓÇ₧├ÿ┬⌐.",
+  "tool-notes-title": "├ÖΓÇª├ÖΓÇ₧├ÿ┬º├ÿ┬¡├ÿ┬╕├ÿ┬º├ÿ┬¬",
+  "tool-notes-desc": "├ÿ┬»├Ö╦å├ÖΓÇÿ├ÖΓÇá ├ÖΓÇª├ÖΓÇ₧├ÿ┬º├ÿ┬¡├ÿ┬╕├ÿ┬º├ÿ┬¬ ├ÿ┬│├ÿ┬▒├Ö┼á├ÿ┬╣├ÿ┬⌐ ├Ö╦å├ÖΓÇá├ÿ┬╕├ÖΓÇª ├ÿ┬ú├Ö┬ü├Ö╞Æ├ÿ┬º├ÿ┬▒├Ö╞Æ.",
+  "tool-password-title": "├ÖΓÇª├Ö╦å├ÖΓÇ₧├ÿ┬» ├Ö╞Æ├ÖΓÇ₧├ÖΓÇª├ÿ┬º├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÿ┬▒├Ö╦å├ÿ┬▒",
+  "tool-password-desc": "├ÿ┬ú├ÖΓÇá├ÿ┬┤├ÿ┬ª ├Ö╞Æ├ÖΓÇ₧├ÖΓÇª├ÿ┬º├ÿ┬¬ ├ÖΓÇª├ÿ┬▒├Ö╦å├ÿ┬▒ ├ÿ┬ó├ÖΓÇª├ÖΓÇá├ÿ┬⌐ ├Ö╦å├ÿ┬╣├ÿ┬┤├Ö╦å├ÿ┬º├ÿ┬ª├Ö┼á├ÿ┬⌐ ├Ö┬ü├Ö╦å├ÿ┬▒├ÖΓÇ╣├ÿ┬º.",
+  "tool-pomodoro-title": "├ÖΓÇª├ÿ┬ñ├ÖΓÇÜ├ÿ┬¬ ├ÿ┬¿├Ö╦å├ÖΓÇª├Ö╦å├ÿ┬»├Ö╦å├ÿ┬▒├Ö╦å",
+  "tool-pomodoro-desc": "├ÿ┬╣├ÿ┬▓├ÿ┬▓ ├ÿ┬¬├ÿ┬▒├Ö╞Æ├Ö┼á├ÿ┬▓├Ö╞Æ ├ÿ┬¿├ÿ┬º├ÿ┬│├ÿ┬¬├ÿ┬«├ÿ┬»├ÿ┬º├ÖΓÇª ├ÿ┬¬├ÖΓÇÜ├ÖΓÇá├Ö┼á├ÿ┬⌐ ├ÿ┬¿├Ö╦å├ÖΓÇª├Ö╦å├ÿ┬»├Ö╦å├ÿ┬▒├Ö╦å.",
+  "tool-stopwatch-title": "├ÿ┬│├ÿ┬º├ÿ┬╣├ÿ┬⌐ ├ÿ┬¬├Ö╦å├ÖΓÇÜ├Ö┼á├ÿ┬¬",
+  "tool-stopwatch-desc": "├ÖΓÇÜ├Ö┬É├ÿ┬│ ├ÿ┬º├ÖΓÇ₧├Ö╦å├ÖΓÇÜ├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÖΓÇá├ÖΓÇÜ├ÿ┬╢├Ö┼á ├ÖΓÇ₧├ÿ┬ú├Ö┼á ├ÖΓÇá├ÿ┬┤├ÿ┬º├ÿ┬╖.",
+  "tool-task-title": "├ÖΓÇª├ÿ┬ñ├ÖΓÇÜ├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÖΓÇí├ÿ┬º├ÖΓÇª",
+  "tool-task-desc": "├ÿ┬¬├ÿ┬º├ÿ┬¿├ÿ┬╣ ├ÿ┬¼├ÖΓÇ₧├ÿ┬│├ÿ┬º├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÖΓÇª├ÖΓÇ₧ ├Ö╦å├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÖΓÇí├ÿ┬º├ÖΓÇª ├Ö╦å├ÿ┬º├ÖΓÇ₧├ÿ┬º├ÿ┬│├ÿ┬¬├ÿ┬▒├ÿ┬º├ÿ┬¡├ÿ┬º├ÿ┬¬.",
+  "tool-unit-title": "├ÖΓÇª├ÿ┬¡├Ö╦å├ÖΓÇ₧ ├ÿ┬º├ÖΓÇ₧├Ö╦å├ÿ┬¡├ÿ┬»├ÿ┬º├ÿ┬¬",
+  "tool-unit-desc": "├ÿ┬¡├Ö╦å├ÖΓÇÿ├ÖΓÇ₧ ├ÿ┬º├ÖΓÇ₧├ÿ┬╖├Ö╦å├ÖΓÇ₧ ├Ö╦å├ÿ┬º├ÖΓÇ₧├Ö╦å├ÿ┬▓├ÖΓÇá ├Ö╦å├ÿ┬º├ÖΓÇ₧├ÿ┬¡├ÿ┬▒├ÿ┬º├ÿ┬▒├ÿ┬⌐ ├Ö╦å├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÿ┬▓├Ö┼á├ÿ┬».",
+  "tool-weather-title": "├ÿ┬º├ÖΓÇ₧├ÿ┬╖├ÖΓÇÜ├ÿ┬│",
+  "tool-weather-desc": "├ÿ┬º├ÿ┬╣├ÿ┬▒├Ö┬ü ├ÿ┬º├ÖΓÇ₧├ÿ┬╖├ÖΓÇÜ├ÿ┬│ ├ÿ┬º├ÖΓÇ₧├ÿ┬¡├ÿ┬º├ÖΓÇ₧├Ö┼á ├Ö┬ü├Ö┼á ├ÿ┬ú├Ö┼á ├ÖΓÇª├Ö╞Æ├ÿ┬º├ÖΓÇá ├Ö┬ü├Ö┼á ├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÿ┬º├ÖΓÇ₧├ÖΓÇª.",
+  "tool-world-title": "├ÿ┬│├ÿ┬º├ÿ┬╣├ÿ┬⌐ ├ÿ┬╣├ÿ┬º├ÖΓÇ₧├ÖΓÇª├Ö┼á├ÿ┬⌐",
+  "tool-world-desc": "├ÿ┬º├ÿ┬╣├ÿ┬▒├ÿ┬╢ ├ÿ┬º├ÖΓÇ₧├Ö╦å├ÖΓÇÜ├ÿ┬¬ ├Ö┬ü├Ö┼á ├ÿ┬ú├Ö┼á ├ÖΓÇª├Ö╞Æ├ÿ┬º├ÖΓÇá ├Ö┬ü├Ö┼á ├ÿ┬º├ÖΓÇ₧├ÿ┬╣├ÿ┬º├ÖΓÇ₧├ÖΓÇª ├Ö┬ü├Ö╦å├ÿ┬▒├ÖΓÇ╣├ÿ┬º.",
+  "resources-title": "├ÿ┬ú├ÿ┬»├Ö╦å├ÿ┬º├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÿ┬Ñ├ÖΓÇá├ÿ┬¬├ÿ┬º├ÿ┬¼├Ö┼á├ÿ┬⌐ ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├Ö╦å├ÿ┬╡├ÖΓÇ░ ├ÿ┬¿├ÖΓÇí├ÿ┬º",
+  "resources-timer-desc": "├óΓé¼ΓÇ£ ├ÿ┬ú├Ö┬ü├ÿ┬╢├ÖΓÇ₧ ├ÖΓÇª├ÿ┬ñ├ÖΓÇÜ├ÿ┬¬ ├ÖΓÇª├ÿ┬▒├ÿ┬ª├Ö┼á ├ÖΓÇ₧├ÖΓÇ₧├ÿ┬╣├ÖΓÇª├ÖΓÇ₧ ├ÿ┬ú├Ö╦å ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÿ┬»├ÿ┬▒├ÿ┬│├ÿ┬⌐ ├ÿ┬ú├Ö╦å ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÖΓÇá├ÿ┬▓├ÖΓÇ₧.",
+  "resources-book-desc": "├óΓé¼ΓÇ£ ├ÿ┬º├ÖΓÇ₧├Ö╞Æ├ÿ┬¬├ÿ┬º├ÿ┬¿ ├ÿ┬º├ÖΓÇ₧├Ö╞Æ├ÖΓÇ₧├ÿ┬º├ÿ┬│├Ö┼á├Ö╞Æ├Ö┼á ├ÿ┬¡├Ö╦å├ÖΓÇ₧ ├ÿ┬º├ÖΓÇ₧├ÿ┬¬├ÿ┬▒├Ö╞Æ├Ö┼á├ÿ┬▓ ├Ö╦å├ÿ┬º├ÖΓÇ₧├ÿ┬Ñ├ÖΓÇá├ÿ┬¬├ÿ┬º├ÿ┬¼├Ö┼á├ÿ┬⌐.",
+  "resources-planner-desc": "├óΓé¼ΓÇ£ ├ÖΓÇá├ÿ┬╕├ÖΓÇª ├ÿ┬¡├Ö┼á├ÿ┬º├ÿ┬¬├Ö╞Æ ├ÖΓÇª├ÿ┬╣ ├ÖΓÇí├ÿ┬░├ÿ┬º ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÿ┬«├ÿ┬╖├ÿ┬╖ ├ÿ┬º├ÖΓÇ₧├Ö╦å├ÿ┬▒├ÖΓÇÜ├Ö┼á ├ÿ┬º├ÖΓÇ₧├ÿ┬ú├ÿ┬│├ÿ┬╖├Ö╦å├ÿ┬▒├Ö┼á.",
+  "resources-keyboard-desc": "├óΓé¼ΓÇ£ ├ÿ┬º├Ö╞Æ├ÿ┬¬├ÿ┬¿ ├Ö┬ü├Ö┼á ├ÿ┬ú├Ö┼á ├ÖΓÇª├Ö╞Æ├ÿ┬º├ÖΓÇá├ÿ┼Æ ├Ö╦å├Ö╞Æ├ÖΓÇá ├ÖΓÇª├ÖΓÇá├ÿ┬¬├ÿ┬¼├ÖΓÇ╣├ÿ┬º!",
+  "resources-affiliate": "├ÿ┬¿├ÿ┬╡├Ö┬ü├ÿ┬¬├ÖΓÇá├ÿ┬º ├ÿ┬┤├ÿ┬▒├Ö╞Æ├ÿ┬º├ÿ┬í ├ÿ┬ú├ÖΓÇª├ÿ┬º├ÿ┬▓├Ö╦å├ÖΓÇá├ÿ┼Æ ├Ö┼á├ÿ┬¡├ÿ┬╡├ÖΓÇ₧ ├ÿ┬¬├ÿ┬º├Ö┼á├ÖΓÇª├ÿ┬▒├ÖΓÇí├ÿ┬º├Ö┬ü├ÖΓÇá ├ÿ┬╣├ÖΓÇ₧├ÖΓÇ░ ├ÿ┬ú├ÿ┬▒├ÿ┬¿├ÿ┬º├ÿ┬¡ ├ÖΓÇª├ÖΓÇá ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÿ┬┤├ÿ┬¬├ÿ┬▒├Ö┼á├ÿ┬º├ÿ┬¬ ├ÿ┬º├ÖΓÇ₧├ÖΓÇª├ÿ┬ñ├ÖΓÇí├ÖΓÇ₧├ÿ┬⌐. ├ÿ┬┤├Ö╞Æ├ÿ┬▒├ÖΓÇ╣├ÿ┬º ├ÖΓÇ₧├ÿ┬»├ÿ┬╣├ÖΓÇª├Ö╞Æ├ÖΓÇª!",
+  "footer-copyright": "&copy; 2025 ├ÿ┬¬├ÿ┬º├Ö┼á├ÖΓÇª├ÿ┬▒├ÖΓÇí├ÿ┬º├Ö┬ü├ÖΓÇá. ├ÿ┬¼├ÖΓÇª├Ö┼á├ÿ┬╣ ├ÿ┬º├ÖΓÇ₧├ÿ┬ú├ÿ┬»├Ö╦å├ÿ┬º├ÿ┬¬ ├ÖΓÇª├ÿ┬¼├ÿ┬º├ÖΓÇá├Ö┼á├ÿ┬⌐ ├Ö╦å├ÿ┬¬├ÿ┬¡├ÿ┬¬├ÿ┬▒├ÖΓÇª ├ÿ┬º├ÖΓÇ₧├ÿ┬«├ÿ┬╡├Ö╦å├ÿ┬╡├Ö┼á├ÿ┬⌐.",
+  "footer-about": "├ÿ┬¡├Ö╦å├ÖΓÇ₧",
+  "footer-privacy": "├ÿ┬º├ÖΓÇ₧├ÿ┬«├ÿ┬╡├Ö╦å├ÿ┬╡├Ö┼á├ÿ┬⌐",
+  "footer-contact": "├ÿ┬º├ÿ┬¬├ÿ┬╡├ÖΓÇ₧ ├ÿ┬¿├ÖΓÇá├ÿ┬º",
+  "footer-credit": "├ÿ┬¬├ÖΓÇª ├ÿ┬º├ÖΓÇ₧├ÿ┬Ñ├ÖΓÇá├ÿ┬┤├ÿ┬º├ÿ┬í ├ÿ┬¿├Ö╦å├ÿ┬º├ÿ┬│├ÿ┬╖├ÿ┬⌐ <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+      }
+    };
+
+    // Ensure all locales at least inherit English keys to avoid missing properties
+    ["es","de","ru","el","ar","fr"].forEach(l => {
+      try {
+        translations[l] = Object.assign({}, translations.en, translations[l] || {});
+      } catch(e){}
+    });
+
+    // Helper to read stored language; central single source of truth
+    function getStoredLang() {
+      try {
+        const s = localStorage.getItem('timerhavenLang');
+        if (s && typeof s === 'string') return s.slice(0,2);
+      } catch(e){}
+      return 'en';
+    }
+
+    // Update UI texts from translations; accept lang param to avoid race conditions
+    function updateLanguage(lang) {
+      if (!lang) lang = document.getElementById("lang-select")?.value || getStoredLang();
+      if (!translations[lang]) lang = 'en';
+      Object.keys(translations[lang]).forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) {
+          try {
+            if (id === "footer-credit" || id === "footer-copyright") {
+              el.innerHTML = translations[lang][id];
+            } else {
+              el.textContent = translations[lang][id];
+            }
+          } catch(e){ /* ignore per-element errors */ }
+        }
+      });
+      try { document.title = translations[lang]["page-title"] || document.title; } catch(e){}
+      console.info('[i18n] applied language ->', lang);
+    }
+
+    // Rewrite tool links so they point to language-specific tool pages when appropriate.
+    // Behavior desired:
+    //  - Always produce tool-<lang>.html for every language, including English (tool-en.html).
+    //  - Defensive: sanitize existing data-tool values that may already include a trailing '-xx' or '.html'.
+    //  - This avoids producing double-suffixed filenames like "countdown-en-el.html".
+    function rewriteToolLinks() {
+      try {
+        const lang = getStoredLang() || 'en';
+        const anchors = document.querySelectorAll('a[data-tool]');
+        anchors.forEach(a => {
+          try {
+            // Read the data-tool value and canonicalize it:
+            //  - Trim whitespace
+            //  - Remove any trailing language suffix like "-en" or "-fr"
+            //  - Remove any trailing ".html" if present
+            let tool = (a.getAttribute('data-tool') || '').trim();
+
+            // Strip trailing .html if present
+            tool = tool.replace(/\.html$/i, '');
+
+            // Strip trailing -xx (two-letter language) if present
+            tool = tool.replace(/-([a-z]{2})$/i, '');
+
+            if (!tool) return;
+
+            // Always append selected language code to produce tool-<lang>.html
+            const newHref = `${tool}-${lang}.html`;
+
+            // Update href attribute (relative) and absolute href for the anchor element
+            a.setAttribute('href', newHref);
+            a.href = location.origin.replace(/\/$/,'') + '/' + newHref;
+          } catch(e){
+            // ignore per-anchor errors
+          }
+        });
+        console.info('[index] rewriteToolLinks applied for lang ->', getStoredLang());
+      } catch(e) {
+        console.warn('[index] rewriteToolLinks failed', e);
+      }
+    }
+
+    // Previous currency-specific rewrite is kept for backward compatibility (defensive)
+    function localizeGenericCurrencyAnchors() {
+      try {
+        const lang = getStoredLang() || 'en';
+        const replacements = {
+          'currency.html': `currency-${lang}.html`,
+          '/currency.html': `currency-${lang}.html`,
+          'currency-how-to.html': `currency-how-to-${lang}.html`,
+          '/currency-how-to.html': `currency-how-to-${lang}.html`,
+          'currency-tips.html': `currency-tips-${lang}.html`,
+          '/currency-tips.html': `currency-tips-${lang}.html`
+        };
+
+        Object.keys(replacements).forEach(function(key){
+          const nodes = document.querySelectorAll('a[href="' + key + '"]');
+          nodes.forEach(function(a){
+            try {
+              a.setAttribute('href', replacements[key]);
+              a.href = replacements[key];
+            } catch(e){}
+          });
+        });
+
+        document.querySelectorAll('a[href]').forEach(function(a){
+          try {
+            const attr = a.getAttribute('href') || '';
+            if (attr.match(/(^|\/)currency(\.html)?($|\?)/i)) {
+              a.href = '/' + replacements['currency.html'];
+            } else if (attr.match(/(^|\/)currency-how-to(\.html)?($|\?)/i)) {
+              a.href = '/' + replacements['currency-how-to.html'];
+            } else if (attr.match(/(^|\/)currency-tips(\.html)?($|\?)/i)) {
+              a.href = '/' + replacements['currency-tips.html'];
+            }
+          } catch(e){}
+        });
+
+        console.info('[index] localized currency anchors for lang ->', lang);
+      } catch(e) {
+        console.warn('[index] localizeGenericCurrencyAnchors error', e);
+      }
+    }
+
+    // Wire up language select and initialization in a robust order
+    document.addEventListener("DOMContentLoaded", function() {
+      // initialize select from stored language
+      const saved = getStoredLang() || 'en';
+      const select = document.getElementById('lang-select');
+      if (select) {
+        select.value = saved;
+        // when user changes selection, save and apply immediately
+        select.addEventListener('change', function() {
+          const v = this.value?.slice(0,2) || 'en';
+          try { localStorage.setItem('timerhavenLang', v); } catch(e){}
+          updateLanguage(v);
+          // rewrite menu tool links to selected language
+          try { rewriteToolLinks(); } catch(e){}
+          // maintain defensive currency-specific rewrite
+          try { localizeGenericCurrencyAnchors(); } catch(e){}
+        });
+      }
+
+      // First apply language from saved (so UI labels are filled)
+      updateLanguage(saved);
+
+      // ensure menu links point to localized tool pages
+      try { rewriteToolLinks(); } catch(e){}
+
+      // ensure any generic anchors pointing to currency.html are rewritten for chosen lang
+      try { localizeGenericCurrencyAnchors(); } catch(e){}
+
+      // Debug: show some values if the tool titles are blank
+      try {
+        console.info('debug: header-title ->', document.getElementById('header-title')?.textContent);
+        console.info('debug: tool-currency-title ->', document.getElementById('tool-currency-title')?.textContent);
+      } catch(e){}
+    });
+
+    // Also respond to storage events (other tab changed language)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        const lang = (e.newValue || 'en').slice(0,2);
+        updateLanguage(lang);
+        rewriteToolLinks();
+        localizeGenericCurrencyAnchors();
+      }
+    });
+  </script>
+</body>
+</html>
+

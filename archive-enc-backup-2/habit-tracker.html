@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Habit Tracker أ¢â'¬â€‌ TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Track daily habits and build new routines. Learn how to use Habit Tracker, get productivity tips, FAQs, and read expert articles.">
+
+  <!--
+    Quick client-side redirect: if the site-wide language (timerhavenLang) is set to a non-English
+    two-letter code, redirect from the generic habit-tracker.html to the localized page:
+    habit-tracker-<lang>.html (e.g., habit-tracker-es.html).
+    This ensures when the user clicks "Habit Tracker" from index.html the localized tool page opens.
+  -->
+  <script>
+    (function(){
+      try {
+        const raw = localStorage.getItem('timerhavenLang') || '';
+        const lang = (raw && raw.toString().slice(0,2).toLowerCase()) || '';
+        if (!lang || lang === 'en') return;
+        const path = location.pathname || '';
+        const filename = path.split('/').pop().toLowerCase();
+        // if already on localized page, do nothing
+        if (filename && filename.indexOf('-' + lang + '.html') !== -1) return;
+        // build localized filename
+        const localized = path.replace(/(habit-tracker)(\.html)?$/i, '$1-' + lang + '.html');
+        const target = (localized === path) ? ('/habit-tracker-' + lang + '.html') : localized;
+        if (target && (target !== location.pathname + location.search + location.hash)) {
+          // replace so back button doesn't keep the generic page in history
+          location.replace(target + location.search + location.hash);
+        }
+      } catch (e) {
+        // fail silently
+        console && console.warn && console.warn('locale redirect failed', e);
+      }
+    })();
+  </script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
+    .article-card, .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      width: 340px;
+      min-width: 220px;
+      max-width: 340px;
+      min-height: 500px;
+      flex: 1 1 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 2em 1.3em 1em 1.3em;
+      margin: 0;
+      box-sizing: border-box;
+      text-align: left;
+      overflow: hidden;
+    }
+    .tool-card {
+      max-width: 410px;
+      min-width: 240px;
+      padding: 2em 1.5em 1em 1.5em;
+      position: relative;
+      z-index: 1;
+    }
+    .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
+    .article-card h2, .tool-card h3 {
+      font-size: 1.35em;
+      font-weight: 700;
+      margin-bottom: 0.4em;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+    }
+    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; }
+    .article-card .btn, .tool-card .btn { align-self: stretch; font-weight: 600; border-radius: 8px; margin-top: 0.2em; margin-bottom: 0; box-sizing: border-box; }
+    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .back-link:hover { text-decoration: underline; }
+    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
+    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
+    .tip-section { margin-top: 0.5em; text-align: center; font-size: 1.08em; color: #43cea2; background: #f6fbfa; padding: 0.6em; border-radius: 8px; font-weight: 500; min-height: 2em; word-break: break-word; }
+    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
+    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } .howto-mobile, .tips-mobile { display: block !important; margin-bottom: 1em; } }
+    @media (min-width: 801px) { .howto-mobile, .tips-mobile { display: none !important; } }
+    details[open] summary::after { content: " أ¢â€"آ²"; font-size: 0.9em; }
+    details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
+    details:not([open]) summary::after { content: " أ¢â€"آ¼"; font-size: 0.9em; }
+    .howto-mobile { margin-bottom: 1em; }
+    .tips-mobile { margin-top: 1.5em; margin-bottom: 0.5em; }
+    .habit-form { margin-bottom: 1em; display: flex; gap: 0.5em; }
+    .habit-list { margin-bottom: 1em; }
+    .habit-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .habit-meta { font-size: 0.9em; color: #888; margin-left: 0.6em; margin-right: 1em; }
+    .habit-btn { font-size: 0.9em; margin-left: 0.6em; }
+    .habit-history { display: flex; gap: 3px; margin-left: 1em; align-items: center;}
+    .dot { width: 15px; height: 15px; border-radius: 50%; display: inline-block; background: #e0e7ef; border: 1px solid #d0d0d0;}
+    .dot.done { background: #43cea2; border: 1.5px solid #185a9d; }
+    .dot.today { border: 2px solid #43cea2; }
+    .stats-bar { background: #f6fbfa; border-radius: 10px; margin-bottom: 1.2em; padding: 0.7em 1em; font-size: 1.05em; font-weight: 600; color: #185a9d; display: flex; gap: 2em; align-items: center; justify-content: space-between;}
+    .archive-btn { font-size: 0.9em; margin-left: 0.6em; background: #fff; border: 1px solid #43cea2; color: #43cea2; border-radius: 6px; padding: 0.15em 0.7em;}
+    .archive-btn.archived { opacity: 0.65; color: #888; border-color: #d0d0d0; }
+    .banner { background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%); color: #fff; border-radius: 10px; font-size: 1.11em; font-weight: 600; text-align: center; margin-bottom: 1em; padding: 0.7em 0.8em;}
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="main-container">
+    <div class="center-row">
+      <!-- Article 1 (desktop only, left) -->
+      <div class="article-card">
+        <div>
+          <h2 id="howto-title"></h2>
+          <ol id="howto-steps"></ol>
+        </div>
+        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
+      </div>
+      <!-- Tool card (center) -->
+      <div class="tool-card">
+        <div id="banner" class="banner" style="display:none;"></div>
+        <a href="index.html" class="back-link" id="back-link"></a>
+        <h3 id="tool-title"></h3>
+        <div class="stats-bar" id="stats-bar"></div>
+        <div class="habit-section">
+          <form class="habit-form" id="habitForm">
+            <input type="text" id="habitInput" class="form-control" placeholder="">
+            <button type="submit" class="btn btn-success btn-sm" id="add-btn"></button>
+          </form>
+          <div id="habitList" class="habit-list"></div>
+        </div>
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title"></summary>
+          <ul id="faq-list" style="padding-left:1em;"></ul>
+        </details>
+        <!-- Tips (mobile only, collapsible) -->
+        <details class="tips-mobile" id="tips-mobile">
+          <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
+          <ul id="tips-mobile-list"></ul>
+        </details>
+      </div>
+      <!-- Article 2 (desktop only, right) -->
+      <div class="article-card">
+        <div>
+          <h2 id="tips-title"></h2>
+          <ul id="tips-list"></ul>
+        </div>
+        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
+      </div>
+    </div>
+  </div>
+  <script>
+    const habitTranslations = {
+      en: {
+        "language-label": "Language:",
+        "back-link": "Back to Main Menu",
+        "tool-title": "Habit Tracker",
+        "habitInput": "Habit name",
+        "add-btn": "Add Habit",
+        "banner-all-done": "أ°إ¸إ½â€° All habits done for today! Great job!",
+        "stats-tracked": "Tracked: ",
+        "stats-done": "Done today: ",
+        "stats-best": "Best streak: ",
+        "howto-title": '<i class="fa fa-check-double"></i> How to Use Habit Tracker',
+        "howto-steps": `<li><b>Add a habit:</b> Type your daily habit (e.g., "Drink Water") and click Add.</li>
+          <li><b>Mark done:</b> When you complete a habit for the day, click the Done button beside it.</li>
+          <li><b>Remove habits:</b> Delete or archive habits you no longer want to track.</li>
+          <li><b>Repeat daily:</b> Return each day to update and track your progress.</li>`,
+        "howto-article-btn": "Read Full Article",
+        "howto-article-link": "habit-how-to.html",
+        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Habit Productivity Tips',
+        "tips-list": `<li><b>Start small:</b> Begin with easy, achievable habits to build momentum.</li>
+          <li><b>Track daily:</b> Consistency is keyأ¢â'¬â€‌mark habits done every day.</li>
+          <li><b>Celebrate progress:</b> Recognize small wins to stay motivated.</li>`,
+        "tips-article-btn": "Read Full Article",
+        "tips-article-link": "habit-tips.html",
+        "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tips',
+        "tips-mobile-list": `<li><b>Start small:</b> Build new habits gradually for best results.</li>
+          <li><b>Track consistency:</b> Review your streaks to stay motivated.</li>
+          <li><b>Set reminders:</b> Add calendar alerts to help remember your habits.</li>`,
+        "faq-title": "FAQs",
+        "faq-list": `<li><b>Are habits saved?</b> Yes, in your browser until you clear them.</li>
+          <li><b>Can I track multiple habits?</b> Yes! Add as many habits as you like.</li>
+          <li><b>Can I see my streaks?</b> Streaks are displayed for each habit.</li>
+          <li><b>Can I archive a habit?</b> Yesأ¢â'¬â€‌archive habits you want to pause.</li>`,
+        "mark-done": "Mark Done",
+        "done-today": "Done Today",
+        "streak": "Streak: ",
+        "longest": "Best: ",
+        "archive": "Archive",
+        "unarchive": "Unarchive",
+        "delete": "Delete",
+        "no-habits": "No habits yet."
+      },
+      fr: {
+        "language-label": "Langue :",
+        "back-link": "Retour au menu principal",
+        "tool-title": "Suivi d'Habitudes",
+        "habitInput": "Nom de l'habitude",
+        "add-btn": "Ajouter l'habitude",
+        "banner-all-done": "أ°إ¸إ½â€° Toutes les habitudes sont terminأƒآ©es aujourd'hui ! Bravo !",
+        "stats-tracked": "Suivies : ",
+        "stats-done": "Faites aujourd'hui : ",
+        "stats-best": "Meilleure sأƒآ©rie : ",
+        "howto-title": '<i class="fa fa-check-double"></i> Comment utiliser le Suivi d\'Habitudes',
+        "howto-steps": `<li><b>Ajoutez une habitude :</b> Tapez votre habitude quotidienne et cliquez sur Ajouter.</li>
+          <li><b>Marquez comme fait :</b> Lorsque vous complأƒآ©tez une habitude, cliquez sur Terminأƒآ© أƒآ  cأƒآ´tأƒآ©.</li>
+          <li><b>Supprimer/archiver :</b> Supprimez ou archivez les habitudes non suivies.</li>
+          <li><b>Rأƒآ©pأƒآ©tez chaque jour :</b> Revenez chaque jour pour suivre vos progrأƒآ¨s.</li>`,
+        "howto-article-btn": "Lire l'article complet",
+        "howto-article-link": "habit-how-to-fr.html",
+        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour les Habitudes',
+        "tips-list": `<li><b>Commencez petit :</b> Dأƒآ©butez avec des habitudes faciles pour progresser.</li>
+          <li><b>Suivez chaque jour :</b> La constance est la clأƒآ© !</li>
+          <li><b>Cأƒآ©lأƒآ©brez :</b> Valorisez les petits progrأƒآ¨s.</li>`,
+        "tips-article-btn": "Lire l'article complet",
+        "tips-article-link": "habit-tips-fr.html",
+        "tips-mobile-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils',
+        "tips-mobile-list": `<li><b>Commencez petit :</b> Construisez progressivement.</li>
+          <li><b>Suivez la rأƒآ©gularitأƒآ© :</b> Regardez vos sأƒآ©ries pour rester motivأƒآ©.</li>
+          <li><b>Ajoutez des rappels :</b> Utilisez des alertes calendrier.</li>`,
+        "faq-title": "FAQ",
+        "faq-list": `<li><b>Mes habitudes sont-elles sauvegardأƒآ©es ?</b> Oui, dans votre navigateur.</li>
+          <li><b>Puis-je suivre plusieurs habitudes ?</b> Oui, autant que vous voulez.</li>
+          <li><b>Puis-je voir mes sأƒآ©ries ?</b> Oui, affichأƒآ©es pour chaque habitude.</li>
+          <li><b>Puis-je archiver ?</b> Oui, archivez les habitudes mises en pause.</li>`,
+        "mark-done": "Terminer",
+        "done-today": "Fait aujourd'hui",
+        "streak": "Sأƒآ©rie : ",
+        "longest": "Meilleur : ",
+        "archive": "Archiver",
+        "unarchive": "Dأƒآ©sarchiver",
+        "delete": "Supprimer",
+        "no-habits": "Aucune habitude pour l'instant."
+      }
+      // other translations (de, ru, el, es, ar) are present in your original data and are kept on the server
+    };
+
+    // mapping for localized how-to and tips pages per language
+    const localizedArticles = {
+      howto: {
+        en: 'habit-how-to.html',
+        fr: 'habit-how-to-fr.html',
+        es: 'habit-how-to-es.html',
+        de: 'habit-how-to-de.html',
+        ru: 'habit-how-to-ru.html',
+        el: 'habit-how-to-el.html',
+        ar: 'habit-how-to-ar.html'
+      },
+      tips: {
+        en: 'habit-tips.html',
+        fr: 'habit-tips-fr.html',
+        es: 'habit-tips-es.html',
+        de: 'habit-tips-de.html',
+        ru: 'habit-tips-ru.html',
+        el: 'habit-tips-el.html',
+        ar: 'habit-tips-ar.html'
+      }
+    };
+
+    const langNames = { en: "English", fr: "Franأƒآ§ais", de: "Deutsch", ru: "أگآ أ'ئ'أ'آپأ'آپأگآ؛أگآ¸أگآ¹", el: "أژ•أژآ»أژآ»أژآ·أژآ½أژآ¹أژآ؛أژآ¬", es: "Espaأƒآ±ol", ar: "أکآ§أ™â€‍أکآ¹أکآ±أکآ¨أ™إ أکآ©" };
+
+    // Helper: today's date format
+    function getTodayStr() {
+      const d = new Date();
+      return d.getFullYear() + "-" + (d.getMonth()+1).toString().padStart(2,"0") + "-" + d.getDate().toString().padStart(2,"0");
+    }
+    function lastNDays(n) {
+      const arr = [];
+      for (let i = n-1; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        arr.push(d.getFullYear() + "-" + (d.getMonth()+1).toString().padStart(2,"0") + "-" + d.getDate().toString().padStart(2,"0"));
+      }
+      return arr;
+    }
+
+    // Data
+    let habits = JSON.parse(localStorage.getItem('habits') || '[]');
+
+    // get site language from main menu (timerhavenLang)
+    function getSiteLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'en';
+        return (l && l.slice(0,2)) || 'en';
+      } catch (e) {
+        return 'en';
+      }
+    }
+
+    // apply language strings and set localized article links
+    function applyLanguage(lang) {
+      lang = (lang || getSiteLang()).slice(0,2);
+      const t = habitTranslations[lang] || habitTranslations['en'];
+
+      // RTL support
+      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+
+      // Update the visible UI strings
+      const back = document.getElementById('back-link'); if (back) back.textContent = t['back-link'] || '';
+      const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-check-double"></i> ${t['tool-title'] || ''}`;
+      const input = document.getElementById('habitInput'); if (input) input.placeholder = t['habitInput'] || '';
+      const addBtn = document.getElementById('add-btn'); if (addBtn) addBtn.textContent = t['add-btn'] || '';
+      const faqTitle = document.getElementById('faq-title'); if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+      const faqList = document.getElementById('faq-list'); if (faqList) faqList.innerHTML = t['faq-list'] || '';
+      const howtoTitle = document.getElementById('howto-title'); if (howtoTitle) howtoTitle.innerHTML = t['howto-title'] || '';
+      const howtoSteps = document.getElementById('howto-steps'); if (howtoSteps) howtoSteps.innerHTML = t['howto-steps'] || '';
+      const tipsTitle = document.getElementById('tips-title'); if (tipsTitle) tipsTitle.innerHTML = t['tips-title'] || '';
+      const tipsList = document.getElementById('tips-list'); if (tipsList) tipsList.innerHTML = t['tips-list'] || '';
+
+      // Set localized how-to and tips links based on mapping above
+      const howtoBtn = document.getElementById('howto-article-btn');
+      const tipsBtn = document.getElementById('tips-article-btn');
+      if (howtoBtn) {
+        const href = (localizedArticles.howto[lang] || localizedArticles.howto.en);
+        howtoBtn.href = href;
+        howtoBtn.textContent = t['howto-article-btn'] || 'Read Full Article';
+      }
+      if (tipsBtn) {
+        const href = (localizedArticles.tips[lang] || localizedArticles.tips.en);
+        tipsBtn.href = href;
+        tipsBtn.textContent = t['tips-article-btn'] || 'Read Full Article';
+      }
+
+      // Update the "language indicator" text (if you still show indicator elsewhere)
+      const labelEl = document.getElementById('language-label');
+      const nameEl = document.getElementById('language-name');
+      if (labelEl) labelEl.textContent = t['language-label'] || 'Language:';
+      if (nameEl) nameEl.textContent = langNames[lang] || lang;
+
+      // Re-render habits so labels and stats use the chosen language
+      renderHabits();
+    }
+
+    // Reset daily flags if new day
+    function resetHabitsIfNeeded() {
+      const today = getTodayStr();
+      let changed = false;
+      habits.forEach(habit => {
+        if (!habit.history) habit.history = [];
+        if (habit.lastChecked !== today) {
+          habit.doneToday = false;
+          habit.lastChecked = today;
+          changed = true;
+        }
+      });
+      if (changed) saveHabits();
+    }
+    function saveHabits() { localStorage.setItem('habits', JSON.stringify(habits)); }
+
+    // Rendering (same as before)
+    function renderHabits() {
+      resetHabitsIfNeeded();
+      const lang = getSiteLang();
+      const t = habitTranslations[lang] || habitTranslations['en'];
+      const list = document.getElementById('habitList');
+      list.innerHTML = '';
+      const today = getTodayStr();
+      let doneTodayCount = 0;
+      let bestStreak = 0;
+      let activeCount = 0;
+      habits.forEach(h => { if (!h.archived) activeCount++; });
+      if (habits.length === 0 || activeCount === 0) {
+        list.innerHTML = `<div style="color:#888;">${t["no-habits"] || habitTranslations["en"]["no-habits"]}</div>`;
+      }
+      habits.forEach((habit, idx) => {
+        if (habit.archived) return;
+        let streak = habit.streak || 0;
+        let longest = habit.longest || streak;
+        bestStreak = Math.max(bestStreak, longest);
+        if (!habit.history) habit.history = [];
+        let historyDots = "";
+        lastNDays(7).forEach((date, i) => {
+          const done = habit.history.includes(date);
+          historyDots += `<span class="dot${done ? ' done' : ''}${date === today ? ' today' : ''}" title="${date}"></span>`;
+        });
+        const isDone = habit.doneToday;
+        if (isDone) doneTodayCount++;
+        list.innerHTML += `
+          <div class="habit-item">
+            <span><b>${habit.name}</b>
+              <span class="habit-meta">${t["streak"]}${streak} ${t["longest"]}${longest}</span>
+              <span class="habit-history">${historyDots}</span>
+            </span>
+            <button class="btn btn-outline-${isDone ? 'secondary' : 'success'} btn-sm habit-btn" onclick="markDone(${idx})" ${isDone ? 'disabled' : ''}>
+              ${isDone ? t["done-today"] : t["mark-done"]}
+            </button>
+            <button class="archive-btn${habit.archived ? ' archived' : ''}" onclick="archiveHabit(${idx})">
+              ${habit.archived ? t["unarchive"] : t["archive"]}
+            </button>
+            <button class="btn btn-outline-danger btn-sm habit-btn" onclick="deleteHabit(${idx})"><i class="fa fa-trash"></i> ${t["delete"]}</button>
+          </div>
+        `;
+      });
+      renderStats(activeCount, doneTodayCount, bestStreak);
+      renderBanner(activeCount, doneTodayCount);
+    }
+    function renderStats(tracked, done, best) {
+      const lang = getSiteLang();
+      const t = habitTranslations[lang] || habitTranslations['en'];
+      document.getElementById("stats-bar").innerHTML =
+        `${t["stats-tracked"]}${tracked} &bull; ${t["stats-done"]}${done} &bull; ${t["stats-best"]}${best}`;
+    }
+    function renderBanner(tracked, done) {
+      const lang = getSiteLang();
+      const t = habitTranslations[lang] || habitTranslations['en'];
+      const banner = document.getElementById("banner");
+      if (tracked > 0 && done === tracked) {
+        banner.textContent = t["banner-all-done"] || habitTranslations["en"]["banner-all-done"];
+        banner.style.display = "block";
+      } else {
+        banner.style.display = "none";
+      }
+    }
+
+    // Actions
+    document.getElementById('habitForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('habitInput').value.trim();
+      if (!name) return;
+      habits.push({
+        name,
+        streak: 0,
+        longest: 0,
+        doneToday: false,
+        lastChecked: getTodayStr(),
+        history: [],
+        archived: false
+      });
+      saveHabits();
+      document.getElementById('habitInput').value = "";
+      renderHabits();
+    });
+    window.markDone = function(idx){
+      const today = getTodayStr();
+      if (!habits[idx].doneToday) {
+        habits[idx].doneToday = true;
+        habits[idx].lastChecked = today;
+        habits[idx].streak = (habits[idx].streak || 0) + 1;
+        habits[idx].longest = Math.max(habits[idx].longest || 0, habits[idx].streak);
+        if (!habits[idx].history) habits[idx].history = [];
+        if (!habits[idx].history.includes(today)) habits[idx].history.push(today);
+        saveHabits();
+        renderHabits();
+      }
+    }
+    window.archiveHabit = function(idx){
+      habits[idx].archived = !habits[idx].archived;
+      saveHabits();
+      renderHabits();
+    }
+    window.deleteHabit = function(idx){
+      habits.splice(idx, 1);
+      saveHabits();
+      renderHabits();
+    }
+
+    // When timerhavenLang changes (other tabs), update UI and article links
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        const lang = (e.newValue || getSiteLang()).slice(0,2);
+        applyLanguage(lang);
+      }
+    });
+
+    // Initialize on load
+    document.addEventListener("DOMContentLoaded", function() {
+      // Apply UI language and localized article links
+      applyLanguage(getSiteLang());
+      // Initial render of habits
+      renderHabits();
+    });
+  </script>
+<footer>
+  &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
+  <a href="privacy.html">Privacy Policy</a> &bull;
+  <a href="terms.html">Terms</a> &bull;
+  <a href="contact.html">Contact</a>
+</footer>
+</body>
+</html>
+
+

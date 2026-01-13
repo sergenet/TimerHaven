@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>World Clock â€” TimerHaven</title>
+  <meta name="description" content="See the time anywhere in the world instantly.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" rel="stylesheet"/>
+  <style>
+    body { background:#f4f7fb; font-family: 'Montserrat', Arial, sans-serif; color:#0b2545; margin:0; }
+    .main-container { max-width:1200px; margin:2.4rem auto; padding:0 1rem; box-sizing:border-box; display:flex; justify-content:center; }
+    .tool-card { background:#fff; border-radius:18px; box-shadow:0 6px 20px rgba(11,37,69,0.06); width:420px; padding:1.6rem; box-sizing:border-box; }
+    .back-link { color:#0d6efd; display:inline-block; margin-bottom:.6rem; text-decoration:none; font-weight:700; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
+    .clock-item { background:#f7fafc; border-radius:8px; padding:.8rem; margin-bottom:.6rem; display:flex; align-items:center; justify-content:space-between; }
+    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
+    .visible-chooser { display:flex; gap:.6rem; align-items:center; }
+    .visible-chooser .awesomplete { flex:1; }
+    @media (max-width:900px) { .tool-card { width:98vw; } }
+
+    /* Mobile compact summary + ordering */
+    .mobile-summary { display:none; margin-bottom:.6rem; color:#51606b; font-size:.95rem; }
+    .clock-main { display:block; }
+    @media (max-width:520px) {
+      .mobile-summary { display:block; }
+      .clock-main { order:1; }
+      .tool-intro { order:2; }
+      .tool-intro p { display:none; }
+      .tool-card { padding:12px; }
+    }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="main-container" role="main">
+    <section class="tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link">&larr; Back to main menu</a>
+
+      <div class="mobile-summary">Quick world clock â€” <a href="/world-clock/world-clock-index.html">Read full guide</a></div>
+
+      <div class="tool-intro" id="tool-help" data-preserve="true" style="margin-bottom:.8rem;color:#374151;line-height:1.5;">
+        <p><strong>Quick guide â€” compare times across zones</strong> â€” Add cities or paste an IANA time zone to instantly compare local times. Use this when scheduling meetings across regions: prefer 2â€“3 candidate slots and present them in both organizer and participant local time to avoid confusion. The tool is lightweight and stores your selected clocks locally for quick reuse.</p>
+        <p style="margin-top:.5rem;color:#51606b;font-size:.95rem;"><strong>By Serge Shammas</strong> Â· Last updated: Jan 6, 2026</p>
+        <p style="margin-top:.5rem;font-size:.95rem;color:#51606b;">Full guide and best practices: <a href="/world-clock/world-clock-index.html">World Clock â€” How to schedule across time zones</a>.</p>
+      </div>
+
+      <a id="read-guide-btn" class="read-guide" href="/world-clock/world-clock-index.html" role="button" style="display:inline-block;margin:.35rem 0 .8rem 0;padding:.45rem .7rem;border-radius:8px;background:#0d6efd;color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;">
+        Read full guide
+      </a>
+
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-globe"></i> World Clock</h3>
+
+      <div class="clock-main">
+        <form class="clock-form" id="clockForm" onsubmit="return false;">
+          <select id="cityDropdown" class="form-select city-dropdown" aria-label="Select city">
+            <option value="">Select city...</option>
+          </select>
+
+          <div class="visible-chooser" style="margin-top:.6rem;">
+            <input id="cityInput" class="form-control awesomplete" placeholder="Or enter city or IANA time zone (eg. Paris, Europe/Paris, GMT+2)" autocomplete="off">
+            <button id="addClockBtn" class="btn btn-success btn-sm" type="button" style="min-width:110px;">Add</button>
+          </div>
+
+          <div style="display:flex; gap:.6rem; margin-top:.6rem;">
+            <button id="clearClocksBtn" class="btn btn-outline-secondary btn-sm" type="button">Clear all</button>
+          </div>
+        </form>
+
+        <div id="errorMsg" style="color:#b00;margin-top:.6rem;"></div>
+        <div id="clockList" style="margin-top:.8rem;"></div>
+      </div>
+
+      <details class="faq-section" style="margin-top:1rem;">
+        <summary style="font-weight:700; font-size:1rem;">FAQ</summary>
+        <ul style="padding-left:1.1rem; color:#374151;">
+          <li><b>Add a city:</b> Use the menu or start typing any city.</li>
+          <li><b>Compare times:</b> Add multiple clocks to compare zones.</li>
+          <li><b>Remove:</b> Click delete to remove a city.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+
+  <script>
+  // World-clock (EN) with localized display support
+  const { DateTime } = luxon;
+
+  function normalizeKey(s){ if(!s) return ''; try{return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();}catch(e){return String(s).toLowerCase().trim();} }
+  function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
+
+  // language detection and display helpers
+  function pageLang() {
+    const sel = document.getElementById('language-select-top');
+    if (sel && sel.value) return sel.value.toLowerCase();
+    if (document.documentElement && document.documentElement.lang) return document.documentElement.lang.slice(0,2).toLowerCase();
+    return 'en';
+  }
+  function displayFor(city, lang) {
+    if (!city) return '';
+    if (lang && city.localizedNames && city.localizedNames[lang]) return city.localizedNames[lang];
+    if (city.nativeName) return city.nativeName;
+    return city.name || '';
+  }
+  function localizedCountryName(countryCode, lang) {
+    try {
+      if (!countryCode || typeof Intl === 'undefined' || !Intl.DisplayNames) return '';
+      const dn = new Intl.DisplayNames([lang], { type: 'region' });
+      return dn.of(countryCode.toUpperCase()) || '';
+    } catch(e){ return ''; }
+  }
+
+  // Tolerant loader & population
+  let cityList = [], cityToZone = {}, cityNames = [], awesompleteInstance = null;
+  (async function loadCities(){
+    const dropdown = document.getElementById('cityDropdown');
+    const input = document.getElementById('cityInput');
+    const lang = pageLang();
+    const PATHS = ['/world-cities.json','/assets/data/world-cities.json','/world-cities.json?cachebust=' + Date.now()];
+
+    async function tryFetch(paths, timeoutMs=4500){
+      const start = Date.now();
+      for (const p of paths) {
+        if (Date.now() - start > timeoutMs) break;
+        try {
+          const r = await fetch(p, { cache: 'no-cache' });
+          if (!r.ok) continue;
+          const txt = await r.text();
+          try { return JSON.parse(txt); } catch(e){ continue; }
+        } catch(e){ continue; }
+      }
+      return null;
+    }
+
+    try {
+      const raw = await tryFetch(PATHS);
+      let list = Array.isArray(raw) ? raw : (raw && Array.isArray(raw.cities) ? raw.cities : []);
+      if (!Array.isArray(list)) list = [];
+
+      const map = new Map();
+      list.forEach(item => {
+        if (!item) return;
+        const name = (item.name || item.city || '').trim();
+        const tz = (item.timezone || item.tz || item.zone || '').trim();
+        const countryCode = (item.countryCode || item.country || '').trim();
+        if (!name) return;
+        const key = normalizeKey(name);
+        if (!map.has(key)) map.set(key, { name, timezone: tz || '', countryCode: countryCode || '', localizedNames: item.localizedNames || {}, nativeName: item.nativeName || '' });
+      });
+
+      const entries = Array.from(map.values()).sort((a,b) => a.name.localeCompare(b.name, lang, { sensitivity:'base' }));
+      cityList = entries;
+      cityToZone = {};
+      cityNames = [];
+
+      if (dropdown) {
+        const placeholder = dropdown.querySelector('option[value=""]') ? dropdown.querySelector('option[value=""]').outerHTML : '<option value="">Select city...</option>';
+        dropdown.innerHTML = placeholder;
+      }
+
+      entries.forEach(e => {
+        const key = normalizeKey(e.name);
+        cityToZone[key] = e.timezone || '';
+        const label = displayFor(e, lang) || e.name;
+        cityNames.push(label);
+        if (dropdown && (e.name || '').toLowerCase() !== 'tokyo') {
+          const opt = document.createElement('option');
+          opt.value = e.timezone || '';
+          const country = e.countryCode ? localizedCountryName(e.countryCode, lang) : '';
+          opt.textContent = country ? `${label} Â· ${country}` : label;
+          dropdown.appendChild(opt);
+        }
+      });
+
+      if (typeof Awesomplete !== 'undefined' && input) {
+        if (input.awesomplete) input.awesomplete.list = cityNames;
+        else awesompleteInstance = new Awesomplete(input, { list: cityNames, minChars: 1, maxItems: 12, autoFirst: true });
+      }
+
+      console.info('world-cities: populated', entries.length, 'entries');
+    } catch(err) {
+      console.warn('world-cities load failed', err);
+      const fallback = [{name:'London',timezone:'Europe/London'},{name:'New York',timezone:'America/New_York'},{name:'Tokyo',timezone:'Asia/Tokyo'}];
+      cityList = fallback; cityToZone = {}; cityNames = fallback.map(f => f.name);
+      if (dropdown) {
+        const placeholder = dropdown.querySelector('option[value=""]') ? dropdown.querySelector('option[value=""]').outerHTML : '<option value="">Select city...</option>';
+        dropdown.innerHTML = placeholder + fallback.map(e => `<option value="${escapeHtml(e.timezone)}">${escapeHtml(e.name)}</option>`).join('');
+      }
+      if (typeof Awesomplete !== 'undefined' && input) {
+        if (input.awesomplete) input.awesomplete.list = cityNames;
+        else awesompleteInstance = new Awesomplete(input, { list: cityNames, minChars:1, maxItems:12, autoFirst:true });
+      }
+    }
+  })();
+
+  // Clocks storage & rendering
+  let clocks = JSON.parse(localStorage.getItem('worldClocks') || '[]');
+  function saveClocks(){ localStorage.setItem('worldClocks', JSON.stringify(clocks)); }
+
+  function renderClocks(){
+    const list = document.getElementById('clockList');
+    list.innerHTML = '';
+    if (!clocks || clocks.length === 0) {
+      list.innerHTML = '<div style="color:#888;">No clocks added.</div>';
+      return;
+    }
+    clocks.forEach((clock, idx) => {
+      let timeStr = '...'; let error = false;
+      try {
+        const now = DateTime.now().setZone(clock.tz);
+        if (!now.isValid) throw new Error('invalid zone');
+        timeStr = now.toFormat('cccc, dd LLL yyyy<br>HH:mm:ss');
+      } catch {
+        timeStr = 'Invalid time zone';
+        error = true;
+      }
+      const div = document.createElement('div');
+      div.className = 'clock-item';
+      div.innerHTML = `
+        <div style="display:flex;gap:.9rem;align-items:center;">
+          <span style="background:#0b2545;color:#fff;border-radius:50%;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;"><i class="fa fa-clock"></i></span>
+          <div style="min-width:0;">
+            <div style="font-weight:700;">${escapeHtml(clock.label)}</div>
+            <div style="font-size:.95rem;color:#444;">${timeStr}${error ? ' <span style="color:#b00;">(check spelling or use an IANA time zone)</span>' : ''}</div>
+          </div>
+        </div>
+        <div><button class="btn btn-outline-danger btn-sm" onclick="deleteClock(${idx})" aria-label="Delete"><i class="fa fa-trash"></i></button></div>
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  function normalizeInput(input) { return input.trim().toLowerCase().replace(/[\s\-_]+/g,' '); }
+  function resolveZoneFromInput(val) {
+    if (!val) return '';
+    if (/^[A-Za-z]+\/[A-Za-z_]+$/.test(val)) return val;
+    const key = normalizeKey(val);
+    return cityToZone[key] || '';
+  }
+
+  function addClock(label, tz) { clocks.push({ label, tz }); saveClocks(); renderClocks(); }
+
+  document.getElementById('addClockBtn').addEventListener('click', function(){
+    document.getElementById('errorMsg').textContent = '';
+    const inputVal = document.getElementById('cityInput').value.trim();
+    const dropdown = document.getElementById('cityDropdown');
+    const dropdownVal = dropdown ? dropdown.value : '';
+    let label = '', zone = '';
+    if (inputVal) {
+      zone = resolveZoneFromInput(inputVal);
+      if (!zone) { document.getElementById('errorMsg').innerHTML = 'City not recognized. Try the suggestions or enter a valid IANA zone (eg. Europe/Paris).'; return; }
+      const canonical = cityList.find(c => normalizeKey(c.name) === normalizeKey(inputVal) || (c.localizedNames && normalizeKey(c.localizedNames[pageLang()]||'') === normalizeKey(inputVal)));
+      label = canonical ? displayFor(canonical, pageLang()) : inputVal;
+    } else if (dropdownVal) {
+      label = dropdown.options[dropdown.selectedIndex].text;
+      zone = dropdownVal;
+    } else {
+      document.getElementById('errorMsg').textContent = 'Please select or enter a city or time zone.';
+      return;
+    }
+    addClock(label, zone);
+    document.getElementById('cityInput').value = '';
+    if (dropdown) dropdown.selectedIndex = 0;
+  });
+
+  document.getElementById('cityInput').addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); document.getElementById('addClockBtn').click(); } });
+
+  document.getElementById('clearClocksBtn').addEventListener('click', function(){
+    if (!clocks || clocks.length === 0) return;
+    if (!confirm('Clear all clocks?')) return;
+    clocks = []; saveClocks(); renderClocks();
+  });
+
+  window.deleteClock = function(idx){ clocks.splice(idx,1); saveClocks(); renderClocks(); }
+
+  setInterval(renderClocks, 1000);
+  renderClocks();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
+</html>
+
+

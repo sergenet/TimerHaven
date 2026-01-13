@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="el">
+<head>
+<meta charset="utf-8"/>
+<title>Προγραμματιστής Συνάντησης</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Βρείτε την καλύτερη ώρα συνάντησης για όλους, οπουδήποτε στον κόσμο." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: stretch; gap: 2em; width: 100%; }
+    .tool-card {
+      background: #fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef;
+      min-width:220px; max-width:340px; width:340px; min-height:500px;
+      flex:1 1 340px; display:flex; flex-direction:column; justify-content:flex-start; align-items:stretch;
+      padding:2em 1.3em 1em 1.3em; margin:0; box-sizing:border-box; text-align:left; overflow:hidden;
+    }
+    .article-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px #e0e7ef; padding:1.2em; width:340px; box-sizing:border-box; }
+    .back-link { display:inline-block; margin-bottom:1em; color:#007bff; text-decoration:none; font-weight:bold; font-size:1em; }
+    .back-link:hover { text-decoration:underline; }
+    .faq-section { margin-top:1.1em; margin-bottom:0.3em; font-size:1em; background:#f7fafc; border-radius:8px; padding:1em; box-shadow:0 1px 4px #e0e7ef; }
+    .article-links { display:flex; flex-direction:column; gap:.5rem; margin-top:.6rem; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="main-container">
+<div class="center-row">
+<!-- Left article card: How-to -->
+<div aria-labelledby="howto-heading" class="article-card">
+<h2 id="howto-heading">Πώς να χρησιμοποιήσετε τον Προγραμματιστή Συνάντησης</h2>
+<ol>
+<li>Προσθέστε συμμετέχοντες και τις ζώνες ώρας τους.</li>
+<li>Επιλέξτε ημερομηνία και προτεινόμενη ώρα.</li>
+<li>Ελέγξτε τις τοπικές ώρες και μοιραστείτε την τελική ώρα.</li>
+</ol>
+
+</div>
+<!-- Center tool card -->
+<div class="tool-card" id="tool-card">
+<!-- language selector removed -->
+<a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i> Επιστροφή στο κύριο μενού</a>
+<h3><i class="fa fa-users"></i> Προγραμματιστής Συνάντησης</h3>
+<form id="meetingForm" onsubmit="return false;">
+<div class="meeting-form-row mb-2">
+<label for="participantName">Όνομα συμμετέχοντα</label>
+<input autocomplete="off" class="form-control" id="participantName" placeholder="Εισάγετε όνομα (π.χ. Γιώργος)" type="text"/>
+</div>
+<div class="meeting-form-row mb-2">
+<label for="participantCity">Ζώνη ώρας / Πόλη</label>
+<select autocomplete="off" class="form-select" id="participantCity"></select>
+</div>
+<div class="mb-2 d-flex gap-2">
+<button class="btn btn-success btn-participant" id="addParticipant" type="button"><i class="fa fa-plus"></i> Προσθήκη συμμετέχοντα</button>
+<button class="btn btn-outline-secondary" id="clearParticipants" title="Καθαρισμός συμμετεχόντων" type="button"><i class="fa fa-eraser"></i></button>
+</div>
+</form>
+<div class="participant-list mb-3" id="participantList"></div>
+<div class="meeting-form-row mb-2">
+<label for="meetingDate">Επιλέξτε ημερομηνία</label>
+<input class="form-control" id="meetingDate" type="date"/>
+</div>
+<div class="meeting-form-row mb-2">
+<label for="meetingTime">Επιλέξτε ώρα</label>
+<input class="form-control" id="meetingTime" type="time"/>
+<button class="btn btn-primary btn-sm mt-2" id="calcTimes" type="button"><i class="fa fa-clock"></i> Εμφάνιση ωρών</button>
+</div>
+<div aria-live="polite" class="mt-2" id="meetingTimes"></div>
+<details class="faq-section mt-3">
+<summary id="faq-heading">Συχνές Ερωτήσεις</summary>
+<ul id="faq-list" style="padding-left: 1em;">
+<li><b>Πόσοι συμμετέχοντες;</b> Όσοι θέλετε.</li>
+<li><b>Ποιες ζώνες ώρας;</b> Επιλέξτε από 30+ δημοφιλείς πόλεις/ζώνες.</li>
+<li><b>Πώς να μοιραστώ;</b> Αντιγράψτε τις ώρες και μοιραστείτε τις με τους συμμετέχοντες.</li>
+</ul>
+</details>
+<!-- extra article link removed from the bottom of the tool card -->
+</div>
+<!-- Right article card: Tips -->
+<div aria-labelledby="tips-heading" class="article-card">
+<h2 id="tips-heading">Συμβουλές για παραγωγικές συναντήσεις</h2>
+<ul>
+<li>Προγραμματίστε εκ των προτέρων για να βρείτε ώρα που λειτουργεί για όλους.</li>
+<li>Στείλτε προσκλήσεις ημερολογίου για αποφυγή σύγχυσης.</li>
+<li>Ελέγξτε τις ζώνες ώρας πριν στείλετε την πρόσκληση.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+<script>
+    const cities = [
+      {value:"", label:"Επιλέξτε πόλη/ζώνη ώρας"},
+      {value:"America/New_York", label:"Νέα Υόρκη 🇺🇸"},
+      {value:"America/Chicago", label:"Σικάγο 🇺🇸"},
+      {value:"America/Los_Angeles", label:"Λος Άντζελες 🇺🇸"},
+      {value:"America/Toronto", label:"Τορόντο 🇨🇦"},
+      {value:"Europe/London", label:"Λονδίνο 🇬🇧"},
+      {value:"Europe/Paris", label:"Παρίσι 🇫🇷"},
+      {value:"Europe/Berlin", label:"Βερολίνο 🇩🇪"},
+      {value:"Europe/Moscow", label:"Μόσχα 🇷🇺"},
+      {value:"Europe/Istanbul", label:"Κωνσταντινούπολη 🇹🇷"},
+      {value:"Asia/Dubai", label:"Ντουμπάι 🇦🇪"},
+      {value:"Asia/Kolkata", label:"Καλκούτα 🇮🇳"},
+      {value:"Asia/Shanghai", label:"Σανγκάη 🇨🇳"},
+      {value:"Asia/Tokyo", label:"Τόκιο 🇯🇵"},
+      {value:"Asia/Singapore", label:"Σιγκαπούρη 🇸🇬"},
+      {value:"Asia/Jakarta", label:"Τζακάρτα 🇮🇩"},
+      {value:"Australia/Sydney", label:"Σίδνεϊ 🇦🇺"},
+      {value:"Pacific/Auckland", label:"Όκλαντ 🇳🇿"},
+      {value:"America/Sao_Paulo", label:"Σάο Πάολο 🇧🇷"},
+      {value:"America/Mexico_City", label:"Πόλη του Μεξικού 🇲🇽"},
+      {value:"Africa/Johannesburg", label:"Γιοχάνεσμπουργκ 🇿🇦"},
+      {value:"Africa/Cairo", label:"Κάιρο 🇪🇬"},
+      {value:"Africa/Nairobi", label:"Ναϊρόμπι 🇰🇪"},
+      {value:"Asia/Seoul", label:"Σεούλ 🇰🇷"},
+      {value:"Asia/Hong_Kong", label:"Χονγκ Κονγκ 🇭🇰"},
+      {value:"Asia/Bangkok", label:"Μπανγκόκ 🇹🇭"},
+      {value:"Asia/Manila", label:"Μανίλα 🇵🇭"},
+      {value:"Europe/Madrid", label:"Μαδρίτη 🇪🇸"},
+      {value:"Europe/Rome", label:"Ρώμη 🇮🇹"},
+      {value:"Europe/Warsaw", label:"Βαρσοβία 🇵🇱"},
+      {value:"Europe/Amsterdam", label:"Άμστερνταμ 🇳🇱"},
+      {value:"Europe/Athens", label:"Αθήνα 🇬🇷"},
+      {value:"America/Vancouver", label:"Βανκούβερ 🇨🇦"}
+    ];
+
+    function populateCities() {
+      const sel = document.getElementById('participantCity');
+      sel.innerHTML = '';
+      cities.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.value;
+        opt.textContent = c.label;
+        sel.appendChild(opt);
+      });
+    }
+
+    const LS_KEY = 'meetingPlannerParticipants';
+    function loadParticipants() {
+      try { const raw = localStorage.getItem(LS_KEY); window.participants = raw ? JSON.parse(raw) : []; } catch(e){ window.participants = []; }
+    }
+    function saveParticipants() { try { localStorage.setItem(LS_KEY, JSON.stringify(window.participants || [])); } catch(e){} }
+    function renderParticipants() {
+      const container = document.getElementById('participantList');
+      container.innerHTML = '';
+      if (!window.participants || window.participants.length === 0) {
+        container.innerHTML = '<div style="color:#888;">Δεν υπάρχουν συμμετέχοντες ακόμα.</div>';
+        return;
+      }
+      window.participants.forEach((p, idx) => {
+        const el = document.createElement('div');
+        el.className = 'participant-item';
+        el.innerHTML = `<div style="min-width:0;"><div style="font-weight:700;">${escapeHtml(p.name)}</div><div style="font-size:.9em;color:#666;">${escapeHtml(p.city)}</div></div>
+          <div style="display:flex;gap:.5rem;"><button class="btn btn-outline-danger btn-sm" onclick="removeParticipant(${idx})" aria-label="Κατάργηση συμμετέχοντα"><i class="fa fa-trash"></i></button></div>`;
+        container.appendChild(el);
+      });
+    }
+    function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
+
+    document.getElementById('addParticipant').addEventListener('click', function(){
+      const name = document.getElementById('participantName').value.trim();
+      const city = document.getElementById('participantCity').value;
+      if (!name) { alert('Παρακαλώ εισάγετε όνομα συμμετέχοντα.'); return; }
+      if (!city) { alert('Παρακαλώ επιλέξτε πόλη / ζώνη ώρας.'); return; }
+      window.participants = window.participants || [];
+      window.participants.push({ name, city });
+      saveParticipants();
+      document.getElementById('participantName').value = '';
+      document.getElementById('participantCity').selectedIndex = 0;
+      renderParticipants();
+      updateMeetingTimes();
+    });
+
+    document.getElementById('clearParticipants').addEventListener('click', function(){
+      if (!window.participants || window.participants.length === 0) return;
+      if (!confirm('Διαγραφή όλων των συμμετεχόντων;')) return;
+      window.participants = [];
+      saveParticipants();
+      renderParticipants();
+      updateMeetingTimes();
+    });
+
+    window.removeParticipant = function(idx){
+      if (!window.participants) return;
+      window.participants.splice(idx,1);
+      saveParticipants();
+      renderParticipants();
+      updateMeetingTimes();
+    };
+
+    const { DateTime } = luxon;
+    function updateMeetingTimes(){
+      const date = document.getElementById('meetingDate').value;
+      const time = document.getElementById('meetingTime').value;
+      const out = document.getElementById('meetingTimes');
+      const tlang = {
+        noDateTime: "Παρακαλώ επιλέξτε ημερομηνία και ώρα.",
+        noParticipants: "Δεν υπάρχουν συμμετέχοντες ακόμα.",
+        heading: "Ώρες συνάντησης (οργανωτής → τοπικές ώρες συμμετεχόντων)"
+      };
+      if (!date || !time) { out.innerHTML = `<div style="color:#888;">${tlang.noDateTime}</div>`; return; }
+      if (!window.participants || window.participants.length === 0) { out.innerHTML = `<div style="color:#888;">${tlang.noParticipants}</div>`; return; }
+      const localISO = `${date}T${time}`;
+      let organizer = DateTime.fromISO(localISO);
+      if (!organizer.isValid) { out.innerHTML = `<div style="color:#b00;">${tlang.noDateTime}</div>`; return; }
+      let html = `<div style="font-weight:700;margin-bottom:.4rem;">${tlang.heading}</div><div class="meeting-times-grid">`;
+      html += `<div class="time-suggestion"><div><b>Οργανωτής</b> (${escapeHtml(organizer.zoneName)})</div><div>${escapeHtml(organizer.toLocaleString(DateTime.DATETIME_FULL))}</div></div>`;
+      window.participants.forEach(p => {
+        let dt;
+        try { dt = organizer.setZone(p.city); } catch(e) { dt = null; }
+        const label = dt ? dt.toLocaleString(DateTime.DATETIME_FULL) : 'Άκυρη ζώνη';
+        html += `<div class="time-suggestion"><div><b>${escapeHtml(p.name)}</b> <span style="color:#666;">(${escapeHtml(p.city)})</span></div><div>${escapeHtml(label)}</div></div>`;
+      });
+      html += `</div>`;
+      out.innerHTML = html;
+    }
+
+    document.getElementById('calcTimes').addEventListener('click', updateMeetingTimes);
+
+    document.addEventListener('DOMContentLoaded', function(){
+      populateCities();
+      loadParticipants();
+      renderParticipants();
+      try {
+        const savedDate = localStorage.getItem('meetingPlannerDate');
+        const savedTime = localStorage.getItem('meetingPlannerTime');
+        if (savedDate) document.getElementById('meetingDate').value = savedDate;
+        if (savedTime) document.getElementById('meetingTime').value = savedTime;
+      } catch(e){}
+    });
+
+    document.getElementById('meetingDate').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerDate', this.value); }catch(e){} });
+    document.getElementById('meetingTime').addEventListener('input', function(){ try{ localStorage.setItem('meetingPlannerTime', this.value); }catch(e){} });
+
+  </script>
+<p style="margin-top:1rem;"><a class="cta" href="/el/meeting-planner/meeting-planner-index.html">Read full guide</a></p></body>
+</html>
+
+
