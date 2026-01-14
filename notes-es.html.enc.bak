@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>Notas â€” TimerHaven</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Toma notas rÃ¡pidas y organiza tus ideas. Aprende a usar Notas, encuentra consejos de productividad, FAQs y lee artÃ­culos de expertos." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
+    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 370px; height: auto; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
+    .article-card h2 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; }
+    .article-card ul, .article-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; }
+    .article-card .btn {
+      white-space: normal;
+      word-break: break-word;
+      font-size: 1em;
+      padding: 0.4em 0.6em;
+      min-width: 0;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 0.6em;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: left; position: relative; z-index: 1; }
+    .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
+    .back-link { display: inline-block; margin-bottom: 1em; color: #185a9d; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .back-link:hover { text-decoration: underline; color: #43cea2; }
+    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
+    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
+    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
+    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } }
+    details[open] summary::after { content: " â–²"; font-size: 0.9em; }
+    details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
+    details:not([open]) summary::after { content: " â–¼"; font-size: 0.9em; }
+    .notes-form { margin-bottom: 1em; display: flex; gap: 0.5em; }
+    .notes-list { margin-bottom: 1em; }
+    .note-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display: flex; align-items: center; justify-content: space-between; }
+    .note-meta { font-size: 0.9em; color: #888; margin-right: 1em; }
+    .note-btn { font-size: 0.9em; margin-left: 0.6em; }
+    .note-pinned { font-weight: bold; color: #185a9d; margin-right: 0.6em; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+<div style="margin:1em 0;">
+<select id="language-select" style="font-size:1em;">
+<option value="en">English</option>
+<option value="fr">FranÃ§ais</option>
+<option value="es">EspaÃ±ol</option>
+<option value="de">Deutsch</option>
+<option value="ru">Ð ÑƒÑÑÐºÐ¸Ð¹</option>
+<option value="el">Î•Î»Î»Î·Î½Î¹ÎºÎ¬</option>
+<option value="ar">Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©</option>
+</select>
+</div>
+<script>
+(function() {
+  var file = window.location.pathname;
+  var langs = ['en','fr','es','de','ru','el','ar'];
+  var current = 'es';
+  for (var i=0; i<langs.length; i++) {
+    if (file.indexOf('-'+langs[i]+'.html') !== -1) {
+      current = langs[i];
+      break;
+    }
+  }
+  document.getElementById('language-select').value = current;
+  document.getElementById('language-select').addEventListener('change', function() {
+    window.location.href = 'notes-' + this.value + '.html';
+  });
+})();
+</script>
+<div class="main-container">
+<div class="center-row">
+
+<div class="tool-card">
+<a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i> Volver al menÃº principal</a>
+<h3><i class="fa fa-note-sticky"></i> Notas</h3>
+<div class="notes-section">
+<form class="notes-form" id="notesForm">
+<input class="form-control" id="noteInput" placeholder="Escribe tu nota..." style="max-width:180px;" type="text"/>
+<button class="btn btn-success btn-sm" type="submit">Agregar nota</button>
+</form>
+<div class="notes-list" id="notesList"></div>
+</div>
+<details class="faq-section">
+<summary>Preguntas frecuentes</summary>
+<ul style="padding-left: 1em;">
+<li><b>Â¿Se guardan las notas?</b> SÃ­, en tu navegador hasta que las elimines.</li><li><b>Â¿Puedo fijar notas importantes?</b> SÃ­, usa la funciÃ³n de fijar si estÃ¡ disponible.</li><li><b>Â¿Hay lÃ­mite?</b> No, agrega tantas notas como quieras.</li>
+</ul>
+</details>
+</div>
+
+</div>
+</div>
+<script>
+    let notes = JSON.parse(localStorage.getItem('notesData') || '[]');
+    function saveNotes() { localStorage.setItem('notesData', JSON.stringify(notes)); }
+    function renderNotes() {
+      const list = document.getElementById('notesList');
+      list.innerHTML = '';
+      if (notes.length === 0) {
+        list.innerHTML = '<div style="color:#888;">No hay notas todavÃ­a.</div>';
+        return;
+      }
+      notes.forEach((note, idx) => {
+        const pinned = note.pinned ? '<span class="note-pinned"><i class="fa fa-thumbtack"></i></span>' : '';
+        list.innerHTML += `
+          <div class="note-item">
+            ${pinned}
+            <span>${note.text}</span>
+            <span class="note-meta">${note.date}</span>
+            <button class="btn btn-outline-${note.pinned ? 'secondary' : 'info'} btn-sm note-btn" onclick="pinNote(${idx})" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>
+            <button class="btn btn-outline-danger btn-sm note-btn" onclick="deleteNote(${idx})"><i class="fa fa-trash"></i></button>
+          </div>
+        `;
+      });
+    }
+    document.getElementById('notesForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const text = document.getElementById('noteInput').value.trim();
+      if (!text) return;
+      notes.unshift({ text, date: new Date().toLocaleString(), pinned: false });
+      saveNotes();
+      document.getElementById('noteInput').value = "";
+      renderNotes();
+    });
+    window.deleteNote = function(idx){
+      notes.splice(idx, 1);
+      saveNotes();
+      renderNotes();
+    }
+    window.pinNote = function(idx){
+      notes[idx].pinned = !notes[idx].pinned;
+      if (notes[idx].pinned) {
+        const pinnedNote = notes.splice(idx, 1)[0];
+        notes.unshift(pinnedNote);
+      }
+      saveNotes();
+      renderNotes();
+    }
+    renderNotes();
+  </script>
+<footer>
+  Â© 2025 TimerHaven. Todas las herramientas son gratuitas y respetuosas con la privacidad.<br/>
+<a href="privacy.html">PolÃ­tica de privacidad</a> â€¢
+  <a href="terms.html">TÃ©rminos</a> â€¢
+  <a href="contact.html">Contacto</a>
+</footer>
+<p style="margin-top:1rem;"><a class="cta" href="/es/notes/notes-index.html">Read full guide</a></p></body>
+</html>
+
+
+

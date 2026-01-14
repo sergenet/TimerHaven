@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Habit Tracker — TimerHaven</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Verfolge tägliche Gewohnheiten und baue Routinen auf.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<title>Habit Tracker â€” TimerHaven</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Verfolge tÃ¤gliche Gewohnheiten und baue Routinen auf." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     /* same styling as the English file for parity */
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
@@ -25,69 +26,66 @@
     .banner{ background:linear-gradient(90deg,#43cea2 0%,#185a9d 100%); color:#fff; border-radius:10px; font-size:1.11em; font-weight:600; text-align:center; margin-bottom:1em; padding:.7em .8em; }
     /* language-indicator removed */
   </style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- Force German for local-file testing -->
-  <script>try{ localStorage.setItem('timerhavenLang','de'); }catch(e){}</script>
-
-  <div class="main-container">
-    <div class="center-row">
-      <div class="article-card"><div><h2 id="howto-title"></h2><ol id="howto-steps"></ol></div><a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a></div>
-
-      <div class="tool-card">
-        <div id="banner" class="banner" style="display:none;"></div>
-        <a href="index.html" class="back-link" id="back-link"></a>
-        <h3 id="tool-title"></h3>
-        <div class="stats-bar" id="stats-bar"></div>
-        <form class="habit-form" id="habitForm"><input type="text" id="habitInput" class="form-control" placeholder=""><button type="submit" class="btn btn-success btn-sm" id="add-btn"></button></form>
-        <div id="habitList" class="habit-list"></div>
-
-        <details class="faq-section" id="faq-section"><summary id="faq-title"></summary><ul id="faq-list" style="padding-left:1em;"></ul></details>
-
-        <!-- removed the duplicate desktop "Tipps" link from inside the tool-card -->
-      </div>
-
-      <div class="article-card"><div><h2 id="tips-title"></h2><ul id="tips-list"></ul></div><a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a></div>
-    </div>
-  </div>
-
-  <!-- Mobile-only tips collapsible (outside the tool card) -->
-  <details class="tips-mobile" id="tips-mobile" style="display:none;">
-    <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
-    <ul id="tips-mobile-list"></ul>
-  </details>
-
+<!-- Force German for local-file testing -->
+<script>try{ localStorage.setItem('timerhavenLang','de'); }catch(e){}</script>
+<div class="main-container">
+<div class="center-row">
+<div class="article-card"><div><h2 id="howto-title"></h2><ol id="howto-steps"></ol></div><a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a></div>
+<div class="tool-card">
+<div class="banner" id="banner" style="display:none;"></div>
+<a class="back-link" href="index.html" id="back-link"></a>
+<h3 id="tool-title"></h3>
+<div class="stats-bar" id="stats-bar"></div>
+<form class="habit-form" id="habitForm"><input class="form-control" id="habitInput" placeholder="" type="text"/><button class="btn btn-success btn-sm" id="add-btn" type="submit"></button></form>
+<div class="habit-list" id="habitList"></div>
+<details class="faq-section" id="faq-section"><summary id="faq-title"></summary><ul id="faq-list" style="padding-left:1em;"></ul></details>
+<!-- removed the duplicate desktop "Tipps" link from inside the tool-card -->
+</div>
+<div class="article-card"><div><h2 id="tips-title"></h2><ul id="tips-list"></ul></div><a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a></div>
+</div>
+</div>
+<!-- Mobile-only tips collapsible (outside the tool card) -->
+<details class="tips-mobile" id="tips-mobile" style="display:none;">
+<summary><h4 id="tips-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
+<ul id="tips-mobile-list"></ul>
+</details>
 <script>
   const habitTranslations = {
     de: {
-      "language-label":"Sprache:","back-link":"Zurück zum Hauptmenü","tool-title":"Habit Tracker",
-      "habitInput":"Gewohnheit","add-btn":"Hinzufügen","banner-all-done":"🎉 Alle Gewohnheiten für heute erledigt! Gut gemacht!",
+      "language-label":"Sprache:","back-link":"ZurÃ¼ck zum HauptmenÃ¼","tool-title":"Habit Tracker",
+      "habitInput":"Gewohnheit","add-btn":"HinzufÃ¼gen","banner-all-done":"ðŸŽ‰ Alle Gewohnheiten fÃ¼r heute erledigt! Gut gemacht!",
       "stats-tracked":"Verfolgt: ","stats-done":"Heute erledigt: ","stats-best":"Beste Serie: ",
       "howto-title":'<i class="fa fa-check-double"></i> Wie man den Habit Tracker nutzt',
-      "howto-steps":`<li><b>Gewohnheit hinzufügen:</b> Geben Sie Ihre tägliche Gewohnheit ein und klicken Sie auf Hinzufügen.</li>
+      "howto-steps":`<li><b>Gewohnheit hinzufÃ¼gen:</b> Geben Sie Ihre tÃ¤gliche Gewohnheit ein und klicken Sie auf HinzufÃ¼gen.</li>
         <li><b>Als erledigt markieren:</b> Wenn Sie eine Gewohnheit abgeschlossen haben, klicken Sie auf Erledigt.</li>
-        <li><b>Entfernen/Archivieren:</b> Löschen oder archivieren Sie Gewohnheiten, die Sie nicht mehr verfolgen möchten.</li>
-        <li><b>Täglich wiederholen:</b> Kehren Sie jeden Tag zurück, um Ihren Fortschritt zu aktualisieren.</li>`,
+        <li><b>Entfernen/Archivieren:</b> LÃ¶schen oder archivieren Sie Gewohnheiten, die Sie nicht mehr verfolgen mÃ¶chten.</li>
+        <li><b>TÃ¤glich wiederholen:</b> Kehren Sie jeden Tag zurÃ¼ck, um Ihren Fortschritt zu aktualisieren.</li>`,
       "howto-article-btn":"Ganzer Artikel","howto-article-link":"habit-how-to-de.html",
-      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Produktivitätstipps',
+      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> ProduktivitÃ¤tstipps',
       "tips-list":`<li><b>Klein anfangen:</b> Beginnen Sie mit einfachen Gewohnheiten.</li>
-        <li><b>Täglich verfolgen:</b> Beständigkeit ist entscheidend.</li>
+        <li><b>TÃ¤glich verfolgen:</b> BestÃ¤ndigkeit ist entscheidend.</li>
         <li><b>Fortschritt feiern:</b> Erkennen Sie kleine Erfolge an.</li>`,
       "tips-article-btn":"Ganzer Artikel","tips-article-link":"habit-tips-de.html",
       "tips-mobile-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Tipps',
       "tips-mobile-list":`<li><b>Klein anfangen:</b> Schrittweise aufbauen.</li>
-        <li><b>Serien verfolgen:</b> Überprüfen Sie Ihre Serien zur Motivation.</li>
+        <li><b>Serien verfolgen:</b> ÃœberprÃ¼fen Sie Ihre Serien zur Motivation.</li>
         <li><b>Erinnerungen setzen:</b> Nutzen Sie Kalendererinnerungen.</li>`,
-      "faq-title":"Häufig gestellte Fragen",
+      "faq-title":"HÃ¤ufig gestellte Fragen",
       "faq-list":`<li><b>Werden Gewohnheiten gespeichert?</b> Ja, im Browser.</li>
         <li><b>Mehrere Gewohnheiten?</b> Ja.</li>
-        <li><b>Serien sichtbar?</b> Ja, für jede Gewohnheit.</li>`,
+        <li><b>Serien sichtbar?</b> Ja, fÃ¼r jede Gewohnheit.</li>`,
       "mark-done":"Erledigt","done-today":"Heute erledigt","streak":"Serie: ","longest":"Bestes: ",
-      "archive":"Archivieren","unarchive":"Wiederherstellen","delete":"Löschen","no-habits":"Noch keine Gewohnheiten."
+      "archive":"Archivieren","unarchive":"Wiederherstellen","delete":"LÃ¶schen","no-habits":"Noch keine Gewohnheiten."
     }
   };
 
-  const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
+  const langNames = { en: "English", fr: "FranÃ§ais", de: "Deutsch", ru: "Ð ÑƒÑÑÐºÐ¸Ð¹", el: "Î•Î»Î»Î·Î½Î¹ÎºÎ¬", es: "EspaÃ±ol", ar: "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©" };
 
   function getLang(){ try{ const l=localStorage.getItem('timerhavenLang')||'de'; return (l && l.slice(0,2)) || 'de'; }catch(e){ return 'de'; } }
 
@@ -144,12 +142,12 @@
 
   document.addEventListener('DOMContentLoaded', function(){ applyLanguage(getLang()); renderHabits(); window.addEventListener('resize', function(){ applyLanguage(getLang()); }); });
 </script>
-
 <footer>
-  &copy; 2025 TimerHaven. Alle Tools sind kostenlos und datenschutzfreundlich.<br>
-  <a href="privacy.html">Datenschutz</a> &bull;
-  <a href="terms.html">Nutzungsbedingungen</a> &bull;
+  Â© 2025 TimerHaven. Alle Tools sind kostenlos und datenschutzfreundlich.<br/>
+<a href="privacy.html">Datenschutz</a> â€¢
+  <a href="terms.html">Nutzungsbedingungen</a> â€¢
   <a href="contact.html">Kontakt</a>
 </footer>
-</body>
+<p style="margin-top:1rem;"><a class="cta" href="/de/habit-tracker/habit-tracker-index.html">Read full guide</a></p></body>
 </html>
+

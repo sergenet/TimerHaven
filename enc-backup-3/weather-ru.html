@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Погода в мире — TimerHaven</title>
+  <meta name="description" content="Проверьте погоду в городах по всему миру мгновенно.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+  <style>
+    :root{--brand:#0d6efd;--muted:#6b7c89}
+    html,body { height:100%; }
+    body { background:#f4f7fb; font-family:'Inter','Montserrat', Arial, sans-serif; color:#0b2545; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    .main-container { max-width:920px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:80vh; box-sizing:border-box; }
+    .card { background:#fff; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.06); width:100%; padding:1.6rem 1.5rem; box-sizing:border-box; }
+    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand); text-decoration:none; font-weight:700; }
+    .back-link:hover { text-decoration:underline; }
+    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .45rem 0; display:flex; align-items:center; gap:.5rem; font-weight:700; }
+    .read-guide-wrap { display:inline-block; margin-bottom:.6rem; }
+    .read-guide {
+      display:inline-flex !important;
+      width:auto !important;
+      max-width:none !important;
+      align-items:center;
+      justify-content:center;
+      padding:.45rem .85rem;
+      border-radius:8px;
+      background:var(--brand);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      font-size:.95rem;
+      white-space:nowrap;
+      box-sizing:border-box;
+    }
+
+    .lead { color:#374151; margin:0 0 0.9rem 0; font-size:1.05rem; }
+    .weather-form-row { display:flex; gap:.5rem; margin-bottom:1rem; align-items:center; flex-wrap:wrap; }
+    .weather-result { margin-top:1rem; background:#f7fafc; border-radius:7px; padding:1rem; font-size:1.15em; min-height:48px; }
+    .powered-by { margin-top:0.6rem; font-size:0.92rem; color:var(--muted); }
+    .action-row { display:flex; gap:.7rem; flex-wrap:wrap; align-items:center; margin-top:.4rem; }
+
+    #getWeatherBtn { min-width:175px; height:42px; font-size:1.07em; background:var(--brand); color:#fff; border:none; border-radius:8px; font-weight:600; box-shadow:0 2px 8px #e0e7ef; cursor:pointer; padding:0 1.1rem; }
+    #useLocationBtn { min-width:175px; height:42px; font-size:1.02rem; background:#444; color:#fff; border-radius:8px; border:none; padding:0 1.1rem; display:inline-flex; align-items:center; gap:.4em; cursor:pointer; justify-content:center; text-align:center; white-space:nowrap; }
+
+    .unit-toggle { display:inline-flex; gap:6px; align-items:center; margin-left:6px; }
+    .unit-toggle button { border-radius:8px; padding:6px 10px; border:1px solid #e6eef8; background:#fff; cursor:pointer; font-weight:700; }
+    .unit-toggle button.active { background:var(--brand); color:#fff; border-color:var(--brand); }
+
+    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
+    .forecast-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; margin-top:0.6rem; }
+    @media(min-width:560px) { .forecast-grid { grid-template-columns: repeat(3, 1fr); } }
+    .forecast-day { background:#fff; border-radius:8px; padding:.55rem; box-shadow:0 1px 4px rgba(9,30,66,0.04); text-align:center; font-size:0.95rem; }
+    .forecast-day .day { font-weight:700; color:#0b2545; margin-bottom:.25rem; }
+    .weather-icon { font-size:1.4rem; margin-bottom:.25rem; display:block; }
+    .forecast-day .desc { color:#374151; font-size:.86rem; margin-top:.25rem; }
+    .forecast-day .temp { margin-top:.3rem; color:#185a9d; }
+
+    @media (max-width:750px) { #getWeatherBtn,#useLocationBtn{width:100%;} .weather-form-row{flex-direction:column;align-items:stretch;} .action-row{flex-direction:column;} }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="main-container" role="main">
+    <article class="card" aria-labelledby="title">
+      <a href="index.html" class="back-link">&larr; Вернуться в главное меню</a>
+
+      <div id="title" class="tool-title"><i class="fa fa-cloud-sun"></i> Погода в мире</div>
+
+      <div class="read-guide-wrap">
+        <a id="read-guide-btn" class="read-guide" href="https://timerhaven.com/ru/weather/weather-index.html" target="_blank" rel="noopener">Прочитать полный гид</a>
+      </div>
+
+      <p class="lead">Проверьте погоду в городах по всему миру мгновенно.</p>
+
+      <form id="weatherForm" autocomplete="off">
+        <div class="weather-form-row">
+          <select id="cityDropdown" class="form-select" title="Выберите город..." style="min-width:140px;">
+            <option value="">Выберите город...</option>
+            <option value="New York">Нью-Йорк</option>
+            <option value="London">Лондон</option>
+            <option value="Paris">Париж</option>
+            <option value="Berlin">Берлин</option>
+            <option value="Tokyo">Токио</option>
+            <option value="Sydney">Сидней</option>
+            <option value="São Paulo">Сан-Паулу</option>
+            <option value="Moscow">Москва</option>
+            <option value="Dubai">Дубай</option>
+            <option value="Istanbul">Стамбул</option>
+            <option value="Johannesburg">Джоханнесбург</option>
+            <option value="Toronto">Торонто</option>
+            <option value="Mexico City">Мехико</option>
+            <option value="Los Angeles">Лос-Анджелес</option>
+            <option value="Mumbai">Мумбаи</option>
+            <option value="Cairo">Каир</option>
+            <option value="Singapore">Сингапур</option>
+            <option value="Hong Kong">Гонконг</option>
+            <option value="Bangkok">Бангкок</option>
+            <option value="Seoul">Сеул</option>
+            <option value="San Francisco">Сан-Франциско</option>
+            <option value="Rome">Рим</option>
+            <option value="Kolkata">Калькутта</option>
+            <option value="Jakarta">Джакарта</option>
+            <option value="Madrid">Мадрид</option>
+            <option value="Cape Town">Кейптаун</option>
+            <option value="Lagos">Лагос</option>
+            <option value="Melbourne">Мельбурн</option>
+            <option value="Beijing">Пекин</option>
+            <option value="Chicago">Чикаго</option>
+            <option value="Vancouver">Ванкувер</option>
+            <option value="Auckland">Окленд</option>
+            <option value="Hanoi">Ханой</option>
+            <option value="Manila">Манила</option>
+            <option value="Warsaw">Варшава</option>
+          </select>
+
+          <input type="text" id="cityInput" class="form-control" placeholder="Или введите город..." title="Или введите город..." style="min-width:160px;">
+        </div>
+
+        <div class="action-row" role="group" aria-label="Действия">
+          <button type="submit" id="getWeatherBtn">Получить погоду</button>
+          <button type="button" id="useLocationBtn"><i class="fa fa-location-arrow"></i> Использовать моё местоположение</button>
+
+          <div class="unit-toggle" role="group" aria-label="Единицы">
+            <button type="button" id="unitC" title="Celsius">°C</button>
+            <button type="button" id="unitF" title="Fahrenheit">°F</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="weatherResult" class="weather-result" aria-live="polite"></div>
+      <div class="powered-by">Данные от <a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a></div>
+
+      <details class="faq-section" style="margin-top:1rem;">
+        <summary style="font-weight:700; font-size:1rem;">Часто задаваемые вопросы</summary>
+        <ul style="padding-left:1.1rem; color:#374151;">
+          <li><strong>Насколько точные данные?</strong> Данные предоставляются Open‑Meteo и подобными сервисами.</li>
+          <li><strong>Могу ли я использовать своё местоположение?</strong> Да — нажмите <strong>Использовать моё местоположение</strong>.</li>
+          <li><strong>Могу ли я ввести любой город?</strong> Да — введите название города.</li>
+        </ul>
+      </details>
+    </article>
+  </main>
+
+  <script>
+  // RU page: unified fixes — instant DOM conversion, robust unit binding, reverse geocoding for location
+  const PAGE_LANG = 'ru';
+  const TEMP_UNIT_KEY = 'timerhavenTempUnit';
+  const DEFAULT_UNIT = 'C';
+  let LAST_QUERY = null;
+
+  function getStoredUnit() { try { const u = localStorage.getItem(TEMP_UNIT_KEY); if (u === 'C' || u === 'F') return u; } catch(e){} return DEFAULT_UNIT; }
+  function setStoredUnit(u) { try { localStorage.setItem(TEMP_UNIT_KEY, u); } catch(e){} }
+
+  function applyUnitUI() {
+    try {
+      const u = getStoredUnit();
+      const c = document.getElementById('unitC'), f = document.getElementById('unitF');
+      if (!c || !f) return;
+      if (u === 'C') { c.classList.add('active'); c.setAttribute('aria-pressed','true'); f.classList.remove('active'); f.setAttribute('aria-pressed','false'); }
+      else { f.classList.add('active'); f.setAttribute('aria-pressed','true'); c.classList.remove('active'); c.setAttribute('aria-pressed','false'); }
+    } catch(e){ console.warn('applyUnitUI error', e); }
+  }
+
+  // Convert displayed temperatures/wind client-side (fast)
+  function convertDisplayedUnits(targetUnit){
+    try {
+      const el = document.getElementById('weatherResult');
+      if (!el) return false;
+      const prevHTML = el.innerHTML;
+      const hasC = /°\s*C/i.test(prevHTML);
+      const hasF = /°\s*F/i.test(prevHTML);
+      if (!hasC && !hasF) return false;
+      let html = prevHTML;
+      if (targetUnit === 'F') {
+        html = html.replace(/(-?\d+)\s*°\s*C/gi, function(_, n){ const c = parseInt(n,10); return Math.round((c * 9/5) + 32) + '°F'; });
+        html = html.replace(/(\d+(?:\.\d+)?)\s*m\/s/gi, function(_, v){ const mps = parseFloat(v); return Math.round(mps * 2.23694) + ' mph'; });
+      }
+      if (targetUnit === 'C') {
+        html = html.replace(/(-?\d+)\s*°\s*F/gi, function(_, n){ const f = parseInt(n,10); return Math.round((f - 32) * 5/9) + '°C'; });
+        html = html.replace(/(\d+(?:\.\d+)?)\s*mph/gi, function(_, v){ const mph = parseFloat(v); return Math.round((mph / 2.23694)) + ' m/s'; });
+      }
+      if (html !== prevHTML) { el.innerHTML = html; setStoredUnit(targetUnit); applyUnitUI(); return true; }
+      return false;
+    } catch (err) { console.warn('convertDisplayedUnits error', err); return false; }
+  }
+
+  // Reapply last query (network preferred when LAST_QUERY exists), otherwise conversion then safe fetch
+  function reapplyLastQuery() {
+    if (LAST_QUERY) {
+      if (LAST_QUERY.type === 'coords' && LAST_QUERY.lat != null && LAST_QUERY.lon != null) {
+        fetchOpenMeteoForecast(LAST_QUERY.lat, LAST_QUERY.lon).then(fore => { try { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(fore, LAST_QUERY.placeName || ''); } catch(e){} }).catch(()=>{});
+      } else if (LAST_QUERY.type === 'city' && LAST_QUERY.city) { fetchWeather(LAST_QUERY.city); }
+      else if (LAST_QUERY.type === 'backend' && LAST_QUERY.city) { fetchBackendCity(LAST_QUERY.city); }
+      return;
+    }
+
+    const desiredUnit = getStoredUnit();
+    const converted = convertDisplayedUnits(desiredUnit);
+    if (converted) return;
+
+    // Safe fetch fallback (preserve current HTML on failure)
+    try {
+      const resultEl = document.getElementById('weatherResult');
+      if (!resultEl) return;
+      const prevHTML = resultEl.innerHTML;
+      let place = null;
+      const bold = resultEl.querySelector('b, strong');
+      if (bold && bold.textContent) place = bold.textContent.trim();
+      if (!place) {
+        const lines = (resultEl.textContent || '').split(/\n/).map(s=>s.trim()).filter(Boolean);
+        if (lines.length) {
+          for (const line of lines) {
+            if (/,/.test(line) || /[A-Za-z]/.test(line)) { place = line; break; }
+          }
+          if (!place) place = lines[0];
+        }
+      }
+      if (!place) return;
+      resultEl.innerHTML = 'Загрузка...';
+      geocodeCity(place).then(geo => {
+        if (geo && geo.latitude != null && geo.longitude != null) {
+          LAST_QUERY = { type: 'coords', lat: geo.latitude, lon: geo.longitude, placeName: geo.name, city: place };
+          fetchOpenMeteoForecast(geo.latitude, geo.longitude).then(fore => {
+            if (!fore) { resultEl.innerHTML = prevHTML; return; }
+            try { resultEl.innerHTML = renderOpenMeteo(fore, geo.name || place); } catch(e){ resultEl.innerHTML = prevHTML; }
+          }).catch(()=> { resultEl.innerHTML = prevHTML; });
+        } else { resultEl.innerHTML = prevHTML; }
+      }).catch(()=> { resultEl.innerHTML = prevHTML; });
+    } catch (err) { console.warn('reapplyLastQuery fallback error', err); }
+  }
+
+  // Robust unit toggle binder
+  (function bindUnitToggles() {
+    function findButtons(){
+      const byIdC = document.getElementById('unitC'), byIdF = document.getElementById('unitF');
+      if (byIdC || byIdF) return { c:byIdC, f:byIdF };
+      const byDataC = document.querySelector('button[data-unit="C"], button[data-unit="°C"]');
+      const byDataF = document.querySelector('button[data-unit="F"], button[data-unit="°F"]');
+      if (byDataC || byDataF) return { c:byDataC, f:byDataF };
+      const container = document.querySelector('.unit-toggle') || document.body;
+      let c=null,f=null;
+      container.querySelectorAll('button, [role="button"]').forEach(btn=>{
+        const txt = (btn.textContent||'').trim();
+        if (!c && /°\s*C|Celsius|C$/i.test(txt)) c = btn;
+        if (!f && /°\s*F|Fahrenheit|F$/i.test(txt)) f = btn;
+      });
+      return { c,f };
+    }
+
+    function attach(btn, unit) {
+      if (!btn) return;
+      const handler = function(e) {
+        try {
+          setStoredUnit(unit);
+          if (!LAST_QUERY) {
+            const conv = convertDisplayedUnits(unit);
+            if (conv) return;
+          }
+          applyUnitUI();
+          setTimeout(reapplyLastQuery, 50);
+        } catch(err){ console.warn('unit handler error', err); }
+      };
+      btn.addEventListener('click', handler);
+      try { btn.addEventListener('touchend', function(e){ e.preventDefault(); handler(); }, { passive:false }); } catch(e){}
+      btn.addEventListener('keydown', function(ev){ if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); handler(); } });
+    }
+
+    function init(){
+      const { c, f } = findButtons();
+      attach(c, 'C'); attach(f, 'F');
+      applyUnitUI();
+      if (!(c && f)) {
+        setTimeout(()=>{ const again = findButtons(); attach(again.c,'C'); attach(again.f,'F'); applyUnitUI(); }, 350);
+      }
+
+      document.addEventListener('click', function(e){
+        try {
+          const t = e.target;
+          const unitBtn = t.closest && t.closest('#unitC, #unitF');
+          if (unitBtn) {
+            e.preventDefault();
+            const id = unitBtn.id;
+            const unit = (id === 'unitC') ? 'C' : (id === 'unitF') ? 'F' : null;
+            if (unit) { setStoredUnit(unit); applyUnitUI(); setTimeout(reapplyLastQuery, 50); }
+          }
+        } catch(_) {}
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  })();
+
+  // --- Weather rendering & helpers (language-specific) ---
+  const UI_STRINGS = {
+    ru: {
+      PLEASE_SELECT: "Пожалуйста, выберите или введите город.",
+      GEO_UNSUPPORTED: "Геолокация не поддерживается.",
+      UNABLE_LOCATION: "Не удалось получить ваше местоположение.",
+      FETCH_ERROR: "Ошибка при получении данных о погоде.",
+      NOT_FOUND_TEMPLATE: "Не удалось найти погоду для \"{city}\"."
+    }
+  };
+
+  const WEATHERCODE_DESC = {
+    0:{ ru:"Ясно" },1:{ ru:"Преимущественно ясно" },2:{ ru:"Малооблачно" },3:{ ru:"Пасмурно" },
+    45:{ ru:"Туман" },48:{ ru:"Туман с изморозью" },51:{ ru:"Легкая морось" },53:{ ru:"Умеренная морось" },
+    55:{ ru:"Сильная морось" },56:{ ru:"Легкая ледяная морось" },57:{ ru:"Сильная ледяная морось" },
+    61:{ ru:"Небольшой дождь" },63:{ ru:"Умеренный дождь" },65:{ ru:"Сильный дождь" },
+    71:{ ru:"Небольшой снег" },73:{ ru:"Умеренный снег" },75:{ ru:"Сильный снег" },
+    80:{ ru:"Небольшие ливни" },81:{ ru:"Умеренные ливни" },82:{ ru:"Сильные ливни" },
+    95:{ ru:"Гроза" },96:{ ru:"Гроза с небольшим градом" },99:{ ru:"Гроза с сильным градом" }
+  };
+
+  function t(key, vars) {
+    const dict = UI_STRINGS[PAGE_LANG] || UI_STRINGS['ru'] || {};
+    let s = dict[key] || '';
+    if (vars && typeof vars === 'object') { Object.keys(vars).forEach(k => { s = s.replace('{'+k+'}', vars[k]); }); }
+    return s;
+  }
+
+  function describeWeatherCode(code) {
+    const obj = WEATHERCODE_DESC[code];
+    if (!obj) return String(code);
+    return obj[PAGE_LANG] || obj['ru'] || String(code);
+  }
+
+  function localizedWeekday(dateStr) {
+    try { const d = new Date(dateStr); return new Intl.DateTimeFormat(PAGE_LANG, { weekday: 'short' }).format(d); } catch(e){ return dateStr; }
+  }
+
+  function getWeatherEmoji(code) {
+    if (code === null || code === undefined) return '•';
+    if (code === 0) return '☀️';
+    if (code === 1 || code === 2) return '🌤️';
+    if (code === 3) return '☁️';
+    if ([45,48].includes(code)) return '🌫️';
+    if ([51,53,55,56,57].includes(code)) return '🌦️';
+    if ([61,63,65,80,81,82].includes(code)) return '🌧️';
+    if ([71,73,75].includes(code)) return '❄️';
+    if ([95,96,99].includes(code)) return '⛈️';
+    return '🌤️';
+  }
+
+  function renderOpenMeteo(forecast, placeName) {
+    const unit = getStoredUnit();
+    const tempSymbol = (unit === 'F') ? '°F' : '°C';
+    const speedUnit = (unit === 'F') ? 'mph' : 'm/s';
+    const cw = forecast.current_weather || {};
+    const daily = forecast.daily || {};
+    const parts = [];
+    const title = `<div style="font-weight:700; margin-bottom:6px;">${placeName || ''}</div>`;
+    const weatherLabel = describeWeatherCode(cw.weathercode);
+    const currentHtml = `<div style="display:flex;gap:.6rem;align-items:center;">
+      <div style="flex:1"><div style="font-weight:700;font-size:1.05rem;">${weatherLabel}</div></div>
+      <div style="text-align:right;min-width:110px">
+        <div style="font-size:1.45rem;font-weight:700;">${typeof cw.temperature === 'number' ? Math.round(cw.temperature) + tempSymbol : 'N/A'}</div>
+        <div style="color:#6b7280;">Ветер ${typeof cw.windspeed === 'number' ? Math.round(cw.windspeed) + ' ' + speedUnit : 'N/A'}</div>
+      </div>
+    </div>`;
+    parts.push(title + currentHtml);
+
+    if (daily.time && daily.time.length) {
+      const days = daily.time.map((d,i) => {
+        const maxT = daily.temperature_2m_max && daily.temperature_2m_max[i] !== undefined ? Math.round(daily.temperature_2m_max[i]) : '—';
+        const minT = daily.temperature_2m_min && daily.temperature_2m_min[i] !== undefined ? Math.round(daily.temperature_2m_min[i]) : '—';
+        const code = daily.weathercode && daily.weathercode[i] !== undefined ? daily.weathercode[i] : null;
+        const desc = code !== null ? describeWeatherCode(code) : '';
+        return { date: d, maxT, minT, code, desc };
+      }).slice(0,7);
+
+      let grid = '<div class="forecast-grid">';
+      days.forEach(day => {
+        grid += `<div class="forecast-day">
+                    <div class="day">${localizedWeekday(day.date)}</div>
+                    <div class="weather-icon">${getWeatherEmoji(day.code)}</div>
+                    <div class="desc">${day.desc}</div>
+                    <div class="temp"><span style="font-weight:700;">${day.maxT}${tempSymbol}</span> / ${day.minT}${tempSymbol}</div>
+                 </div>`;
+      });
+      grid += '</div>';
+      parts.push(grid);
+    }
+
+    return parts.join('');
+  }
+
+  function geocodeCity(city) {
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=${PAGE_LANG}`;
+    return fetch(url).then(r => r.json()).then(j => {
+      if (j && Array.isArray(j.results) && j.results.length > 0) {
+        const r0 = j.results[0];
+        return { latitude: r0.latitude, longitude: r0.longitude, name: r0.name + (r0.country ? ', ' + r0.country : '') };
+      }
+      return null;
+    }).catch(()=>null);
+  }
+
+  function fetchOpenMeteoForecast(lat, lon) {
+    const unit = getStoredUnit();
+    const temperature_unit = (unit === 'F') ? 'fahrenheit' : 'celsius';
+    const windspeed_unit = (unit === 'F') ? 'mph' : 'ms';
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&daily=temperature_2m_max,temperature_2m_min,weathercode&current_weather=true&timezone=auto&forecast_days=7&temperature_unit=${temperature_unit}&windspeed_unit=${windspeed_unit}`;
+    return fetch(url).then(r => r.json());
+  }
+
+  function fetchBackendCity(city) {
+    const resultEl = document.getElementById('weatherResult');
+    return fetch(`/weather?city=${encodeURIComponent(city)}`)
+      .then(r => r.json())
+      .then(data => {
+        if (!data || (data.cod && parseInt(data.cod,10) !== 200)) {
+          const err = (data && (data.error || data.message)) || t('NOT_FOUND_TEMPLATE', { city });
+          resultEl.innerHTML = `<span style="color:#b00;">${err}</span>`;
+          return null;
+        }
+        LAST_QUERY = { type: 'backend', city };
+        resultEl.innerHTML = renderWeatherData(data);
+        return data;
+      })
+      .catch(() => {
+        resultEl.innerHTML = '<span style="color:#b00;">' + t('FETCH_ERROR') + '</span>';
+        return null;
+      });
+  }
+
+  function renderWeatherData(data) {
+    const unit = getStoredUnit();
+    let tempStr = (data.main && typeof data.main.temp === 'number') ? Math.round(data.main.temp) + '°C' : 'N/A';
+    if (unit === 'F' && data.main && typeof data.main.temp === 'number') tempStr = Math.round((data.main.temp * 9/5)+32) + '°F';
+    const windUnit = (unit === 'F') ? 'mph' : 'm/s';
+    let wind = data.wind ? data.wind.speed : 'N/A';
+    if (unit === 'F' && data.wind && typeof data.wind.speed === 'number') wind = Math.round(data.wind.speed * 2.23694);
+    return `<b>${data.name}${data.sys && data.sys.country ? ', ' + data.sys.country : ''}</b><br>
+            Погода: ${data.weather && data.weather[0] ? data.weather[0].description : 'N/A'}<br>
+            Температура: ${tempStr}<br>
+            Влажность: ${data.main ? data.main.humidity : 'N/A'}%<br>
+            Ветер: ${wind} ${windUnit}`;
+  }
+
+  function fetchWeather(city) {
+    const resultEl = document.getElementById('weatherResult');
+    if (!city) { resultEl.innerHTML = '<span style="color:#b00;">' + t('PLEASE_SELECT') + '</span>'; return; }
+    resultEl.innerHTML = 'Загрузка...';
+    geocodeCity(city).then(geo => {
+      if (geo && geo.latitude != null && geo.longitude != null) {
+        LAST_QUERY = { type: 'coords', lat: geo.latitude, lon: geo.longitude, placeName: geo.name, city: city };
+        fetchOpenMeteoForecast(geo.latitude, geo.longitude).then(fore => {
+          if (!fore) return fetchBackendCity(city);
+          try { resultEl.innerHTML = renderOpenMeteo(fore, geo.name || city); } catch (e) { console.error('renderOpenMeteo error', e); resultEl.innerHTML = '<span style="color:#b00;">' + t('FETCH_ERROR') + '</span>'; }
+        }).catch(()=> fetchBackendCity(city));
+      } else fetchBackendCity(city);
+    }).catch(()=> fetchBackendCity(city));
+  }
+
+  // UI wiring
+  try {
+    document.getElementById('cityDropdown').addEventListener('change', function () { document.getElementById('cityInput').value = this.value; if (this.value) fetchWeather(this.value); });
+    document.getElementById('cityInput').addEventListener('input', function () {
+      const val = this.value.trim(); const dd = document.getElementById('cityDropdown'); let found=false;
+      for (let i=0;i<dd.options.length;i++){ if (dd.options[i].value.toLowerCase()===val.toLowerCase()){ dd.selectedIndex=i; found=true; break; } }
+      if (!found) dd.selectedIndex=0;
+    });
+    document.getElementById('weatherForm').addEventListener('submit', function(e){ e.preventDefault(); const city = document.getElementById('cityInput').value.trim() || document.getElementById('cityDropdown').value; fetchWeather(city); });
+  } catch(e){ console.warn(e); }
+
+  try { if (!localStorage.getItem(TEMP_UNIT_KEY)) localStorage.setItem(TEMP_UNIT_KEY, DEFAULT_UNIT); } catch(e){}
+  applyUnitUI();
+
+  // Reverse geocode helper
+  function reverseGeocode(lat, lon) {
+    const url = `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&count=1&language=${PAGE_LANG}`;
+    return fetch(url).then(r => r.ok ? r.json() : null).then(j => {
+      if (j && Array.isArray(j.results) && j.results.length > 0) {
+        const r0 = j.results[0];
+        return (r0.name || '') + (r0.country ? ', ' + r0.country : '');
+      }
+      return '';
+    }).catch(()=> '');
+  }
+
+  // Exposed helper for native/external injection (sets LAST_QUERY and renders place name where possible)
+  window._injectedFetchByCoords = window._injectedFetchByCoords || async function(lat, lon, placeName){
+    try {
+      if (typeof fetchOpenMeteoForecast === 'function' && typeof renderOpenMeteo === 'function') {
+        let resolvedName = placeName || '';
+        if (!resolvedName) { try { resolvedName = await reverseGeocode(lat, lon); } catch(e){ resolvedName = ''; } }
+        const q = { type:'coords', lat: lat, lon: lon, placeName: resolvedName || '' };
+        LAST_QUERY = q;
+        try { window.LAST_QUERY = q; } catch(e){}
+        const fore = await fetchOpenMeteoForecast(lat, lon);
+        if (fore) {
+          try { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(fore, resolvedName || ''); }
+          catch(e){ console.error('renderOpenMeteo error', e); document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">Ошибка отображения</span>'; }
+        } else {
+          document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">Ошибка получения прогноза</span>';
+        }
+      } else {
+        console.log('Coordinates available:', lat, lon);
+      }
+    } catch(e){ console.error(e); }
+  };
+
+  // Robust geolocation IIFE (reverse-geocode & set place name)
+  (function(){
+    const TIMEOUT_MS = 25000;
+    const useBtn = document.getElementById('useLocationBtn');
+    const resultEl = document.getElementById('weatherResult');
+
+    function log(msg){ try { console.debug('[geo] '+msg); } catch(e){} }
+    function show(msg, isError){ if (!resultEl) return; resultEl.innerHTML = isError ? ('<span style="color:#b00;">' + msg + '</span>') : msg; }
+
+    function getPositionWithTimeout(opts){
+      return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) { const err = new Error('Geolocation unavailable'); err.code = 0; return reject(err); }
+        let finished=false;
+        const timer = setTimeout(()=> { if (finished) return; finished=true; const err = new Error('Timeout'); err.code = 3; reject(err); }, TIMEOUT_MS);
+        navigator.geolocation.getCurrentPosition(pos => { if (finished) return; finished=true; clearTimeout(timer); resolve(pos); }, err => { if (finished) return; finished=true; clearTimeout(timer); reject(err); }, opts || { enableHighAccuracy:false, maximumAge:0, timeout:TIMEOUT_MS });
+      });
+    }
+
+    async function queryPermission(){
+      if (!navigator.permissions || !navigator.permissions.query) return null;
+      try { const p = await navigator.permissions.query({ name: 'geolocation' }); return p.state; } catch(e){ log('permissions.query failed: '+e); return null; }
+    }
+
+    function permissionHelpText(){
+      return `
+        <div style="font-size:0.95rem;line-height:1.3;">
+          Доступ к геолокации заблокирован. Чтобы включить:
+          <ul>
+            <li>Откройте меню браузера → Настройки сайта → Местоположение → разрешить для timerhaven.com</li>
+            <li>Убедитесь, что в Android включено: Настройки → Местоположение</li>
+            <li>Не используйте режим инкогнито</li>
+          </ul>
+          Или вставьте координаты из приложения «Карты» (Поделиться → Копировать координаты).
+        </div>
+      `;
+    }
+
+    async function handleUseLocation(e){
+      e && e.preventDefault && e.preventDefault();
+      show('Определение местоположения...');
+      log('User requested location');
+
+      const perm = await queryPermission().catch(()=>null);
+      log('permission state: '+perm);
+      if (perm === 'denied'){ show(permissionHelpText(), true); return; }
+
+      const attempts = [
+        { enableHighAccuracy:false, maximumAge: 60 * 1000, timeout: TIMEOUT_MS },
+        { enableHighAccuracy:true, maximumAge: 0, timeout: TIMEOUT_MS + 5000 }
+      ];
+
+      for (const opts of attempts) {
+        try {
+          const pos = await getPositionWithTimeout(opts);
+          log('got coords: '+pos.coords.latitude+','+pos.coords.longitude);
+          show('' + pos.coords.latitude.toFixed(4) + ', ' + pos.coords.longitude.toFixed(4) + ' — загружаем прогноз...');
+          const placeName = await reverseGeocode(pos.coords.latitude, pos.coords.longitude).catch(()=>'');
+
+          LAST_QUERY = { type:'coords', lat: pos.coords.latitude, lon: pos.coords.longitude, placeName: placeName || '' };
+          try { window.LAST_QUERY = LAST_QUERY; } catch(e){}
+
+          try {
+            const fore = await fetchOpenMeteoForecast(pos.coords.latitude, pos.coords.longitude);
+            if (fore) { try { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(fore, placeName || ''); } catch(err) { console.error('renderOpenMeteo error', err); show('Ошибка отображения', true); } }
+            else { if (placeName) fetchBackendCity(placeName); else show('Ошибка получения прогноза', true); }
+          } catch (err) {
+            console.error('fetchOpenMeteoForecast error', err);
+            if (placeName) fetchBackendCity(placeName); else show('Ошибка получения прогноза', true);
+          }
+          return;
+        } catch (err) {
+          log('getPosition attempt failed: ' + (err && err.code) + ' / ' + (err && err.message));
+        }
+      }
+      show('Местоположение недоступно — проверьте разрешения/GPS и попробуйте снова.', true);
+    }
+
+    if (useBtn) {
+      try { useBtn.removeEventListener && useBtn.removeEventListener('click', handleUseLocation); } catch(e){}
+      useBtn.addEventListener('click', handleUseLocation);
+    }
+
+    // Receiver for native apps
+    window.receiveNativeLocation = function(obj){
+      try {
+        const lat = parseFloat(obj.latitude || obj.lat);
+        const lon = parseFloat(obj.longitude || obj.lon || obj.lng);
+        if (!isNaN(lat) && !isNaN(lon)) {
+          window._injectedFetchByCoords(lat, lon, obj.name || obj.place || '');
+        }
+      } catch(e){ log(e); }
+    };
+  })();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
+</html>
+
+

@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Секундомер</title>
-<meta content="Измеряйте прошедшее время для любой активности. Узнайте, как пользоваться секундомером, получите советы и FAQs." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Секундомер</title>
+  <meta name="description" content="Измеряйте прошедшее время для любой активности. Узнайте, как пользоваться секундомером, получите советы и FAQs.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
 
@@ -48,45 +47,74 @@
   </style>
 </head>
 <body>
-<div class="page-wrap">
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">Секундомер</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">Измеряйте прошедшее время для любой активности. Узнайте, как пользоваться секундомером, получите советы и ответы на частые вопросы.</p>
-</div>
-<div class="center-row">
-<!-- Left summary card -->
+  <div class="page-wrap">
+    <div class="text-center mb-4">
+      <h1 style="margin-bottom:.25rem;">Секундомер</h1>
+      <p class="lead" style="color:#374151; margin-bottom:1rem;">Измеряйте прошедшее время для любой активности. Узнайте, как пользоваться секундомером, получите советы и ответы на частые вопросы.</p>
+    </div>
 
-<!-- Main tool card -->
-<div aria-label="Stopwatch" class="tool-card" role="region">
-<a class="d-block mb-2" href="index.html" style="text-decoration:none; color:#0d6efd; font-weight:600;">← Назад в главное меню</a>
-<h3><i class="fa fa-clock"></i> Секундомер</h3>
-<div aria-live="polite" class="stopwatch-section">
-<div class="stopwatch-display" id="swDisplay">00:00:00</div>
-<div class="controls-row">
-<button class="btn btn-success btn-small" id="swStartBtn">Старт</button>
-<button class="btn btn-secondary btn-small" id="swPauseBtn">Пауза</button>
-<button class="btn btn-danger btn-small" id="swResetBtn">Сброс</button>
-<button class="btn btn-info btn-small" id="swLapBtn">Круг</button>
-</div>
-<div class="lap-list" id="lapList"></div>
-<details class="faq-section" style="margin-top:1rem;">
-<summary style="font-weight:700; font-size:1rem;">Частые вопросы</summary>
-<ul style="padding-left:1.1rem; color:#374151;">
-<li><b>Можно ли записывать несколько кругов?</b> Да — нажмите кнопку «Круг» во время работы секундомера.</li>
-<li><b>Сохранится ли время после перезагрузки?</b> Нет — при обновлении страницы все данные (время и круги) сбрасываются.</li>
-<li><b>Это бесплатно?</b> Да — все инструменты TimerHaven бесплатны.</li>
-</ul>
-</details>
-</div>
-</div>
-<!-- Right summary card -->
+    <div class="center-row">
+      <!-- Left summary card -->
+      <div class="article-card">
+        <div>
+          <h2><i class="fa fa-clock"></i> Как пользоваться секундомером</h2>
+          <ol style="padding-left:1.1rem; color:#374151;">
+            <li><b>Запустите таймер:</b> Нажмите <strong>Старт</strong>.</li>
+            <li><b>Пауза/сброс:</b> Используйте <strong>Пауза</strong> и <strong>Сброс</strong>.</li>
+            <li><b>Запись кругов:</b> Нажмите <strong>Круг</strong>.</li>
+          </ol>
+        </div>
+        <a href="stopwatch-how-to-ru.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Читать статью</a>
+      </div>
 
-</div>
-<footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
-      © 2025 TimerHaven. <a href="privacy.html">Политика</a>
-</footer>
-</div>
-<script>
+      <!-- Main tool card -->
+      <div class="tool-card" role="region" aria-label="Stopwatch">
+        <a href="index.html" class="d-block mb-2" style="text-decoration:none; color:#0d6efd; font-weight:600;">&larr; Назад в главное меню</a>
+        <h3><i class="fa fa-clock"></i> Секундомер</h3>
+
+        <div class="stopwatch-section" aria-live="polite">
+          <div id="swDisplay" class="stopwatch-display">00:00:00</div>
+
+          <div class="controls-row">
+            <button id="swStartBtn" class="btn btn-success btn-small">Старт</button>
+            <button id="swPauseBtn" class="btn btn-secondary btn-small">Пауза</button>
+            <button id="swResetBtn" class="btn btn-danger btn-small">Сброс</button>
+            <button id="swLapBtn" class="btn btn-info btn-small">Круг</button>
+          </div>
+
+          <div id="lapList" class="lap-list"></div>
+
+          <details class="faq-section" style="margin-top:1rem;">
+            <summary style="font-weight:700; font-size:1rem;">Частые вопросы</summary>
+            <ul style="padding-left:1.1rem; color:#374151;">
+              <li><b>Можно ли записывать несколько кругов?</b> Да — нажмите кнопку «Круг» во время работы секундомера.</li>
+              <li><b>Сохранится ли время после перезагрузки?</b> Нет — при обновлении страницы все данные (время и круги) сбрасываются.</li>
+              <li><b>Это бесплатно?</b> Да — все инструменты TimerHaven бесплатны.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+
+      <!-- Right summary card -->
+      <div class="article-card">
+        <div>
+          <h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по секундомеру</h2>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>Используйте круги для интервалов:</b> Фиксируйте сплит‑время.</li>
+            <li><b>Пауза и возобновление:</b> Удобно при прерываниях.</li>
+            <li><b>Сброс между сессиями:</b> Для чистых записей.</li>
+          </ul>
+        </div>
+        <a href="stopwatch-tips-ru.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Читать статью</a>
+      </div>
+    </div>
+
+    <footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
+      &copy; 2025 TimerHaven. <a href="privacy.html">Политика</a>
+    </footer>
+  </div>
+
+  <script>
   (function(){
     // Stopwatch logic (keeps the same behavior on all localized pages)
     var swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
@@ -134,7 +162,8 @@
     swUpdateDisplay();
   })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/ru/stopwatch/stopwatch-index.html">Read full guide</a></p></body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
 </html>

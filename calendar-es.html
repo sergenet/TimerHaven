@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="notranslate" name="google"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Calendario — TimerHaven</title>
-<meta content="Guarda y gestiona múltiples notas de calendario fácilmente. Aprende a usar el Calendario, recibe consejos de productividad, FAQ y artículos expertos." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Calendario — TimerHaven</title>
+  <meta name="description" content="Guarda y gestiona múltiples notas de calendario fácilmente. Aprende a usar el Calendario, recibe consejos de productividad, FAQ y artículos expertos.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     /* Reserve scrollbar to avoid layout shifts */
     html { overflow-y: scroll; }
 
@@ -203,78 +202,92 @@
   </style>
 </head>
 <body>
-<main class="main-container" id="main">
-<div class="center-row">
-<aside class="card-base article-card" id="left-card">
-<h2 id="howto-title"><i class="fa fa-calendar-check"></i> Cómo usar el Calendario</h2>
-<ol id="howto-steps">
-<li><strong>Haz clic en un día:</strong> Abre la ventana para añadir/ver/editar tus notas. ¡Se permiten varias notas por día y se guardan!</li>
-<li><strong>Organiza tus eventos:</strong> Cada nota tiene marca temporal y puede eliminarse individualmente.</li>
-<li><strong>Permanente:</strong> Las notas se guardan en tu navegador hasta que las elimines.</li>
-</ol>
+  <main class="main-container" id="main">
+    <div class="center-row">
+      <aside class="card-base article-card" id="left-card">
+        <h2 id="howto-title"><i class="fa fa-calendar-check"></i> Cómo usar el Calendario</h2>
+        <ol id="howto-steps">
+          <li><strong>Haz clic en un día:</strong> Abre la ventana para añadir/ver/editar tus notas. ¡Se permiten varias notas por día y se guardan!</li>
+          <li><strong>Organiza tus eventos:</strong> Cada nota tiene marca temporal y puede eliminarse individualmente.</li>
+          <li><strong>Permanente:</strong> Las notas se guardan en tu navegador hasta que las elimines.</li>
+        </ol>
+        <div style="margin-top:auto;">
+          <a id="howto-article-btn" class="btn btn-outline-primary" href="calendar-how-to-es.html">Leer el artículo completo</a>
+        </div>
+      </aside>
 
-</aside>
-<section aria-labelledby="tool-title" class="card-base tool-card" id="center-card">
-<a class="back-link" href="index.html" id="back-link" style="margin-bottom:.25rem;display:inline-block;color:var(--brand);font-weight:600;text-decoration:none;">Volver al menú principal</a>
-<h3 id="tool-title"></h3>
-<div id="tool-help" style="color:var(--muted);margin-bottom:.25rem;"></div>
-<div aria-label="Navegación del calendario" class="calendar-header">
-<div aria-label="Navegación mes/año" class="calendar-nav" role="toolbar">
-<button aria-label="Año anterior" class="btn btn-sm btn-outline-secondary" id="nav-prev-year">«</button>
-<button aria-label="Mes anterior" class="btn btn-sm btn-outline-secondary" id="nav-prev-month">‹</button>
-<button aria-label="Hoy" class="btn btn-sm btn-outline-secondary" id="nav-today">Hoy</button>
-<button aria-label="Mes siguiente" class="btn btn-sm btn-outline-secondary" id="nav-next-month">›</button>
-<button aria-label="Año siguiente" class="btn btn-sm btn-outline-secondary" id="nav-next-year">»</button>
-</div>
-<div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
-<select aria-label="Seleccionar mes" class="calendar-select month" id="calendar-month-select"></select>
-<select aria-label="Seleccionar año" class="calendar-select year" id="calendar-year-select"></select>
-</div>
-</div>
-<table aria-describedby="tool-help" class="calendar-table table" id="calendar-table" role="grid"></table>
-<details class="faq-section" id="faq-section">
-<summary id="faq-title">Preguntas frecuentes ▾</summary>
-<ul id="faq-list"></ul>
-</details>
-</section>
-<aside class="card-base article-card" id="right-card">
-<h2 id="tips-title"><i class="fa fa-lightbulb"></i> Consejos de productividad</h2>
-<ul id="tips-list">
-<li><strong>Usa código de color:</strong> Usa emojis o etiquetas para una organización visual sencilla.</li>
-<li><strong>Revisa regularmente:</strong> Verifica tus notas y elimina eventos obsoletos.</li>
-<li><strong>Planifica con antelación:</strong> Añade notas para fechas futuras para estar preparado.</li>
-</ul>
+      <section class="card-base tool-card" id="center-card" aria-labelledby="tool-title">
+        <a id="back-link" class="back-link" href="index.html" style="margin-bottom:.25rem;display:inline-block;color:var(--brand);font-weight:600;text-decoration:none;">Volver al menú principal</a>
 
-</aside>
-</div>
-</main>
-<!-- Notes Modal -->
-<div aria-hidden="true" aria-labelledby="noteModalLabel" class="modal fade" id="noteModal" tabindex="-1">
-<div class="modal-dialog">
-<div class="modal-content">
-<form autocomplete="off" id="noteForm">
-<div class="modal-header">
-<h5 class="modal-title" id="noteModalLabel">Notas para <span id="modal-date-label"></span></h5>
-<button aria-label="Cerrar" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<div class="modal-body">
-<ul aria-live="polite" class="note-list" id="noteList"></ul>
-<textarea class="form-control" id="noteInput" placeholder="Añadir una nueva nota para este día..." rows="3"></textarea>
-</div>
-<div class="modal-footer">
-<button class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn" type="button">Cerrar</button>
-<button class="btn btn-success" id="note-add-btn" type="submit">Añadir nota</button>
-</div>
-</form>
-</div>
-</div>
-</div>
-<footer>© 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br/>
-<a href="privacy.html">Política de privacidad</a> •
+        <h3 id="tool-title"></h3>
+        <div id="tool-help" style="color:var(--muted);margin-bottom:.25rem;"></div>
+
+        <div class="calendar-header" aria-label="Navegación del calendario">
+          <div class="calendar-nav" role="toolbar" aria-label="Navegación mes/año">
+            <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary" aria-label="Año anterior">«</button>
+            <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary" aria-label="Mes anterior">‹</button>
+            <button id="nav-today" class="btn btn-sm btn-outline-secondary" aria-label="Hoy">Hoy</button>
+            <button id="nav-next-month" class="btn btn-sm btn-outline-secondary" aria-label="Mes siguiente">›</button>
+            <button id="nav-next-year" class="btn btn-sm btn-outline-secondary" aria-label="Año siguiente">»</button>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
+            <select id="calendar-month-select" class="calendar-select month" aria-label="Seleccionar mes"></select>
+            <select id="calendar-year-select" class="calendar-select year" aria-label="Seleccionar año"></select>
+          </div>
+        </div>
+
+        <table id="calendar-table" class="calendar-table table" role="grid" aria-describedby="tool-help"></table>
+
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title">Preguntas frecuentes ▾</summary>
+          <ul id="faq-list"></ul>
+        </details>
+      </section>
+
+      <aside class="card-base article-card" id="right-card">
+        <h2 id="tips-title"><i class="fa fa-lightbulb"></i> Consejos de productividad</h2>
+        <ul id="tips-list">
+          <li><strong>Usa código de color:</strong> Usa emojis o etiquetas para una organización visual sencilla.</li>
+          <li><strong>Revisa regularmente:</strong> Verifica tus notas y elimina eventos obsoletos.</li>
+          <li><strong>Planifica con antelación:</strong> Añade notas para fechas futuras para estar preparado.</li>
+        </ul>
+        <div style="margin-top:auto;">
+          <a id="tips-article-btn" class="btn btn-outline-primary" href="calendar-tips-es.html">Leer el artículo completo</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Notes Modal -->
+  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="noteForm" autocomplete="off">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noteModalLabel">Notas para <span id="modal-date-label"></span></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <ul id="noteList" class="note-list" aria-live="polite"></ul>
+            <textarea id="noteInput" class="form-control" rows="3" placeholder="Añadir una nueva nota para este día..."></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn">Cerrar</button>
+            <button type="submit" class="btn btn-success" id="note-add-btn">Añadir nota</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br>
+    <a href="privacy.html">Política de privacidad</a> •
     <a href="terms.html">Términos</a> •
     <a href="contact.html">Contacto</a>
-</footer>
-<script>
+  </footer>
+
+  <script>
     // defensive localStorage write for lang
     try { localStorage.setItem('timerhavenLang','es'); } catch(e) {}
 
@@ -410,5 +423,5 @@
       renderCalendar(currentYear, currentMonth, getLang());
     });
   </script>
-<p style="margin-top:1rem;"><a class="cta" href="/es/calendar/calendar-index.html">Read full guide</a></p></body>
+</body>
 </html>

@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="el">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Καιρός παγκοσμίως</title>
-<meta content="Ελέγξτε τον καιρό για πόλεις σε όλο τον κόσμο άμεσα." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Καιρός παγκοσμίως</title>
+  <meta name="description" content="Ελέγξτε τον καιρό για πόλεις σε όλο τον κόσμο άμεσα.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
@@ -61,87 +60,117 @@
   </style>
 </head>
 <body>
-<div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-<select aria-label="Language selector" class="language-select" id="language-select-top">
-<option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option selected="" value="el">Ελληνικά</option><option value="ar">العربية</option>
-</select>
-</div>
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">Καιρός παγκοσμίως</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">Ελέγξτε τον καιρό για πόλεις σε όλο τον κόσμο άμεσα.</p>
-</div>
-<div class="center-row">
+  <div class="page-wrap">
+    <div class="top-row">
+      <label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
+      <select id="language-select-top" class="language-select" aria-label="Language selector">
+        <option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el" selected>Ελληνικά</option><option value="ar">العربية</option>
+      </select>
+    </div>
 
-<div aria-label="Global Weather" class="tool-card" role="region">
-<a class="back-link" href="index.html">← Επιστροφή στο κύριο μενού</a>
-<!-- Middle visible title intentionally removed to keep the card minimal per request -->
-<form autocomplete="off" id="weatherForm">
-<div class="weather-form-row">
-<select class="form-select" id="cityDropdown" style="min-width:140px;" title="Επιλέξτε πόλη...">
-<option value="">Επιλέξτε πόλη...</option>
-<option value="New York">Νέα Υόρκη</option>
-<option value="London">Λονδίνο</option>
-<option value="Paris">Παρίσι</option>
-<option value="Berlin">Βερολίνο</option>
-<option value="Tokyo">Τόκιο</option>
-<option value="Sydney">Σίδνεϊ</option>
-<option value="São Paulo">Σάο Πάολο</option>
-<option value="Moscow">Μόσχα</option>
-<option value="Dubai">Ντουμπάι</option>
-<option value="Istanbul">Κωνσταντινούπολη</option>
-<option value="Johannesburg">Γιοχάνεσμπουργκ</option>
-<option value="Toronto">Τόροντο</option>
-<option value="Mexico City">Πόλη του Μεξικού</option>
-<option value="Los Angeles">Λος Άντζελες</option>
-<option value="Mumbai">Μουμπάι</option>
-<option value="Cairo">Κάιρο</option>
-<option value="Singapore">Σιγκαπούρη</option>
-<option value="Hong Kong">Χονγκ Κονγκ</option>
-<option value="Bangkok">Μπανγκόκ</option>
-<option value="Seoul">Σεούλ</option>
-<option value="San Francisco">Σαν Φρανσίσκο</option>
-<option value="Rome">Ρώμη</option>
-<option value="Kolkata">Κολκάτα</option>
-<option value="Jakarta">Τζακάρτα</option>
-<option value="Madrid">Μαδρίτη</option>
-<option value="Cape Town">Κέιπ Τάουν</option>
-<option value="Lagos">Λάγος</option>
-<option value="Melbourne">Μελβούρνη</option>
-<option value="Beijing">Πεκίνο</option>
-<option value="Chicago">Σικάγο</option>
-<option value="Vancouver">Βανκούβερ</option>
-<option value="Auckland">Όκλαντ</option>
-<option value="Hanoi">Χανόι</option>
-<option value="Manila">Μανίλα</option>
-<option value="Warsaw">Βαρσοβία</option>
-</select>
-<input class="form-control" id="cityInput" placeholder="Ή πληκτρολογήστε πόλη..." style="min-width:160px;" title="Ή πληκτρολογήστε πόλη..." type="text"/>
-</div>
-<div class="action-row">
-<button id="getWeatherBtn" type="submit">Λήψη καιρού</button>
-<button id="useLocationBtn" type="button"><i class="fa fa-location-arrow"></i> Χρήση τοποθεσίας</button>
-</div>
-</form>
-<div class="weather-result" id="weatherResult"></div>
-<div class="powered-by">Δεδομένα από <a href="https://open-meteo.com" rel="noopener" target="_blank">Open‑Meteo</a><span class="provider"></span></div>
-<details class="faq-section" style="margin-top:1rem;">
-<summary><i class="fa fa-play"></i> Συχνές ερωτήσεις</summary>
-<ul style="padding-left:1.1rem; color:#374151;">
-<li><b>Πόσο ακριβής είναι ο καιρός;</b> Τα δεδομένα παρέχονται από Open‑Meteo ή παρόμοια APIs.</li>
-<li><b>Μπορώ να χρησιμοποιήσω την τοποθεσία μου;</b> Ναι, πατήστε <b>Χρήση τοποθεσίας</b>.</li>
-<li><b>Μπορώ να εισάγω οποιαδήποτε πόλη;</b> Ναι! Πληκτρολογήστε την πόλη.</li>
-</ul>
-</details>
-</div>
+    <div class="text-center mb-4">
+      <h1 style="margin-bottom:.25rem;">Καιρός παγκοσμίως</h1>
+      <p class="lead" style="color:#374151; margin-bottom:1rem;">Ελέγξτε τον καιρό για πόλεις σε όλο τον κόσμο άμεσα.</p>
+    </div>
 
-</div>
-<footer class="site">
-      © 2025 TimerHaven. <a href="privacy.html">Πολιτική</a>
-</footer>
-</div>
-<script>
+    <div class="center-row">
+      <div class="article-card" aria-labelledby="howto-title">
+        <div>
+          <h2 id="howto-title"><i class="fa fa-cloud-sun"></i> Πώς να χρησιμοποιήσετε τον καιρό</h2>
+          <ol style="padding-left:1.1rem; color:#374151;">
+            <li><b>Επιλέξτε ή εισάγετε πόλη:</b> Επιλέξτε από τη λίστα ή πληκτρολογήστε τη δική σας.</li>
+            <li><b>Χρήση τοποθεσίας:</b> Πατήστε <strong>Χρήση τοποθεσίας</strong>.</li>
+            <li><b>Δείτε τα αποτελέσματα:</b> Πατήστε <strong>Λήψη καιρού</strong>.</li>
+          </ol>
+        </div>
+        <a href="weather-how-to-el.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Διαβάστε το άρθρο</a>
+      </div>
+
+      <div class="tool-card" role="region" aria-label="Global Weather">
+        <a href="index.html" class="back-link">&larr; Επιστροφή στο κύριο μενού</a>
+
+        <!-- Middle visible title intentionally removed to keep the card minimal per request -->
+
+        <form id="weatherForm" autocomplete="off">
+          <div class="weather-form-row">
+            <select id="cityDropdown" class="form-select" title="Επιλέξτε πόλη..." style="min-width:140px;">
+              <option value="">Επιλέξτε πόλη...</option>
+              <option value="New York">Νέα Υόρκη</option>
+              <option value="London">Λονδίνο</option>
+              <option value="Paris">Παρίσι</option>
+              <option value="Berlin">Βερολίνο</option>
+              <option value="Tokyo">Τόκιο</option>
+              <option value="Sydney">Σίδνεϊ</option>
+              <option value="São Paulo">Σάο Πάολο</option>
+              <option value="Moscow">Μόσχα</option>
+              <option value="Dubai">Ντουμπάι</option>
+              <option value="Istanbul">Κωνσταντινούπολη</option>
+              <option value="Johannesburg">Γιοχάνεσμπουργκ</option>
+              <option value="Toronto">Τόροντο</option>
+              <option value="Mexico City">Πόλη του Μεξικού</option>
+              <option value="Los Angeles">Λος Άντζελες</option>
+              <option value="Mumbai">Μουμπάι</option>
+              <option value="Cairo">Κάιρο</option>
+              <option value="Singapore">Σιγκαπούρη</option>
+              <option value="Hong Kong">Χονγκ Κονγκ</option>
+              <option value="Bangkok">Μπανγκόκ</option>
+              <option value="Seoul">Σεούλ</option>
+              <option value="San Francisco">Σαν Φρανσίσκο</option>
+              <option value="Rome">Ρώμη</option>
+              <option value="Kolkata">Κολκάτα</option>
+              <option value="Jakarta">Τζακάρτα</option>
+              <option value="Madrid">Μαδρίτη</option>
+              <option value="Cape Town">Κέιπ Τάουν</option>
+              <option value="Lagos">Λάγος</option>
+              <option value="Melbourne">Μελβούρνη</option>
+              <option value="Beijing">Πεκίνο</option>
+              <option value="Chicago">Σικάγο</option>
+              <option value="Vancouver">Βανκούβερ</option>
+              <option value="Auckland">Όκλαντ</option>
+              <option value="Hanoi">Χανόι</option>
+              <option value="Manila">Μανίλα</option>
+              <option value="Warsaw">Βαρσοβία</option>
+            </select>
+            <input type="text" id="cityInput" class="form-control" placeholder="Ή πληκτρολογήστε πόλη..." title="Ή πληκτρολογήστε πόλη..." style="min-width:160px;">
+          </div>
+
+          <div class="action-row">
+            <button type="submit" id="getWeatherBtn">Λήψη καιρού</button>
+            <button type="button" id="useLocationBtn"><i class="fa fa-location-arrow"></i> Χρήση τοποθεσίας</button>
+          </div>
+        </form>
+
+        <div id="weatherResult" class="weather-result"></div>
+
+        <div class="powered-by">Δεδομένα από <a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a><span class="provider"></span></div>
+
+        <details class="faq-section" style="margin-top:1rem;">
+          <summary><i class="fa fa-play"></i> Συχνές ερωτήσεις</summary>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>Πόσο ακριβής είναι ο καιρός;</b> Τα δεδομένα παρέχονται από Open‑Meteo ή παρόμοια APIs.</li>
+            <li><b>Μπορώ να χρησιμοποιήσω την τοποθεσία μου;</b> Ναι, πατήστε <b>Χρήση τοποθεσίας</b>.</li>
+            <li><b>Μπορώ να εισάγω οποιαδήποτε πόλη;</b> Ναι! Πληκτρολογήστε την πόλη.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="article-card" aria-labelledby="tips-title">
+        <div>
+          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Συμβουλές Καιρού</h2>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>Σχεδιάστε εκ των προτέρων:</b> Ελέγξτε τον καιρό πριν ταξίδια ή εκδηλώσεις.</li><li><b>Χρησιμοποιήστε τοποθεσία:</b> Λάβετε τοπικές ενημερώσεις άμεσα.</li><li><b>Εξοικονομήστε χρόνο:</b> Χρησιμοποιήστε τη λίστα για δημοφιλείς πόλεις.</li>
+          </ul>
+        </div>
+        <a href="weather-tips-el.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Διαβάστε το άρθρο</a>
+      </div>
+    </div>
+
+    <footer class="site">
+      &copy; 2025 TimerHaven. <a href="privacy.html">Πολιτική</a>
+    </footer>
+  </div>
+
+  <script>
   // localized JS strings
   const MSG_PLEASE_SELECT = "Επιλέξτε ή εισάγετε μια πόλη, παρακαλώ.";
   const MSG_GEO_UNSUPPORTED = "Η γεωτοποθεσία δεν υποστηρίζεται.";
@@ -248,7 +277,8 @@
     }
   })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/el/weather/weather-index.html">Read full guide</a></p></body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
 </html>

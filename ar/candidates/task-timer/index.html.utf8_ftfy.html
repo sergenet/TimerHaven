@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>مؤقت المهام — TimerHaven</title>
+  <meta name="description" content="مؤقت المهام — قياس الوقت بدقة لكل مهمة، تسجيل الجلسات وتحسين التقديرات استناداً إلى بيانات فعلية.">
+
+  <link rel="canonical" href="https://timerhaven.com/ar/task-timer/">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer/">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer/">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer/">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer/">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer/">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer/">
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer/">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer/">
+
+  <!-- Person structured data (author) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Serge Shammas",
+    "image": "/assets/images/authors/serge-shammas-400.jpg",
+    "url": "/authors/serge-shammas",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- HowTo / Article structured data (Arabic page) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"تسجيل وتحليل وقت المهام باستخدام مؤقت المهام",
+        "description":"إجراء عمل لقياس الوقت الفعلي للمهام، تسجيل المقاطعات، واستخدام البيانات لتحسين التقديرات.",
+        "image":"/assets/images/tasktimer-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["مؤقت المهام","ملاحظات","جداول بيانات"],
+        "step":[
+          {"@type":"HowToStep","name":"إنشاء إدخال مهمة","text":"سجّل اسم المهمة وأضف المدة المتوقعة والوسوم.","image":"/assets/images/tasktimer-step-1.png"},
+          {"@type":"HowToStep","name":"بدء المؤقت وتسجيل المقاطعات","text":"ابدأ المؤقت وسجّل أي مقاطعات أثناء العمل.","image":"/assets/images/tasktimer-step-2.png"},
+          {"@type":"HowToStep","name":"إيقاف وتصدير","text":"أوقف المؤقت عند الانتهاء وصدر الجلسة كملف CSV لتحليل أسبوعي.","image":"/assets/images/tasktimer-step-3.png"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"مؤقت المهام — قِس وقتك وسجّل الجلسات",
+        "image":["/assets/images/tasktimer-snapshot.png"],
+        "author": {"@type":"Person","name":"Serge Shammas"},
+        "datePublished":"2025-10-25",
+        "dateModified":"2025-11-10",
+        "publisher": {"@type":"Organization","name":"TimerHaven","logo":{"@type":"ImageObject","url":"/assets/images/timerhaven-logo.png"}},
+        "description":"دليل استخدام مؤقت المهام: تسجيل الجلسات، إدارة المقاطعات وتصدير CSV للتحليل.",
+        "mainEntityOfPage":"/ar/task-timer/",
+        "about": {
+          "@type":"SoftwareApplication",
+          "name":"مؤقت المهام",
+          "url": "/timer-ar.html",
+          "applicationCategory": "Productivity",
+          "operatingSystem": "Web"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#fffdfa;color:#102a43;margin:0;padding:2rem;line-height:1.6;direction:rtl;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:#fff;border-radius:10px;padding:2rem;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:#0b5f8a;margin-top:0;text-align:right;}
+    .meta{color:#6b7c89;font-size:0.95rem;margin-bottom:1rem;text-align:right;}
+    .lead{font-size:1.05rem;color:#333;text-align:right;}
+    .section{margin-top:1.1rem;text-align:right;}
+    .cta{display:inline-block;margin-top:1rem;padding:0.6rem 1.1rem;border-radius:8px;background:#0b5f8a;color:#fff;text-decoration:none;}
+    .case{background:#f8fff7;border-right:4px solid #b7f0c2;padding:0.8rem;margin:0.8rem 0;border-radius:6px;text-align:right;}
+    .workflow{background:#fff7fb;border-right:4px solid #f0c2e0;padding:0.8rem;margin:0.8rem 0;border-radius:6px;text-align:right;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;direction:ltr;text-align:left;}
+    .faq{margin-top:1rem;background:#f3f7fb;padding:1rem;border-radius:8px;text-align:right;}
+    .muted{color:#6b7c89;font-size:0.95rem;text-align:right;}
+    table.sample {width:100%;border-collapse:collapse;margin-top:0.5rem;}
+    table.sample th, table.sample td {text-align:left;padding:0.4rem;border-bottom:1px solid #eee;font-size:0.95rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;justify-content:flex-end;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    .return-link{display:inline-block;margin-top:1rem;text-decoration:none;color:#0b5f8a;font-weight:600;text-align:right;}
+    .small-text-muted{color:#6b7280;font-size:.95rem;margin:0 0 0.5rem 0;text-align:right;}
+    .example-card .row{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+    .example-card .left{display:flex;gap:.75rem;align-items:center;min-width:0;}
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="container">
+    <article class="card" role="main" aria-labelledby="title">
+      <h1 id="title">مؤقت المهام — قِس وقتك وسجّل الجلسات</h1>
+
+      <!-- Author card -->
+      <div class="author" role="articleauthor" aria-label="المؤلف">
+        <img
+          src="/assets/images/authors/serge-shammas-200.jpg"
+          srcset="/assets/images/authors/serge-shammas-400.jpg 2x"
+          width="56" height="56"
+          alt="Serge Shammas — productivity writer and UX researcher"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='/assets/images/authors/avatar-placeholder.png';">
+        <div style="text-align:right;">
+          <div class="byline"><strong>بواسطة Serge Shammas</strong> — كاتب عن الإنتاجية وباحث في تجربة المستخدم</div>
+          <div class="meta">نُشرت: 2025-10-25 · آخر تحديث: 2025-11-10 · وقت القراءة: 7 دقائق</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        استخدم مؤقت المهام لقياس المدة الحقيقية التي تستغرقها المهام. تساعدك هذه البيانات على تحسين التقديرات، تتبع عبء العمل، وتجهيز بيانات الفوترة عند الحاجة.
+      </p>
+
+      <!-- Table of contents -->
+      <nav class="toc" aria-label="جدول المحتويات" style="margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;text-align:right;">
+        <a href="#setup" style="display:inline-block;margin-left:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">الإعداد</a>
+        <a href="#howto" style="display:inline-block;margin-left:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">كيفية التسجيل</a>
+        <a href="#analysis" style="display:inline-block;margin-left:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">التصدير والتحليل</a>
+        <a href="#download" style="display:inline-block;margin-left:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">تحميل CSV</a>
+        <a href="#case-studies" style="display:inline-block;margin-left:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">حالات</a>
+        <a href="#faq" style="display:inline-block;margin-left:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">الأسئلة الشائعة</a>
+      </nav>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">الإعداد وقواعد التسمية</h2>
+        <p>استخدم أسماء مهام واضحة وأضف مدة متوقعة بين قوسين (مثال: <em>كتابة اختبارات وحدات (45m)</em>). أضف وسوماً للمشروع والنوع. هذا التناسق يجعل CSVs أسهل في التحليل — استخدم وسوماً قصيرة وثابتة (client-alpha, meeting, review).</p>
+      </section>
+
+      <section id="howto" class="section" aria-labelledby="howto-title">
+        <h2 id="howto-title">كيفية تسجيل جلسة</h2>
+
+        <div class="workflow" role="region">
+          <strong>تسجيل</strong>
+          <ol>
+            <li>أنشئ إدخال المهمة مع المدة التقديرية والوسوم.</li>
+            <li>ابدأ المؤقت عند البداية وسجل المقاطعات في حقل الملاحظات.</li>
+            <li>أوقف المؤقت عند الانتهاء وأضف ملخصاً قصيراً للعمل المنجز.</li>
+          </ol>
+        </div>
+
+        <!-- Example card: Download sample CSV -->
+        <section id="export-demo-inline" class="section export-demo mt-3" aria-labelledby="export-demo-inline-title">
+          <h3 id="export-demo-inline-title" class="h5">مثال: إدخال مؤقت المهمة مع تصدير</h3>
+
+          <p class="small-text-muted">تحميل مثال CSV</p>
+
+          <div class="card example-card" style="padding:1rem;max-width:740px;background:#fbfdff;border:1px solid #eef5fb;border-radius:8px;text-align:right;">
+            <div class="row">
+              <div class="left">
+                <div style="flex:0 0 auto;">
+                  <span style="display:inline-block;width:44px;height:44px;border-radius:6px;background:#fff;border:1px solid #e6eef8;text-align:center;line-height:44px;color:#0d6efd;font-weight:700;">TT</span>
+                </div>
+
+                <div style="min-width:0;">
+                  <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:nowrap;justify-content:flex-end;">
+                    <strong id="demoSessionName" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">كتابة تقرير</strong>
+                    <small id="demoSessionTags" class="muted" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عمل، مشروعX</small>
+                  </div>
+                  <div style="margin-top:.25rem; color:#475569; font-size:.95rem; text-align:right;">
+                    <span id="demoSessionTimer" style="font-weight:600;">25:00</span>
+                    <span class="muted" style="margin-left:.5rem;font-size:.9rem;">(مثال)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="flex:0 0 auto; display:flex; gap:.5rem; align-items:center; justify-content:flex-start;">
+                <button id="exportDemoBtnInline" class="cta" aria-label="تحميل مثال CSV" style="background:#fff;color:#0b5f8a;border:1px solid #cfe8f5;padding:0.4rem 0.8rem;border-radius:6px;">
+                  <!-- inline SVG download icon -->
+                  <svg width="14" height="14" viewBox="0 0 24 24" style="margin-left:.35rem;vertical-align:middle" aria-hidden="true" focusable="false">
+                    <path fill="#0d6efd" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"></path>
+                  </svg>
+                  تحميل مثال CSV
+                </button>
+              </div>
+            </div>
+
+            <p class="mt-2 mb-0" style="font-size:.9rem;color:#6b7280;text-align:right;">
+              انقر الزر أعلاه لتنزيل ملف CSV نموذجي جاهز للاستخدام. لتصدير بيانات الجلسة الفعلية من أداة مؤقت المهام، استخدم أمر التصدير داخل الأداة.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section id="analysis" class="section" aria-labelledby="analysis-title">
+        <h2 id="analysis-title">التصدير والتحليل</h2>
+        <p>صدر CSVs أسبوعية واحسب المتوسطات حسب الوسوم أو المشروع. مؤشّرات مهمة: متوسط الوقت لكل مهمة، الوسيط (أقل تأثراً بالقيم الشاذة)، ومعدل المقاطعات (% من الجلسات التي بها مقاطعات).</p>
+
+        <div class="workflow">
+          <strong>وصفة — مراجعة أسبوعية</strong>
+          <ol>
+            <li>صدّر جلسات الأسبوع كملف CSV.</li>
+            <li>في جدول البيانات احسب متوسطات المدة لكل وسم ورتّب المهام الأطول لتحسين التقديرات.</li>
+            <li>استخدم النتائج لتعديل كتل Pomodoro وتقويم العمل.</li>
+          </ol>
+        </div>
+
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">مثال — صيغ وتفسير</h3>
+          <p>افترض أن التصدير يحتوي على عمود <code>actual_minutes</code> وعمود <code>interruptions</code> بعدد المقاطعات لكل جلسة.</p>
+          <ul>
+            <li>متوسط الوسم "project-alpha": =AVERAGEIF(tag_range,"project-alpha",actual_minutes_range)</li>
+            <li>الوسيط: =MEDIAN(IF(tag_range="project-alpha",actual_minutes_range)) — استخدم صيغة مصفوفية عند الحاجة.</li>
+            <li>معدل المقاطعات: =COUNTIFS(tag_range,"project-alpha",interruptions_range,">0") / COUNTIF(tag_range,"project-alpha")</li>
+          </ul>
+
+          <p>جلسات أسبوعية كمثال (للتوضيح):</p>
+          <table class="sample" aria-hidden="false">
+            <thead><tr><th>2025-11-03</th><th>مراجعة كود</th><th>60</th><th>1</th></tr></thead>
+            <tbody>
+              <tr><td>2025-11-03</td><td>مراجعة كود</td><td>60</td><td>1</td></tr>
+              <tr><td>2025-11-04</td><td>الميزة X</td><td>120</td><td>0</td></tr>
+              <tr><td>2025-11-06</td><td>تصحيح علة</td><td>45</td><td>1</td></tr>
+            </tbody>
+          </table>
+
+          <p class="muted">مثال: المتوسط = (60+120+45)/3 = 75 دقيقة؛ معدل المقاطعات = 2/3 = 66.7%.</p>
+        </div>
+      </section>
+
+      <section id="download" class="section" aria-labelledby="download-title">
+        <h2 id="download-title">تحميل — نموذج CSV لمؤقت المهام</h2>
+        <p class="muted">استخدم هذا النموذج لملء الجلسات يدوياً أو لاختبار الاستيراد.</p>
+        <p><a href="#" id="downloadCsv" class="cta" aria-label="تحميل نموذج CSV">تحميل نموذج CSV</a></p>
+
+        <script>
+          // Keep the CSV template only in JS so it's not visible on the page
+          const csvTemplate = 'task_name,start_iso,end_iso,duration_minutes,note\nClientX_ProjectA_Design,2025-01-02T08:30:00Z,2025-01-02T10:00:00Z,90,Initial concept';
+
+          document.getElementById('downloadCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = csvTemplate;
+            var blob = new Blob([text], {type:'text/csv;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'task-timer-template-ar.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title">حالات واقعية ونصائح</h2>
+        <div class="case">
+          <strong>مستشار — Paolo</strong>
+          <p>بعد أسبوعين، اكتشف Paolo أن مراجعات الكود تستحوذ على 20% من يومه. خصص وقتاً مخصصاً للمراجعات وقلل من تبديل السياق.</p>
+        </div>
+        <div class="case">
+          <strong>مستشارة — Rina</strong>
+          <p>سجلت Rina المكالمات كـمقاطعات؛ الآن تُبرمج فترات فاصلة وتضبط الوقت المخصص للاجتماعات.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="faq">
+          <p><strong>س: ماذا أفعل إذا كانت الجلسات تظهر أقصر بسبب وضع السكون؟</strong><br>
+          <strong>ج:</strong> أبقِ الصفحة نشطة أو سجّل الأوقات يدوياً إذا دخل الجهاز وضع السكون.</p>
+
+          <p><strong>س: هل يمكن تشغيل عدة مؤقتات في آن واحد؟</strong><br>
+          <strong>ج:</strong> المؤقت مصمم لجلسة نشطة واحدة. لتتبّع أعمال متوازية استخدم نوافذ/جلسات منفصلة.</p>
+
+          <p><strong>س: أين تحفظ البيانات؟</strong><br>
+          <strong>ج:</strong> تُخزّن الجلسات محلياً في متصفحك (localStorage) بشكل افتراضي ولا تُرسل إلى الخادم إلا إذا اخترت ذلك.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;text-align:right;">أدوات ذات صلة: <a class="inline-link" href="/ar/notes/">الملاحظات</a> · <a class="inline-link" href="/ar/pomodoro-timer/">Pomodoro</a> · <a class="inline-link" href="/ar/calendar-planning/">التقويم</a></p>
+
+      <p style="text-align:left;margin-top:1rem;">
+        <a href="/timer-ar.html#startBtn" class="cta" style="float:left;">فتح Task Timer</a>
+      </p>
+      <div style="clear:both;"></div>
+
+      <footer style="margin-top:1.2rem;text-align:right;color:#6b7c89;font-size:0.95rem;">
+        <p>هل لديك تعليق أو خطأ؟ راسلنا: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a></p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Demo export script (stable sample filename) -->
+  <script>
+  (function(){
+    function escapeCsv(v){
+      if (v === null || v === undefined) return '';
+      return '"' + String(v).replace(/"/g,'""') + '"';
+    }
+
+    function downloadCsv(filename, content){
+      var blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function buildDemoSession(){
+      var now = new Date();
+      var start = new Date(now.getTime() - (25*60*1000)); // 25 minutes earlier
+      var task = (document.getElementById('demoSessionName') && document.getElementById('demoSessionName').textContent) || 'كتابة تقرير';
+      var tagsText = (document.getElementById('demoSessionTags') && document.getElementById('demoSessionTags').textContent) || '';
+      var tags = tagsText.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+      return {
+        id: 'demo-' + Math.floor(Math.random()*900000+100000),
+        task_name: task.trim(),
+        tags: tags,
+        start_time: start.toISOString(),
+        end_time: now.toISOString(),
+        duration_seconds: 25*60,
+        duration_human: '25:00',
+        notes: 'مثال تصدير من الدليل',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+      };
+    }
+
+    function exportSessionAsCsv(session){
+      var header = ['id','task_name','tags','start_time','end_time','duration_seconds','duration_human','notes','timezone'];
+      var row = [
+        session.id || '',
+        session.task_name || '',
+        (session.tags || []).join(';'),
+        session.start_time || '',
+        session.end_time || '',
+        session.duration_seconds != null ? session.duration_seconds : '',
+        session.duration_human || '',
+        session.notes || '',
+        session.timezone || ''
+      ];
+      var csv = header.map(escapeCsv).join(',') + '\n' + row.map(escapeCsv).join(',') + '\n';
+      // Stable sample filename
+      var filename = 'tasktimer-sample.csv';
+      downloadCsv(filename, csv);
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      var btn = document.getElementById('exportDemoBtnInline');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        try {
+          var session = buildDemoSession();
+          exportSessionAsCsv(session);
+          var orig = btn.innerHTML;
+          btn.innerHTML = 'تم التنزيل';
+          btn.disabled = true;
+          setTimeout(function(){ btn.innerHTML = orig; btn.disabled = false; }, 1200);
+        } catch (e) {
+          console.error('Export error', e);
+          alert('فشل التصدير — راجع وحدة تحكم المتصفح للمزيد.');
+        }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
+
+

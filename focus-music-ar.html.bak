@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="ar">
 <head>
-  <meta charset="utf-8">
-  <title>موسيقى التركيز — TimerHaven</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="استمع إلى موسيقى تساعدك على التركيز. اختر الضوضاء البيضاء، المطر، موجات ألفا، الكلاسيك، أمواج البحر أو أجواء المقهى.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<title>Ù…ÙˆØ³ÙŠÙ‚Ù‰ Ø§Ù„ØªØ±ÙƒÙŠØ² â€” TimerHaven</title>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Ø§Ø³ØªÙ…Ø¹ Ø¥Ù„Ù‰ Ù…ÙˆØ³ÙŠÙ‚Ù‰ ØªØ³Ø§Ø¹Ø¯Ùƒ Ø¹Ù„Ù‰ Ø§Ù„ØªØ±ÙƒÙŠØ². Ø§Ø®ØªØ± Ø§Ù„Ø¶ÙˆØ¶Ø§Ø¡ Ø§Ù„Ø¨ÙŠØ¶Ø§Ø¡ØŒ Ø§Ù„Ù…Ø·Ø±ØŒ Ù…ÙˆØ¬Ø§Øª Ø£Ù„ÙØ§ØŒ Ø§Ù„ÙƒÙ„Ø§Ø³ÙŠÙƒØŒ Ø£Ù…ÙˆØ§Ø¬ Ø§Ù„Ø¨Ø­Ø± Ø£Ùˆ Ø£Ø¬ÙˆØ§Ø¡ Ø§Ù„Ù…Ù‚Ù‡Ù‰." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; direction: rtl; }
     .main-container { max-width:1200px; margin:2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
     .center-row, .card-row { display:flex; gap:2em; width:100%; justify-content:center; align-items:stretch; flex-wrap:wrap; }
@@ -25,65 +26,61 @@
     .back-link:hover { text-decoration:underline; }
     @media (max-width:1100px){ .main-container{padding:0 8px;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
     @media (max-width:800px){ .center-row{flex-direction:column;align-items:center;} .article-card{display:none!important;} }
-    details[open] summary::after{ content:" ▲"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" ▼"; font-size:.9em; }
+    details[open] summary::after{ content:" â–²"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" â–¼"; font-size:.9em; }
   </style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body dir="rtl">
-  <!-- Force Arabic for local testing -->
-  <script>try{ localStorage.setItem('timerhavenLang','ar'); }catch(e){}</script>
-
-  <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div>
-          <h2 id="howto-title"></h2>
-          <ol id="howto-steps"></ol>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
-
-      <div class="tool-card">
-        <a href="index.html" class="back-link" id="back-link"></a>
-        <h3 id="tool-title"></h3>
-        <div class="help-section" id="tool-help"></div>
-
-        <div class="music-player">
-          <label for="music-select" id="music-label"></label>
-          <select id="music-select" class="form-select mb-2" aria-label="اختر قائمة تشغيل">
-            <option value="white"></option>
-            <option value="rain"></option>
-            <option value="alpha"></option>
-            <option value="classical"></option>
-            <option value="ocean"></option>
-            <option value="cafe"></option>
-          </select>
-
-          <label for="music-loop" id="loop-label" style="display:flex;align-items:center;gap:.5rem; justify-content:flex-end;">
-            <input type="checkbox" id="music-loop" aria-label="تكرار المقطع">
-            <span id="loop-label-text"></span>
-          </label>
-        </div>
-
-        <button class="btn btn-primary w-100 mb-2" id="play-btn">تشغيل</button>
-        <button class="btn btn-danger w-100 mb-2" id="stop-btn">إيقاف</button>
-        <audio id="focus-audio" style="display:none;" controls></audio>
-
-        <details class="faq-section mt-2">
-          <summary id="faq-title"></summary>
-          <ul id="faq-list" style="padding-right:1em;"></ul>
-        </details>
-      </div>
-
-      <div class="article-card">
-        <div>
-          <h2 id="tips-title"></h2>
-          <ul id="tips-list"></ul>
-        </div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
-    </div>
-  </div>
-
+<!-- Force Arabic for local testing -->
+<script>try{ localStorage.setItem('timerhavenLang','ar'); }catch(e){}</script>
+<div class="main-container">
+<div class="center-row">
+<div class="article-card">
+<div>
+<h2 id="howto-title"></h2>
+<ol id="howto-steps"></ol>
+</div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
+</div>
+<div class="tool-card">
+<a class="back-link" href="index.html" id="back-link"></a>
+<h3 id="tool-title"></h3>
+<div class="help-section" id="tool-help"></div>
+<div class="music-player">
+<label for="music-select" id="music-label"></label>
+<select aria-label="Ø§Ø®ØªØ± Ù‚Ø§Ø¦Ù…Ø© ØªØ´ØºÙŠÙ„" class="form-select mb-2" id="music-select">
+<option value="white"></option>
+<option value="rain"></option>
+<option value="alpha"></option>
+<option value="classical"></option>
+<option value="ocean"></option>
+<option value="cafe"></option>
+</select>
+<label for="music-loop" id="loop-label" style="display:flex;align-items:center;gap:.5rem; justify-content:flex-end;">
+<input aria-label="ØªÙƒØ±Ø§Ø± Ø§Ù„Ù…Ù‚Ø·Ø¹" id="music-loop" type="checkbox"/>
+<span id="loop-label-text"></span>
+</label>
+</div>
+<button class="btn btn-primary w-100 mb-2" id="play-btn">ØªØ´ØºÙŠÙ„</button>
+<button class="btn btn-danger w-100 mb-2" id="stop-btn">Ø¥ÙŠÙ‚Ø§Ù</button>
+<audio controls="" id="focus-audio" style="display:none;"></audio>
+<details class="faq-section mt-2">
+<summary id="faq-title"></summary>
+<ul id="faq-list" style="padding-right:1em;"></ul>
+</details>
+</div>
+<div class="article-card">
+<div>
+<h2 id="tips-title"></h2>
+<ul id="tips-list"></ul>
+</div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
+</div>
+</div>
+</div>
 <script>
   // Test tracks (SoundHelix)
   const tracks = {
@@ -105,7 +102,7 @@
       "play":"Play","stop":"Stop","faq-title":"FAQs",
       "faq-list":`<li><b>Can I loop tracks?</b> Yes, use the Loop checkbox or audio controls after pressing Play.</li>
         <li><b>Does this work offline?</b> No, tracks stream from the server.</li>
-        <li><b>Can I add my own music?</b> Not yet—let us know if you want this.</li>`,
+        <li><b>Can I add my own music?</b> Not yetâ€”let us know if you want this.</li>`,
       "howto-title":'<i class="fa fa-music"></i> How to Use Focus Music',
       "howto-steps":`<li><b>Select a playlist:</b> Choose music for focus or relaxation.</li>
         <li><b>Play and adjust volume:</b> Use the controls to adjust playback.</li>
@@ -119,62 +116,62 @@
     },
     fr: {
       "language-label":"Langue :","back-link":"Retour au menu principal","tool-title":"Musique pour la Concentration",
-      "tool-help":"Boostez votre concentration مع موسيقى مريحة...","music-label":"Choisissez une playlist :","music-white":"Bruit blanc","music-rain":"Pluie","music-alpha":"Ondes alpha",
-      "music-classical":"Classique","music-ocean":"Vagues de l'océan","music-cafe":"Ambiance café","loop-label":"Boucler le morceau",
-      "play":"Lecture","stop":"Arrêter","faq-title":"FAQ",
-      "faq-list":`<li><b>Peut-on boucler les morceaux ؟</b> Oui.</li>`
+      "tool-help":"Boostez votre concentration Ù…Ø¹ Ù…ÙˆØ³ÙŠÙ‚Ù‰ Ù…Ø±ÙŠØ­Ø©...","music-label":"Choisissez une playlist :","music-white":"Bruit blanc","music-rain":"Pluie","music-alpha":"Ondes alpha",
+      "music-classical":"Classique","music-ocean":"Vagues de l'ocÃ©an","music-cafe":"Ambiance cafÃ©","loop-label":"Boucler le morceau",
+      "play":"Lecture","stop":"ArrÃªter","faq-title":"FAQ",
+      "faq-list":`<li><b>Peut-on boucler les morceaux ØŸ</b> Oui.</li>`
     },
     de: {
-      "language-label":"Sprache:","back-link":"Zurück zum Hauptmenü","tool-title":"Fokus-Musик",
-      "tool-help":"Verbessern Sie Ihre Konzentration ...","music-label":"Playlist auswählen:","music-white":"Weißes Rauschen","music-rain":"Regen","music-alpha":"Alpha-Wellen",
-      "music-classical":"Klassik","music-ocean":"Meeresrauschen","music-cafe":"Café-Atmosphäre","loop-label":"Titel wiederholen",
+      "language-label":"Sprache:","back-link":"ZurÃ¼ck zum HauptmenÃ¼","tool-title":"Fokus-MusÐ¸Ðº",
+      "tool-help":"Verbessern Sie Ihre Konzentration ...","music-label":"Playlist auswÃ¤hlen:","music-white":"WeiÃŸes Rauschen","music-rain":"Regen","music-alpha":"Alpha-Wellen",
+      "music-classical":"Klassik","music-ocean":"Meeresrauschen","music-cafe":"CafÃ©-AtmosphÃ¤re","loop-label":"Titel wiederholen",
       "play":"Abspielen","stop":"Stopp","faq-title":"FAQ",
-      "faq-list":`<li><b>Können Titel wiederholt werden؟</b> Ja.</li>`
+      "faq-list":`<li><b>KÃ¶nnen Titel wiederholt werdenØŸ</b> Ja.</li>`
     },
     ru: {
-      "language-label":"Язык:","back-link":"Назад в главное меню","tool-title":"Музыка для концентрации",
-      "tool-help":"Улучшите концентрацию с помощью музыки ...","music-label":"Выберите плейлист:","music-white":"Белый шум","music-rain":"Дождь","music-alpha":"Альфа-волны",
-      "music-classical":"Классика","music-ocean":"Шум океана","music-cafe":"Кафе","loop-label":"Зациклить трек",
-      "play":"Воспроизвести","stop":"Стоп","faq-title":"Частые вопросы",
-      "faq-list":`<li><b>Можно зациклить трек؟</b> Да.</li>`
+      "language-label":"Ð¯Ð·Ñ‹Ðº:","back-link":"ÐÐ°Ð·Ð°Ð´ Ð² Ð³Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ","tool-title":"ÐœÑƒÐ·Ñ‹ÐºÐ° Ð´Ð»Ñ ÐºÐ¾Ð½Ñ†ÐµÐ½Ñ‚Ñ€Ð°Ñ†Ð¸Ð¸",
+      "tool-help":"Ð£Ð»ÑƒÑ‡ÑˆÐ¸Ñ‚Ðµ ÐºÐ¾Ð½Ñ†ÐµÐ½Ñ‚Ñ€Ð°Ñ†Ð¸ÑŽ Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ Ð¼ÑƒÐ·Ñ‹ÐºÐ¸ ...","music-label":"Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¿Ð»ÐµÐ¹Ð»Ð¸ÑÑ‚:","music-white":"Ð‘ÐµÐ»Ñ‹Ð¹ ÑˆÑƒÐ¼","music-rain":"Ð”Ð¾Ð¶Ð´ÑŒ","music-alpha":"ÐÐ»ÑŒÑ„Ð°-Ð²Ð¾Ð»Ð½Ñ‹",
+      "music-classical":"ÐšÐ»Ð°ÑÑÐ¸ÐºÐ°","music-ocean":"Ð¨ÑƒÐ¼ Ð¾ÐºÐµÐ°Ð½Ð°","music-cafe":"ÐšÐ°Ñ„Ðµ","loop-label":"Ð—Ð°Ñ†Ð¸ÐºÐ»Ð¸Ñ‚ÑŒ Ñ‚Ñ€ÐµÐº",
+      "play":"Ð’Ð¾ÑÐ¿Ñ€Ð¾Ð¸Ð·Ð²ÐµÑÑ‚Ð¸","stop":"Ð¡Ñ‚Ð¾Ð¿","faq-title":"Ð§Ð°ÑÑ‚Ñ‹Ðµ Ð²Ð¾Ð¿Ñ€Ð¾ÑÑ‹",
+      "faq-list":`<li><b>ÐœÐ¾Ð¶Ð½Ð¾ Ð·Ð°Ñ†Ð¸ÐºÐ»Ð¸Ñ‚ÑŒ Ñ‚Ñ€ÐµÐºØŸ</b> Ð”Ð°.</li>`
     },
     el: {
-      "language-label":"Γλώσσα:","back-link":"Επιστροφή στο κύριο μενού","tool-title":"Μουσική Συγκέντρωσης",
-      "tool-help":"Βελτιώστε τη συγκέντρωση με μουσική ...","music-label":"Επιλέξτε playlist:","music-white":"Λευκός θόρυβος","music-rain":"Βροχή","music-alpha":"Άλφα κύματα",
-      "music-classical":"Κλασική","music-ocean":"Κύματα ωκεανού","music-cafe":"Ατμόσφαιρα καφέ","loop-label":"Επανάληψη κομματιού",
-      "play":"Αναπαραγωγή","stop":"Διακοπή","faq-title":"Συχνές Ερωτήσεις",
-      "faq-list":`<li><b>Μπορώ να επαναλάβω κομμάτια;</b> Ναι.</li>`
+      "language-label":"Î“Î»ÏŽÏƒÏƒÎ±:","back-link":"Î•Ï€Î¹ÏƒÏ„ÏÎ¿Ï†Î® ÏƒÏ„Î¿ ÎºÏÏÎ¹Î¿ Î¼ÎµÎ½Î¿Ï","tool-title":"ÎœÎ¿Ï…ÏƒÎ¹ÎºÎ® Î£Ï…Î³ÎºÎ­Î½Ï„ÏÏ‰ÏƒÎ·Ï‚",
+      "tool-help":"Î’ÎµÎ»Ï„Î¹ÏŽÏƒÏ„Îµ Ï„Î· ÏƒÏ…Î³ÎºÎ­Î½Ï„ÏÏ‰ÏƒÎ· Î¼Îµ Î¼Î¿Ï…ÏƒÎ¹ÎºÎ® ...","music-label":"Î•Ï€Î¹Î»Î­Î¾Ï„Îµ playlist:","music-white":"Î›ÎµÏ…ÎºÏŒÏ‚ Î¸ÏŒÏÏ…Î²Î¿Ï‚","music-rain":"Î’ÏÎ¿Ï‡Î®","music-alpha":"Î†Î»Ï†Î± ÎºÏÎ¼Î±Ï„Î±",
+      "music-classical":"ÎšÎ»Î±ÏƒÎ¹ÎºÎ®","music-ocean":"ÎšÏÎ¼Î±Ï„Î± Ï‰ÎºÎµÎ±Î½Î¿Ï","music-cafe":"Î‘Ï„Î¼ÏŒÏƒÏ†Î±Î¹ÏÎ± ÎºÎ±Ï†Î­","loop-label":"Î•Ï€Î±Î½Î¬Î»Î·ÏˆÎ· ÎºÎ¿Î¼Î¼Î±Ï„Î¹Î¿Ï",
+      "play":"Î‘Î½Î±Ï€Î±ÏÎ±Î³Ï‰Î³Î®","stop":"Î”Î¹Î±ÎºÎ¿Ï€Î®","faq-title":"Î£Ï…Ï‡Î½Î­Ï‚ Î•ÏÏ‰Ï„Î®ÏƒÎµÎ¹Ï‚",
+      "faq-list":`<li><b>ÎœÏ€Î¿ÏÏŽ Î½Î± ÎµÏ€Î±Î½Î±Î»Î¬Î²Ï‰ ÎºÎ¿Î¼Î¼Î¬Ï„Î¹Î±;</b> ÎÎ±Î¹.</li>`
     },
     es: {
-      "language-label":"Idioma:","back-link":"Volver al menú principal","tool-title":"Música para concentrarse",
-      "tool-help":"Mejora tu concentración مع música ...","music-label":"Selecciona una lista:","music-white":"Ruido blanco","music-rain":"Lluvia","music-alpha":"Ondas alfa",
-      "music-classical":"Clásica","music-ocean":"Olas","music-cafe":"Ambiente de café","loop-label":"Repetir pista",
+      "language-label":"Idioma:","back-link":"Volver al menÃº principal","tool-title":"MÃºsica para concentrarse",
+      "tool-help":"Mejora tu concentraciÃ³n Ù…Ø¹ mÃºsica ...","music-label":"Selecciona una lista:","music-white":"Ruido blanco","music-rain":"Lluvia","music-alpha":"Ondas alfa",
+      "music-classical":"ClÃ¡sica","music-ocean":"Olas","music-cafe":"Ambiente de cafÃ©","loop-label":"Repetir pista",
       "play":"Reproducir","stop":"Detener","faq-title":"Preguntas frecuentes",
-      "faq-list":`<li><b>¿Puedo repetir la pista؟</b> Sí.</li>`
+      "faq-list":`<li><b>Â¿Puedo repetir la pistaØŸ</b> SÃ­.</li>`
     },
     ar: {
-      "language-label":"اللغة:","back-link":"العودة إلى القائمة الرئيسية","tool-title":"موسيقى التركيز",
-      "tool-help":"عزز تركيزك باستخدام أصوات مريحة: ضوضاء بيضاء ، مطر ، موجات ألفا ، موسيقى كلاسيك ، أمواج البحر أو أجواء المقهى.",
-      "music-label":"اختر قائمة تشغيل:","music-white":"ضوضاء بيضاء","music-rain":"مطر","music-alpha":"موجات ألفا",
-      "music-classical":"كلاسيك","music-ocean":"أمواج البحر","music-cafe":"أجواء مقهى","loop-label":"تكرار المقطع",
-      "play":"تشغيل","stop":"إيقاف","faq-title":"الأسئلة الشائعة",
-      "faq-list":`<li><b>هل يمكن تكرار المقطع؟</b> نعم، استخدم خانة التكرار أو عناصر التحكم في المشغل.</li>
-        <li><b>هل تعمل بدون اتصال؟</b> لا، المسارات تبث من الخادم.</li>
-        <li><b>هل يمكن إضافة موسيقاي؟</b> ليس الآن—أخبرنا إن رغبت بذلك.</li>`,
-      "howto-title":'<i class="fa fa-music"></i> كيفية استخدام موسيقى التركيز',
-      "howto-steps":`<li><b>اختر قائمة تشغيل:</b> حدد الموسيقى للتركيز أو الاسترخاء.</li>
-        <li><b>اضغط تشغيل واضبط الصوت:</b> استخدم عناصر التحكم لتعديل التشغيل.</li>
-        <li><b>جرّب المسارات:</b> جرّب أنماطًا مختلفة لمعرفة الأنسب لك.</li>`,
-      "howto-article-btn":"اقرأ المقال الكامل","howto-article-link":"focus-music-how-to-ar.html",
-      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح لموسيقى التركيز',
-      "tips-list":`<li><b>جرّب الأنواع:</b> جرّب قوائم تشغيل مختلفة لمهام مختلفة.</li>
-        <li><b>استخدام سماعات:</b> يساعد في حجب المشتتات.</li>
-        <li><b>حافظ على مستوى صوت منخفض:</b> لتحسين التركيز.</li>`,
-      "tips-article-btn":"اقرأ المقال الكامل","tips-article-link":"focus-music-tips-ar.html"
+      "language-label":"Ø§Ù„Ù„ØºØ©:","back-link":"Ø§Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©","tool-title":"Ù…ÙˆØ³ÙŠÙ‚Ù‰ Ø§Ù„ØªØ±ÙƒÙŠØ²",
+      "tool-help":"Ø¹Ø²Ø² ØªØ±ÙƒÙŠØ²Ùƒ Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø£ØµÙˆØ§Øª Ù…Ø±ÙŠØ­Ø©: Ø¶ÙˆØ¶Ø§Ø¡ Ø¨ÙŠØ¶Ø§Ø¡ ØŒ Ù…Ø·Ø± ØŒ Ù…ÙˆØ¬Ø§Øª Ø£Ù„ÙØ§ ØŒ Ù…ÙˆØ³ÙŠÙ‚Ù‰ ÙƒÙ„Ø§Ø³ÙŠÙƒ ØŒ Ø£Ù…ÙˆØ§Ø¬ Ø§Ù„Ø¨Ø­Ø± Ø£Ùˆ Ø£Ø¬ÙˆØ§Ø¡ Ø§Ù„Ù…Ù‚Ù‡Ù‰.",
+      "music-label":"Ø§Ø®ØªØ± Ù‚Ø§Ø¦Ù…Ø© ØªØ´ØºÙŠÙ„:","music-white":"Ø¶ÙˆØ¶Ø§Ø¡ Ø¨ÙŠØ¶Ø§Ø¡","music-rain":"Ù…Ø·Ø±","music-alpha":"Ù…ÙˆØ¬Ø§Øª Ø£Ù„ÙØ§",
+      "music-classical":"ÙƒÙ„Ø§Ø³ÙŠÙƒ","music-ocean":"Ø£Ù…ÙˆØ§Ø¬ Ø§Ù„Ø¨Ø­Ø±","music-cafe":"Ø£Ø¬ÙˆØ§Ø¡ Ù…Ù‚Ù‡Ù‰","loop-label":"ØªÙƒØ±Ø§Ø± Ø§Ù„Ù…Ù‚Ø·Ø¹",
+      "play":"ØªØ´ØºÙŠÙ„","stop":"Ø¥ÙŠÙ‚Ø§Ù","faq-title":"Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø´Ø§Ø¦Ø¹Ø©",
+      "faq-list":`<li><b>Ù‡Ù„ ÙŠÙ…ÙƒÙ† ØªÙƒØ±Ø§Ø± Ø§Ù„Ù…Ù‚Ø·Ø¹ØŸ</b> Ù†Ø¹Ù…ØŒ Ø§Ø³ØªØ®Ø¯Ù… Ø®Ø§Ù†Ø© Ø§Ù„ØªÙƒØ±Ø§Ø± Ø£Ùˆ Ø¹Ù†Ø§ØµØ± Ø§Ù„ØªØ­ÙƒÙ… ÙÙŠ Ø§Ù„Ù…Ø´ØºÙ„.</li>
+        <li><b>Ù‡Ù„ ØªØ¹Ù…Ù„ Ø¨Ø¯ÙˆÙ† Ø§ØªØµØ§Ù„ØŸ</b> Ù„Ø§ØŒ Ø§Ù„Ù…Ø³Ø§Ø±Ø§Øª ØªØ¨Ø« Ù…Ù† Ø§Ù„Ø®Ø§Ø¯Ù….</li>
+        <li><b>Ù‡Ù„ ÙŠÙ…ÙƒÙ† Ø¥Ø¶Ø§ÙØ© Ù…ÙˆØ³ÙŠÙ‚Ø§ÙŠØŸ</b> Ù„ÙŠØ³ Ø§Ù„Ø¢Ù†â€”Ø£Ø®Ø¨Ø±Ù†Ø§ Ø¥Ù† Ø±ØºØ¨Øª Ø¨Ø°Ù„Ùƒ.</li>`,
+      "howto-title":'<i class="fa fa-music"></i> ÙƒÙŠÙÙŠØ© Ø§Ø³ØªØ®Ø¯Ø§Ù… Ù…ÙˆØ³ÙŠÙ‚Ù‰ Ø§Ù„ØªØ±ÙƒÙŠØ²',
+      "howto-steps":`<li><b>Ø§Ø®ØªØ± Ù‚Ø§Ø¦Ù…Ø© ØªØ´ØºÙŠÙ„:</b> Ø­Ø¯Ø¯ Ø§Ù„Ù…ÙˆØ³ÙŠÙ‚Ù‰ Ù„Ù„ØªØ±ÙƒÙŠØ² Ø£Ùˆ Ø§Ù„Ø§Ø³ØªØ±Ø®Ø§Ø¡.</li>
+        <li><b>Ø§Ø¶ØºØ· ØªØ´ØºÙŠÙ„ ÙˆØ§Ø¶Ø¨Ø· Ø§Ù„ØµÙˆØª:</b> Ø§Ø³ØªØ®Ø¯Ù… Ø¹Ù†Ø§ØµØ± Ø§Ù„ØªØ­ÙƒÙ… Ù„ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„ØªØ´ØºÙŠÙ„.</li>
+        <li><b>Ø¬Ø±Ù‘Ø¨ Ø§Ù„Ù…Ø³Ø§Ø±Ø§Øª:</b> Ø¬Ø±Ù‘Ø¨ Ø£Ù†Ù…Ø§Ø·Ù‹Ø§ Ù…Ø®ØªÙ„ÙØ© Ù„Ù…Ø¹Ø±ÙØ© Ø§Ù„Ø£Ù†Ø³Ø¨ Ù„Ùƒ.</li>`,
+      "howto-article-btn":"Ø§Ù‚Ø±Ø£ Ø§Ù„Ù…Ù‚Ø§Ù„ Ø§Ù„ÙƒØ§Ù…Ù„","howto-article-link":"focus-music-how-to-ar.html",
+      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Ù†ØµØ§Ø¦Ø­ Ù„Ù…ÙˆØ³ÙŠÙ‚Ù‰ Ø§Ù„ØªØ±ÙƒÙŠØ²',
+      "tips-list":`<li><b>Ø¬Ø±Ù‘Ø¨ Ø§Ù„Ø£Ù†ÙˆØ§Ø¹:</b> Ø¬Ø±Ù‘Ø¨ Ù‚ÙˆØ§Ø¦Ù… ØªØ´ØºÙŠÙ„ Ù…Ø®ØªÙ„ÙØ© Ù„Ù…Ù‡Ø§Ù… Ù…Ø®ØªÙ„ÙØ©.</li>
+        <li><b>Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø³Ù…Ø§Ø¹Ø§Øª:</b> ÙŠØ³Ø§Ø¹Ø¯ ÙÙŠ Ø­Ø¬Ø¨ Ø§Ù„Ù…Ø´ØªØªØ§Øª.</li>
+        <li><b>Ø­Ø§ÙØ¸ Ø¹Ù„Ù‰ Ù…Ø³ØªÙˆÙ‰ ØµÙˆØª Ù…Ù†Ø®ÙØ¶:</b> Ù„ØªØ­Ø³ÙŠÙ† Ø§Ù„ØªØ±ÙƒÙŠØ².</li>`,
+      "tips-article-btn":"Ø§Ù‚Ø±Ø£ Ø§Ù„Ù…Ù‚Ø§Ù„ Ø§Ù„ÙƒØ§Ù…Ù„","tips-article-link":"focus-music-tips-ar.html"
     }
   };
 
-  const langNames = { en:"English", fr:"Français", de:"Deutsch", ru:"Русский", el:"Ελληνικά", es:"Español", ar:"العربية" };
+  const langNames = { en:"English", fr:"FranÃ§ais", de:"Deutsch", ru:"Ð ÑƒÑÑÐºÐ¸Ð¹", el:"Î•Î»Î»Î·Î½Î¹ÎºÎ¬", es:"EspaÃ±ol", ar:"Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©" };
 
   function getLang() {
     try { const l = localStorage.getItem('timerhavenLang') || 'ar'; return (l && l.slice(0,2)) || 'ar'; } catch(e){ return 'ar'; }
@@ -192,20 +189,20 @@
     if (document.getElementById('music-label')) document.getElementById('music-label').textContent = t['music-label'] || '';
     const ms = document.getElementById('music-select');
     if (ms && ms.options) {
-      ms.options[0].text = t['music-white'] || 'ضوضاء بيضاء';
-      ms.options[1].text = t['music-rain'] || 'مطر';
-      ms.options[2].text = t['music-alpha'] || 'موجات ألفا';
-      ms.options[3].text = t['music-classical'] || 'كلاسيك';
-      ms.options[4].text = t['music-ocean'] || 'أمواج البحر';
-      ms.options[5].text = t['music-cafe'] || 'أجواء مقهى';
+      ms.options[0].text = t['music-white'] || 'Ø¶ÙˆØ¶Ø§Ø¡ Ø¨ÙŠØ¶Ø§Ø¡';
+      ms.options[1].text = t['music-rain'] || 'Ù…Ø·Ø±';
+      ms.options[2].text = t['music-alpha'] || 'Ù…ÙˆØ¬Ø§Øª Ø£Ù„ÙØ§';
+      ms.options[3].text = t['music-classical'] || 'ÙƒÙ„Ø§Ø³ÙŠÙƒ';
+      ms.options[4].text = t['music-ocean'] || 'Ø£Ù…ÙˆØ§Ø¬ Ø§Ù„Ø¨Ø­Ø±';
+      ms.options[5].text = t['music-cafe'] || 'Ø£Ø¬ÙˆØ§Ø¡ Ù…Ù‚Ù‡Ù‰';
     }
 
     const loopText = document.getElementById('loop-label-text');
-    if (loopText) loopText.textContent = t['loop-label'] || 'تكرار المقطع';
+    if (loopText) loopText.textContent = t['loop-label'] || 'ØªÙƒØ±Ø§Ø± Ø§Ù„Ù…Ù‚Ø·Ø¹';
     const playBtn = document.getElementById('play-btn');
     const stopBtn = document.getElementById('stop-btn');
-    if (playBtn) playBtn.textContent = t['play'] || 'تشغيل';
-    if (stopBtn) stopBtn.textContent = t['stop'] || 'إيقاف';
+    if (playBtn) playBtn.textContent = t['play'] || 'ØªØ´ØºÙŠÙ„';
+    if (stopBtn) stopBtn.textContent = t['stop'] || 'Ø¥ÙŠÙ‚Ø§Ù';
 
     if (document.getElementById('faq-title')) document.getElementById('faq-title').textContent = t['faq-title'] || '';
     if (document.getElementById('faq-list')) document.getElementById('faq-list').innerHTML = t['faq-list'] || '';
@@ -255,10 +252,10 @@
     if (ms && (!ms.options[0].text || ms.options[0].text.trim() === "")) applyLanguage(getLang());
   });
 </script>
-
 <footer style="direction:rtl; text-align:right;">
-  &copy; 2025 TimerHaven. جميع الأدوات مجانية وتحترم الخصوصية.<br>
-  <a href="privacy.html">سياسة الخصوصية</a> &bull; <a href="terms.html">الشروط</a> &bull; <a href="contact.html">اتصل بنا</a>
+  Â© 2025 TimerHaven. Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ø¯ÙˆØ§Øª Ù…Ø¬Ø§Ù†ÙŠØ© ÙˆØªØ­ØªØ±Ù… Ø§Ù„Ø®ØµÙˆØµÙŠØ©.<br/>
+<a href="privacy.html">Ø³ÙŠØ§Ø³Ø© Ø§Ù„Ø®ØµÙˆØµÙŠØ©</a> â€¢ <a href="terms.html">Ø§Ù„Ø´Ø±ÙˆØ·</a> â€¢ <a href="contact.html">Ø§ØªØµÙ„ Ø¨Ù†Ø§</a>
 </footer>
-</body>
+<p style="margin-top:1rem;"><a class="cta" href="/ar/focus-music/focus-music-index.html">Read full guide</a></p></body>
 </html>
+

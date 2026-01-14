@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-
-<html dir="rtl" lang="ar">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>الموقت — TimerHaven</title>
-<meta content="قِس الوقت المنقضي لأي نشاط. تعلّم كيفية استخدام الموقت، واحصل على نصائح والأسئلة الشائعة." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>الموقت — TimerHaven</title>
+  <meta name="description" content="قِس الوقت المنقضي لأي نشاط. تعلّم كيفية استخدام الموقت، واحصل على نصائح والأسئلة الشائعة.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
@@ -30,51 +29,77 @@
   </style>
 </head>
 <body>
-<div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-<select aria-label="Language selector" class="language-select" id="language-select-top">
-<option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option selected="" value="ar">العربية</option>
-</select>
-</div>
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">الموقت</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">قِس الوقت المنقضي لأي نشاط. تعلّم كيفية استخدام الموقت، واحصل على نصائح والأسئلة الشائعة.</p>
-</div>
-<div class="center-row">
-<!-- Left summary card -->
+  <div class="page-wrap">
+    <div class="top-row">
+      <label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
+      <select id="language-select-top" class="language-select" aria-label="Language selector">
+        <option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar" selected>العربية</option>
+      </select>
+    </div>
 
-<!-- Main tool card -->
-<div aria-label="Stopwatch" class="tool-card" role="region">
-<a class="d-block mb-2" href="index.html" style="text-decoration:none; color:#0d6efd; font-weight:600;">← العودة إلى القائمة الرئيسية</a>
-<h3><i class="fa fa-clock"></i> الموقت</h3>
-<div aria-live="polite" class="stopwatch-section">
-<div class="stopwatch-display" id="swDisplay">00:00:00</div>
-<div class="controls-row">
-<button class="btn btn-success btn-small" id="swStartBtn">ابدأ</button>
-<button class="btn btn-secondary btn-small" id="swPauseBtn">إيقاف مؤقت</button>
-<button class="btn btn-danger btn-small" id="swResetBtn">إعادة ضبط</button>
-<button class="btn btn-info btn-small" id="swLapBtn">لفة</button>
-</div>
-<div class="lap-list" id="lapList"></div>
-<details class="faq-section" style="margin-top:1rem;">
-<summary style="font-weight:700; font-size:1rem;">الأسئلة الشائعة</summary>
-<ul style="padding-left:1.1rem; color:#374151;">
-<li><b>هل يمكن تسجيل لفات متعددة؟</b> نعم، استخدم زر اللفة.</li>
+    <div class="text-center mb-4">
+      <h1 style="margin-bottom:.25rem;">الموقت</h1>
+      <p class="lead" style="color:#374151; margin-bottom:1rem;">قِس الوقت المنقضي لأي نشاط. تعلّم كيفية استخدام الموقت، واحصل على نصائح والأسئلة الشائعة.</p>
+    </div>
+
+    <div class="center-row">
+      <!-- Left summary card -->
+      <div class="article-card">
+        <div>
+          <h2><i class="fa fa-clock"></i> كيفية استخدام الموقت</h2>
+          <ol style="padding-left:1.1rem; color:#374151;">
+            <li><b>ابدأ المؤقت:</b> اضغط <strong>ابدأ</strong>.</li><li><b>إيقاف/إعادة ضبط:</b> استخدم <strong>إيقاف مؤقت</strong> و <strong>إعادة ضبط</strong>.</li><li><b>سجل لفات:</b> اضغط <strong>لفة</strong>.</li>
+          </ol>
+        </div>
+        <a href="stopwatch-how-to-ar.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">اقرأ المقالة</a>
+      </div>
+
+      <!-- Main tool card -->
+      <div class="tool-card" role="region" aria-label="Stopwatch">
+        <a href="index.html" class="d-block mb-2" style="text-decoration:none; color:#0d6efd; font-weight:600;">&larr; العودة إلى القائمة الرئيسية</a>
+        <h3><i class="fa fa-clock"></i> الموقت</h3>
+
+        <div class="stopwatch-section" aria-live="polite">
+          <div id="swDisplay" class="stopwatch-display">00:00:00</div>
+
+          <div class="controls-row">
+            <button id="swStartBtn" class="btn btn-success btn-small">ابدأ</button>
+            <button id="swPauseBtn" class="btn btn-secondary btn-small">إيقاف مؤقت</button>
+            <button id="swResetBtn" class="btn btn-danger btn-small">إعادة ضبط</button>
+            <button id="swLapBtn" class="btn btn-info btn-small">لفة</button>
+          </div>
+
+          <div id="lapList" class="lap-list"></div>
+
+          <details class="faq-section" style="margin-top:1rem;">
+            <summary style="font-weight:700; font-size:1rem;">الأسئلة الشائعة</summary>
+            <ul style="padding-left:1.1rem; color:#374151;">
+              <li><b>هل يمكن تسجيل لفات متعددة؟</b> نعم، استخدم زر اللفة.</li>
 <li><b>هل يبقى الوقت محفوظاً؟</b> لا، يعاد عند إعادة التحميل.</li>
 <li><b>هل هو مجاني؟</b> نعم، جميع أدوات TimerHaven مجانية.</li>
-</ul>
-</details>
-</div>
-</div>
-<!-- Right summary card -->
+            </ul>
+          </details>
+        </div>
+      </div>
 
-</div>
-<footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
-      © 2025 TimerHaven. <a href="privacy.html">سياسة الخصوصية</a>
-</footer>
-</div>
-<script>
+      <!-- Right summary card -->
+      <div class="article-card">
+        <div>
+          <h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> نصائح الموقت</h2>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>استخدم اللفات للفترات:</b>سجل أوقات التقسيم</li><li><b>إيقاف مؤقت واستئناف:</b> مفيد عند المقاطعات.</li><li><b>إعادة ضبط بين الجلسات:</b> للحفاظ على سجلات نظيفة.</li>
+          </ul>
+        </div>
+        <a href="stopwatch-tips-ar.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">اقرأ المقالة</a>
+      </div>
+    </div>
+
+    <footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
+      &copy; 2025 TimerHaven. <a href="privacy.html">سياسة الخصوصية</a>
+    </footer>
+  </div>
+
+  <script>
   (function(){
     // language selector redirect
     var sel = document.getElementById('language-select-top');
@@ -131,7 +156,8 @@
     swUpdateDisplay();
   })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/ar/stopwatch/stopwatch-index.html">Read full guide</a></p></body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
 </html>

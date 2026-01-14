@@ -1,0 +1,208 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>World Clock â€” Compare Timezones & Schedule Confidently | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Comprehensive guide for using the World Clock: selecting zones, reading offsets, planning meetings across regions, daylight saving pitfalls, and automation tips." />
+  <link rel="canonical" href="https://timerhaven.com/en/world-clock/world-clock-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Use a World Clock for scheduling",
+        "description":"Compare multiple time zones, show local times for participants, and avoid daylight saving confusion. This guide includes planning recipes, conversion tips, and automation ideas.",
+        "image":"https://timerhaven.com/assets/images/world-clock-snapshot.png",
+        "totalTime":"PT45M",
+        "supply":["World Clock (TimerHaven)","Calendar","Participant time zone info"],
+        "step":[
+          {"@type":"HowToStep","name":"Pick reference points","text":"Choose an organizer reference and add participant zones to compare local times."},
+          {"@type":"HowToStep","name":"Watch DST shifts","text":"Check daylight saving rules and confirm times around transition dates."},
+          {"@type":"HowToStep","name":"Share local times","text":"Share chosen slot with organizer and participant local times to reduce ambiguity."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"How do I handle daylight saving transitions?","acceptedAnswer":{"@type":"Answer","text":"Schedule away from DST transition dates if possible; otherwise confirm local times explicitly and include timezone identifiers (IANA) in invites."}},
+          {"@type":"Question","name":"Should I show multiple local times in invites?","acceptedAnswer":{"@type":"Answer","text":"Yes â€” showing organizer and participant local times reduces mistakes, especially for distributed teams."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <h1 id="title">World Clock â€” Compare Time Zones and Schedule with Confidence</h1>
+
+      <div class="author" role="articleauthor" aria-label="Article author">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>By Serge Shammas</strong> â€” distributed work & scheduling writer</div>
+          <div class="meta">Published: 2025-11-24 Â· Reading time: 12â€“16 min</div>
+        </div>
+      </div>
+
+      <p class="lead">Scheduling across time zones is a frequent source of confusion. A reliable world clock helps you compare local times, avoid daylight-saving pitfalls, and communicate meeting times clearly. This guide covers timezone basics, meeting planning recipes, daylight saving traps, naming and IANA zone usage, automation tips, and sharing patterns that reduce mistakes.</p>
+
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#basics">Timezone basics</a> Â·
+        <a href="#dst">Daylight saving & pitfalls</a> Â·
+        <a href="#planning">Meeting planning recipes</a> Â·
+        <a href="#naming">Use IANA identifiers & clear labels</a> Â·
+        <a href="#automation">Automation & calendar tips</a> Â·
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="basics" class="section" aria-labelledby="basics-title">
+        <h2 id="basics-title">Timezone basics â€” offsets, UTC and local time</h2>
+        <p>Time zones are defined relative to Coordinated Universal Time (UTC) with offsets (e.g., UTC+1). For clarity, always communicate both the clock time and the zone (or offset) when scheduling across locations.</p>
+
+        <ul>
+          <li><strong>UTC reference:</strong> use UTC when coordinating global systems to avoid local ambiguities.</li>
+          <li><strong>Local human times:</strong> for invites prefer local times for recipients â€” show both organizer and recipient local times to reduce mistakes.</li>
+          <li><strong>24-hour vs 12-hour:</strong> use the format your audience prefers â€” 24-hour reduces AM/PM confusion.</li>
+        </ul>
+      </section>
+
+      <section id="dst" class="section" aria-labelledby="dst-title">
+        <h2 id="dst-title">Daylight saving time â€” common pitfalls</h2>
+        <p>Daylight saving transitions can shift local offsets and cause scheduling errors, especially around the transition dates. Avoid scheduling recurring events near DST change dates or always include timezone identifiers in invites.</p>
+
+        <h3>Practical rules</h3>
+        <ul>
+          <li>Avoid scheduling critical deadlines or cross-zone meetings on days that include DST transitions.</li>
+          <li>Explicitly state the timezone (e.g., "09:00 America/Los_Angeles (PDT)") rather than relying on local names that change semantics.</li>
+          <li>When confirming with participants, show their local time and the UTC timestamp as a definitive reference.</li>
+        </ul>
+      </section>
+
+      <section id="planning" class="section" aria-labelledby="planning-title">
+        <h2 id="planning-title">Meeting planning recipes â€” minimize friction</h2>
+        <p>Use the world clock to pick equitable slots and communicate times clearly.</p>
+
+        <div class="recipe" aria-labelledby="small-meeting">
+          <strong id="small-meeting">Small distributed team â€” 30-minute meeting</strong>
+          <ol>
+            <li>Collect participant preferred windows (local morning/afternoon).</li>
+            <li>Use the world clock to display each candidate slot in participant local time.</li>
+            <li>Offer 2â€“3 slots and finalize quickly; include both organizer and participant local times in the invite description.</li>
+          </ol>
+        </div>
+
+        <div class="recipe" aria-labelledby="global">
+          <strong id="global">Global town-hall â€” minimize hardship</strong>
+          <ol>
+            <li>Pick a window that avoids extreme early/late hours for most participants; rotate times across repeated events to share inconvenience.</li>
+            <li>Record and share the session for those who canâ€™t attend live.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="naming" class="section" aria-labelledby="naming-title">
+        <h2 id="naming-title">Use IANA identifiers & clear labels</h2>
+        <p>IANA zone names (Europe/London, America/New_York) are unambiguous and account for DST rules. When including times in messages or invites, show both the readable label and the IANA identifier or UTC offset for clarity.</p>
+
+        <pre class="template">Example invite line:
+Meeting: Project sync
+Time: 2025-11-30 09:00 America/Los_Angeles (UTC-8) â€” 17:00 Europe/London (UTC+0)
+Agenda: ...</pre>
+      </section>
+
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Automation & calendar tips</h2>
+        <p>Make scheduling predictable with automation and explicit calendar practices.</p>
+
+        <ul>
+          <li><strong>Set calendar timezones per event:</strong> include the organizer timezone in event metadata so attendees' calendars convert correctly.</li>
+          <li><strong>Use timezone-aware links:</strong> convert and paste local times for key attendees into event descriptions.</li>
+          <li><strong>Use scheduling tools:</strong> leverage tools that propose optimal windows based on participants' timezones and working hours.</li>
+        </ul>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> What if participants see different times?<br><strong>A:</strong> Confirm the event's timezone and include the UTC time in the invite. Encourage participants to open the event details in their calendar app to see converted times automatically.</p>
+
+          <p><strong>Q:</strong> Should I always schedule in UTC?<br><strong>A:</strong> UTC is great for systems and automation, but for human communication show local times with UTC as a fallback. People understand local times better; UTC removes ambiguity when sharing technical schedules.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Resources</h2>
+        <ul class="muted">
+          <li><a href="/world-clock-en.html">Open World Clock tool</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA time zones</a></li>
+          <li><a href="https://timeanddate.com" target="_blank" rel="noopener">timeanddate.com â€” conversions & DST</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:1.2rem;">
+        <a href="/world-clock-en.html" class="cta" aria-label="Open World Clock">Open World Clock</a>
+      </p>
+
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions or feedback? Contact us at <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Read our <a href="/privacy/">Privacy Policy</a>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Floating "Return to tool" button -->
+  <a href="/world-clock-en.html" class="return-to-tool" id="returnToToolWorldClock" aria-label="Return to World Clock">
+    <span class="icon" aria-hidden="true">â†©</span>
+    <span class="label">Return to World Clock</span>
+  </a>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWorldClock');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
+</body>
+</html>
+
+

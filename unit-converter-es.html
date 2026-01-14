@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Convertidor de unidades</title>
-<meta content="Convierte longitud, peso, temperatura y más. Aprende a usar el Convertidor, obtén consejos y artículos." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Convertidor de unidades</title>
+  <meta name="description" content="Convierte longitud, peso, temperatura y más. Aprende a usar el Convertidor, obtén consejos y artículos.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
     .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
     .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
@@ -31,56 +30,86 @@
   </style>
 </head>
 <body>
-<div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-<select aria-label="Language selector" class="language-select" id="language-select-top">
-<option value="en">English</option><option value="fr">Français</option><option selected="" value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
-</select>
-</div>
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">Convertidor de unidades</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">Convierte longitud, peso, temperatura y más. Aprende a usar el Convertidor, obtén consejos y artículos.</p>
-</div>
-<div class="center-row">
-<!-- Left article card -->
+  <div class="page-wrap">
+    <div class="top-row">
+      <label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
+      <select id="language-select-top" class="language-select" aria-label="Language selector">
+        <option value="en">English</option><option value="fr">Français</option><option value="es" selected>Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
+      </select>
+    </div>
 
-<!-- Tool card (duplicate How-to removed) -->
-<div aria-label="Unit Converter" class="tool-card" role="region">
-<a class="back-link" href="index.html">← Volver al menú principal</a>
-<h3><i class="fa fa-ruler-combined"></i> Convertidor de unidades</h3>
-<div class="unit-section">
-<form class="converter-form" id="unitForm">
-<select class="form-select" id="typeSelect" style="max-width:140px;">
-<option value="length">Longitud</option>
-<option value="weight">Peso</option>
-<option value="temperature">Temperatura</option>
-</select>
-<input class="form-control" id="inputValue" placeholder="Valor" style="max-width:100px;" type="number"/>
-<select class="form-select" id="fromUnit" style="max-width:120px;"></select>
-<span style="font-size:1.3em;">→</span>
-<select class="form-select" id="toUnit" style="max-width:120px;"></select>
-<button class="btn btn-primary btn-sm" type="submit">Convertir</button>
-</form>
-<div class="converter-result" id="unitResult"></div>
-</div>
-<details class="faq-section">
-<summary>Preguntas frecuentes</summary>
-<ul style="padding-left:1.1rem; color:#374151;">
-<li><b>¿Se admiten todas las unidades?</b> Se incluyen las unidades comunes más usadas.</li>
+    <div class="text-center mb-4">
+      <h1 style="margin-bottom:.25rem;">Convertidor de unidades</h1>
+      <p class="lead" style="color:#374151; margin-bottom:1rem;">Convierte longitud, peso, temperatura y más. Aprende a usar el Convertidor, obtén consejos y artículos.</p>
+    </div>
+
+    <div class="center-row">
+      <!-- Left article card -->
+      <div class="article-card" aria-labelledby="howto-title">
+        <div>
+          <h2 id="howto-title"><i class="fa fa-ruler-combined"></i> Cómo usar el Convertidor</h2>
+          <ol style="padding-left:1.1rem; color:#374151;">
+            <li><b>Ingrese su valor :</b> Escriba el número que desea convertir.</li><li><b>Selecciones las unidades :</b> Elija las unidades de origen y destino.</li><li><b>Convertir :</b> Haga clic en <strong>Convertir</strong> para obtener la respuesta inmediatamente.</li><li><b>Pruebe otras unidades :</b> Cambie unidades según sea necesario.</li>
+          </ol>
+        </div>
+        <a href="unit-how-to-es.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Leer el artículo</a>
+      </div>
+
+      <!-- Tool card (duplicate How-to removed) -->
+      <div class="tool-card" role="region" aria-label="Unit Converter">
+        <a href="index.html" class="back-link">&larr; Volver al menú principal</a>
+        <h3><i class="fa fa-ruler-combined"></i> Convertidor de unidades</h3>
+
+        <div class="unit-section">
+          <form class="converter-form" id="unitForm">
+            <select id="typeSelect" class="form-select" style="max-width:140px;">
+              <option value="length">Longitud</option>
+              <option value="weight">Peso</option>
+              <option value="temperature">Temperatura</option>
+            </select>
+
+            <input type="number" id="inputValue" class="form-control" placeholder="Valor" style="max-width:100px;">
+
+            <select id="fromUnit" class="form-select" style="max-width:120px;"></select>
+            <span style="font-size:1.3em;">→</span>
+            <select id="toUnit" class="form-select" style="max-width:120px;"></select>
+
+            <button type="submit" class="btn btn-primary btn-sm">Convertir</button>
+          </form>
+
+          <div id="unitResult" class="converter-result"></div>
+        </div>
+
+        <details class="faq-section">
+          <summary>Preguntas frecuentes</summary>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>¿Se admiten todas las unidades?</b> Se incluyen las unidades comunes más usadas.</li>
 <li><b>¿La conversión es gratuita?</b> Sí, úsala tanto como necesites.</li>
 <li><b>¿Puedo convertir decimales?</b> Sí, se admiten valores decimales.</li>
-</ul>
-</details>
-</div>
-<!-- Right article card -->
+          </ul>
+        </details>
 
-</div>
-<footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
-      © 2025 TimerHaven. <a href="privacy.html">Política</a>
-</footer>
-</div>
-<script>
+        
+      </div>
+
+      <!-- Right article card -->
+      <div class="article-card" aria-labelledby="tips-title">
+        <div>
+          <h2 id="tips-title"><i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos Convertidor</h2>
+          <ul style="padding-left:1.1rem; color:#374151;">
+            <li><b>Verifica las unidades :</b> Asegúrate de convertir los tipos correctos.</li><li><b>Cambia de dirección :</b> Intenta convertir en ambas direcciones para comprobar.</li><li><b>Guarda en favoritos :</b> Guarda esta página para acceso rápido.</li>
+          </ul>
+        </div>
+        <a href="unit-tips-es.html" class="btn btn-outline-primary btn-sm" style="align-self:stretch; margin-top:.6rem;">Leer el artículo</a>
+      </div>
+    </div>
+
+    <footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
+      &copy; 2025 TimerHaven. <a href="privacy.html">Política</a>
+    </footer>
+  </div>
+
+  <script>
   // Unit types & conversion logic (kept as original)
   const unitTypes = {
     length: {
@@ -146,7 +175,8 @@
     }
   })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/es/unit-converter/unit-converter-index.html">Read full guide</a></p></body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
 </html>

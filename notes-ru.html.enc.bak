@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<title>Ð—Ð°Ð¼ÐµÑ‚ÐºÐ¸ â€” TimerHaven</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Ð”ÐµÐ»Ð°Ð¹Ñ‚Ðµ Ð±Ñ‹ÑÑ‚Ñ€Ñ‹Ðµ Ð·Ð°Ð¼ÐµÑ‚ÐºÐ¸ Ð¸ Ð¾Ñ€Ð³Ð°Ð½Ð¸Ð·ÑƒÐ¹Ñ‚Ðµ ÑÐ²Ð¾Ð¸ Ð¼Ñ‹ÑÐ»Ð¸. Ð£Ð·Ð½Ð°Ð¹Ñ‚Ðµ, ÐºÐ°Ðº Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ Ð—Ð°Ð¼ÐµÑ‚ÐºÐ¸, Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚Ðµ ÑÐ¾Ð²ÐµÑ‚Ñ‹ Ð¿Ð¾ Ð¿Ñ€Ð¾Ð´ÑƒÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚Ð¸, FAQs Ð¸ Ñ‡Ð¸Ñ‚Ð°Ð¹Ñ‚Ðµ ÑÐºÑÐ¿ÐµÑ€Ñ‚Ð½Ñ‹Ðµ ÑÑ‚Ð°Ñ‚ÑŒÐ¸." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
+    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 370px; height: auto; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 2em 1.3em 1em 1.3em; text-align: left; overflow: hidden; box-sizing: border-box; }
+    .article-card h2 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.3em; }
+    .article-card ul, .article-card ol { margin-left: 1em; font-size: 1em; margin-bottom: 0.2em; padding-right: 0.2em; word-break: break-word; }
+    .article-card .btn {
+      white-space: normal;
+      word-break: break-word;
+      font-size: 1em;
+      padding: 0.4em 0.6em;
+      min-width: 0;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 0.6em;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.5em 1em 1.5em; text-align: left; position: relative; z-index: 1; }
+    .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
+    .back-link { display: inline-block; margin-bottom: 1em; color: #185a9d; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .back-link:hover { text-decoration: underline; color: #43cea2; }
+    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
+    .faq-section summary { font-weight: bold; font-size: 1.07em; cursor: pointer; margin-bottom: 0.5em; }
+    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
+    @media (max-width: 800px) { .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card { display: none !important; } }
+    details[open] summary::after { content: " â–²"; font-size: 0.9em; }
+    details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
+    details:not([open]) summary::after { content: " â–¼"; font-size: 0.9em; }
+    .notes-form { margin-bottom: 1em; display: flex; gap: 0.5em; }
+    .notes-list { margin-bottom: 1em; }
+    .note-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display: flex; align-items: center; justify-content: space-between; }
+    .note-meta { font-size: 0.9em; color: #888; margin-right: 1em; }
+    .note-btn { font-size: 0.9em; margin-left: 0.6em; }
+    .note-pinned { font-weight: bold; color: #185a9d; margin-right: 0.6em; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="main-container">
+<div class="center-row">
+
+<div class="tool-card">
+<a class="back-link" href="index.html"><i class="fa fa-arrow-left"></i> ÐÐ°Ð·Ð°Ð´ Ð² Ð³Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ</a>
+<h3><i class="fa fa-note-sticky"></i> Ð—Ð°Ð¼ÐµÑ‚ÐºÐ¸</h3>
+<div class="notes-section">
+<form class="notes-form" id="notesForm">
+<input class="form-control" id="noteInput" placeholder="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð°Ð¼ÐµÑ‚ÐºÑƒ..." style="max-width:180px;" type="text"/>
+<button class="btn btn-success btn-sm" type="submit">Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð·Ð°Ð¼ÐµÑ‚ÐºÑƒ</button>
+</form>
+<div class="notes-list" id="notesList"></div>
+</div>
+<details class="faq-section">
+<summary>Ð§Ð°ÑÑ‚Ð¾ Ð·Ð°Ð´Ð°Ð²Ð°ÐµÐ¼Ñ‹Ðµ Ð²Ð¾Ð¿Ñ€Ð¾ÑÑ‹</summary>
+<ul style="padding-left: 1em;">
+<li><b>Ð—Ð°Ð¼ÐµÑ‚ÐºÐ¸ ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÑŽÑ‚ÑÑ?</b> Ð”Ð°, Ð² Ð²Ð°ÑˆÐµÐ¼ Ð±Ñ€Ð°ÑƒÐ·ÐµÑ€Ðµ Ð´Ð¾ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ.</li><li><b>ÐœÐ¾Ð¶Ð½Ð¾ Ð·Ð°ÐºÑ€ÐµÐ¿Ð»ÑÑ‚ÑŒ Ð²Ð°Ð¶Ð½Ñ‹Ðµ Ð·Ð°Ð¼ÐµÑ‚ÐºÐ¸?</b> Ð”Ð°, Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐ¹Ñ‚Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑŽ Ð·Ð°ÐºÑ€ÐµÐ¿Ð»ÐµÐ½Ð¸Ñ, ÐµÑÐ»Ð¸ Ð¾Ð½Ð° Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð°.</li><li><b>Ð•ÑÑ‚ÑŒ Ð»Ð¸Ð¼Ð¸Ñ‚?</b> ÐÐµÑ‚, Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐ¹Ñ‚Ðµ ÑÐºÐ¾Ð»ÑŒÐºÐ¾ ÑƒÐ³Ð¾Ð´Ð½Ð¾ Ð·Ð°Ð¼ÐµÑ‚Ð¾Ðº.</li>
+</ul>
+</details>
+</div>
+
+</div>
+</div>
+<script>
+    let notes = JSON.parse(localStorage.getItem('notesData') || '[]');
+    function saveNotes() { localStorage.setItem('notesData', JSON.stringify(notes)); }
+    function renderNotes() {
+      const list = document.getElementById('notesList');
+      list.innerHTML = '';
+      if (notes.length === 0) {
+        list.innerHTML = '<div style="color:#888;">Ð—Ð°Ð¼ÐµÑ‚Ð¾Ðº Ð¿Ð¾ÐºÐ° Ð½ÐµÑ‚.</div>';
+        return;
+      }
+      notes.forEach((note, idx) => {
+        const pinned = note.pinned ? '<span class="note-pinned"><i class="fa fa-thumbtack"></i></span>' : '';
+        list.innerHTML += `
+          <div class="note-item">
+            ${pinned}
+            <span>${note.text}</span>
+            <span class="note-meta">${note.date}</span>
+            <button class="btn btn-outline-${note.pinned ? 'secondary' : 'info'} btn-sm note-btn" onclick="pinNote(${idx})" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>
+            <button class="btn btn-outline-danger btn-sm note-btn" onclick="deleteNote(${idx})"><i class="fa fa-trash"></i></button>
+          </div>
+        `;
+      });
+    }
+    document.getElementById('notesForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const text = document.getElementById('noteInput').value.trim();
+      if (!text) return;
+      notes.unshift({ text, date: new Date().toLocaleString(), pinned: false });
+      saveNotes();
+      document.getElementById('noteInput').value = "";
+      renderNotes();
+    });
+    window.deleteNote = function(idx){
+      notes.splice(idx, 1);
+      saveNotes();
+      renderNotes();
+    }
+    window.pinNote = function(idx){
+      notes[idx].pinned = !notes[idx].pinned;
+      if (notes[idx].pinned) {
+        const pinnedNote = notes.splice(idx, 1)[0];
+        notes.unshift(pinnedNote);
+      }
+      saveNotes();
+      renderNotes();
+    }
+    renderNotes();
+  </script>
+<footer>
+  Â© 2025 TimerHaven. Ð’ÑÐµ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð±ÐµÑÐ¿Ð»Ð°Ñ‚Ð½Ñ‹ Ð¸ Ð·Ð°Ð±Ð¾Ñ‚ÑÑ‚ÑÑ Ð¾ Ð¿Ñ€Ð¸Ð²Ð°Ñ‚Ð½Ð¾ÑÑ‚Ð¸.<br/>
+<a href="privacy.html">ÐŸÐ¾Ð»Ð¸Ñ‚Ð¸ÐºÐ° ÐºÐ¾Ð½Ñ„Ð¸Ð´ÐµÐ½Ñ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚Ð¸</a> â€¢
+  <a href="terms.html">Ð£ÑÐ»Ð¾Ð²Ð¸Ñ</a> â€¢
+  <a href="contact.html">ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚</a>
+</footer>
+<p style="margin-top:1rem;"><a class="cta" href="/ru/notes/notes-index.html">Read full guide</a></p></body>
+</html>
+
+

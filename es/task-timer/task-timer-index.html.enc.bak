@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Task Timer â€” TimerHaven</title>
+  <meta name="description" content="Task Timer â€” mide el tiempo de tareas, registra sesiones y mejora estimaciones con datos reales.">
+
+  <!-- Canonical and hreflang for multilingual setup -->
+  <link rel="canonical" href="https://timerhaven.com/es/task-timer-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer-index.html">
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer-index.html">
+
+  <!-- Person structured data (author) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Serge Shammas",
+    "image": "/assets/images/authors/serge-shammas-400.jpg",
+    "url": "/authors/serge-shammas",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- HowTo / Article structured data (Spanish page) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Registrar y analizar tiempo de tareas con Task Timer",
+        "description":"Flujo para medir el tiempo real dedicado a tareas, registrar interrupciones y usar esos datos para mejorar estimaciones.",
+        "image":"/assets/images/tasktimer-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Task Timer","Notas","Hoja de cÃ¡lculo"],
+        "step":[
+          {"@type":"HowToStep","name":"Crear una tarea","text":"Nombra la tarea y aÃ±ade duraciÃ³n estimada y etiquetas.","image":"/assets/images/tasktimer-step-1.png"},
+          {"@type":"HowToStep","name":"Iniciar el temporizador y registrar interrupciones","text":"Inicia el Task Timer y anota interrupciones mientras ocurren.","image":"/assets/images/tasktimer-step-2.png"},
+          {"@type":"HowToStep","name":"Detener y exportar","text":"DetÃ©n el temporizador y exporta la sesiÃ³n en CSV para anÃ¡lisis semanal.","image":"/assets/images/tasktimer-step-3.png"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Task Timer â€” mide el tiempo y registra sesiones",
+        "image":["/assets/images/tasktimer-snapshot.png"],
+        "author": {"@type":"Person","name":"Serge Shammas"},
+        "datePublished":"2025-10-25",
+        "dateModified":"2025-11-10",
+        "publisher": {"@type":"Organization","name":"TimerHaven","logo":{"@type":"ImageObject","url":"/assets/images/timerhaven-logo.png"}} ,
+        "description":"GuÃ­a para usar Task Timer: registrar sesiones, gestionar interrupciones y exportar CSV para anÃ¡lisis.",
+        "mainEntityOfPage":"/es/task-timer-index.html",
+        "about": {
+          "@type":"SoftwareApplication",
+          "name":"Task Timer",
+          "url": "/timer-es.html",
+          "applicationCategory": "Productivity",
+          "operatingSystem": "Web"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fffdfa;color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:#fff;border-radius:10px;padding:2rem;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:#0b5f8a;margin-top:0;}
+    .meta{color:#6b7c89;font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;color:#333;}
+    .section{margin-top:1.1rem;}
+    .cta{display:inline-block;margin-top:1rem;padding:0.6rem 1.1rem;border-radius:8px;background:#0b5f8a;color:#fff;text-decoration:none;}
+    .case{background:#f8fff7;border-left:4px solid #b7f0c2;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    .workflow{background:#fff7fb;border-left:4px solid #f0c2e0;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .faq{margin-top:1rem;background:#f3f7fb;padding:1rem;border-radius:8px;}
+    .muted{color:#6b7c89;font-size:0.95rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    .return-link{display:inline-block;margin-top:1rem;text-decoration:none;color:#0b5f8a;font-weight:600;}
+    .small-text-muted{color:#6b7280;font-size:.95rem;margin:0 0 0.5rem 0;}
+    table.sample th, table.sample td { padding: 6px 10px; border: 1px solid #eef5fb; text-align:left; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="container">
+    <article class="card" role="main" aria-labelledby="title">
+      <h1 id="title">Task Timer â€” mide el tiempo y registra sesiones</h1>
+
+      <!-- Author card -->
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img
+          src="/assets/images/authors/serge-shammas-200.jpg"
+          srcset="/assets/images/authors/serge-shammas-400.jpg 2x"
+          width="56" height="56"
+          alt="Serge Shammas â€” productivity writer and UX researcher"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='/assets/images/authors/avatar-placeholder.png';">
+        <div>
+          <div class="byline"><strong>Por Serge Shammas</strong> â€” redactor de productividad y researcher UX</div>
+          <div class="meta">Publicado: 2025-10-25 Â· Actualizado: 2025-11-10 Â· Tiempo de lectura: 7 min</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        El Task Timer te ayuda a medir el tiempo real dedicado a tareas individuales. Usa esos datos para estimaciones mÃ¡s precisas, controlar la carga de trabajo o preparar facturas basadas en horas reales.
+      </p>
+
+      <!-- Table of contents -->
+      <nav class="toc" aria-label="Tabla de contenidos" style="margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;">
+        <a href="#setup" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">InstalaciÃ³n</a>
+        <a href="#howto" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">CÃ³mo registrar</a>
+        <a href="#analysis" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Exportar & analizar</a>
+        <a href="#download" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Descargar CSV</a>
+        <a href="#case-studies" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Casos</a>
+        <a href="#faq" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">FAQ</a>
+      </nav>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">InstalaciÃ³n & convenciones de nombres</h2>
+        <p>Usa nombres claros para las tareas e incluye la duraciÃ³n prevista entre parÃ©ntesis (ej.: <em>Escribir tests unitarios (45m)</em>). AÃ±ade etiquetas para proyecto y tipo. Esta coherencia facilita el anÃ¡lisis de los CSV exportados â€” prefiere etiquetas cortas y estables (cliente-alpha, reuniÃ³n, revisiÃ³n).</p>
+      </section>
+
+      <section id="howto" class="section" aria-labelledby="howto-title">
+        <h2 id="howto-title">CÃ³mo registrar una sesiÃ³n</h2>
+
+        <div class="workflow">
+          <strong>Registrar</strong>
+          <ol>
+            <li>Crea la entrada de tarea con la duraciÃ³n estimada y etiquetas.</li>
+            <li>Inicia el Task Timer cuando empieces; anota interrupciones en el campo de notas.</li>
+            <li>DetÃ©n el temporizador al terminar y aÃ±ade un breve resumen del trabajo realizado.</li>
+          </ol>
+        </div>
+
+        <!-- Example card: Download sample CSV -->
+        <section id="export-demo-inline" class="section export-demo mt-3" aria-labelledby="export-demo-inline-title">
+          <h3 id="export-demo-inline-title" class="h5">Ejemplo: entrada Task Timer con exportaciÃ³n</h3>
+
+          <p class="small-text-muted">Descargar CSV de ejemplo</p>
+
+          <div class="card" style="padding:1rem;max-width:740px;background:#fbfdff;border:1px solid #eef5fb;border-radius:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div style="min-width:0;display:flex;gap:0.75rem;align-items:center;flex:1;">
+                <div style="flex:0 0 auto;">
+                  <span style="display:inline-block;width:44px;height:44px;border-radius:6px;background:#fff;border:1px solid #e6eef8;text-align:center;line-height:44px;color:#0d6efd;font-weight:700;">TT</span>
+                </div>
+                <div style="min-width:0;">
+                  <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:nowrap;">
+                    <strong id="demoSessionName" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Escribir informe</strong>
+                    <small id="demoSessionTags" class="muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">trabajo, proyectoX</small>
+                  </div>
+                  <div style="margin-top:.25rem;color:#475569;font-size:.95rem;">
+                    <span id="demoSessionTimer" style="font-weight:600;">25:00</span>
+                    <span class="muted" style="margin-left:.5rem;font-size:.9rem;">(ejemplo)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="flex:0 0 auto;display:flex;gap:.5rem;align-items:center;">
+                <button id="exportDemoBtnInline" class="cta" aria-label="Descargar CSV de ejemplo" style="background:#fff;color:#0b5f8a;border:1px solid #cfe8f5;padding:0.4rem 0.8rem;border-radius:6px;">
+                  <!-- inline SVG download icon -->
+                  <svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.35rem;vertical-align:middle" aria-hidden="true" focusable="false">
+                    <path fill="#0d6efd" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"></path>
+                  </svg>
+                  Descargar CSV de ejemplo
+                </button>
+              </div>
+            </div>
+
+            <p class="mt-2 mb-0" style="font-size:.9rem;color:#6b7280;">
+              Haz clic en el botÃ³n para descargar un archivo CSV de ejemplo. Para exportar tus sesiones reales desde la herramienta, usa la funciÃ³n de Export en el Task Timer.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section id="analysis" class="section" aria-labelledby="analysis-title">
+        <h2 id="analysis-title">Exportar & analizar</h2>
+        <p>Exporta CSV semanales y calcula promedios por etiqueta o proyecto. MÃ©tricas clave: tiempo medio por tarea, mediana (menos sensible a valores extremos) y tasa de interrupciones (% de sesiones con interrupciones).</p>
+
+        <div class="workflow">
+          <strong>Receta â€” revisiÃ³n semanal</strong>
+          <ol>
+            <li>Exporta las sesiones de la semana en CSV.</li>
+            <li>En la hoja de cÃ¡lculo, calcula tiempos medios por etiqueta y ordena las tareas mÃ¡s largas para refinar estimaciones.</li>
+            <li>Usa los resultados para ajustar tus bloques Pomodoro y calendario.</li>
+          </ol>
+        </div>
+
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">Ejemplo â€” fÃ³rmulas & interpretaciÃ³n</h3>
+          <p>SupÃ³n que tu export incluye una columna <code>actual_minutes</code> y una columna <code>interruptions</code> con el nÃºmero de interrupciones por sesiÃ³n.</p>
+          <ul>
+            <li>Promedio para la etiqueta "proyecto-alpha": =AVERAGEIF(tag_range,"proyecto-alpha",actual_minutes_range)</li>
+            <li>Mediana (menos sensible a outliers): =MEDIAN(IF(tag_range="proyecto-alpha",actual_minutes_range)) â€” fÃ³rmula matricial si es necesario.</li>
+            <li>Tasa de interrupciÃ³n: =COUNTIFS(tag_range,"proyecto-alpha",interruptions_range,">0") / COUNTIF(tag_range,"proyecto-alpha")</li>
+          </ul>
+
+          <p>Ejemplo de sesiones semanales (ilustraciÃ³n):</p>
+          <table class="sample" style="border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:480px;">
+            <thead><tr><th>Fecha</th><th>Tarea</th><th>Real (min)</th><th>Interrupciones</th></tr></thead>
+            <tbody>
+              <tr><td>2025-11-03</td><td>RevisiÃ³n de cÃ³digo</td><td>60</td><td>1</td></tr>
+              <tr><td>2025-11-04</td><td>Funcionalidad X</td><td>120</td><td>0</td></tr>
+              <tr><td>2025-11-06</td><td>CorrecciÃ³n de bug</td><td>45</td><td>1</td></tr>
+            </tbody>
+          </table>
+
+          <p class="muted">Ejemplo: promedio = (60+120+45)/3 = 75 min; tasa de interrupciÃ³n = 2/3 = 66,7%.</p>
+        </div>
+      </section>
+
+      <section id="download" class="section" aria-labelledby="download-title">
+        <h2 id="download-title">Descargar â€” plantilla CSV del Task Timer</h2>
+        <p class="muted">Utiliza este CSV para rellenar sesiones manualmente o para probar importaciones.</p>
+        <p><a href="#" id="downloadCsv" class="cta" aria-label="Descargar la plantilla CSV">Descargar plantilla CSV</a></p>
+        <pre class="template" id="csvTemplate" aria-hidden="true">task_name,start_iso,end_iso,duration_minutes,note
+RevisiÃ³n diseÃ±o,2025-01-01T08:00:00Z,2025-01-01T09:15:00Z,75,RevisiÃ³n inicial</pre>
+
+        <script>
+          // Template download (unchanged)
+          document.getElementById('downloadCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('csvTemplate').textContent;
+            var blob = new Blob([text], {type:'text/csv;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'task-timer-template-es.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title">Casos & consejos</h2>
+        <div class="case">
+          <strong>Consultor â€” Paolo</strong>
+          <p>Tras 2 semanas, Paolo descubriÃ³ que la revisiÃ³n de cÃ³digo suponÃ­a el 20% de su jornada. BloqueÃ³ huecos dedicados y redujo la fragmentaciÃ³n del trabajo.</p>
+        </div>
+        <div class="case">
+          <strong>Consultora â€” Rina</strong>
+          <p>Rina registrÃ³ llamadas como interrupciones; ahora reserva bloques de concentraciÃ³n y ajusta el tiempo reservado para reuniones.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="faq">
+          <p><strong>P: Â¿Puedo cambiar la unidad de visualizaciÃ³n?</strong><br>
+          <strong>R:</strong> La visualizaciÃ³n principal muestra minutos. Para informes en horas, exporta a CSV y calcula totales en la hoja de cÃ¡lculo.</p>
+
+          <p><strong>P: Â¿QuÃ© hago si el navegador suspende la pestaÃ±a?</strong><br>
+          <strong>R:</strong> Algunos navegadores reducen la actividad de pestaÃ±as inactivas. MantÃ©n el Task Timer en una pestaÃ±a activa o registra horas manualmente si trabajas en dispositivos que suspenden pestaÃ±as.</p>
+
+          <p><strong>P: Â¿Mis datos son privados?</strong><br>
+          <strong>R:</strong> Por defecto las sesiones se almacenan localmente en el navegador (localStorage). No se envÃ­an a servidores externos a menos que uses una funciÃ³n de sincronizaciÃ³n o exportes y subas los archivos.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources-title">
+        <h2 id="resources-title">Recursos</h2>
+        <ul class="muted">
+          <li><a href="https://support.google.com/docs/answer/3093281" target="_blank" rel="noopener noreferrer">Google Sheets â€” tablas dinÃ¡micas & fÃ³rmulas (guÃ­a)</a></li>
+        </ul>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">MÃ¡s herramientas: <a href="/es/notes-index.html">Notas</a> Â· <a href="/es/pomodoro-index.html">Pomodoro</a> Â· <a href="/es/calendar-planning-index.html">Calendario</a></p>
+
+      <!-- Open the localized timer tool -->
+      <p style="margin-top:1.2rem;"><a href="/timer-es.html#startBtn" class="cta" aria-label="Abrir Task Timer" rel="help">Abrir Task Timer</a></p>
+
+      <!-- Return link -->
+      <p class="return-link"><a href="/timer-es.html#startBtn" rel="up" aria-label="Volver a Task Timer">Volver a Task Timer</a></p>
+
+      <footer style="margin-top:1.2rem;color:#6b7c89;font-size:0.95rem;">
+        <p>Comentarios o problemas: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Demo export script (stable sample filename) -->
+  <script>
+  (function(){
+    function escapeCsv(v){
+      if (v === null || v === undefined) return '';
+      return '"' + String(v).replace(/"/g,'""') + '"';
+    }
+
+    function downloadCsv(filename, content){
+      var blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function buildDemoSession(){
+      var now = new Date();
+      var start = new Date(now.getTime() - (25*60*1000)); // 25 minutes earlier
+      var task = (document.getElementById('demoSessionName') && document.getElementById('demoSessionName').textContent) || 'Escribir informe';
+      var tagsText = (document.getElementById('demoSessionTags') && document.getElementById('demoSessionTags').textContent) || '';
+      var tags = tagsText.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+      return {
+        id: 'demo-' + Math.floor(Math.random()*900000+100000),
+        task_name: task.trim(),
+        tags: tags,
+        start_time: start.toISOString(),
+        end_time: now.toISOString(),
+        duration_seconds: 25*60,
+        duration_human: '25:00',
+        notes: 'Export de ejemplo desde la guÃ­a',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+      };
+    }
+
+    function exportSessionAsCsv(session){
+      var header = ['id','task_name','tags','start_time','end_time','duration_seconds','duration_human','notes','timezone'];
+      var row = [
+        session.id || '',
+        session.task_name || '',
+        (session.tags || []).join(';'),
+        session.start_time || '',
+        session.end_time || '',
+        session.duration_seconds != null ? session.duration_seconds : '',
+        session.duration_human || '',
+        session.notes || '',
+        session.timezone || ''
+      ];
+      var csv = header.map(escapeCsv).join(',') + '\n' + row.map(escapeCsv).join(',') + '\n';
+      // Stable sample filename for the example download
+      var filename = 'tasktimer-sample.csv';
+      downloadCsv(filename, csv);
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      var btn = document.getElementById('exportDemoBtnInline');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        try {
+          var session = buildDemoSession();
+          exportSessionAsCsv(session);
+          var orig = btn.innerHTML;
+          btn.innerHTML = 'Descargado';
+          btn.disabled = true;
+          setTimeout(function(){ btn.innerHTML = orig; btn.disabled = false; }, 1200);
+        } catch (e) {
+          console.error('Export error', e);
+          alert('Error al exportar â€” consulta la consola para mÃ¡s detalles.');
+        }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
+
+

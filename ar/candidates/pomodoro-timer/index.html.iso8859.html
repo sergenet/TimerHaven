@@ -1,0 +1,201 @@
+ï»¿<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ÙØ¤ÙØª Ø¨ÙÙÙØ¯ÙØ±Ù â TimerHaven</title>
+  <meta name="description" content="Ø­Ø³ÙÙ ØªØ±ÙÙØ²Ù Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù ÙØ¤ÙØª Ø¨ÙÙÙØ¯ÙØ±Ù ÙÙ TimerHaven. Ø¬ÙØ³Ø§Øª Ø®Ø§ØµØ©Ø Ø³ÙØ± Ø¹ÙÙ Ø¹ÙÙÙ ÙÙÙØ§ÙØ¨ Ø¬Ø§ÙØ²Ø© ÙÙØªØ­ÙÙÙ.">
+
+  <link rel="canonical" href="https://timerhaven.com/ar/pomodoro-timer/">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/pomodoro-timer/">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/pomodoro-timer/">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/pomodoro-timer/">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/pomodoro-timer/">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/pomodoro-timer/">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/pomodoro-timer/">
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/pomodoro-timer/">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/pomodoro-timer/">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "ÙÙ Ø£Ø³ØªØ·ÙØ¹ ØªØºÙÙØ± ÙØ¯Ø© Ø§ÙØ¬ÙØ³Ø© Ø§ÙØ§ÙØªØ±Ø§Ø¶ÙØ©Ø",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ÙØ¹Ù â ÙÙÙÙÙ ØªØ®ØµÙØµ ÙØªØ±Ø§Øª Ø§ÙØ¹ÙÙ ÙØ§ÙØ§Ø³ØªØ±Ø§Ø­Ø© (ÙØ«ÙØ§Ù 50/10 Ø¨Ø¯ÙØ§Ù ÙÙ 25/5) ÙØªÙØ§Ø³Ø¨ Ø£Ø³ÙÙØ¨Ù."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ÙÙ ÙØ¹ÙÙ Ø§ÙÙØ¤ÙØª ÙÙ Ø§ÙØ®ÙÙÙØ©Ø",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ø§ÙÙØ¤ÙØª ÙØ¹ÙÙ ÙÙ Ø§ÙÙØªØµÙØ­Ø Ø¨Ø¹Ø¶ ÙØªØµÙØ­Ø§Øª Ø§ÙÙÙØ§ØªÙ ÙØ¯ ØªÙÙÙ Ø¹ÙØ§ÙØ§Øª Ø§ÙØªØ¨ÙÙØ¨ ØºÙØ± Ø§ÙÙØ´Ø·Ø©Ø ÙÙÙØ¶Ù Ø¥Ø¨ÙØ§Ø¡ Ø§ÙØµÙØ­Ø© ÙÙØªÙØ­Ø© ÙÙØ­ØµÙÙ Ø¹ÙÙ Ø¯ÙØ© Ø£ÙØ¶Ù."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "ÙÙ ÙÙÙÙÙÙ Ø­ÙØ¸ Ø³Ø¬ÙØ§Øª Ø§ÙØ¬ÙØ³Ø§ØªØ",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "ÙØ¹Ù â ÙÙÙÙÙ ØªÙØ²ÙÙ ÙØ§ÙØ¨ Ø§ÙØ¬ÙØ³Ø© ÙØªØ³Ø¬ÙÙ Ø¬ÙØ³Ø§ØªÙ ÙØ­ÙÙØ§Ù ÙØªØ­ÙÙÙÙØ§ ÙØ§Ø­ÙØ§Ù."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#fbfeff;color:#102a43;margin:0;padding:2rem;line-height:1.5;direction:rtl;}
+    .card{max-width:920px;margin:0 auto;background:#fff;border-radius:10px;padding:2rem;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:#0b63a0;margin-top:0;text-align:right;}
+    .lead{font-size:1.05rem;color:#334;text-align:right;}
+    .section{margin-top:1.1rem;text-align:right;}
+    .case{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    .workflow{background:#fff7f0;border-right:4px solid #ffd1a7;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    .cta{display:inline-block;margin-top:1rem;padding:0.6rem 1.1rem;border-radius:8px;background:#0b63a0;color:#fff;text-decoration:none;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;direction:ltr;text-align:left;}
+    .faq{margin-top:1rem;background:#f3f7fb;padding:1rem;border-radius:8px;}
+    .muted{color:#6b7c89;font-size:0.95rem;text-align:right;}
+    ul, ol { padding-inline-start: 1.1rem; margin: 0 0 0.6rem 0; }
+    li { margin-bottom: 0.4rem; }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="title">
+    <h1 id="title">ÙØ¤ÙØª Ø¨ÙÙÙØ¯ÙØ±Ù â Ø§Ø¹ÙÙ ÙÙ ÙØªØ±Ø§Øª ÙØµÙØ±Ø© ÙÙØ±ÙØ²Ø©</h1>
+
+    <p class="lead">
+      ØªÙÙÙØ© Ø¨ÙÙÙØ¯ÙØ±Ù ØªÙØ³ÙÙ Ø§ÙØ¹ÙÙ Ø¥ÙÙ ÙØªØ±Ø§Øª ÙØµÙØ±Ø© ÙÙ Ø§ÙØªØ±ÙÙØ² ÙØªØ¨Ø¹ÙØ§ Ø§Ø³ØªØ±Ø§Ø­Ø§Øª ÙØµÙØ±Ø©. Ø§Ø³ØªØ®Ø¯Ù ÙØ°Ø§ Ø§ÙÙØ¤ÙØª ÙØªÙÙÙÙ Ø§ÙÙØ´ØªØªØ§Øª ÙØ²ÙØ§Ø¯Ø© Ø¥ÙØªØ§Ø¬ÙØªÙ.
+    </p>
+
+    <section class="section">
+      <h2>Ø£ÙØ«ÙØ© Ø¹ÙÙÙØ© ÙØµÙØ±Ø©</h2>
+
+      <div class="case">
+        <strong>ÙØ«Ø§Ù â ÙØ·ÙØ± (Ø£Ø­ÙØ¯)</strong>
+        <p>Ø£Ø­ÙØ¯ ÙØ³ØªØ®Ø¯Ù 50/10 ÙÙÙØ§Ù Ø§ÙØªØ±ÙÙØ² Ø§ÙØ¹ÙÙÙ. Ø¨Ø¹Ø¯ Ø¨Ø¶Ø¹Ø© Ø£Ø³Ø§Ø¨ÙØ¹ ÙØ§Ø­Ø¸ Ø£ÙÙ ÙØ±Ø§Ø¬Ø¹Ø§Øª Ø§ÙÙÙØ¯ ØªØ­ØªØ§Ø¬ ÙÙØªØ§Ù Ø£Ø·ÙÙØ ÙØ¹Ø¯ÙÙ ØªØ®Ø·ÙØ·Ù ÙÙÙØ§Ù ÙØ°ÙÙ.</p>
+      </div>
+
+      <div class="case">
+        <strong>ÙØ«Ø§Ù â Ø·Ø§ÙØ¨Ø© (ÙÙÙÙ)</strong>
+        <p>ÙÙÙÙ ØªØ³ØªØ®Ø¯Ù 25/5 ÙÙØ°Ø§ÙØ±Ø© Ø§ÙÙØµØ·ÙØ­Ø§ØªØ ÙÙ Ø§ÙØ§Ø³ØªØ±Ø§Ø­Ø© ØªÙØªØ¨ ÙÙØ§Ø­Ø¸Ø© ÙØµÙØ±Ø© ÙÙ Ø§ÙÙÙØ§Ø­Ø¸Ø§Øª ÙØªØ«Ø¨ÙØª Ø§ÙÙØ¹ÙÙÙØ§Øª.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>ÙØµÙØ§Øª Ø¹ÙÙ â Ø¬Ø±ÙØ¨ÙØ§ ÙÙØ±Ø§Ù</h2>
+
+      <div class="workflow">
+        <strong>ÙØµÙØ© 1 â ÙØªØ§Ø¨Ø© Ø³Ø±ÙØ¹Ø©</strong>
+        <ol>
+          <li>Ø§ÙØªØ­ Ø§ÙÙÙØ§Ø­Ø¸Ø§Øª ÙØ§ÙØªØ¨ ÙØ®Ø·Ø·Ø§Ù ÙØµÙØ±Ø§Ù (3 ÙÙØ§Ø·).</li>
+          <li>Ø§Ø¨Ø¯Ø£ 1â2 Ø¬ÙØ³Ø§Øª Ø¨ÙÙÙØ¯ÙØ±Ù (25/5) ÙØ§ÙØªØ¨ Ø¯ÙÙ Ø§ÙÙØ·Ø§Ø¹.</li>
+          <li>ÙÙ Ø§ÙØ§Ø³ØªØ±Ø§Ø­Ø© Ø§Ø­Ø±Øµ Ø¹ÙÙ ÙØ±Ø§Ø¬Ø¹Ø© Ø³Ø±ÙØ¹Ø© ÙØªØ¯ÙÙÙ ÙÙØ§Ø· ÙÙØªØ­Ø³ÙÙ.</li>
+        </ol>
+      </div>
+
+      <div class="workflow">
+        <strong>ÙØµÙØ© 2 â Ø³Ø¨Ø§Ù Ø¹ÙÙ Ø¹ÙÙÙ (50/10)</strong>
+        <ol>
+          <li>Ø§Ø­Ø¬Ø² 2Ã50 Ø¯ÙÙÙØ© ÙÙÙÙØ© ØµØ¹Ø¨Ø©.</li>
+          <li>Ø®Ø° 10 Ø¯ÙØ§Ø¦Ù Ø±Ø§Ø­Ø© Ø¨Ø¹Ø¯ ÙÙ ÙØªÙØ©Ø Ù5â10 Ø¯ÙØ§Ø¦Ù ÙÙØªÙÙÙØ±.</li>
+          <li>Ø¯ÙÙÙ ØªÙØ¯ÙÙ ÙÙ Ø§ÙÙÙØ§Ø­Ø¸Ø§Øª ÙØªØ­ÙÙÙ ÙÙØ§ÙØ© Ø§ÙÙÙÙ.</li>
+        </ol>
+      </div>
+
+      <div class="workflow">
+        <strong>ÙØµÙØ© 3 â Ø¨ÙÙÙØ¯ÙØ±Ù ÙØªØ²Ø§ÙÙ ÙÙÙØ±ÙÙ</strong>
+        <ol>
+          <li>Ø§Ø¨Ø¯Ø£ Ø¬ÙÙØ¹ Ø§ÙØ£Ø¹Ø¶Ø§Ø¡ Ø§ÙØ¬ÙØ³Ø§Øª ÙØ¹Ø§Ù ÙÙØ¹ÙÙ Ø§ÙÙØ³ØªÙÙ.</li>
+          <li>Ø¨Ø¹Ø¯ 4 Ø¯ÙØ±Ø§ØªØ Ø§Ø¬ØªÙØ¹ÙØ§ ÙÙØ´Ø§Ø±ÙØ© ÙØªØ§Ø¦Ø¬ Ø³Ø±ÙØ¹Ø©.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>ØªØ­ÙÙÙ â ÙÙÙØ°Ø¬ Ø¬ÙØ³Ø© Ø¨ÙÙÙØ¯ÙØ±Ù</h2>
+      <p class="muted">Ø§ÙÙØ± ÙØªØ­ÙÙÙ ÙØ§ÙØ¨ Ø¨Ø³ÙØ· (.txt) ÙÙØ§Ø­ØªÙØ§Ø¸ Ø¨Ø³Ø¬Ù ÙØ­ÙÙ ÙÙØ¬ÙØ³Ø§Øª:</p>
+      <p><a href="#" id="downloadPomodoro" class="cta">ØªØ­ÙÙÙ ÙØ§ÙØ¨ Ø¨ÙÙÙØ¯ÙØ±Ù</a></p>
+
+      <pre class="template" id="pomTemplate" aria-hidden="true">Ø³Ø¬Ù Ø¬ÙØ³Ø© Ø¨ÙÙÙØ¯ÙØ±Ù
+Ø§ÙØªØ§Ø±ÙØ®: {{YYYY-MM-DD}}
+Ø§ÙÙÙÙØ©:
+Ø¨ÙÙÙØ¯ÙØ±Ù #1: Ø¨Ø¯Ø§ÙØ© __:__  ÙÙØ§ÙØ© __:__  ÙØ¯Ø© 25
+Ø¨ÙÙÙØ¯ÙØ±Ù #2: Ø¨Ø¯Ø§ÙØ© __:__  ÙÙØ§ÙØ© __:__  ÙØ¯Ø© 25
+ÙØªØ±Ø§Øª Ø§ÙØ±Ø§Ø­Ø© Ø§ÙÙØµÙØ±Ø©:
+ÙÙØ§Ø­Ø¸Ø§Øª / Ø®Ø·ÙØ§Øª ÙØ§Ø­ÙØ©:</pre>
+
+      <script>
+        document.getElementById('downloadPomodoro').addEventListener('click', function(e){
+          e.preventDefault();
+          var text = document.getElementById('pomTemplate').textContent;
+          var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'pomodoro-session-ar.txt';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 100);
+        });
+      </script>
+    </section>
+
+    <section class="section">
+      <h2>Ø§ÙØªØ±Ø§Ø­Ø§Øª ÙØµÙØ± Ø§ÙØ´Ø§Ø´Ø© (ÙØ´Ø±ÙØ­Ø©)</h2>
+      <p class="muted">
+        Ø£Ø¶Ù ÙØ°Ù Ø§ÙØµÙØ± ÙØªÙÙÙØ² Ø§ÙØµÙØ­Ø©:<br>
+        - screenshotâ1: Ø§ÙÙØ¤ÙØª ÙØ¹ÙÙ ÙØ¹ Ø¹Ø¯Ù ØªÙØ§Ø²ÙÙ ÙØ§Ø¶Ø­ (Ø§ÙØªØ³ÙÙØ©: "Ø§Ø¨Ø¯Ø£ ÙØªÙØ© 25 Ø¯ÙÙÙØ©").<br>
+        - screenshotâ2: ÙÙØ®Øµ Ø¨Ø¹Ø¯ 4 Ø¨ÙÙÙØ¯ÙØ±Ù ÙØ¹ ÙÙØ§Ø­Ø¸Ø§Øª ÙØµÙØ±Ø© (Ø§ÙØªØ³ÙÙØ©: "Ø±Ø§Ø¬Ø¹ ÙØ®Ø·Ø· ÙÙØ®Ø·ÙØ© Ø§ÙØªØ§ÙÙØ©").
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>ÙØµØ§Ø¦Ø­ ÙØªÙØ¯ÙØ©</h2>
+      <ul>
+        <li><strong>Ø¬Ø±Ø¨ Ø£Ø·ÙØ§ÙØ§Ù ÙØ®ØªÙÙØ©:</strong> Ø¬Ø±ÙØ¨ 25/5 Ø£Ù 50/10 Ø£Ù 90/20 Ø­Ø³Ø¨ ÙÙØ¹ Ø§ÙÙÙÙØ©.</li>
+        <li><strong>Ø·ÙÙØ³ ÙØ¨Ù Ø§ÙØ¨Ø¯Ø§ÙØ©:</strong> 10 Ø«ÙØ§ÙÙ ÙÙØªØ­Ø¶ÙØ± ØªØ³Ø§Ø¹Ø¯ Ø§ÙØ¯ÙØ§Øº Ø¹ÙÙ Ø§ÙØ§ÙØªÙØ§Ù Ø¥ÙÙ Ø§ÙØ¹ÙÙ.</li>
+        <li><strong>Ø§Ø³ØªØ®Ø¯Ù Ø§ÙØ¨ÙØ§ÙØ§Øª:</strong> Ø§Ø¬ÙØ¹ Ø¨ÙØ§ÙØ§Øª Ø£Ø³Ø¨ÙØ¹ÙØ© ÙØªØ­Ø³ÙÙ ØªÙØ¯ÙØ±Ø§Øª Ø§ÙÙÙØª.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Ø§ÙØ£Ø³Ø¦ÙØ© Ø§ÙØ´Ø§Ø¦Ø¹Ø©</h2>
+      <div class="faq">
+        <p><strong>Ø³: ÙÙ ÙÙÙÙ ØªÙØ¯ÙØ¯ Ø§ÙØ§Ø³ØªØ±Ø§Ø­Ø§Øª ØªÙÙØ§Ø¦ÙØ§ÙØ</strong><br>
+        <strong>Ø¬:</strong> ÙÙÙÙÙ Ø¶Ø¨Ø· Ø§ÙÙØªØ±Ø§Øª ÙØ¯ÙÙØ§Ù ÙØ¨Ù Ø§ÙØ¨Ø¯Ø¡ ÙØªÙØ§Ø³Ø¨ Ø³ÙØ±ØªÙ.</p>
+
+        <p><strong>Ø³: ÙÙ ØªÙØ¬Ø¯ ÙØºÙØ§Øª ØªÙØ¨ÙÙÙØ©Ø</strong><br>
+        <strong>Ø¬:</strong> ÙØ¹Ù â Ø³ÙÙØ·ÙÙ ØªÙØ¨ÙÙ ÙØµÙØ± Ø¨Ø¹Ø¯ Ø§ÙØªÙØ§Ø¡ ÙÙ Ø¬ÙØ³Ø© Ø¥Ø°Ø§ Ø³ÙØ­ Ø§ÙÙØªØµÙØ­.</p>
+
+        <p><strong>Ø³: ÙÙÙ Ø£Ø³ØªØ®Ø¯ÙÙ ÙØ¹ Ø§ÙÙÙØ§Ø­Ø¸Ø§Øª ÙTask TimerØ</strong><br>
+        <strong>Ø¬:</strong> Ø§ÙØªØ¨ Ø§ÙÙÙÙØ© ÙÙ Ø§ÙÙÙØ§Ø­Ø¸Ø§ØªØ Ø§Ø¨Ø¯Ø£ Ø¨ÙÙÙØ¯ÙØ±Ù ÙÙØªØ±ÙÙØ²Ø ÙØ§Ø³ØªØ®Ø¯Ù Task Timer ÙÙÙØ§Ø³ Ø§ÙÙÙØª Ø§ÙØªÙØµÙÙÙ Ø¥Ø°Ø§ Ø§Ø­ØªØ¬Øª ÙØ°ÙÙ.</p>
+      </div>
+    </section>
+
+    <p class="muted" style="margin-top:1rem;text-align:right;">Ø£Ø¯ÙØ§Øª Ø¥Ø¶Ø§ÙÙØ©: <a class="inline-link" href="/ar/notes/">Ø§ÙÙÙØ§Ø­Ø¸Ø§Øª</a> Â· <a class="inline-link" href="/ar/task-timer/">Task Timer</a> Â· <a class="inline-link" href="/ar/calendar-planning/">Ø§ÙØªÙÙÙÙ</a></p>
+
+    <a href="/pomodoro-ar.html" class="cta" style="float:left;margin-top:1rem;">ÙØªØ­ Ø£Ø¯Ø§Ø© Ø¨ÙÙÙØ¯ÙØ±Ù</a>
+
+    <div style="clear:both;"></div>
+
+    <footer style="margin-top:1.2rem;text-align:right;color:#6b7c89;font-size:0.95rem;">
+      <p>ÙÙ ÙØ¯ÙÙ ØªØ¹ÙÙÙ Ø£Ù Ø®Ø·Ø£Ø Ø±Ø§Ø³ÙÙØ§: <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a></p>
+    </footer>
+  </main>
+</body>
+</html>
+
+

@@ -1,13 +1,32 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title id="page-title">TimerHaven: Productivity Suite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="TimerHaven offers free world clocks, countdown timers, alarms, stopwatches, Pomodoro, weather, and currency tools. Boost your productivity with TimerHaven!">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Performance & Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" as="style">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- Open Graph defaults -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TimerHaven: Productivity Suite">
+  <meta property="og:description" content="Free world clocks, timers, Pomodoro, weather and small productivity tools.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/pomodoro-snapshot.png">
+  <meta property="og:url" content="https://timerhaven.com/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- hreflang links for main alternate languages -->
+  <link rel="alternate" href="https://timerhaven.com/" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/ar/" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/" hreflang="x-default" />
+
   <style>
     body {
       font-family: 'Montserrat', Arial, sans-serif;
@@ -137,6 +156,11 @@
     .card-unit       .menu-icon { --card-color1: #fd5d47; --card-color2: #a1c4fd; }
     .card-weather    .menu-icon { --card-color1: #a1c4fd; --card-color2: #c2e9fb; }
     .card-world      .menu-icon { --card-color1: #185a9d; --card-color2: #43cea2; }
+
+    /* Pomodoro icon styling (tomato emoji + stopwatch) */
+    .pomodoro-emoji { font-size:1.1em; line-height:1; margin-right:.25rem; vertical-align:middle; }
+    .pomodoro-fa { font-size:1.0em; color:#e24b3a; margin-right:.25rem; vertical-align:middle; }
+
     @media (max-width: 800px) {
       .main-header h1 { font-size: 1.2em; }
       .tool-grid { gap: 8px; }
@@ -171,40 +195,88 @@
   .ad-wrapper { min-height: 50px; }   /* reserve approx 320x50 mobile banner */
 }
   </style>
-  <script>window.__timerhaven_ad_client = "ca-pub-0467059729557007";</script>
+
+  <script></script>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="language-select">
     <label for="lang-select"><strong id="language-label">Language:</strong></label>
     <select id="lang-select">
       <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="es">Español</option>
+      <option value="fr">Fran�ais</option>
+      <option value="es">Espa�ol</option>
       <option value="de">Deutsch</option>
-      <option value="ru">Русский</option>
-      <option value="el">Ελληνικά</option>
-      <option value="ar">العربية</option>
+      <option value="ru">???????</option>
+      <option value="el">????????</option>
+      <option value="ar">???????</option>
     </select>
   </div>
   <header class="main-header">
-    <h1 id="header-title">🕒 TimerHaven Productivity Suite</h1>
+    <h1 id="header-title">?? TimerHaven Productivity Suite</h1>
     <p id="header-desc">Choose a tool below to boost your productivity!</p>
   </header>
-<!-- Homepage Leaderboard Ad — paste IMMEDIATELY AFTER </header> -->
-<div class="ad-wrapper" style="max-width:900px;margin:0 auto;padding:0 1rem;min-height:0;display:flex;align-items:center;justify-content:center;">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007"
-       crossorigin="anonymous"></script>
 
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-0467059729557007"
-       data-ad-slot="8923180236"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+<!-- Homepage leaderboard ad (placeholder reserved; will initialize after consent) -->
+<div class="ad-wrapper" id="th-leaderboard-ad" aria-hidden="false" style="max-width:900px;margin:0 auto;padding:0 1rem;min-height:0;display:flex;align-items:center;justify-content:center;">
+  <div class="th-ad-placeholder" style="width:100%;min-height:50px;display:flex;align-items:center;justify-content:center;"></div>
 </div>
+
+<!-- Consent assets -->
+<link rel="stylesheet" href="/assets/css/consent.css">
+<script src="/assets/js/consent.js" defer></script>
+
+<script>
+  (function(){
+    function initAds(){
+      try {
+        if (window.__timerhaven_ads_initialized) return;
+        window.__timerhaven_ads_initialized = true;
+
+        // inject AdSense script tag (if not already loaded)
+        if (!document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')) {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007';
+          s.crossOrigin = 'anonymous';
+          document.head.appendChild(s);
+        }
+
+        // create & insert ins.ad element
+        var container = document.getElementById('th-leaderboard-ad');
+        if (!container) return;
+        var ins = document.createElement('ins');
+        ins.className = 'adsbygoogle';
+        ins.style.display = 'block';
+        ins.setAttribute('data-ad-client', 'ca-pub-0467059729557007');
+        ins.setAttribute('data-ad-slot', '8923180236');
+        ins.setAttribute('data-ad-format', 'auto');
+        ins.setAttribute('data-full-width-responsive', 'true');
+
+        // clear placeholder and append ins
+        container.innerHTML = '';
+        container.appendChild(ins);
+
+        // push ads
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      } catch(e){ console.warn('ad init failed', e); }
+    }
+
+    // If consent already given, load immediately; otherwise wait for grant
+    if (window.timerhavenConsentGiven && window.timerhavenConsentGiven()) {
+      initAds();
+    } else {
+      window.timerhavenLoadAdsAfterConsent && window.timerhavenLoadAdsAfterConsent(initAds);
+    }
+  })();
+</script>
+
   <main>
     <div class="tool-grid" id="tools">
       <a href="calendar-en.html" class="menu-card card-calendar text-decoration-none text-dark" data-tool="calendar-en">
@@ -253,7 +325,7 @@
         <div class="menu-description" id="tool-password-desc"></div>
       </a>
       <a href="pomodoro-en.html" class="menu-card card-pomodoro text-decoration-none text-dark" data-tool="pomodoro-en">
-        <div class="menu-icon"><i class="fa fa-apple-whole"></i></div>
+        <div class="menu-icon"><span class="pomodoro-emoji" aria-hidden="true">??</span><i class="fa fa-stopwatch pomodoro-fa" aria-hidden="true"></i></div>
         <div class="menu-title" id="tool-pomodoro-title"></div>
         <div class="menu-description" id="tool-pomodoro-desc"></div>
       </a>
@@ -300,7 +372,7 @@
       en: {
         "page-title": "TimerHaven: Productivity Suite",
         "language-label": "Language:",
-        "header-title": "🕒 TimerHaven Productivity Suite",
+        "header-title": "?? TimerHaven Productivity Suite",
         "header-desc": "Choose a tool below to boost your productivity!",
         "nav-tools": "Tools",
         "nav-resources": "Resources",
@@ -335,10 +407,10 @@
         "tool-world-title": "World Clock",
         "tool-world-desc": "See the time anywhere in the world, instantly.",
         "resources-title": "Recommended Productivity Tools",
-        "resources-timer-desc": "– The best visual countdown timer for work, school, and home.",
-        "resources-book-desc": "– The classic book on focus and productivity.",
-        "resources-planner-desc": "– Organize your life with this legendary paper planner.",
-        "resources-keyboard-desc": "– Write anywhere, stay productive!",
+        "resources-timer-desc": "� The best visual countdown timer for work, school, and home.",
+        "resources-book-desc": "� The classic book on focus and productivity.",
+        "resources-planner-desc": "� Organize your life with this legendary paper planner.",
+        "resources-keyboard-desc": "� Write anywhere, stay productive!",
         "resources-affiliate": "As an Amazon Associate, TimerHaven earns from qualifying purchases. Thanks for your support!",
         "footer-copyright": "&copy; 2025 TimerHaven. All tools are free and privacy-friendly.",
         "footer-about": "About",
@@ -347,97 +419,97 @@
         "footer-credit": "Built by <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Amazon Partner</a>"
       },
       fr: {
-  "page-title": "TimerHaven : Suite de Productivité",
+  "page-title": "TimerHaven : Suite de Productivit�",
   "language-label": "Langue :",
-  "header-title": "🕒 Suite de Productivité TimerHaven",
-  "header-desc": "Choisissez un outil ci-dessous pour améliorer votre productivité !",
+  "header-title": "?? Suite de Productivit� TimerHaven",
+  "header-desc": "Choisissez un outil ci-dessous pour am�liorer votre productivit� !",
   "nav-tools": "Outils",
   "nav-resources": "Ressources",
   "tool-calendar-title": "Calendrier",
-  "tool-calendar-desc": "Voir les dates et planifier des événements facilement.",
+  "tool-calendar-desc": "Voir les dates et planifier des �v�nements facilement.",
   "tool-clipboard-title": "Gestionnaire de Presse-papiers",
-  "tool-clipboard-desc": "Enregistrez et organisez des extraits de texte pour un accès facile.",
-  "tool-countdown-title": "Minuteur de compte à rebours",
-  "tool-countdown-desc": "Compte à rebours jusqu'aux échéances, événements ou réunions.",
+  "tool-clipboard-desc": "Enregistrez et organisez des extraits de texte pour un acc�s facile.",
+  "tool-countdown-title": "Minuteur de compte � rebours",
+  "tool-countdown-desc": "Compte � rebours jusqu'aux �ch�ances, �v�nements ou r�unions.",
   "tool-currency-title": "Convertisseur de devises",
   "tool-currency-desc": "Convertissez les devises avec des taux de change en direct.",
   "tool-focus-title": "Musique de concentration",
-  "tool-focus-desc": "Écoutez de la musique qui aide à vous concentrer.",
+  "tool-focus-desc": "�coutez de la musique qui aide � vous concentrer.",
   "tool-habit-title": "Suivi d'habitudes",
-  "tool-habit-desc": "Suivez les habitudes quotidiennes et développez de nouvelles routines.",
-  "tool-meeting-title": "Planificateur de réunions",
-  "tool-meeting-desc": "Planifiez des réunions dans différents fuseaux horaires facilement.",
+  "tool-habit-desc": "Suivez les habitudes quotidiennes et d�veloppez de nouvelles routines.",
+  "tool-meeting-title": "Planificateur de r�unions",
+  "tool-meeting-desc": "Planifiez des r�unions dans diff�rents fuseaux horaires facilement.",
   "tool-notes-title": "Notes",
-  "tool-notes-desc": "Prenez des notes rapides et organisez vos pensées.",
-  "tool-password-title": "Générateur de mots de passe",
-  "tool-password-desc": "Créez des mots de passe sécurisés et aléatoires instantanément.",
+  "tool-notes-desc": "Prenez des notes rapides et organisez des pens�es.",
+  "tool-password-title": "G�n�rateur de mots de passe",
+  "tool-password-desc": "Cr�ez des mots de passe s�curis�s et al�atoires instantan�ment.",
   "tool-pomodoro-title": "Minuteur Pomodoro",
-  "tool-pomodoro-desc": "Améliorez la concentration avec la technique Pomodoro.",
-  "tool-stopwatch-title": "Chronomètre",
-  "tool-stopwatch-desc": "Mesurez le temps écoulé pour toute activité.",
-  "tool-task-title": "Minuteur de tâches",
-  "tool-task-desc": "Suivez les sessions de travail, les tâches et les pauses.",
-  "tool-unit-title": "Convertisseur d'unités",
-  "tool-unit-desc": "Convertissez la longueur, le poids, la température et plus.",
-  "tool-weather-title": "Météo",
-  "tool-weather-desc": "Consultez la météo actuelle partout dans le monde.",
+  "tool-pomodoro-desc": "Am�liorez la concentration avec la technique Pomodoro.",
+  "tool-stopwatch-title": "Chronom�tre",
+  "tool-stopwatch-desc": "Mesurez le temps �coul� pour toute activit�.",
+  "tool-task-title": "Minuteur de t�ches",
+  "tool-task-desc": "Suivez les sessions de travail, les t�ches et les pauses.",
+  "tool-unit-title": "Convertisseur d'unit�s",
+  "tool-unit-desc": "Convertissez la longueur, le poids, la temp�rature et plus.",
+  "tool-weather-title": "M�t�o",
+  "tool-weather-desc": "Consultez la m�t�o actuelle partout dans le monde.",
   "tool-world-title": "Horloge mondiale",
-  "tool-world-desc": "Voir l'heure partout dans le monde, instantanément.",
-  "resources-title": "Outils de productivité recommandés",
-  "resources-timer-desc": "– Le meilleur minuteur visuel pour le travail, l'école et la maison.",
-  "resources-book-desc": "– Le livre classique sur la concentration et la productivité.",
-  "resources-planner-desc": "– Organisez votre vie avec ce légendaire agenda papier.",
-  "resources-keyboard-desc": "– Écrivez partout, restez productif !",
-  "resources-affiliate": "En tant qu'associé Amazon, TimerHaven gagne sur les achats qualifiés. Merci pour votre soutien !",
-  "footer-copyright": "&copy; 2025 TimerHaven. Tous les outils sont gratuits et respectueux de la vie privée.",
-  "footer-about": "À propos",
-  "footer-privacy": "Confidentialité",
+  "tool-world-desc": "Voir l'heure partout dans le monde, instantan�ment.",
+  "resources-title": "Outils de productivit� recommand�s",
+  "resources-timer-desc": "� Le meilleur minuteur visuel pour le travail, l'�cole et la maison.",
+  "resources-book-desc": "� Le livre classique sur la concentration et la productivit�.",
+  "resources-planner-desc": "� Organisez votre vie avec ce l�gendaire agenda papier.",
+  "resources-keyboard-desc": "� �crivez partout, restez productif !",
+  "resources-affiliate": "En tant qu'associ� Amazon, TimerHaven gagne sur les achats qualifi�s. Merci pour votre soutien !",
+  "footer-copyright": "&copy; 2025 TimerHaven. Tous les outils sont gratuits et respectueux de la vie priv�e.",
+  "footer-about": "� propos",
+  "footer-privacy": "Confidentialit�",
   "footer-contact": "Contact",
-  "footer-credit": "Développé par <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Partenaire Amazon</a>"
+  "footer-credit": "D�velopp� par <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a> | <a href=\"https://www.amazon.com/?tag=sergenet20-20\" target=\"_blank\" rel=\"nofollow sponsored\">Partenaire Amazon</a>"
 },
       es: {
   "page-title": "TimerHaven: Suite de Productividad",
   "language-label": "Idioma:",
-  "header-title": "🕒 Suite de Productividad TimerHaven",
-  "header-desc": "¡Elige una herramienta abajo para aumentar tu productividad!",
+  "header-title": "?? Suite de Productividad TimerHaven",
+  "header-desc": "�Elige una herramienta abajo para aumentar tu productividad!",
   "nav-tools": "Herramientas",
   "nav-resources": "Recursos",
   "tool-calendar-title": "Calendario",
-  "tool-calendar-desc": "Consulta fechas y planifica eventos fácilmente.",
+  "tool-calendar-desc": "Consulta fechas y planifica eventos f�cilmente.",
   "tool-clipboard-title": "Administrador del Portapapeles",
-  "tool-clipboard-desc": "Guarda y organiza fragmentos de texto para un acceso fácil.",
+  "tool-clipboard-desc": "Guarda y organiza fragmentos de texto para un acceso f�cil.",
   "tool-countdown-title": "Temporizador de cuenta regresiva",
-  "tool-countdown-desc": "Cuenta regresiva para fechas límite, eventos o reuniones.",
+  "tool-countdown-desc": "Cuenta regresiva para fechas l�mite, eventos o reuniones.",
   "tool-currency-title": "Convertidor de moneda",
   "tool-currency-desc": "Convierte monedas usando tasas de cambio en tiempo real.",
-  "tool-focus-title": "Música de concentración",
-  "tool-focus-desc": "Escucha música que te ayuda a concentrarte.",
-  "tool-habit-title": "Rastreador de hábitos",
-  "tool-habit-desc": "Registra hábitos diarios y crea nuevas rutinas.",
+  "tool-focus-title": "M�sica de concentraci�n",
+  "tool-focus-desc": "Escucha m�sica que te ayuda a concentrarte.",
+  "tool-habit-title": "Rastreador de h�bitos",
+  "tool-habit-desc": "Registra h�bitos diarios y crea nuevas rutinas.",
   "tool-meeting-title": "Planificador de reuniones",
-  "tool-meeting-desc": "Programa reuniones en diferentes zonas horarias fácilmente.",
+  "tool-meeting-desc": "Programa reuniones en diferentes zonas horarias f�cilmente.",
   "tool-notes-title": "Notas",
-  "tool-notes-desc": "Toma notas rápidas y organiza tus ideas.",
-  "tool-password-title": "Generador de contraseñas",
-  "tool-password-desc": "Crea contraseñas seguras y aleatorias al instante.",
+  "tool-notes-desc": "Toma notas r�pidas y organiza tus ideas.",
+  "tool-password-title": "Generador de contrase�as",
+  "tool-password-desc": "Crea contrase�as seguras y aleatorias al instante.",
   "tool-pomodoro-title": "Temporizador Pomodoro",
-  "tool-pomodoro-desc": "Mejora el enfoque con la técnica Pomodoro.",
-  "tool-stopwatch-title": "Cronómetro",
+  "tool-pomodoro-desc": "Mejora el enfoque con la t�cnica Pomodoro.",
+  "tool-stopwatch-title": "Cron�metro",
   "tool-stopwatch-desc": "Mide el tiempo transcurrido para cualquier actividad.",
   "tool-task-title": "Temporizador de tareas",
   "tool-task-desc": "Registra sesiones de trabajo, tareas y descansos.",
   "tool-unit-title": "Convertidor de unidades",
-  "tool-unit-desc": "Convierte longitud, peso, temperatura y más.",
+  "tool-unit-desc": "Convierte longitud, peso, temperatura y m�s.",
   "tool-weather-title": "Clima",
   "tool-weather-desc": "Consulta el clima actual en cualquier parte del mundo.",
   "tool-world-title": "Reloj mundial",
   "tool-world-desc": "Consulta la hora en cualquier lugar del mundo al instante.",
   "resources-title": "Herramientas de productividad recomendadas",
-  "resources-timer-desc": "– El mejor temporizador visual para trabajo, escuela y hogar.",
-  "resources-book-desc": "– El libro clásico sobre enfoque y productividad.",
-  "resources-planner-desc": "– Organiza tu vida con esta legendaria agenda de papel.",
-  "resources-keyboard-desc": "– ¡Escribe en cualquier lugar, mantente productivo!",
-  "resources-affiliate": "Como asociado de Amazon, TimerHaven gana con compras elegibles. ¡Gracias por tu apoyo!",
+  "resources-timer-desc": "� El mejor temporizador visual para trabajo, escuela y hogar.",
+  "resources-book-desc": "� El libro cl�sico sobre enfoque y productividad.",
+  "resources-planner-desc": "� Organiza tu vida con esta legendaria agenda de papel.",
+  "resources-keyboard-desc": "� �Escribe en cualquier lugar, mantente productivo!",
+  "resources-affiliate": "Como asociado de Amazon, TimerHaven gana con compras elegibles. �Gracias por tu apoyo!",
   "footer-copyright": "&copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan tu privacidad.",
   "footer-about": "Acerca de",
   "footer-privacy": "Privacidad",
@@ -445,200 +517,200 @@
   "footer-credit": "Creado por <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
 },
       de: {
-  "page-title": "TimerHaven: Produktivitätssuite",
+  "page-title": "TimerHaven: Produktivit�tssuite",
   "language-label": "Sprache:",
-  "header-title": "🕒 TimerHaven Produktivitätssuite",
-  "header-desc": "Wähle unten ein Tool aus, um deine Produktivität zu steigern!",
+  "header-title": "?? TimerHaven Produktivit�tssuite",
+  "header-desc": "W�hle unten ein Tool aus, um deine Produktivit�t zu steigern!",
   "nav-tools": "Werkzeuge",
   "nav-resources": "Ressourcen",
   "tool-calendar-title": "Kalender",
   "tool-calendar-desc": "Termine anzeigen und Veranstaltungen einfach planen.",
   "tool-clipboard-title": "Zwischenablage-Manager",
-  "tool-clipboard-desc": "Textausschnitte speichern und für einfachen Zugriff organisieren.",
+  "tool-clipboard-desc": "Textausschnitte speichern und f�r einfachen Zugriff organisieren.",
   "tool-countdown-title": "Countdown-Timer",
   "tool-countdown-desc": "Countdown zu Fristen, Veranstaltungen oder Meetings.",
-  "tool-currency-title": "Währungsrechner",
-  "tool-currency-desc": "Währungen mit aktuellen Wechselkursen umrechnen.",
+  "tool-currency-title": "W�hrungsrechner",
+  "tool-currency-desc": "W�hrungen mit aktuellen Wechselkursen umrechnen.",
   "tool-focus-title": "Konzentrationsmusik",
-  "tool-focus-desc": "Höre Musik, die beim Konzentrieren hilft.",
+  "tool-focus-desc": "H�re Musik, die beim Konzentrieren hilft.",
   "tool-habit-title": "Gewohnheitstracker",
-  "tool-habit-desc": "Tägliche Gewohnheiten verfolgen und neue Routinen aufbauen.",
+  "tool-habit-desc": "T�gliche Gewohnheiten verfolgen und neue Routinen aufbauen.",
   "tool-meeting-title": "Meeting-Planer",
-  "tool-meeting-desc": "Meetings einfach über verschiedene Zeitzonen hinweg planen.",
+  "tool-meeting-desc": "Meetings einfach �ber verschiedene Zeitzonen hinweg planen.",
   "tool-notes-title": "Notizen",
   "tool-notes-desc": "Schnell Notizen machen und Gedanken organisieren.",
   "tool-password-title": "Passwortgenerator",
-  "tool-password-desc": "Sichere, zufällige Passwörter sofort erstellen.",
+  "tool-password-desc": "Sichere, zuf�llige Passw�rter sofort erstellen.",
   "tool-pomodoro-title": "Pomodoro-Timer",
   "tool-pomodoro-desc": "Steigere die Konzentration mit der Pomodoro-Technik.",
   "tool-stopwatch-title": "Stoppuhr",
-  "tool-stopwatch-desc": "Verstrichene Zeit für jede Aktivität messen.",
+  "tool-stopwatch-desc": "Verstrichene Zeit f�r jede Aktivit�t messen.",
   "tool-task-title": "Aufgaben-Timer",
   "tool-task-desc": "Arbeitssitzungen, Aufgaben und Pausen verfolgen.",
   "tool-unit-title": "Einheitenrechner",
-  "tool-unit-desc": "Länge, Gewicht, Temperatur und mehr Einheiten umrechnen.",
+  "tool-unit-desc": "L�nge, Gewicht, Temperatur und mehr Einheiten umrechnen.",
   "tool-weather-title": "Wetter",
-  "tool-weather-desc": "Das aktuelle Wetter überall auf der Welt anzeigen.",
+  "tool-weather-desc": "Das aktuelle Wetter �berall auf der Welt anzeigen.",
   "tool-world-title": "Weltuhr",
-  "tool-world-desc": "Die Uhrzeit überall auf der Welt sofort sehen.",
-  "resources-title": "Empfohlene Produktivitätswerkzeuge",
-  "resources-timer-desc": "– Der beste visuelle Timer für Arbeit, Schule und Zuhause.",
-  "resources-book-desc": "– Das klassische Buch über Fokus und Produktivität.",
-  "resources-planner-desc": "– Organisiere dein Leben mit diesem legendären Papierplaner.",
-  "resources-keyboard-desc": "– Überall schreiben, produktiv bleiben!",
-  "resources-affiliate": "Als Amazon-Partner verdient TimerHaven an qualifizierten Käufen. Vielen Dank für deine Unterstützung!",
+  "tool-world-desc": "Die Uhrzeit �berall auf der Welt sofort sehen.",
+  "resources-title": "Empfohlene Produktivit�tswerkzeuge",
+  "resources-timer-desc": "� Der beste visuelle Timer f�r Arbeit, Schule und Zuhause.",
+  "resources-book-desc": "� Das klassische Buch �ber Fokus und Produktivit�t.",
+  "resources-planner-desc": "� Organisiere dein Leben mit diesem legend�ren Papierplaner.",
+  "resources-keyboard-desc": "� �berall schreiben, produktiv bleiben!",
+  "resources-affiliate": "Als Amazon-Partner verdient TimerHaven an qualifizierten K�ufen. Vielen Dank f�r deine Unterst�tzung!",
   "footer-copyright": "&copy; 2025 TimerHaven. Alle Werkzeuge sind kostenlos und datenschutzfreundlich.",
-  "footer-about": "Über",
+  "footer-about": "�ber",
   "footer-privacy": "Datenschutz",
   "footer-contact": "Kontakt",
   "footer-credit": "Erstellt von <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
 },
       ru: {
-  "page-title": "TimerHaven: Набор инструментов для продуктивности",
-  "language-label": "Язык:",
-  "header-title": "🕒 TimerHaven — Набор инструментов для продуктивности",
-  "header-desc": "Выберите нужный инструмент ниже, чтобы повысить вашу продуктивность!",
-  "nav-tools": "Инструменты",
-  "nav-resources": "Ресурсы",
-  "tool-calendar-title": "Календарь",
-  "tool-calendar-desc": "Просматривайте даты и легко планируйте события.",
-  "tool-clipboard-title": "Менеджер буфера обмена",
-  "tool-clipboard-desc": "Сохраняйте и организуйте текстовые фрагменты для быстрого доступа.",
-  "tool-countdown-title": "Таймер обратного отсчёта",
-  "tool-countdown-desc": "Обратный отсчёт до дедлайнов, событий или встреч.",
-  "tool-currency-title": "Конвертер валют",
-  "tool-currency-desc": "Конвертируйте валюты с использованием актуальных курсов.",
-  "tool-focus-title": "Музыка для концентрации",
-  "tool-focus-desc": "Слушайте музыку, которая помогает сосредоточиться.",
-  "tool-habit-title": "Трекер привычек",
-  "tool-habit-desc": "Отслеживайте ежедневные привычки и вырабатывайте новые.",
-  "tool-meeting-title": "Планировщик встреч",
-  "tool-meeting-desc": "Планируйте встречи в разных часовых поясах легко.",
-  "tool-notes-title": "Заметки",
-  "tool-notes-desc": "Делайте быстрые заметки и организуйте свои мысли.",
-  "tool-password-title": "Генератор паролей",
-  "tool-password-desc": "Создайте безопасные случайные пароли мгновенно.",
-  "tool-pomodoro-title": "Таймер Помодоро",
-  "tool-pomodoro-desc": "Повышайте концентрацию с помощью метода Помодоро.",
-  "tool-stopwatch-title": "Секундомер",
-  "tool-stopwatch-desc": "Измеряйте прошедшее время для любой активности.",
-  "tool-task-title": "Таймер задач",
-  "tool-task-desc": "Отслеживайте рабочие сессии, задачи и перерывы.",
-  "tool-unit-title": "Конвертер единиц",
-  "tool-unit-desc": "Конвертируйте длину, вес, температуру и другие единицы.",
-  "tool-weather-title": "Погода",
-  "tool-weather-desc": "Узнайте актуальную погоду в любом месте мира.",
-  "tool-world-title": "Мировые часы",
-  "tool-world-desc": "Узнайте время в любой точке мира мгновенно.",
-  "resources-title": "Рекомендуемые инструменты для продуктивности",
-  "resources-timer-desc": "– Лучший визуальный таймер для работы, учёбы и дома.",
-  "resources-book-desc": "– Классическая книга о концентрации и продуктивности.",
-  "resources-planner-desc": "– Организуйте свою жизнь с этим легендарным бумажным планером.",
-  "resources-keyboard-desc": "– Работайте где угодно, оставайтесь продуктивными!",
-  "resources-affiliate": "Как партнёр Amazon, TimerHaven получает доход с соответствующих покупок. Спасибо за вашу поддержку!",
-  "footer-copyright": "&copy; 2025 TimerHaven. Все инструменты бесплатны и уважают вашу конфиденциальность.",
-  "footer-about": "О сайте",
-  "footer-privacy": "Конфиденциальность",
-  "footer-contact": "Контакт",
-  "footer-credit": "Создано <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+  "page-title": "TimerHaven: ????? ???????????? ??? ??????????????",
+  "language-label": "????:",
+  "header-title": "?? TimerHaven � ????? ???????????? ??? ??????????????",
+  "header-desc": "???????? ?????? ?????????? ????, ????? ???????? ???? ??????????????!",
+  "nav-tools": "???????????",
+  "nav-resources": "???????",
+  "tool-calendar-title": "?????????",
+  "tool-calendar-desc": "?????????????? ???? ? ????? ?????????? ???????.",
+  "tool-clipboard-title": "???????? ?????? ??????",
+  "tool-clipboard-desc": "?????????? ? ??????????? ????????? ????????? ??? ???????? ???????.",
+  "tool-countdown-title": "?????? ????????? ???????",
+  "tool-countdown-desc": "???????? ?????? ?? ?????????, ??????? ??? ??????.",
+  "tool-currency-title": "????????? ?????",
+  "tool-currency-desc": "????????????? ?????? ? ?????????????? ?????????? ??????.",
+  "tool-focus-title": "?????? ??? ????????????",
+  "tool-focus-desc": "???????? ??????, ??????? ???????? ???????????????.",
+  "tool-habit-title": "?????? ????????",
+  "tool-habit-desc": "???????????? ?????????? ???????? ? ????????????? ?????.",
+  "tool-meeting-title": "??????????? ??????",
+  "tool-meeting-desc": "?????????? ??????? ? ?????? ??????? ?????? ?????.",
+  "tool-notes-title": "???????",
+  "tool-notes-desc": "??????? ??????? ??????? ? ??????????? ???? ?????.",
+  "tool-password-title": "????????? ???????",
+  "tool-password-desc": "???????? ?????????? ????????? ?????? ?????????.",
+  "tool-pomodoro-title": "?????? ????????",
+  "tool-pomodoro-desc": "????????? ???????????? ? ??????? ?????? ????????.",
+  "tool-stopwatch-title": "??????????",
+  "tool-stopwatch-desc": "????????? ????????? ????? ??? ????? ??????????.",
+  "tool-task-title": "?????? ?????",
+  "tool-task-desc": "???????????? ??????? ??????, ?????? ? ????????.",
+  "tool-unit-title": "????????? ??????",
+  "tool-unit-desc": "????????????? ?????, ???, ??????????? ? ?????? ???????.",
+  "tool-weather-title": "??????",
+  "tool-weather-desc": "??????? ?????????? ?????? ? ????? ????? ????.",
+  "tool-world-title": "??????? ????",
+  "tool-world-desc": "??????? ????? ? ????? ????? ???? ?????????.",
+  "resources-title": "????????????? ??????????? ??? ??????????????",
+  "resources-timer-desc": "� ?????? ?????????? ?????? ??? ??????, ????? ? ????.",
+  "resources-book-desc": "� ???????????? ????? ? ???????????? ? ??????????????.",
+  "resources-planner-desc": "� ??????????? ???? ????? ? ???? ??????????? ???????? ????????.",
+  "resources-keyboard-desc": "� ????????? ??? ??????, ??????????? ?????????????!",
+  "resources-affiliate": "??? ??????? Amazon, TimerHaven ???????? ????? ? ??????????????? ???????. ??????? ?? ???? ?????????!",
+  "footer-copyright": "&copy; 2025 TimerHaven. ??? ??????????? ????????? ? ??????? ???? ??????????????????.",
+  "footer-about": "? ?????",
+  "footer-privacy": "??????????????????",
+  "footer-contact": "???????",
+  "footer-credit": "??????? <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
 },
       el: {
-  "page-title": "TimerHaven: Σουίτα Παραγωγικότητας",
-  "language-label": "Γλώσσα:",
-  "header-title": "🕒 TimerHaven Σουίτα Παραγωγικότητας",
-  "header-desc": "Επιλέξτε ένα εργαλείο παρακάτω για να αυξήσετε την παραγωγικότητά σας!",
-  "nav-tools": "Εργαλεία",
-  "nav-resources": "Πόροι",
-  "tool-calendar-title": "Ημερολόγιο",
-  "tool-calendar-desc": "Δείτε ημερομηνίες και σχεδιάστε γεγονότα εύκολα.",
-  "tool-clipboard-title": "Διαχειριστής Πρόχειρου",
-  "tool-clipboard-desc": "Αποθηκεύστε και οργανώστε αποσπάσματα κειμένου για εύκολη πρόσβαση.",
-  "tool-countdown-title": "Χρονόμετρο αντίστροφης μέτρησης",
-  "tool-countdown-desc": "Μετρήστε αντίστροφα σε προθεσμίες, γεγονότα ή συναντήσεις.",
-  "tool-currency-title": "Μετατροπέας Νομισμάτων",
-  "tool-currency-desc": "Μετατρέψτε νομίσματα με ζωντανές ισοτιμίες.",
-  "tool-focus-title": "Μουσική Συγκέντρωσης",
-  "tool-focus-desc": "Ακούστε μουσική που βοηθά στη συγκέντρωση.",
-  "tool-habit-title": "Παρακολούθηση Συνηθειών",
-  "tool-habit-desc": "Παρακολουθήστε καθημερινές συνήθειες και χτίστε νέες ρουτίνες.",
-  "tool-meeting-title": "Προγραμματιστής Συναντήσεων",
-  "tool-meeting-desc": "Προγραμματίστε συναντήσεις σε διαφορετικές ζώνες ώρας εύκολα.",
-  "tool-notes-title": "Σημειώσεις",
-  "tool-notes-desc": "Κρατήστε γρήγορες σημειώσεις και οργανώστε τις σκέψεις σας.",
-  "tool-password-title": "Γεννήτρια Κωδικών",
-  "tool-password-desc": "Δημιουργήστε ασφαλείς, τυχαίους κωδικούς άμεσα.",
-  "tool-pomodoro-title": "Χρονόμετρο Pomodoro",
-  "tool-pomodoro-desc": "Αυξήστε την συγκέντρωση με την τεχνική Pomodoro.",
-  "tool-stopwatch-title": "Χρονόμετρο",
-  "tool-stopwatch-desc": "Μετρήστε τον χρόνο που πέρασε για κάθε δραστηριότητα.",
-  "tool-task-title": "Χρονόμετρο Εργασιών",
-  "tool-task-desc": "Παρακολουθήστε συνεδρίες εργασίας, εργασίες και διαλείμματα.",
-  "tool-unit-title": "Μετατροπέας Μονάδων",
-  "tool-unit-desc": "Μετατρέψτε μήκος, βάρος, θερμοκρασία και περισσότερα.",
-  "tool-weather-title": "Καιρός",
-  "tool-weather-desc": "Δείτε τον τρέχοντα καιρό σε όλο τον κόσμο.",
-  "tool-world-title": "Παγκόσμιο Ρολόι",
-  "tool-world-desc": "Δείτε την ώρα σε όλο τον κόσμο αμέσως.",
-  "resources-title": "Προτεινόμενα εργαλεία παραγωγικότητας",
-  "resources-timer-desc": "– Το καλύτερο οπτικό χρονόμετρο για εργασία, σχολείο και σπίτι.",
-  "resources-book-desc": "– Το κλασικό βιβλίο για συγκέντρωση και παραγωγικότητα.",
-  "resources-planner-desc": "– Οργανώστε τη ζωή σας με αυτό το θρυλικό έντυπο ημερολόγιο.",
-  "resources-keyboard-desc": "– Γράψτε παντού, παραμείνετε παραγωγικοί!",
-  "resources-affiliate": "Ως συνεργάτης του Amazon, το TimerHaven κερδίζει από κατάλληλες αγορές. Ευχαριστούμε για την υποστήριξή σας!",
-  "footer-copyright": "&copy; 2025 TimerHaven. Όλα τα εργαλεία είναι δωρεάν και φιλικά προς το απόρρητο.",
-  "footer-about": "Σχετικά",
-  "footer-privacy": "Απόρρητο",
-  "footer-contact": "Επικοινωνία",
-  "footer-credit": "Δημιουργήθηκε από <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+  "page-title": "TimerHaven: S???ta ?a?a??????t?ta?",
+  "language-label": "G??ssa:",
+  "header-title": "?? TimerHaven S???ta ?a?a??????t?ta?",
+  "header-desc": "?p????te ??a e??a?e?? pa?a??t? ??a ?a a???sete t?? pa?a??????t?t? sa?!",
+  "nav-tools": "???a?e?a",
+  "nav-resources": "?????",
+  "tool-calendar-title": "?�e???????",
+  "tool-calendar-desc": "?e?te ?�e??�???e? ?a? s?ed??ste ?e????ta e????a.",
+  "tool-clipboard-title": "??a?e???st?? ????e????",
+  "tool-clipboard-desc": "?p????e?ste ?a? ???a??ste ap?sp?s�ata ?e?�???? ??a e????? p??s�as?.",
+  "tool-countdown-title": "?????�et?? a?t?st??f?? �?t??s??",
+  "tool-countdown-desc": "?et??ste a?t?st??fa se p???es�?e?, ?e????ta ? s??a?t?se??.",
+  "tool-currency-title": "?etat??p?a? ??�?s�?t??",
+  "tool-currency-desc": "?etat???te ??�?s�ata �e ???ta??? ?s?t?�?e?.",
+  "tool-focus-title": "???s??? S?????t??s??",
+  "tool-focus-desc": "????ste �??s??? p?? �???? st? s?????t??s?.",
+  "tool-habit-title": "?a?a???????s? S????e???",
+  "tool-habit-desc": "?a?a???????ste ?a??�e????? s????e?e? ?a? ?t?ste ??e? ???t??e?.",
+  "tool-meeting-title": "?????a��at?st?? S??a?t?se??",
+  "tool-meeting-desc": "?????a��at?ste s??a?t?se?? se d?af??et???? ???e? ??a? e????a.",
+  "tool-notes-title": "S?�e??se??",
+  "tool-notes-desc": "??at?ste ??????e? s?�e??se?? ?a? ???a??ste t?? s???e?? sa?.",
+  "tool-password-title": "Ge???t??a ??d????",
+  "tool-password-desc": "??�??????ste asfa?e??, t??a???? ??d????? ?�esa.",
+  "tool-pomodoro-title": "?????�et?? Pomodoro",
+  "tool-pomodoro-desc": "????ste t?? s?????t??s? �e t?? te????? Pomodoro.",
+  "tool-stopwatch-title": "?????�et??",
+  "tool-stopwatch-desc": "?et??ste t?? ????? p?? p??ase ??a ???e d?ast????t?ta.",
+  "tool-task-title": "?????�et?? ???as???",
+  "tool-task-desc": "?a?a???????ste s??ed??e? e??as?a?, e??as?e? ?a? d?a?e?��ata.",
+  "tool-unit-title": "?etat??p?a? ????d??",
+  "tool-unit-desc": "?etat???te �????, �????, ?e?�???as?a ?a? pe??ss?te?a.",
+  "tool-weather-title": "?a????",
+  "tool-weather-desc": "?e?te t?? t?????ta ?a??? se ??? t?? ??s�?.",
+  "tool-world-title": "?a???s�?? ?????",
+  "tool-world-desc": "?e?te t?? ??a se ??? t?? ??s�? a�?s??.",
+  "resources-title": "???te???�e?a e??a?e?a pa?a??????t?ta?",
+  "resources-timer-desc": "� ?? ?a??te?? ?pt??? ?????�et?? ??a e??as?a, s???e?? ?a? sp?t?.",
+  "resources-book-desc": "� ?? ??as??? �?�??? ??a s?????t??s? ?a? pa?a??????t?ta.",
+  "resources-planner-desc": "� ???a??ste t? ??? sa? �e a?t? t? ??????? ??t?p? ?�e???????.",
+  "resources-keyboard-desc": "� G???te pa?t??, pa?a�e??ete pa?a???????!",
+  "resources-affiliate": "O? s??e???t?? t?? Amazon, t? TimerHaven ?e?d??e? ap? ?at?????e? a?????. ???a??st??�e ??a t?? ?p?st????? sa?!",
+  "footer-copyright": "&copy; 2025 TimerHaven. ??a ta e??a?e?a e??a? d??e?? ?a? f????? p??? t? ap????t?.",
+  "footer-about": "S?et???",
+  "footer-privacy": "?p????t?",
+  "footer-contact": "?p????????a",
+  "footer-credit": "??�?????????e ap? <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
 },
       ar: {
-  "page-title": "تايمرهافن: مجموعة أدوات الإنتاجية",
-  "language-label": "اللغة:",
-  "header-title": "🕒 تايمرهافن مجموعة أدوات الإنتاجية",
-  "header-desc": "اختر أداة من الأسفل لتعزيز إنتاجيتك!",
-  "nav-tools": "الأدوات",
-  "nav-resources": "الموارد",
-  "tool-calendar-title": "التقويم",
-  "tool-calendar-desc": "اعرض التواريخ وخطط الأحداث بسهولة.",
-  "tool-clipboard-title": "مدير الحافظة",
-  "tool-clipboard-desc": "احفظ ونظم مقتطفات النص للوصول السهل.",
-  "tool-countdown-title": "مؤقت العد التنازلي",
-  "tool-countdown-desc": "عد تنازلي للمواعيد النهائية أو الأحداث أو الاجتماعات.",
-  "tool-currency-title": "محول العملات",
-  "tool-currency-desc": "حوّل العملات باستخدام أسعار الصرف الحية.",
-  "tool-focus-title": "موسيقى التركيز",
-  "tool-focus-desc": "استمع إلى موسيقى تساعدك على التركيز.",
-  "tool-habit-title": "متتبع العادات",
-  "tool-habit-desc": "تابع العادات اليومية وابنِ روتينًا جديدًا.",
-  "tool-meeting-title": "مخطط الاجتماعات",
-  "tool-meeting-desc": "جدول الاجتماعات عبر المناطق الزمنية بسهولة.",
-  "tool-notes-title": "ملاحظات",
-  "tool-notes-desc": "دوّن ملاحظات سريعة ونظم أفكارك.",
-  "tool-password-title": "مولد كلمات المرور",
-  "tool-password-desc": "أنشئ كلمات مرور آمنة وعشوائية فورًا.",
-  "tool-pomodoro-title": "مؤقت بومودورو",
-  "tool-pomodoro-desc": "عزز تركيزك باستخدام تقنية بومودورو.",
-  "tool-stopwatch-title": "ساعة توقيت",
-  "tool-stopwatch-desc": "قِس الوقت المنقضي لأي نشاط.",
-  "tool-task-title": "مؤقت المهام",
-  "tool-task-desc": "تابع جلسات العمل والمهام والاستراحات.",
-  "tool-unit-title": "محول الوحدات",
-  "tool-unit-desc": "حوّل الطول والوزن والحرارة والمزيد.",
-  "tool-weather-title": "الطقس",
-  "tool-weather-desc": "اعرف الطقس الحالي في أي مكان في العالم.",
-  "tool-world-title": "ساعة عالمية",
-  "tool-world-desc": "اعرض الوقت في أي مكان في العالم فورًا.",
-  "resources-title": "أدوات الإنتاجية الموصى بها",
-  "resources-timer-desc": "– أفضل مؤقت مرئي للعمل أو المدرسة أو المنزل.",
-  "resources-book-desc": "– الكتاب الكلاسيكي حول التركيز والإنتاجية.",
-  "resources-planner-desc": "– نظم حياتك مع هذا المخطط الورقي الأسطوري.",
-  "resources-keyboard-desc": "– اكتب في أي مكان، وكن منتجًا!",
-  "resources-affiliate": "بصفتنا شركاء أمازون، يحصل تايمرهافن على أرباح من المشتريات المؤهلة. شكرًا لدعمكم!",
-  "footer-copyright": "&copy; 2025 تايمرهافن. جميع الأدوات مجانية وتحترم الخصوصية.",
-  "footer-about": "حول",
-  "footer-privacy": "الخصوصية",
-  "footer-contact": "اتصل بنا",
-  "footer-credit": "تم الإنشاء بواسطة <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
+  "page-title": "?????????: ?????? ????? ?????????",
+  "language-label": "?????:",
+  "header-title": "?? ????????? ?????? ????? ?????????",
+  "header-desc": "???? ???? ?? ?????? ?????? ????????!",
+  "nav-tools": "???????",
+  "nav-resources": "???????",
+  "tool-calendar-title": "???????",
+  "tool-calendar-desc": "???? ???????? ???? ??????? ??????.",
+  "tool-clipboard-title": "???? ???????",
+  "tool-clipboard-desc": "???? ???? ??????? ???? ?????? ?????.",
+  "tool-countdown-title": "???? ???? ????????",
+  "tool-countdown-desc": "?? ?????? ???????? ???????? ?? ??????? ?? ??????????.",
+  "tool-currency-title": "???? ???????",
+  "tool-currency-desc": "???? ??????? ???????? ????? ????? ?????.",
+  "tool-focus-title": "?????? ???????",
+  "tool-focus-desc": "????? ??? ?????? ?????? ??? ???????.",
+  "tool-habit-title": "????? ???????",
+  "tool-habit-desc": "???? ??????? ??????? ????? ??????? ??????.",
+  "tool-meeting-title": "???? ??????????",
+  "tool-meeting-desc": "???? ?????????? ??? ??????? ??????? ??????.",
+  "tool-notes-title": "???????",
+  "tool-notes-desc": "???? ??????? ????? ???? ??????.",
+  "tool-password-title": "???? ????? ??????",
+  "tool-password-desc": "??? ????? ???? ???? ???????? ?????.",
+  "tool-pomodoro-title": "???? ????????",
+  "tool-pomodoro-desc": "??? ?????? ???????? ????? ????????.",
+  "tool-stopwatch-title": "???? ?????",
+  "tool-stopwatch-desc": "??? ????? ??????? ??? ????.",
+  "tool-task-title": "???? ??????",
+  "tool-task-desc": "???? ????? ????? ??????? ???????????.",
+  "tool-unit-title": "???? ???????",
+  "tool-unit-desc": "???? ????? ?????? ???????? ???????.",
+  "tool-weather-title": "?????",
+  "tool-weather-desc": "???? ????? ?????? ?? ?? ???? ?? ??????.",
+  "tool-world-title": "???? ??????",
+  "tool-world-desc": "???? ????? ?? ?? ???? ?? ?????? ?????.",
+  "resources-title": "????? ????????? ?????? ???",
+  "resources-timer-desc": "� ???? ???? ???? ????? ?? ??????? ?? ??????.",
+  "resources-book-desc": "� ?????? ????????? ??? ??????? ??????????.",
+  "resources-planner-desc": "� ??? ????? ?? ??? ?????? ?????? ????????.",
+  "resources-keyboard-desc": "� ???? ?? ?? ????? ??? ??????!",
+  "resources-affiliate": "?????? ????? ??????? ???? ????????? ??? ????? ?? ????????? ???????. ????? ??????!",
+  "footer-copyright": "&copy; 2025 ?????????. ???? ??????? ?????? ?????? ????????.",
+  "footer-about": "???",
+  "footer-privacy": "????????",
+  "footer-contact": "???? ???",
+  "footer-credit": "?? ??????? ?????? <a href=\"https://github.com/sergenet\" target=\"_blank\">sergenet</a>"
       }
     };
 
@@ -679,29 +751,39 @@
     }
 
     // Rewrite tool links so they point to language-specific tool pages when appropriate.
-    // Behavior:
-    //  - For English (en) we keep canonical links like "unit-converter.html" (no suffix).
-    //  - For other languages we rewrite "tool.html" -> "tool-<lang>.html" (e.g. unit-converter -> unit-converter-es.html)
-    //  - Only affects anchors with data-tool attribute (menu cards); safe and idempotent.
+    // Behavior desired:
+    //  - Always produce tool-<lang>.html for every language, including English (tool-en.html).
+    //  - Defensive: sanitize existing data-tool values that may already include a trailing '-xx' or '.html'.
+    //  - This avoids producing double-suffixed filenames like "countdown-en-el.html".
     function rewriteToolLinks() {
       try {
         const lang = getStoredLang() || 'en';
         const anchors = document.querySelectorAll('a[data-tool]');
         anchors.forEach(a => {
           try {
-            const tool = a.getAttribute('data-tool'); // e.g. "unit-converter"
+            // Read the data-tool value and canonicalize it:
+            //  - Trim whitespace
+            //  - Remove any trailing language suffix like "-en" or "-fr"
+            //  - Remove any trailing ".html" if present
+            let tool = (a.getAttribute('data-tool') || '').trim();
+
+            // Strip trailing .html if present
+            tool = tool.replace(/\.html$/i, '');
+
+            // Strip trailing -xx (two-letter language) if present
+            tool = tool.replace(/-([a-z]{2})$/i, '');
+
             if (!tool) return;
-            let newHref;
-            if (lang === 'en') {
-              // canonical english page
-              newHref = `${tool}.html`;
-            } else {
-              newHref = `${tool}-${lang}.html`;
-            }
+
+            // Always append selected language code to produce tool-<lang>.html
+            const newHref = `${tool}-${lang}.html`;
+
+            // Update href attribute (relative) and absolute href for the anchor element
             a.setAttribute('href', newHref);
-            // make absolute for clarity (keeps same origin)
             a.href = location.origin.replace(/\/$/,'') + '/' + newHref;
-          } catch(e){}
+          } catch(e){
+            // ignore per-anchor errors
+          }
         });
         console.info('[index] rewriteToolLinks applied for lang ->', getStoredLang());
       } catch(e) {
@@ -798,3 +880,4 @@
   </script>
 </body>
 </html>
+

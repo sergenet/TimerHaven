@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>Трекер привычек — TimerHaven</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Отслеживайте ежедневные привычки и формируйте новые рутины.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <style>
+<meta charset="utf-8"/>
+<title>Ð¢Ñ€ÐµÐºÐµÑ€ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐµÐº â€” TimerHaven</title>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="ÐžÑ‚ÑÐ»ÐµÐ¶Ð¸Ð²Ð°Ð¹Ñ‚Ðµ ÐµÐ¶ÐµÐ´Ð½ÐµÐ²Ð½Ñ‹Ðµ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÐ¸ Ð¸ Ñ„Ð¾Ñ€Ð¼Ð¸Ñ€ÑƒÐ¹Ñ‚Ðµ Ð½Ð¾Ð²Ñ‹Ðµ Ñ€ÑƒÑ‚Ð¸Ð½Ñ‹." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+<style>
     /* consistent styling */
     body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; }
     .main-container{ max-width:1200px; margin:2em auto; display:flex; justify-content:center; align-items:center; min-height:90vh; }
@@ -25,84 +26,79 @@
     @media (max-width:1100px){ .main-container{padding:0 8px;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
     @media (max-width:800px){ .center-row{flex-direction:column;align-items:center;} .article-card{display:none!important;} .howto-mobile, .tips-mobile { display:block !important; } }
     @media (min-width:801px){ .howto-mobile, .tips-mobile { display:none !important; } }
-    details[open] summary::after{ content:" ▲"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" ▼"; font-size:.9em; }
+    details[open] summary::after{ content:" â–²"; font-size:.9em; } details summary{ cursor:pointer; padding:.35em 0; font-weight:700; font-size:1.09em; } details:not([open]) summary::after{ content:" â–¼"; font-size:.9em; }
   </style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
 </head>
 <body>
-  <!-- language indicator removed -->
-
-  <div class="main-container">
-    <div class="center-row">
-      <div class="article-card">
-        <div><h2 id="howto-title"></h2><ol id="howto-steps"></ol></div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
-      </div>
-
-      <div class="tool-card">
-        <div id="banner" class="banner" style="display:none;"></div>
-        <a href="index.html" class="back-link" id="back-link"></a>
-        <h3 id="tool-title"></h3>
-        <div class="stats-bar" id="stats-bar"></div>
-
-        <form class="habit-form" id="habitForm">
-          <input type="text" id="habitInput" class="form-control" placeholder="">
-          <button type="submit" class="btn btn-success btn-sm" id="add-btn"></button>
-        </form>
-
-        <div id="habitList" class="habit-list"></div>
-
-        <details class="faq-section" id="faq-section">
-          <summary id="faq-title"></summary>
-          <ul id="faq-list" style="padding-left:1em;"></ul>
-        </details>
-
-        <!-- Removed the inline "Советы" block from inside the tool-card to avoid duplicate on desktop -->
-      </div>
-
-      <div class="article-card">
-        <div><h2 id="tips-title"></h2><ul id="tips-list"></ul></div>
-        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile-only tips collapsible (outside tool-card) -->
-  <details class="tips-mobile" id="tips-mobile" style="display:none;">
-    <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
-    <ul id="tips-mobile-list"></ul>
-  </details>
-
+<!-- language indicator removed -->
+<div class="main-container">
+<div class="center-row">
+<div class="article-card">
+<div><h2 id="howto-title"></h2><ol id="howto-steps"></ol></div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
+</div>
+<div class="tool-card">
+<div class="banner" id="banner" style="display:none;"></div>
+<a class="back-link" href="index.html" id="back-link"></a>
+<h3 id="tool-title"></h3>
+<div class="stats-bar" id="stats-bar"></div>
+<form class="habit-form" id="habitForm">
+<input class="form-control" id="habitInput" placeholder="" type="text"/>
+<button class="btn btn-success btn-sm" id="add-btn" type="submit"></button>
+</form>
+<div class="habit-list" id="habitList"></div>
+<details class="faq-section" id="faq-section">
+<summary id="faq-title"></summary>
+<ul id="faq-list" style="padding-left:1em;"></ul>
+</details>
+<!-- Removed the inline "Ð¡Ð¾Ð²ÐµÑ‚Ñ‹" block from inside the tool-card to avoid duplicate on desktop -->
+</div>
+<div class="article-card">
+<div><h2 id="tips-title"></h2><ul id="tips-list"></ul></div>
+<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
+</div>
+</div>
+</div>
+<!-- Mobile-only tips collapsible (outside tool-card) -->
+<details class="tips-mobile" id="tips-mobile" style="display:none;">
+<summary><h4 id="tips-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
+<ul id="tips-mobile-list"></ul>
+</details>
 <script>
   const habitTranslations = {
     ru: {
-      "language-label":"Язык:","back-link":"Назад в главное меню","tool-title":"Трекер привычек",
-      "habitInput":"Название привычки","add-btn":"Добавить","banner-all-done":"🎉 Все привычки выполнены сегодня! Отличная работа!",
-      "stats-tracked":"Отслеживается: ","stats-done":"Выполнено сегодня: ","stats-best":"Лучшая серия: ",
-      "howto-title":'<i class="fa fa-check-double"></i> Как пользоваться трекером привычек',
-      "howto-steps":`<li><b>Добавьте привычку:</b> Введите вашу ежедневную привычку и нажмите Добавить.</li>
-        <li><b>Отметить как сделанное:</b> Когда вы выполнили привычку, нажмите кнопку Выполнено.</li>
-        <li><b>Удалить/архивировать:</b> Удаляйте или архивируйте ненужные привычки.</li>
-        <li><b>Повторять ежедневно:</b> Возвращайтесь каждый день для обновления прогресса.</li>`,
-      "howto-article-btn":"Читать полностью","howto-article-link":"habit-how-to-ru.html",
-      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы по привычкам',
-      "tips-list":`<li><b>Начинайте с малого:</b> Легкие привычки быстрее приживаются.</li>
-        <li><b>Отслеживайте ежедневно:</b> Постоянство — ключ к успеху.</li>
-        <li><b>Отмечайте прогресс:</b> Маленькие победы поддерживают мотивацию.</li>`,
-      "tips-article-btn":"Читать полностью","tips-article-link":"habit-tips-ru.html",
-      "tips-mobile-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Советы',
-      "tips-mobile-list":`<li><b>Начинайте с малого:</b> Постепенно увеличивайте.</li>
-        <li><b>Следите за сериями:</b> Отслеживание мотивирует.</li>
-        <li><b>Добавьте напоминания:</b> Используйте календарные оповещения.</li>`,
-      "faq-title":"Часто задаваемые вопросы",
-      "faq-list":`<li><b>Сохраняются ли привычки?</b> Да, в браузере.</li>
-        <li><b>Можно ли отслеживать несколько привычек?</b> Да.</li>
-        <li><b>Отображаются ли серии?</b> Да.</li>`,
-      "mark-done":"Отметить","done-today":"Выполнено сегодня","streak":"Серия: ","longest":"Лучшее: ",
-      "archive":"Архивировать","unarchive":"Восстановить","delete":"Удалить","no-habits":"Пока нет привычек."
+      "language-label":"Ð¯Ð·Ñ‹Ðº:","back-link":"ÐÐ°Ð·Ð°Ð´ Ð² Ð³Ð»Ð°Ð²Ð½Ð¾Ðµ Ð¼ÐµÐ½ÑŽ","tool-title":"Ð¢Ñ€ÐµÐºÐµÑ€ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐµÐº",
+      "habitInput":"ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÐ¸","add-btn":"Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ","banner-all-done":"ðŸŽ‰ Ð’ÑÐµ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÐ¸ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ñ‹ ÑÐµÐ³Ð¾Ð´Ð½Ñ! ÐžÑ‚Ð»Ð¸Ñ‡Ð½Ð°Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ð°!",
+      "stats-tracked":"ÐžÑ‚ÑÐ»ÐµÐ¶Ð¸Ð²Ð°ÐµÑ‚ÑÑ: ","stats-done":"Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¾ ÑÐµÐ³Ð¾Ð´Ð½Ñ: ","stats-best":"Ð›ÑƒÑ‡ÑˆÐ°Ñ ÑÐµÑ€Ð¸Ñ: ",
+      "howto-title":'<i class="fa fa-check-double"></i> ÐšÐ°Ðº Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒÑÑ Ñ‚Ñ€ÐµÐºÐµÑ€Ð¾Ð¼ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐµÐº',
+      "howto-steps":`<li><b>Ð”Ð¾Ð±Ð°Ð²ÑŒÑ‚Ðµ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÑƒ:</b> Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ð°ÑˆÑƒ ÐµÐ¶ÐµÐ´Ð½ÐµÐ²Ð½ÑƒÑŽ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÑƒ Ð¸ Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ.</li>
+        <li><b>ÐžÑ‚Ð¼ÐµÑ‚Ð¸Ñ‚ÑŒ ÐºÐ°Ðº ÑÐ´ÐµÐ»Ð°Ð½Ð½Ð¾Ðµ:</b> ÐšÐ¾Ð³Ð´Ð° Ð²Ñ‹ Ð²Ñ‹Ð¿Ð¾Ð»Ð½Ð¸Ð»Ð¸ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÑƒ, Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ ÐºÐ½Ð¾Ð¿ÐºÑƒ Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¾.</li>
+        <li><b>Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ/Ð°Ñ€Ñ…Ð¸Ð²Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ:</b> Ð£Ð´Ð°Ð»ÑÐ¹Ñ‚Ðµ Ð¸Ð»Ð¸ Ð°Ñ€Ñ…Ð¸Ð²Ð¸Ñ€ÑƒÐ¹Ñ‚Ðµ Ð½ÐµÐ½ÑƒÐ¶Ð½Ñ‹Ðµ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÐ¸.</li>
+        <li><b>ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€ÑÑ‚ÑŒ ÐµÐ¶ÐµÐ´Ð½ÐµÐ²Ð½Ð¾:</b> Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°Ð¹Ñ‚ÐµÑÑŒ ÐºÐ°Ð¶Ð´Ñ‹Ð¹ Ð´ÐµÐ½ÑŒ Ð´Ð»Ñ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð¿Ñ€Ð¾Ð³Ñ€ÐµÑÑÐ°.</li>`,
+      "howto-article-btn":"Ð§Ð¸Ñ‚Ð°Ñ‚ÑŒ Ð¿Ð¾Ð»Ð½Ð¾ÑÑ‚ÑŒÑŽ","howto-article-link":"habit-how-to-ru.html",
+      "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Ð¡Ð¾Ð²ÐµÑ‚Ñ‹ Ð¿Ð¾ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÐ°Ð¼',
+      "tips-list":`<li><b>ÐÐ°Ñ‡Ð¸Ð½Ð°Ð¹Ñ‚Ðµ Ñ Ð¼Ð°Ð»Ð¾Ð³Ð¾:</b> Ð›ÐµÐ³ÐºÐ¸Ðµ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÐ¸ Ð±Ñ‹ÑÑ‚Ñ€ÐµÐµ Ð¿Ñ€Ð¸Ð¶Ð¸Ð²Ð°ÑŽÑ‚ÑÑ.</li>
+        <li><b>ÐžÑ‚ÑÐ»ÐµÐ¶Ð¸Ð²Ð°Ð¹Ñ‚Ðµ ÐµÐ¶ÐµÐ´Ð½ÐµÐ²Ð½Ð¾:</b> ÐŸÐ¾ÑÑ‚Ð¾ÑÐ½ÑÑ‚Ð²Ð¾ â€” ÐºÐ»ÑŽÑ‡ Ðº ÑƒÑÐ¿ÐµÑ…Ñƒ.</li>
+        <li><b>ÐžÑ‚Ð¼ÐµÑ‡Ð°Ð¹Ñ‚Ðµ Ð¿Ñ€Ð¾Ð³Ñ€ÐµÑÑ:</b> ÐœÐ°Ð»ÐµÐ½ÑŒÐºÐ¸Ðµ Ð¿Ð¾Ð±ÐµÐ´Ñ‹ Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶Ð¸Ð²Ð°ÑŽÑ‚ Ð¼Ð¾Ñ‚Ð¸Ð²Ð°Ñ†Ð¸ÑŽ.</li>`,
+      "tips-article-btn":"Ð§Ð¸Ñ‚Ð°Ñ‚ÑŒ Ð¿Ð¾Ð»Ð½Ð¾ÑÑ‚ÑŒÑŽ","tips-article-link":"habit-tips-ru.html",
+      "tips-mobile-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Ð¡Ð¾Ð²ÐµÑ‚Ñ‹',
+      "tips-mobile-list":`<li><b>ÐÐ°Ñ‡Ð¸Ð½Ð°Ð¹Ñ‚Ðµ Ñ Ð¼Ð°Ð»Ð¾Ð³Ð¾:</b> ÐŸÐ¾ÑÑ‚ÐµÐ¿ÐµÐ½Ð½Ð¾ ÑƒÐ²ÐµÐ»Ð¸Ñ‡Ð¸Ð²Ð°Ð¹Ñ‚Ðµ.</li>
+        <li><b>Ð¡Ð»ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð° ÑÐµÑ€Ð¸ÑÐ¼Ð¸:</b> ÐžÑ‚ÑÐ»ÐµÐ¶Ð¸Ð²Ð°Ð½Ð¸Ðµ Ð¼Ð¾Ñ‚Ð¸Ð²Ð¸Ñ€ÑƒÐµÑ‚.</li>
+        <li><b>Ð”Ð¾Ð±Ð°Ð²ÑŒÑ‚Ðµ Ð½Ð°Ð¿Ð¾Ð¼Ð¸Ð½Ð°Ð½Ð¸Ñ:</b> Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐ¹Ñ‚Ðµ ÐºÐ°Ð»ÐµÐ½Ð´Ð°Ñ€Ð½Ñ‹Ðµ Ð¾Ð¿Ð¾Ð²ÐµÑ‰ÐµÐ½Ð¸Ñ.</li>`,
+      "faq-title":"Ð§Ð°ÑÑ‚Ð¾ Ð·Ð°Ð´Ð°Ð²Ð°ÐµÐ¼Ñ‹Ðµ Ð²Ð¾Ð¿Ñ€Ð¾ÑÑ‹",
+      "faq-list":`<li><b>Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÑÑŽÑ‚ÑÑ Ð»Ð¸ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐºÐ¸?</b> Ð”Ð°, Ð² Ð±Ñ€Ð°ÑƒÐ·ÐµÑ€Ðµ.</li>
+        <li><b>ÐœÐ¾Ð¶Ð½Ð¾ Ð»Ð¸ Ð¾Ñ‚ÑÐ»ÐµÐ¶Ð¸Ð²Ð°Ñ‚ÑŒ Ð½ÐµÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐµÐº?</b> Ð”Ð°.</li>
+        <li><b>ÐžÑ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÑŽÑ‚ÑÑ Ð»Ð¸ ÑÐµÑ€Ð¸Ð¸?</b> Ð”Ð°.</li>`,
+      "mark-done":"ÐžÑ‚Ð¼ÐµÑ‚Ð¸Ñ‚ÑŒ","done-today":"Ð’Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¾ ÑÐµÐ³Ð¾Ð´Ð½Ñ","streak":"Ð¡ÐµÑ€Ð¸Ñ: ","longest":"Ð›ÑƒÑ‡ÑˆÐµÐµ: ",
+      "archive":"ÐÑ€Ñ…Ð¸Ð²Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ","unarchive":"Ð’Ð¾ÑÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ","delete":"Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ","no-habits":"ÐŸÐ¾ÐºÐ° Ð½ÐµÑ‚ Ð¿Ñ€Ð¸Ð²Ñ‹Ñ‡ÐµÐº."
     }
   };
 
-  const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
+  const langNames = { en: "English", fr: "FranÃ§ais", de: "Deutsch", ru: "Ð ÑƒÑÑÐºÐ¸Ð¹", el: "Î•Î»Î»Î·Î½Î¹ÎºÎ¬", es: "EspaÃ±ol", ar: "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©" };
 
   function getLang(){ try{ const l=localStorage.getItem('timerhavenLang')||'ru'; return (l && l.slice(0,2))||'ru'; }catch(e){ return 'ru'; } }
 
@@ -111,9 +107,9 @@
     const t=habitTranslations[lang]||habitTranslations['ru']; 
     document.body.dir=(lang==="ar")?"rtl":"ltr"; 
 
-    // language indicator elements not present — calls guarded by existence checks
+    // language indicator elements not present â€” calls guarded by existence checks
     const labelEl=document.getElementById('language-label'); if(labelEl) labelEl.textContent=t['language-label']; 
-    const nameEl=document.getElementById('language-name'); if(nameEl) nameEl.textContent='Русский'; 
+    const nameEl=document.getElementById('language-name'); if(nameEl) nameEl.textContent='Ð ÑƒÑÑÐºÐ¸Ð¹'; 
 
     const back=document.getElementById('back-link'); if(back) back.textContent=t['back-link']; 
     const toolTitle=document.getElementById('tool-title'); if(toolTitle) toolTitle.innerHTML=`<i class="fa fa-check-double"></i> ${t['tool-title']}`; 
@@ -163,10 +159,10 @@
   window.addEventListener('storage', function(e){ if(e.key==='timerhavenLang'){ const lang=(e.newValue||getLang()).slice(0,2); applyLanguage(lang); }});
   document.addEventListener('DOMContentLoaded', function(){ applyLanguage(getLang()); renderHabits(); window.addEventListener('resize', function(){ applyLanguage(getLang()); }); });
 </script>
-
 <footer>
-  &copy; 2025 TimerHaven. Все инструменты бесплатны и защищают приватность.<br>
-  <a href="privacy.html">Политика конфиденциальности</a> &bull; <a href="terms.html">Условия</a> &bull; <a href="contact.html">Контакты</a>
+  Â© 2025 TimerHaven. Ð’ÑÐµ Ð¸Ð½ÑÑ‚Ñ€ÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð±ÐµÑÐ¿Ð»Ð°Ñ‚Ð½Ñ‹ Ð¸ Ð·Ð°Ñ‰Ð¸Ñ‰Ð°ÑŽÑ‚ Ð¿Ñ€Ð¸Ð²Ð°Ñ‚Ð½Ð¾ÑÑ‚ÑŒ.<br/>
+<a href="privacy.html">ÐŸÐ¾Ð»Ð¸Ñ‚Ð¸ÐºÐ° ÐºÐ¾Ð½Ñ„Ð¸Ð´ÐµÐ½Ñ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚Ð¸</a> â€¢ <a href="terms.html">Ð£ÑÐ»Ð¾Ð²Ð¸Ñ</a> â€¢ <a href="contact.html">ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ñ‹</a>
 </footer>
-</body>
+<p style="margin-top:1rem;"><a class="cta" href="/ru/habit-tracker/habit-tracker-index.html">Read full guide</a></p></body>
 </html>
+

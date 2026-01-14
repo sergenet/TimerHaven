@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<title>Conversor de monedas — TimerHaven</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Convierte monedas con tasas en tiempo real." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
+  <meta charset="UTF-8">
+  <title>Conversor de monedas — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convierte monedas con tasas en tiempo real.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
     body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
@@ -37,53 +36,60 @@
   </style>
 </head>
 <body>
-<script>try{ localStorage.setItem('timerhavenLang','es'); }catch(e){}</script>
-<div class="main-container">
-<div class="center-row">
-<div class="article-card">
-<div>
-<h2 id="howto-title"></h2>
-<ol id="howto-steps"></ol>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a>
-</div>
-<div class="tool-card">
-<details class="howto-mobile" id="howto-mobile">
-<summary><h4 id="howto-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
-<ol id="howto-mobile-steps"></ol>
-</details>
-<a class="back-link" href="index.html" id="back-link"></a>
-<h3 id="tool-title"></h3>
-<div class="tool-help" id="tool-help"></div>
-<div class="converter-section">
-<form class="converter-form" id="currencyForm">
-<input class="form-control" id="amount" min="0" placeholder="" step="any" style="max-width:100px;" type="number"/>
-<select class="form-select" id="fromCurrency" style="max-width:120px;"></select>
-<span style="font-size:1.3em;">→</span>
-<select class="form-select" id="toCurrency" style="max-width:120px;"></select>
-<button class="btn btn-primary btn-sm" id="convert-btn" type="submit"></button>
-</form>
-<div class="converter-result" id="result"></div>
-</div>
-<details class="faq-section">
-<summary id="faq-title"></summary>
-<ul id="faq-list" style="padding-left: 1em;"></ul>
-</details>
-<details class="tips-mobile" id="tips-mobile">
-<summary><h4 id="tips-mobile-title" style="color:#185a9d;display:inline;"></h4></summary>
-<ul id="tips-mobile-list"></ul>
-</details>
-</div>
-<div class="article-card">
-<div>
-<h2 id="tips-title"></h2>
-<ul id="tips-list"></ul>
-</div>
-<a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a>
-</div>
-</div>
-</div>
-<script>
+  <script>try{ localStorage.setItem('timerhavenLang','es'); }catch(e){}</script>
+
+  <div class="main-container">
+    <div class="center-row">
+      <div class="article-card">
+        <div>
+          <h2 id="howto-title"></h2>
+          <ol id="howto-steps"></ol>
+        </div>
+        <a href="#" class="btn btn-outline-primary btn-sm" id="howto-article-btn"></a>
+      </div>
+
+      <div class="tool-card">
+        <details class="howto-mobile" id="howto-mobile">
+          <summary><h4 style="color:#185a9d;display:inline;" id="howto-mobile-title"></h4></summary>
+          <ol id="howto-mobile-steps"></ol>
+        </details>
+        <a href="index.html" class="back-link" id="back-link"></a>
+        <h3 id="tool-title"></h3>
+        <div class="tool-help" id="tool-help"></div>
+
+        <div class="converter-section">
+          <form class="converter-form" id="currencyForm">
+            <input type="number" min="0" step="any" id="amount" class="form-control" placeholder="" style="max-width:100px;">
+            <select id="fromCurrency" class="form-select" style="max-width:120px;"></select>
+            <span style="font-size:1.3em;">→</span>
+            <select id="toCurrency" class="form-select" style="max-width:120px;"></select>
+            <button type="submit" class="btn btn-primary btn-sm" id="convert-btn"></button>
+          </form>
+          <div id="result" class="converter-result"></div>
+        </div>
+
+        <details class="faq-section">
+          <summary id="faq-title"></summary>
+          <ul id="faq-list" style="padding-left: 1em;"></ul>
+        </details>
+
+        <details class="tips-mobile" id="tips-mobile">
+          <summary><h4 style="color:#185a9d;display:inline;" id="tips-mobile-title"></h4></summary>
+          <ul id="tips-mobile-list"></ul>
+        </details>
+      </div>
+
+      <div class="article-card">
+        <div>
+          <h2 id="tips-title"></h2>
+          <ul id="tips-list"></ul>
+        </div>
+        <a href="#" class="btn btn-outline-primary btn-sm" id="tips-article-btn"></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
     const apiKey = "5f484bfa921ef56c9c279660";
     const currencyList = ["USD","EUR","GBP","JPY","AUD","CAD","CHF","CNY","SEK","NZD","MXN","SGD","HKD","NOK","KRW","TRY","INR","RUB","BRL","ZAR"];
 
@@ -236,11 +242,12 @@
       populateCurrencySelects();
     });
   </script>
-<footer>
-    © 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br/>
-<a href="privacy.html">Política de privacidad</a> •
-    <a href="terms.html">Términos</a> •
+
+  <footer>
+    &copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br>
+    <a href="privacy.html">Política de privacidad</a> &bull;
+    <a href="terms.html">Términos</a> &bull;
     <a href="contact.html">Contacto</a>
-</footer>
-<p style="margin-top:1rem;"><a class="cta" href="/es/currency/currency-index.html">Read full guide</a></p></body>
+  </footer>
+</body>
 </html>

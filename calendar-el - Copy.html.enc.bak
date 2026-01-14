@@ -1,0 +1,503 @@
+﻿<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <title>Î—Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿ â€” TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Î‘Ï€Î¿Î¸Î·ÎºÎµÏÏƒÏ„Îµ ÎºÎ±Î¹ Î´Î¹Î±Ï‡ÎµÎ¹ÏÎ¹ÏƒÏ„ÎµÎ¯Ï„Îµ Ï€Î¿Î»Î»Î±Ï€Î»Î­Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ ÏƒÏ„Î¿ Î·Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿ ÎµÏÎºÎ¿Î»Î±. ÎœÎ¬Î¸ÎµÏ„Îµ Ï€ÏŽÏ‚ Î½Î± Ï‡ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹ÎµÎ¯Ï„Îµ Ï„Î¿ Î—Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿, Î´ÎµÎ¯Ï„Îµ ÏƒÏ…Î¼Î²Î¿Ï…Î»Î­Ï‚ Ï€Î±ÏÎ±Î³Ï‰Î³Î¹ÎºÏŒÏ„Î·Ï„Î±Ï‚, FAQ ÎºÎ±Î¹ Î¬ÏÎ¸ÏÎ± ÎµÎ¹Î´Î¹ÎºÏŽÎ½.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container {
+      max-width: 1200px;
+      margin: 2em auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 90vh;
+    }
+    .center-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      gap: 2em;
+      width: 100%;
+    }
+    .article-card, .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      width: 340px;
+      min-width: 220px;
+      max-width: 340px;
+      flex: 1 1 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 2em 1.3em 1em 1.3em;
+      margin: 0;
+      box-sizing: border-box;
+      min-height: 500px;
+    }
+    .tool-card { max-width: 640px; min-width: 320px; }
+    .article-card h2, .tool-card h3 { font-size: 1.35em; font-weight: 700; margin-bottom: 0.4em; display:flex; align-items:center; gap:0.3em; }
+    .calendar-table { width:100%; margin-top:1em; border-collapse:separate; border-spacing:0; background:#fff; border-radius:8px; overflow:hidden; table-layout: fixed; }
+    .calendar-table th, .calendar-table td { text-align:center; padding:0.6em 0.7em; min-width:36px; max-width:40px; vertical-align:middle; }
+    .day-cell { cursor:pointer; border-radius:6px; transition: background 0.1s; display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; margin:0 auto; }
+    .day-cell:hover { background:#e0e7ef; }
+    .has-note { background:#ffeeba !important; }
+    .calendar-today { background:#43cea2 !important; color:#fff !important; border-radius:50% !important; font-weight:bold; box-shadow:0 0 6px #185a9d33; }
+    .modal-header { background:#f4f7fb; }
+    .modal-footer { background:#f7fafc; }
+    .note-list { list-style:none; padding:0; margin-bottom:1em; }
+    .note-list li { background:#f7fafc; border-radius:6px; margin-bottom:0.5em; padding:0.5em 0.8em; display:flex; align-items:center; justify-content:space-between; }
+    .note-text { word-break:break-word; flex-grow:1; }
+    .note-meta { font-size:0.85em; color:#888; margin-right:1em; }
+    .delete-note-btn { font-size:0.9em; color:#c00; background:none; border:none; cursor:pointer; }
+
+    /* Header controls: nav + month/year on one line (desktop) */
+    .calendar-header { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.6rem; flex-wrap:nowrap; }
+    .calendar-nav { display:flex; gap:.25rem; align-items:center; flex-shrink:0; }
+    /* Slightly reduced height to make the controls tighter */
+    .calendar-nav .btn { min-width:40px; padding:.22rem .45rem; height:34px; line-height:1; display:inline-flex; align-items:center; justify-content:center; }
+    .calendar-select { border-radius:8px; padding:.14rem .35rem; border:1px solid #e4edf5; background:#fff; font-size:.9rem; height:34px; line-height:1; display:inline-block; vertical-align:middle; box-sizing:border-box; -webkit-appearance:none; appearance:none; }
+    /* Narrower to ensure both selects fit inside the tool card */
+    .calendar-select.month { width:110px; }
+    .calendar-select.year { width:70px; }
+
+    /* Make How-to headline smaller (less overwhelming) */
+    #howto-title { font-size: 1.05em; font-weight:700; }
+
+    @media (max-width:1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
+    @media (max-width:800px) {
+      .main-container{padding:0;} .center-row{flex-direction:column;align-items:center;} .tool-card,.article-card{width:98vw;max-width:540px;height:auto;} .article-card{display:none!important;} .howto-mobile, .tips-mobile{display:block!important; margin-bottom:1em;}
+      .calendar-header{flex-wrap:wrap; justify-content:flex-start;}
+      .calendar-select{width:48%; max-width:220px; margin-top:.45rem;}
+      .calendar-nav{margin-right:.5rem;}
+    }
+  </style>
+
+  <!-- Defensive override: force true horizontal table layout for the calendar -->
+  <style id="calendar-table-fix">
+    /* Force the calendar to behave as a real table regardless of injected styles or transforms */
+    #calendar-table,
+    table#calendar-table,
+    .calendar-table {
+      display: table !important;
+      table-layout: fixed !important;
+      width: 100% !important;
+      border-collapse: collapse !important;
+      transform: none !important;
+      writing-mode: horizontal-tb !important;
+      -webkit-writing-mode: horizontal-tb !important;
+    }
+
+    /* Ensure table groups and rows are correct */
+    #calendar-table thead,
+    #calendar-table tbody,
+    #calendar-table tr {
+      display: table-row-group !important;
+    }
+    #calendar-table tr {
+      display: table-row !important;
+    }
+
+    /* Force cells to behave like table-cells */
+    #calendar-table th,
+    #calendar-table td {
+      display: table-cell !important;
+      vertical-align: middle !important;
+      white-space: nowrap !important;
+      float: none !important;
+      position: static !important;
+      width: auto !important;
+      max-width: none !important;
+      box-sizing: border-box !important;
+      padding: .6rem .45rem !important;
+    }
+
+    /* Defensive: prevent ancestor transforms or unusual writing-modes from stacking/rotating cells */
+    #calendar-table,
+    #calendar-table * {
+      transform: none !important;
+      -webkit-transform: none !important;
+      writing-mode: horizontal-tb !important;
+      -webkit-writing-mode: horizontal-tb !important;
+    }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body dir="ltr">
+
+  <div class="main-container">
+    <div class="center-row">
+      <div class="article-card">
+        <div>
+          <h2 id="howto-title"><i class="fa fa-calendar-check"></i> Î ÏŽÏ‚ Î½Î± Ï‡ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÎµÏ„Îµ Ï„Î¿ Î—Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿</h2>
+          <ol id="howto-steps">
+            <li><b>ÎšÎ¬Î½Ï„Îµ ÎºÎ»Î¹Îº ÏƒÎµ Î¼Î¹Î± Î·Î¼Î­ÏÎ±:</b> Î‘Î½Î¿Î¯Î¾Ï„Îµ Ï„Î¿ Ï€Î±ÏÎ¬Î¸Ï…ÏÎ¿ Î³Î¹Î± Î½Î± Ï€ÏÎ¿ÏƒÎ¸Î­ÏƒÎµÏ„Îµ/Î´ÎµÎ¯Ï„Îµ Ï€Î¿Î»Î»Î­Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Î½Î¬ Î·Î¼Î­ÏÎ±.</li>
+            <li><b>ÎŸÏÎ³Î±Î½ÏŽÏƒÏ„Îµ Ï„Î± Î³ÎµÎ³Î¿Î½ÏŒÏ„Î±:</b> ÎšÎ¬Î¸Îµ ÏƒÎ·Î¼ÎµÎ¯Ï‰ÏƒÎ· Î­Ï‡ÎµÎ¹ Ï‡ÏÎ¿Î½Î¿ÏƒÎ®Î¼Î±Î½ÏƒÎ· ÎºÎ±Î¹ Î¼Ï€Î¿ÏÎµÎ¯ Î½Î± Î´Î¹Î±Î³ÏÎ±Ï†ÎµÎ¯ Î¼ÎµÎ¼Î¿Î½Ï‰Î¼Î­Î½Î±.</li>
+            <li><b>Î•Ï€Î¹Î¼Î¿Î½Î®:</b> ÎŸÎ¹ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Ï€Î¿Î¸Î·ÎºÎµÏÎ¿Î½Ï„Î±Î¹ ÏƒÏ„Î¿ Ï€ÏÏŒÎ³ÏÎ±Î¼Î¼Î± Ï€ÎµÏÎ¹Î®Î³Î·ÏƒÎ®Ï‚ ÏƒÎ±Ï‚ ÎºÎ±Î¹ Ï€Î±ÏÎ±Î¼Î­Î½Î¿Ï…Î½ Î¼Î­Ï‡ÏÎ¹ Î½Î± Ï„Î¹Ï‚ Î´Î¹Î±Î³ÏÎ¬ÏˆÎµÏ„Îµ.</li>
+          </ol>
+        </div>
+        <a href="calendar-how-to-el.html" class="btn btn-outline-primary btn-sm" id="howto-article-btn">Î”Î¹Î±Î²Î¬ÏƒÏ„Îµ Ï„Î¿ Ï€Î»Î®ÏÎµÏ‚ Î¬ÏÎ¸ÏÎ¿</a>
+      </div>
+
+      <div class="tool-card">
+        <!-- removed the mobile "ÎŸÎ´Î·Î³Î¯ÎµÏ‚" details here to keep the middle card cleaner -->
+
+        <a href="index.html" class="back-link" id="back-link">Î•Ï€Î¹ÏƒÏ„ÏÎ¿Ï†Î® ÏƒÏ„Î¿ ÎºÏÏÎ¹Î¿ Î¼ÎµÎ½Î¿Ï</a>
+        <h3 id="tool-title"><i class="fa fa-calendar-days"></i> Î—Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿</h3>
+        <div class="help-section">
+          <b id="tool-help">ÎšÎ¬Î½Ï„Îµ ÎºÎ»Î¹Îº ÏƒÎµ Î¿Ï€Î¿Î¹Î±Î´Î®Ï€Î¿Ï„Îµ Î·Î¼Î­ÏÎ± Î³Î¹Î± Î½Î± Ï€ÏÎ¿ÏƒÎ¸Î­ÏƒÎµÏ„Îµ/Î´ÎµÎ¯Ï„Îµ/ÎµÏ€ÎµÎ¾ÎµÏÎ³Î±ÏƒÏ„ÎµÎ¯Ï„Îµ Ï„Î¹Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ ÏƒÎ±Ï‚. Î¥Ï€Î¿ÏƒÏ„Î·ÏÎ¯Î¶Î¿Î½Ï„Î±Î¹ Ï€Î¿Î»Î»Î­Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Î½Î¬ Î·Î¼Î­ÏÎ± ÎºÎ±Î¹ Î±Ï€Î¿Î¸Î·ÎºÎµÏÎ¿Î½Ï„Î±Î¹!</b>
+        </div>
+
+        <!-- Header controls (buttons + month/year selects) -->
+        <div class="calendar-header" aria-label="ÐÐ°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ñ ÐºÐ°Ð»ÐµÐ½Ð´Ð°Ñ€Ñ">
+          <div class="calendar-nav" role="toolbar" aria-label="ÐÐ°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ñ Ð¼ÐµÑÑÑ†/Ð³Ð¾Ð´">
+            <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary" aria-label="Î ÏÎ¿Î·Î³Î¿ÏÎ¼ÎµÎ½Î¿ Î­Ï„Î¿Ï‚">Â«</button>
+            <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary" aria-label="Î ÏÎ¿Î·Î³Î¿ÏÎ¼ÎµÎ½Î¿Ï‚ Î¼Î®Î½Î±Ï‚">â€¹</button>
+            <button id="nav-today" class="btn btn-sm btn-outline-secondary" aria-label="Î£Î®Î¼ÎµÏÎ±">Î£Î®Î¼ÎµÏÎ±</button>
+            <button id="nav-next-month" class="btn btn-sm btn-outline-secondary" aria-label="Î•Ï€ÏŒÎ¼ÎµÎ½Î¿Ï‚ Î¼Î®Î½Î±Ï‚">â€º</button>
+            <button id="nav-next-year" class="btn btn-sm btn-outline-secondary" aria-label="Î•Ï€ÏŒÎ¼ÎµÎ½Î¿ Î­Ï„Î¿Ï‚">Â»</button>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
+            <select id="calendar-month-select" class="calendar-select month" aria-label="Î•Ï€Î¹Î»Î¿Î³Î® Î¼Î®Î½Î±"></select>
+            <select id="calendar-year-select" class="calendar-select year" aria-label="Î•Ï€Î¹Î»Î¿Î³Î® Î­Ï„Î¿Ï…Ï‚"></select>
+          </div>
+        </div>
+
+        <table class="table calendar-table" id="calendar-table">
+          <!-- thead & tbody are populated by JS -->
+        </table>
+
+        <details class="faq-section" id="faq-section">
+          <summary id="faq-title">Î£Ï…Ï‡Î½Î­Ï‚ Î•ÏÏ‰Ï„Î®ÏƒÎµÎ¹Ï‚</summary>
+          <ul id="faq-list" style="padding-left:1em;"></ul>
+        </details>
+
+        <!-- tips-mobile removed from middle card as requested -->
+      </div>
+
+      <div class="article-card">
+        <div>
+          <h2 id="tips-title"><i class="fa fa-lightbulb"></i> Î£Ï…Î¼Î²Î¿Ï…Î»Î­Ï‚ Ï€Î±ÏÎ±Î³Ï‰Î³Î¹ÎºÏŒÏ„Î·Ï„Î±Ï‚ Î³Î¹Î± Ï„Î¿ Î·Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿</h2>
+          <ul id="tips-list">
+            <li><b>ÎšÏ‰Î´Î¹ÎºÎ¿Ï€Î¿Î¯Î·ÏƒÎ· Î¼Îµ Ï‡ÏÏŽÎ¼Î±Ï„Î± Î³Î¹Î± Ï„Î¹Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚:</b> Î§ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ emoji Î® ÎµÏ„Î¹ÎºÎ­Ï„ÎµÏ‚ Î³Î¹Î± Î¿Ï€Ï„Î¹ÎºÎ® Î¿ÏÎ³Î¬Î½Ï‰ÏƒÎ·.</li>
+            <li><b>Î•Î»Î­Î³Ï‡ÎµÏ„Îµ Ï„Î±ÎºÏ„Î¹ÎºÎ¬:</b> Î•Î»Î­Î³Î¾Ï„Îµ Ï„Î¹Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ ÏƒÎ±Ï‚ ÎºÎ±Î¹ Î±Ï†Î±Î¹ÏÎ­ÏƒÏ„Îµ Ï€Î±Î»Î¹Î¬ ÏƒÏ…Î¼Î²Î¬Î½Ï„Î±.</li>
+            <li><b>Î£Ï‡ÎµÎ´Î¹Î¬ÏƒÏ„Îµ ÎµÎº Ï„Ï‰Î½ Ï€ÏÎ¿Ï„Î­ÏÏ‰Î½:</b> Î ÏÎ¿ÏƒÎ¸Î­ÏƒÏ„Îµ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î³Î¹Î± Î¼ÎµÎ»Î»Î¿Î½Ï„Î¹ÎºÎ­Ï‚ Î·Î¼ÎµÏÎ¿Î¼Î·Î½Î¯ÎµÏ‚ Î³Î¹Î± Î½Î± ÎµÎ¯ÏƒÏ„Îµ Ï€ÏÎ¿ÎµÏ„Î¿Î¹Î¼Î±ÏƒÎ¼Î­Î½Î¿Î¹.</li>
+          </ul>
+        </div>
+        <a href="calendar-tips-el.html" class="btn btn-outline-primary btn-sm" id="tips-article-btn">Î”Î¹Î±Î²Î¬ÏƒÏ„Îµ Ï„Î¿ Ï€Î»Î®ÏÎµÏ‚ Î¬ÏÎ¸ÏÎ¿</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog"><div class="modal-content">
+      <form id="noteForm" autocomplete="off">
+        <div class="modal-header">
+          <h5 class="modal-title" id="noteModalLabel">Î£Î·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î³Î¹Î± <span id="modal-date-label"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="note-list" id="noteList"></ul>
+          <textarea id="noteInput" class="form-control" rows="3" placeholder="Î ÏÎ¿ÏƒÎ¸Î­ÏƒÏ„Îµ Î¼Î¹Î± Î½Î­Î± ÏƒÎ·Î¼ÎµÎ¯Ï‰ÏƒÎ· Î³Î¹Î± Î±Ï…Ï„Î®Î½ Ï„Î·Î½ Î·Î¼Î­ÏÎ±..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn">ÎšÎ»ÎµÎ¯ÏƒÎ¹Î¼Î¿</button>
+          <button type="submit" class="btn btn-success" id="note-add-btn">Î ÏÎ¿ÏƒÎ¸Î®ÎºÎ· ÏƒÎ·Î¼ÎµÎ¯Ï‰ÏƒÎ·Ï‚</button>
+        </div>
+      </form>
+    </div></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Force Greek for local-file testing and make Greek the fallback
+    localStorage.setItem('timerhavenLang','el');
+
+    // Notes persistence and calendar state
+    let notes = JSON.parse(localStorage.getItem('calendarNotes') || '{}');
+    let currentYear, currentMonth, selectedDay;
+
+    function getLang() {
+      return localStorage.getItem('timerhavenLang') || 'el';
+    }
+
+    const langNames = {
+      en: "English",
+      fr: "FranÃ§ais",
+      de: "Deutsch",
+      ru: "Ð ÑƒÑÑÐºÐ¸Ð¹",
+      el: "Î•Î»Î»Î·Î½Î¹ÎºÎ¬",
+      es: "EspaÃ±Ð¾Ð»",
+      ar: "Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©"
+    };
+
+    const translations = {
+      en: {
+        "language-label": "Language:",
+        "back-link": "Back to Main Menu",
+        "tool-title": "Calendar",
+        "tool-help": "Click any day to add/view/edit your notes. Multiple notes per day are supported and persist!",
+        "faq-title": "FAQs",
+        "faq-list": `<li><b>Are my notes saved?</b> Yes! Notes are saved in your browser and remain until you delete them.</li>`,
+        "howto-title": "<i class=\"fa fa-calendar-check\"></i> How to Use Calendar",
+        "howto-steps": `<li><b>Click a day:</b> Open the modal to add/view multiple notes for each day.</li>`,
+        "noteModalLabel": "Notes for",
+        "noteInput": "Add a new note for this day...",
+        "note-none": "No notes yet for this day.",
+        "note-delete": "Delete this note",
+        "note-close-btn": "Close",
+        "note-add-btn": "Add Note",
+        "days": ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+      },
+      el: {
+        "language-label": "Î“Î»ÏŽÏƒÏƒÎ±:",
+        "back-link": "Î•Ï€Î¹ÏƒÏ„ÏÎ¿Ï†Î® ÏƒÏ„Î¿ ÎºÏÏÎ¹Î¿ Î¼ÎµÎ½Î¿Ï",
+        "tool-title": "Î—Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿",
+        "tool-help": "ÎšÎ¬Î½Ï„Îµ ÎºÎ»Î¹Îº ÏƒÎµ Î¿Ï€Î¿Î¹Î±Î´Î®Ï€Î¿Ï„Îµ Î·Î¼Î­ÏÎ± Î³Î¹Î± Î½Î± Ï€ÏÎ¿ÏƒÎ¸Î­ÏƒÎµÏ„Îµ/Î´ÎµÎ¯Ï„Îµ/ÎµÏ€ÎµÎ¾ÎµÏÎ³Î±ÏƒÏ„ÎµÎ¯Ï„Îµ Ï„Î¹Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ ÏƒÎ±Ï‚. Î¥Ï€Î¿ÏƒÏ„Î·ÏÎ¯Î¶Î¿Î½Ï„Î±Î¹ Ï€Î¿Î»Î»Î­Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Î½Î¬ Î·Î¼Î­ÏÎ± ÎºÎ±Î¹ Î±Ï€Î¿Î¸Î·ÎºÎµÏÎ¿Î½Ï„Î±Î¹!",
+        "faq-title": "Î£Ï…Ï‡Î½Î­Ï‚ Î•ÏÏ‰Ï„Î®ÏƒÎµÎ¹Ï‚",
+        "faq-list": `<li><b>Î‘Ï€Î¿Î¸Î·ÎºÎµÏÎ¿Î½Ï„Î±Î¹ Î¿Î¹ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î¼Î¿Ï…;</b> ÎÎ±Î¹! ÎŸÎ¹ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Ï€Î¿Î¸Î·ÎºÎµÏÎ¿Î½Ï„Î±Î¹ ÏƒÏ„Î¿ Ï€ÏÏŒÎ³ÏÎ±Î¼Î¼Î± Ï€ÎµÏÎ¹Î®Î³Î·ÏƒÎ®Ï‚ ÏƒÎ±Ï‚ ÎºÎ±Î¹ Ï€Î±ÏÎ±Î¼Î­Î½Î¿Ï…Î½ Î¼Î­Ï‡ÏÎ¹ Î½Î± Ï„Î¹Ï‚ Î´Î¹Î±Î³ÏÎ¬ÏˆÎµÏ„Îµ.</li>
+          <li><b>ÎœÏ€Î¿ÏÏŽ Î½Î± Ï€ÏÎ¿ÏƒÎ¸Î­ÏƒÏ‰ Ï€Î¿Î»Î»Î­Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚;</b> ÎÎ±Î¹, Î¼Ï€Î¿ÏÎµÎ¯Ï„Îµ Î½Î± Ï€ÏÎ¿ÏƒÎ¸Î­ÏƒÎµÏ„Îµ ÏŒÏƒÎµÏ‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î¸Î­Î»ÎµÏ„Îµ Î³Î¹Î± ÎºÎ¬Î¸Îµ Î·Î¼Î­ÏÎ±.</li>
+          <li><b>ÎœÏ€Î¿ÏÏŽ Î½Î± Î´Î¹Î±Î³ÏÎ¬ÏˆÏ‰ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚;</b> ÎÎ±Î¹, Î´Î¹Î±Î³ÏÎ¬ÏˆÏ„Îµ ÎºÎ¬Î¸Îµ ÏƒÎ·Î¼ÎµÎ¯Ï‰ÏƒÎ· Î¼ÎµÎ¼Î¿Î½Ï‰Î¼Î­Î½Î± Î¼Îµ Ï„Î¿ ÎµÎ¹ÎºÎ¿Î½Î¯Î´Î¹Î¿ ÎºÎ¬Î´Î¿Ï….</li>
+          <li><b>ÎŸÎ¹ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ ÏƒÏ…Î³Ï‡ÏÎ¿Î½Î¯Î¶Î¿Î½Ï„Î±Î¹ ÏƒÎµ Î¬Î»Î»ÎµÏ‚ ÏƒÏ…ÏƒÎºÎµÏ…Î­Ï‚;</b> ÎŒÏ‡Î¹ Î±ÎºÏŒÎ¼Î· â€” Î¿Î¹ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Ï€Î¿Î¸Î·ÎºÎµÏÎ¿Î½Ï„Î±Î¹ Î±Î½Î¬ Ï€ÏÏŒÎ³ÏÎ±Î¼Î¼Î± Ï€ÎµÏÎ¹Î®Î³Î·ÏƒÎ·Ï‚. Î“Î¹Î± Ï€ÏÏŒÏƒÎ²Î±ÏƒÎ· Î±Ï€ÏŒ Ï€Î¿Î»Î»Î­Ï‚ ÏƒÏ…ÏƒÎºÎµÏ…Î­Ï‚, Ï‡ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ Î¼Î¹Î± cloud ÎµÏ†Î±ÏÎ¼Î¿Î³Î®.</li>`,
+        "howto-title": "<i class=\"fa fa-calendar-check\"></i> Î ÏŽÏ‚ Î½Î± Ï‡ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÎµÏ„Îµ Ï„Î¿ Î—Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿",
+        "howto-steps": `<li><b>ÎšÎ¬Î½Ï„Îµ ÎºÎ»Î¹Îº ÏƒÎµ Î¼Î¹Î± Î·Î¼Î­ÏÎ±:</b> Î‘Î½Î¿Î¯Î¾Ï„Îµ Ï„Î¿ Ï€Î±ÏÎ¬Î¸Ï…ÏÎ¿ Î³Î¹Î± Î½Î± Ï€ÏÎ¿ÏƒÎ¸Î­ÏƒÎµÏ„Îµ/Î´ÎµÎ¯Ï„Îµ Ï€Î¿Î»Î»Î­Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Î½Î¬ Î·Î¼Î­ÏÎ±.</li>
+          <li><b>ÎŸÏÎ³Î±Î½ÏŽÏƒÏ„Îµ Ï„Î± Î³ÎµÎ³Î¿Î½ÏŒÏ„Î±:</b> ÎšÎ¬Î¸Îµ ÏƒÎ·Î¼ÎµÎ¯Ï‰ÏƒÎ· Î­Ï‡ÎµÎ¹ Ï‡ÏÎ¿Î½Î¿ÏƒÎ®Î¼Î±Î½ÏƒÎ· ÎºÎ±Î¹ Î¼Ï€Î¿ÏÎµÎ¯ Î½Î± Î´Î¹Î±Î³ÏÎ±Ï†ÎµÎ¯ Î¼ÎµÎ¼Î¿Î½Ï‰Î¼Î­Î½Î±.</li>
+          <li><b>Î•Ï€Î¹Î¼Î¿Î½Î®:</b> ÎŸÎ¹ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Ï€Î¿Î¸Î·ÎºÎµÏÎ¿Î½Ï„Î±Î¹ ÏƒÏ„Î¿ Ï€ÏÏŒÎ³ÏÎ±Î¼Î¼Î± Ï€ÎµÏÎ¹Î®Î³Î·ÏƒÎ®Ï‚ ÏƒÎ±Ï‚ ÎºÎ±Î¹ Ï€Î±ÏÎ±Î¼Î­Î½Î¿Ï…Î½ Î¼Î­Ï‡ÏÎ¹ Î½Î± Ï„Î¹Ï‚ Î´Î¹Î±Î³ÏÎ¬ÏˆÎµÏ„Îµ.</li>`,
+        "howto-article-btn": "Î”Î¹Î±Î²Î¬ÏƒÏ„Îµ Ï„Î¿ Ï€Î»Î®ÏÎµÏ‚ Î¬ÏÎ¸ÏÎ¿",
+        "howto-article-link": "calendar-how-to-el.html",
+        "tips-title": "<i class=\"fa fa-lightbulb\"></i> Î£Ï…Î¼Î²Î¿Ï…Î»Î­Ï‚",
+        "tips-list": `<li><b>ÎšÏ‰Î´Î¹ÎºÎ¿Ï€Î¿Î¯Î·ÏƒÎ· Î¼Îµ Ï‡ÏÏŽÎ¼Î± Î³Î¹Î± Ï„Î¹Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚:</b> Î§ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ emoji Î® ÎµÏ„Î¹ÎºÎ­Ï„ÎµÏ‚ Î³Î¹Î± Î¿Ï€Ï„Î¹ÎºÎ® Î¿ÏÎ³Î¬Î½Ï‰ÏƒÎ·.</li>
+          <li><b>Î•Î»Î­Î³Ï‡ÎµÏ„Îµ Ï„Î±ÎºÏ„Î¹ÎºÎ¬:</b> Î•Î»Î­Î³Î¾Ï„Îµ Ï„Î¹Ï‚ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ ÏƒÎ±Ï‚ ÎºÎ±Î¹ Î±Ï†Î±Î¹ÏÎ­ÏƒÏ„Îµ Ï€Î±Î»Î¹Î¬ ÏƒÏ…Î¼Î²Î¬Î½Ï„Î±.</li>
+          <li><b>Î£Ï‡ÎµÎ´Î¹Î¬ÏƒÏ„Îµ ÎµÎº Ï„Ï‰Î½ Ï€ÏÎ¿Ï„Î­ÏÏ‰Î½:</b> Î ÏÎ¿ÏƒÎ¸Î­ÏƒÏ„Îµ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î³Î¹Î± Î¼ÎµÎ»Î»Î¿Î½Ï„Î¹ÎºÎ­Ï‚ Î·Î¼ÎµÏÎ¿Î¼Î·Î½Î¯ÎµÏ‚ Î³Î¹Î± Î½Î± ÎµÎ¯ÏƒÏ„Îµ Ï€ÏÎ¿ÎµÏ„Î¿Î¹Î¼Î±ÏƒÎ¼Î­Î½Î¿Î¹.</li>`,
+        "tips-article-btn": "Î”Î¹Î±Î²Î¬ÏƒÏ„Îµ Ï„Î¿ Ï€Î»Î®ÏÎµÏ‚ Î¬ÏÎ¸ÏÎ¿",
+        "tips-article-link": "calendar-tips-el.html",
+        "tips-mobile-title": "<i class=\"fa fa-lightbulb\" style=\"color:#43cea2;\"></i> Î£Ï…Î¼Î²Î¿Ï…Î»Î­Ï‚",
+        "tips-mobile-list": `<li><b>Î§ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ ÎºÏ‰Î´Î¹ÎºÎ¿Ï€Î¿Î¯Î·ÏƒÎ· Ï‡ÏÏ‰Î¼Î¬Ï„Ï‰Î½:</b> Î§ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ emoji Î® ÎµÏ„Î¹ÎºÎ­Ï„ÎµÏ‚ Î³Î¹Î± Î¿Ï€Ï„Î¹ÎºÎ® Î¿ÏÎ³Î¬Î½Ï‰ÏƒÎ·.</li>`,
+        "noteModalLabel": "Î£Î·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î³Î¹Î±",
+        "noteInput": "Î ÏÎ¿ÏƒÎ¸Î­ÏƒÏ„Îµ Î¼Î¹Î± Î½Î­Î± ÏƒÎ·Î¼ÎµÎ¯Ï‰ÏƒÎ· Î³Î¹Î± Î±Ï…Ï„Î®Î½ Ï„Î·Î½ Î·Î¼Î­ÏÎ±...",
+        "note-none": "Î”ÎµÎ½ Ï…Ï€Î¬ÏÏ‡Î¿Ï…Î½ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î³Î¹Î± Î±Ï…Ï„Î®Î½ Ï„Î·Î½ Î·Î¼Î­ÏÎ±.",
+        "note-delete": "Î”Î¹Î±Î³ÏÎ±Ï†Î® Î±Ï…Ï„Î®Ï‚ Ï„Î·Ï‚ ÏƒÎ·Î¼ÎµÎ¯Ï‰ÏƒÎ·Ï‚",
+        "note-close-btn": "ÎšÎ»ÎµÎ¯ÏƒÎ¹Î¼Î¿",
+        "note-add-btn": "Î ÏÎ¿ÏƒÎ¸Î®ÎºÎ· ÏƒÎ·Î¼ÎµÎ¯Ï‰ÏƒÎ·Ï‚",
+        "days": ["ÎšÏ…Ï","Î”ÎµÏ…","Î¤ÏÎ¹","Î¤ÎµÏ„","Î ÎµÎ¼","Î Î±Ï","Î£Î±Î²"]
+      }
+    };
+
+    function updateLanguage(lang) {
+      lang = lang || getLang();
+      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+      const t = translations[lang] || translations['en'];
+      const elById = id => document.getElementById(id);
+      if (elById("back-link")) elById("back-link").textContent = t["back-link"];
+      if (elById("tool-title")) elById("tool-title").innerHTML = `<i class="fa fa-calendar-days"></i> ${t["tool-title"]}`;
+      if (elById("tool-help")) elById("tool-help").textContent = t["tool-help"];
+      if (elById("faq-title")) elById("faq-title").textContent = t["faq-title"];
+      if (elById("faq-list")) elById("faq-list").innerHTML = t["faq-list"];
+      if (elById("howto-title")) elById("howto-title").innerHTML = t["howto-title"];
+      if (elById("howto-steps")) elById("howto-steps").innerHTML = t["howto-steps"];
+      if (elById("howto-article-btn")) { elById("howto-article-btn").textContent = t["howto-article-btn"]; elById("howto-article-btn").href = t["howto-article-link"]; }
+
+      if (elById("tips-title")) elById("tips-title").innerHTML = t["tips-title"] || "";
+      if (elById("tips-list")) elById("tips-list").innerHTML = t["tips-list"] || "";
+      if (elById("tips-article-btn")) { elById("tips-article-btn").textContent = t["tips-article-btn"] || ""; elById("tips-article-btn").href = t["tips-article-link"] || "#"; }
+      if (elById("tips-mobile-title")) elById("tips-mobile-title").innerHTML = t["tips-mobile-title"] || "";
+      if (elById("tips-mobile-list")) elById("tips-mobile-list").innerHTML = t["tips-mobile-list"] || "";
+
+      if (elById("noteModalLabel")) elById("noteModalLabel").innerHTML = `${t["noteModalLabel"]} <span id="modal-date-label"></span>`;
+      if (elById("noteInput")) elById("noteInput").placeholder = t["noteInput"];
+      if (elById("note-close-btn")) elById("note-close-btn").textContent = t["note-close-btn"];
+      if (elById("note-add-btn")) elById("note-add-btn").textContent = t["note-add-btn"];
+
+      if (typeof currentYear === 'number' && typeof currentMonth === 'number') {
+        renderCalendar(currentYear, currentMonth, lang);
+      }
+    }
+
+    // Populate month/year controls
+    function populateMonthYearControls(year, month, lang) {
+      lang = lang || getLang();
+      const monthSelect = document.getElementById('calendar-month-select');
+      const yearSelect = document.getElementById('calendar-year-select');
+      if (!monthSelect || !yearSelect) return;
+      const locale = (lang === 'el') ? 'el-GR' : 'en-US';
+      const mf = new Intl.DateTimeFormat(locale, { month: 'long' });
+      monthSelect.innerHTML = '';
+      for (let m=0; m<12; m++) {
+        const opt = document.createElement('option');
+        opt.value = String(m);
+        opt.textContent = mf.format(new Date(2000,m,1));
+        if (m === month) opt.selected = true;
+        monthSelect.appendChild(opt);
+      }
+      const now = new Date();
+      const base = now.getFullYear();
+      const start = base - 50, end = base + 50;
+      yearSelect.innerHTML = '';
+      for (let y = start; y <= end; y++) {
+        const opt = document.createElement('option');
+        opt.value = String(y);
+        opt.textContent = String(y);
+        if (y === year) opt.selected = true;
+        yearSelect.appendChild(opt);
+      }
+    }
+
+    // Calendar renderer
+    function renderCalendar(year, month, lang) {
+      currentYear = year;
+      currentMonth = month;
+      lang = lang || getLang();
+      const table = document.getElementById('calendar-table');
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      let html = `<thead><tr>`;
+      const dayNames = (translations[lang] && translations[lang]["days"]) ? translations[lang]["days"] : translations['en']["days"];
+      dayNames.forEach(day => { html += `<th>${day}</th>`; });
+      html += `</tr></thead><tbody><tr>`;
+
+      for (let i = 0; i < firstDay; i++) html += `<td></td>`;
+
+      const now = new Date();
+      const todayYear = now.getFullYear();
+      const todayMonth = now.getMonth();
+      const todayDay = now.getDate();
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const dayNotes = notes[dateStr] || [];
+        const hasNote = dayNotes.length > 0;
+        if ((firstDay + d - 1) % 7 === 0 && d !== 1) html += `</tr><tr>`;
+        const isToday = (d === todayDay && month === todayMonth && year === todayYear);
+        /* Inline style forces table-cell behaviour even if external CSS overrides */
+        html += `<td class="day-cell${hasNote ? ' has-note' : ''}${isToday ? ' calendar-today' : ''}" data-date="${dateStr}" style="display:table-cell !important; vertical-align:middle;">${d}${hasNote ? ' <span title="Î£Î·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚ Î±Ï€Î¿Î¸Î·ÎºÎµÏÏ„Î·ÎºÎ±Î½">ðŸ“</span>' : ''}</td>`;
+      }
+      html += `</tr></tbody>`;
+      table.innerHTML = html;
+
+      // Ensure the month/year selects reflect the currently rendered calendar
+      populateMonthYearControls(currentYear, currentMonth, lang);
+
+      Array.from(document.getElementsByClassName('day-cell')).forEach(cell => {
+        cell.addEventListener('click', function() {
+          selectedDay = this.getAttribute('data-date');
+          showNoteModal(selectedDay);
+        });
+      });
+    }
+
+    function showNoteModal(dateStr) {
+      const modalDateLabel = document.getElementById('modal-date-label');
+      if (modalDateLabel) modalDateLabel.textContent = dateStr;
+      renderNoteList(dateStr);
+      document.getElementById('noteInput').value = '';
+      let modal = new bootstrap.Modal(document.getElementById('noteModal'));
+      modal.show();
+    }
+
+    function renderNoteList(dateStr) {
+      const list = document.getElementById('noteList');
+      list.innerHTML = '';
+      const lang = getLang();
+      const dayNotes = notes[dateStr] || [];
+      if (dayNotes.length === 0) {
+        list.innerHTML = `<li style="color:#888;">${translations[lang]["note-none"] || translations['el']["note-none"]}</li>`;
+        return;
+      }
+      dayNotes.forEach((note, idx) => {
+        list.innerHTML += `
+          <li>
+            <span class="note-text">${escapeHtml(note.text)}</span>
+            <span class="note-meta">${new Date(note.ts).toLocaleString()}</span>
+            <button class="delete-note-btn" title="${translations[lang]["note-delete"] || translations['el']["note-delete"]}" onclick="deleteNote('${dateStr}',${idx})"><i class="fa fa-trash"></i></button>
+          </li>
+        `;
+      });
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
+    }
+
+    document.getElementById('noteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!selectedDay) return;
+      const text = document.getElementById('noteInput').value.trim();
+      if (!text) return;
+      if (!notes[selectedDay]) notes[selectedDay] = [];
+      notes[selectedDay].push({ text, ts: Date.now() });
+      localStorage.setItem('calendarNotes', JSON.stringify(notes));
+      document.getElementById('noteInput').value = '';
+      renderNoteList(selectedDay);
+      renderCalendar(currentYear, currentMonth, getLang());
+    });
+
+    window.deleteNote = function(dateStr, idx) {
+      if (!notes[dateStr]) return;
+      notes[dateStr].splice(idx, 1);
+      if (notes[dateStr].length === 0) delete notes[dateStr];
+      localStorage.setItem('calendarNotes', JSON.stringify(notes));
+      renderNoteList(dateStr);
+      renderCalendar(currentYear, currentMonth, getLang());
+    };
+
+    // Hookup nav controls and select changes
+    function hookupCalendarControls() {
+      const prevYear=document.getElementById('nav-prev-year');
+      const prevMonth=document.getElementById('nav-prev-month');
+      const nextMonth=document.getElementById('nav-next-month');
+      const nextYear=document.getElementById('nav-next-year');
+      const todayBtn=document.getElementById('nav-today');
+
+      prevYear && prevYear.addEventListener('click', ()=> renderCalendar(currentYear-1, currentMonth, getLang()));
+      nextYear && nextYear.addEventListener('click', ()=> renderCalendar(currentYear+1, currentMonth, getLang()));
+      prevMonth && prevMonth.addEventListener('click', ()=> { let y=currentYear,m=currentMonth-1; if(m<0){m=11;y--;} renderCalendar(y,m,getLang()); });
+      nextMonth && nextMonth.addEventListener('click', ()=> { let y=currentYear,m=currentMonth+1; if(m>11){m=0;y++;} renderCalendar(y,m,getLang()); });
+      todayBtn && todayBtn.addEventListener('click', ()=> { const n=new Date(); renderCalendar(n.getFullYear(), n.getMonth(), getLang()); });
+
+      const mSel=document.getElementById('calendar-month-select');
+      const ySel=document.getElementById('calendar-year-select');
+      if(mSel && ySel){
+        mSel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
+        ySel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const now = new Date();
+      currentYear = now.getFullYear();
+      currentMonth = now.getMonth();
+
+      updateLanguage(getLang());
+      populateMonthYearControls(currentYear, currentMonth, getLang());
+      hookupCalendarControls();
+      renderCalendar(currentYear, currentMonth, getLang());
+    });
+  </script>
+
+  <footer>
+    Â© 2025 TimerHaven. ÎŒÎ»Î± Ï„Î± ÎµÏÎ³Î±Î»ÎµÎ¯Î± ÎµÎ¯Î½Î±Î¹ Î´Ï‰ÏÎµÎ¬Î½ ÎºÎ±Î¹ Ï†Î¹Î»Î¹ÎºÎ¬ Ï€ÏÎ¿Ï‚ Ï„Î·Î½ Î¹Î´Î¹Ï‰Ï„Î¹ÎºÏŒÏ„Î·Ï„Î±.<br>
+    <a href="privacy.html">Î Î¿Î»Î¹Ï„Î¹ÎºÎ® Î±Ï€Î¿ÏÏÎ®Ï„Î¿Ï…</a> â€¢
+    <a href="terms.html">ÎŒÏÎ¿Î¹</a> â€¢
+    <a href="contact.html">Î•Ï€Î¹ÎºÎ¿Î¹Î½Ï‰Î½Î¯Î±</a>
+  </footer>
+</body>
+</html>
+
+

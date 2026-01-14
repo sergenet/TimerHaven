@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Task Timer â€” TimerHaven</title>
+  <meta name="description" content="Task Timer â€” Î¼ÎµÏ„ÏÎ®ÏƒÏ„Îµ Ï„Î¿Î½ Ï‡ÏÏŒÎ½Î¿ ÏƒÎµ ÎµÏÎ³Î±ÏƒÎ¯ÎµÏ‚, ÎºÎ±Ï„Î±Î³ÏÎ¬ÏˆÏ„Îµ ÏƒÏ…Î½ÎµÎ´ÏÎ¯ÎµÏ‚ ÎºÎ±Î¹ Î²ÎµÎ»Ï„Î¹ÏŽÏƒÏ„Îµ Ï„Î¹Ï‚ ÎµÎºÏ„Î¹Î¼Î®ÏƒÎµÎ¹Ï‚ ÏƒÎ±Ï‚ Î¼Îµ Ï€ÏÎ±Î³Î¼Î±Ï„Î¹ÎºÎ¬ Î´ÎµÎ´Î¿Î¼Î­Î½Î±.">
+
+  <link rel="canonical" href="https://timerhaven.com/el/task-timer/">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer/">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer/">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer/">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer/">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer/">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer/">
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer/">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer/">
+
+  <!-- Person structured data (author) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Serge Shammas",
+    "image": "/assets/images/authors/serge-shammas-400.jpg",
+    "url": "/authors/serge-shammas",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- HowTo / Article structured data (Greek page) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"ÎšÎ±Ï„Î±Î³ÏÎ±Ï†Î® ÎºÎ±Î¹ Î±Î½Î¬Î»Ï…ÏƒÎ· Ï‡ÏÏŒÎ½Î¿Ï… ÎµÏÎ³Î±ÏƒÎ¹ÏŽÎ½ Î¼Îµ Ï„Î¿Î½ Task Timer",
+        "description":"Î’Î®Î¼Î±Ï„Î± Î³Î¹Î± Ï„Î· Î¼Î­Ï„ÏÎ·ÏƒÎ· Ï„Î¿Ï… Ï€ÏÎ±Î³Î¼Î±Ï„Î¹ÎºÎ¿Ï Ï‡ÏÏŒÎ½Î¿Ï… Ï€Î¿Ï… Î±Ï†Î¹ÎµÏÏŽÎ½ÎµÏ„Î±Î¹ ÏƒÎµ ÎµÏÎ³Î±ÏƒÎ¯ÎµÏ‚, Ï„Î·Î½ ÎºÎ±Ï„Î±Î³ÏÎ±Ï†Î® Î´Î¹Î±ÎºÎ¿Ï€ÏŽÎ½ ÎºÎ±Î¹ Ï„Î· Ï‡ÏÎ®ÏƒÎ· Ï„Ï‰Î½ Î´ÎµÎ´Î¿Î¼Î­Î½Ï‰Î½ Î³Î¹Î± ÎºÎ±Î»ÏÏ„ÎµÏÎµÏ‚ ÎµÎºÏ„Î¹Î¼Î®ÏƒÎµÎ¹Ï‚.",
+        "image":"/assets/images/tasktimer-snapshot.png",
+        "totalTime":"PT1H",
+        "supply":["Task Timer","Î£Î·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚","Î›Î¿Î³Î¹ÏƒÏ„Î¹ÎºÏŒ Ï†ÏÎ»Î»Î¿"],
+        "step":[
+          {"@type":"HowToStep","name":"Î”Î·Î¼Î¹Î¿Ï…ÏÎ³Î®ÏƒÏ„Îµ Î¼Î¯Î± ÎµÏÎ³Î±ÏƒÎ¯Î±","text":"Î”ÏŽÏƒÏ„Îµ ÏŒÎ½Î¿Î¼Î± ÏƒÏ„Î·Î½ ÎµÏÎ³Î±ÏƒÎ¯Î± ÎºÎ±Î¹ Ï€ÏÎ¿ÏƒÎ¸Î­ÏƒÏ„Îµ ÎµÎºÏ„Î¹Î¼ÏŽÎ¼ÎµÎ½Î· Î´Î¹Î¬ÏÎºÎµÎ¹Î± ÎºÎ±Î¹ tags.","image":"/assets/images/tasktimer-step-1.png"},
+          {"@type":"HowToStep","name":"Î•ÎºÎºÎ¹Î½Î®ÏƒÏ„Îµ Ï„Î¿Î½ Ï‡ÏÎ¿Î½Î¿Î´Î¹Î±ÎºÏŒÏ€Ï„Î· ÎºÎ±Î¹ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÏ„Îµ Ï„Î¹Ï‚ Î´Î¹Î±ÎºÎ¿Ï€Î­Ï‚","text":"ÎžÎµÎºÎ¹Î½Î®ÏƒÏ„Îµ Ï„Î¿Î½ Task Timer ÎºÎ±Î¹ ÎºÎ±Ï„Î±Î³ÏÎ¬ÏˆÏ„Îµ Ï„Ï…Ï‡ÏŒÎ½ Î´Î¹Î±ÎºÎ¿Ï€Î­Ï‚ ÎºÎ±Î¸ÏŽÏ‚ ÏƒÏ…Î¼Î²Î±Î¯Î½Î¿Ï…Î½.","image":"/assets/images/tasktimer-step-2.png"},
+          {"@type":"HowToStep","name":"Î£Ï„Î±Î¼Î±Ï„Î®ÏƒÏ„Îµ ÎºÎ±Î¹ ÎµÎ¾Î¬Î³ÎµÏ„Îµ","text":"Î£Ï„Î±Î¼Î±Ï„Î®ÏƒÏ„Îµ Ï„Î¿Î½ Ï‡ÏÎ¿Î½Î¿Î´Î¹Î±ÎºÏŒÏ€Ï„Î· ÎºÎ±Î¹ ÎµÎ¾Î¬Î³ÎµÏ„Îµ Ï„Î· ÏƒÏ…Î½ÎµÎ´ÏÎ¯Î± ÏƒÎµ CSV Î³Î¹Î± ÎµÎ²Î´Î¿Î¼Î±Î´Î¹Î±Î¯Î± Î±Î½Î¬Î»Ï…ÏƒÎ·.","image":"/assets/images/tasktimer-step-3.png"}
+        ]
+      },
+      {
+        "@type":"Article",
+        "headline":"Task Timer â€” Î¼ÎµÏ„ÏÎ®ÏƒÏ„Îµ Ï„Î¿Î½ Ï‡ÏÏŒÎ½Î¿ ÎºÎ±Î¹ ÎºÎ±Ï„Î±Î³ÏÎ¬ÏˆÏ„Îµ ÏƒÏ…Î½ÎµÎ´ÏÎ¯ÎµÏ‚",
+        "image":["/assets/images/tasktimer-snapshot.png"],
+        "author": {"@type":"Person","name":"Serge Shammas"},
+        "datePublished":"2025-10-25",
+        "dateModified":"2025-11-10",
+        "publisher": {"@type":"Organization","name":"TimerHaven","logo":{"@type":"ImageObject","url":"/assets/images/timerhaven-logo.png"}},
+        "description":"ÎŸÎ´Î·Î³ÏŒÏ‚ Î³Î¹Î± Ï„Î¿Î½ Task Timer: ÎºÎ±Ï„Î±Î³ÏÎ±Ï†Î® ÏƒÏ…Î½ÎµÎ´ÏÎ¹ÏŽÎ½, Î´Î¹Î±Ï‡ÎµÎ¯ÏÎ¹ÏƒÎ· Î´Î¹Î±ÎºÎ¿Ï€ÏŽÎ½ ÎºÎ±Î¹ ÎµÎ¾Î±Î³Ï‰Î³Î® CSV Î³Î¹Î± Î±Î½Î¬Î»Ï…ÏƒÎ·.",
+        "mainEntityOfPage":"/el/task-timer/",
+        "about": {
+          "@type":"SoftwareApplication",
+          "name":"Task Timer",
+          "url": "/timer-el.html",
+          "applicationCategory": "Productivity",
+          "operatingSystem": "Web"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:#fffdfa;color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:#fff;border-radius:10px;padding:2rem;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:#0b5f8a;margin-top:0;}
+    .meta{color:#6b7c89;font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;color:#333;}
+    .section{margin-top:1.1rem;}
+    .cta{display:inline-block;margin-top:1rem;padding:0.6rem 1.1rem;border-radius:8px;background:#0b5f8a;color:#fff;text-decoration:none;}
+    .case{background:#f8fff7;border-left:4px solid #b7f0c2;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    .workflow{background:#fff7fb;border-left:4px solid #f0c2e0;padding:0.8rem;margin:0.8rem 0;border-radius:6px;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .faq{margin-top:1rem;background:#f3f7fb;padding:1rem;border-radius:8px;}
+    .muted{color:#6b7c89;font-size:0.95rem;}
+    table.sample {width:100%;border-collapse:collapse;margin-top:0.5rem;}
+    table.sample th, table.sample td {text-align:left;padding:0.4rem;border-bottom:1px solid #eee;font-size:0.95rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    .return-link{display:inline-block;margin-top:1rem;text-decoration:none;color:#0b5f8a;font-weight:600;}
+    .small-text-muted{color:#6b7280;font-size:.95rem;margin:0 0 0.5rem 0;}
+  </style>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <main class="container">
+    <article class="card" role="main" aria-labelledby="title">
+      <h1 id="title">Task Timer â€” Î¼ÎµÏ„ÏÎ®ÏƒÏ„Îµ Ï„Î¿Î½ Ï‡ÏÏŒÎ½Î¿ ÎºÎ±Î¹ ÎºÎ±Ï„Î±Î³ÏÎ¬ÏˆÏ„Îµ ÏƒÏ…Î½ÎµÎ´ÏÎ¯ÎµÏ‚</h1>
+
+      <!-- Author card -->
+      <div class="author" role="articleauthor" aria-label="Î£Ï…Î³Î³ÏÎ±Ï†Î­Î±Ï‚">
+        <img
+          src="/assets/images/authors/serge-shammas-200.jpg"
+          srcset="/assets/images/authors/serge-shammas-400.jpg 2x"
+          width="56" height="56"
+          alt="Serge Shammas â€” productivity writer and UX researcher"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='/assets/images/authors/avatar-placeholder.png';">
+        <div>
+          <div class="byline"><strong>Î‘Ï€ÏŒ Ï„Î¿Î½ Serge Shammas</strong> â€” ÏƒÏ…Î³Î³ÏÎ±Ï†Î­Î±Ï‚ Î³Î¹Î± Ï„Î·Î½ Ï€Î±ÏÎ±Î³Ï‰Î³Î¹ÎºÏŒÏ„Î·Ï„Î± & ÎµÏÎµÏ…Î½Î·Ï„Î®Ï‚ UX</div>
+          <div class="meta">Î”Î·Î¼Î¿ÏƒÎ¹ÎµÏÎ¸Î·ÎºÎµ: 2025-10-25 Â· Î¤ÎµÎ»ÎµÏ…Ï„Î±Î¯Î± ÎµÎ½Î·Î¼Î­ÏÏ‰ÏƒÎ·: 2025-11-10 Â· Î§ÏÏŒÎ½Î¿Ï‚ Î±Î½Î¬Î³Î½Ï‰ÏƒÎ·Ï‚: 7 Î»ÎµÏ€Ï„Î¬</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        ÎŸ Task Timer ÏƒÎ±Ï‚ Î²Î¿Î·Î¸Î¬ Î½Î± Î¼ÎµÏ„ÏÎ¬Ï„Îµ Ï„Î¿Î½ Ï€ÏÎ±Î³Î¼Î±Ï„Î¹ÎºÏŒ Ï‡ÏÏŒÎ½Î¿ Ï€Î¿Ï… Î±Ï†Î¹ÎµÏÏŽÎ½ÎµÏ„Îµ ÏƒÎµ ÎºÎ¬Î¸Îµ ÎµÏÎ³Î±ÏƒÎ¯Î±. Î§ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ Î±Ï…Ï„Î¬ Ï„Î± Î´ÎµÎ´Î¿Î¼Î­Î½Î± Î³Î¹Î± Ï€Î¹Î¿ ÏÎµÎ±Î»Î¹ÏƒÏ„Î¹ÎºÎ­Ï‚ ÎµÎºÏ„Î¹Î¼Î®ÏƒÎµÎ¹Ï‚, Ï€Î±ÏÎ±ÎºÎ¿Î»Î¿ÏÎ¸Î·ÏƒÎ· Ï†ÏŒÏÏ„Î¿Ï… ÎµÏÎ³Î±ÏƒÎ¯Î±Ï‚ Î® ÎµÎ¾Î±Î³Ï‰Î³Î® Î³Î¹Î± Ï„Î¹Î¼Î¿Î»ÏŒÎ³Î·ÏƒÎ·.
+      </p>
+
+      <!-- Table of contents -->
+      <nav class="toc" aria-label="Î Î¯Î½Î±ÎºÎ±Ï‚ Ï€ÎµÏÎ¹ÎµÏ‡Î¿Î¼Î­Î½Ï‰Î½" style="margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;">
+        <a href="#setup" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Î•Î³ÎºÎ±Ï„Î¬ÏƒÏ„Î±ÏƒÎ·</a>
+        <a href="#howto" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Î ÏŽÏ‚ Î½Î± ÎºÎ±Ï„Î±Î³ÏÎ¬ÏˆÎµÏ„Îµ</a>
+        <a href="#analysis" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Î•Î¾Î±Î³Ï‰Î³Î® & Î±Î½Î¬Î»Ï…ÏƒÎ·</a>
+        <a href="#download" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Î›Î®ÏˆÎ· CSV</a>
+        <a href="#case-studies" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">Î ÎµÏÎ¯Ï€Ï„Ï‰ÏƒÎµÎ¹Ï‚</a>
+        <a href="#faq" style="display:inline-block;margin-right:1rem;color:#0b5f8a;text-decoration:none;font-weight:600;">FAQ</a>
+      </nav>
+
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Î•Î³ÎºÎ±Ï„Î¬ÏƒÏ„Î±ÏƒÎ· & Î£Ï…Î¼Î²Î¬ÏƒÎµÎ¹Ï‚ Î¿Î½Î¿Î¼Î±Ï„Î¿Î´Î¿ÏƒÎ¯Î±Ï‚</h2>
+        <p>Î§ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ ÏƒÎ±Ï†Î® Î¿Î½ÏŒÎ¼Î±Ï„Î± ÎµÏÎ³Î±ÏƒÎ¹ÏŽÎ½ ÎºÎ±Î¹ ÏƒÏ…Î¼Ï€ÎµÏÎ¹Î»Î¬Î²ÎµÏ„Îµ ÏƒÏÎ½Ï„Î¿Î¼Î· ÎµÎºÏ„Î¹Î¼ÏŽÎ¼ÎµÎ½Î· Î´Î¹Î¬ÏÎºÎµÎ¹Î± ÏƒÎµ Ï€Î±ÏÎ­Î½Î¸ÎµÏƒÎ· (Ï€.Ï‡. <em>Î“ÏÎ¬ÏˆÎ¹Î¼Î¿ unit tests (45m)</em>). Î ÏÎ¿ÏƒÎ¸Î­ÏƒÏ„Îµ tags Î³Î¹Î± Ï„Î¿ Î­ÏÎ³Î¿ ÎºÎ±Î¹ Ï„Î¿Î½ Ï„ÏÏ€Î¿. Î‘Ï…Ï„Î® Î· ÏƒÏ…Î½Î­Ï€ÎµÎ¹Î± Î´Î¹ÎµÏ…ÎºÎ¿Î»ÏÎ½ÎµÎ¹ Ï„Î·Î½ Î±Î½Î¬Î»Ï…ÏƒÎ· Ï„Ï‰Î½ ÎµÎ¾Î±Î³ÏŒÎ¼ÎµÎ½Ï‰Î½ CSV â€” Ï€ÏÎ¿Ï„Î¹Î¼Î®ÏƒÏ„Îµ ÏƒÏÎ½Ï„Î¿Î¼Î±, ÏƒÏ„Î±Î¸ÎµÏÎ¬ tags (client-alpha, meeting, review).</p>
+      </section>
+
+      <section id="howto" class="section" aria-labelledby="howto-title">
+        <h2 id="howto-title">Î ÏŽÏ‚ Î½Î± ÎºÎ±Ï„Î±Î³ÏÎ¬ÏˆÎµÏ„Îµ Î¼Î¯Î± ÏƒÏ…Î½ÎµÎ´ÏÎ¯Î±</h2>
+
+        <div class="workflow">
+          <strong>ÎšÎ±Ï„Î±Î³ÏÎ±Ï†Î®</strong>
+          <ol>
+            <li>Î”Î·Î¼Î¹Î¿Ï…ÏÎ³Î®ÏƒÏ„Îµ Ï„Î·Î½ ÎµÎ³Î³ÏÎ±Ï†Î® ÎµÏÎ³Î±ÏƒÎ¯Î±Ï‚ Î¼Îµ ÎµÎºÏ„Î¹Î¼ÏŽÎ¼ÎµÎ½Î· Î´Î¹Î¬ÏÎºÎµÎ¹Î± ÎºÎ±Î¹ tags.</li>
+            <li>ÎžÎµÎºÎ¹Î½Î®ÏƒÏ„Îµ Ï„Î¿Î½ Task Timer ÏŒÏ„Î±Î½ Î±ÏÏ‡Î¯ÏƒÎµÏ„Îµ ÎºÎ±Î¹ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÏ„Îµ Ï„Ï…Ï‡ÏŒÎ½ Î´Î¹Î±ÎºÎ¿Ï€Î­Ï‚ ÏƒÏ„Î¿ Ï€ÎµÎ´Î¯Î¿ ÏƒÎ·Î¼ÎµÎ¹ÏŽÏƒÎµÏ‰Î½.</li>
+            <li>Î£Ï„Î±Î¼Î±Ï„Î®ÏƒÏ„Îµ Ï„Î¿Î½ Ï‡ÏÎ¿Î½Î¿Î´Î¹Î±ÎºÏŒÏ€Ï„Î· ÏƒÏ„Î¿ Ï„Î­Î»Î¿Ï‚ ÎºÎ±Î¹ Ï€ÏÎ¿ÏƒÎ¸Î­ÏƒÏ„Îµ Î¼Î¹Î± ÏƒÏÎ½Ï„Î¿Î¼Î· Ï€ÎµÏÎ¯Î»Î·ÏˆÎ· Ï„Î·Ï‚ ÎµÏÎ³Î±ÏƒÎ¯Î±Ï‚.</li>
+          </ol>
+        </div>
+
+        <!-- Example card: Download sample CSV -->
+        <section id="export-demo-inline" class="section export-demo mt-3" aria-labelledby="export-demo-inline-title">
+          <h3 id="export-demo-inline-title" class="h5">Î Î±ÏÎ¬Î´ÎµÎ¹Î³Î¼Î±: ÎµÎ³Î³ÏÎ±Ï†Î® Task Timer Î¼Îµ ÎµÎ¾Î±Î³Ï‰Î³Î®</h3>
+
+          <p class="small-text-muted">Î›Î®ÏˆÎ· Î´ÎµÎ¯Î³Î¼Î±Ï„Î¿Ï‚ CSV</p>
+
+          <div class="card" style="padding:1rem;max-width:740px;background:#fbfdff;border:1px solid #eef5fb;border-radius:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div style="min-width:0;display:flex;gap:0.75rem;align-items:center;flex:1;">
+                <div style="flex:0 0 auto;">
+                  <span style="display:inline-block;width:44px;height:44px;border-radius:6px;background:#fff;border:1px solid #e6eef8;text-align:center;line-height:44px;color:#0d6efd;font-weight:700;">TT</span>
+                </div>
+                <div style="min-width:0;">
+                  <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:nowrap;">
+                    <strong id="demoSessionName" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Î“ÏÎ¬ÏˆÎ¹Î¼Î¿ Î±Î½Î±Ï†Î¿ÏÎ¬Ï‚</strong>
+                    <small id="demoSessionTags" class="muted" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">ÎµÏÎ³Î±ÏƒÎ¯Î±, projectX</small>
+                  </div>
+                  <div style="margin-top:.25rem;color:#475569;font-size:.95rem;">
+                    <span id="demoSessionTimer" style="font-weight:600;">25:00</span>
+                    <span class="muted" style="margin-left:.5rem;font-size:.9rem;">(Ï€Î±ÏÎ¬Î´ÎµÎ¹Î³Î¼Î±)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="flex:0 0 auto;display:flex;gap:.5rem;align-items:center;">
+                <button id="exportDemoBtnInline" class="cta" aria-label="Î›Î®ÏˆÎ· Î´ÎµÎ¯Î³Î¼Î±Ï„Î¿Ï‚ CSV" style="background:#fff;color:#0b5f8a;border:1px solid #cfe8f5;padding:0.4rem 0.8rem;border-radius:6px;">
+                  <!-- inline SVG download icon -->
+                  <svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:.35rem;vertical-align:middle" aria-hidden="true" focusable="false">
+                    <path fill="#0d6efd" d="M5 20h14v-2H5v2zm7-18L5.33 9h3.84v4h4.66V9h3.84L12 2z"></path>
+                  </svg>
+                  Î›Î®ÏˆÎ· Î´ÎµÎ¯Î³Î¼Î±Ï„Î¿Ï‚ CSV
+                </button>
+              </div>
+            </div>
+
+            <p class="mt-2 mb-0" style="font-size:.9rem;color:#6b7280;">
+              ÎšÎ¬Î½Ï„Îµ ÎºÎ»Î¹Îº ÏƒÏ„Î¿ ÎºÎ¿Ï…Î¼Ï€Î¯ Ï€Î±ÏÎ±Ï€Î¬Î½Ï‰ Î³Î¹Î± Î½Î± ÎºÎ±Ï„ÎµÎ²Î¬ÏƒÎµÏ„Îµ Î­Î½Î± Ï€ÏÎ¿ÎµÏ„Î¿Î¹Î¼Î±ÏƒÎ¼Î­Î½Î¿ Î±ÏÏ‡ÎµÎ¯Î¿ CSV Î¼Îµ Ï€Î±ÏÎ¬Î´ÎµÎ¹Î³Î¼Î±. Î“Î¹Î± Î½Î± ÎµÎ¾Î¬Î³ÎµÏ„Îµ Ï„Î± Ï€ÏÎ±Î³Î¼Î±Ï„Î¹ÎºÎ¬ Î´ÎµÎ´Î¿Î¼Î­Î½Î± Ï„Î·Ï‚ ÏƒÏ…Î½ÎµÎ´ÏÎ¯Î±Ï‚ ÏƒÎ±Ï‚, Ï‡ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ Ï„Î·Î½ ÎµÎ½Ï„Î¿Î»Î® Î•Î¾Î±Î³Ï‰Î³Î® ÏƒÏ„Î¿ ÎµÏÎ³Î±Î»ÎµÎ¯Î¿ Task Timer.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section id="analysis" class="section" aria-labelledby="analysis-title">
+        <h2 id="analysis-title">Î•Î¾Î±Î³Ï‰Î³Î® & Î‘Î½Î¬Î»Ï…ÏƒÎ·</h2>
+        <p>Î•Î¾Î¬Î³ÎµÏ„Îµ ÎµÎ²Î´Î¿Î¼Î±Î´Î¹Î±Î¯Î± CSV ÎºÎ±Î¹ Ï…Ï€Î¿Î»Î¿Î³Î¯ÏƒÏ„Îµ Î¼Î­ÏƒÎ¿Ï…Ï‚ ÏŒÏÎ¿Ï…Ï‚ Î±Î½Î¬ tag Î® Î­ÏÎ³Î¿. Î’Î±ÏƒÎ¹ÎºÎ¿Î¯ Î´ÎµÎ¯ÎºÏ„ÎµÏ‚: Î¼Î­ÏƒÎ¿Ï‚ Ï‡ÏÏŒÎ½Î¿Ï‚ Î±Î½Î¬ ÎµÏÎ³Î±ÏƒÎ¯Î±, Î´Î¹Î¬Î¼ÎµÏƒÎ¿Ï‚ (Î»Î¹Î³ÏŒÏ„ÎµÏÎ¿ ÎµÏ…Î±Î¯ÏƒÎ¸Î·Ï„Î¿Ï‚ ÏƒÎµ Î±ÎºÏÎ±Î¯ÎµÏ‚ Ï„Î¹Î¼Î­Ï‚) ÎºÎ±Î¹ Ï€Î¿ÏƒÎ¿ÏƒÏ„ÏŒ Î´Î¹Î±ÎºÎ¿Ï€ÏŽÎ½ (% Ï„Ï‰Î½ ÏƒÏ…Î½ÎµÎ´ÏÎ¹ÏŽÎ½ Î¼Îµ Î´Î¹Î±ÎºÎ¿Ï€Î­Ï‚).</p>
+
+        <div class="workflow">
+          <strong>Î£Ï…Î½Ï„Î±Î³Î® â€” ÎµÎ²Î´Î¿Î¼Î±Î´Î¹Î±Î¯Î± Î±Î½Î±ÏƒÎºÏŒÏ€Î·ÏƒÎ·</strong>
+          <ol>
+            <li>Î•Î¾Î¬Î³ÎµÏ„Îµ Ï„Î¹Ï‚ ÏƒÏ…Î½ÎµÎ´ÏÎ¯ÎµÏ‚ Ï„Î·Ï‚ ÎµÎ²Î´Î¿Î¼Î¬Î´Î±Ï‚ ÏƒÎµ CSV.</li>
+            <li>Î£Îµ Î­Î½Î± Î»Î¿Î³Î¹ÏƒÏ„Î¹ÎºÏŒ Ï†ÏÎ»Î»Î¿, Ï…Ï€Î¿Î»Î¿Î³Î¯ÏƒÏ„Îµ Î¼Î­ÏƒÎ¿Ï…Ï‚ ÏŒÏÎ¿Ï…Ï‚ Î±Î½Î¬ tag ÎºÎ±Î¹ Ï„Î±Î¾Î¹Î½Î¿Î¼Î®ÏƒÏ„Îµ Ï„Î¹Ï‚ Î¼ÎµÎ³Î±Î»ÏÏ„ÎµÏÎµÏ‚ ÎµÏÎ³Î±ÏƒÎ¯ÎµÏ‚ Î³Î¹Î± Î½Î± Î²ÎµÎ»Ï„Î¹ÏŽÏƒÎµÏ„Îµ Ï„Î¹Ï‚ ÎµÎºÏ„Î¹Î¼Î®ÏƒÎµÎ¹Ï‚.</li>
+            <li>Î§ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ Ï„Î± ÎµÏ…ÏÎ®Î¼Î±Ï„Î± Î³Î¹Î± Î½Î± Ï€ÏÎ¿ÏƒÎ±ÏÎ¼ÏŒÏƒÎµÏ„Îµ Î¼Ï€Î»Î¿Îº Pomodoro ÎºÎ±Î¹ Ï„Î¿Î½ Î·Î¼ÎµÏÎ¿Î»Î¿Î³Î¹Î±ÎºÏŒ ÏƒÏ‡ÎµÎ´Î¹Î±ÏƒÎ¼ÏŒ.</li>
+          </ol>
+        </div>
+
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">Î Î±ÏÎ¬Î´ÎµÎ¹Î³Î¼Î± â€” Ï„ÏÏ€Î¿Î¹ & ÎµÏÎ¼Î·Î½ÎµÎ¯Î±</h3>
+          <p>Î‘Ï‚ Ï…Ï€Î¿Î¸Î­ÏƒÎ¿Ï…Î¼Îµ ÏŒÏ„Î¹ Ï„Î¿ export ÏƒÎ±Ï‚ Ï€ÎµÏÎ¹Î­Ï‡ÎµÎ¹ ÏƒÏ„Î®Î»Î· <code>actual_minutes</code> ÎºÎ±Î¹ ÏƒÏ„Î®Î»Î· <code>interruptions</code> Î¼Îµ Ï„Î¿Î½ Î±ÏÎ¹Î¸Î¼ÏŒ Î´Î¹Î±ÎºÎ¿Ï€ÏŽÎ½ Î±Î½Î¬ ÏƒÏ…Î½ÎµÎ´ÏÎ¯Î±.</p>
+          <ul>
+            <li>ÎœÎ­ÏƒÎ¿Ï‚ ÏŒÏÎ¿Ï‚ Î³Î¹Î± tag "project-alpha": =AVERAGEIF(tag_range,"project-alpha",actual_minutes_range)</li>
+            <li>Î”Î¹Î¬Î¼ÎµÏƒÎ¿Ï‚ (Î»Î¹Î³ÏŒÏ„ÎµÏÎ¿ ÎµÏ…Î±Î¯ÏƒÎ¸Î·Ï„Î· ÏƒÎµ outliers): =MEDIAN(IF(tag_range="project-alpha",actual_minutes_range)) â€” Ï‰Ï‚ array formula Î±Î½ Ï‡ÏÎµÎ¹Î¬Î¶ÎµÏ„Î±Î¹.</li>
+            <li>Î Î¿ÏƒÎ¿ÏƒÏ„ÏŒ Î´Î¹Î±ÎºÎ¿Ï€ÏŽÎ½: =COUNTIFS(tag_range,"project-alpha",interruptions_range,">0") / COUNTIF(tag_range,"project-alpha")</li>
+          </ul>
+
+          <p>Î Î±ÏÎ¬Î´ÎµÎ¹Î³Î¼Î± ÏƒÏ…Î½ÎµÎ´ÏÎ¹ÏŽÎ½ (Î³Î¹Î± ÎµÏ€Î¯Î´ÎµÎ¹Î¾Î·):</p>
+          <table class="sample" aria-hidden="false">
+            <thead><tr><th>Î—Î¼ÎµÏÎ¿Î¼Î·Î½Î¯Î±</th><th>Î•ÏÎ³Î±ÏƒÎ¯Î±</th><th>Î¡ÎµÎ±Î» (Î»ÎµÏ€Ï„Î¬)</th><th>Î”Î¹Î±ÎºÎ¿Ï€Î­Ï‚</th></tr></thead>
+            <tbody>
+              <tr><td>2025-11-03</td><td>Code review</td><td>60</td><td>1</td></tr>
+              <tr><td>2025-11-04</td><td>Feature X</td><td>120</td><td>0</td></tr>
+              <tr><td>2025-11-06</td><td>Bugfix</td><td>45</td><td>1</td></tr>
+            </tbody>
+          </table>
+
+          <p class="muted">Î Î±ÏÎ¬Î´ÎµÎ¹Î³Î¼Î±: Î¼Î­ÏƒÎ¿Ï‚ = (60+120+45)/3 = 75 Î»ÎµÏ€Ï„Î¬ Â· Ï€Î¿ÏƒÎ¿ÏƒÏ„ÏŒ Î´Î¹Î±ÎºÎ¿Ï€ÏŽÎ½ = 2/3 = 66,7%.</p>
+        </div>
+      </section>
+
+      <section id="download" class="section" aria-labelledby="download-title">
+        <h2 id="download-title">Î›Î®ÏˆÎ· â€” Î ÏÏŒÏ„Ï…Ï€Î¿ CSV Ï„Î¿Ï… Task Timer</h2>
+        <p class="muted">Î§ÏÎ·ÏƒÎ¹Î¼Î¿Ï€Î¿Î¹Î®ÏƒÏ„Îµ Î±Ï…Ï„ÏŒ Ï„Î¿ CSV Î³Î¹Î± Î½Î± ÎºÎ±Ï„Î±Ï‡Ï‰ÏÎ®ÏƒÎµÏ„Îµ Ï‡ÎµÎ¹ÏÎ¿ÎºÎ¯Î½Î·Ï„Î± ÏƒÏ…Î½ÎµÎ´ÏÎ¯ÎµÏ‚ Î® Î³Î¹Î± Î´Î¿ÎºÎ¹Î¼Î­Ï‚ ÎµÎ¹ÏƒÎ±Î³Ï‰Î³Î®Ï‚.</p>
+        <p><a href="#" id="downloadCsv" class="cta" aria-label="Î›Î®ÏˆÎ· Ï€ÏÎ¿Ï„ÏÏ€Î¿Ï… CSV">Î›Î®ÏˆÎ· Ï€ÏÎ¿Ï„ÏÏ€Î¿Ï… CSV</a></p>
+        <pre class="template" id="csvTemplate" aria-hidden="true">task_name,start_iso,end_iso,duration_minutes,note
+ClientA_ProjectX_Design,2025-01-02T08:30:00Z,2025-01-02T10:00:00Z,90,Î ÏÏŽÏ„Î¿ concept</pre>
+
+        <script>
+          // Template download (localized filename)
+          document.getElementById('downloadCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('csvTemplate').textContent;
+            var blob = new Blob([text], {type:'text/csv;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'task-timer-template-el.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+
+      <section id="case-studies" class="section" aria-labelledby="case-studies-title">
+        <h2 id="case-studies-title">Î ÎµÏÎ¯Ï€Ï„Ï‰ÏƒÎµÎ¹Ï‚ & Î£Ï…Î¼Î²Î¿Ï…Î»Î­Ï‚</h2>
+        <div class="case">
+          <strong>Consultant â€” Paolo</strong>
+          <p>ÎœÎµÏ„Î¬ Î±Ï€ÏŒ 2 ÎµÎ²Î´Î¿Î¼Î¬Î´ÎµÏ‚, Î¿ Paolo Î´Î¹Î±Ï€Î¯ÏƒÏ„Ï‰ÏƒÎµ ÏŒÏ„Î¹ Ï„Î¿ code review ÎºÎ±Ï„Î±Î»Î¬Î¼Î²Î±Î½Îµ Ï„Î¿ 20% Ï„Î·Ï‚ Î·Î¼Î­ÏÎ±Ï‚ Ï„Î¿Ï…. ÎˆÎºÎ»ÎµÎ¹ÏƒÎµ Î±Ï†Î¹ÎµÏÏ‰Î¼Î­Î½Î± Ï€Î±ÏÎ¬Î¸Ï…ÏÎ± ÎºÎ±Î¹ Î¼ÎµÎ¯Ï‰ÏƒÎµ Ï„Î¿ fragmentation.</p>
+        </div>
+        <div class="case">
+          <strong>Consultant â€” Rina</strong>
+          <p>Î— Rina ÎºÎ±Ï„Î­Î³ÏÎ±Ï†Îµ ÎºÎ»Î®ÏƒÎµÎ¹Ï‚ Ï‰Ï‚ Î´Î¹Î±ÎºÎ¿Ï€Î­Ï‚ â€” Ï„ÏŽÏÎ± Ï€ÏÎ¿Î³ÏÎ±Î¼Î¼Î±Ï„Î¯Î¶ÎµÎ¹ buffers ÎºÎ±Î¹ Ï€ÏÎ¿ÏƒÎ±ÏÎ¼ÏŒÎ¶ÎµÎ¹ Ï„Î¿Î½ Ï‡ÏÏŒÎ½Î¿ Î³Î¹Î± ÏƒÏ…Î½Î±Î½Ï„Î®ÏƒÎµÎ¹Ï‚.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="faq">
+          <p><strong>Î•: ÎœÏ€Î¿ÏÏŽ Î½Î± Î±Î»Î»Î¬Î¾Ï‰ Ï„Î· Î¼Î¿Î½Î¬Î´Î± ÎµÎ¼Ï†Î¬Î½Î¹ÏƒÎ·Ï‚;</strong><br>
+          <strong>Î‘:</strong> Î— ÎºÏÏÎ¹Î± Ï€ÏÎ¿Î²Î¿Î»Î® Î´ÎµÎ¯Ï‡Î½ÎµÎ¹ Î»ÎµÏ€Ï„Î¬. Î“Î¹Î± Î±Î½Î±Ï†Î¿ÏÎ­Ï‚ ÏƒÎµ ÏŽÏÎµÏ‚ ÎµÎ¾Î¬Î³ÎµÏ„Îµ ÏƒÎµ CSV ÎºÎ±Î¹ Î±Î¸ÏÎ¿Î¯ÏƒÏ„Îµ ÏƒÎµ Ï†ÏÎ»Î»Î¿ ÎµÏÎ³Î±ÏƒÎ¯Î±Ï‚.</p>
+
+          <p><strong>Î•: Î¤Î¹ ÎºÎ¬Î½Ï‰ Î±Î½ Î¿ browser Î±Î½Î±ÏƒÏ„Î­Î»Î»ÎµÎ¹ Ï„Î·Î½ ÎºÎ±ÏÏ„Î­Î»Î±;</strong><br>
+          <strong>Î‘:</strong> ÎŸÏÎ¹ÏƒÎ¼Î­Î½Î¿Î¹ browsers Ï€ÎµÏÎ¹Î¿ÏÎ¯Î¶Î¿Ï…Î½ Î±Î´ÏÎ±Î½Î­Ï‚ Ï€ÎµÏÎ¹ÎµÏ‡ÏŒÎ¼ÎµÎ½Î¿. ÎšÏÎ±Ï„Î®ÏƒÏ„Îµ Ï„Î¿Î½ Task Timer ÏƒÎµ ÎµÎ½ÎµÏÎ³ÏŒ ÎºÎ±ÏÏ„Î­Î»Î± Î® ÎºÎ±Ï„Î±Î³ÏÎ¬ÏˆÏ„Îµ Ï‡ÎµÎ¹ÏÎ¿ÎºÎ¯Î½Î·Ï„Î± ÏŽÏÎµÏ‚.</p>
+
+          <p><strong>Î•: Î‘Ï€Î¿Î¸Î·ÎºÎµÏÎ¿Î½Ï„Î±Î¹ Ï„Î± Î´ÎµÎ´Î¿Î¼Î­Î½Î± Î¼Î¿Ï… ÏƒÏ„Î¿Î½ server;</strong><br>
+          <strong>Î‘:</strong> Î‘Ï€ÏŒ Ï€ÏÎ¿ÎµÏ€Î¹Î»Î¿Î³Î® Ï„Î± Î´ÎµÎ´Î¿Î¼Î­Î½Î± ÎµÎ¯Î½Î±Î¹ Ï„Î¿Ï€Î¹ÎºÎ¬ (localStorage). Î”ÎµÎ½ Î±Ï€Î¿ÏƒÏ„Î­Î»Î»Î¿Î½Ï„Î±Î¹ ÏƒÎµ ÎµÎ¾Ï‰Ï„ÎµÏÎ¹ÎºÎ¿ÏÏ‚ servers ÎµÎºÏ„ÏŒÏ‚ Î±Î½ Ï„Î± ÎµÎ¾Î¬Î³ÎµÏ„Îµ ÎºÎ±Î¹ Ï„Î± Î±Î½ÎµÎ²Î¬ÏƒÎµÏ„Îµ ÎµÏƒÎµÎ¯Ï‚.</p>
+        </div>
+      </section>
+
+      <section id="resources" class="section" aria-labelledby="resources-title">
+        <h2 id="resources-title">Î ÏŒÏÎ¿Î¹</h2>
+        <ul class="muted">
+          <li><a href="https://support.google.com/docs/answer/3093281" target="_blank" rel="noopener noreferrer">Google Sheets â€” pivot tables & ÏƒÏ…Î½Î±ÏÏ„Î®ÏƒÎµÎ¹Ï‚ (Î¿Î´Î·Î³ÏŒÏ‚)</a></li>
+        </ul>
+      </section>
+
+      <p class="muted" style="margin-top:1rem;">Î£Ï‡ÎµÏ„Î¹ÎºÎ¬ ÎµÏÎ³Î±Î»ÎµÎ¯Î±: <a href="/el/notes/">Î£Î·Î¼ÎµÎ¹ÏŽÏƒÎµÎ¹Ï‚</a> Â· <a href="/el/pomodoro-timer/">Pomodoro</a> Â· <a href="/el/calendar-planning/">Î—Î¼ÎµÏÎ¿Î»ÏŒÎ³Î¹Î¿</a></p>
+
+      <!-- Open the localized timer tool -->
+      <p style="margin-top:1.2rem;"><a href="/timer-el.html#startBtn" class="cta" aria-label="Î†Î½Î¿Î¹Î³Î¼Î± Task Timer" rel="help">Î†Î½Î¿Î¹Î³Î¼Î± Task Timer</a></p>
+
+      <!-- Return link -->
+      <p class="return-link"><a href="/timer-el.html#startBtn" rel="up" aria-label="Î•Ï€Î¹ÏƒÏ„ÏÎ¿Ï†Î® ÏƒÏ„Î¿Î½ Task Timer">Î•Ï€Î¹ÏƒÏ„ÏÎ¿Ï†Î® ÏƒÏ„Î¿Î½ Task Timer</a></p>
+
+      <footer style="margin-top:1.2rem;color:#6b7c89;font-size:0.95rem;">
+        <p>Î£Ï‡ÏŒÎ»Î¹Î± Î® Ï€ÏÎ¿Î²Î»Î®Î¼Î±Ï„Î±; Î£Ï„ÎµÎ¯Î»Ï„Îµ email ÏƒÏ„Î¿ <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>.</p>
+      </footer>
+    </article>
+  </main>
+
+  <!-- Demo export script (stable sample filename) -->
+  <script>
+  (function(){
+    function escapeCsv(v){
+      if (v === null || v === undefined) return '';
+      return '"' + String(v).replace(/"/g,'""') + '"';
+    }
+
+    function downloadCsv(filename, content){
+      var blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function buildDemoSession(){
+      var now = new Date();
+      var start = new Date(now.getTime() - (25*60*1000)); // 25 minutes earlier
+      var task = (document.getElementById('demoSessionName') && document.getElementById('demoSessionName').textContent) || 'Î“ÏÎ¬ÏˆÎ¹Î¼Î¿ Î±Î½Î±Ï†Î¿ÏÎ¬Ï‚';
+      var tagsText = (document.getElementById('demoSessionTags') && document.getElementById('demoSessionTags').textContent) || '';
+      var tags = tagsText.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+      return {
+        id: 'demo-' + Math.floor(Math.random()*900000+100000),
+        task_name: task.trim(),
+        tags: tags,
+        start_time: start.toISOString(),
+        end_time: now.toISOString(),
+        duration_seconds: 25*60,
+        duration_human: '25:00',
+        notes: 'Î”ÎµÎ¯Î³Î¼Î± ÎµÎ¾Î±Î³Ï‰Î³Î®Ï‚ Î±Ï€ÏŒ Ï„Î¿Î½ Î¿Î´Î·Î³ÏŒ',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+      };
+    }
+
+    function exportSessionAsCsv(session){
+      var header = ['id','task_name','tags','start_time','end_time','duration_seconds','duration_human','notes','timezone'];
+      var row = [
+        session.id || '',
+        session.task_name || '',
+        (session.tags || []).join(';'),
+        session.start_time || '',
+        session.end_time || '',
+        session.duration_seconds != null ? session.duration_seconds : '',
+        session.duration_human || '',
+        session.notes || '',
+        session.timezone || ''
+      ];
+      var csv = header.map(escapeCsv).join(',') + '\n' + row.map(escapeCsv).join(',') + '\n';
+      // Stable sample filename
+      var filename = 'tasktimer-sample.csv';
+      downloadCsv(filename, csv);
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      var btn = document.getElementById('exportDemoBtnInline');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        try {
+          var session = buildDemoSession();
+          exportSessionAsCsv(session);
+          var orig = btn.innerHTML;
+          btn.innerHTML = 'Î›Î®Ï†Î¸Î·ÎºÎµ';
+          btn.disabled = true;
+          setTimeout(function(){ btn.innerHTML = orig; btn.disabled = false; }, 1200);
+        } catch (e) {
+          console.error('Export error', e);
+          alert('Î£Ï†Î¬Î»Î¼Î± ÎµÎ¾Î±Î³Ï‰Î³Î®Ï‚ â€” Î´ÎµÎ¯Ï„Îµ Ï„Î·Î½ ÎºÎ¿Î½ÏƒÏŒÎ»Î± Î³Î¹Î± Î»ÎµÏ€Ï„Î¿Î¼Î­ÏÎµÎ¹ÎµÏ‚.');
+        }
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
+
