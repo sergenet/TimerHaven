@@ -1,257 +1,863 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Clima Global</title>
-<meta content="Consulta el clima de ciudades del mundo al instante." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
-    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-    .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
-    .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
 
-    /* Hide the visible language selector while leaving markup and JS intact */
-    .top-row { display: none !important; }
-
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); padding:1.3rem; }
-    .article-card { width:330px; min-width:200px; min-height:340px; height:340px; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; }
-    .tool-card { width:410px; min-width:240px; min-height:330px; display:flex; flex-direction:column; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
-    .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
-    .weather-form-row { display:flex; gap:.5rem; margin-bottom:1rem; align-items:center; flex-wrap:wrap; }
-    .weather-result { margin-top:1rem; background:#f7fafc; border-radius:7px; padding:1rem; font-size:1.15em; min-height:48px; }
-    .powered-by { margin-top:0.5rem; font-size:0.9em; color:#6b7280; display:flex; align-items:center; gap:.4rem; }
-    .powered-by a { text-decoration:none; color:inherit; font-weight:600; }
-    .powered-by .provider { font-size:0.9em; color:#6b7280; opacity:0.95; }
-
-    .action-row { display:flex; gap:.7rem; flex-wrap:wrap; }
-    #getWeatherBtn { width:175px; height:42px; font-size:1.07em; background:#157af6; color:#fff; border:none; border-radius:8px; font-weight:600; box-shadow:0 2px 8px #e0e7ef; cursor:pointer; }
-    #useLocationBtn { background:#444; color:#fff; border-radius:8px; font-size:1.07em; font-weight:600; border:none; padding:0.4em 1.1em; width:175px; height:42px; display:inline-flex; align-items:center; gap:.4em; cursor:pointer; }
-    @media (max-width:750px) { #getWeatherBtn,#useLocationBtn{width:100%;} .weather-form-row{flex-direction:column;align-items:stretch;} .action-row{flex-direction:column;} }
-    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-
-    /* Strong rule: remove underlines for links in article-card lists and do NOT add underline on hover */
-    .article-card a,
-    .article-card ul a,
-    .article-card ol a,
-    .article-card li a,
-    .article-card ul li a,
-    .article-card ol li a {
-      text-decoration: none !important;
-      color: inherit !important;
-    }
-    .article-card a:hover,
-    .article-card ul a:hover,
-    .article-card ol a:hover,
-    .article-card li a:hover,
-    .article-card ul li a:hover,
-    .article-card ol li a:hover {
-      text-decoration: none !important;
-      color: inherit !important;
-    }
-
-    /* FAQ summary styling so the summary text/icon is visible and sits next to the arrow */
-    .faq-section summary { cursor:pointer; font-weight:700; font-size:1rem; display:flex; align-items:center; gap:.5rem; }
-    .faq-section summary .fa { color:#185a9d; }
-
-  </style>
-</head>
-<body>
-<div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-<select aria-label="Language selector" class="language-select" id="language-select-top">
-<option value="en">English</option><option value="fr">Français</option><option selected="" value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option value="ar">العربية</option>
-</select>
-</div>
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">Clima Global</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">Consulta el clima de ciudades del mundo al instante.</p>
-</div>
-<div class="center-row">
-
-<div aria-label="Global Weather" class="tool-card" role="region">
-<a class="back-link" href="index.html">← Volver al menú principal</a>
-<!-- Middle visible title intentionally removed to keep the card minimal per request -->
-<form autocomplete="off" id="weatherForm">
-<div class="weather-form-row">
-<select class="form-select" id="cityDropdown" style="min-width:140px;" title="Seleccione ciudad...">
-<option value="">Seleccione ciudad...</option>
-<option value="New York">Nueva York</option>
-<option value="London">Londres</option>
-<option value="Paris">París</option>
-<option value="Berlin">Berlín</option>
-<option value="Tokyo">Tokio</option>
-<option value="Sydney">Sídney</option>
-<option value="São Paulo">São Paulo</option>
-<option value="Moscow">Moscú</option>
-<option value="Dubai">Dubái</option>
-<option value="Istanbul">Estambul</option>
-<option value="Johannesburg">Johannesburgo</option>
-<option value="Toronto">Toronto</option>
-<option value="Mexico City">Ciudad de México</option>
-<option value="Los Angeles">Los Ángeles</option>
-<option value="Mumbai">Mumbai</option>
-<option value="Cairo">El Cairo</option>
-<option value="Singapore">Singapur</option>
-<option value="Hong Kong">Hong Kong</option>
-<option value="Bangkok">Bangkok</option>
-<option value="Seoul">Seúl</option>
-<option value="San Francisco">San Francisco</option>
-<option value="Rome">Roma</option>
-<option value="Kolkata">Kolkata</option>
-<option value="Jakarta">Yakarta</option>
-<option value="Madrid">Madrid</option>
-<option value="Cape Town">Ciudad del Cabo</option>
-<option value="Lagos">Lagos</option>
-<option value="Melbourne">Melbourne</option>
-<option value="Beijing">Pekín</option>
-<option value="Chicago">Chicago</option>
-<option value="Vancouver">Vancouver</option>
-<option value="Auckland">Auckland</option>
-<option value="Hanoi">Hanói</option>
-<option value="Manila">Manila</option>
-<option value="Warsaw">Varsovia</option>
-</select>
-<input class="form-control" id="cityInput" placeholder="O introduzca la ciudad..." style="min-width:160px;" title="O introduzca la ciudad..." type="text"/>
-</div>
-<div class="action-row">
-<button id="getWeatherBtn" type="submit">Obtener clima</button>
-<button id="useLocationBtn" type="button"><i class="fa fa-location-arrow"></i> Usar mi ubicación</button>
-</div>
-</form>
-<div class="weather-result" id="weatherResult"></div>
-<!-- powered-by: show provider link and a small provider label -->
-<div class="powered-by">Datos de <a href="https://open-meteo.com" rel="noopener" target="_blank">Open‑Meteo</a><span class="provider"></span></div>
-<!-- FAQ: summary visible with icon and label "Preguntas frecuentes" -->
-<details class="faq-section" style="margin-top:1rem;">
-<summary><i class="fa fa-play"></i> Preguntas frecuentes</summary>
-<ul style="padding-left:1.1rem; color:#374151;">
-<li><b>¿Qué tan precisa es la información?</b> Los datos provienen de APIs como Open‑Meteo.</li>
-<li><b>¿Puedo usar mi ubicación?</b> Sí, haga clic en <b>Usar mi ubicación</b>.</li>
-<li><b>¿Puedo escribir cualquier ciudad?</b> ¡Sí! Escriba la ciudad en el campo.</li>
-</ul>
-</details>
-</div>
-
-</div>
-<footer class="site">
-      © 2025 TimerHaven. <a href="privacy.html">Política</a>
-</footer>
-</div>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
 <script>
-  // localized JS strings
-  const MSG_PLEASE_SELECT = "Por favor seleccione o escriba una ciudad.";
-  const MSG_GEO_UNSUPPORTED = "Geolocalización no soportada.";
-  const MSG_UNABLE_LOCATION = "No se pudo obtener su ubicación.";
-  const MSG_FETCH_ERROR = "Error al obtener datos meteorológicos.";
-  const MSG_NOT_FOUND_TEMPLATE = "No se encontró el clima para \"{city}\".";
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  function renderWeatherData(data) {
-    return `<b>${data.name}, ${data.sys.country}</b><br>
-            Weather: ${data.weather[0].description}<br>
-            Temperature: ${data.main.temp}&deg;C<br>
-            Humidity: ${data.main.humidity}%<br>
-            Wind: ${data.wind.speed} m/s`;
-  }
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-  function fetchWeather(city) {
-    const resultEl = document.getElementById('weatherResult');
-    if (!city) {
-      resultEl.innerHTML = '<span style="color:#b00;">' + MSG_PLEASE_SELECT + '</span>';
-      return;
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <title>Clima Global — TimerHaven</title>
+  <link rel="canonical" href="https://timerhaven.com/weather-es.html" />
+  
+  
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description" content="Consulta el clima de ciudades del mundo al instante.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #0d6efd;
+      --muted: #6b7c89
     }
-    fetch(`/weather?city=${encodeURIComponent(city)}`)
-      .then(r => r.json())
-      .then(data => {
-        if (data.cod !== 200 && data.error) {
-          resultEl.innerHTML = `<span style="color:#b00;">${data.error}</span>`;
-          return;
-        }
-        if (data.cod !== 200) {
-          resultEl.innerHTML = '<span style="color:#b00;">' + MSG_NOT_FOUND_TEMPLATE.replace('{city}', city) + '</span>';
-          return;
-        }
-        resultEl.innerHTML = renderWeatherData(data);
-      })
-      .catch(() => {
-        document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_FETCH_ERROR + '</span>';
-      });
-  }
-
-  document.getElementById('cityDropdown').addEventListener('change', function() {
-    document.getElementById('cityInput').value = this.value;
-    if (this.value) fetchWeather(this.value);
-  });
-
-  document.getElementById('cityInput').addEventListener('input', function() {
-    const val = this.value.trim();
-    const dd = document.getElementById('cityDropdown');
-    let found = false;
-    for (let i = 0; i < dd.options.length; i++) {
-      if (dd.options[i].value.toLowerCase() === val.toLowerCase()) {
-        dd.selectedIndex = i;
-        found = true;
-        break;
+    html,
+    body {
+      height: 100%;
+    }
+    body {
+      background: #f4f7fb;
+      font-family: 'Inter', 'Montserrat', Arial, sans-serif; font-display: swap;
+      color: #0b2545;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .main-container {
+      max-width: 920px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 80vh;
+      box-sizing: border-box;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      width: 100%;
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    .tool-title {
+      color: #185a9d;
+      font-size: 1.35rem;
+      margin: 0 0 .45rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: 700;
+    }
+    .read-guide-wrap {
+      display: inline-block;
+      margin-bottom: .6rem;
+    }
+    /* prevent wrapper stretching */
+    /* Read guide: inline on all viewports */
+    .read-guide {
+      display: inline-flex !important;
+      width: auto !important;
+      max-width: none !important;
+      align-items: center;
+      justify-content: center;
+      padding: .45rem .85rem;
+      border-radius: 8px;
+      background: var(--brand);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .lead {
+      color: #374151;
+      margin: 0 0 0.9rem 0;
+      font-size: 1.05rem;
+    }
+    .weather-form-row {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .weather-result {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 7px;
+      padding: 1rem;
+      font-size: 1.15em;
+      min-height: 48px;
+    }
+    .powered-by {
+      margin-top: 0.6rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    .action-row {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: .4rem;
+    }
+    #getWeatherBtn {
+      min-width: 175px;
+      height: 42px;
+      font-size: 1.07em;
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 2px 8px #e0e7ef;
+      cursor: pointer;
+      padding: 0 1.1rem;
+    }
+    #useLocationBtn {
+      min-width: 175px;
+      height: 42px;
+      font-size: 1.02rem;
+      background: #444;
+      color: #fff;
+      border-radius: 8px;
+      border: none;
+      padding: 0 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .4em;
+      cursor: pointer;
+      justify-content: center;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .unit-toggle {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      margin-left: 6px;
+    }
+    .unit-toggle button {
+      border-radius: 8px;
+      padding: 6px 10px;
+      border: 1px solid #e6eef8;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .unit-toggle button.active {
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+    }
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+    .forecast-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 0.6rem;
+    }
+    @media(min-width:560px) {
+      .forecast-grid {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
-    if (!found) dd.selectedIndex = 0;
-  });
-
-  document.getElementById('weatherForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const city = document.getElementById('cityInput').value.trim() || document.getElementById('cityDropdown').value;
-    fetchWeather(city);
-  });
-
-  document.getElementById('useLocationBtn').addEventListener('click', function() {
-    if (!navigator.geolocation) {
-      document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_GEO_UNSUPPORTED + '</span>';
-      return;
+    .forecast-day {
+      background: #fff;
+      border-radius: 8px;
+      padding: .55rem;
+      box-shadow: 0 1px 4px rgba(9, 30, 66, 0.04);
+      text-align: center;
+      font-size: 0.95rem;
     }
-    navigator.geolocation.getCurrentPosition(function(pos) {
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
-      fetch(`/weather?lat=${lat}&lon=${lon}`)
+    .forecast-day .day {
+      font-weight: 700;
+      color: #0b2545;
+      margin-bottom: .25rem;
+    }
+    .weather-icon {
+      font-size: 1.4rem;
+      margin-bottom: .25rem;
+      display: block;
+    }
+    .forecast-day .desc {
+      color: #374151;
+      font-size: .86rem;
+      margin-top: .25rem;
+    }
+    .forecast-day .temp {
+      margin-top: .3rem;
+      color: #185a9d;
+    }
+    @media (max-width:750px) {
+      #getWeatherBtn,
+      #useLocationBtn {
+        width: 100%;
+      }
+      .weather-form-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .action-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Clima Global — TimerHaven">
+  <meta property="og:description" content="Consulta el clima de ciudades del mundo al instante.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/weather-es.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clima Global — TimerHaven">
+  <meta name="twitter:description" content="Consulta el clima de ciudades del mundo al instante.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta name="keywords" content="local weather, world weather forecast, current temperature, productivity tools, privacy-first, no login">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Herramienta de Pronóstico del Tiempo",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "Una herramienta meteorológica proporciona datos atmosféricos y pronósticos en tiempo real, ayudándole a planificar su día en función de la temperatura, la precipitación y las condiciones del viento.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/weather-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/weather-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/weather-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/weather-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/weather-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/weather-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/weather-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/weather-en.html">
+</head>
+<body>
+    <main class="main-container" role="main">
+    <article class="card" aria-labelledby="title">
+      <a href="index.html" class="back-link">&larr; Volver al menú principal</a>
+      <div id="title" class="tool-title"><i class="fa fa-cloud-sun"></i> Clima Global</div>
+      <div class="read-guide-wrap">
+        <a id="read-guide-btn" class="read-guide" href="https://timerhaven.com/es/weather/weather-index.html"
+          target="_blank" rel="noopener">Leer guía completa</a>
+      </div>
+      <p class="lead">Consulta el clima de ciudades del mundo al instante.</p>
+      <form id="weatherForm" autocomplete="off">
+        <div class="weather-form-row">
+          <select id="cityDropdown" class="form-select" title="Seleccione ciudad..." style="min-width:140px;">
+            <option value="">Seleccione ciudad...</option>
+            <option value="New York">Nueva York</option>
+            <option value="London">Londres</option>
+            <option value="Paris">París</option>
+            <option value="Berlin">Berlín</option>
+            <option value="Tokyo">Tokio</option>
+            <option value="Sydney">Sídney</option>
+            <option value="São Paulo">São Paulo</option>
+            <option value="Moscow">Moscú</option>
+            <option value="Dubai">Dubái</option>
+            <option value="Istanbul">Estambul</option>
+            <option value="Johannesburg">Johannesburgo</option>
+            <option value="Toronto">Toronto</option>
+            <option value="Mexico City">Ciudad de México</option>
+            <option value="Los Angeles">Los Ángeles</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Cairo">El Cairo</option>
+            <option value="Singapore">Singapur</option>
+            <option value="Hong Kong">Hong Kong</option>
+            <option value="Bangkok">Bangkok</option>
+            <option value="Seoul">Seúl</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="Rome">Roma</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Jakarta">Yakarta</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Cape Town">Ciudad del Cabo</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Melbourne">Melbourne</option>
+            <option value="Beijing">Pekín</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Vancouver">Vancouver</option>
+            <option value="Auckland">Auckland</option>
+            <option value="Hanoi">Hanói</option>
+            <option value="Manila">Manila</option>
+            <option value="Warsaw">Varsovia</option>
+          </select>
+          <input type="text" id="cityInput" class="form-control" placeholder="O introduzca la ciudad..."
+            title="O introduzca la ciudad..." style="min-width:160px;">
+        </div>
+        <div class="action-row" role="group" aria-label="Acciones">
+          <button type="submit" id="getWeatherBtn">Obtener clima</button>
+          <button type="button" id="useLocationBtn"><i class="fa fa-location-arrow"></i> Usar mi ubicación</button>
+          <div class="unit-toggle" role="group" aria-label="Unidades de temperatura">
+            <button type="button" id="unitC" title="Celsius">°C</button>
+            <button type="button" id="unitF" title="Fahrenheit">°F</button>
+          </div>
+        </div>
+      </form>
+      <div id="weatherResult" class="weather-result" aria-live="polite"></div>
+      <div class="powered-by">Datos de <a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a>
+      </div>
+      <details class="faq-section" style="margin-top:1rem;">
+        <summary style="font-weight:700; font-size:1rem;">Preguntas frecuentes</summary>
+        <ul style="padding-left:1.1rem; color:#374151;">
+          <li><strong>¿Qué tan precisa es la información?</strong> Los datos provienen de Open‑Meteo y servicios
+            similares.</li>
+          <li><strong>¿Puedo usar mi ubicación?</strong> Sí — toque <strong>Usar mi ubicación</strong>.</li>
+          <li><strong>¿Puedo escribir cualquier ciudad?</strong> Sí — escriba la ciudad.</li>
+        </ul>
+      </details>
+    </article>
+  </main>
+  <script>
+    // Full ES page JS with robust mobile-friendly geolocation helper integrated
+    const DEFAULT_PAGE_LANG = 'es';
+    const SUPPORTED_LANGS = ['en', 'fr', 'de', 'es', 'ru', 'el', 'ar'];
+    const PAGE_LANG = 'es';
+    const UI_STRINGS = {
+      es: {
+        PLEASE_SELECT: "Por favor seleccione o escriba una ciudad.",
+        GEO_UNSUPPORTED: "Geolocalización no soportada.",
+        UNABLE_LOCATION: "No se pudo obtener su ubicación.",
+        FETCH_ERROR: "Error al obtener datos meteorológicos.",
+        NOT_FOUND_TEMPLATE: "No se encontró el clima para \"{city}\".",
+        SELECT_CITY_PLACEHOLDER: "Seleccionar ciudad...",
+        OR_ENTER_CITY_PLACEHOLDER: "O introduzca la ciudad..."
+      }
+    };
+    const WEATHERCODE_DESC = {
+      0: { es: "Cielo despejado" },
+      1: { es: "Mayormente despejado" },
+      2: { es: "Parcialmente nublado" },
+      3: { es: "Cubierto" },
+      45: { es: "Niebla" },
+      48: { es: "Niebla helada" },
+      51: { es: "Llovizna ligera" },
+      53: { es: "Llovizna moderada" },
+      55: { es: "Llovizna densa" },
+      56: { es: "Llovizna helada ligera" },
+      57: { es: "Llovizna helada densa" },
+      61: { es: "Lluvia ligera" },
+      63: { es: "Lluvia moderada" },
+      65: { es: "Lluvia intensa" },
+      71: { es: "Nevadas ligeras" },
+      73: { es: "Nevadas moderadas" },
+      75: { es: "Nevadas intensas" },
+      80: { es: "Chubascos ligeros" },
+      81: { es: "Chubascos moderados" },
+      82: { es: "Chubascos violentos" },
+      95: { es: "Tormenta" },
+      96: { es: "Tormenta con granizo ligero" },
+      99: { es: "Tormenta con granizo fuerte" }
+    };
+    const TEMP_UNIT_KEY = 'timerhavenTempUnit';
+    const DEFAULT_UNIT = 'C';
+    let LAST_QUERY = null;
+    function getStoredUnit() { try { const u = localStorage.getItem(TEMP_UNIT_KEY); if (u === 'C' || u === 'F') return u; } catch (e) { } return DEFAULT_UNIT; }
+    function setStoredUnit(u) { try { localStorage.setItem(TEMP_UNIT_KEY, u); } catch (e) { } }
+    function applyUnitUI() { const u = getStoredUnit(); const c = document.getElementById('unitC'), f = document.getElementById('unitF'); if (!c || !f) return; if (u === 'C') { c.classList.add('active'); f.classList.remove('active'); } else { f.classList.add('active'); c.classList.remove('active'); } }
+    function reapplyLastQuery() {
+      if (!LAST_QUERY) return;
+      if (LAST_QUERY.type === 'coords' && LAST_QUERY.lat != null && LAST_QUERY.lon != null) {
+        fetchOpenMeteoForecast(LAST_QUERY.lat, LAST_QUERY.lon).then(fore => { try { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(fore, LAST_QUERY.placeName || ''); } catch (e) { } });
+      } else if (LAST_QUERY.type === 'city' && LAST_QUERY.city) {
+        fetchWeather(LAST_QUERY.city);
+      } else if (LAST_QUERY.type === 'backend' && LAST_QUERY.city) {
+        fetchBackendCity(LAST_QUERY.city);
+      }
+    }
+    try {
+      document.getElementById('unitC').addEventListener('click', function () { setStoredUnit('C'); applyUnitUI(); reapplyLastQuery(); });
+      document.getElementById('unitF').addEventListener('click', function () { setStoredUnit('F'); applyUnitUI(); reapplyLastQuery(); });
+    } catch (e) { }
+    function t(key, vars) {
+      const dict = UI_STRINGS[PAGE_LANG] || UI_STRINGS[DEFAULT_PAGE_LANG] || {};
+      let s = dict[key] || '';
+      if (vars && typeof vars === 'object') { Object.keys(vars).forEach(k => { s = s.replace('{' + k + '}', vars[k]); }); }
+      return s;
+    }
+    function describeWeatherCode(code) {
+      const obj = WEATHERCODE_DESC[code];
+      if (!obj) return String(code);
+      return obj[PAGE_LANG] || obj['es'] || String(code);
+    }
+    function localizedWeekday(dateStr) {
+      try { const d = new Date(dateStr); return new Intl.DateTimeFormat(PAGE_LANG, { weekday: 'short' }).format(d); } catch (e) { return dateStr; }
+    }
+    function getWeatherEmoji(code) {
+      if (code === null || code === undefined) return '•';
+      if (code === 0) return '☀️';
+      if (code === 1 || code === 2) return '🌤️';
+      if (code === 3) return '☁️';
+      if ([45, 48].includes(code)) return '🌫️';
+      if ([51, 53, 55, 56, 57].includes(code)) return '🌦️';
+      if ([61, 63, 65, 80, 81, 82].includes(code)) return '🌧️';
+      if ([71, 73, 75].includes(code)) return '❄️';
+      if ([95, 96, 99].includes(code)) return '⛈️';
+      return '🌤️';
+    }
+    function renderOpenMeteo(forecast, placeName) {
+      const unit = getStoredUnit();
+      const tempSymbol = (unit === 'F') ? '°F' : '°C';
+      const speedUnit = (unit === 'F') ? 'mph' : 'm/s';
+      const cw = forecast.current_weather || {};
+      const daily = forecast.daily || {};
+      const parts = [];
+      const title = `<div style="font-weight:700; margin-bottom:6px;">${placeName || ''}</div>`;
+      const weatherLabel = describeWeatherCode(cw.weathercode);
+      const currentHtml = `<div style="display:flex;gap:.6rem;align-items:center;">
+      <div style="flex:1"><div style="font-weight:700;font-size:1.05rem;">${weatherLabel}</div></div>
+      <div style="text-align:right;min-width:110px">
+        <div style="font-size:1.45rem;font-weight:700;">${typeof cw.temperature === 'number' ? Math.round(cw.temperature) + tempSymbol : 'N/A'}</div>
+        <div style="color:#6b7280;">Viento ${typeof cw.windspeed === 'number' ? Math.round(cw.windspeed) + ' ' + speedUnit : 'N/A'}</div>
+      </div>
+    </div>`;
+      parts.push(title + currentHtml);
+      if (daily.time && daily.time.length) {
+        const days = daily.time.map((d, i) => {
+          const maxT = daily.temperature_2m_max && daily.temperature_2m_max[i] !== undefined ? Math.round(daily.temperature_2m_max[i]) : ' ? ';
+          const minT = daily.temperature_2m_min && daily.temperature_2m_min[i] !== undefined ? Math.round(daily.temperature_2m_min[i]) : ' ? ';
+          const code = daily.weathercode && daily.weathercode[i] !== undefined ? daily.weathercode[i] : null;
+          const desc = code !== null ? describeWeatherCode(code) : '';
+          return { date: d, maxT, minT, code, desc };
+        }).slice(0, 7);
+        let grid = '<div class="forecast-grid">';
+        days.forEach(day => {
+          grid += `<div class="forecast-day">
+                    <div class="day">${localizedWeekday(day.date)}</div>
+                    <div class="weather-icon">${getWeatherEmoji(day.code)}</div>
+                    <div class="desc">${day.desc}</div>
+                    <div class="temp"><span style="font-weight:700;">${day.maxT}${tempSymbol}</span> / ${day.minT}${tempSymbol}</div>
+                 </div>`;
+        });
+        grid += '</div>';
+        parts.push(grid);
+      }
+      return parts.join('');
+    }
+    function geocodeCity(city) {
+      const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=${PAGE_LANG}`;
+      return fetch(url).then(r => r.json()).then(j => {
+        if (j && Array.isArray(j.results) && j.results.length > 0) {
+          const r0 = j.results[0];
+          return { latitude: r0.latitude, longitude: r0.longitude, name: r0.name + (r0.country ? ', ' + r0.country : '') };
+        }
+        return null;
+      }).catch(() => null);
+    }
+    function fetchOpenMeteoForecast(lat, lon) {
+      const unit = getStoredUnit();
+      const temperature_unit = (unit === 'F') ? 'fahrenheit' : 'celsius';
+      const windspeed_unit = (unit === 'F') ? 'mph' : 'ms';
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&daily=temperature_2m_max,temperature_2m_min,weathercode&current_weather=true&timezone=auto&forecast_days=7&temperature_unit=${temperature_unit}&windspeed_unit=${windspeed_unit}`;
+      return fetch(url).then(r => r.json());
+    }
+    function fetchBackendCity(city) {
+      const resultEl = document.getElementById('weatherResult');
+      return fetch(`/weather?city=${encodeURIComponent(city)}`)
         .then(r => r.json())
         .then(data => {
-          if (data.cod !== 200 && data.error) {
-            document.getElementById('weatherResult').innerHTML = `<span style="color:#b00;">${data.error}</span>`;
-            return;
+          if (!data || (data.cod && parseInt(data.cod, 10) !== 200)) {
+            const err = (data && (data.error || data.message)) || t('NOT_FOUND_TEMPLATE', { city });
+            resultEl.innerHTML = `<span style="color:#b00;">${err}</span>`;
+            return null;
           }
-          if (data.cod !== 200) {
-            document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_UNABLE_LOCATION + '</span>';
-            return;
-          }
-          document.getElementById('weatherResult').innerHTML = renderWeatherData(data);
-          document.getElementById('cityInput').value = data.name;
-          document.getElementById('cityDropdown').value = '';
+          LAST_QUERY = { type: 'backend', city };
+          resultEl.innerHTML = renderWeatherData(data);
+          return data;
         })
         .catch(() => {
-          document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_FETCH_ERROR + '</span>';
+          resultEl.innerHTML = '<span style="color:#b00;">' + t('FETCH_ERROR') + '</span>';
+          return null;
         });
-    }, function() {
-      document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">' + MSG_UNABLE_LOCATION + '</span>';
-    });
-  });
-
-  // language selector redirect
-  (function() {
-    var sel = document.getElementById('language-select-top');
-    if (sel) {
-      sel.addEventListener('change', function() {
-        var v = this.value || 'en';
-        window.location.href = 'weather-' + v + '.html';
-      });
     }
-  })();
+    function renderWeatherData(data) {
+      const unit = getStoredUnit();
+      let tempStr = (data.main && typeof data.main.temp === 'number') ? Math.round(data.main.temp) + '°C' : 'N/A';
+      if (unit === 'F' && data.main && typeof data.main.temp === 'number') tempStr = Math.round((data.main.temp * 9 / 5) + 32) + '°F';
+      const windUnit = (unit === 'F') ? 'mph' : 'm/s';
+      let wind = data.wind ? data.wind.speed : 'N/A';
+      if (unit === 'F' && data.wind && typeof data.wind.speed === 'number') wind = Math.round(data.wind.speed * 2.23694);
+      return `<b>${data.name}${data.sys && data.sys.country ? ', ' + data.sys.country : ''}</b><br>
+            Clima: ${data.weather && data.weather[0] ? data.weather[0].description : 'N/A'}<br>
+            Temperatura: ${tempStr}<br>
+            Humedad: ${data.main ? data.main.humidity : 'N/A'}%<br>
+            Viento: ${wind} ${windUnit}`;
+    }
+    function fetchWeather(city) {
+      const resultEl = document.getElementById('weatherResult');
+      if (!city) {
+        resultEl.innerHTML = '<span style="color:#b00;">' + t('PLEASE_SELECT') + '</span>';
+        return;
+      }
+      resultEl.innerHTML = 'Cargando...';
+      geocodeCity(city).then(geo => {
+        if (geo && geo.latitude != null && geo.longitude != null) {
+          LAST_QUERY = { type: 'city', city };
+          fetchOpenMeteoForecast(geo.latitude, geo.longitude).then(fore => {
+            if (!fore) return fetchBackendCity(city);
+            try {
+              LAST_QUERY = { type: 'coords', lat: geo.latitude, lon: geo.longitude, placeName: geo.name, city: city };
+              resultEl.innerHTML = renderOpenMeteo(fore, geo.name || city);
+            } catch (e) {
+              console.error('renderOpenMeteo error', e);
+              resultEl.innerHTML = '<span style="color:#b00;">' + t('FETCH_ERROR') + '</span>';
+            }
+          }).catch(() => fetchBackendCity(city));
+        } else {
+          fetchBackendCity(city);
+        }
+      }).catch(() => fetchBackendCity(city));
+    }
+    // UI wiring
+    try {
+      document.getElementById('cityDropdown').addEventListener('change', function () {
+        document.getElementById('cityInput').value = this.value;
+        if (this.value) fetchWeather(this.value);
+      });
+      document.getElementById('cityInput').addEventListener('input', function () {
+        const val = this.value.trim();
+        const dd = document.getElementById('cityDropdown');
+        let found = false;
+        for (let i = 0; i < dd.options.length; i++) {
+          if (dd.options[i].value.toLowerCase() === val.toLowerCase()) { dd.selectedIndex = i; found = true; break; }
+        }
+        if (!found) dd.selectedIndex = 0;
+      });
+      document.getElementById('weatherForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const city = document.getElementById('cityInput').value.trim() || document.getElementById('cityDropdown').value;
+        fetchWeather(city);
+      });
+    } catch (e) { console.warn(e); }
+    try { if (!localStorage.getItem(TEMP_UNIT_KEY)) localStorage.setItem(TEMP_UNIT_KEY, DEFAULT_UNIT); } catch (e) { }
+    applyUnitUI();
+    // Exposed helper for native app bridge or external injection
+    window._injectedFetchByCoords = window._injectedFetchByCoords || function (lat, lon, placeName) {
+      try {
+        if (typeof fetchOpenMeteoForecast === 'function' && typeof renderOpenMeteo === 'function') {
+          fetchOpenMeteoForecast(lat, lon).then(fore => {
+            try {
+              window.LAST_QUERY = { type: 'coords', lat: lat, lon: lon, placeName: placeName || '' };
+              document.getElementById('weatherResult').innerHTML = renderOpenMeteo(fore, placeName || '');
+            } catch (e) {
+              console.error('renderOpenMeteo error', e);
+              document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">Error al mostrar el clima</span>';
+            }
+          }).catch(err => {
+            console.error('fetchOpenMeteoForecast error', err);
+            document.getElementById('weatherResult').innerHTML = '<span style="color:#b00;">Error al obtener previsión</span>';
+          });
+        } else {
+          console.log('Coordinates available:', lat, lon);
+        }
+      } catch (e) { console.error(e); }
+    };
+    // Robust mobile-friendly geolocation helper (Spanish messages)
+    (function () {
+      const TIMEOUT_MS = 25000; // increase for mobile GPS
+      const useBtn = document.getElementById('useLocationBtn');
+      const resultEl = document.getElementById('weatherResult');
+      function log(msg) { try { console.debug('[geo] ' + msg); } catch (e) { } }
+      function show(msg, isError) {
+        if (!resultEl) return;
+        resultEl.innerHTML = isError ? ('<span style="color:#b00;">' + msg + '</span>') : msg;
+      }
+      const TRY_PATHS = ['/world-cities.json', '/cities.json', '/assets/data/cities.json'];
+      const FALLBACK_CITIES = ["Madrid", "Barcelona", "Mexico City", "Buenos Aires", "Bogotá"];
+      let CITIES_DATA = null;
+      async function loadCitiesData() {
+        if (CITIES_DATA) return CITIES_DATA;
+        for (const path of TRY_PATHS) {
+          try {
+            const response = await fetch(path, { cache: 'no-cache' });
+            if (response.ok) {
+              const data = await response.json();
+              CITIES_DATA = data;
+              return data;
+            }
+          } catch (e) { console.warn(`Failed to load cities from ${path}:`, e); }
+        }
+        return null;
+      }
+      async function populateCityDropdown() {
+        const select = document.getElementById('cityDropdown');
+        if (!select) return;
+        const cities = await loadCitiesData();
+        let list = [];
+        if (cities) {
+          if (Array.isArray(cities)) list = cities;
+          else if (cities.cities && Array.isArray(cities.cities)) list = cities.cities;
+        }
+        if (!list || list.length === 0) list = FALLBACK_CITIES.map(n => ({ name: n }));
+        const names = list.map(item => typeof item === 'object' ? item.name : item);
+        const unique = Array.from(new Set(names.map(s => (s || '').trim()).filter(Boolean)));
+        unique.sort((a, b) => a.localeCompare(b, PAGE_LANG, { sensitivity: 'base' }));
+        const placeholder = select.querySelector('option[value=""]') ? select.querySelector('option[value=""]').outerHTML : '<option value="">Seleccionar ciudad...</option>';
+        select.innerHTML = placeholder + unique.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+      }
+      function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+      document.getElementById('cityDropdown').addEventListener('change', function () {
+        document.getElementById('cityInput').value = this.value;
+        if (this.value) fetchWeather(this.value);
+      });
+      document.getElementById('cityInput').addEventListener('input', function () {
+        const val = this.value.trim();
+        const dd = document.getElementById('cityDropdown');
+        let found = false;
+        for (let i = 0; i < dd.options.length; i++) {
+          if (dd.options[i].value.toLowerCase() === val.toLowerCase()) { dd.selectedIndex = i; found = true; break; }
+        }
+        if (!found) dd.selectedIndex = 0;
+      });
+      document.getElementById('weatherForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const city = document.getElementById('cityInput').value.trim() || document.getElementById('cityDropdown').value;
+        fetchWeather(city);
+      });
+      try { if (!localStorage.getItem(TEMP_UNIT_KEY)) localStorage.setItem(TEMP_UNIT_KEY, DEFAULT_UNIT); } catch (e) { }
+      applyUnitUI();
+      populateCityDropdown();
+      function getPositionWithTimeout(opts) {
+        return new Promise((resolve, reject) => {
+          if (!navigator.geolocation) {
+            const err = new Error('Geolocation unavailable');
+            err.code = 0;
+            return reject(err);
+          }
+          let finished = false;
+          const timer = setTimeout(() => {
+            if (finished) return;
+            finished = true;
+            const err = new Error('Timeout');
+            err.code = 3;
+            reject(err);
+          }, TIMEOUT_MS);
+          navigator.geolocation.getCurrentPosition(pos => {
+            if (finished) return;
+            finished = true; clearTimeout(timer); resolve(pos);
+          }, err => {
+            if (finished) return;
+            finished = true; clearTimeout(timer); reject(err);
+          }, opts || { enableHighAccuracy: false, maximumAge: 0, timeout: TIMEOUT_MS });
+        });
+      }
+      async function queryPermission() {
+        if (!navigator.permissions || !navigator.permissions.query) return null;
+        try {
+          const p = await navigator.permissions.query({ name: 'geolocation' });
+          return p.state; // 'granted'|'prompt'|'denied'
+        } catch (e) {
+          log('permissions.query failed: ' + e);
+          return null;
+        }
+      }
+      function permissionHelpText() {
+        return `
+        <div style="font-size:0.95rem;line-height:1.3;">
+          Parece que el acceso a la ubicación está bloqueado. Para activarlo:
+          <ul>
+            <li>Abra el menú del navegador → Configuración del sitio → Ubicación → permita timerhaven.com</li>
+            <li>Asegúrese de que Android → Ajustes → Ubicación esté activado</li>
+            <li>No utilice el modo incógnito</li>
+          </ul>
+          O pegue las coordenadas desde su app de Mapas (Compartir → Copiar coordenadas).
+        </div>
+      `;
+      }
+      async function handleUseLocation(e) {
+        e && e.preventDefault && e.preventDefault();
+        show('Detectando ubicación...');
+        log('User requested location');
+        const perm = await queryPermission().catch(() => null);
+        log('permission state: ' + perm);
+        if (perm === 'denied') {
+          show(permissionHelpText(), true);
+          return;
+        }
+        let pos = null;
+        try {
+          // Intentar primero la posición en caché (rápido)
+          pos = await getPositionWithTimeout({ enableHighAccuracy: false, maximumAge: 60 * 1000, timeout: 5000 });
+          log('got coords quick: ' + pos.coords.latitude + ',' + pos.coords.longitude);
+        } catch (err) {
+          log('quick getCurrentPosition failed, trying fresh...');
+          try {
+            pos = await getPositionWithTimeout({ enableHighAccuracy: true, maximumAge: 0, timeout: TIMEOUT_MS + 5000 });
+            log('got coords after prompt: ' + pos.coords.latitude + ',' + pos.coords.longitude);
+          } catch (err2) {
+            log('final getCurrentPosition failed: ' + (err2 && err2.code) + ' / ' + err2.message);
+            if (err2 && err2.code === 1) show(permissionHelpText(), true);
+            else if (err2 && err2.code === 3) show('La solicitud de ubicación agotó el tiempo. Asegúrese de que el GPS esté activado y vuelva a intentarlo.', true);
+            else show('Ubicación no disponible en este dispositivo o navegador.', true);
+            return;
+          }
+        }
+        if (!pos) return;
+        show('Identificando ubicación...');
+        let locName = null;
+        try {
+          const geoResp = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`, {
+            headers: { 'Accept-Language': 'es', 'User-Agent': 'TimerHaven/1.1' }
+          });
+          if (geoResp.ok) {
+            const geoData = await geoResp.json();
+            locName = geoData.address.city || geoData.address.town || geoData.address.village || geoData.address.suburb || geoData.name || (geoData.display_name ? geoData.display_name.split(',')[0] : null);
+          }
+        } catch (e) { log('Reverse geo failed: ' + e); }
+        const displayName = locName || (pos.coords.latitude.toFixed(4) + ', ' + pos.coords.longitude.toFixed(4));
+        show(displayName + ' — obteniendo previsión...');
+        if (typeof window._injectedFetchByCoords === 'function') {
+          window._injectedFetchByCoords(pos.coords.latitude, pos.coords.longitude, locName);
+        } else if (typeof fetchOpenMeteoForecast === 'function') {
+          fetchOpenMeteoForecast(pos.coords.latitude, pos.coords.longitude)
+            .then(f => { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(f, locName || displayName); })
+            .catch(err => { log('fetch forecast after geo err: ' + err); show('Error al obtener previsión', true); });
+        }
+      }
+      if (useBtn) {
+        try { useBtn.removeEventListener && useBtn.removeEventListener('click', handleUseLocation); } catch (e) { }
+        useBtn.addEventListener('click', handleUseLocation);
+      } else {
+        log('useLocationBtn not present');
+      }
+      // Expose function for native apps
+      window.receiveNativeLocation = function (obj) {
+        try {
+          const lat = parseFloat(obj.latitude || obj.lat);
+          const lon = parseFloat(obj.longitude || obj.lon || obj.lng);
+          if (!isNaN(lat) && !isNaN(lon)) {
+            show('Ubicación desde la app: ' + lat + ', ' + lon + ' — obteniendo previsión...');
+            if (typeof window._injectedFetchByCoords === 'function') window._injectedFetchByCoords(lat, lon);
+            else fetchOpenMeteoForecast(lat, lon).then(f => { document.getElementById('weatherResult').innerHTML = renderOpenMeteo(f, ''); }).catch(err => { log(err); show('Error al obtener previsión', true); });
+          }
+        } catch (e) { log(e); }
+      };
+    })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/es/weather/weather-index.html">Read full guide</a></p></body>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anuncio</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+    <div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>local weather</strong> and other <strong>privacy-first productivity tools</strong>.</div>
+    &copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan tu privacidad.<br>
+    <a href="/privacy.html">Privacidad</a> ·
+    <a href="/terms.html">Términos de servicio</a> ·
+    <a href="/contact.html">Contacto</a>
+  
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Herramienta de Pronóstico del Tiempo</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Una herramienta meteorológica proporciona datos atmosféricos y pronósticos en tiempo real, ayudándole a planificar su día en función de la temperatura, la precipitación y las condiciones del viento.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Historia</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Cómo usar</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Permita el acceso a la ubicación o ingrese el nombre de su ciudad.</li><li>Vea la temperatura actual, la humedad y el icono de condición.</li><li>Consulte el pronóstico de 7 días para la planificación a largo plazo.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Siempre verifique la temperatura 'Sensación térmica', que tiene en cuenta el enfriamiento por viento y la humedad para una evaluación al aire libre más precisa."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Más Herramientas de Productividad Gratuitas</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Temporizador de Tareas</a> <a href="stopwatch-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Cronómetro</a> <a href="pomodoro-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Conversor de Unidades</a> <a href="weather-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clima</a> <a href="world-clock-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Reloj Mundial</a> <a href="calendar-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendario</a> <a href="clipboard-manager-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Portapapeles</a> <a href="countdown-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Cuenta Regresiva</a> <a href="currency-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Divisas</a> <a href="focus-music-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Música Focus</a> <a href="habit-tracker-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Hábitos</a> <a href="meeting-planner-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Reuniones</a> <a href="notes-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notas</a> <a href="password-generator-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Contraseñas</a></div>
+        </div>
+    </section>
+    
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
 </html>

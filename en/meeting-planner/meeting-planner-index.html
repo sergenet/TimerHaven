@@ -1,0 +1,523 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Meeting Planner — Schedule Efficient Meetings Across Time Zones | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description"
+    content="Complete guide to planning and coordinating meetings across time zones. Includes invite patterns, agenda design, and synchronous meeting recipes." />
+  <link rel="canonical" href="https://timerhaven.com/en/meeting-planner/meeting-planner-index.html">
+  <meta name="author" content="Serge Shammas">
+  
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Plan effective meetings",
+        "description":"Practical recipes for scheduling across time zones, preparing agendas, running efficient discussions, and sharing meeting times.",
+        "image":"https://timerhaven.com/assets/images/meeting-planner-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Meeting Planner (TimerHaven)","Calendar","Participants' time zones"],
+        "step":[
+          {"@type":"HowToStep","name":"Gather time zones","text":"Collect each participant's preferred time zone or city."},
+          {"@type":"HowToStep","name":"Pick candidate windows","text":"Use the planner to propose 23 candidate times that minimize hardship across zones."},
+          {"@type":"HowToStep","name":"Share and confirm","text":"Share times as organizer-local — participant-local to reduce confusion; confirm one slot and send calendar invite."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"How many options should I propose?","acceptedAnswer":{"@type":"Answer","text":"Offer 23 reasonable windows. Too many options slow decisions; too few may preclude availability."}},
+          {"@type":"Question","name":"Should I always show participant local times?","acceptedAnswer":{"@type":"Answer","text":"Yes — showing both organizer and participant local times reduces errors and builds trust."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --brand-dark: #09507a;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff;
+      --link-blue: #0d6efd
+    }
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: #102a43;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+    h1 {
+      color: var(--brand);
+      margin-top: 0;
+      font-size: 1.8rem;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .lead {
+      font-size: 1.05rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .section {
+      margin-top: 1.1rem;
+    }
+    .workflow {
+      background: #fff7f0;
+      border-left: 4px solid #ffd1a7;
+      padding: 0.9rem;
+      border-radius: 8px;
+      margin-bottom: 0.9rem;
+    }
+    .cta {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      background: var(--brand);
+      color: #fff;
+      text-decoration: none;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .author img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    nav.toc {
+      margin: 0.75rem 0;
+      padding: 0.5rem 0;
+      border-left: 3px solid #eef5fb;
+    }
+    nav.toc a {
+      display: inline-block;
+      margin-right: 1rem;
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--link-blue) !important;
+      text-decoration: none;
+      font-weight: 700
+    }
+    .back-link:hover {
+      text-decoration: underline
+    }
+    /* Floating return-to-tool button (shared pattern) */
+    .return-to-tool {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      z-index: 2147483647;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #2faaff, #0b63a0);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 18px 40px rgba(3, 56, 102, 0.22);
+      cursor: pointer;
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .return-to-tool:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 50px rgba(3, 56, 102, 0.3);
+      color: #fff;
+      text-decoration: none;
+    }
+    .return-to-tool .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 18px;
+      flex: 0 0 44px;
+    }
+    .return-to-tool .label {
+      font-size: 16px;
+      line-height: 1;
+      white-space: nowrap;
+      padding-right: 6px;
+    }
+    @media (max-width:520px) {
+      .card {
+        padding: 1rem
+      }
+      .return-to-tool .label {
+        display: none;
+      }
+      .return-to-tool {
+        padding: 8px;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../../assets/css/app-promo.css"  media="print" onload="this.media='all'">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Meeting Planner — Schedule Efficient Meetings Across Time Zones | TimerHaven">
+  <meta property="og:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta property="og:image" content="https://timerhaven.com/images/meeting-planner-hero.webp">
+  <meta property="og:url" content="https://timerhaven.com/en/meeting-planner/meeting-planner-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meeting Planner — Schedule Efficient Meetings Across Time Zones | TimerHaven">
+  <meta name="twitter:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta name="twitter:image" content="https://timerhaven.com/images/meeting-planner-hero.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/meeting-planner/meeting-planner-index.html">
+</head>
+<body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
+  <div class="app-promo-banner" id="smart-app-banner">
+    <div class="app-promo-content">
+      <img src="/assets/images/app-icon.webp" alt="TimerHaven Icon" class="app-promo-icon" width="48" height="48" style="width: 48px; height: 48px; border-radius: 10px;">
+      <div class="app-promo-text">
+        <h4>TimerHaven: Focus & Tools</h4>
+        <p>Get the best experience on our mobile app</p>
+      </div>
+    </div>
+    <div class="app-promo-actions">
+      <a href="https://play.google.com/store/apps/details?id=com.sergenet.TimerHavenApp" class="btn-app-store">
+        <i class="fab fa-google-play"></i> Google Play
+      </a>
+      <button onclick="document.getElementById('smart-app-banner').style.display='none'" class="btn btn-sm text-white">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <a href="/" class="back-link" id="back-link">&larr;&nbsp;Back to Main Menu</a>
+      <h1 id="title">Meeting Planner — Schedule Better Meetings Across Time Zones</h1>
+      <div class="author" role="articleauthor" aria-label="Article author">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" 
+          width="56" height="56" alt="Serge Shammas" loading="lazy">
+        <div>
+          <div class="byline"><strong>By Serge Shammas ·</strong> — meetings & collaboration writer</div>
+          <div class="meta">Published: 2025-11-24 — Last updated: 2026-02-09 — Reading time: 2025 min</div>
+        </div>
+      </div>
+      <p class="lead">Running meetings across time zones or with distributed teams requires clarity and empathy. The
+        Meeting Planner helps you propose times, visualize participant local times, and select slots that minimize
+        inconvenience. This guide covers participant collection, time-window selection, agenda design, sharing
+        best-practices, and timezone pitfalls.</p>
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#collect">Collect participants</a>
+        <a href="#propose">Propose effectively</a>
+        <a href="#agenda">Design the agenda</a>
+        <a href="#timezone">Time zone pitfalls</a>
+        <a href="#psychology">The Psychology of Sync</a>
+        <a href="#recipes">Meeting recipes</a>
+        <a href="#share">Share & confirm</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="collect" class="section">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2>Phase 1: Collect participants and time zones</h2>
+        <p>Start by collecting each invitee—s preferred time zone or city and their availability windows
+          (morning/afternoon). Use the Meeting Planner to store cities and compute local times quickly. Avoid assuming
+          availability simply because a slot is within "9-to-5" in one region.</p>
+        <p>In global teams, <strong>Time Zone Empathy</strong> is crucial. If you are always scheduling meetings that
+          fall during the graveyard shift for a specific region, you will experience lower engagement and higher
+          turnover
+          from those team members. Rotate the "burden" of inconvenient meeting times if no perfect slot exists.</p>
+        <p>Ask participants not just for their timezone, but for their <strong>Protected Hours</strong>—times when
+          they are absolutely unavailable due to school runs, religious practices, or local holidays. This respect for
+          personal time builds <strong>Psychological Safety</strong> within distributed teams.</p>
+      </section>
+      <section id="propose" class="section">
+        <h2>Propose times effectively — keep choices small</h2>
+        <p>A common mistake is offering too many options, which leads to <strong>Analysis Paralysis</strong>. Offer 23
+          reasonable slots rather than an open poll. Use the tool to show organizer local time — participant local time
+          to reduce confusion.</p>
+        <div class="workflow">
+          <strong>The Propose Slot Recipe</strong>
+          <ol>
+            <li><strong>Constraint Mapping:</strong> Pick 23 candidate windows that meet the majority of hard
+              constraints.</li>
+            <li><strong>Multi-Local Display:</strong> Share the list with local times for each participant. Example:
+              "NY: 10 AM | London: 3 PM | Dubai: 7 PM."</li>
+            <li><strong>The "Silence is Consent" Rule:</strong> Set a clear deadline for feedback (e.g., "Please let me
+              know by noon tomorrow if none of these work").</li>
+            <li><strong>Final Verification:</strong> Once a slot is chosen, verify there are no last-minute daylight
+              saving changes.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="agenda" class="section">
+        <h2>Design a short agenda — timebox and anchor decisions</h2>
+        <p>An agenda drives outcomes. Every minute of a 10-person meeting costs 10 minutes of productivity. If you
+          don't have an agenda, you don't have a meeting—you have a conversation. An effective agenda includes goals,
+          time allocations, and expected outcomes.</p>
+        <ul>
+          <li><strong>Outcome-Based Titles:</strong> Instead of "Budget discussion," use "Approve Q2 Marketing Spend."
+          </li>
+          <li><strong>The "2-Minute Rule":</strong> Start every meeting with a 2-minute summary of the goal and the
+            required decisions.</li>
+          <li><strong>Parking Lot:</strong> Use a "Parking Lot" note for topics that are important but outside the
+            current agenda's scope. This keep the meeting focused on the immediate goal.</li>
+        </ul>
+      </section>
+      <section id="timezone" class="section">
+        <h2>Time zone pitfalls & daylight savings</h2>
+        <p>Beware daylight saving transitions and ambiguous zone names. Where possible, use IANA time zone identifiers
+          (e.g., <em>Europe/London</em>) rather than abbreviations like <em>EST</em> or <em>CST</em>, which can refer
+          to multiple different regions.</p>
+        <p>Daylight Savings Time (DST) is the greatest source of meeting scheduling errors. Because different
+          countries switch on different dates, a meeting that works in the first week of October may be a nightmare in
+          the second week. For a deeper look at these challenges, see our
+          <strong><a href="../../blog/digital-nomad-time-zones.html">Digital Nomad Time Zone Guide</a></strong>.
+          The Meeting Planner tool allows you to check future dates to ensure your recurring meetings
+          stay within reasonable hours.
+        </p>
+      </section>
+      <section id="psychology" class="section">
+        <h2>The Psychology of Synchronous Collaboration</h2>
+        <p>Synchronous meetings are expensive. Use them for <strong>Complex Coordination</strong>, <strong>Dynamic
+            Brainstorming</strong>, or <strong>Emotional Connection</strong>. For simple status updates or information
+          sharing, prioritize <strong><a href="../../blog/asynchronous-communication-guide.html">Asynchronous
+              Communication</a></strong>
+          using tools like <a href="/notes-en.html">Actionable Notes</a> or email.</p>
+        <p>In a sync meeting, the "Presence" of participants is your most valuable asset. Encourage "Video On" for small
+          groups to capture non-verbal cues, but allow "Video Off" for large presentations to reduce <strong>Zoom
+            Fatigue</strong>. Managing the energy of the meeting is just as important as managing the time.</p>
+      </section>
+      <section id="recipes" class="section">
+        <h2>Synchronous meeting recipes</h2>
+        <p>Standardized formats reduce the cognitive load of participating in meetings.</p>
+        <div class="workflow">
+          <strong>The Decision Sprint (30 minutes)</strong>
+          <ol>
+            <li><strong>Pre-Read (Async):</strong> Send all data and context 24 hours before.</li>
+            <li><strong>Clarification (5m):</strong> Quick Q&A for any technical misunderstandings.</li>
+            <li><strong>Debate (15m):</strong> Structured discussion of pros/cons.</li>
+            <li><strong>Decision (5m):</strong> Final vote or owner call.</li>
+            <li><strong>Next Steps (5m):</strong> Define who does what and by when.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="share" class="section">
+        <h2>Share, confirm & send invites</h2>
+        <p>When you confirm a slot, send a calendar invite with clear timezone-aware times, agenda, and attachments.
+          The invite is the "Contract" for the meeting.</p>
+        <ul>
+          <li><strong>Direct Linking:</strong> Include a link to the meeting note or collaborative doc in the invite.
+          </li>
+          <li><strong>Required vs. Optional:</strong> Be clear about who <em>must</em> be there for a decision to be
+            made.</li>
+          <li><strong>The "Record" Toggle:</strong> If someone can't make it due to a timezone conflict, record the
+            meeting and share the link in the follow-up note within 2 hours.</li>
+        </ul>
+      </section>
+      <section id="#faq" class="section">
+        <h2>Frequently asked questions</h2>
+        <div class="muted">
+          <p><strong>Q: What is the ideal meeting length?</strong><br><strong>A:</strong> Parkinson—s Law says work
+            expands to fill the time available. Try scheduling "Short Default" meetings (20m or 50m) to allow for
+            bio-breaks between sessions.</p>
+          <p><strong>Q: How do I handle participants who are always late?</strong><br><strong>A:</strong> Start on time
+            every time. Once the culture shifts to "The meeting starts at :00," lateness will naturally decrease as
+            people realize they are missing critical context.</p>
+          <p><strong>Q: Should I use a Meeting Planner for 1-on-1s?</strong><br><strong>A:</strong> Yes. Showing the
+            other
+            person you've considered their local time is a sign of professional respect and strengthens the
+            working relationship.</p>
+        </div>
+      </section>
+      <p class="muted" style="margin-top:2rem;">Related tools: <a href="/notes-en.html">Actionable Notes</a> — <a
+          href="/pomodoro.html">Pomodoro Timer</a> — <a href="/timer-en.html#startBtn">Task Timer</a></p>
+      <p style="margin-top:1.5rem;"><a href="/meeting-planner-en.html" class="cta"
+          aria-label="Open Meeting Planner">Open Meeting Planner tool</a></p>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="https://ko-fi.com/sergenet" target="_blank" rel="noopener"
+          style="color: var(--muted); text-decoration: none; font-size: 0.9rem;">
+          <i class="fa fa-coffee"></i> Support TimerHaven on Ko-fi
+        </a>
+      </div>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>&copy; 2026 TimerHaven. All tools are free and privacy-friendly.<br>
+          Questions or feedback? Contact us at <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Read
+          our <a href="/privacy.html">Privacy Policy</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Meeting Planner & Time Zone Coordinator</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A coordination tool for finding the best overlapping time for meetings across multiple global time zones.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">History</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Enter the cities of all participants.</li><li>View the overlapping 'Green' (working hours) slots.</li><li>Select the best time and share the invite.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Always aim for 'socially acceptable' hours (9 AM - 6 PM) for all participants whenever possible to ensure high engagement."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="../../stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="../../weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="../../world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="../../calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="../../clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="../../countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="../../currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="../../focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="../../habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="../../meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="../../notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="../../password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
+    </article>
+  
+    
+    <div class="author-card" style="margin-top: 3rem; background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 1.5rem; align-items: center; border: 1px solid #e2e8f0;">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" alt="Serge Shammas" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #43cea2;">
+        <div class="author-info">
+            <div style="font-weight: 700; color: #185a9d; font-size: 1.2rem;">Serge Shammas</div>
+            <p style="margin: 0.25rem 0 0 0; color: #64748b; font-size: 0.95rem; line-height: 1.5;">Productivity enthusiast and developer of TimerHaven. Follow my journey in mastering focus with simple, free systems.</p>
+        </div>
+    </div>
+    <section class="related-articles" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee;">
+        <h3 style="color: #185a9d; margin-bottom: 1.5rem;">Deep Dive Productivity Articles</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;"><a href="../../blog/asynchronous-communication-guide.html" style="color: #185a9d; text-decoration: none;">Asynchronous Communication Guide</a></h4>
+                <p style="font-size: 0.9rem; color: #64748b; margin: 0;">Explore the science and systems behind this tool.</p>
+                <a href="../../blog/asynchronous-communication-guide.html" style="display: inline-block; margin-top: 1rem; font-weight: 700; color: #43cea2; text-decoration: none; font-size: 0.9rem;">Read Article &rarr;</a>
+            </div>
+            <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;"><a href="../../blog/digital-nomad-time-zones.html" style="color: #185a9d; text-decoration: none;">Digital Nomad Time Zone Mastery</a></h4>
+                <p style="font-size: 0.9rem; color: #64748b; margin: 0;">Explore the science and systems behind this tool.</p>
+                <a href="../../blog/digital-nomad-time-zones.html" style="display: inline-block; margin-top: 1rem; font-weight: 700; color: #43cea2; text-decoration: none; font-size: 0.9rem;">Read Article &rarr;</a>
+            </div>
+        </div>
+    </section>
+</main>
+  <!-- Floating pill button -->
+  <a href="/meeting-planner-en.html" class="return-to-tool" role="button" aria-label="Back to Meeting Planner">
+    <span class="icon" aria-hidden="true">?</span>
+    <span class="label">Back to Meeting Planner</span>
+  </a>
+  <script>
+    (function () {
+      try {
+        var pill = document.querySelector('.return-to-tool');
+        if (!pill) return;
+        if (!pill.hasAttribute('tabindex')) pill.setAttribute('tabindex', '0');
+        pill.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pill.click(); }
+        });
+        try {
+          var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+          if (!mq || !mq.matches) {
+            pill.style.opacity = '0';
+            pill.style.transform = 'translateY(15px)';
+            window.addEventListener('load', function () {
+              setTimeout(function () {
+                pill.style.transition = 'transform .4s cubic-bezier(.2,.9,.2,1.2), opacity .3s ease';
+                pill.style.opacity = '1';
+                pill.style.transform = 'translateY(0)';
+              }, 200);
+            });
+          }
+        } catch (e) { }
+      } catch (err) { }
+    })();
+  </script>
+</body>
+</html>

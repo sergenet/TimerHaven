@@ -1,145 +1,404 @@
 <!DOCTYPE html>
-
 <html dir="rtl" lang="ar">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>مؤقت بومودورو</title>
-<meta content="زد تركيزك باستخدام تقنية بومودورو. تعلّم كيفية استخدام المؤقت، واحصل على نصائح، والأسئلة الشائعة." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
-    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:340px; padding:1.3rem; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
-    .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
-    .form-inline { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; }
-    .pomodoro-display { font-weight:700; font-size:1.25rem; margin-top:.5rem; margin-bottom:.5rem; }
-    .controls-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem; }
-    .toggles { margin-top:.6rem; display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
-    .btn-small { padding:.35rem .7rem; font-size:.9rem; }
-    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-    @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width,initial-scale=1" name="viewport" />
+  <title>مؤقت بومودورو</title>
+<meta name="description" content="زد تركيزك باستخدام تقنية بومودورو. تعلّم كيفية استخدام المؤقت، واحصل على نصائح، والأسئلة الشائعة.">
+  <link rel="canonical" href="https://timerhaven.com/pomodoro-ar.html" />
+  
+  
+  <meta content="زد تركيزك باستخدام تقنية بومودورو. تعلّم كيفية استخدام المؤقت، واحصل على نصائح، والأسئلة الشائعة."
+    name="description" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/newsletter.css"  media="print" onload="this.media='all'">
+  <style>
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif; font-display: swap;
+      color: #0b2545;
+    }
+    .page-wrap {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .center-row {
+      display: flex;
+      gap: 1.6rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .article-card,
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      width: 340px;
+      padding: 1.3rem;
+    }
+    .article-card h2 {
+      color: #185a9d;
+      font-size: 1.25rem;
+      margin-bottom: .6rem;
+    }
+    .tool-card h3 {
+      color: #185a9d;
+      font-size: 1.35rem;
+      margin-bottom: .5rem;
+    }
+    .form-inline {
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .pomodoro-display {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+    }
+    .controls-row {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+    }
+    .toggles {
+      margin-top: .6rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .btn-small {
+      padding: .35rem .7rem;
+      font-size: .9rem;
+    }
+    footer.site {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #6b7280;
+    }
+    /* Pomodoro icon styling (tomato emoji + stopwatch) */
+    .pomodoro-emoji {
+      font-size: 1.2rem;
+      line-height: 1;
+      margin-left: .25rem;
+    }
+    .pomodoro-fa {
+      font-size: 1.0rem;
+      color: #e24b3a;
+      margin-left: .25rem;
+    }
+    @media (max-width:900px) {
+      .center-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      .article-card,
+      .tool-card {
+        width: 98%;
+        max-width: 540px;
+      }
+    }
+    /* small readable styles for read-guide/mobilesummary (matches en behaviour) */
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+    .read-guide {
+      display: inline-block;
+      margin: .35rem 0 .8rem 0;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: #0d6efd;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+    }
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+    }
   </style>
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="مؤقت بومودورو">
+  <meta property="og:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/pomodoro-ar.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="مؤقت بومودورو">
+  <meta name="twitter:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ظ…ط¤ظ‚طھ ط¨ظˆظ…ظˆط¯ظˆط±ظˆ (طھظ‚ظ†ظٹط© ط§ظ„ط·ظ…ط§ط·ظ…)",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "طھظ‚ظ†ظٹط© ط¨ظˆظ…ظˆط¯ظˆط±ظˆ ظ‡ظٹ ظ…ظ†ظ‡ط¬ظٹط© ظ„ط¥ط¯ط§ط±ط© ط§ظ„ظˆظ‚طھ طھط³طھط®ط¯ظ… ظ…ط¤ظ‚طھط§ظ‹ ظ„طھظ‚ط³ظٹظ… ط§ظ„ط¹ظ…ظ„ ط¥ظ„ظ‰ ظپطھط±ط§طھ ط²ظ…ظ†ظٹط©طŒ طھط¨ظ„ط؛ ظ…ط¯طھظ‡ط§ ط¹ط§ط¯ط© 25 ط¯ظ‚ظٹظ‚ط©طŒ طھظپطµظ„ ط¨ظٹظ†ظ‡ط§ ظپطھط±ط§طھ ط±ط§ط­ط© ظ‚طµظٹط±ط©.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/pomodoro-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/pomodoro-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/pomodoro-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/pomodoro-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/pomodoro-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/pomodoro-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/pomodoro-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/pomodoro-en.html">
 </head>
 <body>
-<div class="page-wrap">
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">مؤقت بومودورو</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">زد تركيزك باستخدام تقنية بومودورو. تعلّم كيفية استخدام المؤقت، واحصل على نصائح، والأسئلة الشائعة.</p>
-</div>
-<div class="center-row">
-
-<div aria-label="مؤقت بومودورو" class="tool-card" role="region">
-<!-- Back to main menu (localized to Arabic) -->
-<a aria-label="العودة إلى القائمة الرئيسية" class="d-block mb-2" dir="rtl" href="index.html" id="backLink" style="text-decoration:none; color:#0d6efd; font-weight:600; direction:rtl;">
+    <div class="page-wrap">
+    <div class="text-center mb-4">
+      <h1 style="margin-bottom:.25rem;">مؤقت بومودورو</h1>
+      <p class="lead" style="color:#374151; margin-bottom:1rem;">زد تركيزك باستخدام تقنية بومودورو. تعلّم كيفية استخدام
+        المؤقت، واحصل على نصائح، والأسئلة الشائعة.</p>
+    </div>
+    <div class="center-row">
+      <div aria-label="مؤقت بومودورو" class="tool-card" role="region">
+        <!-- Back to main menu (localized to Arabic) -->
+        <a aria-label="العودة إلى القائمة الرئيسية" class="d-block mb-2" dir="rtl" href="index.html" id="backLink"
+          style="text-decoration:none; color:#0d6efd; font-weight:600; direction:rtl;">
           العودة إلى القائمة الرئيسية →
         </a>
-<h3><i class="fa fa-apple-whole"></i> مؤقت بومودورو</h3>
-<div aria-live="polite" class="pomodoro-section">
-<div class="form-inline mb-2">
-<label style="font-weight:600;">العمل (دقائق):
-              <input class="form-control" id="workLength" max="60" min="1" style="width:80px; margin-left:.3rem;" type="number" value="25"/>
-</label>
-<label style="font-weight:600;">استراحة (دقائق):
-              <input class="form-control" id="breakLength" max="30" min="1" style="width:80px; margin-left:.3rem;" type="number" value="5"/>
-</label>
+        <!-- Replaced Apple icon with Pomodoro visuals -->
+        <h3><span class="pomodoro-emoji" aria-hidden="true">🍅</span><i class="fa fa-stopwatch pomodoro-fa"
+            aria-hidden="true"></i> مؤقت بومودورو</h3>
+        <div class="mobile-summary">Pomodoro quick start — <a href="ar/pomodoro-timer/pomodoro-index.html">اقرأ الدليل
+            الكامل</a></div>
+        <a id="read-guide-btn" class="read-guide" href="ar/pomodoro-timer/pomodoro-index.html" role="button">اقرأ الدليل
+          الكامل</a>
+        <div aria-live="polite" class="pomodoro-section">
+          <div class="form-inline mb-2">
+            <label style="font-weight:600;">العمل (دقائق):
+              <input class="form-control" id="workLength" max="60" min="1" style="width:80px; margin-left:.3rem;"
+                type="number" value="25" />
+            </label>
+            <label style="font-weight:600;">استراحة (دقائق):
+              <input class="form-control" id="breakLength" max="30" min="1" style="width:80px; margin-left:.3rem;"
+                type="number" value="5" />
+            </label>
+          </div>
+          <div id="pomodoroStatus" style="font-weight:600; margin-bottom:.25rem;">عمل</div>
+          <div class="pomodoro-display" id="pomodoroDisplay">25:00</div>
+          <div class="controls-row">
+            <button class="btn btn-success btn-small" id="startBtn"><i class="fa fa-play"></i> ابدأ</button>
+            <button class="btn btn-secondary btn-small" id="pauseBtn"><i class="fa fa-pause"></i> إيقاف مؤقت</button>
+            <button class="btn btn-danger btn-small" id="resetBtn"><i class="fa fa-refresh"></i> إعادة ضبط</button>
+          </div>
+          <div id="pomodoroCycle" style="margin-top:.5rem; color:#185a9d; font-weight:600;">الدورات المكتملة: 0</div>
+          <div aria-hidden="false" class="toggles" style="margin-top:.5rem;">
+            <label style="display:flex; align-items:center; gap:.35rem;"><input id="beepToggle" type="checkbox" /> صوت
+              عند الانتهاء</label>
+            <label style="display:flex; align-items:center; gap:.35rem;"><input id="notifyToggle" type="checkbox" />
+              إشعار سطح المكتب</label>
+            <label style="display:flex; align-items:center; gap:.35rem;"><input id="autoStartToggle" type="checkbox" />
+              بدء الفترة التالية تلقائيًا</label>
+          </div>
+          <details class="faq-section" style="margin-top:1rem;">
+            <summary style="font-weight:700; font-size:1rem;">الأسئلة الشائعة</summary>
+            <ul style="padding-left:1.1rem; color:#374151;">
+              <li><b>ما هو بومودورو؟</b> تقنية إنتاجية تعتمد دورات عمل/استراحة.</li>
+              <li><b>هل يمكن تعديل المؤقت؟</b> نعم — عدِّل المدد حسب حاجتك.</li>
+              <li><b>هل تُحفظ الجلسات؟</b> لا — تُعاد عند إعادة تحميل الصفحة.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+      <!-- Newsletter Signup Section -->
+      <div class="newsletter-signup" style="width: 100%; max-width: 500px; margin: 2rem auto;">
+        <div class="newsletter-container">
+          <div class="newsletter-icon">📬</div>
+          <h3 class="newsletter-title">ابقَ على تركيزك</h3>
+          <p class="newsletter-description">
+            احصل على تحليلات أسبوعية للإنتاجية وملخصات الكتب ونصائح أدوات حصرية في بريدك الوارد.
+          </p>
+          <form class="newsletter-form" id="newsletterForm">
+            <div class="form-group">
+              <input type="email" name="email" class="newsletter-input" placeholder="بريدك الإلكتروني" required
+                aria-label="Email address">
+              <button type="submit" class="newsletter-button">انضم الآن</button>
+            </div>
+            <p id="newsletterMessage" style="display: none;"></p>
+            <p class="newsletter-privacy">
+              <small>نحن نحترم خصوصيتك. اطلع على <a href="/privacy.html">سياسة الخصوصية</a>.</small>
+            </p>
+          </form>
+        </div>
+      </div>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
 </div>
-<div id="pomodoroStatus" style="font-weight:600; margin-bottom:.25rem;">عمل</div>
-<div class="pomodoro-display" id="pomodoroDisplay">25:00</div>
-<div class="controls-row">
-<button class="btn btn-success btn-small" id="startBtn"><i class="fa fa-play"></i> ابدأ</button>
-<button class="btn btn-secondary btn-small" id="pauseBtn"><i class="fa fa-pause"></i> إيقاف مؤقت</button>
-<button class="btn btn-danger btn-small" id="resetBtn"><i class="fa fa-refresh"></i> إعادة ضبط</button>
-</div>
-<div id="pomodoroCycle" style="margin-top:.5rem; color:#185a9d; font-weight:600;">الدورات المكتملة: 0</div>
-<div aria-hidden="false" class="toggles" style="margin-top:.5rem;">
-<label style="display:flex; align-items:center; gap:.35rem;"><input id="beepToggle" type="checkbox"/> صوت عند الانتهاء</label>
-<label style="display:flex; align-items:center; gap:.35rem;"><input id="notifyToggle" type="checkbox"/> إشعار سطح المكتب</label>
-<label style="display:flex; align-items:center; gap:.35rem;"><input id="autoStartToggle" type="checkbox"/> بدء الفترة التالية تلقائيًا</label>
-</div>
-<details class="faq-section" style="margin-top:1rem;">
-<summary style="font-weight:700; font-size:1rem;">الأسئلة الشائعة</summary>
-<ul style="padding-left:1.1rem; color:#374151;">
-<li><b>ما هو بومودورو؟</b> تقنية إنتاجية تعتمد دورات عمل/استراحة.</li>
-<li><b>هل يمكن تعديل المؤقت؟</b> نعم — عدِّل المدد حسب حاجتك.</li>
-<li><b>هل تُحفظ الجلسات؟</b> لا — تُعاد عند إعادة تحميل الصفحة.</li>
-</ul>
-</details>
-</div>
-</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+        &copy; 2025 تايمرهافن. جميع الأدوات مجانية وتحترم الخصوصية.<br>
+        <a href="/privacy.html">الخصوصية</a> ·
+        <a href="/terms.html">شروط الخدمة</a> ·
+        <a href="/contact.html">اتصل بنا</a>
+      
+    
+    
 
-</div>
-<footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
-      © 2025 TimerHaven. <a href="privacy.html">سياسة الخصوصية</a> • <a href="terms.html">الشروط</a> • <a href="contact.html">اتصل بنا</a>
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="rtl" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: right;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">مؤقت بومودورو (تقنية الطماطم)</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">تقنية بومودورو هي منهجية لإدارة الوقت تستخدم مؤقتاً لتقسيم العمل إلى فترات زمنية، تبلغ مدتها عادة 25 دقيقة، تفصل بينها فترات راحة قصيرة.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">التاريخ</h3>
+                <p style="line-height: 1.7; color: #4b5563;">طورها فرانتشيسكو تشيريلو في أواخر الثمانينيات. استخدم تشيريلو مؤقت مطبخ على شكل ثمرة طماطم (pomodoro) لتنظيم دراسته الجامعية.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">كيفية الاستخدام</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-right: 1.25rem;"><li>اختر مهمة واحدة.</li><li>اضبط المؤقت لـ 25 دقيقة.</li><li>اعمل بتركيز.</li><li>خذ استراحة لـ 5 دقائق.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"استخدم فترات الراحة لتحريك جسمك أو شرب الماء لزيادة التركيز."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">المزيد من أدوات الإنتاجية المجانية</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">مؤقت المهام</a> <a href="stopwatch-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">ساعة الإيقاف</a> <a href="pomodoro-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">بومودورو</a> <a href="unit-converter-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">محول الوحدات</a> <a href="weather-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الطقس</a> <a href="world-clock-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الساعة العالمية</a> <a href="calendar-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">التقويم</a> <a href="clipboard-manager-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الحافظة</a> <a href="countdown-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العد التنازلي</a> <a href="currency-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العملات</a> <a href="focus-music-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">موسيقى التركيز</a> <a href="habit-tracker-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العادات</a> <a href="meeting-planner-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الاجتماعات</a> <a href="notes-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الملاحظات</a> <a href="password-generator-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">كلمات المرور</a></div>
+        </div>
+    </section>
+    
 </footer>
-</div>
-<script>
-  (function(){
-    // Pomodoro logic (simple)
-    var timer = null;
-    var running = false;
-    var isWork = true;
-    var timeLeft = 25*60;
-    var cycleCount = 0;
-
-    function updateDisplay() {
-      var min = Math.floor(timeLeft/60);
-      var sec = timeLeft % 60;
-      document.getElementById('pomodoroDisplay').textContent = String(min).padStart(2,'0') + ':' + String(sec).padStart(2,'0');
-      document.getElementById('pomodoroStatus').textContent = isWork ? "عمل" : "استراحة";
-      document.getElementById('pomodoroCycle').textContent = "الدورات المكتملة: " + cycleCount;
-    }
-
-    function setLengths() {
-      if (isWork) {
-        timeLeft = parseInt(document.getElementById('workLength').value,10) * 60;
-      } else {
-        timeLeft = parseInt(document.getElementById('breakLength').value,10) * 60;
-      }
-      updateDisplay();
-    }
-
-    document.getElementById('workLength').addEventListener('change', setLengths);
-    document.getElementById('breakLength').addEventListener('change', setLengths);
-
-    document.getElementById('startBtn').addEventListener('click', function(){
-      if (running) return;
-      running = true;
-      timer = setInterval(function(){
-        if (timeLeft > 0) {
-          timeLeft--;
-          updateDisplay();
-        } else {
-          clearInterval(timer);
-          running = false;
-          if (isWork) cycleCount++;
-          isWork = !isWork;
-          setLengths();
+    </div>
+    <script>
+      (function () {
+        // Pomodoro logic (simple)
+        var timer = null;
+        var running = false;
+        var isWork = true;
+        var timeLeft = 25 * 60;
+        var cycleCount = 0;
+        function updateDisplay() {
+          var min = Math.floor(timeLeft / 60);
+          var sec = timeLeft % 60;
+          document.getElementById('pomodoroDisplay').textContent = String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+          document.getElementById('pomodoroStatus').textContent = isWork ? "عمل" : "استراحة";
+          document.getElementById('pomodoroCycle').textContent = "الدورات المكتملة: " + cycleCount;
         }
-      }, 1000);
+        function setLengths() {
+          if (isWork) {
+            timeLeft = parseInt(document.getElementById('workLength').value, 10) * 60;
+          } else {
+            timeLeft = parseInt(document.getElementById('breakLength').value, 10) * 60;
+          }
+          updateDisplay();
+        }
+        document.getElementById('workLength').addEventListener('change', setLengths);
+        document.getElementById('breakLength').addEventListener('change', setLengths);
+        document.getElementById('startBtn').addEventListener('click', function () {
+          if (running) return;
+          running = true;
+          timer = setInterval(function () {
+            if (timeLeft > 0) {
+              timeLeft--;
+              updateDisplay();
+            } else {
+              clearInterval(timer);
+              running = false;
+              if (isWork) cycleCount++;
+              isWork = !isWork;
+              setLengths();
+            }
+          }, 1000);
+        });
+        document.getElementById('pauseBtn').addEventListener('click', function () {
+          if (timer) clearInterval(timer);
+          running = false;
+        });
+        document.getElementById('resetBtn').addEventListener('click', function () {
+          if (timer) clearInterval(timer);
+          running = false;
+          cycleCount = 0;
+          isWork = true;
+          setLengths();
+        });
+        setLengths();
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script defer src="assets/newsletter.js"></script>
+    <p style="margin-top:1rem;"><a class="cta" href="/pomodoro-ar.html">اقرأ الدليل الكامل</a></p>
+  <script>
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() {
+          // Initialize non-critical widgets here if needed
+        });
+      }
     });
-
-    document.getElementById('pauseBtn').addEventListener('click', function(){
-      if (timer) clearInterval(timer);
-      running = false;
-    });
-
-    document.getElementById('resetBtn').addEventListener('click', function(){
-      if (timer) clearInterval(timer);
-      running = false;
-      cycleCount = 0;
-      isWork = true;
-      setLengths();
-    });
-
-    setLengths();
-  })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/ar/pomodoro/pomodoro-index.html">Read full guide</a></p></body>
+</body>
 </html>

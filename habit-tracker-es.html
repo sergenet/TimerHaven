@@ -1,146 +1,667 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<title>Rastreador de Hábitos — TimerHaven</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Sigue hábitos diarios y crea nuevas rutinas." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    /* same styles as English file */
-    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
-    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
-    .article-card, .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 340px; min-width: 220px; max-width: 340px; min-height: 500px; flex: 1 1 340px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 2em 1.3em 1em 1.3em; margin: 0; box-sizing: border-box; text-align: left; overflow: hidden; }
-    .tool-card { max-width: 410px; min-width: 240px; padding: 2em 1.5em 1em 1.5em; position: relative; z-index: 1; }
-    .tool-card h3 { font-size: 1.45em; font-weight: 700; margin-bottom: 0.1em; }
-    .habit-form { margin-bottom: 1em; display: flex; gap: 0.5em; }
-    .habit-item { background: #f7fafc; border-radius: 7px; padding: 0.6em 0.8em; margin-bottom: 0.6em; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
-    .dot { width: 15px; height: 15px; border-radius: 50%; display: inline-block; background: #e0e7ef; border: 1px solid #d0d0d0;}
-    .dot.done { background: #43cea2; border: 1.5px solid #185a9d; }
-    .dot.today { border: 2px solid #43cea2; }
-    .stats-bar { background: #f6fbfa; border-radius: 10px; margin-bottom: 1.2em; padding: 0.7em 1em; font-size: 1.05em; font-weight: 600; color: #185a9d; display:flex; gap:2em; align-items:center; justify-content:space-between; }
-    .banner { background: linear-gradient(90deg,#43cea2 0%,#185a9d 100%); color:#fff; border-radius:10px; font-size:1.11em; font-weight:600; text-align:center; margin-bottom:1em; padding:0.7em 0.8em; }
-    /* language-indicator styles removed */
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Rastreador de Hábitos — TimerHaven</title>
+  <link rel="canonical" href="https://timerhaven.com/habit-tracker-es.html" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description" content="Sigue hábitos diarios y crea nuevas rutinas. Aprende a usar el Rastreador de Hábitos, obtén consejos de productividad, preguntas frecuentes y artículos…"> />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tool-theme.css"  media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="assets/newsletter.css"  media="print" onload="this.media='all'">
+  <script src="assets/js/syncManager.js"></script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+    html,
+    body {
+      height: 100%
+    }
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif; font-display: swap;
+      color: var(--text-dark, #102a43);
+      margin: 0;
+      padding: 2rem
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto
+    }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box
+    }
+    /* Use consistent blue (#007bff) for Back and Read full guide to match other tools */
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: #007bff !important;
+      text-decoration: none;
+      font-weight: 700
+    }
+    .back-link:hover {
+      text-decoration: underline
+    }
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .4rem 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: #185a9d
+    }
+    /* Read full guide styled as the other tools (explicit blue) */
+    .cta {
+      display: inline-block;
+      margin: .35rem 0 .8rem 0;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: #007bff !important;
+      color: #fff !important;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+      box-shadow: 0 6px 18px rgba(0, 123, 255, 0.08);
+    }
+    .stats-bar {
+      background: #f6fbfa;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      padding: .7rem 1rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #185a9d;
+      display: flex;
+      gap: 2em;
+      align-items: center;
+      justify-content: space-between
+    }
+    .habit-form {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .habit-form input {
+      flex: 1;
+      min-width: 200px;
+    }
+    .habit-form button {
+      flex: 0 0 auto;
+    }
+    .habit-list {
+      margin-bottom: 1rem
+    }
+    .habit-item {
+      background: #f7fafc;
+      border-radius: 7px;
+      padding: .6rem .8rem;
+      margin-bottom: .6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap
+    }
+    .dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      background: #e0e7ef;
+      border: 1px solid #d0d0d0;
+      margin-left: 3px
+    }
+    .dot.done {
+      background: #43cea2;
+      border: 1.5px solid #185a9d
+    }
+    .dot.today {
+      border: 2px solid #43cea2
+    }
+    .archive-btn {
+      font-size: .9em;
+      margin-left: .6em;
+      background: #fff;
+      border: 1px solid #43cea2;
+      color: #43cea2;
+      border-radius: 6px;
+      padding: .15rem .7rem
+    }
+    .archive-btn.archived {
+      opacity: .65;
+      color: #888;
+      border-color: #d0d0d0
+    }
+    .faq-section summary {
+      cursor: pointer;
+      padding: .2rem 0;
+      font-weight: 700
+    }
+    .faq-section ul {
+      margin-top: .5rem;
+      color: var(--muted);
+      padding-left: 1rem
+    }
+    .banner {
+      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 1.11em;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1em;
+      padding: .7em .8em;
+      display: none
+    }
+    @media (max-width:900px) {
+      .card {
+        padding: 1rem
+      }
+    }
   </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rastreador de Hábitos — TimerHaven">
+  <meta property="og:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/habit-tracker-es.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rastreador de Hábitos — TimerHaven">
+  <meta name="twitter:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta name="keywords" content="free habit tracker no account, daily routine tracker, habitify alternative, simple habit tracking, productivity tools, privacy-first, no login">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Seguimiento de Hábitos",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "Una herramienta de ciencia conductual diseñada para ayudarlo a construir y mantener rutinas positivas a través de la consistencia y el automonitoreo.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/habit-tracker-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/habit-tracker-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/habit-tracker-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/habit-tracker-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/habit-tracker-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/habit-tracker-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/habit-tracker-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/habit-tracker-en.html">
 </head>
 <body>
-<!-- language-indicator removed -->
-<div class="main-container">
-<div class="center-row">
-<div class="article-card"><div><h2 id="howto-title"></h2><ol id="howto-steps"></ol></div><a class="btn btn-outline-primary btn-sm" href="#" id="howto-article-btn"></a></div>
-<div class="tool-card">
-<div class="banner" id="banner" style="display:none;"></div>
-<a class="back-link" href="index.html" id="back-link"></a>
-<h3 id="tool-title"></h3>
-<div class="stats-bar" id="stats-bar"></div>
-<form class="habit-form" id="habitForm"><input class="form-control" id="habitInput" placeholder="" type="text"/><button class="btn btn-success btn-sm" id="add-btn" type="submit"></button></form>
-<div class="habit-list" id="habitList"></div>
-<details class="faq-section" id="faq-section"><summary id="faq-title"></summary><ul id="faq-list" style="padding-left:1em;"></ul></details>
-<!-- Tips removed from the middle (tool) card as requested -->
-</div>
-<div class="article-card"><div><h2 id="tips-title"></h2><ul id="tips-list"></ul></div><a class="btn btn-outline-primary btn-sm" href="#" id="tips-article-btn"></a></div>
-</div>
-</div>
-<script>
+    <script>try { localStorage.setItem('timerhavenLang', 'es'); } catch (e) { };</script>
+  <main class="container" role="main">
+    <section class="card tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">← Volver al menú principal</a>
+      <div id="tool-title" class="tool-title"><i class="fa fa-check-double"></i> Rastreador de Hábitos</div>
+      <!-- Read full guide button (canonical absolute path) -->
+      <p style="margin:0 0 .6rem 0;">
+        <a id="read-guide-btn" class="cta" href="https://timerhaven.com/es/habit-tracker/habit-tracker-index.html"
+          role="button" target="_blank" rel="noopener">Leer artículo</a>
+      </p>
+      <div id="banner" class="banner" style="display:none;"></div>
+      <div id="stats-bar" class="stats-bar">Rastreado: 0 · Hecho hoy: 0 · Mejor racha: 0</div>
+      <div class="habit-section">
+        <form class="habit-form" id="habitForm">
+          <input type="text" id="habitInput" class="form-control" placeholder="Nombre del hábito">
+          <button type="submit" class="btn btn-success btn-sm" id="add-btn">Añadir hábito</button>
+        </form>
+        <div id="habitList" class="habit-list"></div>
+      </div>
+      <details class="faq-section">
+        <summary id="faq-title">Preguntas frecuentes</summary>
+        <ul id="faq-list" style="padding-left:1em;"></ul>
+      </details>
+    </section>
+    <!-- Newsletter Signup Section -->
+    <div class="newsletter-signup" style="width: 100%; max-width: 500px; margin: 2rem auto;">
+      <div class="newsletter-container">
+        <div class="newsletter-icon">📬</div>
+        <h3 class="newsletter-title">Crea Mejores Hábitos</h3>
+        <p class="newsletter-description">
+          Únete a más de 50,000 lectores que reciben semanalmente estrategias basadas en investigación y actualizaciones
+          de herramientas.
+        </p>
+        <form class="newsletter-form" id="newsletterForm">
+          <div class="form-group">
+            <input type="email" name="email" class="newsletter-input" placeholder="Tu correo electrónico" required
+              aria-label="Email address">
+            <button type="submit" class="newsletter-button">Unirse Ahora</button>
+          </div>
+          <p id="newsletterMessage" style="display: none;"></p>
+          <p class="newsletter-privacy">
+          <div class="newsletter-container">
+            <div class="newsletter-icon">📬</div>
+            <h3 class="newsletter-title">Crea Mejores Hábitos</h3>
+            <p class="newsletter-description">
+              Únete a más de 50,000 lectores que reciben semanalmente estrategias basadas en investigación y
+              actualizaciones de herramientas.
+            </p>
+            <form class="newsletter-form" id="newsletterForm">
+              <div class="form-group">
+                <input type="email" name="email" class="newsletter-input" placeholder="Tu correo electrónico" required
+                  aria-label="Email address">
+                <button type="submit" class="newsletter-button">Unirse Ahora</button>
+              </div>
+              <p id="newsletterMessage" style="display: none;"></p>
+              <p class="newsletter-privacy">
+                <small>Respetamos tu privacidad. Consulta nuestra <a href="/privacy.html">Política de
+                    privacidad</a>.</small>
+              </p>
+            </form>
+          </div>
+      </div>
+  </main>
+  <script>
     const habitTranslations = {
       es: {
-        "language-label":"Idioma:","back-link":"Volver al menú principal","tool-title":"Rastreador de Hábitos",
-        "habitInput":"Nombre del hábito","add-btn":"Añadir hábito","banner-all-done":"🎉 ¡Todas las hábitos completadas hoy! ¡Buen trabajo!",
-        "stats-tracked":"Rastreado: ","stats-done":"Hecho hoy: ","stats-best":"Mejor racha: ",
-        "howto-title":'<i class="fa fa-check-double"></i> Cómo usar el Rastreador de Hábitos',
-        "howto-steps":`<li><b>Añade un hábito:</b> Escribe tu hábito diario y pulsa Añadir.</li>
+        "language-label": "Idioma:",
+        "back-link": "← Volver al menú principal",
+        "tool-title": "Rastreador de Hábitos",
+        "habitInput": "Nombre del hábito",
+        "add-btn": "Añadir hábito",
+        "banner-all-done": "🎉 ¡Todas las hábitos completadas hoy! ¡Buen trabajo!",
+        "stats-tracked": "Rastreado: ",
+        "stats-done": "Hecho hoy: ",
+        "stats-best": "Mejor racha: ",
+        "howto-title": '<i class="fa fa-check-double"></i> Cómo usar el Rastreador de Hábitos',
+        "howto-steps": `<li><b>Añade un hábito:</b> Escribe tu hábito diario y pulsa Añadir.</li>
           <li><b>Marcar como hecho:</b> Cuando completes un hábito, pulsa Hecho.</li>
           <li><b>Eliminar/Archivar:</b> Elimina o archiva hábitos que no quieras seguir.</li>
           <li><b>Repetir a diario:</b> Vuelve cada día para actualizar tu progreso.</li>`,
-        "howto-article-btn":"Leer artículo","howto-article-link":"habit-how-to-es.html",
-        "tips-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos',
-        "tips-list":`<li><b>Empieza pequeño:</b> Comienza con hábitos fáciles.</li>
+        "howto-article-btn": "Leer artículo",
+        "howto-article-link": "https://timerhaven.com/es/habit-tracker/habit-tracker-index.html",
+        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos para Hábitos',
+        "tips-list": `<li><b>Empieza pequeño:</b> Comienza con hábitos fáciles.</li>
           <li><b>Rastrea a diario:</b> La consistencia es clave.</li>
-          <li><b>Celebra progreso:</b> Reconoce pequeñas victorias.</li>`,
-        "tips-article-btn":"Leer artículo","tips-article-link":"habit-tips-es.html",
-        "tips-mobile-title":'<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Consejos',
-        "tips-mobile-list":`<li><b>Empieza pequeño:</b> Construye gradualmente.</li>
-          <li><b>Revisa rachas:</b> Mantén la motivación.</li>
-          <li><b>Usa recordatorios:</b> Agrega alertas de calendario.</li>`,
-        "faq-title":"Preguntas frecuentes",
-        "faq-list":`<li><b>¿Se guardan los hábitos?</b> Sí, en tu navegador.</li>
+          <li><b>Celebra el progreso:</b> Reconoce pequeñas victorias.</li>`,
+        "tips-article-btn": "Leer artículo",
+        "tips-article-link": "habit-tips-es.html",
+        "faq-title": "Preguntas frecuentes",
+        "faq-list": `<li><b>¿Se guardan los hábitos?</b> Sí, en tu navegador.</li>
           <li><b>¿Puedo rastrear varios hábitos?</b> Sí.</li>
           <li><b>¿Se muestran rachas?</b> Sí.</li>`,
-        "mark-done":"Marcar","done-today":"Hecho hoy","streak":"Racha: ","longest":"Mejor: ",
-        "archive":"Archivar","unarchive":"Desarchivar","delete":"Eliminar","no-habits":"Aún no hay hábitos."
+        "mark-done": "Marcar",
+        "done-today": "Hecho hoy",
+        "streak": "Racha: ",
+        "longest": "Mejor: ",
+        "archive": "Archivar",
+        "unarchive": "Desarchivar",
+        "delete": "Eliminar",
+        "no-habits": "Aún no hay hábitos."
       }
     };
-
-    const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
-
-    function getLang() { try { const l = localStorage.getItem('timerhavenLang') || 'es'; return (l && l.slice(0,2)) || 'es'; } catch(e){ return 'es'; } }
-
-    // For brevity this file focuses on Spanish translations and reuses the same logic as the canonical English file.
-    // The script below mirrors the English file's behavior and uses habitTranslations.es for UI strings.
-
+    function escapeHtml(text) {
+      if (!text) return "";
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    function getTodayStr() {
+      const d = new Date();
+      return d.getFullYear() + "-" + (d.getMonth() + 1).toString().padStart(2, "0") + "-" + d.getDate().toString().padStart(2, "0");
+    }
+    function lastNDays(n) {
+      const arr = [];
+      for (let i = n - 1; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        arr.push(d.getFullYear() + "-" + (d.getMonth() + 1).toString().padStart(2, "0") + "-" + d.getDate().toString().padStart(2, "0"));
+      }
+      return arr;
+    }
+    let habits = JSON.parse(localStorage.getItem('habits') || '[]');
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'es';
+        return (l && l.slice(0, 2)) || 'es';
+      } catch (e) {
+        return 'es';
+      }
+    }
     function applyLanguage(lang) {
-      lang = (lang || getLang()).slice(0,2);
+      lang = (lang || getLang()).slice(0, 2);
       const t = habitTranslations[lang] || habitTranslations['es'];
       document.body.dir = (lang === "ar") ? "rtl" : "ltr";
-      const labelEl = document.getElementById('language-label'); if (labelEl) labelEl.textContent = t['language-label'] || 'Idioma:';
-      const nameEl = document.getElementById('language-name'); if (nameEl) nameEl.textContent = langNames[lang] || lang;
       const back = document.getElementById('back-link'); if (back) back.textContent = t['back-link'] || '';
       const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-check-double"></i> ${t['tool-title'] || ''}`;
       const input = document.getElementById('habitInput'); if (input) input.placeholder = t['habitInput'] || '';
       const addBtn = document.getElementById('add-btn'); if (addBtn) addBtn.textContent = t['add-btn'] || '';
       const faqTitle = document.getElementById('faq-title'); if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
       const faqList = document.getElementById('faq-list'); if (faqList) faqList.innerHTML = t['faq-list'] || '';
-      const howtoTitle = document.getElementById('howto-title'); if (howtoTitle) howtoTitle.innerHTML = t['howto-title'] || '';
-      const howtoSteps = document.getElementById('howto-steps'); if (howtoSteps) howtoSteps.innerHTML = t['howto-steps'] || '';
-      const howtoBtn = document.getElementById('howto-article-btn'); if (howtoBtn) { howtoBtn.textContent = t['howto-article-btn'] || ''; howtoBtn.href = t['howto-article-link'] || ''; }
-      const tipsTitle = document.getElementById('tips-title'); if (tipsTitle) tipsTitle.innerHTML = t['tips-title'] || '';
-      const tipsList = document.getElementById('tips-list'); if (tipsList) tipsList.innerHTML = t['tips-list'] || '';
-      const tipsBtn = document.getElementById('tips-article-btn'); if (tipsBtn) { tipsBtn.textContent = t['tips-article-btn'] || ''; tipsBtn.href = t['tips-article-link'] || ''; }
-      const tipsMobileTitle = document.getElementById('tips-mobile-title'); if (tipsMobileTitle) tipsMobileTitle.innerHTML = t['tips-mobile-title'] || '';
-      const tipsMobileList = document.getElementById('tips-mobile-list'); if (tipsMobileList) tipsMobileList.innerHTML = t['tips-mobile-list'] || '';
-      renderHabits();
+      const readBtn = document.getElementById('read-guide-btn'); if (readBtn) { readBtn.textContent = t['howto-article-btn'] || 'Leer artículo'; readBtn.href = t['howto-article-link'] || 'https://timerhaven.com/es/habit-tracker/habit-tracker-index.html'; readBtn.target = '_blank'; readBtn.rel = 'noopener'; }
     }
-
-    function getTodayStr() { const d = new Date(); return d.getFullYear() + "-" + (d.getMonth()+1).toString().padStart(2,"0") + "-" + d.getDate().toString().padStart(2,"0"); }
-    function lastNDays(n) { const arr=[]; for(let i=n-1;i>=0;i--){const d=new Date(); d.setDate(d.getDate()-i); arr.push(d.getFullYear()+"-"+(d.getMonth()+1).toString().padStart(2,"0")+"-"+d.getDate().toString().padStart(2,"0"));} return arr; }
-
-    let habits = JSON.parse(localStorage.getItem('habits') || '[]');
-
-    function resetHabitsIfNeeded() { const today=getTodayStr(); let changed=false; habits.forEach(h=>{ if(!h.history) h.history=[]; if(h.lastChecked!==today){ h.doneToday=false; h.lastChecked=today; changed=true;}}); if(changed) saveHabits(); }
-    function saveHabits(){ localStorage.setItem('habits', JSON.stringify(habits)); }
-
-    function renderHabits(){
-      resetHabitsIfNeeded();
+    function resetHabitsIfNeeded() {
+      const today = getTodayStr();
+      let changed = false;
+      habits.forEach(habit => {
+        if (!habit.history) habit.history = [];
+        if (habit.lastChecked !== today) {
+          habit.doneToday = false;
+          habit.lastChecked = today;
+          changed = true;
+        }
+      });
+      if (changed) saveHabits();
+    }
+    function ensureHabitIds() {
+      let changed = false;
+      habits.forEach(h => {
+        if (!h.id) {
+          h.id = 'habit_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+          changed = true;
+        }
+      });
+      if (changed) saveHabits();
+    }
+    function saveHabits() { localStorage.setItem('habits', JSON.stringify(habits)); }
+    function refreshUI() {
+      if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(() => renderHabits());
+      } else {
+        renderHabits();
+      }
+    }
+    function renderHabits() {
+      try {
+        resetHabitsIfNeeded();
+        const lang = getLang();
+        const t = habitTranslations[lang] || habitTranslations['es'];
+        const list = document.getElementById('habitList');
+        if (!list) return;
+        list.innerHTML = '';
+        const today = getTodayStr();
+        let doneTodayCount = 0;
+        let bestStreak = 0;
+        let activeCount = 0;
+        if (!habits) habits = [];
+        habits.forEach(h => { if (h && !h.archived) activeCount++; });
+        if (habits.length === 0 || activeCount === 0) {
+          list.innerHTML = `<div style="color:#888;">${t["no-habits"] || 'No hay hábitos todavía.'}</div>`;
+        }
+        habits.forEach((habit, idx) => {
+          if (habit.archived) return;
+          let streak = habit.streak || 0;
+          let longest = habit.longest || streak;
+          bestStreak = Math.max(bestStreak, longest);
+          if (!habit.history) habit.history = [];
+          let historyDots = "";
+          lastNDays(7).forEach((date) => {
+            const done = habit.history.includes(date);
+            historyDots += `<span class="dot${done ? ' done' : ''}${date === today ? ' today' : ''}" title="${date}"></span>`;
+          });
+          const isDone = habit.doneToday;
+          if (isDone) doneTodayCount++;
+          list.innerHTML += `
+          <div class="habit-item">
+            <span><b>${escapeHtml(habit.name)}</b>
+              <span class="habit-meta">${t["streak"]}${streak} ${t["longest"]}${longest}</span>
+              <span class="habit-history">${historyDots}</span>
+            </span>
+            <div>
+              <button class="btn btn-outline-${isDone ? 'secondary' : 'success'} btn-sm habit-btn" onclick="markDone(${idx})" ${isDone ? 'disabled' : ''}>
+                ${isDone ? t["done-today"] : t["mark-done"]}
+              </button>
+              <button class="archive-btn${habit.archived ? ' archived' : ''}" onclick="archiveHabit(${idx})">
+                ${habit.archived ? t["unarchive"] : t["archive"]}
+              </button>
+              <button class="btn btn-outline-danger btn-sm habit-btn" onclick="deleteHabit(${idx})"><i class="fa fa-trash"></i> ${t["delete"]}</button>
+            </div>
+          </div>
+        `;
+        });
+        renderBanner(activeCount, doneTodayCount);
+      } catch (renderErr) { console.error("[HabitTracker] Render error:", renderErr); }
+    }
+    function renderStats(tracked, done, best) {
       const t = habitTranslations[getLang()] || habitTranslations['es'];
-      const list = document.getElementById('habitList'); list.innerHTML=''; const today=getTodayStr(); let doneTodayCount=0; let bestStreak=0; let activeCount=0;
-      habits.forEach(h=>{ if(!h.archived) activeCount++;});
-      if(habits.length===0||activeCount===0) { list.innerHTML = `<div style="color:#888;">${t["no-habits"] || "Aún no hay hábitos."}</div>`; }
-      habits.forEach((habit, idx)=>{ if(habit.archived) return; let streak=habit.streak||0; let longest=habit.longest||streak; bestStreak=Math.max(bestStreak,longest); if(!habit.history) habit.history=[]; let historyDots=""; lastNDays(7).forEach(date=>{ const done=habit.history.includes(date); historyDots += `<span class="dot${done?' done':''}${date===today?' today':''}" title="${date}"></span>`;}); const isDone=habit.doneToday; if(isDone) doneTodayCount++; list.innerHTML += `<div class="habit-item"><span><b>${habit.name}</b><span class="habit-meta">${t["streak"]}${streak} ${t["longest"]}${longest}</span><span class="habit-history">${historyDots}</span></span><button class="btn btn-outline-${isDone?'secondary':'success'} btn-sm habit-btn" onclick="markDone(${idx})" ${isDone?'disabled':''}>${isDone? t["done-today"]: t["mark-done"]}</button><button class="archive-btn${habit.archived?' archived':''}" onclick="archiveHabit(${idx})">${habit.archived? t["unarchive"]: t["archive"]}</button><button class="btn btn-outline-danger btn-sm habit-btn" onclick="deleteHabit(${idx})"><i class="fa fa-trash"></i> ${t["delete"]}</button></div>`;});
-      renderStats(activeCount, doneTodayCount, bestStreak); renderBanner(activeCount, doneTodayCount);
+      document.getElementById("stats-bar").innerHTML =
+        `${t["stats-tracked"]}${tracked} · ${t["stats-done"]}${done} · ${t["stats-best"]}${best}`;
     }
-    function renderStats(tracked, done, best){ const t=habitTranslations[getLang()]; document.getElementById("stats-bar").innerHTML = `${t["stats-tracked"]}${tracked} &bull; ${t["stats-done"]}${done} &bull; ${t["stats-best"]}${best}`; }
-    function renderBanner(tracked, done){ const t=habitTranslations[getLang()]; const banner=document.getElementById("banner"); if(tracked>0 && done===tracked){ banner.textContent = t["banner-all-done"]; banner.style.display="block"; } else { banner.style.display="none"; } }
-
-    document.getElementById('habitForm').addEventListener('submit', function(e){ e.preventDefault(); const name=document.getElementById('habitInput').value.trim(); if(!name) return; habits.push({ name, streak:0, longest:0, doneToday:false, lastChecked:getTodayStr(), history:[], archived:false }); saveHabits(); document.getElementById('habitInput').value=''; renderHabits(); });
-
-    window.markDone=function(idx){ const today=getTodayStr(); if(!habits[idx].doneToday){ habits[idx].doneToday=true; habits[idx].lastChecked=today; habits[idx].streak=(habits[idx].streak||0)+1; habits[idx].longest=Math.max(habits[idx].longest||0,habits[idx].streak); if(!habits[idx].history) habits[idx].history=[]; if(!habits[idx].history.includes(today)) habits[idx].history.push(today); saveHabits(); renderHabits(); } }
-    window.archiveHabit=function(idx){ habits[idx].archived=!habits[idx].archived; saveHabits(); renderHabits(); }
-    window.deleteHabit=function(idx){ habits.splice(idx,1); saveHabits(); renderHabits(); }
-
-    window.addEventListener('storage', function(e){ if(e.key==='timerhavenLang'){ const lang=(e.newValue||getLang()).slice(0,2); applyLanguage(lang); }});
-    function getLang(){ try{ const l=localStorage.getItem('timerhavenLang')||'es'; return (l && l.slice(0,2))||'es'; }catch(e){ return 'es'; } }
-    function applyLanguage(lang){ lang=(lang||getLang()).slice(0,2); const t = habitTranslations[lang] || habitTranslations['es']; document.body.dir = (lang==="ar") ? "rtl" : "ltr"; const back=document.getElementById('back-link'); if(back) back.textContent=t['back-link']; const toolTitle=document.getElementById('tool-title'); if(toolTitle) toolTitle.innerHTML=`<i class="fa fa-check-double"></i> ${t['tool-title']}`; const input=document.getElementById('habitInput'); if(input) input.placeholder=t['habitInput']; const addBtn=document.getElementById('add-btn'); if(addBtn) addBtn.textContent=t['add-btn']; const faqTitle=document.getElementById('faq-title'); if(faqTitle) faqTitle.textContent=t['faq-title']; const faqList=document.getElementById('faq-list'); if(faqList) faqList.innerHTML=t['faq-list']; const howtoTitle=document.getElementById('howto-title'); if(howtoTitle) howtoTitle.innerHTML=t['howto-title']; const howtoSteps=document.getElementById('howto-steps'); if(howtoSteps) howtoSteps.innerHTML=t['howto-steps']; const howtoBtn=document.getElementById('howto-article-btn'); if(howtoBtn){ howtoBtn.textContent=t['howto-article-btn']; howtoBtn.href=t['howto-article-link']; } const tipsTitle=document.getElementById('tips-title'); if(tipsTitle) tipsTitle.innerHTML=t['tips-title']; const tipsList=document.getElementById('tips-list'); if(tipsList) tipsList.innerHTML=t['tips-list']; const tipsBtn=document.getElementById('tips-article-btn'); if(tipsBtn){ tipsBtn.textContent=t['tips-article-btn']; tipsBtn.href=t['tips-article-link']; } renderHabits(); }
-
-    document.addEventListener('DOMContentLoaded', function(){ applyLanguage(getLang()); renderHabits(); });
+    function renderBanner(tracked, done) {
+      const t = habitTranslations[getLang()] || habitTranslations['es'];
+      const banner = document.getElementById("banner");
+      if (tracked > 0 && done === tracked) {
+        banner.textContent = t["banner-all-done"] || habitTranslations["es"]["banner-all-done"];
+        banner.style.display = "block";
+      } else {
+        banner.style.display = "none";
+      }
+    }
+    document.getElementById('habitForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      try {
+        const el = document.getElementById('habitInput');
+        const name = (el && el.value || '').trim();
+        if (!name) return;
+        console.log("[HabitTracker] Adding habit:", name);
+        const newHabit = {
+          id: 'habit_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          name,
+          streak: 0,
+          longest: 0,
+          doneToday: false,
+          lastChecked: getTodayStr(),
+          history: [],
+          archived: false,
+          updatedAt: Date.now()
+        };
+        habits.push(newHabit);
+        saveHabits();
+        try {
+          if (window.SyncManager && window.SyncManager.isAvailable()) {
+            window.SyncManager.saveHabit(newHabit.id, newHabit);
+          }
+        } catch (syncErr) { console.error("[HabitTracker] Sync error (Add):", syncErr); }
+        if (el) el.value = "";
+        refreshUI();
+      } catch (err) { console.error("[HabitTracker] Submit error:", err); }
+    });
+    window.markDone = function (idx) {
+      try {
+        const today = getTodayStr();
+        if (!habits[idx].doneToday) {
+          habits[idx].doneToday = true;
+          habits[idx].lastChecked = today;
+          habits[idx].streak = (habits[idx].streak || 0) + 1;
+          habits[idx].longest = Math.max(habits[idx].longest || 0, habits[idx].streak);
+          if (!habits[idx].history) habits[idx].history = [];
+          if (!habits[idx].history.includes(today)) habits[idx].history.push(today);
+          habits[idx].updatedAt = Date.now();
+          saveHabits();
+          try {
+            if (window.SyncManager && window.SyncManager.isAvailable()) {
+              window.SyncManager.saveHabit(habits[idx].id, habits[idx]);
+            }
+          } catch (syncErr) { console.error("[HabitTracker] Sync error (MarkDone):", syncErr); }
+          refreshUI();
+        }
+      } catch (err) { console.error("[HabitTracker] MarkDone error:", err); }
+    }
+    window.archiveHabit = function (idx) {
+      try {
+        habits[idx].archived = !habits[idx].archived;
+        habits[idx].updatedAt = Date.now();
+        saveHabits();
+        try {
+          if (window.SyncManager && window.SyncManager.isAvailable()) {
+            window.SyncManager.saveHabit(habits[idx].id, habits[idx]);
+          }
+        } catch (syncErr) { console.error("[HabitTracker] Sync error (Archive):", syncErr); }
+        refreshUI();
+      } catch (err) { console.error("[HabitTracker] Archive error:", err); }
+    }
+    window.deleteHabit = function (idx) {
+      try {
+        console.log("[HabitTracker] Deleting index:", idx);
+        const removed = habits.splice(idx, 1)[0];
+        saveHabits();
+        try {
+          if (removed && removed.id && window.SyncManager && window.SyncManager.isAvailable()) {
+            window.SyncManager.deleteHabit(removed.id);
+          }
+        } catch (syncErr) { console.error("[HabitTracker] Sync error (Delete):", syncErr); }
+        refreshUI();
+      } catch (err) { console.error("[HabitTracker] Delete error:", err); }
+    }
+    window.addEventListener('storage', function (e) {
+      if (e.key === 'timerhavenLang') {
+        const lang = (e.newValue || getLang()).slice(0, 2);
+        applyLanguage(lang);
+      }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+      ensureHabitIds();
+      applyLanguage(getLang());
+      refreshUI();
+      window.addEventListener('resize', function () { applyLanguage(getLang()); });
+    });
+    // Cloud Sync Listeners
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.habits) {
+        let changed = false;
+        cloudData.habits.forEach(cloudHabit => {
+          const existing = habits.find(h => h.id === cloudHabit.id);
+          if (!existing) {
+            habits.push(cloudHabit);
+            changed = true;
+          } else if ((cloudHabit.updatedAt || 0) > (existing.updatedAt || 0)) {
+            Object.assign(existing, cloudHabit);
+            changed = true;
+          }
+        });
+        if (changed) {
+          saveHabits();
+          refreshUI();
+        }
+      }
+    });
+    window.addEventListener('timerhaven:cloudDataChanged', function () {
+      if (window.SyncManager && window.SyncManager.isAvailable()) window.SyncManager.initialize();
+    });
   </script>
-<footer>
-  © 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br/>
-<a href="privacy.html">Política de privacidad</a> •
-  <a href="terms.html">Términos</a> •
-  <a href="contact.html">Contacto</a>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anuncio</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+    <div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>free habit tracker no account</strong> and other <strong>privacy-first productivity tools</strong>.</div>
+    &copy; 2025 TimerHaven. Todas las herramientas son gratuitas y respetan la privacidad.<br>
+    <a href="/privacy.html">Privacidad</a> ·
+    <a href="/terms.html">Términos de servicio</a> ·
+    <a href="/contact.html">Contacto</a>
+  
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Seguimiento de Hábitos</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Una herramienta de ciencia conductual diseñada para ayudarlo a construir y mantener rutinas positivas a través de la consistencia y el automonitoreo.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Historia</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Cómo usar</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Defina de 1 a 3 hábitos simples que desee construir.</li><li>Marque cada hábito a medida que lo complete diariamente.</li><li>Supervise su 'racha' para generar impulso y compromiso psicológico.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Consistencia sobre perfección: incluso una pequeña 'marca' en un mal día ayuda a mantener las vías neuronales del hábito."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Más Herramientas de Productividad Gratuitas</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Temporizador de Tareas</a> <a href="stopwatch-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Cronómetro</a> <a href="pomodoro-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Conversor de Unidades</a> <a href="weather-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clima</a> <a href="world-clock-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Reloj Mundial</a> <a href="calendar-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendario</a> <a href="clipboard-manager-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Portapapeles</a> <a href="countdown-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Cuenta Regresiva</a> <a href="currency-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Divisas</a> <a href="focus-music-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Música Focus</a> <a href="habit-tracker-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Hábitos</a> <a href="meeting-planner-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Reuniones</a> <a href="notes-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notas</a> <a href="password-generator-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Contraseñas</a></div>
+        </div>
+    </section>
+    
 </footer>
-<p style="margin-top:1rem;"><a class="cta" href="/es/habit-tracker/habit-tracker-index.html">Read full guide</a></p></body>
+  <script defer src="assets/newsletter.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() {
+          // Initialize non-critical widgets here if needed
+        });
+      }
+    });
+  </script>
+</body>
 </html>

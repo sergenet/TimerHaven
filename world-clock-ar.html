@@ -1,232 +1,525 @@
-<!DOCTYPE html>
-
-<html dir="rtl" lang="ar">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>الوقت العالمي</title>
-<meta content="شاهد الوقت في أي مكان بالعالم فورًا." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
-<style>
-    /* Strong page-level override to match other tools */
-    body { background:#f4f7fb !important; font-family: 'Montserrat', Arial, sans-serif !important; color:#0b2545 !important; margin:0; }
-    .page-wrap { max-width:1200px; margin:2.4rem auto !important; padding:0 1rem !important; box-sizing:border-box !important; }
-    .top-row { display:flex !important; justify-content:flex-end !important; gap:.6rem !important; margin-bottom:.6rem !important; align-items:center; }
-    .language-select { width:180px !important; border-radius:10px !important; padding:.28rem .6rem !important; border:1px solid rgba(13,110,253,0.18) !important; background:#fff !important; color:#0d6efd !important; font-weight:600 !important; }
-    .text-center.mb-4 { margin-bottom:1.5rem !important; }
-    .text-center.mb-4 h1 { font-size:2.4rem !important; margin:0 !important; color:#0b2545 !important; }
-    .text-center.mb-4 p.lead { margin-top:.4rem !important; color:#6b7280 !important; }
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
 
-    .center-row { display:flex !important; gap:1.6rem !important; justify-content:center !important; align-items:flex-start !important; flex-wrap:nowrap !important; }
-
-    .article-card, .tool-card {
-      background:#fff !important;
-      border-radius:18px !important;
-      box-shadow: 0 6px 20px rgba(11,37,69,0.06) !important;
-      padding:1.3rem !important;
-      box-sizing:border-box !important;
-      min-height:340px !important;
-      display:flex !important;
-      flex-direction:column !important;
-      justify-content:space-between !important;
-    }
-
-    .article-card { width:330px !important; }
-    .tool-card { width:420px !important; }
-
-    .article-card h2, .tool-card h3 { color:#185a9d !important; margin:0 0 .6rem 0 !important; font-size:1.25rem !important; }
-    .article-card ul, .article-card ol, .tool-card ul { color:#374151 !important; padding-left:1.1rem !important; }
-
-    .article-card > a.btn,
-    .article-card .btn-outline-primary {
-      width:100% !important;
-      box-sizing:border-box !important;
-      display:inline-block !important;
-      padding:.5rem .75rem !important;
-      border-radius:8px !important;
-      border:1px solid rgba(13,110,253,0.18) !important;
-      color:#0d6efd !important;
-      background:transparent !important;
-      text-align:center !important;
-      margin-top:.35rem !important;
-      font-weight:600 !important;
-    }
-
-    .tool-card .back-link { color:#0d6efd !important; display:inline-block !important; margin-bottom:.6rem !important; text-decoration:none !important; }
-
-    .clock-item { background:#f7fafc !important; border-radius:8px !important; padding:.8rem !important; margin-bottom:.6rem !important; display:flex !important; align-items:center !important; justify-content:space-between !important; }
-
-    footer.site { text-align:center !important; margin-top:1.6rem !important; color:#6b7280 !important; }
-
-    @media (max-width:900px) {
-      .center-row { flex-direction:column !important; align-items:center !important; gap:1rem !important; }
-      .article-card, .tool-card { width:98vw !important; max-width:540px !important; }
-      .text-center.mb-4 h1 { font-size:1.8rem !important; }
-    }
-
-    /* --- Embedded language placement CSS --- */
-
-    /* Defensive: hide any selectors inserted into the tool-card */
-    .tool-card .lang-wrap,
-    .tool-card #language-select-top {
-      display: none !important;
-      visibility: hidden !important;
-    }
-
-    /* Hide the visible language indicator while keeping the markup and JS intact */
-    .top-row { display: none !important; visibility: hidden !important; }
-
-    /* RTL tweak for Arabic pages (if dir attr used) */
-    [dir="rtl"] .top-row { justify-content:flex-start !important; }
-
-    /* Small-screen: move header selector above content for better UX */
-    @media (max-width:900px) {
-      .top-row { justify-content:flex-start !important; }
-      .top-row .language-select { width:140px !important; }
-    }
-
-  </style>
-</link></head>
-<body>
-<div class="page-wrap">
-<div aria-hidden="true" class="top-row">
-<label for="language-select-top" style="font-weight:600; margin-right:.5rem;">Language:</label>
-<!-- populated by JS; header select is primary (kept in DOM for JS but hidden visually) -->
-<select aria-label="Language selector" class="language-select" id="language-select-top"></select>
-</div>
-<div class="text-center mb-4">
-<h1>الوقت العالمي</h1>
-<p class="lead">شاهد الوقت في أي مكان بالعالم فورًا.</p>
-</div>
-<div class="center-row">
-
-<div aria-label="World Clock" class="tool-card" role="region">
-<a class="back-link" href="index.html">← العودة إلى القائمة الرئيسية</a>
-<div class="world-section">
-<form class="clock-form" id="clockForm">
-<select class="form-select city-dropdown" id="cityDropdown">
-<option value="">اختر مدينة...</option>
-</select>
-<input autocomplete="off" class="form-control awesomplete" id="cityInput" placeholder="أو ادخل المدينة/المنطقة الزمنية (مثال: Cairo, Africa/Cairo, GMT+2)" style="margin-top:.6rem;" type="text"/>
-<button class="btn btn-success btn-sm" style="margin-top:.5rem; width:110px;" type="submit">أضف ساعة</button>
-</form>
-<div id="errorMsg" style="color:#b00;margin-bottom:.6em;"></div>
-<div class="clock-list" id="clockList"></div>
-</div>
-<details class="faq-section" style="margin-top:1rem;">
-<summary style="font-weight:700; font-size:1rem;">الأسئلة الشائعة</summary>
-<ul style="padding-left:1.1rem;">
-<li><b>أضف مدينة:</b> استخدم القائمة أو ابدأ بالكتابة لاسم المدينة.</li>
-<li><b>قارن الأوقات:</b> أضف مدنًا متعددة للمقارنة.</li>
-<li><b>إزالة:</b> انقر لإزالة المدينة من قائمتك.</li>
-<li>القائمة الكاملة للمناطق الزمنية: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">انظر هنا</a></li>
-</ul>
-</details>
-</div>
-
-</div>
-<footer class="site">
-      © 2025 TimerHaven. <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms</a> • <a href="contact.html">Contact</a>
-</footer>
-</div>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
 <script>
-    // Clock logic (identical behavior as previous generator)
-    const { DateTime } = luxon;
-    let cityList = [];
-    let cityToZone = {};
-    let cityNames = [];
-    let awesompleteInstance;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    fetch('world-cities.json')
-      .then(r => r.json())
-      .then(data => {
-        cityList = data;
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <title>الوقت العالمي — TimerHaven</title>
+  <link rel="canonical" href="https://timerhaven.com/world-clock-ar.html" />
+  
+  
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description" content="شاهد الوقت في أي مكان بالعالم فورًا." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --link-blue: #0d6efd;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+    html,
+    body {
+      height: 100%
+    }
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif; font-display: swap;
+      color: #0b2545;
+      margin: 0;
+      padding: 2rem;
+      direction: rtl
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 1.6rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06)
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--link-blue) !important;
+      text-decoration: none;
+      font-weight: 700
+    }
+    .back-link:hover {
+      text-decoration: underline
+    }
+    .tool-title {
+      color: #185a9d;
+      font-size: 1.35rem;
+      margin: 0 0 .6rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      justify-content: flex-end
+    }
+    .lead {
+      color: #374151;
+      margin: 0 0 .8rem 0;
+      text-align: right
+    }
+    article.card a.read-guide {
+      background: var(--link-blue) !important;
+      color: #fff !important;
+      border-radius: 8px;
+      padding: .45rem .7rem;
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+      box-shadow: 0 6px 18px rgba(13, 110, 253, 0.12);
+    }
+    article.card a.read-guide:hover {
+      background: #09507a !important;
+      color: #fff !important
+    }
+    .form-row-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin-bottom: 1rem;
+      align-items: stretch
+    }
+    .form-inline {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-start
+    }
+    .clock-list {
+      margin-top: .6rem
+    }
+    .clock-item {
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: .8rem;
+      margin-bottom: .6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+    .btn-add {
+      background: #198754;
+      border-color: #198754;
+      color: #fff;
+      border-radius: 6px;
+      padding: .35rem .6rem
+    }
+    .btn-clear {
+      background: transparent;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: #374151;
+      border-radius: 6px;
+      padding: .35rem .6rem
+    }
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px rgba(224, 231, 239, 0.9);
+      text-align: right
+    }
+    footer.site {
+      text-align: center;
+      margin-top: 1.6rem;
+      color: #6b7280
+    }
+    .top-row {
+      display: none !important;
+      visibility: hidden !important
+    }
+    @media (max-width:900px) {
+      body {
+        padding: 1rem
+      }
+      .container {
+        padding: 0
+      }
+    }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="الوقت العالمي — TimerHaven">
+  <meta property="og:description" content="شاهد الوقت في أي مكان بالعالم فورًا.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/world-clock-ar.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="الوقت العالمي — TimerHaven">
+  <meta name="twitter:description" content="شاهد الوقت في أي مكان بالعالم فورًا.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta name="keywords" content="world clock, global time zones, current time world, city time converter, productivity tools, privacy-first, no login">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ط§ظ„ط³ط§ط¹ط© ط§ظ„ط¹ط§ظ„ظ…ظٹط© ظˆط§ظ„ظ†ط·ط§ظ‚ط§طھ ط§ظ„ط²ظ…ظ†ظٹط©",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "طھط¹ط±ط¶ ط§ظ„ط³ط§ط¹ط© ط§ظ„ط¹ط§ظ„ظ…ظٹط© ط§ظ„ظˆظ‚طھ ط§ظ„ط­ط§ظ„ظٹ ظپظٹ ظ…ظˆط§ظ‚ط¹ ظ…ط®طھظ„ظپط© ط­ظˆظ„ ط§ظ„ط¹ط§ظ„ظ…طŒ ظ…ط¹ ظ…ط±ط§ط¹ط§ط© ط§ظ„طھظˆظ‚ظٹطھ ط§ظ„طµظٹظپظٹ ظˆط§ظ„ط§ط®طھظ„ط§ظپط§طھ ط§ظ„ط²ظ…ظ†ظٹط©.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/world-clock-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/world-clock-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/world-clock-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/world-clock-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/world-clock-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/world-clock-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/world-clock-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/world-clock-en.html">
+</head>
+<body>
+    <main class="container" role="main">
+    <article class="card" aria-labelledby="tool-title">
+      <a href="/index.html" class="back-link">← العودة إلى القائمة الرئيسية</a>
+      <div id="tool-title" class="tool-title"><i class="fa fa-globe"></i> الوقت العالمي</div>
+      <p style="margin:0 0 .6rem 0; text-align:right;">
+        <a id="read-guide-btn" class="read-guide" href="/ar/world-clock/world-clock-index.html" role="button"
+          aria-label="اقرأ المقال كاملًا">اقرأ المقال كاملًا</a>
+      </p>
+      <p class="lead">شاهد الوقت في أي مكان بالعالم فورًا.</p>
+      <form class="clock-form" id="clockForm" autocomplete="off">
+        <div class="form-row-vertical">
+          <select class="form-select city-dropdown" id="cityDropdown" aria-label="اختر مدينة">
+            <option value="">اختر مدينة...</option>
+          </select>
+          <input autocomplete="off" class="form-control awesomplete" id="cityInput"
+            placeholder="أو ادخل المدينة/المنطقة الزمنية (مثال: Cairo, Africa/Cairo, GMT+2)" type="text" />
+          <div class="form-inline" style="margin-top:.4rem">
+            <button class="btn btn-sm btn-add" type="submit" id="addClockBtn">أضف ساعة</button>
+            <button class="btn btn-sm btn-clear" type="button" id="clearAllBtn">مسح الكل</button>
+          </div>
+        </div>
+      </form>
+      <div id="errorMsg" style="color:#b00;margin-bottom:.6em;text-align:right;"></div>
+      <div class="clock-list" id="clockList"></div>
+      <details class="faq-section">
+        <summary style="font-weight:700; font-size:1rem;">الأسئلة الشائعة</summary>
+        <ul style="padding-right:1.1rem; color:#374151; list-style: none;">
+          <li style="margin-bottom:.45rem;"><b>أضف مدينة:</b> استخدم القائمة أو ابدأ بكتابة اسم المدينة.</li>
+          <li style="margin-bottom:.45rem;"><b>قارن الأوقات:</b> أضف مدنًا متعددة للمقارنة.</li>
+          <li style="margin-bottom:.45rem;"><b>إزالة:</b> انقر لإزالة المدينة من قائمتك.</li>
+          <li>القائمة الكاملة للمناطق الزمنية: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+              target="_blank" rel="noopener">انظر هنا</a></li>
+        </ul>
+      </details>
+    </article>
+  </main>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="direction:rtl;text-align:right;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+    <div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>world clock</strong> and other <strong>privacy-first productivity tools</strong>.</div>
+    &copy; 2025 TimerHaven. جميع الأدوات مجانية وتحترم الخصوصية.<br>
+    <a href="/privacy.html">الخصوصية</a> ·
+    <a href="/terms.html">شروط الاستخدام</a> ·
+    <a href="/contact.html">اتصل بنا</a>
+  
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="rtl" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: right;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">الساعة العالمية</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">مراقبة الوقت في مدن العالم المختلفة والمناطق الزمنية.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">التاريخ</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">كيفية الاستخدام</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-right: 1.25rem;"><li>أضف المدينة التي تهمك.</li><li>قارنها مع توقيتك المحلي.</li><li>تحقق من التوقيت الصيفي.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"استخدم UTC كمرجع عالمي للاجتماعات الدولية."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">المزيد من أدوات الإنتاجية المجانية</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">مؤقت المهام</a> <a href="stopwatch-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">ساعة الإيقاف</a> <a href="pomodoro-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">بومودورو</a> <a href="unit-converter-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">محول الوحدات</a> <a href="weather-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الطقس</a> <a href="world-clock-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الساعة العالمية</a> <a href="calendar-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">التقويم</a> <a href="clipboard-manager-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الحافظة</a> <a href="countdown-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العد التنازلي</a> <a href="currency-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العملات</a> <a href="focus-music-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">موسيقى التركيز</a> <a href="habit-tracker-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العادات</a> <a href="meeting-planner-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الاجتماعات</a> <a href="notes-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الملاحظات</a> <a href="password-generator-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">كلمات المرور</a></div>
+        </div>
+    </section>
+    
+</footer>
+  <script>
+    /*
+     Arabic-localized world clock
+     - Display Arabic month words instead of transliterated month (e.g. كانون الأول instead of "ديسمبر")
+     - Use Luxon for weekdays localization, but override month names for more "Arabic" wording
+    */
+    const { DateTime } = luxon;
+    function normalizeKey(s) { if (!s) return ''; try { return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); } catch (e) { return String(s).toLowerCase().trim(); } }
+    function escapeHtml(s) { if (!s) return ''; return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
+    function pageLang() {
+      const sel = document.getElementById('language-select-top');
+      if (sel && sel.value) return sel.value.toLowerCase();
+      if (document.documentElement && document.documentElement.lang) return document.documentElement.lang.slice(0, 2).toLowerCase();
+      return 'en';
+    }
+    function displayFor(city, lang) {
+      if (!city) return '';
+      if (lang && city.localizedNames && city.localizedNames[lang]) return city.localizedNames[lang];
+      if (city.nativeName) return city.nativeName;
+      return city.name || '';
+    }
+    function localizedCountryName(countryCode, lang) {
+      try {
+        if (!countryCode || typeof Intl === 'undefined' || !Intl.DisplayNames) return '';
+        const dn = new Intl.DisplayNames([lang], { type: 'region' });
+        return dn.of(countryCode.toUpperCase()) || '';
+      } catch (e) { return ''; }
+    }
+    const locale = pageLang() || 'ar';
+    // Tolerant loader & population
+    let cityList = [], cityToZone = {}, cityNames = [], awesompleteInstance = null;
+    (async function loadCities() {
+      const dropdown = document.getElementById('cityDropdown');
+      const input = document.getElementById('cityInput');
+      const lang = pageLang();
+      const PATHS = ['/world-cities.json', '/assets/data/world-cities.json', '/world-cities.json?cachebust=' + Date.now()];
+      async function tryFetchPaths(paths) {
+        for (const p of paths) {
+          try {
+            const res = await fetch(p, { cache: 'no-cache' });
+            if (!res.ok) continue;
+            const json = await res.json();
+            if (Array.isArray(json)) return json;
+            if (json && Array.isArray(json.cities)) return json.cities;
+          } catch (e) { }
+        }
+        return null;
+      }
+      const FALLBACK = [
+        { name: "London", timezone: "Europe/London", countryCode: "GB" },
+        { name: "New York", timezone: "America/New_York", countryCode: "US" },
+        { name: "Boston", timezone: "America/New_York", countryCode: "US" },
+        { name: "Tokyo", timezone: "Asia/Tokyo", countryCode: "JP" },
+        { name: "Sydney", timezone: "Australia/Sydney", countryCode: "AU" },
+        { name: "Paris", timezone: "Europe/Paris", countryCode: "FR" },
+        { name: "Berlin", timezone: "Europe/Berlin", countryCode: "DE" },
+        { name: "Los Angeles", timezone: "America/Los_Angeles", countryCode: "US" },
+        { name: "Toronto", timezone: "America/Toronto", countryCode: "CA" },
+        { name: "Dubai", timezone: "Asia/Dubai", countryCode: "AE" },
+        { name: "Singapore", timezone: "Asia/Singapore", countryCode: "SG" },
+        { name: "Mumbai", timezone: "Asia/Kolkata", countryCode: "IN" }
+      ];
+      try {
+        let raw = await tryFetchPaths(PATHS);
+        if (!raw || !raw.length) {
+          console.info('World Clock: falling back to embedded list');
+          raw = FALLBACK;
+        }
+        const list = raw.map(item => {
+          return {
+            name: item.name || item.city || '',
+            timezone: item.timezone || item.tz || item.IANA || '',
+            countryCode: item.countryCode || item.country || '',
+            localizedNames: item.localizedNames || {},
+            nativeName: item.nativeName || ''
+          };
+        }).filter(it => it.name);
+        // Deduplicate
+        const map = new Map();
+        list.forEach(i => {
+          const key = normalizeKey(i.name);
+          if (!map.has(key)) map.set(key, i);
+        });
+        const entries = Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name, lang, { sensitivity: 'base' }));
+        cityList = entries;
         cityToZone = {};
         cityNames = [];
-        data.forEach(city => {
-          cityToZone[city.name.toLowerCase()] = city.timezone;
-          cityNames.push(city.name);
-        });
-        let dropdown = document.getElementById("cityDropdown");
-        cityList.forEach(city => {
-          if (city.name.toLowerCase() !== 'tokyo') {
-            let opt = document.createElement("option");
-            opt.value = city.timezone;
-            opt.textContent = city.name;
+        if (dropdown) {
+          const placeholder = dropdown.querySelector('option[value=""]') ? dropdown.querySelector('option[value=""]').outerHTML : '<option value="">اختر مدينة...</option>';
+          dropdown.innerHTML = placeholder;
+        }
+        entries.forEach(e => {
+          const key = normalizeKey(e.name);
+          cityToZone[key] = e.timezone || '';
+          const label = displayFor(e, lang) || e.name;
+          cityNames.push(label);
+          if (dropdown) {
+            const opt = document.createElement('option');
+            opt.value = e.timezone || '';
+            const country = e.countryCode ? localizedCountryName(e.countryCode, lang) : '';
+            opt.textContent = country ? `${label} · ${country}` : label;
             dropdown.appendChild(opt);
           }
         });
-        let input = document.getElementById("cityInput");
-        awesompleteInstance = new Awesomplete(input, {
-          list: cityNames.filter(n => n.toLowerCase() !== 'tokyo'),
-          minChars: 1,
-          maxItems: 12,
-          autoFirst: true
-        });
-      });
-
+        if (typeof Awesomplete !== 'undefined' && input) {
+          if (input.awesomplete) input.awesomplete.list = cityNames;
+          else awesompleteInstance = new Awesomplete(input, { list: cityNames, minChars: 1, maxItems: 12, autoFirst: true });
+        }
+        console.info('world-cities: populated', entries.length, 'entries');
+      } catch (err) {
+        console.warn('world-cities load failed', err);
+      }
+    })();
     let clocks = JSON.parse(localStorage.getItem('worldClocks') || '[]');
     function saveClocks() { localStorage.setItem('worldClocks', JSON.stringify(clocks)); }
+    function escapeHtml(s) { return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
     function renderClocks() {
       const list = document.getElementById('clockList');
       list.innerHTML = '';
-      if (clocks.length === 0) {
-        list.innerHTML = '<div style="color:#888;">لم تتم إضافة ساعات بعد.</div>';
+      if (!clocks || clocks.length === 0) {
+        list.innerHTML = '<div style="color:#888;text-align:right;">لم تتم إضافة ساعات بعد.</div>';
         return;
       }
       clocks.forEach((clock, idx) => {
-        let timeStr = '...';
+        let timeHtml = '...';
         let error = false;
         try {
-          let now = DateTime.now().setZone(clock.tz);
-          if (!now.isValid) throw new Error("Invalid zone");
-          timeStr = now.toFormat('cccc, dd LLL yyyy<br>HH:mm:ss');
-        } catch {
-          timeStr = 'Invalid time zone';
+          const now = DateTime.now().setZone(clock.tz).setLocale(locale);
+          if (!now.isValid) throw new Error('Invalid zone');
+          // Weekday localized by Luxon (Arabic)
+          const weekday = now.toFormat('cccc'); // e.g., "السبت"
+          const day = now.toFormat('dd');       // day number
+          const year = now.toFormat('yyyy');    // year number
+          // Use traditional Arabic month names from AR_MONTHS_TRAD for clearer Arabic wording
+          const monthName = AR_MONTHS_TRAD[now.month] || now.toFormat('LLLL');
+          // Arabic comma U+060C used between parts
+          const datePart = `${weekday}، ${day} ${monthName} ${year}`;
+          const timePart = now.toFormat('HH:mm:ss');
+          // keep numeric time LTR for readability inside RTL page
+          timeHtml = `${datePart}<br><span dir="ltr">${timePart}</span>`;
+        } catch (e) {
+          timeHtml = 'منطقة زمنية غير صالحة';
           error = true;
         }
-        list.innerHTML += `
-          <div class="clock-item">
-            <span class="clock-meta"><i class="fa fa-clock"></i></span>
-            <span><b>${clock.label}</b><br>${timeStr}${error ? ' <span style="color:#b00;">(Check spelling or use a valid city or IANA time zone)</span>' : ''}</span>
-            <button class="btn btn-outline-danger btn-sm clock-btn" onclick="deleteClock(${idx})"><i class="fa fa-trash"></i></button>
+        let displayLabel = clock.label || '';
+        const normLabel = normalize(displayLabel);
+        if (cityToZone[normLabel]) {
+          displayLabel = localizeCity(zoneToCity[cityToZone[normLabel]]);
+        } else if (localizedToZone[normLabel]) {
+          displayLabel = displayLabel;
+        } else if (zoneToCity[clock.tz]) {
+          displayLabel = localizeCity(zoneToCity[clock.tz]);
+        }
+        const item = document.createElement('div');
+        item.className = 'clock-item';
+        item.innerHTML = `
+      <div style="display:flex;gap:.6rem;align-items:center;justify-content:space-between;width:100%;direction:rtl;">
+        <div style="display:flex;gap:.6rem;align-items:center;">
+          <i class="fa fa-clock"></i>
+          <div style="line-height:1.1;text-align:right">
+            <strong>${escapeHtml(displayLabel)}</strong><br>
+            <span>${timeHtml}${error ? ' <span style="color:#b00;">(تحقق من التهجئة أو استخدم منطقة IANA صالحة)</span>' : ''}</span>
           </div>
-        `;
+        </div>
+        <div style="display:flex;gap:.5rem;align-items:center;">
+          <button class="btn btn-outline-danger btn-sm" data-idx="${idx}" title="حذف"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    `;
+        list.appendChild(item);
+      });
+      list.querySelectorAll('button[data-idx]').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const idx = parseInt(this.getAttribute('data-idx'), 10);
+          deleteClock(idx);
+        });
       });
     }
-
-    function normalizeInput(input) { return input.trim().toLowerCase().replace(/[\s\-_]+/g, " "); }
-
-    function addClock(label, tz) {
-      clocks.push({ label, tz });
-      saveClocks();
-      renderClocks();
-    }
-
-    document.getElementById('clockForm').addEventListener('submit', function(e) {
+    function addClock(label, tz) { clocks.push({ label, tz }); saveClocks(); renderClocks(); }
+    function clearAll() { clocks = []; saveClocks(); renderClocks(); }
+    function deleteClock(idx) { if (idx >= 0 && idx < clocks.length) { clocks.splice(idx, 1); saveClocks(); renderClocks(); } }
+    document.getElementById('clockForm').addEventListener('submit', function (e) {
       e.preventDefault();
       document.getElementById('errorMsg').textContent = '';
-      let cityInput = document.getElementById('cityInput').value.trim();
-      let dropdown = document.getElementById('cityDropdown').value;
-      let label = '';
-      let zone = '';
-      if (dropdown) {
-        label = document.getElementById('cityDropdown').options[document.getElementById('cityDropdown').selectedIndex].text;
-        zone = dropdown;
-      } else if (cityInput) {
-        label = cityInput;
-        if (/^[A-Za-z]+\/[A-Za-z_]+$/.test(cityInput)) {
-          zone = cityInput;
+      const raw = document.getElementById('cityInput').value.trim();
+      const dropdownVal = document.getElementById('cityDropdown').value;
+      let label = ''; let zone = '';
+      if (dropdownVal) {
+        const dd = document.getElementById('cityDropdown');
+        label = dd.options[dd.selectedIndex].textContent;
+        zone = dropdownVal;
+      } else if (raw) {
+        if (/^[A-Za-z]+\/[A-Za-z_+\-]+$/.test(raw)) {
+          zone = raw;
+          label = localizeCity(zoneToCity[zone] || raw);
         } else {
-          let norm = normalizeInput(cityInput);
-          if (cityToZone[norm] && norm !== 'tokyo') {
+          const norm = normalize(raw);
+          if (localizedToZone[norm]) {
+            zone = localizedToZone[norm];
+            label = localizeCity(zoneToCity[zone]);
+          } else if (cityToZone[norm]) {
             zone = cityToZone[norm];
+            label = localizeCity(zoneToCity[zone]);
           } else {
-            document.getElementById('errorMsg').innerHTML = 'لم يتم التعرف على المدينة. جرب القائمة أو أدخل منطقة IANA صالحة (مثال: Africa/Cairo). <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">Full list here</a>.';
+            document.getElementById('errorMsg').innerHTML = 'لم يتم التعرف على المدينة. جرّب القائمة أو الإدخال التلقائي أو أدخل منطقة IANA صالحة (مثل Africa/Cairo). <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">قائمة كاملة هنا</a>.';
             return;
           }
         }
@@ -238,131 +531,38 @@
       document.getElementById('cityInput').value = '';
       document.getElementById('cityDropdown').selectedIndex = 0;
     });
-
-    window.deleteClock = function(idx) {
-      clocks.splice(idx, 1);
-      saveClocks();
-      renderClocks();
-    }
-
+    document.getElementById('clearAllBtn')?.addEventListener('click', clearAll);
     setInterval(renderClocks, 1000);
     renderClocks();
   </script>
-<!-- Embedded unified header language selector + defensive localizer JS -->
-<script>
-  (function(){
-    const LANGS = [
-      { code: 'en', name: 'English' },
-      { code: 'fr', name: 'Français' },
-      { code: 'es', name: 'Español' },
-      { code: 'de', name: 'Deutsch' },
-      { code: 'ru', name: 'Русский' },
-      { code: 'el', name: 'Ελληνικά' },
-      { code: 'ar', name: 'العربية' }
-    ];
-
-    function detectPageInfo() {
-      const path = (location.pathname || '').split('/').pop() || '';
-      const m = path.match(/^world-(clock|how-to|tips)-([a-z]{2})\.html$/i);
-      if (m) return { type: m[1], lang: m[2].toLowerCase() };
-      if (/^world-clock\.html$/i.test(path)) return { type: 'clock', lang: 'ar' };
-      const m2 = path.match(/^world-(clock|how-to|tips)\.html$/i);
-      if (m2) return { type: m2[1], lang: 'ar' };
-      return { type: 'clock', lang: 'ar' };
-    }
-
-    function removeInCardSelectors() {
-      document.querySelectorAll('.tool-card .lang-wrap, .tool-card #language-select-top').forEach(function(el){ try{ el.remove(); }catch(e){} });
-    }
-
-    function buildHeaderSelector(selectedLang) {
-      // ensure .top-row exists (page templates include it; create if missing)
-      let top = document.querySelector('.page-wrap .top-row') || document.querySelector('.top-row');
-      if (!top) {
-        top = document.createElement('div');
-        top.className = 'top-row';
-        const pw = document.querySelector('.page-wrap') || document.body;
-        pw.insertBefore(top, pw.firstChild);
-      }
-
-      // remove any existing header select/label
-      top.querySelectorAll('label[for="language-select-top"], #language-select-top').forEach(function(n){ try{ n.remove(); }catch(e){} });
-
-      const label = document.createElement('label');
-      label.setAttribute('for','language-select-top');
-      label.textContent = 'Language:';
-      label.style.fontWeight = '600';
-      label.style.marginRight = '.5rem';
-
-      const sel = document.createElement('select');
-      sel.id = 'language-select-top';
-      sel.className = 'language-select';
-      sel.setAttribute('aria-label','Language selector');
-
-      LANGS.forEach(function(l){
+  <!-- Header language selector kept in DOM (hidden) to allow switching pages -->
+  <script>
+    (function () {
+      const LANGS = [
+        { code: 'en', name: 'English' },
+        { code: 'fr', name: 'Français' },
+        { code: 'es', name: 'Español' },
+        { code: 'de', name: 'Deutsch' },
+        { code: 'ru', name: 'Русский' },
+        { code: 'el', name: 'Ελληνικά' },
+        { code: 'ar', name: 'العربية' }
+      ];
+      const sel = document.getElementById('language-select-top');
+      if (!sel) return;
+      sel.innerHTML = '';
+      LANGS.forEach(l => {
         const o = document.createElement('option');
         o.value = l.code;
         o.textContent = l.name;
-        if (l.code === selectedLang) o.selected = true;
+        if (l.code === 'ar') o.selected = true;
         sel.appendChild(o);
       });
-
-      top.appendChild(label);
-      top.appendChild(sel);
-      // ensure visible
-      sel.style.display = 'inline-flex';
-      sel.style.visibility = 'visible';
-      return sel;
-    }
-
-    function hookSelector(sel) {
-      if (!sel) return;
-      // remove previous handler if any
-      if (sel._handler) sel.removeEventListener('change', sel._handler);
-      sel._handler = function() {
+      sel.addEventListener('change', function () {
         const code = this.value || 'ar';
-        const info = detectPageInfo();
-        if ((location.pathname || '').match(/world-clock\.html$/i)) {
-          window.location.href = 'world-clock-' + code + '.html';
-          return;
-        }
-        window.location.href = 'world-' + info.type + '-' + code + '.html';
-      };
-      sel.addEventListener('change', sel._handler);
-    }
-
-    // Run on DOM ready
-    function init() {
-      removeInCardSelectors();
-      const info = detectPageInfo();
-      const sel = buildHeaderSelector(info.lang);
-      hookSelector(sel);
-
-      // Defensive: observe for a short time and remove inserted in-card selectors (legacy scripts)
-      const observer = new MutationObserver(function(muts){
-        muts.forEach(function(m){
-          if (m.addedNodes) {
-            m.addedNodes.forEach(function(n){
-              try {
-                if (n.querySelectorAll) {
-                  n.querySelectorAll('.tool-card .lang-wrap, .tool-card #language-select-top').forEach(function(el){ try{ el.remove(); }catch(e){} });
-                }
-                if (n.matches && (n.matches('.tool-card .lang-wrap') || n.matches('.tool-card #language-select-top'))) {
-                  try{ n.remove(); }catch(e){}
-                }
-              } catch(e){}
-            });
-          }
-        });
+        window.location.href = 'world-clock-' + code + '.html';
       });
-      observer.observe(document.documentElement || document.body, { childList: true, subtree: true });
-      // stop observing after 6s
-      setTimeout(function(){ try{ observer.disconnect(); }catch(e){} }, 6000);
-    }
-
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-    else init();
-  })();
+    })();
   </script>
-<p style="margin-top:1rem;"><a class="cta" href="/ar/world-clock/world-clock-index.html">Read full guide</a></p></body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

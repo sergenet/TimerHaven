@@ -1,146 +1,525 @@
 <!DOCTYPE html>
-
 <html dir="rtl" lang="ar">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>محول الوحدات</title>
-<meta content="حوّل الطول والوزن ودرجة الحرارة والمزيد. تعلّم كيفية استخدام محول الوحدات، واحصل على نصائح ومقالات." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; direction:rtl; }
-    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-    .top-row { display:flex; justify-content:flex-start; gap:.6rem; margin-bottom:.6rem; align-items:center; }
-    .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; direction:ltr; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; flex-wrap:wrap; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); padding:1.3rem; box-sizing:border-box; min-width:280px; }
-    .article-card { width:330px; min-height:340px; height:340px; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; text-align:right; }
-    .tool-card { width:410px; min-width:240px; min-height:330px; display:flex; flex-direction:column; text-align:right; }
-    h1,h2,h3 { color:#0b2545; }
-    .converter-form { display:flex; gap:.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center; justify-content:center; }
-    .converter-result { font-weight:700; font-size:1.12em; margin-bottom:1rem; text-align:center; }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; text-align:right; }
-    .btn-small { padding:.35rem .7rem; font-size:.9rem; }
-    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; direction:ltr; }
-    @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
 
-    /* Hide the visible language selector while keeping the markup and JS behavior intact */
-    .top-row { display: none !important; }
-  </style>
-</head>
-<body>
-<div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="font-weight:600; margin-left:.5rem;">اللغة:</label>
-<select aria-label="محدد اللغة" class="language-select" id="language-select-top">
-<option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option selected="" value="ar">العربية</option>
-</select>
-</div>
-<div class="text-center mb-4" style="direction:ltr;">
-<h1 style="margin-bottom:.25rem;">محول الوحدات</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">حوّل الطول والوزن ودرجة الحرارة والمزيد. تعلّم كيفية استخدام محول الوحدات، واحصل على نصائح ومقالات.</p>
-</div>
-<div class="center-row">
-
-<div aria-label="محول الوحدات" class="tool-card" role="region">
-<a class="back-link" href="index.html" style="text-decoration:none; color:#0d6efd; font-weight:600; margin-bottom:.4rem; display:block;">← العودة إلى القائمة الرئيسية</a>
-<h3><i class="fa fa-ruler-combined"></i> محول الوحدات</h3>
-<div class="unit-section">
-<form class="converter-form" id="unitForm">
-<select class="form-select" id="typeSelect" style="max-width:140px;">
-<option value="length">الطول</option>
-<option value="weight">الوزن</option>
-<option value="temperature">الحرارة</option>
-</select>
-<input class="form-control" id="inputValue" placeholder="القيمة" style="max-width:100px; direction:ltr;" type="number"/>
-<select class="form-select" id="fromUnit" style="max-width:140px;"></select>
-<span style="font-size:1.3em;">→</span>
-<select class="form-select" id="toUnit" style="max-width:140px;"></select>
-<button class="btn btn-primary btn-sm" type="submit">تحويل</button>
-</form>
-<div class="converter-result" id="unitResult"></div>
-</div>
-<details class="faq-section">
-<summary style="text-align:right;">الأسئلة الشائعة</summary>
-<ul style="padding-left:1.1rem; color:#374151; text-align:right;">
-<li><b>هل تدعم الوحدات؟</b> يتضمن المحول الوحدات الأكثر استخداماً.</li>
-<li><b>هل يمكن تحويل الكسور؟</b> نعم، يتم دعم الكسور والعلامة العشرية.</li>
-</ul>
-</details>
-</div>
-
-</div>
-<footer class="site">© 2025 TimerHaven. <a href="privacy.html">سياسة الخصوصية</a></footer>
-</div>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
 <script>
-  // Unit types & conversion logic (canonical keys used for option values)
-  const unitTypes = {
-    length: {
-      units: { "Meter": 1, "Kilometer": 1000, "Centimeter": 0.01, "Millimeter": 0.001, "Mile": 1609.34, "Yard": 0.9144, "Foot": 0.3048, "Inch": 0.0254 },
-      convert: (val, from, to) => val * unitTypes.length.units[from] / unitTypes.length.units[to]
-    },
-    weight: {
-      units: { "Kilogram": 1, "Gram": 0.001, "Milligram": 0.000001, "Pound": 0.453592, "Ounce": 0.0283495 },
-      convert: (val, from, to) => val * unitTypes.weight.units[from] / unitTypes.weight.units[to]
-    },
-    temperature: {
-      units: { "Celsius": "C", "Fahrenheit": "F", "Kelvin": "K" },
-      convert: (val, from, to) => {
-        if (from === to) return val;
-        if (from === "Celsius" && to === "Fahrenheit") return val * 9/5 + 32;
-        if (from === "Fahrenheit" && to === "Celsius") return (val - 32) * 5/9;
-        if (from === "Celsius" && to === "Kelvin") return val + 273.15;
-        if (from === "Kelvin" && to === "Celsius") return val - 273.15;
-        if (from === "Fahrenheit" && to === "Kelvin") return (val - 32) * 5/9 + 273.15;
-        if (from === "Kelvin" && to === "Fahrenheit") return (val - 273.15) * 9/5 + 32;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width,initial-scale=1" name="viewport" />
+  <title>محول الوحدات — TimerHaven</title>
+<meta name="description" content="محول الوحدات - أداة مجانية عبر الإنترنت ودليل عملي من TimerHaven.">
+  <link rel="canonical" href="https://timerhaven.com/unit-converter-ar.html" />
+  
+  
+  <meta content="حوّل الطول والوزن ودرجة الحرارة والمزيد. تعلّم كيفية استخدام محول الوحدات، واحصل على نصائح ومقالات."
+    name="description" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7280
+    }
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif; font-display: swap;
+      color: #0b2545;
+      direction: rtl;
+    }
+    .page-wrap {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .tool-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+    h1 {
+      color: var(--brand);
+      margin-bottom: .4rem;
+    }
+    .controls {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: .8rem;
+      justify-content: flex-end;
+    }
+    .converter-form {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: .6rem;
+    }
+    .converter-result {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-top: .6rem;
+    }
+    .small-muted {
+      color: var(--muted);
+      font-size: .92rem;
+      margin-top: .4rem;
+      display: block;
+    }
+    .unit-filter {
+      max-width: 240px;
+    }
+    .swap-btn,
+    .copy-btn,
+    .mode-btn {
+      border-radius: 8px;
+      border: 1px solid #e6eef5;
+      background: #fff;
+      padding: .35rem .6rem;
+      cursor: pointer
+    }
+    /* Keep numeric fields LTR so numbers render predictably in RTL pages */
+    input[type="number"] {
+      direction: ltr;
+      text-align: left;
+    }
+    /* Result will be constructed mixing LTR numbers and RTL unit labels for correct reading */
+    @media (max-width:640px) {
+      .controls {
+        justify-content: stretch;
+      }
+      .converter-form {
+        justify-content: stretch;
       }
     }
-  };
-
-  function populateUnits(type) {
-    const from = document.getElementById('fromUnit');
-    const to = document.getElementById('toUnit');
-    from.innerHTML = to.innerHTML = '';
-    Object.keys(unitTypes[type].units).forEach(u => {
-      from.innerHTML += `<option value="${u}">${u}</option>`;
-      to.innerHTML += `<option value="${u}">${u}</option>`;
-    });
-  }
-
-  const typeSelect = document.getElementById('typeSelect');
-  const initialType = typeSelect.value || 'length';
-  typeSelect.addEventListener('change', function() {
-    populateUnits(this.value);
-  });
-  populateUnits(initialType);
-
-  document.getElementById('unitForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const type = document.getElementById('typeSelect').value;
-    const val = parseFloat(document.getElementById('inputValue').value);
-    const from = document.getElementById('fromUnit').value;
-    const to = document.getElementById('toUnit').value;
-    const resultEl = document.getElementById('unitResult');
-    if (isNaN(val)) {
-      resultEl.innerText = "الرجاء إدخال قيمة صحيحة.";
-      return;
+    /* hide language selector visually but keep markup for JS behavior */
+    .top-row {
+      display: none !important;
     }
-    let result = unitTypes[type].convert(val, from, to);
-    resultEl.innerText = `${val} ${from} = ${result} ${to}`;
-  });
-
-  // language selector redirect (robust)
-  (function() {
-    var sel = document.getElementById('language-select-top');
-    if (sel) {
-      sel.addEventListener('change', function() {
-        var v = this.value || 'en';
-        window.location.href = 'unit-converter-' + v + '.html';
+    /* data mode container hidden by default; shown only for data category */
+    #dataModeContainer {
+      display: none;
+      gap: .6rem;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: .4rem;
+    }
+    .cta {
+      color: var(--brand);
+      font-weight: 700;
+      text-decoration: none;
+    }
+  </style>
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="محول الوحدات — TimerHaven">
+  <meta property="og:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/unit-converter-ar.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="محول الوحدات — TimerHaven">
+  <meta name="twitter:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta name="keywords" content="online unit converter, metric to imperial converter, unit conversion tool, productivity tools, privacy-first, no login">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ظ…ط­ظˆظ„ ط§ظ„ظˆط­ط¯ط§طھ",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "ظ…ط­ظˆظ„ ط§ظ„ظˆط­ط¯ط§طھ ظ‡ظˆ ط£ط¯ط§ط© طھظڈط³طھط®ط¯ظ… ظ„طھط­ظˆظٹظ„ ظ‚ظٹط§ط³ ظ…ظ† ظˆط­ط¯ط© ط¥ظ„ظ‰ ط£ط®ط±ظ‰ ط¯ظˆظ† طھط؛ظٹظٹط± ط§ظ„ظƒظ…ظٹط© ط§ظ„ظپط¹ظ„ظٹط©. ظˆظ‡ظˆ ط£ظ…ط± ط¶ط±ظˆط±ظٹ ظ„ظ„ط¹ظ„ظˆظ… ظˆط§ظ„ظ‡ظ†ط¯ط³ط© ظˆط§ظ„ط­ظٹط§ط© ط§ظ„ظٹظˆظ…ظٹط©.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/unit-converter-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/unit-converter-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/unit-converter-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/unit-converter-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/unit-converter-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/unit-converter-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/unit-converter-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/unit-converter-en.html">
+</head>
+<body>
+    <div class="page-wrap">
+    <div class="top-row">
+      <label for="language-select-top" style="font-weight:600; margin-left:.5rem;">اللغة:</label>
+      <select aria-label="محدد اللغة" class="language-select" id="language-select-top">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+        <option value="ru">Русский</option>
+        <option value="el">Ελληνικά</option>
+        <option selected value="ar">العربية</option>
+      </select>
+    </div>
+    <header class="mb-3 text-center" style="direction:rtl;">
+      <h1>محول الوحدات</h1>
+      <p class="lead" style="color:#374151; margin:0;">حوّل الطول، الوزن، الحرارة والمزيد بسهولة.</p>
+    </header>
+    <section class="tool-card" aria-labelledby="tool-title" role="region">
+      <a class="back-link" href="index.html" style="text-decoration:none; color:var(--brand); font-weight:600;">← العودة
+        إلى القائمة الرئيسية</a>
+      <div class="controls" style="align-items:center;">
+        <div style="min-width:180px;">
+          <label class="small-muted" for="typeSelect">الفئة</label>
+          <select id="typeSelect" class="form-select">
+            <option value="length">الطول</option>
+            <option value="weight">الوزن</option>
+            <option value="temperature">الحرارة</option>
+            <option value="volume">الحجم</option>
+            <option value="area">المساحة</option>
+            <option value="speed">السرعة</option>
+            <option value="time">الزمن</option>
+            <option value="pressure">الضغط</option>
+            <option value="energy">الطاقة</option>
+            <option value="power">القدرة</option>
+            <option value="data">البيانات</option>
+            <option value="fuel">استهلاك الوقود</option>
+            <option value="angle">الزاوية</option>
+            <option value="frequency">التردد</option>
+          </select>
+        </div>
+        <div style="min-width:160px;">
+          <label class="small-muted" for="precisionSelect">الأرقام العشرية</label>
+          <select id="precisionSelect" class="form-select">
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4" selected>4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+            <option value="0">0</option>
+          </select>
+        </div>
+        <div style="min-width:220px;">
+          <label class="small-muted" for="unitFilter">تصفية الوحدات</label>
+          <input id="unitFilter" class="form-control unit-filter" data-template="فلتر الوحدات (مثال: لتر أو m)" placeholder="فلتر الوحدات (مثال: لتر أو m)" />
+        </div>
+      </div>
+      <form id="unitForm" class="converter-form" aria-label="نموذج التحويل">
+        <input id="inputValue" type="number" step="any" class="form-control" placeholder="القيمة"
+          style="max-width:130px;" aria-label="قيمة" />
+        <select id="fromUnit" class="form-select" style="min-width:170px;"></select>
+        <button type="button" id="swapBtn" class="swap-btn" title="تبديل الوحدات" aria-label="تبديل الوحدات">
+          <i class="fa fa-exchange-alt"></i>
+        </button>
+        <select id="toUnit" class="form-select" style="min-width:170px;"></select>
+        <button type="submit" class="btn btn-primary btn-sm" id="convertBtn">تحويل</button>
+        <button type="button" id="copyBtn" class="copy-btn" title="نسخ النتيجة" aria-label="نسخ النتيجة"><i
+            class="fa fa-copy"></i></button>
+      </form>
+      <div id="dataModeContainer">
+        <div class="small-muted">وضع البيانات:</div>
+        <div>
+          <button id="dataModeSI" class="mode-btn">SI</button>
+          <button id="dataModeBin" class="mode-btn">Bin</button>
+        </div>
+      </div>
+      <div id="unitResult" class="converter-result" aria-live="polite" style="min-height:2.6em;"></div>
+      <div class="small-muted" style="margin-top:.8rem;">مصدر القيم: عوامل معيارية شائعة الاستخدام. احفظ المعاملات
+        المعيارية في أنظمتك عند الحاجة للدقة الهندسية.</div>
+      <p style="margin-top:1rem; text-align:right;"><a class="cta"
+          href="https://timerhaven.com/ar/unit-converter/unit-converter-index.html">اقرأ الدليل الكامل</a></p>
+    </section>
+  </div>
+  <script>
+    // Canonical conversion factors (keys are canonical English identifiers)
+    const unitTypes = {
+      length: { units: { "Meter": 1, "Kilometer": 1000, "Centimeter": 0.01, "Millimeter": 0.001, "Mile": 1609.344, "Yard": 0.9144, "Foot": 0.3048, "Inch": 0.0254 }, convert: (v, f, t) => v * unitTypes.length.units[f] / unitTypes.length.units[t] },
+      weight: { units: { "Kilogram": 1, "Gram": 0.001, "Milligram": 0.000001, "Pound": 0.45359237, "Ounce": 0.028349523125, "Ton (metric)": 1000 }, convert: (v, f, t) => v * unitTypes.weight.units[f] / unitTypes.weight.units[t] },
+      temperature: { units: { "Celsius": "C", "Fahrenheit": "F", "Kelvin": "K" }, convert: (val, from, to) => { if (from === to) return val; if (from === "Celsius" && to === "Fahrenheit") return val * 9 / 5 + 32; if (from === "Fahrenheit" && to === "Celsius") return (val - 32) * 5 / 9; if (from === "Celsius" && to === "Kelvin") return val + 273.15; if (from === "Kelvin" && to === "Celsius") return val - 273.15; if (from === "Fahrenheit" && to === "Kelvin") return (val - 32) * 5 / 9 + 273.15; if (from === "Kelvin" && to === "Fahrenheit") return (val - 273.15) * 9 / 5 + 32 } },
+      volume: { units: { "Liter": 1, "Milliliter": 0.001, "Cubic meter": 1000, "US gallon": 3.785411784, "US quart": 0.946352946, "US pint": 0.473176473, "Imperial gallon": 4.54609, "Cubic inch": 0.016387064, "Cubic foot": 28.316846592 }, convert: (v, f, t) => v * unitTypes.volume.units[f] / unitTypes.volume.units[t] },
+      area: { units: { "Square meter": 1, "Square kilometer": 1e6, "Hectare": 10000, "Acre": 4046.8564224, "Square mile": 2589988.110336, "Square foot": 0.09290304, "Square yard": 0.83612736, "Square inch": 0.00064516 }, convert: (v, f, t) => v * unitTypes.area.units[f] / unitTypes.area.units[t] },
+      speed: { units: { "m/s": 1, "km/h": 1 / 3.6, "mph": 0.44704, "knots": 0.514444 }, convert: (v, f, t) => v * unitTypes.speed.units[f] / unitTypes.speed.units[t] },
+      time: { units: { "Second": 1, "Minute": 60, "Hour": 3600, "Day": 86400, "Week": 604800 }, convert: (v, f, t) => v * unitTypes.time.units[f] / unitTypes.time.units[t] },
+      pressure: { units: { "Pascal": 1, "kPa": 1000, "Bar": 100000, "atm": 101325, "psi": 6894.757293168 }, convert: (v, f, t) => v * unitTypes.pressure.units[f] / unitTypes.pressure.units[t] },
+      energy: { units: { "Joule": 1, "Kilojoule": 1000, "Calorie": 4.184, "kcal": 4184, "Wh": 3600 }, convert: (v, f, t) => v * unitTypes.energy.units[f] / unitTypes.energy.units[t] },
+      power: { units: { "Watt": 1, "Kilowatt": 1000, "Horsepower (metric)": 735.49875, "Horsepower (mechanical)": 745.69987158227022 }, convert: (v, f, t) => v * unitTypes.power.units[f] / unitTypes.power.units[t] },
+      data: {
+        unitsSI: { "Byte": 1, "KB": 1e3, "MB": 1e6, "GB": 1e9, "TB": 1e12 },
+        unitsBin: { "Byte": 1, "KiB": 1024, "MiB": 1024 ** 2, "GiB": 1024 ** 3, "TiB": 1024 ** 4 },
+        convert: (v, f, t, mode = 'SI') => {
+          const table = (mode === 'Bin') ? unitTypes.data.unitsBin : unitTypes.data.unitsSI;
+          if (!table[f] || !table[t]) return NaN;
+          return v * table[f] / table[t];
+        }
+      },
+      fuel: {
+        units: { "L/100km": "L100", "mpg (US)": "mpgus", "mpg (UK)": "mpguk" },
+        convert: (val, from, to) => {
+          if (from === to) return val;
+          const toL100 = (v, src) => { if (src === "L/100km") return v; if (src === "mpg (US)") return 235.214583 / v; if (src === "mpg (UK)") return 282.480936 / v; };
+          const fromL100 = (l100, dst) => { if (dst === "L/100km") return l100; if (dst === "mpg (US)") return 235.214583 / l100; if (dst === "mpg (UK)") return 282.480936 / l100; };
+          const l100 = toL100(val, from);
+          return fromL100(l100, to);
+        }
+      },
+      angle: { units: { "Degree": 1, "Radian": (180 / Math.PI), "Gradian": 0.9 }, convert: (v, f, t) => v * unitTypes.angle.units[f] / unitTypes.angle.units[t] },
+      frequency: { units: { "Hz": 1, "kHz": 1e3, "MHz": 1e6, "GHz": 1e9 }, convert: (v, f, t) => v * unitTypes.frequency.units[f] / unitTypes.frequency.units[t] }
+    };
+    // Arabic display labels for units (keyed by canonical English key)
+    const AR_LABELS = {
+      "Meter": "متر", "Kilometer": "كيلومتر", "Centimeter": "سنتيمتر", "Millimeter": "ملليمتر", "Mile": "ميل", "Yard": "يارد", "Foot": "قدم", "Inch": "بوصة",
+      "Kilogram": "كيلوغرام", "Gram": "جرام", "Milligram": "مليغرام", "Pound": "رطل", "Ounce": "أوقية", "Ton (metric)": "طن متري",
+      "Celsius": "درجة مئوية", "Fahrenheit": "درجة فهرنهايت", "Kelvin": "كلفن",
+      "Liter": "لتر", "Milliliter": "ملليلتر", "Cubic meter": "متر مكعب", "US gallon": "غالون أمريكي", "US quart": "ربع غالون (أمريكي)", "US pint": "باينت (أمريكي)", "Imperial gallon": "غالون إمبراطوري", "Cubic inch": "بوصة مكعبة", "Cubic foot": "قدم مكعب",
+      "Square meter": "متر مربع", "Square kilometer": "كيلومتر مربع", "Hectare": "هكتار", "Acre": "فدان", "Square mile": "ميل مربع", "Square foot": "قدم مربع", "Square yard": "يارد مربع", "Square inch": "بوصة مربعة",
+      "m/s": "متر/ثانية", "km/h": "كم/ساعة", "mph": "ميل/ساعة", "knots": "عقدة",
+      "Second": "ثانية", "Minute": "دقيقة", "Hour": "ساعة", "Day": "يوم", "Week": "أسبوع",
+      "Pascal": "باسكال", "kPa": "كيلو باسكال", "Bar": "بار", "atm": "جو (atm)", "psi": "رطل/بوصة²",
+      "Joule": "جول", "Kilojoule": "كيلوجول", "Calorie": "سعر حراري", "kcal": "كيلو كالوري", "Wh": "واط ساعة",
+      "Watt": "واط", "Kilowatt": "كيلوواط", "Horsepower (metric)": "حصان (متري)", "Horsepower (mechanical)": "حصان ميكانيكي",
+      "Byte": "بايت", "KB": "كيلوبايت", "MB": "ميغابايت", "GB": "غيغابايت", "TB": "تيرابايت",
+      "KiB": "كيبيبايت", "MiB": "ميبيبايت", "GiB": "جيبيبايت", "TiB": "تيبيبايت",
+      "L/100km": "لتر/100كم", "mpg (US)": "ميل/غالون (أمريكي)", "mpg (UK)": "ميل/غالون (بريطانيا)",
+      "Degree": "درجة", "Radian": "راديان", "Gradian": "غراديان",
+      "Hz": "هرتز", "kHz": "كيلوهرتز", "MHz": "ميغاهرتز", "GHz": "غيغاهرتز"
+    };
+    // Persistence keys
+    const LS_KEYS = { lastType: 'th_unit_lastType_ar', lastFrom: 'th_unit_lastFrom_ar', lastTo: 'th_unit_lastTo_ar', lastValue: 'th_unit_lastValue_ar', lastPrecision: 'th_unit_lastPrecision_ar', dataMode: 'th_unit_dataMode_ar' };
+    function saveState(k, v) { try { localStorage.setItem(k, v); } catch (e) { } }
+    function loadState(k, def) { try { const v = localStorage.getItem(k); return v !== null ? v : def; } catch (e) { return def; } }
+    // UI references
+    const typeSelectEl = document.getElementById('typeSelect');
+    const fromUnit = document.getElementById('fromUnit');
+    const toUnit = document.getElementById('toUnit');
+    const inputValue = document.getElementById('inputValue');
+    const unitFilter = document.getElementById('unitFilter');
+    const precisionSelect = document.getElementById('precisionSelect');
+    const unitResult = document.getElementById('unitResult');
+    const dataModeContainer = document.getElementById('dataModeContainer');
+    const dataModeSI = document.getElementById('dataModeSI');
+    const dataModeBin = document.getElementById('dataModeBin');
+    const copyBtn = document.getElementById('copyBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    let currentDataMode = loadState(LS_KEYS.dataMode, 'SI');
+    function setDataModeUI() {
+      if (currentDataMode === 'SI') { dataModeSI.style.opacity = '1'; dataModeBin.style.opacity = '0.6'; }
+      else { dataModeBin.style.opacity = '1'; dataModeSI.style.opacity = '0.6'; }
+    }
+    function toggleDataModeVisibility() {
+      // show data-mode controls only for the "data" category
+      const show = (typeSelectEl.value === 'data');
+      dataModeContainer.style.display = show ? 'flex' : 'none';
+    }
+    function getUnitsForType(type) {
+      if (type === 'data') return (currentDataMode === 'Bin') ? Object.keys(unitTypes.data.unitsBin) : Object.keys(unitTypes.data.unitsSI);
+      if (unitTypes[type] && unitTypes[type].units) return Object.keys(unitTypes[type].units);
+      if (unitTypes[type] && unitTypes[type].unitsSI) return Object.keys(unitTypes[type].unitsSI);
+      return [];
+    }
+    function displayLabel(key) {
+      return AR_LABELS[key] || key;
+    }
+    function populateUnits(type) {
+      const allU = getUnitsForType(type);
+      if (allU.length > 0) {
+        let example = allU[0].toLowerCase().split(' ')[0];
+        if (type === 'temperature') example = 'celsius';
+        if (type === 'speed') example = 'km/h';
+        if (type === 'length') example = 'meter';
+        if (type === 'area') example = 'square';
+        if (type === 'volume') example = 'liter';
+        if (type === 'data') example = 'byte';
+        if (type === 'frequency') example = 'hz';
+        const template = document.getElementById('unitFilter').getAttribute('data-template') || "فلتر الوحدات (مثال: لتر أو m)";
+        document.getElementById('unitFilter').placeholder = template.replace('{ex}', example);
+      }
+      const units = getUnitsForType(type);
+      fromUnit.innerHTML = ''; toUnit.innerHTML = '';
+      units.forEach(k => {
+        const opt1 = document.createElement('option'); opt1.value = k; opt1.textContent = displayLabel(k); fromUnit.appendChild(opt1);
+        const opt2 = document.createElement('option'); opt2.value = k; opt2.textContent = displayLabel(k); toUnit.appendChild(opt2);
+      });
+      applyUnitFilter();
+      setDataModeUI();
+      toggleDataModeVisibility();
+      // restore last selections if available
+      const lf = loadState(LS_KEYS.lastFrom, ''); const lt = loadState(LS_KEYS.lastTo, '');
+      if (lf && Array.from(fromUnit.options).some(o => o.value === lf)) fromUnit.value = lf;
+      if (lt && Array.from(toUnit.options).some(o => o.value === lt)) toUnit.value = lt;
+      if (!fromUnit.value && fromUnit.options.length) fromUnit.selectedIndex = 0;
+      if (!toUnit.value && toUnit.options.length) toUnit.selectedIndex = Math.min(1, toUnit.options.length - 1);
+    }
+    function applyUnitFilter() {
+      const q = (unitFilter.value || '').toLowerCase().trim();
+      const type = typeSelectEl.value;
+      const all = getUnitsForType(type);
+      const filtered = q ? all.filter(k => (displayLabel(k) + ' ' + k).toLowerCase().includes(q)) : all.slice();
+      const final = filtered.length ? filtered : all;
+      fromUnit.innerHTML = ''; toUnit.innerHTML = '';
+      final.forEach(k => {
+        const o1 = document.createElement('option'); o1.value = k; o1.textContent = displayLabel(k); fromUnit.appendChild(o1);
+        const o2 = document.createElement('option'); o2.value = k; o2.textContent = displayLabel(k); toUnit.appendChild(o2);
       });
     }
-  })();
+    function fmtNumber(n, prec) {
+      if (!isFinite(n)) return String(n);
+      return Number(n).toFixed(prec).replace(/\.?0+$/, '');
+    }
+    function doConvert() {
+      const type = typeSelectEl.value;
+      const val = parseFloat(inputValue.value);
+      const from = fromUnit.value;
+      const to = toUnit.value;
+      const prec = parseInt(precisionSelect.value, 10);
+      if (!isFinite(val)) {
+        unitResult.innerHTML = `<span style="direction:rtl;text-align:right;">الرجاء إدخال قيمة صحيحة.</span>`;
+        return;
+      }
+      let result;
+      try {
+        if (type === 'data') result = unitTypes.data.convert(val, from, to, currentDataMode === 'Bin' ? 'Bin' : 'SI');
+        else if (type === 'fuel') result = unitTypes.fuel.convert(val, from, to);
+        else if (type === 'temperature') result = unitTypes.temperature.convert(val, from, to);
+        else if (unitTypes[type] && typeof unitTypes[type].convert === 'function') result = unitTypes[type].convert(val, from, to);
+        else result = NaN;
+      } catch (e) { console.error('convert error', e); result = NaN; }
+      if (!isFinite(result)) {
+        unitResult.innerHTML = `<span style="direction:rtl;text-align:right;">التحويل غير متاح لهذه الوحدات.</span>`;
+        return;
+      }
+      // Compose result using LTR numbers and RTL unit labels to avoid bidi issues
+      const valStr = fmtNumber(val, prec);
+      const resStr = fmtNumber(result, prec);
+      const fromLabel = displayLabel(from);
+      const toLabel = displayLabel(to);
+      const html = `<span dir="ltr">${valStr}</span>&nbsp;<span dir="rtl">${fromLabel}</span>&nbsp;=&nbsp;<span dir="ltr">${resStr}</span>&nbsp;<span dir="rtl">${toLabel}</span>`;
+      const rawNote = (Number(resStr) !== result) — `&nbsp;<span style="color:#6b7280;font-weight:400;">(raw ${result})</span>` : '';
+      unitResult.innerHTML = html + rawNote;
+      // persist
+      saveState(LS_KEYS.lastType, type);
+      saveState(LS_KEYS.lastFrom, from);
+      saveState(LS_KEYS.lastTo, to);
+      saveState(LS_KEYS.lastValue, inputValue.value);
+      saveState(LS_KEYS.lastPrecision, precisionSelect.value);
+    }
+    // Event wiring
+    document.getElementById('unitForm').addEventListener('submit', function (e) { e.preventDefault(); doConvert(); });
+    typeSelectEl.addEventListener('change', function () { unitFilter.value = ''; populateUnits(this.value); });
+    unitFilter.addEventListener('input', applyUnitFilter);
+    precisionSelect.addEventListener('change', doConvert);
+    fromUnit.addEventListener('change', doConvert);
+    toUnit.addEventListener('change', doConvert);
+    swapBtn.addEventListener('click', function () { const a = fromUnit.value, b = toUnit.value; fromUnit.value = b; toUnit.value = a; doConvert(); });
+    copyBtn.addEventListener('click', function () {
+      const text = unitResult.innerText || unitResult.textContent || '';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => { copyBtn.innerHTML = '<i class="fa fa-check"></i>'; setTimeout(() => { copyBtn.innerHTML = '<i class="fa fa-copy"></i>'; }, 900); }).catch(() => { alert('فشل النسخ'); });
+      } else {
+        const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); copyBtn.innerHTML = '<i class="fa fa-check"></i>'; setTimeout(() => { copyBtn.innerHTML = '<i class="fa fa-copy"></i>'; }, 900); } catch (e) { alert('النسخ غير مدعوم'); }
+        ta.remove();
+      }
+    });
+    dataModeSI.addEventListener('click', () => { currentDataMode = 'SI'; saveState(LS_KEYS.dataMode, 'SI'); setDataModeUI(); if (typeSelectEl.value === 'data') populateUnits('data'); });
+    dataModeBin.addEventListener('click', () => { currentDataMode = 'Bin'; saveState(LS_KEYS.dataMode, 'Bin'); setDataModeUI(); if (typeSelectEl.value === 'data') populateUnits('data'); });
+    // keyboard shortcut to focus value (Ctrl+K)
+    document.addEventListener('keydown', function (e) { if (e.ctrlKey && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); inputValue.focus(); inputValue.select(); } });
+    // Initialization
+    (function init() {
+      setDataModeUI();
+      const lastType = loadState(LS_KEYS.lastType, 'length');
+      if (Array.from(typeSelectEl.options).some(o => o.value === lastType)) typeSelectEl.value = lastType;
+      populateUnits(typeSelectEl.value);
+      const lastFrom = loadState(LS_KEYS.lastFrom, ''); const lastTo = loadState(LS_KEYS.lastTo, '');
+      if (lastFrom && Array.from(fromUnit.options).some(o => o.value === lastFrom)) fromUnit.value = lastFrom;
+      if (lastTo && Array.from(toUnit.options).some(o => o.value === lastTo)) toUnit.value = lastTo;
+      const lastVal = loadState(LS_KEYS.lastValue, ''); if (lastVal) inputValue.value = lastVal;
+      const lastPrecision = loadState(LS_KEYS.lastPrecision, '4'); if (lastPrecision && Array.from(precisionSelect.options).some(o => o.value === lastPrecision)) precisionSelect.value = lastPrecision;
+      if (inputValue.value) doConvert();
+    })();
+    // language selector redirect (markup hidden but behavior preserved)
+    (function () { var sel = document.getElementById('language-select-top'); if (sel) sel.addEventListener('change', function () { window.location.href = 'unit-converter-' + (this.value || 'en') + '.html'; }); })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/ar/unit-converter/unit-converter-index.html">Read full guide</a></p></body>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+    &copy; 2025 تايمرهافن. جميع الأدوات مجانية وتحترم الخصوصية.<br>
+    <a href="/privacy.html">الخصوصية</a> ·
+    <a href="/terms.html">شروط الخدمة</a> ·
+    <a href="/contact.html">اتصل بنا</a>
+  
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="rtl" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: right;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">محول الوحدات</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">أداة لتحويل القياسات من وحدة إلى أخرى بدقة وسهولة.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">التاريخ</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">كيفية الاستخدام</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-right: 1.25rem;"><li>حدد وحدة المصدر والهدف.</li><li>أدخل القيمة.</li><li>احصل على النتيجة فوراً.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"راجع معاملات التحويل للتأكد من الدقة العلمية."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">المزيد من أدوات الإنتاجية المجانية</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">مؤقت المهام</a> <a href="stopwatch-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">ساعة الإيقاف</a> <a href="pomodoro-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">بومودورو</a> <a href="unit-converter-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">محول الوحدات</a> <a href="weather-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الطقس</a> <a href="world-clock-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الساعة العالمية</a> <a href="calendar-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">التقويم</a> <a href="clipboard-manager-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الحافظة</a> <a href="countdown-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العد التنازلي</a> <a href="currency-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العملات</a> <a href="focus-music-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">موسيقى التركيز</a> <a href="habit-tracker-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العادات</a> <a href="meeting-planner-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الاجتماعات</a> <a href="notes-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الملاحظات</a> <a href="password-generator-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">كلمات المرور</a></div>
+        </div>
+    </section>
+    
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

@@ -1,61 +1,226 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Stopwatch — TimerHaven</title>
-  <meta name="description" content="Measure elapsed time for any activity. Learn how to use Stopwatch, get productivity tips, FAQs, and read expert articles.">
+  <title>Full Screen Split Time Lap Stopwatch | TimerHaven</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description"
+    content="Measure performance with our full-screen split time lap stopwatch. Ad-free, millisecond precision tracking ideal for coaches, presenters, and focus sessions.">
+  <meta name="author" content="Serge Shammas">
+  <meta name="datePublished" content="2025-10-12">
+  <meta name="dateModified" content="2026-01-06">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  media="print" onload="this.media='all'">
+  <link rel="canonical" href="https://timerhaven.com/stopwatch-en.html" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Stopwatch  Measure elapsed time for activities",
+    "description":"Stopwatch tool for timing sessions and laps; includes short guide to best practices for timing and recording laps.",
+    "author":{"@type":"Person","name":"Serge Shammas","url":"https://timerhaven.com/authors/serge-shammas"},
+    "datePublished":"2025-10-12",
+    "dateModified":"2026-01-06",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://timerhaven.com/stopwatch-en.html"}
+  }
+  </script>
   <style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
-    .main-container { max-width:1200px; margin:2rem auto; padding:0 1rem; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; box-sizing:border-box; }
-    .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
-    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
-    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
-    .read-guide {
-      display:inline-block;
-      margin:.35rem 0 .8rem 0;
-      padding:.45rem .7rem;
-      border-radius:8px;
-      background:var(--brand,#0d6efd);
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      font-size:.95rem;
-      border:none;
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif; font-display: swap;
+      color: #0b2545;
     }
-    .stopwatch-display { font-weight:700; font-size:1.25rem; margin-top:.5rem; margin-bottom:.5rem; }
-    .controls-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem; }
-    .lap-list { margin-top:.8rem; }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
-    @media (max-width:900px) { .tool-card{ width:98vw; padding:1rem; } }
+    .main-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 90vh;
+      box-sizing: border-box;
+    }
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      width: 420px;
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--brand, #0d6efd) !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .tool-title {
+      color: #185a9d;
+      font-size: 1.35rem;
+      margin: 0 0 .6rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .read-guide {
+      display: inline-block;
+      margin: .35rem 0 .8rem 0;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: var(--brand, #0d6efd);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+    }
+    .stopwatch-display {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+    }
+    .controls-row {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+    }
+    .lap-list {
+      margin-top: .8rem;
+    }
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+    /* Mobile summary and ordering */
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+      .stopwatch-section {
+        order: 1;
+      }
+      .tool-intro {
+        order: 2;
+      }
+      .tool-intro p {
+        display: none;
+      }
+      .tool-card {
+        width: 94vw;
+        padding: 12px;
+      }
+    }
+    @media (max-width:900px) {
+      .tool-card {
+        width: 98vw;
+        padding: 1rem;
+      }
+    }
   </style>
+  <script>
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Full Screen Split Time Lap Stopwatch | TimerHaven">
+  <meta property="og:description" content="Measure performance with our full-screen split time lap stopwatch. Ad-free, millisecond precision tracking ideal for coaches, presenters, and focus sessions.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/stopwatch-en.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Full Screen Split Time Lap Stopwatch | TimerHaven">
+  <meta name="twitter:description" content="Measure performance with our full-screen split time lap stopwatch. Ad-free, millisecond precision tracking ideal for coaches, presenters, and focus sessions.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/stopwatch-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/stopwatch-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/stopwatch-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/stopwatch-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/stopwatch-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/stopwatch-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/stopwatch-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/stopwatch-en.html">
 </head>
 <body>
-  <script>try{ localStorage.setItem('timerhavenLang','en'); }catch(e){};</script>
-
-  <main class="main-container" role="main">
+    <main class="main-container" role="main">
     <section class="tool-card" aria-labelledby="tool-title">
       <a href="index.html" class="back-link">&larr; Back to Main Menu</a>
-
-      <h3 id="tool-title" class="tool-title"><i class="fa fa-clock"></i> Stopwatch</h3>
-
-      <!-- Read full guide button added -->
-      <a id="read-guide-btn" class="read-guide" href="stopwatch-how-to-en.html" role="button">Read full guide</a>
-
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-clock"></i> Full Screen Split Time Lap Stopwatch</h3>
+      <div class="mobile-summary">Quick stopwatch  <a href="en/stopwatch/stopwatch-index.html">Read full guide</a>
+      </div>
+      <!-- Updated: Read full guide link now points to the actual guide file in /en/stopwatch/ ·-->
+      <a id="read-guide-btn" class="read-guide" href="en/stopwatch/stopwatch-index.html" role="button">Read full
+        guide</a>
+      <!-- Server-rendered editorial intro (preserved by data-preserve) -->
+      <div class="tool-intro" id="tool-help" data-preserve="true"
+        style="margin-top:.6rem;margin-bottom:.9rem;color:#374151;line-height:1.45;">
+        <p><strong>Using the Stopwatch effectively</strong>  The Stopwatch is ideal for measuring elapsed time and
+          recording laps. Use it for testing sequences, timing short experiments, or tracking workouts. Press Start to
+          begin timing, Lap to record intermediate times, Pause to stop the clock and Reset to clear.</p>
+        <p style="margin-top:.6rem;color:#51606b;font-size:.95rem;"><strong>By Serge Shammas ·</strong> · Last updated:
+          <time datetime="2026-01-06">Jan 6, 2026</time></p>
+      </div>
       <div class="stopwatch-section" aria-live="polite">
         <div id="swDisplay" class="stopwatch-display">00:00:00</div>
-
         <div class="controls-row">
           <button id="swStartBtn" class="btn btn-success btn-small">Start</button>
           <button id="swPauseBtn" class="btn btn-secondary btn-small">Pause</button>
           <button id="swResetBtn" class="btn btn-danger btn-small">Reset</button>
           <button id="swLapBtn" class="btn btn-info btn-small">Lap</button>
         </div>
-
         <div id="lapList" class="lap-list" style="margin-top:.8rem;"></div>
-
         <details class="faq-section" style="margin-top:1rem;">
           <summary style="font-weight:700; font-size:1rem;">FAQs</summary>
           <ul style="padding-left:1.1rem; color:#374151;">
@@ -67,57 +232,174 @@
       </div>
     </section>
   </main>
-
   <script>
-  (function(){
-    // Stopwatch logic (preserved)
-    var swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
-    function swFormat(ms) {
-      var t = Math.floor(ms / 1000);
-      var h = Math.floor(t / 3600);
-      var m = Math.floor((t % 3600) / 60);
-      var s = t % 60;
-      return String(h).padStart(2,'0')+":"+String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
-    }
-    function renderLaps() {
-      var lapList = document.getElementById('lapList');
-      lapList.innerHTML = laps.map(function(l,i){
-        return '<div class="lap-item" style="background:#f7fafc;padding:.45rem;border-radius:8px;margin-bottom:.4rem;">Lap '+(i+1)+': '+swFormat(l)+'</div>';
-      }).join('');
-    }
-    function swUpdateDisplay() {
-      document.getElementById('swDisplay').textContent = swFormat(swElapsed);
-      renderLaps();
-    }
-    document.getElementById('swStartBtn').onclick = function() {
-      if (swRunning) return;
-      swRunning = true;
-      swStart = Date.now() - swElapsed;
-      swTimer = setInterval(function(){
-        swElapsed = Date.now() - swStart;
+    (function () {
+      // Safe helper
+      function $id(id) { return document.getElementById(id); }
+      // Stopwatch state
+      var swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
+      // Format milliseconds -> HH:MM:SS
+      function swFormat(ms) {
+        var t = Math.floor(ms / 1000);
+        var h = Math.floor(t / 3600);
+        var m = Math.floor((t % 3600) / 60);
+        var s = t % 60;
+        return String(h).padStart(2, '0') + ":" + String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
+      }
+      // Render lap list safely
+      function renderLaps() {
+        var lapList = $id('lapList');
+        if (!lapList) return;
+        lapList.innerHTML = laps.map(function (l, i) {
+          return '<div class="lap-item" style="background:#f7fafc;padding:.45rem;border-radius:8px;margin-bottom:.4rem;">Lap ' + (i + 1) + ': ' + swFormat(l) + '</div>';
+        }).join('');
+      }
+      // Update display
+      function swUpdateDisplay() {
+        var display = $id('swDisplay');
+        if (!display) return;
+        display.textContent = swFormat(swElapsed);
+        renderLaps();
+      }
+      // Safe binding helper
+      function safeBind(id, ev, fn) {
+        var el = $id(id);
+        if (el) el.addEventListener(ev, fn);
+      }
+      safeBind('swStartBtn', 'click', function () {
+        if (swRunning) return;
+        swRunning = true;
+        swStart = Date.now() - swElapsed;
+        swTimer = setInterval(function () {
+          swElapsed = Date.now() - swStart;
+          swUpdateDisplay();
+        }, 100);
+      });
+      safeBind('swPauseBtn', 'click', function () {
+        swRunning = false;
+        clearInterval(swTimer);
+      });
+      safeBind('swResetBtn', 'click', function () {
+        swRunning = false;
+        clearInterval(swTimer);
+        swElapsed = 0;
+        laps = [];
         swUpdateDisplay();
-      }, 100);
-    };
-    document.getElementById('swPauseBtn').onclick = function() {
-      swRunning = false;
-      clearInterval(swTimer);
-    };
-    document.getElementById('swResetBtn').onclick = function() {
-      swRunning = false;
-      clearInterval(swTimer);
-      swElapsed = 0;
-      laps = [];
+      });
+      safeBind('swLapBtn', 'click', function () {
+        if (swRunning) laps.push(swElapsed);
+        swUpdateDisplay();
+      });
+      // initial render
       swUpdateDisplay();
-    };
-    document.getElementById('swLapBtn').onclick = function() {
-      if (swRunning) laps.push(swElapsed);
-      swUpdateDisplay();
-    };
-    swUpdateDisplay();
-  })();
+    })();
   </script>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
+    <a href="/privacy.html">Privacy Policy</a> ·
+    <a href="/terms.html">Terms</a> ·
+    <a href="/pricing.html">Pricing</a> · <a href="/contact.html">Contact</a>
+  
+    
+    
 
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: 'Montserrat', sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 2.2rem; font-weight: 800; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">The Ultimate Guide to Using an Online Stopwatch</h2>
+        
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.1rem; margin-bottom: 1.5rem;">
+            A stopwatch is more than just a ticking clock; it is an essential tool for athletes, professionals, and students who need precise time measurement. Unlike a countdown timer that subtracts time from a predetermined limit, a stopwatch measures the exact amount of time that elapses from activation to deactivation. 
+        </p>
+
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.1rem; margin-bottom: 2rem;">
+            Our free online stopwatch provides millisecond accuracy directly in your browser. Below, we explore the history of chronographs, practical use cases for everyday productivity, and how you can leverage lap times to optimize your workflow and athletic training.
+        </p>
+
+        <h3 style="color: #1e40af; font-size: 1.6rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem;">A Brief History of the Stopwatch</h3>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 1.5rem;">
+            The journey of the modern stopwatch began in the 18th century, but the first true "chronograph" (meaning time writer) was invented by Nicolas Mathieu Rieussec in 1821. It was commissioned by King Louis XVIII to time horse races. This early device used ink to mark the dial, allowing officials to see exactly how much time had passed.
+        </p>
+
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 2rem;">
+            As technology advanced, mechanical stopwatches gave way to digital, quartz-powered devices in the late 20th century. Today, digital stopwatches—like the one provided above—rely on the system clock of your computer or mobile device, ensuring flawless accuracy down to the millisecond without the need for mechanical gears.
+        </p>
+
+        <h3 style="color: #1e40af; font-size: 1.6rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem;">Core Features: Start, Stop, and Lap</h3>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 1rem;">
+            Using our online stopwatch is incredibly intuitive. Here is how to get the most out of its features:
+        </p>
+        <ul style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 2rem; padding-left: 1.5rem;">
+            <li style="margin-bottom: 0.5rem;"><strong>Start & Stop:</strong> Click the 'Start' button to begin tracking time instantly. Press 'Stop' to freeze the display without clearing the data.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>The Lap Function:</strong> This is arguably the most powerful feature of a stopwatch. Pressing 'Lap' records the exact time at that specific moment while the main timer continues running in the background. This allows you to track individual segments of an event without resetting the clock.</li>
+            <li style="margin-bottom: 0.5rem;"><strong>Reset:</strong> Clears all data, including your saved laps, bringing the timer back to 00:00:00.</li>
+        </ul>
+
+        <h3 style="color: #1e40af; font-size: 1.6rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem;">Creative Ways to Use a Stopwatch for Productivity</h3>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 1.5rem;">
+            While stopwatches are typically associated with athletic events, they are incredible tools for office workers and creatives. Here are three ways to use our online stopwatch to boost your productivity:
+        </p>
+        
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 1rem;"><strong>1. The Time Audit:</strong></p>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Do you ever reach the end of the day and wonder where your time went? Run the stopwatch while you perform daily tasks (answering emails, writing code, attending meetings) and use the "Lap" feature every time you switch tasks. At the end of the day, review your lap times to identify time-wasting habits.
+        </p>
+
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 1rem;"><strong>2. Meeting Management:</strong></p>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 1.5rem;">
+            Meetings often drag on because there is no sense of urgency. Project our stopwatch on the screen during a conference room meeting. Assign a specific "Lap" time for every agenda item. When the lap time is up, the team must move to the next topic.
+        </p>
+
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 1rem;"><strong>3. The Sprint Method:</strong></p>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem; margin-bottom: 2rem;">
+            If you struggle with procrastination, make a game out of your work. Start the stopwatch and challenge yourself to finish a difficult task before the clock hits a certain number. Gamifying your workflow can trigger dopamine release and make mundane tasks exciting.
+        </p>
+
+        <div style="margin-top:3rem;padding:2rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.2rem;">🚀 Training Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.7;font-style:italic;">"If you are using this stopwatch for athletic interval training (like HIIT or Tabata), use the 'Lap' function to isolate your recovery times. Aim to progressively lower your recovery lap times over several weeks while maintaining the same intensity during your active laps. This is a surefire way to track cardiovascular improvement."</p>
+        </div>
+
+        <div style="margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Explore More TimerHaven Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;">
+                <a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;">Task Timer</a>
+                <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;">Stopwatch</a>
+                <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;">Unit Converter</a>
+                <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;">Weather</a>
+                <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;">World Clock</a>
+                <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;">Calendar</a>
+                <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;">Clipboard</a>
+            </div>
+        </div>
+    </section>
+    
+</footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 </body>
 </html>
+

@@ -1,18 +1,250 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="el">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8">
-  <title>task-timer — Guide (el)</title>
+  <title>Task Timer — Μέτρηση Χρόνου και Βελτίωση Εκτιμήσεων | TimerHaven</title>
+  <meta name="description" content="Ολοκληρωμένος οδηγός για τη μέτρηση της διάρκειας των εργασιών, την ανάλυση των διακοπών και τη βελτίωση των εκτιμήσεων.">>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for task-timer guide (el)">
+  <link rel="canonical" href="https://timerhaven.com/el/task-timer/task-timer-index.html">
+  <meta name="author" content="Serge Shammas">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "HowTo",
+        "name": "Καταγραφή και ανάλυση χρόνου εργασιών με το Task Timer",
+        "description": "Μια ροή εργασίας για τη μέτρηση του πραγματικού χρόνου που δαπανάται σε εργασίες και τη βελτίωση του σχεδιασμού.",
+        "image": "https://timerhaven.com/assets/images/tasktimer-snapshot.webp",
+        "totalTime": "PT2H",
+        "supply": ["Χρονόμετρο", "Λίστα εργασιών", "Πρότυπο παρακολούθησης χρόνου"],
+        "step": [
+          {"@type":"HowToStep","name":"Ορισμός σαφών αποτελεσμάτων","text":"Ονομάστε την εργασία σας με δομημένη μορφή και ορίστε μια εκτιμώμενη διάρκεια."},
+          {"@type":"HowToStep","name":"Έναρξη χρονομέτρου και εργασία","text":"Ξεκινήστε το χρονόμετρο και επικεντρωθείτε στην εργασία. Εάν αλλάξετε εστίαση, σταματήστε το χρονόμετρο."},
+          {"@type":"HowToStep","name":"Καταγραφή διακοπών","text":"Κάθε φορά που διακόπτεστε, προσθέστε μια σημείωση για να καταγράψετε το κρυφό κόστος της εναλλαγής πλαισίου."},
+          {"@type":"HowToStep","name":"Ανασκόπηση και ανάλυση","text":"Στο τέλος της ημέρας ή της εβδομάδας, συγκρίνετε τους πραγματικούς έναντι των εκτιμώμενων χρόνων."}
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff;
+      --link-blue: #0d6efd;
+    }
+    body { font-family: 'Montserrat', Arial, sans-serif; font-display: swap; background: var(--bg); color: #102a43; margin: 0; padding: 2rem; line-height: 1.6; }
+    .container { max-width: 920px; margin: 0 auto; }
+    .card { background: var(--card); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); }
+    h1 { color: var(--brand); margin-top: 0; font-size: 1.8rem; }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    .lead { font-size: 1.05rem; margin-top: 0; margin-bottom: 1rem; }
+    .section { margin-top: 1.1rem; }
+    .workflow { background: #fff7f0; border-left: 4px solid #ffd1a7; padding: 0.9rem; border-radius: 8px; margin-bottom: 0.9rem; }
+    .cta { display: inline-block; padding: 0.6rem 1rem; border-radius: 8px; background: var(--brand); color: #fff; text-decoration: none; font-weight: 700; }
+    .back-link { display: inline-block; margin-bottom: .75rem; color: var(--link-blue) !important; text-decoration: none; font-weight: 700; }
+    nav.toc { margin: 0.75rem 0; padding: 0.5rem 0; border-left: 3px solid #eef5fb; }
+    nav.toc a { display: inline-block; margin-right: 1rem; color: var(--brand); text-decoration: none; font-weight: 600; }
+    pre.template { background: #f3f7fb; padding: 0.75rem; border-radius: 6px; overflow: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.75rem; border: 1px solid #e2e8f0; text-align: left; }
+    th { background: #f8fafc; }
+    .return-to-tool { position: fixed; right: 26px; bottom: 26px; z-index: 999; display: inline-flex; align-items: center; gap: 12px; padding: 11px 16px; border-radius: 999px; background: linear-gradient(180deg, #2faaff, #0b63a0); color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 18px 40px rgba(3, 56, 102, 0.22); }
+    .return-to-tool .icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: rgba(255, 255, 255, 0.12); font-size: 18px; }
+  </style>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+
+    
+    <!-- Social preview (added: page previously had none) -->
+    <meta property="og:title" content="Task Timer — Μέτρηση Χρόνου και Βελτίωση Εκτιμήσεων | TimerHaven">
+    <meta property="og:description" content="Ολοκληρωμένος οδηγός για τη μέτρηση της διάρκειας των εργασιών, την ανάλυση των διακοπών και τη βελτίωση των εκτιμήσεων. Περιλαμβάνει HowTo, FAQ και πρότυπο CSV.">
+    <meta property="og:url" content="https://timerhaven.com/el/task-timer/task-timer-index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TimerHaven">
+    <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Task Timer — Μέτρηση Χρόνου και Βελτίωση Εκτιμήσεων | TimerHaven">
+    <meta name="twitter:description" content="Ολοκληρωμένος οδηγός για τη μέτρηση της διάρκειας των εργασιών, την ανάλυση των διακοπών και τη βελτίωση των εκτιμήσεων. Περιλαμβάνει HowTo, FAQ και πρότυπο CSV.">
+    <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer/task-timer-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">task-timer — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <a href="/index-el.html" class="back-link">&larr;&nbsp;Επιστροφή στο κύριο μενού</a>
+      <h1 id="title">Task Timer — Μέτρηση Χρόνου και Βελτίωση Εκτιμήσεων</h1>
+      
+      <div class="meta">Από τον Serge Shammas · Δημοσιεύτηκε: 2025-10-25 · Χρόνος ανάγνωσης: 10 λεπτά</div>
+      
+      <p class="lead">Το Task Timer δεν είναι απλώς μια αντίστροφη μέτρηση. είναι ένα διαγνωστικό εργαλείο για την παραγωγικότητά σας. Καταγράφοντας τον πραγματικό χρόνο που δαπανάται σε εργασίες, μπορείτε να εντοπίσετε κρυφά εμπόδια και να βελτιώσετε τον σχεδιασμό σας.</p>
+
+      <nav class="toc" aria-label="Πίνακας περιεχομένων">
+        <a href="#setup">Ρύθμιση</a>
+        <a href="#howto">Τρόπος καταγραφής</a>
+        <a href="#interruptions">Διαχείριση διακοπών</a>
+        <a href="#analysis">Εξαγωγή & Ανάλυση</a>
+        <a href="#faq">Συχνές ερωτήσεις</a>
+      </nav>
+
+      <section class="section" id="setup">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Διαφήμιση</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2>Φάση 1: Ρύθμιση και στρατηγική ονομασίας</h2>
+        <p>Η αποτελεσματική παρακολούθηση του χρόνου ξεκινά με συνεπή ονοματολογία. Σας συνιστούμε να χρησιμοποιείτε μια δομημένη μορφή: <strong>[Έργο] - [Δραστηριότητα] - [Αποτέλεσμα]</strong>.</p>
+        <p>Για παράδειγμα, αντί για "Συνάντηση", χρησιμοποιήστε <em>"Έργο Mercury - Daily Standup - Επίλυση προβλήματος"</em>. Αυτό σας επιτρέπει να φιλτράρετε τα δεδομένα σας αργότερα και να δείτε ακριβώς πόσες ώρες δαπανήθηκαν σε κάθε κατηγορία.</p>
+      </section>
+
+      <section class="section" id="howto">
+        <h2>Φάση 2: Η τέλεια ροή εργασίας καταγραφής</h2>
+        <div class="workflow">
+          <strong>Μεθοδολογία βήμα προς βήμα</strong>
+          <ol>
+            <li><strong>Καθορισμός πρόθεσης:</strong> Πριν ξεκινήσετε, γράψτε ακριβώς πώς μοιάζει η επιτυχία για την επόμενη συνεδρία.</li>
+            <li><strong>Η έναρξη:</strong> Πατήστε το κουμπί Έναρξη. Αυτή η πράξη σηματοδοτεί στον εγκέφαλό σας ότι η εστίαση ξεκίνησε.</li>
+            <li><strong>Ενεργή παρακολούθηση:</strong> Κρατήστε το χρονόμετρο ορατό για να διατηρήσετε την επίγνωση του χρόνου.</li>
+            <li><strong>Μετα-ανάλυση:</strong> Όταν τελειώσει η συνεδρία, γράψτε μια σύντομη σημείωση για το τι επιτεύχθηκε.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="interruptions">
+        <h2>Διαχείριση διακοπών</h2>
+        <p>Οι διακοπές είναι η μεγαλύτερη απειλή για την παραγωγικότητα. Το Task Timer σας επιτρέπει να ποσοτικοποιήσετε αυτήν την απειλή. Κάθε φορά που διακόπτεστε, σημειώστε το στο πεδίο των σημειώσεων. Θυμηθείτε: Κάθε διακοπή 1 λεπτού σας κοστίζει στην πραγματικότητα 10-15 λεπτά για να επιστρέψετε σε κατάσταση βαθιάς εστίασης.</p>
+      </section>
+
+      <section class="section" id="analysis">
+        <h2>Φάση 3: Αναλύσεις βασισμένες σε δεδομένα</h2>
+        <p>Στο τέλος κάθε εβδομάδας, εξάγετε τα δεδομένα σας σε CSV και συγκρίνετε τους εκτιμώμενους χρόνους με τους πραγματικούς. Εάν υποτιμάτε συνεχώς κατά 30%, εφαρμόστε αυτόν τον πολλαπλασιαστή στον μελλοντικό σας σχεδιασμό.</p>
+        <h3>Δείγμα πίνακα ανάλυσης</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Μετρική</th>
+              <th>Στόχος</th>
+              <th>Πραγματικό</th>
+              <th>Κατάσταση</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Βαθιά εργασία</td>
+              <td>4 ώρες/ημέρα</td>
+              <td>2.5 ώρες</td>
+              <td style="color:red">Μη βέλτιστο</td>
+            </tr>
+            <tr>
+              <td>Κόστος διακοπής (μ.ο.)</td>
+              <td>&lt; 15 λεπτά</td>
+              <td>22 λεπτά</td>
+              <td style="color:orange">Προειδοποίηση</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="faq">
+        <h2>Συχνές ερωτήσεις</h2>
+        <div class="muted">
+          <p><strong>Ε: Πρέπει να παρακολουθώ κάθε λεπτό της ημέρας μου;</strong><br> Α: Όχι. Ξεκινήστε παρακολουθώντας μόνο τη σημαντικότερη εργασία σας (Deep Work). Η παρακολούθηση απλών εργασιών μπορεί να οδηγήσει σε εξάντληση.</p>
+          <p><strong>Ε: Είναι τα δεδομένα μου ασφαλή;</strong><br> Α: Ναι. Όλα τα εργαλεία του TimerHaven δίνουν προτεραιότητα στο απόρρητο. Τα δεδομένα σας αποθηκεύονται τοπικά στο πρόγραμμα περιήγησής σας.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:2rem;">Σχετικά εργαλεία: <a href="/notes-el.html">Εργαλείο σημειώσεων</a> · <a href="/pomodoro.html">Pomodoro Timer</a> · <a href="/calendar-el.html">Σχεδιασμός ημερολογίου</a></p>
+      
+      <p style="margin-top:1.5rem;"><a href="/timer-el.html" class="cta">Άνοιγμα του Task Timer</a></p>
+      
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Διαφήμιση</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>&copy; 2025 TimerHaven. Όλα τα εργαλεία είναι δωρεάν και σέβονται το απόρρητό σας.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Task Timer</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Ευέλικτο χρονόμετρο για τη διαχείριση εργασιών ή μαγειρικής.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Ιστορία</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Πώς να το χρησιμοποιήσετε</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Ρυθμίστε τα λεπτά.</li><li>Πατήστε Έναρξη.</li><li>Θα ηχήσει στο τέλος.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Καταγράψτε την πρόοδό σας για καλύτερη παραγωγικότητα."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Περισσότερα Δωρεάν Εργαλεία Παραγωγικότητας</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="../../stopwatch-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Χρονόμετρο</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Μετατροπέας Μονάδων</a> <a href="../../weather-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Καιρός</a> <a href="../../world-clock-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Παγκόσμιο Ρολόι</a> <a href="../../calendar-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Ημερολόιο</a> <a href="../../clipboard-manager-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Πρόχειρο</a> <a href="../../countdown-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Αντίστροφη Μέτρηση</a> <a href="../../currency-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Νόμισμα</a> <a href="../../focus-music-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Μουσική Focus</a> <a href="../../habit-tracker-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="../../meeting-planner-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="../../notes-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Σημειώσεις</a> <a href="../../password-generator-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+
+  <a href="/timer-el.html" class="return-to-tool">
+    <span class="icon">↩</span>
+    <span class="label">Επιστροφή στο εργαλείο</span>
+  </a>
 </body>
 </html>

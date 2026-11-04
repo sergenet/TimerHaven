@@ -1,18 +1,306 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>habit-tracker — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for habit-tracker guide (ru)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Отслеживание привычек — Формируйте последовательность простыми ритуалами | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Практическое руководство по использованию Habit Tracker для формирования и поддержания привычек:"> />
+  <link rel="canonical" href="https://timerhaven.com/ru/habit-tracker/habit-tracker-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Создавайте и поддерживайте привычки с Habit Tracker",
+        "description":"Пошаговые рабочие процессы для создания эффективных привычек, поддержания серии, измерения прогресса и масштабирования от отдельной привычки до недельных рутин.",
+        "image":"https://timerhaven.com/assets/images/habit-tracker-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Habit Tracker (TimerHaven)","Блокнот или приложение для заметок","Календарь"],
+        "step":[
+          {"@type":"HowToStep","name":"Выберите ключевую привычку","text":"Выберите одно простое действие, которое легко выполнить и которое даёт значительный эффект."},
+          {"@type":"HowToStep","name":"Начните с малого и привяжите к триггеру","text":"Привяжите новую привычку к существующему ритуалу (после кофе, перед почтой). Начинайте с крошечных действий."},
+          {"@type":"HowToStep","name":"Отслеживайте ежедневно","text":"Отмечайте выполнение привычки каждый день в трекере; фиксируйте помехи и причины пропусков."},
+          {"@type":"HowToStep","name":"Проводите еженедельный обзор","text":"Подводите итоги по сериям и корректируйте сложность или время, чтобы повысить последовательность."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Сколько привычек стоит отслеживать?","acceptedAnswer":{"@type":"Answer","text":"Начните с 13 привычек. Концентрация и последовательность важнее широты. Постепенно добавляйте новые привычки, когда старые закрепятся."}},
+          {"@type":"Question","name":"Как восстановить прерванную серию?","acceptedAnswer":{"@type":"Answer","text":"Зафиксируйте, что послужило причиной пропуска, при необходимости снизьте ожидания, и начните заново как можно скорее — перезапуск важнее ошибки."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Отслеживание привычек — Формируйте последовательность простыми ритуалами | TimerHaven">
+  <meta property="og:description" content="Практическое руководство по использованию Habit Tracker для формирования и поддержания привычек: постановка целей, дизайн привычек, жетоны, метрики, автоматизация и командные шаблоны.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ru/habit-tracker/habit-tracker-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Отслеживание привычек — Формируйте последовательность простыми ритуалами | TimerHaven">
+  <meta name="twitter:description" content="Практическое руководство по использованию Habit Tracker для формирования и поддержания привычек: постановка целей, дизайн привычек, жетоны, метрики, автоматизация и командные шаблоны.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/habit-tracker/habit-tracker-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/habit-tracker/habit-tracker-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/habit-tracker/habit-tracker-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/habit-tracker/habit-tracker-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/habit-tracker/habit-tracker-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/habit-tracker/habit-tracker-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/habit-tracker/habit-tracker-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/habit-tracker/habit-tracker-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">habit-tracker — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Отслеживание привычек — Формируйте привычки, которые сохраняются</h1>
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — эксперт по дизайну привычек и продуктивности</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 1216 мин.</div>
+        </div>
+      </div>
+      <p class="lead">Небольшие, последовательные действия складываются в значимые результаты. Habit Tracker помогает превратить намерения в ежедневную практику. В этом руководстве описывается выбор привычек, уменьшение трения, измерение прогресса, управление сериями, восстановление после сбоев и командные сценарии — всё, чтобы привычки прижились надолго.</p>
+      <nav class="toc" aria-label="Содержание">
+        <a href="#choose">Выберите правильные привычки</a> ·
+        <a href="#design">Дизайн маленьких привычек</a> ·
+        <a href="#track">Ежедневное отслеживание</a> ·
+        <a href="#measure">Измерения и метрики</a> ·
+        <a href="#streaks">Серии и мотивация</a> ·
+        <a href="#recover">Восстановление после сбоев</a> ·
+        <a href="#team">Команда и ответственность</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="choose" class="section" aria-labelledby="choose-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="choose-title">Выберите правильные привычки — начните с влияния</h2>
+        <p>Не все привычки одинаковы. Начните с одной‑двух «ключевых» привычек, которые дают высокий эффект (физкультура, утреннее планирование, сортировка почты). Ключевая привычка упрощает другие действия и быстро даёт видимый результат, что поддерживает мотивацию.</p>
+        <ul>
+          <li><strong>Сначала влияние:</strong> выбирайте привычки, которые напрямую приближают ваши цели.</li>
+          <li><strong>Начинайте с малого:</strong> если задача пугает — уменьшите её до минимального действия (1 отжимание, 2 минуты чтения).</li>
+          <li><strong>Конкретика:</strong> определите, что считается «сделано» — например, «прочитать 1 страницу», а не «читать больше».</li>
+        </ul>
+      </section>
+      <section id="design" class="section" aria-labelledby="design-title">
+        <h2 id="design-title">Дизайн маленьких привычек — ниже трение, выше последовательность</h2>
+        <p>Используйте подход «Tiny Habits»: сделайте действие лёгким, привяжите его к триггеру и отметьте завершение. Интерфейс Habit Tracker упрощает шаг отметки — чем легче отметить выполнение, тем выше вероятность сохранить привычку.</p>
+        <div class="recipe">
+          <strong>Рецепт маленькой привычки</strong>
+          <ol>
+            <li>Триггер: привяжите привычку к надёжному ежедневному сигналу (например, после утреннего кофе).</li>
+            <li>Мини‑действие: выберите минимальную версию, которую сможете выполнить даже в усталом состоянии.</li>
+            <li>Мгновенная отметка: откройте Habit Tracker и нажмите «Отметить выполнено» (или используйте сочетание клавиш, если доступно).</li>
+            <li>Награда: выполните маленькое поощрение (галочка, короткая заметка), чтобы замкнуть цикл.</li>
+          </ol>
+        </div>
+        <p class="small-note">Совет: последовательность привычек (habit chaining) уменьшает переключения контекста — «после того как почистил зубы, я напишу 1 предложение в дневнике».</p>
+      </section>
+      <section id="track" class="section" aria-labelledby="track-title">
+        <h2 id="track-title">Ежедневные рабочие процессы для отслеживания</h2>
+        <p>Последовательность зависит от видимости привычки. Используйте Habit Tracker ежедневно — либо утром, либо в фиксированное время (вечером). Записывайте как выполнения, так и короткие заметки о помехах или причинах промахов.</p>
+        <h3>Пример ежедневной рутины</h3>
+        <ol>
+          <li>Утро: просмотрите привычки на день и при необходимости добавьте контекст.</li>
+          <li>В течение дня: отмечайте выполненные привычки по мере их завершения.</li>
+          <li>Вечер: быстрый обзор — зафиксируйте причины пропусков и при необходимости перенесите задачу.</li>
+        </ol>
+      </section>
+      <section id="measure" class="section" aria-labelledby="measure-title">
+        <h2 id="measure-title">Измерения и метрики — держите всё просто</h2>
+        <p>Измерение помогает оставаться честным. Отслеживайте несколько полезных метрик и еженедельно анализируйте их, чтобы улучшать время и дизайн привычек.</p>
+        <h3>Минимальные метрики</h3>
+        <ul>
+          <li><strong>Дни отслеживания:</strong> количество дней, когда вы отметили выполнение привычки.</li>
+          <li><strong>Процент выполнения:</strong> выполненные дни / запланированные дни.</li>
+          <li><strong>Длина серии:</strong> текущая последовательность подряд выполненных дней.</li>
+          <li><strong>Причины пропусков:</strong> короткие коды причин (поездка, болезнь, забыл).</li>
+        </ul>
+        <pre class="template">CSV столбцы:
+date,habit,done,reason,notes
+2025-11-24,Пить воду,1,,Бутылка на столе</pre>
+      </section>
+      <section id="streaks" class="section" aria-labelledby="streaks-title">
+        <h2 id="streaks-title">Серии и мотивация — используйте разумно</h2>
+        <p>Серии могут мотивировать, но они хрупки. Используйте их, чтобы сформировать ритм, а не как способ наказания. Если серия прервана, сосредоточьтесь на быстром перезапуске вместо переживаний.</p>
+        <h3>Здоровые правила для серий</h3>
+        <ul>
+          <li>Держите цели реалистичными (ежедневные привычки проще; для некоторых подойдут недельные).</li>
+          <li>Установите мягкие правила для особых дней (поездки/праздники) — функция «отложено» или «извинено» полезна.</li>
+          <li>Отмечайте вехи (7, 30, 90 дней) небольшой наградой.</li>
+        </ul>
+      </section>
+      <section id="recover" class="section" aria-labelledby="recover-title">
+        <h2 id="recover-title">Восстановление после сбоев — начинайте быстро</h2>
+        <p>Сбои — нормальная часть процесса. Быстрый план восстановления уменьшает негативные последствия и помогает вернуть импульс.</p>
+        <div class="recipe">
+          <strong>Рутина восстановления</strong>
+          <ol>
+            <li>Запишите причину пропуска (одна строка).</li>
+            <li>Скорректируйте план (снизьте размер привычки, поменяйте триггер или время дня).</li>
+            <li>Начните снова немедленно — не откладывайте до понедельника.</li>
+            <li>Еженедельно анализируйте паттерны и вносите корректировки.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="team" class="section" aria-labelledby="team-title">
+        <h2 id="team-title">Команда и схемы ответственности</h2>
+        <p>Команды могут использовать привычки для совместных ритмов (ежедневный стендап, итог дня). Делайте командные привычки добровольными и фокусируйтесь на общих результатах, а не на контроле.</p>
+        <ul>
+          <li><strong>Совместные ритуалы:</strong> короткие привычки, улучшающие координацию (например, ежедневное обновление статуса тикета).</li>
+          <li><strong>Партнёрская система:</strong> объединяйтесь с коллегой для еженедельных чек‑инов по прогрессу.</li>
+          <li><strong>Агрегированные метрики:</strong> делитесь обезличенными показателями выполнения для улучшения команды, а не для контроля отдельных людей.</li>
+        </ul>
+      </section>
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Устранение неполадок и распространённые проблемы</h2>
+        <ul>
+          <li><strong>Нет времени на отметку:</strong> добавьте однонажатие «Отметить сделано» или используйте голосовую заметку для быстрой записи выполнения.</li>
+          <li><strong>Слишком много привычек:</strong> сократите до 13 приоритетных и заморозьте остальные, пока первые не станут стабильными.</li>
+          <li><strong>Ложные срабатывания:</strong> убедитесь, что «выполнено» действительно означает завершение — важнее качество, чем формальное нажатие.</li>
+        </ul>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Через какое время привычка становится автоматической?<br><strong>Ответ:</strong> Различается: простые привычки могут закрепиться за недели; сложные — за месяцы. Сосредоточьтесь на последовательности, а не на фиксированных сроках.</p>
+          <p><strong>Вопрос:</strong> Нужно ли отмечать каждый день?<br><strong>Ответ:</strong> Ежедневное отслеживание помогает выстроить ритм. Для некоторых привычек практичнее недельная частота — согласуйте частоту с природой привычки.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/habit-tracker-ru.html">Открыть Habit Tracker</a></li>
+          <li><a href="https://jamesclear.com/habits" target="_blank" rel="noopener">Atomic Habits — James Clear</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/habit-tracker-ru.html" class="cta" aria-label="Открыть Habit Tracker">Открыть Habit Tracker</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Политика конфиденциальности: <a href="/privacy.html">Privacy Policy</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذ¢ر€ذµذ؛ذµر€ ذ؟ر€ذ¸ذ²ر‹ر‡ذµذ؛</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذکذ½رپر‚ر€رƒذ¼ذµذ½ر‚ ذ؟ذ¾ذ²ذµذ´ذµذ½ر‡ذµرپذ؛ذ¾ذ¹ ذ؟رپذ¸ر…ذ¾ذ»ذ¾ذ³ذ¸ذ¸ ذ´ذ»رڈ ر„ذ¾ر€ذ¼ذ¸ر€ذ¾ذ²ذ°ذ½ذ¸رڈ ذ؟ذ¾ذ»ذµذ·ذ½ر‹ر… ذ؟ر€ذ¸ذ²ر‹ر‡ذµذ؛.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذ‍ذ؟ر€ذµذ´ذµذ»ذ¸ر‚ذµ 1-3 ذ؟ر€ذ¾رپر‚ر‹ر… ذ؟ر€ذ¸ذ²ر‹ر‡ذ؛ذ¸.</li><li>ذ‍ر‚ذ¼ذµر‡ذ°ذ¹ر‚ذµ ذ²ر‹ذ؟ذ¾ذ»ذ½ذµذ½ذ¸ذµ ذ؛ذ°ذ¶ذ´ر‹ذ¹ ذ´ذµذ½رŒ.</li><li>ذ،ذ»ذµذ´ذ¸ر‚ذµ ذ·ذ° 'رپذµر€ذ¸ذµذ¹' (streak) ذ´ذ»رڈ ذ¼ذ¾ر‚ذ¸ذ²ذ°ر†ذ¸ذ¸.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذںذ¾رپر‚ذ¾رڈر½رپر‚ذ²ذ¾ ذ²ذ°ذ¶ذ½ذµذµ رپذ¾ذ²ذµر€رˆذµذ½رپر‚ذ²ذ°: ذ´ذ°ذ¶ذµ ذ¼ذ°ذ»ذµذ½رŒذ؛ذ°رڈ ذ¾ر‚ذ¼ذµر‚ذ؛ذ° ذ² ذ؟ذ»ذ¾ر…ذ¾ذ¹ ذ´ذµذ½رŒ ذ؟ذ¾ذ´ذ´ذµر€ذ¶ذ¸ذ²ذ°ذµر‚ ذ؟ر€ذ¸ذ²رچر‡ذ؛رƒ."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="../../stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="../../unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="../../weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="../../world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="../../calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="../../clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="../../countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="../../currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="../../focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="../../habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="../../meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="../../notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="../../password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/habit-tracker-ru.html" class="return-to-tool" id="returnToToolHabit" aria-label="Вернуться к Habit Tracker">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К Habit Tracker</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolHabit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

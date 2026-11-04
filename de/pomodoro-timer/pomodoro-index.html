@@ -1,17 +1,25 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="de">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8">
   <title>Pomodoro‑Timer — Praktischer Leitfaden für fokussiertes Arbeiten | TimerHaven</title>
-  <meta name="description" content="Umfassender Pomodoro‑Leitfaden mit praktischen Workflows, Schritt‑für‑Schritt‑Anleitungen, Vorlagen, Fallbeispielen und Fehlerbehebung zur Verbesserung von Fokus und Ergebnissen.">
+  <meta name="description" content="Umfassender Pomodoro‑Leitfaden mit praktischen Workflows, Schritt‑für‑Schritt‑Anleitungen, Vorlagen, Fallbeispielen und Fehlerbehebung zur Verbesserung…">>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="canonical" href="https://timerhaven.com/de/pomodoro-index.html">
+  <link rel="canonical" href="https://timerhaven.com/de/pomodoro-timer/pomodoro-index.html">
   <meta name="author" content="Serge Shammas">
-  <meta property="og:title" content="Pomodoro‑Timer — Praktischer Leitfaden & Workflows">
-  <meta property="og:description" content="Praktischer Pomodoro‑Leitfaden mit Workflows, Anleitungen, Vorlagen und Tipps zur Verbesserung von Fokus und Messbarkeit.">
-  <meta property="og:image" content="/assets/images/pomodoro-snapshot.png">
-  <meta property="og:url" content="https://timerhaven.com/de/pomodoro-index.html">
-
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -20,7 +28,7 @@
         "@type": "HowTo",
         "name": "Die Pomodoro‑Technik für fokussiertes Arbeiten verwenden",
         "description": "Ein praktischer Pomodoro‑Workflow: Einrichten, starten, aufzeichnen und auswerten von Pomodoro‑Sitzungen mit Varianten und Team‑Mustern.",
-        "image": "https://timerhaven.com/assets/images/pomodoro-snapshot.png",
+        "image": "https://timerhaven.com/assets/images/pomodoro-snapshot.webp",
         "totalTime": "PT3H",
         "supply": ["Timer (Browser oder Telefon)", "Notizapp oder Notizbuch", "Aufgabenliste"],
         "tool": ["TimerHaven Pomodoro‑Tool", "Task Timer (optional)"],
@@ -29,7 +37,7 @@
           {"@type":"HowToStep","name":"Umgebung vorbereiten","text":"Benachrichtigungen stummschalten, Arbeitsplatz vorbereiten und Wasser bereithalten. Öffnen Sie den Pomodoro‑Timer und stellen Sie 25/5 oder Ihr bevorzugtes Intervall ein."},
           {"@type":"HowToStep","name":"Starten und fokussieren","text":"Starten Sie den Timer und arbeiten Sie ohne Ablenkung an der Aufgabe bis zur Glocke. Unterbrechungen notieren; bei längeren Unterbrechungen Pause/Neustart überlegen."},
           {"@type":"HowToStep","name":"Kurze Pause und Reflexion","text":"Nehmen Sie eine 5‑minütige Pause, notieren Sie kurz den Fortschritt und planen Sie das nächste Mikro‑Ziel."},
-          {"@type":"HowToStep","name":"Nach vier Zyklen überprüfen","text":"Nach vier Pomodoros eine längere Pause (15–30 Min.) einlegen und Notizen zur Verbesserung durchsehen."}
+          {"@type":"HowToStep","name":"Nach vier Zyklen überprüfen","text":"Nach vier Pomodoros eine längere Pause (1530 Min.) einlegen und Notizen zur Verbesserung durchsehen."}
         ]
       },
       {
@@ -44,12 +52,11 @@
         "@type":"Person",
         "name":"Serge Shammas",
         "url":"https://timerhaven.com/authors/serge-shammas",
-        "image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg"
+        "image":"https://timerhaven.com/assets/images/authors/Serge.jpg"
       }
     ]
   }
   </script>
-
   <style>
     :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
     body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
@@ -68,23 +75,49 @@
     nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
     pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
     .small-note{font-size:0.95rem;color:#51606b}
+    /* Floating return button styling */
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
   </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pomodoro‑Timer — Praktischer Leitfaden für fokussiertes Arbeiten | TimerHaven">
+  <meta property="og:description" content="Umfassender Pomodoro‑Leitfaden mit praktischen Workflows, Schritt‑für‑Schritt‑Anleitungen, Vorlagen, Fallbeispielen und Fehlerbehebung zur Verbesserung von Fokus und Ergebnissen.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/de/pomodoro-timer/pomodoro-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pomodoro‑Timer — Praktischer Leitfaden für fokussiertes Arbeiten | TimerHaven">
+  <meta name="twitter:description" content="Umfassender Pomodoro‑Leitfaden mit praktischen Workflows, Schritt‑für‑Schritt‑Anleitungen, Vorlagen, Fallbeispielen und Fehlerbehebung zur Verbesserung von Fokus und Ergebnissen.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/pomodoro-timer/pomodoro-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/pomodoro-timer/pomodoro-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/pomodoro-timer/pomodoro-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/pomodoro-timer/pomodoro-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/pomodoro-timer/pomodoro-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/pomodoro-timer/pomodoro-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/pomodoro-timer/pomodoro-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/pomodoro-timer/pomodoro-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
       <h1 id="title">Pomodoro‑Timer — Praktischer Leitfaden für fokussiertes Arbeiten</h1>
-
       <div class="author" role="articleauthor" aria-label="Autor">
-        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="48" height="48" alt="Serge Shammas">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="48" height="48" alt="Serge Shammas">
         <div>
           <div><strong>Von Serge Shammas</strong> — Produktivitätsautor und UX‑Forscher</div>
-          <div class="meta">Veröffentlicht: 2025‑10‑20 · Zuletzt aktualisiert: 2025‑11‑21 · Lesezeit: 10–12 Min.</div>
+          <div class="meta">Veröffentlicht: 2025‑10‑20 · Zuletzt aktualisiert: 2025‑11‑21 · Lesezeit: 1012 Min.</div>
         </div>
       </div>
-
       <p class="lead">Die Pomodoro‑Technik teilt Arbeit in kurze, fokussierte Intervalle mit Pausen. Dieser Leitfaden bietet praktische Einstellungen, Varianten für verschiedene Aufgaben, Team‑Workflows, Vorlagen zum Download und Tipps zur Messung und Verbesserung.</p>
-
       <nav class="toc" aria-label="Inhaltsverzeichnis">
         <a href="#why">Warum Pomodoro?</a>
         <a href="#setup">Vorbereitung</a>
@@ -96,12 +129,14 @@
         <a href="#troubleshoot">Fehlerbehebung</a>
         <a href="#faq">FAQ</a>
       </nav>
-
       <section id="why" class="section" aria-labelledby="why-title">
-        <h2 id="why-title">Warum Pomodoro?</h2>
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anzeige</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="why-title">Warum Pomodoro?</h2>
         <p>Pomodoro verwandelt das große „viel erledigen“ in kleine, machbare Ziele. Kurze Blöcke verringern die Hemmschwelle zum Starten, reduzieren Entscheidungs‑Ermüdung und liefern verlässliche Daten über tatsächliche Arbeitszeiten.</p>
       </section>
-
       <section id="setup" class="section" aria-labelledby="setup-title">
         <h2 id="setup-title">Vorbereitung & Umfeld</h2>
         <ul>
@@ -110,7 +145,6 @@
           <li><strong>Timer wählen:</strong> TimerHaven Pomodoro nutzen oder einen physischen Timer. Prüfen Sie Benachrichtigungen.</li>
         </ul>
       </section>
-
       <section id="howto" class="section" aria-labelledby="howto-title">
         <h2 id="howto-title">Schritt‑für‑Schritt (25/5)</h2>
         <div class="workflow" aria-labelledby="setup-steps">
@@ -120,18 +154,15 @@
             <li>25 Minuten Timer starten und ohne Multitasking arbeiten.</li>
             <li>Bei Glocke sofort stoppen, 5 Minuten Pause machen.</li>
             <li>Während der Pause eine kurze Notiz zum Fortschritt.</li>
-            <li>Nach vier Pomodoros eine längere Pause (15–30 Min.) und Review.</li>
+            <li>Nach vier Pomodoros eine längere Pause (1530 Min.) und Review.</li>
           </ol>
         </div>
-
         <p class="small-note">Kleine Aufgaben bündeln, große Aufgaben in mehrere Pomodoros aufteilen.</p>
-
         <figure>
-          <img class="screenshot" src="/assets/images/pomodoro-snapshot.png" alt="Pomodoro Timer — Beispieloberfläche">
+          <img class="screenshot" src="../assets/images/pomodoro-snapshot.webp" alt="Pomodoro Timer — Beispieloberfläche">
           <figcaption class="muted">Beispiel: Pomodoro‑Timer startet, pausiert, protokolliert.</figcaption>
         </figure>
       </section>
-
       <section id="variants" class="section" aria-labelledby="variants-title">
         <h2 id="variants-title">Varianten und Einsatz</h2>
         <ul>
@@ -141,7 +172,6 @@
           <li><strong>Task Batching:</strong> Kurze ähnliche Aufgaben bündeln.</li>
         </ul>
       </section>
-
       <section id="recipes" class="section" aria-labelledby="recipes-title">
         <h2 id="recipes-title">Rezepte & Workflows</h2>
         <div class="workflow">
@@ -152,7 +182,6 @@
             <li>Pausen nutzen, um Stichpunkte in Absätze zu verwandeln.</li>
           </ol>
         </div>
-
         <div class="workflow">
           <strong>Deep Sprint (50/10)</strong>
           <ol>
@@ -161,34 +190,29 @@
             <li>Ergebnisse und Unterbrechungen dokumentieren.</li>
           </ol>
         </div>
-
         <div class="workflow">
           <strong>Meeting Prep (25/5 + Review)</strong>
           <ol>
             <li>Erster Pomodoro Material sammeln und gliedern.</li>
-            <li>Zweiter Pomodoro rehearsal und 1–2 Min. Zusammenfassung.</li>
+            <li>Zweiter Pomodoro rehearsal und 12 Min. Zusammenfassung.</li>
             <li>Längere Pause danach.</li>
           </ol>
         </div>
       </section>
-
       <section id="measure" class="section" aria-labelledby="measure-title">
         <h2 id="measure-title">Messen, protokollieren und verbessern</h2>
         <p>Protokollieren Sie Datum, Aufgabe, geplante Dauer, tatsächliche Dauer, Unterbrechungen und eine kurze Notiz. Exportieren Sie wöchentlich und berechnen Sie Durchschnitt, Median und Unterbrechungsrate.</p>
-
         <h3>Wichtige Kennzahlen</h3>
         <ul>
           <li>Durchschnittliche Dauer</li>
           <li>Unterbrechungsrate</li>
           <li>Abschluss‑Ratio (geplante vs. benötigte Pomodoros)</li>
         </ul>
-
         <h3>Tabellen‑Formeln</h3>
         <pre class="template">=AVERAGEIF(TagRange,"project-alpha",ActualMinutesRange)
 =MEDIAN(IF(TagRange="project-alpha",ActualMinutesRange))
 =COUNTIFS(TagRange,"project-alpha",InterruptionsRange,">0") / COUNTIF(TagRange,"project-alpha")</pre>
       </section>
-
       <section id="team" class="section" aria-labelledby="team-title">
         <h2 id="team-title">Pomodoro im Team</h2>
         <ul>
@@ -197,19 +221,15 @@
           <li>Blockierungen in einem gemeinsamen Dokument festhalten.</li>
         </ul>
       </section>
-
       <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
         <h2 id="troubleshoot-title">Fehlerbehebung</h2>
         <h3>Häufige Unterbrechungen</h3>
         <p>Unterbrechungen eine Woche protokollieren, Muster erkennen und Fokusfenster aushandeln.</p>
-
         <h3>Aufgaben zu groß</h3>
-        <p>In kleinere, 1–3 Pomodoro‑sinnige Teile aufteilen oder als Multi‑Pomodoro‑Block planen.</p>
-
+        <p>In kleinere, 13 Pomodoro‑sinnige Teile aufteilen oder als Multi‑Pomodoro‑Block planen.</p>
         <h3>Timer‑Genauigkeit</h3>
         <p class="small-note">Auf Mobilgeräten kann Tab‑Throttling den Timer beeinflussen — ggf. native App nutzen.</p>
       </section>
-
       <section id="download" class="section" aria-labelledby="download-title">
         <h2 id="download-title">Download — Session‑Vorlage</h2>
         <p class="muted">Vorlage herunterladen und wöchentlich protokollieren.</p>
@@ -222,7 +242,6 @@ Pomodoro #2: start __:__ end __:__ duration 25
 Short breaks:
 Interruptions (#):
 Notes / next steps:</pre>
-
         <script>
           document.getElementById('downloadPomodoro').addEventListener('click', function(e){
             e.preventDefault();
@@ -238,38 +257,83 @@ Notes / next steps:</pre>
           });
         </script>
       </section>
-
       <section id="case-studies" class="section" aria-labelledby="case-studies-title">
         <h2 id="case-studies-title">Kurz‑Fallstudien</h2>
         <div class="case">
           <strong>Entwicklerin — Aisha</strong>
           <p>Aisha stellte fest, dass Debugging durchschnittlich 3 Pomodoros benötigt. Sie plant nun größere Blöcke und trennt Code‑Reviews.</p>
         </div>
-
         <div class="case">
           <strong>Freelancer — Jonah</strong>
           <p>Jonah bündelte Angebotserstellung in Sprints und erhöhte dadurch seine Abschlussquote.</p>
         </div>
       </section>
-
       <section id="faq" class="section" aria-labelledby="faq-title">
         <h2 id="faq-title">FAQ</h2>
         <div class="muted">
-          <p><strong>Frage:</strong> Pomodoro für Meetings?<br><strong>Antwort:</strong> Eher für Vorbereitung und Nachbereitung nutzen; während Meetings keine neuen Pomodoros starten.</p>
-          <p><strong>Frage:</strong> Ist Pomodoro ein Allheilmittel?<br><strong>Antwort:</strong> Nein. Testen Sie und nutzen Sie die Daten, um zu entscheiden, ob es Ihre Produktivität verbessert.</p>
+          <p><strong>Frage:</strong> Pomodoro für Meetings”<br><strong>Antwort:</strong> Eher für Vorbereitung und Nachbereitung nutzen; während Meetings keine neuen Pomodoros starten.</p>
+          <p><strong>Frage:</strong> Ist Pomodoro ein Allheilmittel”<br><strong>Antwort:</strong> Nein. Testen Sie und nutzen Sie die Daten, um zu entscheiden, ob es Ihre Produktivität verbessert.</p>
         </div>
       </section>
-
-      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/de/notes-index.html">Notes</a> · <a href="/timer.html#startBtn">Task Timer</a> · <a href="/de/calendar-planning-index.html">Kalender</a></p>
-
+      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/de/notes/notes-index.html">Notes</a> · <a href="/timer.html#startBtn">Task Timer</a> · <a href="/de/calendar-planning/calendar-planning-index.html">Kalender</a></p>
       <p style="margin-top:1.2rem;">
-        <a href="/pomodoro-de.html" class="cta">Pomodoro‑Tool öffnen</a>
+        <a href="/pomodoro.html" class="cta">Pomodoro‑Tool öffnen</a>
       </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anzeige</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Feedback” <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Siehe <a href="/privacy.html">Datenschutzerklärung</a>.</p>
+      
+    <!-- SEO Content Section -->
+    
+    
 
-      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
-        <p>Feedback? <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Siehe <a href="/privacy/">Datenschutzerklärung</a>.</p>
-      </footer>
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Pomodoro-Timer</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Die Pomodoro-Technik ist eine Zeitmanagementmethode, bei der ein Timer verwendet wird, um die Arbeit in Intervalle zu unterteilen, die traditionell 25 Minuten lang sind und durch kurze Pausen unterbrochen werden.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Geschichte</h3>
+                <p style="line-height: 1.7; color: #4b5563;">Entwickelt von Francesco Cirillo in den spأ¤ten 1980er Jahren. Cirillo benutzte eine kأ¼chenuhr in Form einer Tomate (italienisch: pomodoro), um sein Studium zu organisieren und Burnout zu bekأ¤mpfen.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Anleitung</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Wأ¤hlen Sie eine Aufgabe aus.</li><li>Stellen Sie den Timer auf 25 Minuten ein.</li><li>Arbeiten Sie konzentriert, bis der Timer klingelt.</li><li>Machen Sie eine 5-minأ¼tige Pause.</li><li>Machen Sie nach vier 'Pomodoros' eine lأ¤ngere Pause von 15 bis 30 Minuten.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Nutzen Sie die Pausen, um sich zu bewegen oder etwas zu trinken – das beugt geistiger Ermأ¼dung vor und hأ¤lt den Fokus scharf."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Weitere kostenlose Produktivitäts-Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Aufgaben-Timer</a> <a href="../../stopwatch-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stoppuhr</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Einheitenumrechner</a> <a href="../../weather-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Wetter</a> <a href="../../world-clock-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weltuhr</a> <a href="../../calendar-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Kalender</a> <a href="../../clipboard-manager-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Zwischenablage</a> <a href="../../countdown-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="../../currency-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Währungsrechner</a> <a href="../../focus-music-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Fokus-Musik</a> <a href="../../habit-tracker-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Gewohnheiten</a> <a href="../../meeting-planner-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting-Planer</a> <a href="../../notes-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notizen</a> <a href="../../password-generator-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwörter</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/pomodoro.html" class="return-to-tool" id="returnToToolPomodoro" aria-label="Zurück zum Pomodoro‑Tool">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zum Pomodoro‑Tool</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolPomodoro');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

@@ -1,18 +1,287 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <title>stopwatch — Guide (el)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for stopwatch guide (el)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Χρονόμετρο — Μετρήστε Απόδοση, Διαστήματα & Πρόοδο | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Οδηγός για τη χρήση του χρονομέτρου σε παραγωγικότητα, προπόνηση, πειράματα και συναντήσεις."> />
+  <link rel="canonical" href="https://timerhaven.com/el/stopwatch/stopwatch-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Χρήση Χρονόμετρου αποτελεσματικά",
+        "description":"Ξεκινήστε, παύστε, καταγράψτε lap και μετρήστε τον παρελθόντα χρόνο για πειράματα, προπονήσεις, συναντήσεις και παραγωγική εργασία. Αυτός ο οδηγός καλύπτει ροές εργασίας, χρήση lap, συλλογή δεδομένων, ζητήματα ακρίβειας και αντιμετώπιση προβλημάτων.",
+        "image":"https://timerhaven.com/assets/images/stopwatch-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Χρονόμετρο (TimerHaven)","Τετράδιο ή υπολογιστικό φύλλο","Προαιρετικό καρδιοσυχνόμετρο για χρήση στην άσκηση"],
+        "step":[
+          {"@type":"HowToStep","name":"Ορίστε στόχο","text":"Αποφασίστε τι μετράτε (διάρκεια εργασίας, απόδοση διαστήματος, χρόνος ολοκλήρωσης)."},
+          {"@type":"HowToStep","name":"Ξεκινήστε και καταγράψτε laps","text":"Χρησιμοποιήστε το Start και πατήστε Lap σε προκαθορισμένα σημεία· επισημάνετε ή εξάγετε τις ώρες lap αν χρειάζεται."},
+          {"@type":"HowToStep","name":"Ανασκοπήστε και αναλύστε","text":"Συλλέξτε τα δεδομένα lap σε υπολογιστικό φύλλο και υπολογίστε μέσους όρους, καλύτερους χρόνους και διακύμανση για να κατανοήσετε την απόδοση."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Θα τρέχει το χρονόμετρο αν αλλάξω καρτέλα;","acceptedAnswer":{"@type":"Answer","text":"Ναι — το χρονόμετρο υπολογίζει τον περασμένο χρόνο βάσει χρονικών σημάνσεων (start + τώρα) οπότε παραμένει ακριβές ακόμη κι αν η καρτέλα είναι στο υπόβαθρο. Ορισμένες σελίδες ενδέχεται να μειώσουν τις ενημερώσεις UI, αλλά όχι τον υπολογισμό του περασμένου χρόνου."}},
+          {"@type":"Question","name":"Πώς καταγράφω laps;","acceptedAnswer":{"@type":"Answer","text":"Πατήστε το κουμπί Lap για να καταγράψετε τον τρέχοντα περασμένο χρόνο. Εξάγετε ή αντιγράψτε τις ώρες για να κρατήσετε αρχεία για μετέπειτα ανάλυση."}},
+          {"@type":"Question","name":"Είναι το χρονόμετρο αρκετά ακριβές για πειράματα;","acceptedAnswer":{"@type":"Answer","text":"Για τις περισσότερες χρήσεις παραγωγικότητας και προπόνησης, ναι. Για υψηλής ακρίβειας επιστημονικό χρονισμό, προτιμήστε ειδικό εξοπλισμό ή native εφαρμογές με εγγυήσεις πραγματικού χρόνου."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Χρονόμετρο — Μετρήστε Απόδοση, Διαστήματα & Πρόοδο | TimerHaven">
+  <meta property="og:description" content="Οδηγός για τη χρήση του χρονομέτρου σε παραγωγικότητα, προπόνηση, πειράματα και συναντήσεις. Περιλαμβάνει πρότυπα χρονισμού, πρακτικές για laps, σημειώσεις ακρίβειας και αντιμετώπιση προβλημάτων.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/el/stopwatch/stopwatch-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="el_GR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Χρονόμετρο — Μετρήστε Απόδοση, Διαστήματα & Πρόοδο | TimerHaven">
+  <meta name="twitter:description" content="Οδηγός για τη χρήση του χρονομέτρου σε παραγωγικότητα, προπόνηση, πειράματα και συναντήσεις. Περιλαμβάνει πρότυπα χρονισμού, πρακτικές για laps, σημειώσεις ακρίβειας και αντιμετώπιση προβλημάτων.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/stopwatch/stopwatch-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">stopwatch — Guide (el)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Χρονόμετρο — Μετρήστε Παρελθόντα Χρόνο, Διαστήματα & Πρόοδο</h1>
+      <div class="author" role="articleauthor" aria-label="Συγγραφέας άρθρου">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Από τον Serge Shammas</strong> — συγγραφέας για παραγωγικότητα & μέτρηση</div>
+          <div class="meta">Δημοσιεύτηκε: 2025-11-24 · Χρόνος ανάγνωσης: 1015 λεπτά</div>
+        </div>
+      </div>
+      <p class="lead">Το χρονόμετρο είναι το πιο απλό εργαλείο χρονισμού αλλά οι εφαρμογές του είναι πολλές: μετρήστε διάρκειες εργασιών, χρονίστε διαστήματα προπόνησης, καταγράψτε χρόνους πειραμάτων ή επιβάλετε ενότητες ατζέντας σε συναντήσεις. Αυτός ο οδηγός καλύπτει πρακτικές ροές εργασίας, βέλτιστες πρακτικές για laps, συλλογή δεδομένων, ζητήματα ακρίβειας και πώς να χρησιμοποιήσετε τα δεδομένα για βελτίωση της απόδοσης.</p>
+      <nav class="toc" aria-label="Περιεχόμενα">
+        <a href="#when">Πότε να χρησιμοποιήσετε χρονόμετρο</a>
+        <a href="#start">Βασικά: Έναρξη/παύση/lap</a>
+        <a href="#workflows">Πρακτικές ροές εργασίας</a>
+        <a href="#data">Συλλογή & ανάλυση δεδομένων lap</a>
+        <a href="#precision">Ακρίβεια & σημειώσεις περιβάλλοντος</a>
+        <a href="#integration">Ενσωματώσεις & εξαγωγές</a>
+        <a href="#troubleshoot">Αντιμετώπιση προβλημάτων</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="when" class="section" aria-labelledby="when-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Διαφήμιση</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="when-title">Πότε να χρησιμοποιήσετε χρονόμετρο</h2>
+        <p>Τα χρονόμετρα είναι χρήσιμα όταν χρειάζεται να μετρήσετε με ακρίβεια τον περασμένο χρόνο για μια οριοθετημένη δραστηριότητα. Συνηθισμένα σενάρια:</p>
+        <ul>
+          <li><strong>Πειράματα παραγωγικότητας:</strong> μετρήστε πόσο πραγματικά διαρκεί μια εργασία σε σχέση με την εκτίμησή σας.</li>
+          <li><strong>Προπόνηση & διαστήματα:</strong> καταγράψτε splits για τρέξιμο, σετ ή ασκήσεις.</li>
+          <li><strong>Usability tests & πειράματα:</strong> μετρήστε το χρόνο ολοκλήρωσης εργασιών για benchmarking.</li>
+          <li><strong>Συναντήσεις:</strong> χρονίστε θέματα ατζέντας και εξασφαλίστε ίσο χρόνο ομιλητή.</li>
+        </ul>
+      </section>
+      <section id="start" class="section" aria-labelledby="start-title">
+        <h2 id="start-title">Έναρξη, παύση & lap — βασικά που έχουν σημασία</h2>
+        <p>Τα σύγχρονα web χρονόμετρα βασίζονται σε χρονικές σημάνσεις ώστε να παραμένουν ακριβή ακόμη κι αν το UI θροτλάρει. Βασικές έννοιες:</p>
+        <ul>
+          <li><strong>Έναρξη:</strong> καταγράψτε χρονική σήμανση έναρξης (Date.now()).</li>
+          <li><strong>Παρελθών χρόνος:</strong> υπολογίστε τώρα − start (συν τυχόν προηγούμενο συσσωρευμένο χρόνο κατά την επανεκκίνηση μετά από παύση).</li>
+          <li><strong>Παύση/συνέχιση:</strong> στη παύση αποθηκεύστε τον συσσωρευμένο χρόνο και καθαρίστε το ενεργό start· για συνέχιση ορίστε start = now − accumulated.</li>
+          <li><strong>Lap:</strong> καταγράψτε τον τρέχοντα παρελθόντα χρόνο ως lap split — προαιρετικά επαναφέρετε τον μετρητή lap αν θέλετε χρόνους μεταξύ laps (διάκριση split vs lap duration).</li>
+        </ul>
+        <p class="small-note">Δύο λειτουργίες lap: (Α) σωρευτικά splits (χρόνος από την αρχή) και (Β) διάρκειες lap (χρόνος από την προηγούμενη lap). Αποφασίστε ποια χρειάζεστε πριν την καταγραφή.</p>
+      </section>
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Πρακτικές ροές εργασίας με το χρονόμετρο</h2>
+        <div class="recipe" aria-labelledby="timing-task">
+          <strong id="timing-task">Χρόνος ολοκλήρωσης (εκτίμηση εργασίας)</strong>
+          <ol>
+            <li>Ορίστε τον στόχο: "Γράψτε την εισαγωγή — 1ο προσχέδιο".</li>
+            <li>Ξεκινήστε το χρονόμετρο στην έναρξη της εργασίας· αποφύγετε multitasking κατά τη μέτρηση.</li>
+            <li>Χρησιμοποιήστε το Lap για να σημειώσετε ουσιαστικά σημεία (π.χ. ολοκλήρωση δομής, πρώτο παράγραφο).</li>
+            <li>Στο τέλος, καταγράψτε το συνολικό παρελθόντα χρόνο στην εργασία ή στη σημείωση ημερολογίου.</li>
+          </ol>
+        </div>
+        <div class="recipe" aria-labelledby="interval-training">
+          <strong id="interval-training">Διαλειμματική προπόνηση (επαναλαμβανόμενοι κύκλοι)</strong>
+          <ol>
+            <li>Χρησιμοποιήστε Lap για κάθε διάστημα· αν μετράτε αναπαύσεις, χρησιμοποιήστε Παύση για να καταγράψετε ξεχωριστά τη διάρκεια ανάπαυσης.</li>
+            <li>Εξάγετε τα laps για να υπολογίσετε μέσο χρόνο διαστήματος, καλύτερο χρόνο και διακύμανση για παρακολούθηση προόδου.</li>
+            <li>Χρησιμοποιήστε συνεπή κανόνες προθέρμανσης και αποθεραπείας για έγκυρες συγκρίσεις ανάμεσα σε συνεδρίες.</li>
+          </ol>
+        </div>
+        <p class="small-note">Συμβουλή: για επαναλαμβανόμενες ροές, κρατήστε μια μικρή ρουτίνα πριν την εκκίνηση (άνοιγμα υλικού, ορθή στάση) ώστε το χρονόμετρο να μετρά συγκρίσιμη προσπάθεια.</p>
+      </section>
+      <section id="data" class="section" aria-labelledby="data-title">
+        <h2 id="data-title">Συλλογή και ανάλυση δεδομένων lap</h2>
+        <p>Οι ακατέργαστοι χρόνοι lap είναι πιο χρήσιμοι όταν συγκεντρωθούν. Εξάγετε ή αντιγράψτε τα laps σε υπολογιστικό φύλλο και υπολογίστε απλά μετρικά:</p>
+        <ul>
+          <li><strong>Μέσος όρος (mean)</strong> — τυπικός χρόνος ανά lap/επαναληψη.</li>
+          <li><strong>Διάμεσος (median)</strong> — ανθεκτικός σε ακραίες τιμές.</li>
+          <li><strong>Τυπική απόκλιση / διακύμανση</strong> — μετρά τη σταθερότητα.</li>
+          <li><strong>Καλύτερο / χειρότερο</strong> — παρακολουθήστε βέλτιστη και χειρότερη απόδοση.</li>
+        </ul>
+        <pre class="template">CSV columns: index,split_seconds,lap_seconds,timestamp
+1,30.12,30.12,2025-11-24T10:02:12Z</pre>
+        <p>Χρησιμοποιήστε αυτά τα μετρικά σε εβδομαδιαίες ανασκοπήσεις για να βρείτε τάσεις και να εντοπίσετε πότε οι αλλαγές διαδικασιών βελτίωσαν την ταχύτητα ή τη συνέπεια.</p>
+      </section>
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Ακρίβεια & σημειώσεις περιβάλλοντος</h2>
+        <p>Τα χρονόμετρα σε προγράμματα περιήγησης είναι ακριβή για καθημερινή χρήση, αλλά γνωρίστε τους περιορισμούς:</p>
+        <ul>
+          <li><strong>Θροτλινγκ UI:</strong> οι καρτέλες στο υπόβαθρο μπορεί να μειώσουν τη συχνότητα ενημέρωσης της διεπαφής, αλλά όχι τον υπολογισμό του περασμένου χρόνου εάν χρησιμοποιούνται χρονικές σημάνσεις.</li>
+          <li><strong>Sleep / κατάσταση συστήματος:</strong> αν η συσκευή ξαπλώσει, ο τοίχος χρόνου θα προχωρήσει — λάβετε υπόψη αυτό στην ανάλυση συνεδριών.</li>
+          <li><strong>Ανάγκες υψηλής ακρίβειας:</strong> για επιστήμη ή συγχρονισμό audio/video προτιμήστε εξειδικευμένα εργαλεία (hardware timers, DAW timecode, συστήματα συγχρονισμένα με NTP).</li>
+        </ul>
+      </section>
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Ενσωματώσεις & εξαγωγές</h2>
+        <p>Τα καλά εργαλεία χρονόμετρου επιτρέπουν αντιγραφή ή εξαγωγή λίστας laps για μετέπειτα ανάλυση. Ιδέες ενσωμάτωσης:</p>
+        <ul>
+          <li><strong>Καταγραφή εργασιών:</strong> προσθέστε τον περασμένο χρόνο σε στοιχεία εργασιών ή στην περιγραφή γεγονότος ημερολογίου.</li>
+          <li><strong>CSV εξαγωγή:</strong> εισάγετε δεδομένα lap σε υπολογιστικά φύλλα για ανάλυση τάσεων.</li>
+          <li><strong>API / Webhooks:</strong> στείλτε γεγονότα χρονισμού σε backend για αποθήκευση ιστορικού συνεδριών σε προσωπικά dashboards.</li>
+        </ul>
+      </section>
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Αντιμετώπιση προβλημάτων</h2>
+        <ul>
+          <li><strong>Το χρονόμετρο δεν φαίνεται να ενημερώνεται:</strong> ορισμένοι browsers θροτλάρουν repaint — βασιστείτε στην τελική τιμή παρελθόντος χρόνου αντί στο να βλέπετε κάθε tick.</li>
+          <li><strong>Τα laps δεν αποθηκεύονται μετά από reload:</strong> χρησιμοποιήστε εξαγωγή ή εργαλείο που αποθηκεύει laps στο localStorage αν χρειάζεστε ανθεκτικά αρχεία.</li>
+          <li><strong>Λανθασμένη ζώνη ώρας στα timestamps:</strong> αποθηκεύετε timestamps ως ISO UTC για να αποφύγετε σύγχυση κατά τη συγκέντρωση δεδομένων από διαφορετικές συσκευές.</li>
+        </ul>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Q:</strong> Μπορώ να μετρήσω παράλληλες εργασίες με ένα χρονόμετρο;<br><strong>A:</strong> Είναι δυνατό με προσεκτική χρήση lap (επισημάνετε κάθε lap), αλλά οι παράλληλες εργασίες είναι πιο εύκολο να μετρηθούν με πολλαπλά χρονόμετρα ή με ένα Task Timer που υποστηρίζει ταυτόχρονους χρονοδιακόπτες.</p>
+          <p><strong>Q:</strong> Πώς να επισημαίνω τα laps;<br><strong>A:</strong> Χρησιμοποιήστε σύντομες, συνεπείς ετικέτες (π.χ. "Προθέρμανση", "Rep 1", "Checkpoint αναθεώρησης"). Αν το εργαλείο δεν υποστηρίζει ετικέτες, καταγράψτε μια χρονισμένη σημείωση στο σύστημα εργασιών μαζί με τον δείκτη lap.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Πόροι</h2>
+        <ul class="muted">
+          <li><a href="/stopwatch-el.html">Άνοιγμα εργαλείου Χρονόμετρο</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Stopwatch" target="_blank" rel="noopener">Stopwatch — Wikipedia</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/stopwatch-el.html" class="cta" aria-label="Άνοιγμα Χρονόμετρου">Άνοιγμα Χρονόμετρου</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Διαφήμιση</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Ερωτήσεις ή σχόλια; Επικοινωνήστε με <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Διαβάστε την <a href="/privacy.html">Πολιτική Απορρήτου</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Χρονόμετρο</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Ακριβές ψηφιακό χρονόμετρο για μέτρηση χρόνου.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Ιστορία</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Πώς να το χρησιμοποιήσετε</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Πατήστε Start.</li><li>Χρησιμοποιήστε το Lap.</li><li>Πατήστε Reset.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Ιδανικό για αθλητικές δραστηριότητες."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Περισσότερα Δωρεάν Εργαλεία Παραγωγικότητας</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="../../stopwatch-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Χρονόμετρο</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Μετατροπέας Μονάδων</a> <a href="../../weather-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Καιρός</a> <a href="../../world-clock-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Παγκόσμιο Ρολόι</a> <a href="../../calendar-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Ημερολόιο</a> <a href="../../clipboard-manager-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Πρόχειρο</a> <a href="../../countdown-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Αντίστροφη Μέτρηση</a> <a href="../../currency-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Νόμισμα</a> <a href="../../focus-music-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Μουσική Focus</a> <a href="../../habit-tracker-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="../../meeting-planner-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="../../notes-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Σημειώσεις</a> <a href="../../password-generator-el.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/stopwatch-el.html" class="return-to-tool" id="returnToToolStopwatch" aria-label="Επιστροφή στο Χρονόμετρο">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Προς Χρονόμετρο</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolStopwatch');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

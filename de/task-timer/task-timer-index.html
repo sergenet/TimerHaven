@@ -1,13 +1,14 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="de">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
   <meta charset="utf-8">
   <title>Task Timer — Zeit messen, Schätzungen verbessern (Leitfaden) | TimerHaven</title>
-  <meta name="description" content="Ausführlicher Leitfaden: Task Timer nutzen, um echte Aufwandszeiten zu erfassen, Unterbrechungen zu analysieren und die Planung zu verbessern. Enthält Step‑by‑Step, CSV‑Vorlagen, Analyse‑Rezepte und FAQ.">
+  <meta name="description" content="Ausführlicher Leitfaden: Task Timer nutzen, um echte Aufwandszeiten zu erfassen, Unterbrechungen zu analysieren und die Planung zu verbessern.">>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="canonical" href="https://timerhaven.com/de/task-timer-index.html">
+  <link rel="canonical" href="https://timerhaven.com/de/task-timer/task-timer-index.html">
   <meta name="author" content="Serge Shammas">
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -16,7 +17,7 @@
         "@type": "HowTo",
         "name": "Task Timer verwenden, um Arbeitszeiten zu messen und bessere Schätzungen zu erhalten",
         "description": "Schritt‑für‑Schritt‑Workflow zum Anlegen von Aufgaben, Aufzeichnen von Sessions, Protokollieren von Unterbrechungen und Exportieren für die Analyse.",
-        "image": "https://timerhaven.com/assets/images/tasktimer-snapshot.png",
+        "image": "https://timerhaven.com/assets/images/tasktimer-snapshot.webp",
         "totalTime": "PT1H",
         "supply": [
           "Task Timer (TimerHaven)",
@@ -41,7 +42,6 @@
     ]
   }
   </script>
-
   <style>
     :root{--brand:#0b63a0;--muted:#6b7c89;--bg:#fbfeff}
     body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
@@ -61,8 +61,35 @@
     table.sample td, table.sample th{border:1px solid #eef5fb;padding:0.35rem 0.6rem;text-align:left;}
     .tips{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:.7rem;border-radius:8px;margin-top:.7rem}
   </style>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+
+    
+    <!-- Social preview (added: page previously had none) -->
+    <meta property="og:title" content="Task Timer — Zeit messen, Schätzungen verbessern (Leitfaden) | TimerHaven">
+    <meta property="og:description" content="Ausführlicher Leitfaden: Task Timer nutzen, um echte Aufwandszeiten zu erfassen, Unterbrechungen zu analysieren und die Planung zu verbessern. Enthält Step‑by‑Step, CSV‑Vorlagen, Analyse‑Rezepte und FAQ.">
+    <meta property="og:url" content="https://timerhaven.com/de/task-timer/task-timer-index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TimerHaven">
+    <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Task Timer — Zeit messen, Schätzungen verbessern (Leitfaden) | TimerHaven">
+    <meta name="twitter:description" content="Ausführlicher Leitfaden: Task Timer nutzen, um echte Aufwandszeiten zu erfassen, Unterbrechungen zu analysieren und die Planung zu verbessern. Enthält Step‑by‑Step, CSV‑Vorlagen, Analyse‑Rezepte und FAQ.">
+    <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer/task-timer-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
       <h1 id="title">Task Timer — Zeit messen, Schätzungen verbessern</h1>
@@ -83,7 +110,11 @@
       </nav>
 
       <section id="setup" class="section" aria-labelledby="setup">
-        <h2>Einrichtung & Namenskonvention</h2>
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anzeige</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2>Einrichtung & Namenskonvention</h2>
         <p>Eine konsistente Namenskonvention macht spätere Auswertungen deutlich einfacher. Empfohlen:</p>
         <ul>
           <li><strong>Task‑Titel:</strong> klar und outcome‑orientiert (z. B. „Intro schreiben — Projekt X“).</li>
@@ -217,7 +248,6 @@
         <p><a href="#" id="downloadTaskCsv" class="cta">CSV‑Vorlage herunterladen</a></p>
         <pre id="taskCsvTemplate" class="template" aria-hidden="true">date,task,tag,expected_minutes,actual_minutes,interruptions,notes
 2025-11-01,Feature X implementieren,project-alpha,90,120,1,"Unterbrechung: Abstimmung mit PM"</pre>
-
         <script>
           document.getElementById('downloadTaskCsv').addEventListener('click', function(e){
             e.preventDefault();
@@ -234,13 +264,69 @@
         </script>
       </section>
 
-      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/de/notes-index.html">Notes</a> · <a href="/de/pomodoro-de.html">Pomodoro</a> · <a href="/de/calendar-planning-index.html">Kalender</a></p>
+      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/de/notes/notes-index.html">Notes</a> · <a href="/pomodoro-de.html">Pomodoro</a> · <a href="/de/calendar-planning/calendar-planning-index.html">Kalender</a></p>
 
       <p style="margin-top:1.2rem;"><a href="/timer-de.html" class="cta" aria-label="Task Timer öffnen">Task Timer öffnen</a></p>
 
-      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
-        <p>Fragen oder Feedback? <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Lesen Sie unsere <a href="/privacy/">Privacy Policy</a>.</p>
-      </footer>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anzeige</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+        &copy; 2025 TimerHaven. Alle Tools sind kostenlos und respektieren Ihre Privatsphäre.<br>
+        <a href="/privacy.html">Datenschutz</a> ·
+        <a href="/terms.html">Nutzungsbedingungen</a> ·
+        <a href="/contact.html">Kontakt</a>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Aufgaben-Timer</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Ein flexibles Countdown-Werkzeug fأ¼r Arbeitsblأ¶cke, Kochzeiten oder Fokus-Sitzungen.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Geschichte</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Anleitung</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Stellen Sie die Zeit ein.</li><li>Klicken Sie auf 'Start'.</li><li>Das Tool benachrichtigt Sie bei Ablauf.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Nutzen Sie das 'Sitzungsprotokoll', um festzuhalten, was Sie erreicht haben – das schafft ein Bewusstsein fأ¼r Produktivitأ¤t."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Weitere kostenlose Produktivitäts-Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Aufgaben-Timer</a> <a href="../../stopwatch-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stoppuhr</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Einheitenumrechner</a> <a href="../../weather-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Wetter</a> <a href="../../world-clock-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weltuhr</a> <a href="../../calendar-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Kalender</a> <a href="../../clipboard-manager-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Zwischenablage</a> <a href="../../countdown-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="../../currency-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Währungsrechner</a> <a href="../../focus-music-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Fokus-Musik</a> <a href="../../habit-tracker-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Gewohnheiten</a> <a href="../../meeting-planner-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting-Planer</a> <a href="../../notes-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notizen</a> <a href="../../password-generator-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwörter</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
 </body>

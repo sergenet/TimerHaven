@@ -1,18 +1,312 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>weather — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for weather guide (ru)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Погода — Как находить, интерпретировать и планировать прогнозы | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Практическое руководство по использованию инструмента Погода: выбор мест, интерпретация прогнозов, планирование поездок, оповещения, микро‑климаты и…"> />
+  <link rel="canonical" href="https://timerhaven.com/ru/weather/weather-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Эффективное использование прогнозов погоды",
+        "description":"Находите и интерпретируйте прогнозы погоды для планирования повседневных дел и поездок. Руководство объясняет типы прогнозов, чтение вероятностей, планирование с учётом неопределённости, оповещения, влияние микро‑климата и сохранение прогнозов.",
+        "image":"https://timerhaven.com/assets/images/weather-snapshot.webp",
+        "totalTime":"PT45M",
+        "supply":["Инструмент «Погода» (TimerHaven)","Календарь","План поездки или чек‑лист"],
+        "step":[
+          {"@type":"HowToStep","name":"Выберите нужное место","text":"Ищите по городу или используйте геолокацию для точных координат."},
+          {"@type":"HowToStep","name":"Выберите тип прогноза","text":"Поймите различия между почасовыми, суточными и дальними прогнозами и когда каждый из них полезен."},
+          {"@type":"HowToStep","name":"Планируйте с учётом неопределённости","text":"Используйте вероятности и диапазоны для устойчивых решений (возьмите слои одежды, запланируйте гибкое время встреч)."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Насколько точны краткосроки прогнозы?","acceptedAnswer":{"@type":"Answer","text":"Краткосрочные прогнозы (03 дня) обычно надёжны по температуре и вероятности осадков, но точность варьируется по регионам и разрешению моделей."}},
+          {"@type":"Question","name":"Доверять ли почасовым или суточным прогнозам?","acceptedAnswer":{"@type":"Answer","text":"Используйте почасовые прогнозы для решений в ближайшие 24 часа, а суточные сводки — для планирования дальше. Для важных решений сравнивайте источники."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    /* Floating return button */
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Погода — Как находить, интерпретировать и планировать прогнозы | TimerHaven">
+  <meta property="og:description" content="Практическое руководство по использованию инструмента Погода: выбор мест, интерпретация прогнозов, планирование поездок, оповещения, микро‑климаты и сохранение прогнозов для последующего использования.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ru/weather/weather-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Погода — Как находить, интерпретировать и планировать прогнозы | TimerHaven">
+  <meta name="twitter:description" content="Практическое руководство по использованию инструмента Погода: выбор мест, интерпретация прогнозов, планирование поездок, оповещения, микро‑климаты и сохранение прогнозов для последующего использования.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/weather/weather-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/weather/weather-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/weather/weather-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/weather/weather-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/weather/weather-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/weather/weather-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/weather/weather-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/weather/weather-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">weather — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Погода — как находить, читать и использовать прогнозы</h1>
+      <div class="author" role="articleauthor" aria-label="Автор статьи">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — автор по путешествиям и планированию</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 1218 мин</div>
+        </div>
+      </div>
+      <p class="lead">Прогнозы погоды — это инструмент принятия решений, а не только для метеорологов. Планируете ли вы поездку на работу, уикенд или полевые работы, умение выбрать подходящий прогноз, читать вероятности и планировать с учётом неопределённости сделает ваши планы более надёжными. В руководстве объясняются типы прогнозов, интерпретация вероятностей осадков, влияние микро‑климата, оповещения, сохранение прогнозов и практические рецепты планирования.</p>
+      <nav class="toc" aria-label="Оглавление">
+        <a href="#types">Типы прогнозов</a> ·
+        <a href="#ppo">Осадки и вероятности</a> ·
+        <a href="#hourly-daily">Почасовые vs суточные прогнозы</a> ·
+        <a href="#micro">Микроклиматы и локальные факторы</a> ·
+        <a href="#alerts">Оповещения, предупреждения и пороги</a> ·
+        <a href="#plan">Рецепты планирования</a> ·
+        <a href="#save">Сохранить и поделиться прогнозом</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="types" class="section" aria-labelledby="types-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="types-title">Типы прогнозов — выбирайте подходящий</h2>
+        <p>Прогнозы бывают нескольких видов. Выбирайте тот, который соответствует горизонту принятия решения и требуемой детализации:</p>
+        <ul>
+          <li><strong>Носковой / краткий (06 часов):</strong> лучше всего для немедленных решений; часто использует локальные радары и наблюдения.</li>
+          <li><strong>Краткосрочный (672 часа):</strong> хорош для планирования на день — температура, окна осадков и ветер обычно достаточно надёжны.</li>
+          <li><strong>Среднесрочный (37 дней):</strong> полезен для планирования поездок, но детали (время) приблизительны — фокусируйтесь на трендах.</li>
+          <li><strong>Долгосрочный (7+ дней):</strong> даёт общие сигналы (теплее/холоднее нормы) и подходит для ожиданий, но не для точного расписания.</li>
+        </ul>
+      </section>
+      <section id="ppo" class="section" aria-labelledby="ppo-title">
+        <h2 id="ppo-title">Осадки и вероятность — как читать шанс дождя</h2>
+        <p>Вероятность осадков (PoP) часто неправильно интерпретируется. PoP показывает вероятность того, что в заданном месте и периоде выпадут измеримые осадки. Она не сообщает напрямую объём осадков.</p>
+        <ul>
+          <li><strong>Интерпретация PoP:</strong> 20 % — невысокая вероятность: имеет смысл взять лёгкую накидку или зонтик при осторожном подходе; 6080 % — рассматривайте альтернативы или перенос мероприятия на другое время.</li>
+          <li><strong>Интенсивность vs вероятность:</strong> всегда смотрите ожидаемую интенсивность и длительность. 30 % шанс сильного дождя 10 минут может быть более проблематичным, чем 60 % лёгкой мороси.</li>
+          <li><strong>Используйте радар для тайминга:</strong> для решений в ближайшее время смотрите живой радар, чтобы понять движение и время прихода осадков.</li>
+        </ul>
+      </section>
+      <section id="hourly-daily" class="section" aria-labelledby="hourly-daily-title">
+        <h2 id="hourly-daily-title">Почасовые vs суточные прогнозы — когда применять</h2>
+        <p>Почасовые прогнозы лучше для планов в пределах дня: поездки, время старта или короткие мероприятия. Суточные сводки удобнее для поездок и общего планирования.</p>
+        <div class="recipe" aria-labelledby="hourly-recipe">
+          <strong id="hourly-recipe">Практическое правило</strong>
+          <ol>
+            <li>Для решений в пределах 24 часов смотрите почасовые прогнозы и радар, чтобы выбрать оптимическое окно.</li>
+            <li>Для планов на 14 дня используйте суточные сводки, но за день до события проверьте почасовой прогноз.</li>
+            <li>Для 5+ дней рассматривайте прогноз как сигнал тренда и делайте гибкие планы (возьмите слои одежды, запасные даты).</li>
+          </ol>
+        </div>
+      </section>
+      <section id="micro" class="section" aria-labelledby="micro-title">
+        <h2 id="micro-title">Микроклиматы и локальные факторы — что модели могут не учесть</h2>
+        <p>Местная география, высота, городское тепло, близость к побережью и долинные эффекты создают микро‑климаты, которые могут отличаться от региональных моделей. При планировании учитывайте местные знания и данные наблюдений.</p>
+        <ul>
+          <li>Побережье: морские бризы могут быстро менять температуру и вызывать локальные ливни.</li>
+          <li>Долины и впадины: холодный воздух скапливается и может привести к росе или туману, даже если региональный прогноз мягкий.</li>
+          <li>Городские островки тепла: ночная температура в городе может быть на несколько градусов выше, чем в сельской местности.</li>
+        </ul>
+      </section>
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Оповещения, предупреждения и пороги — как действовать</h2>
+        <p>Оповещения выпускают при потенциально опасных условиях. Разберитесь в типах оповещений и имейте чек‑лист действий для каждого.</p>
+        <h3>Типы оповещений</h3>
+        <ul>
+          <li><strong>Watch (наблюдение):</strong> условия возможны — подготовьтесь и следите за ситуацией.</li>
+          <li><strong>Warning (предупреждение):</strong> ожидаются опасные условия — принимайте защитные меры.</li>
+          <li><strong>Advisory (совет):</strong> менее серьёзно, но может доставлять неудобства — планируйте соответственно.</li>
+        </ul>
+        <div class="recipe" aria-labelledby="alert-recipe">
+          <strong id="alert-recipe">Простой чек‑лист действий при оповещении</strong>
+          <ol>
+            <li>Прочитайте текст оповещения — обратите внимание на время и зону воздействия.</li>
+            <li>Определите критичное имущество (путешествия, мероприятия, оборудование) и решите — отложить, переместить или принять меры по смягчению риска.</li>
+            <li>Поделитесь оповещением с заинтересованными лицами и подтвердите планы действий.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="plan" class="section" aria-labelledby="plan-title">
+        <h2 id="plan-title">Рецепты планирования — как принимать надёжные решения</h2>
+        <p>Планируйте с учётом неопределённости. Делайте консервативные выборы и имейте быстрые запасные варианты, чтобы минимизировать срыв планов.</p>
+        <div class="recipe" aria-labelledby="commute">
+          <strong id="commute">Поездка и планирование мероприятий</strong>
+          <ol>
+            <li>Проверьте почасовой прогноз за 2 часа до выезда для тайминга и осадков.</li>
+            <li>Если PoP > 50 % вблизи времени поездки — планируйте защищённый маршрут или альтернативный транспорт; выходите заранее при сильном дожде или снеге.</li>
+            <li>Для мероприятий на свежем воздухе назначьте крайний срок принятия решения и сообщите участникам понятную резервную опцию.</li>
+          </ol>
+        </div>
+        <div class="recipe" aria-labelledby="travel">
+          <strong id="travel">Упаковка на уикенд</strong>
+          <ol>
+            <li>Посмотрите тренды за 37 дней по температуре и вероятности осадков.</li>
+            <li>Упакуйте слои и водонепроницаемую одежду, если прогноз переменчив; возьмите солнцезащиту при ясной и тёплой погоде.</li>
+            <li>Перед выездом ещё раз проверьте локальный радар и краткосрочные прогнозы для окончательного выбора одежды.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="save" class="section" aria-labelledby="save-title">
+        <h2 id="save-title">Сохранение, обмен и архивирование прогнозов</h2>
+        <p>Сохранение прогнозов позволяет сравнить предсказанное и фактическое позже — полезно для обзоров мероприятий, садоводства или экспериментов.</p>
+        <ul>
+          <li><strong>Сохранить снимок:</strong> скопируйте ключевые детали прогноза (время, PoP, температуры) в заметку или событие календаря.</li>
+          <li><strong>Поделиться:</strong> вставьте короткий скриншот или резюме с локальным временем для участников.</li>
+          <li><strong>Архивировать:</strong> храните датированный снимок, если тестируете точность моделей или документируете условия для установок и экспериментов.</li>
+        </ul>
+        <pre class="template">Пример сохранённого прогноза:
+Город: London
+Дата: 2025-11-28
+Почасовой: 09:00 12°C 30% дождя → 12:00 14°C 10% дождя
+Заметки: Взять зонт на утреннюю встречу</pre>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Какой моделью прогноза стоит доверять?<br><strong>Ответ:</strong> Нет одной модели, которая всегда лучше. Для важных решений сравнивайте несколько источников (национальная служба, глобальные модели, локальный радар). Национальные метеослужбы часто уточняют модели под местные условия.</p>
+          <p><strong>Вопрос:</strong> На сколько вперёд можно полагаться на прогноз?<br><strong>Ответ:</strong> Температурные тренды обычно надёжны на 35 дней; тайминг осадков за пределами 48 часов становится менее уверенным. Для дальнего горизонта применяйте вероятностное мышление.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/weather-ru.html">Открыть инструмент «Погода»</a></li>
+          <li><a href="https://open-meteo.com" target="_blank" rel="noopener">Open‑Meteo</a></li>
+          <li><a href="https://www.wmo.int" target="_blank" rel="noopener">World Meteorological Organization</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/weather-ru.html" class="cta" aria-label="Открыть инструмент Погода">Открыть Погоду</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Прочитайте нашу <a href="/privacy.html">Политику конфиденциальности</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذںر€ذ¾ذ³ذ½ذ¾ذ· ذ؟ذ¾ذ³ذ¾ذ´ر‹</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذکذ½رپر‚ر€رƒذ¼ذµذ½ر‚ ذ؟ر€ذ¾ذ³ذ½ذ¾ذ·ذ° ذ؟ذ¾ذ³ذ¾ذ´ر‹ ذ؟ر€ذµذ´ذ¾رپر‚ذ°ذ²ذ»رڈرµر‚ ذ°ر‚ذ¼ذ¾رپر„ذµر€ذ½ر‹ذµ ذ´ذ°ذ½ذ½ر‹ذµ ذ² ر€ذµذ°ذ»رŒذ½ذ¾ذ¼ ذ²ر€ذµذ¼ذµذ½ذ¸, ذ؟ذ¾ذ¼ذ¾ذ³ذ°رڈ ذ²ذ°ذ¼ ذ؟ذ»ذ°ذ½ذ¸ر€ذ¾ذ²ذ°ر‚رŒ ذ´ذµذ½رŒ ذ² ذ·ذ°ذ²ذ¸رپذ¸ذ¼ذ¾رپر‚ذ¸ ذ¾ر‚ ر‚ذµذ¼ذ؟ذµر€ذ°ر‚رƒر€ر‹, ذ¾رپذ°ذ´ذ؛ذ¾ذ² ذ¸ ذ²ذµر‚ر€ذ°.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذ ذ°ذ·ر€ذµرˆذ¸ر‚ذµ ذ´ذ¾رپر‚رƒذ؟ ذ؛ ذ¼ذµرپر‚ذ¾ذ؟ذ¾ذ»ذ¾ذ¶ذµذ½ذ¸رژ ذ¸ذ»ذ¸ ذ²ذ²ذµذ´ذ¸ر‚ذµ ذ½ذ°ذ·ذ²ذ°ذ½ذ¸ذµ ذ²ذ°رˆذµذ³ذ¾ ذ³ذ¾ر€ذ¾ذ´ذ°.</li><li>ذںر€ذ¾رپذ¼ذ¾ر‚ر€ذ¸ر‚ذµ ر‚ذµذ؛رƒر‰رƒرژ ر‚ذµذ¼ذ؟ذµر€ذ°ر‚رƒر€رƒ, ذ²ذ»ذ°ذ¶ذ½ذ¾رپر‚رŒ ذ¸ ذ¸ذ؛ذ¾ذ½ذ؛رƒ رپذ¾رپر‚ذ¾رڈر½ذ¸رڈ.</li><li>ذںر€ذ¾ذ²ذµر€رŒر‚ذµ ذ؟ر€ذ¾ذ³ذ½ذ¾ذ· ذ½ذ° 7 ذ´ذ½ذµذ¹ ذ´ذ»رڈ ذ´ذ¾ذ»ذ³ذ¾رپر€ذ¾ر‡ذ½ذ¾ذ³ذ¾ ذ؟ذ»ذ°ذ½ذ¸ر€ذ¾ذ²ذ°ذ½ذ¸رڈ.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذ’رپذµذ³ذ´ذ° ذ؟ر€ذ¾ذ²ذµر€رڈر¹ر‚ذµ ر‚ذµذ¼ذ؟ذµر€ذ°ر‚رƒر€رƒ 'ذ‍ر‰رƒر‰ذ°ذµر‚رپرڈ ذ؛ذ°ذ؛', ذ؛ذ¾ر‚ذ¾ر€ذ°رڈ رƒر‡ذ¸ر‚ر‹ذ²ذ°ذµر‚ ذ²ذµر‚ذµر€ ذ¸ ذ²ذ»ذ°ذ¶ذ½ذ¾رپر‚رŒ ذ´ذ»رڈ ذ±ذ¾ذ»ذµذµ ر‚ذ¾ر‡ذ½ذ¾ذ¹ ذ¾ر†ذµذ½ذ؛ذ¸."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="../../stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="../../unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="../../weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="../../world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="../../calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="../../clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="../../countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="../../currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="../../focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="../../habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="../../meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="../../notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="../../password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/weather-ru.html" class="return-to-tool" id="returnToToolWeather" aria-label="Вернуться к инструменту Погода">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К инструменту «Погода»</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWeather');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

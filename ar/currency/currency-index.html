@@ -1,18 +1,252 @@
-<!doctype html>
-<html lang="ar">
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <title>currency — Guide (ar)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for currency guide (ar)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>محول العملات — تحويل الأسعار وطرق عمل عملية ذكية | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="دليل متقدم لتحويل العملات: اختيار مصادر الأسعار، القواعد حول التقريب والعرض، نصائح للسفر والأعمال، وأتمتة التحويلات." />
+  <link rel="canonical" href="https://timerhaven.com/ar/currency/currency-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"تحويل العملات العملي",
+        "description":"كيفية تحويل العملات بشكل موثوق، اختيار مصادر الأسعار، عرض التحويلات للمستخدمين، والتعامل مع التقريب واحتياجات الأعمال.",
+        "image":"https://timerhaven.com/assets/images/currency-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["محول عملات (TimerHaven)","ExchangeRate API أو أسعار البنوك","ورقة بيانات (Spreadsheet)"],
+        "step":[
+          {"@type":"HowToStep","name":"اختر المصدر","text":"قرر ما إذا كنت بحاجة إلى أسعار السوق الوسيط (mid‑market) أو أسعار البنوك (تضيف البنوك ومقدمو التحويل هوامش)."},
+          {"@type":"HowToStep","name":"حدد قواعد التقريب","text":"اختر قواعد عرض الأرقام (مركزان عشريان للأسعار، 46 عشرية للعمليات التحليلية للربح)."},
+          {"@type":"HowToStep","name":"اعرض السياق","text":"اعرض السعر المستخدم والمبلغ المحوّل والطابع الزمني حتى يفهم المستخدم متى طُبّق العرض."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"هل أسعار المحول مباشرة؟","acceptedAnswer":{"@type":"Answer","text":"يمكن لأدوات التحويل جلب أسعار السوق الوسيط من واجهات برمجة التطبيقات، لكن أسعار البنوك وخدمات التحويل قد تختلف بسبب الهوامش والرسوم."}},
+          {"@type":"Question","name":"هل يجب تقريب المبالغ المحوّلة؟","acceptedAnswer":{"@type":"Answer","text":"نعم — اعرض المبالغ بعد تقريب مناسب للعملة (مركزان عشريان لمعظم العملات الورقية) وعرّض السعر بدقة أعلى عند الحاجة."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    html { direction: rtl; }
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-right:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;flex-direction:row-reverse;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="محول العملات — تحويل الأسعار وطرق عمل عملية ذكية | TimerHaven">
+  <meta property="og:description" content="دليل متقدم لتحويل العملات: اختيار مصادر الأسعار، القواعد حول التقريب والعرض، نصائح للسفر والأعمال، وأتمتة التحويلات.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ar/currency/currency-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="محول العملات — تحويل الأسعار وطرق عمل عملية ذكية | TimerHaven">
+  <meta name="twitter:description" content="دليل متقدم لتحويل العملات: اختيار مصادر الأسعار، القواعد حول التقريب والعرض، نصائح للسفر والأعمال، وأتمتة التحويلات.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/currency/currency-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/currency/currency-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/currency/currency-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/currency/currency-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/currency/currency-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/currency/currency-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">currency — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">محول العملات — دليل عملي لتحويلات موثوقة</h1>
+      <div class="author" role="articleauthor" aria-label="مؤلف المقال">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>بقلم Serge Shammas</strong> — كاتب في مجالي المدفوعات والإنتاجية</div>
+          <div class="meta">نشر: 2025-11-24 · وقت القراءة: 1216 دقيقة</div>
+        </div>
+      </div>
+      <p class="lead">يجب أن يفعل محول العملات أكثر من عرض أرقام فقط — يجب أن يبيّن السياق: أي سعر استُخدم، متى طُبّق، وهل الرسوم مضمّنة أم لا. يشرح هذا الدليل مصادر الأسعار، خيارات العرض، أنماط للسفر والأعمال، قواعد التقريب، وطرق لأتمتة التحويلات المتكررة.</p>
+      <nav class="toc" aria-label="فهرس المحتويات">
+        <a href="#sources">مصادر الأسعار</a>
+        <a href="#presentation">العرض وعمليات التقريب</a>
+        <a href="#travel">نصائح للسفر والميزانية</a>
+        <a href="#business">أنماط الأعمال والتسعير</a>
+        <a href="#automation">الأتمتة والبرمجة النصية</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+      <section id="sources" class="section" aria-labelledby="sources-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="sources-title">مصادر الأسعار — اختر ما يتناسب مع حاجتك</h2>
+        <p>ليست كل الأسعار متساوية. أسعار السوق الوسيط (mid-market) هي منتصف نطاق الشراء والبيع في الأسواق بين البنوك وتوفرها معظم واجهات برمجة التطبيقات العامة. البنوك ومقدمو الدفع يضيفون هوامش ورسوم؛ للعرض للمستخدمين، فكر في استخدام عروض مقدمي الخدمة أو عرض السعر الوسيط إلى جانب تقدير للتكلفة النهائية بما في ذلك الرسوم.</p>
+        <h3>المصادر الشائعة</h3>
+        <ul>
+          <li><strong>واجهات API لأسعار الصرف:</strong> واجهات مجانية أو مدفوعة (مناسبة لأسعار السوق الوسيط).</li>
+          <li><strong>عروض البنوك:</strong> الأدق للمدفوعات لكن غالبًا ما تتطلب تسجيل دخول أو مفتاح API من البنك/شريك الدفع.</li>
+          <li><strong>أسعار معالجات البطاقات:</strong> تُستخدم لعمليات البطاقات وتضم الفارق والرسوم.</li>
+        </ul>
+      </section>
+      <section id="presentation" class="section" aria-labelledby="presentation-title">
+        <h2 id="presentation-title">العرض وعمليات التقريب — الوضوح يبني الثقة</h2>
+        <p>اعرض المبلغ المحوّل، والسعر المستخدم، والطابع الزمني. قواعد التقريب مهمة: اعرض مبلغ الدفع بمركزين عشريين للعملات الورقية؛ أما لتحليلات الأسعار فاعرض دقة أكبر للسعر نفسه.</p>
+        <div class="recipe" aria-labelledby="display-recipe">
+          <strong id="display-recipe">تنسيق العرض الأدنى</strong>
+          <ol>
+            <li>المبلغ المحوّل (مقرب للعرض) — مثال: 123.45 يورو</li>
+            <li>السعر — مثال: 1.234567 (اعرض 46 منازل عشرية)</li>
+            <li>الطابع الزمني أو عبارة "ساري اعتبارًا من" — ليعرف المستخدم متى طُبّق العرض</li>
+            <li>اختياري: نسبة المصدر إن كنت تستخدم مزود بيانات مدفوع</li>
+          </ol>
+        </div>
+      </section>
+      <section id="travel" class="section" aria-labelledby="travel-title">
+        <h2 id="travel-title">نصائح للسفر والميزانية</h2>
+        <p>عند السفر قد تتراكم فروق التقريب الصغيرة. استخدم أسعار السوق الوسيط للتقديرات السريعة، لكن احسب الرسوم المتوقعة عند التخطيط لسحب النقود أو استخدام البطاقة.</p>
+        <ul>
+          <li>لسحب النقود من الصراف الآلي، توقع رسومًا إضافية من الصراف والبنك؛ احسب هامشًا إضافيًا 35٪ فوق تقدير السوق الوسيط.</li>
+          <li>احتفظ بوسادة يومية صغيرة عند تحويل المال للسفر لتجنب التقليل من المصاريف.</li>
+        </ul>
+      </section>
+      <section id="business" class="section" aria-labelledby="business-title">
+        <h2 id="business-title">أنماط للأعمال والتسعير</h2>
+        <p>للفواتير والتسعير، كن صريحًا: إما أن تفوّتش بالعملة العميل وعرض تحويل مقتبس، أو تكلف بالعملة الخاصة بك وتعرض تقدير التحويل. أضمن إدراج السعر والطابع الزمني على الفواتير للشفافية.</p>
+        <h3>وصفة الفاتورة</h3>
+        <pre class="template">حقول الفاتورة التي يجب تضمينها:
+- المبلغ (عملة البائع)
+- المبلغ المحوّل (عملة المشتري) مع التقريب
+- السعر المستخدم
+- طابع زمني للسعر
+- ملاحظة: "السعر مصدره [المزود]"</pre>
+      </section>
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">الأتمتة والبرمجة النصية</h2>
+        <p>أتمتة التحويلات المتكررة باستخدام سكربتات بسيطة أو صيغ في الجداول. تعيد كثير من واجهات API JSON، لذا يمكنك جلبها وحساب التحويلات في جدول بيانات أو أداة صغيرة.</p>
+        <h3>صيغة في الجدول (Spreadsheet)</h3>
+        <pre class="template">إذا كان السعر في الخلية B2 والمبلغ في A2:
+=ROUND(A2 * B2, 2)</pre>
+        <p class="small-note">للمهام المتكررة، خزّن الأسعار مؤقتًا وقم بتحديثها بتواتر معقول (مثل كل ساعة) لتجنب الوصول إلى حدود واجهات API المجانية.</p>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted">
+          <p><strong>س:</strong> هل يجب دائمًا استخدام سعر السوق الوسيط؟<br><strong>ج:</strong> أسعار السوق الوسيط ممتازة للتقديرات. للفاتورة الفعلية أو التحويلات، استخدم عروض المزود التي تتضمن الرسوم والهوامش.</p>
+          <p><strong>س:</strong> كم تتكرر تحديثات الأسعار؟<br><strong>ج:</strong> تقوم العديد من واجهات API بتحديث الأسعار كل دقيقة؛ يعتمد اختيارك على الحاجة وقيود API.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">الموارد</h2>
+        <ul class="muted">
+          <li><a href="/currency-ar.html">افتح أداة محول العملات</a></li>
+          <li><a href="https://exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate API</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/currency-ar.html" class="cta" aria-label="افتح محول العملات">افتح محول العملات</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>أسئلة أو ملاحظات؟ اتصل بنا على <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. اقرأ <a href="/privacy.html">سياسة الخصوصية</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="rtl" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: right;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">محول العملات</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">أسعار صرف العملات العالمية لحظة بلحظة.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">التاريخ</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">كيفية الاستخدام</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-right: 1.25rem;"><li>اختر العملتين.</li><li>أدخل المبلغ.</li><li>تحقق من النسبة المئوية للتغيير.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"تذكر أن أسعار الصرف قد تختلف قليلاً عن أسعار البنوك الفعلية."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">المزيد من أدوات الإنتاجية المجانية</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">مؤقت المهام</a> <a href="../../stopwatch-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">ساعة الإيقاف</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">بومودورو</a> <a href="../../unit-converter-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">محول الوحدات</a> <a href="../../weather-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الطقس</a> <a href="../../world-clock-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الساعة العالمية</a> <a href="../../calendar-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">التقويم</a> <a href="../../clipboard-manager-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الحافظة</a> <a href="../../countdown-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العد التنازلي</a> <a href="../../currency-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العملات</a> <a href="../../focus-music-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">موسيقى التركيز</a> <a href="../../habit-tracker-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العادات</a> <a href="../../meeting-planner-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الاجتماعات</a> <a href="../../notes-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الملاحظات</a> <a href="../../password-generator-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">كلمات المرور</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- زر عائدي للأداة -->
+  <a href="/currency-ar.html" class="return-to-tool" id="returnToToolCurrency" aria-label="العودة إلى محول العملات">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى محول العملات</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCurrency');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

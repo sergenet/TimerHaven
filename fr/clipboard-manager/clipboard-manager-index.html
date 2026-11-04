@@ -1,18 +1,298 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>clipboard-manager — Guide (fr)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for clipboard-manager guide (fr)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Gestionnaire de presse-papiers — Enregistrer et réutiliser des extraits | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guide pratique pour utiliser le gestionnaire de presse-papiers : flux de capture rapides, organisation, export/import, raccourcis clavier, bonnes…"> />
+  <link rel="canonical" href="https://timerhaven.com/fr/clipboard-manager/clipboard-manager-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Gestion efficace du presse‑papier",
+        "description":"Enregistrez, organisez et réutilisez de courts extraits de texte via un gestionnaire local. Le guide couvre les flux de capture, les sauvegardes, les raccourcis clavier, la confidentialité et les techniques avancées.",
+        "image":"https://timerhaven.com/assets/images/clipboard-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Gestionnaire de presse‑papier (local)","Navigateur","Notes","Task Timer"],
+        "step":[
+          {"@type":"HowToStep","name":"Capture rapide","text":"Collez ou tapez l'extrait dans le gestionnaire et enregistrez avec un tag ou un titre court."},
+          {"@type":"HowToStep","name":"Organiser","text":"Groupez les extraits avec des tags ou une convention de nommage (projet:sujet). Utilisez la recherche pour retrouver rapidement un extrait."},
+          {"@type":"HowToStep","name":"Réutiliser","text":"Copiez les extraits dans le document actif ou collez via les contrôles du gestionnaire. Utilisez les raccourcis pour aller vite."},
+          {"@type":"HowToStep","name":"Sauvegarder","text":"Exportez les extraits au format JSON pour les sauvegardes ; importez pour restaurer ou transférer vers un autre appareil."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Où sont stockés les extraits ?","acceptedAnswer":{"@type":"Answer","text":"Ils sont stockés localement dans le navigateur (localStorage). Ils ne quittent pas votre appareil sauf si vous les exportez."}},
+          {"@type":"Question","name":"Comment sauvegarder ou transférer ?","acceptedAnswer":{"@type":"Answer","text":"Utilisez le bouton Exporter pour télécharger une sauvegarde JSON; importez ce fichier sur un autre appareil."}},
+          {"@type":"Question","name":"Les gestionnaires de presse‑papier sont‑ils sûrs ?","acceptedAnswer":{"@type":"Answer","text":"Un gestionnaire local est relativement sûr car les données restent sur l'appareil. N'enregistrez pas des identifiants sensibles en clair; utilisez un gestionnaire de mots de passe pour cela."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); opacity:0.98; }
+    .return-to-tool .icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;font-size:16px;}
+    .return-to-tool .label{font-size:0.95rem;}
+    @media (max-width:520px){ .return-to-tool{padding:.45rem .5rem; right:14px; bottom:14px;} .return-to-tool .label{display:none;} .return-to-tool{border-radius:12px;} }
+    .return-to-tool:focus{outline:3px solid rgba(11,99,160,0.18);outline-offset:4px;}
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gestionnaire de presse-papiers — Enregistrer et réutiliser des extraits | TimerHaven">
+  <meta property="og:description" content="Guide pratique pour utiliser le gestionnaire de presse-papiers : flux de capture rapides, organisation, export/import, raccourcis clavier, bonnes pratiques de sécurité et usage en équipe.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/fr/clipboard-manager/clipboard-manager-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gestionnaire de presse-papiers — Enregistrer et réutiliser des extraits | TimerHaven">
+  <meta name="twitter:description" content="Guide pratique pour utiliser le gestionnaire de presse-papiers : flux de capture rapides, organisation, export/import, raccourcis clavier, bonnes pratiques de sécurité et usage en équipe.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/clipboard-manager/clipboard-manager-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">clipboard-manager — Guide (fr)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Gestionnaire de presse‑papier — Capture, organisation et réutilisation</h1>
+      <div class="author" role="articleauthor" aria-label="Auteur">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Par Serge Shammas</strong> — auteur productivité & chercheur UX</div>
+          <div class="meta">Publié : 2025-11-24 · Temps de lecture : 1014 min</div>
+        </div>
+      </div>
+      <p class="lead">Un gestionnaire de presse‑papier léger vous aide à sauvegarder de courts extraits réutilisables — modèles d'email, fragments de code, identifiants — pour arrêter de les chercher et commencer à coller. Ce guide détaille les flux de capture, l'organisation, les sauvegardes, les raccourcis clavier, la confidentialité et l'usage en équipe.</p>
+      <nav class="toc" aria-label="Sommaire">
+        <a href="#why">Pourquoi l'utiliser</a> · <a href="#capture">Capture</a> · <a href="#organize">Organisation</a> · <a href="#reuse">Réutilisation</a> · <a href="#backup">Sauvegarde</a> · <a href="#security">Sécurité</a> · <a href="#team">Équipe</a> · <a href="#troubleshoot">Dépannage</a> · <a href="#faq">FAQ</a>
+      </nav>
+      <section id="why" class="section">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Publicité</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2>Pourquoi un gestionnaire de presse‑papier importe</h2>
+        <p>Le travail moderne répète de nombreux petits textes entre applications. Un gestionnaire réduit les frictions, diminue les erreurs et conserve du contexte.</p>
+        <ul>
+          <li><strong>Rapidité :</strong> accéder en deux clics ou via un raccourci.</li>
+          <li><strong>Consistance :</strong> réutiliser du texte validé.</li>
+          <li><strong>Mémoire :</strong> court terme recherché pour la tâche en cours.</li>
+          <li><strong>Sauvegarde :</strong> exporter/restaurer la bibliothèque d'extraits.</li>
+        </ul>
+      </section>
+      <section id="capture" class="section">
+        <h2>Capture — sauvegarder sur le vif</h2>
+        <div class="recipe">
+          <strong>Recette de capture rapide</strong>
+          <ol>
+            <li>Copiez un élément utile, ouvrez le gestionnaire et collez dans le champ d'entrée ; conservez un seul élément logique.</li>
+            <li>Ajoutez un titre ou tag court (ex. "Facture: Acme — IBAN").</li>
+            <li>Enregistrez ; l'élément apparaît en tête de liste.</li>
+            <li>Prenez l'habitude de purger les éléments obsolètes.</li>
+          </ol>
+        </div>
+        <p class="small-note">Astuce : pour du texte multi‑lignes, ajoutez un titre pour faciliter la recherche.</p>
+      </section>
+      <section id="organize" class="section">
+        <h2>Organiser & rechercher</h2>
+        <p>Favorisez la récupération rapide : titres, tags et conventions simples.</p>
+        <h3>Modèle d'organisation</h3>
+        <ul>
+          <li><strong>Titre :</strong> 36 mots décrivant l'usage.</li>
+          <li><strong>Tag :</strong> projet, client, template, code.</li>
+          <li><strong>Aperçu :</strong> éviter les textes énormes.</li>
+        </ul>
+      </section>
+      <section id="reuse" class="section">
+        <h2>Réutilisation rapide & raccourcis</h2>
+        <h3>Raccourcis pratiques</h3>
+        <ul>
+          <li><span class="kbd">Ctrl/Cmd+Shift+V</span> — ouvrir et coller le dernier élément.</li>
+          <li><span class="kbd">Ctrl/Cmd+Alt+C</span> — capture rapide (focus prêt à coller).</li>
+          <li><span class="kbd">Flèches</span> — naviguer; <span class="kbd">Entrée</span> pour copier.</li>
+        </ul>
+        <p class="small-note">Si le navigateur bloque l'écriture dans le presse‑papier, utilisez le bouton Copier dans l'UI.</p>
+      </section>
+      <section id="backup" class="section">
+        <h2>Export / import & sauvegardes</h2>
+        <div class="recipe">
+          <strong>Routine de sauvegarde (5 minutes)</strong>
+          <ol>
+            <li>Chaque semaine : exportez en JSON.</li>
+            <li>Stockez l'export dans un dossier sécurisé (cloud ou coffre chiffré).</li>
+            <li>Pour changer d'appareil : importez le JSON.</li>
+            <li>Archivez avec une date (clipboard-backup-YYYYMMDD.json).</li>
+          </ol>
+        </div>
+        <pre class="template">Exemple CSV :
+title,text,tags,created
+Invoice: Acme,"Acct: 123-45-678",finance;client,2025-11-21T10:15:00Z</pre>
+      </section>
+      <section id="security" class="section">
+        <h2>Sécurité & confidentialité</h2>
+        <ul>
+          <li>Ne stockez pas de mots de passe, clés privées ou PINs en clair.</li>
+          <li>Si nécessaire, chiffez vos sauvegardes exportées.</li>
+          <li>Sur machines partagées : exportez puis supprimez les extraits.</li>
+          <li>Nettoyez régulièrement les extraits sensibles.</li>
+        </ul>
+        <p class="small-note">Le gestionnaire utilise localStorage : les données restent sur l'appareil sauf export.</p>
+      </section>
+      <section id="team" class="section">
+        <h2>Usage en équipe</h2>
+        <p>Pour le travail d'équipe, utilisez un dépôt d'extraits partagé pour le texte canonique; gardez le gestionnaire local pour l'usage personnel.</p>
+      </section>
+      <section id="troubleshoot" class="section">
+        <h2>Dépannage</h2>
+        <ul>
+          <li>Extraits disparus : vérifiez les paramètres de stockage du navigateur ; importez la dernière sauvegarde.</li>
+          <li>Collage bloqué : autorisez l'accès au presse‑papier dans les paramètres.</li>
+          <li>Export échoue : vérifiez les permissions d'écriture disque.</li>
+          <li>Listes longues : épurez ou utilisez la fonction favoris.</li>
+        </ul>
+      </section>
+      <section id="faq" class="section">
+        <h2>FAQ</h2>
+        <div class="muted">
+          <p><strong>Q :</strong> Où sont enregistrés les extraits ?<br><strong>R :</strong> Localement dans le navigateur (localStorage).</p>
+          <p><strong>Q :</strong> Puis‑je importer depuis un autre appareil ?<br><strong>R :</strong> Oui, via l'import du JSON.</p>
+          <p><strong>Q :</strong> Y a‑t‑il des limites ?<br><strong>R :</strong> localStorage a une limite (quelques Mo). Pour des bibliothèques volumineuses, exportez régulièrement.</p>
+        </div>
+      </section>
+      <section id="resources" class="section">
+        <h2>Ressources</h2>
+        <ul class="muted">
+          <li><a href="/fr/clipboard-manager/clipboard-manager-index.html">Ouvrir l'outil Clipboard Manager</a></li>
+          <li><a href="https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage" target="_blank" rel="noopener">localStorage — MDN</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Clipboard_(computing)" target="_blank" rel="noopener">Clipboard (computing) — Wikipedia</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/clipboard-manager-fr.html" class="cta" aria-label="Ouvrir Clipboard Manager">Ouvrir Clipboard Manager</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Publicité</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Questions — Contactez‑nous : <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Lire notre <a href="/privacy.html">Politique de confidentialité</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Gestionnaire de Presse-papiers</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Un outil de productivitأ© qui أ©tend le presse-papiers par dأ©faut en stockant un historique des أ©lأ©ments copiأ©s, les rendant consultables et rأ©utilisables.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Histoire</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Comment utiliser</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Copiez des أ©lأ©ments normalement.</li><li>Ouvrez le gestionnaire pour voir votre historique.</li><li>Sأ©lectionnez un أ©lأ©ment prأ©cأ©dent pour le recoller instantanأ©ment.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Utilisez un gestionnaire de presse-papiers pour stocker des extraits de code frأ©quents ou des signatures d'e-mail."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Plus d'Outils de Productivité Gratuits</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Minuteur de Tâches</a> <a href="../../stopwatch-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Chronomètre</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Convertisseur d'Unités</a> <a href="../../weather-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Météo</a> <a href="../../world-clock-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Horloge Mondiale</a> <a href="../../calendar-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendrier</a> <a href="../../clipboard-manager-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Presse-papiers</a> <a href="../../countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Compte à Rebours</a> <a href="../../currency-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Devises</a> <a href="../../focus-music-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Musique Focus</a> <a href="../../habit-tracker-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habitudes</a> <a href="../../meeting-planner-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Réunions</a> <a href="../../notes-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="../../password-generator-fr.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Mots de Passe</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <a href="https://timerhaven.com/clipboard-manager-fr.html" class="return-to-tool" id="returnToTool" aria-label="Retour vers Clipboard Manager">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Retour vers Clipboard Manager</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToTool');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleVisibility(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleVisibility);
+      toggleVisibility();
+    })();
+  </script>
 </body>
 </html>
+
+

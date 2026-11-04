@@ -1,121 +1,564 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="UTF-8">
-  <title>Notes — TimerHaven</title>
+  <title>Distraction-Free Auto-Saving Browser Notepad | TimerHaven</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Take quick notes and organize your thoughts. Learn how to use Notes, get productivity tips, FAQs, and read expert articles.">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description" content="Capture thoughts instantly with our distraction-free, auto-saving browser notepad. No login required, everything stays local to your machine for ultimate…">>
+  <meta name="author" content="Serge Shammas">
+  <meta name="datePublished" content="2026-01-08">
+  <meta name="dateModified" content="2026-01-08">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  media="print" onload="this.media='all'">
+  <link rel="canonical" href="https://timerhaven.com/notes-en.html" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  <link rel="stylesheet" href="assets/newsletter.css"  media="print" onload="this.media='all'">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Notes — Capture and organize quick thoughts",
+    "description":"Notes tool for quick capture and simple organization; stores notes locally in the browser. Includes tips for taking actionable notes.",
+    "author":{"@type":"Person","name":"Serge Shammas","url":"https://timerhaven.com/authors/serge-shammas"},
+    "datePublished":"2026-01-08",
+    "dateModified":"2026-01-08",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://timerhaven.com/notes-en.html"}
+  }
+  </script>
   <style>
-    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
-    .main-container { max-width: 1200px; margin: 2rem auto; display:flex; justify-content:center; align-items:flex-start; min-height:90vh; padding:0 1rem; box-sizing:border-box; }
-    .tool-card {
-      background:#fff;
-      border-radius:16px;
-      box-shadow:0 2px 12px #e0e7ef;
-      width:420px;
-      padding:1.6rem 1.5rem;
-      box-sizing:border-box;
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif; font-display: swap;
     }
-    .back-link { display:inline-block; margin-bottom:.75rem; color:var(--brand,#0d6efd) !important; text-decoration:none; font-weight:700; }
-    .tool-title { font-size:1.35rem; margin:0 0 .4rem 0; display:flex; align-items:center; gap:.4rem; color:#185a9d; }
-    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
-    .notes-form { margin-bottom:1rem; display:flex; gap:.5rem; align-items:center; }
-    .notes-list { margin-bottom:1rem; }
-    .note-item { background:#f7fafc; border-radius:7px; padding:0.6rem 0.8rem; margin-bottom:0.6rem; display:flex; align-items:center; justify-content:space-between; }
-    .note-meta { font-size:0.9em; color:#888; margin-right:1em; }
-    .note-pinned { font-weight:700; color:#185a9d; margin-right:0.6em; }
-    .faq-section { margin-top:1.1rem; margin-bottom:0.3rem; font-size:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
-    .faq-section summary { font-weight:700; font-size:1.02rem; cursor:pointer; }
-    @media (max-width:900px){ .tool-card{ width:98vw; padding:1rem; } }
+    .main-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      min-height: 90vh;
+      box-sizing: border-box;
+    }
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      width: 420px;
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--brand, #0d6efd) !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .4rem 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: #185a9d;
+    }
+    .read-guide {
+      display: inline-block;
+      margin: .35rem 0 .8rem 0;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: var(--brand, #0d6efd);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+    }
+    .notes-form {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+    .notes-list {
+      margin-bottom: 1rem;
+    }
+    .note-item {
+      background: #f7fafc;
+      border-radius: 7px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .note-meta {
+      font-size: 0.9em;
+      color: #888;
+      margin-right: 1em;
+    }
+    .note-pinned {
+      font-weight: 700;
+      color: #185a9d;
+      margin-right: 0.6em;
+    }
+    .faq-section {
+      margin-top: 1.1rem;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+    .faq-section summary {
+      font-weight: 700;
+      font-size: 1.02rem;
+      cursor: pointer;
+    }
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+      .notes-section {
+        order: 1;
+      }
+      .tool-intro {
+        order: 2;
+      }
+      .tool-intro p {
+        display: none;
+      }
+      .tool-card {
+        width: 94vw;
+        padding: 12px;
+      }
+    }
+    @media (max-width:900px) {
+      .tool-card {
+        width: 98vw;
+        padding: 1rem;
+      }
+    }
   </style>
+  <script>
+  </script>
+  <script src="assets/js/syncManager.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Distraction-Free Auto-Saving Browser Notepad | TimerHaven">
+  <meta property="og:description" content="Capture thoughts instantly with our distraction-free, auto-saving browser notepad. No login required, everything stays local to your machine for ultimate privacy.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/notes-en.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Distraction-Free Auto-Saving Browser Notepad | TimerHaven">
+  <meta name="twitter:description" content="Capture thoughts instantly with our distraction-free, auto-saving browser notepad. No login required, everything stays local to your machine for ultimate privacy.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta name="keywords" content="distraction free browser notepad, auto saving local notepad, privacy first text editor, quick online notes, adhd brain dump tool">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/notes-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/notes-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/notes-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/notes-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/notes-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/notes-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/notes-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/notes-en.html">
 </head>
 <body>
-  <main class="main-container" role="main">
+    <main class="main-container" role="main">
     <section class="tool-card" aria-labelledby="tool-title">
       <a href="index.html" class="back-link" id="back-link">&larr; Back to Main Menu</a>
-
-      <h3 id="tool-title" class="tool-title"><i class="fa fa-note-sticky"></i> Notes</h3>
-
-      <a id="read-guide-btn" class="read-guide" href="/en/notes/notes-index.html" role="button">Read full guide</a>
-
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-note-sticky"></i> Distraction-Free Auto-Saving Browser Notepad</h3>
+      <div class="mobile-summary">Quick notes — <a href="en/notes/notes-index.html">Read full guide</a></div>
+      <a id="read-guide-btn" class="read-guide" href="en/notes/notes-index.html" role="button">Read full guide</a>
+      <div class="tool-intro" id="tool-help" data-preserve="true"
+        style="margin-top:.6rem;margin-bottom:.9rem;color:#374151;line-height:1.45;">
+        <p><strong>Quick notes that stay with you</strong> — Use Notes for short reminders, ideas or session logs. Notes
+          are saved locally in your browser so they remain private to your device unless you export them. Pin important
+          items to keep them at the top.</p>
+        <p style="margin-top:.6rem;color:#51606b;font-size:.95rem;"><strong>By Serge Shammas ·</strong> — Last updated:
+          <time datetime="2026-01-08">Jan 8, 2026</time>
+        </p>
+      </div>
       <div class="notes-section">
         <form class="notes-form" id="notesForm">
-          <input type="text" id="noteInput" class="form-control" placeholder="Type your note..." style="max-width:220px;">
-          <button type="submit" class="btn btn-success btn-sm">Add Note</button>
+          <input type="text" id="noteInput" class="form-control" placeholder="Type your note..."
+            style="max-width:220px;">
+          <button type="button" id="addNoteBtn" class="btn btn-success btn-sm">Add Note</button>
         </form>
         <div id="notesList" class="notes-list"></div>
       </div>
-
       <details class="faq-section">
         <summary id="faq-title">FAQs</summary>
         <ul style="padding-left:1em;" id="faq-list">
           <li><b>Are notes saved?</b> Yes, in your browser until you clear them.</li>
-          <li><b>Can I pin important notes?</b> Yes, use the pin feature if available.</li>
+          <li><b>Can I pin important notes?</b> Yes — pin/unpin moves notes to the top.</li>
           <li><b>Is there a limit?</b> No, add as many notes as you need.</li>
         </ul>
       </details>
     </section>
+    <!-- Newsletter Signup Section -->
+    <div class="newsletter-signup" style="width: 100%; max-width: 500px; margin: 0;">
+      <div class="newsletter-container">
+        <div class="newsletter-icon">📬</div>
+        <h3 class="newsletter-title">Capture Your Ideas</h3>
+        <p class="newsletter-description">
+          Master your knowledge management. Weekly tips on PKM, second brain systems, and productivity workflows.
+        </p>
+        <form class="newsletter-form" id="newsletterForm">
+          <div class="form-group">
+            <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
+              aria-label="Email address">
+            <button type="submit" class="newsletter-button">Join Now</button>
+          </div>
+          <p id="newsletterMessage" style="display: none;"></p>
+          <p class="newsletter-privacy">
+            <small>Respectful of your inbox. View our <a href="/privacy.html">Privacy Policy</a>.</small>
+          </p>
+        </form>
+      </div>
+    </div>
   </main>
-
-<script>
-  let notes = JSON.parse(localStorage.getItem('notesData') || '[]');
-  function saveNotes() { localStorage.setItem('notesData', JSON.stringify(notes)); }
-  function renderNotes() {
-    const list = document.getElementById('notesList');
-    list.innerHTML = '';
-    if (notes.length === 0) {
-      list.innerHTML = '<div style="color:#888;">No notes yet.</div>';
-      return;
+  <script>
+    window.onerror = function (msg, url, line) {
+      console.error('JS Error: ' + msg + ' @ ' + line);
+      return false;
+    };
+    // Safe storage wrappers
+    function safeSet(key, value) {
+      try {
+        localStorage.setItem(key, value);
+        return true;
+      } catch (e) {
+        console.error('Storage Save Error', e);
+        return false;
+      }
     }
-    notes.forEach((note, idx) => {
-      const pinned = note.pinned ? '<span class="note-pinned"><i class="fa fa-thumbtack"></i></span>' : '';
-      const div = document.createElement('div');
-      div.className = 'note-item';
-      div.innerHTML = `
-        <div style="display:flex;align-items:center;gap:.6rem;">
-          ${pinned}
-          <span>${escapeHtml(note.text)}</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:.5rem;">
-          <span class="note-meta">${escapeHtml(note.date)}</span>
-          <button class="btn btn-outline-${note.pinned ? 'secondary' : 'info'} btn-sm" onclick="pinNote(${idx})" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>
-          <button class="btn btn-outline-danger btn-sm" onclick="deleteNote(${idx})"><i class="fa fa-trash"></i></button>
-        </div>
-      `;
-      list.appendChild(div);
+    function safeGet(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        console.error('Storage Read Error', e);
+        return null;
+      }
+    }
+    function $id(id) { return document.getElementById(id); }
+    // Load notes
+    var notes = [];
+    try {
+      var saved = safeGet('notesData');
+      if (saved) notes = JSON.parse(saved);
+    } catch (e) {
+      notes = [];
+    }
+    if (!Array.isArray(notes)) notes = [];
+    // Assign IDs to legacy notes
+    notes.forEach(function (n) { if (!n.id) n.id = 'note_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now(); });
+    function saveNotes() {
+      safeSet('notesData', JSON.stringify(notes));
+    }
+    // Fixed escapeHtml (no replaceAll for old browsers)
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function renderNotes() {
+      var list = $id('notesList');
+      if (!list) return;
+      list.innerHTML = '';
+      if (!notes || notes.length === 0) {
+        list.innerHTML = '<div style="color:#888;">No notes yet.</div>';
+        return;
+      }
+      notes.forEach(function (note, idx) {
+        var pinned = note.pinned ? '<span class="note-pinned"><i class="fa fa-thumbtack"></i></span>' : '';
+        var div = document.createElement('div');
+        div.className = 'note-item';
+        div.innerHTML = '<div style="display:flex;align-items:center;gap:.6rem;">' + pinned + '<span>' + escapeHtml(note.text) + '</span></div>' +
+          '<div style="display:flex;align-items:center;gap:.5rem;">' +
+          '<span class="note-meta">' + escapeHtml(note.date) + '</span>' +
+          '<button class="btn btn-outline-' + (note.pinned ? 'secondary' : 'info') + ' btn-sm" onclick="pinNote(' + idx + ')" title="Pin/unpin"><i class="fa fa-thumbtack"></i></button>' +
+          '<button class="btn btn-outline-danger btn-sm" onclick="deleteNote(' + idx + ')"><i class="fa fa-trash"></i></button>' +
+          '</div>';
+        list.appendChild(div);
+      });
+    }
+    window.addNote = function () {
+      var input = $id('noteInput');
+      if (!input) return;
+      var text = input.value.trim();
+      if (!text) return;
+      try {
+        var dateStr = new Date().toLocaleString();
+        var newNote = {
+          id: 'note_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          text: text,
+          date: dateStr,
+          pinned: false,
+          updatedAt: Date.now()
+        };
+        notes.unshift(newNote);
+        saveNotes();
+        if (window.SyncManager && window.SyncManager.isAvailable()) {
+          try {
+            window.SyncManager.saveNote(newNote.id, "", newNote.text);
+          } catch (e) { }
+        }
+        input.value = "";
+        requestAnimationFrame(function () {
+          renderNotes();
+        });
+      } catch (e) {
+        console.error('Error adding note', e);
+      }
+    };
+    if ($id('notesForm')) $id('notesForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      window.addNote();
     });
-  }
-  function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
-
-  document.getElementById('notesForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const text = document.getElementById('noteInput').value.trim();
-    if (!text) return;
-    notes.unshift({ text, date: new Date().toLocaleString(), pinned: false });
-    saveNotes();
-    document.getElementById('noteInput').value = "";
-    renderNotes();
-  });
-  window.deleteNote = function(idx){ notes.splice(idx, 1); saveNotes(); renderNotes(); }
-  window.pinNote = function(idx){
-    notes[idx].pinned = !notes[idx].pinned;
-    if (notes[idx].pinned) {
-      const pinnedNote = notes.splice(idx, 1)[0];
-      notes.unshift(pinnedNote);
+    // Bind button directly with both touch and click
+    var addBtn = $id('addNoteBtn');
+    if (addBtn) {
+      addBtn.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        window.addNote();
+      });
+      addBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.addNote();
+      });
     }
-    saveNotes();
+    window.deleteNote = function (idx) {
+      var removed = notes.splice(idx, 1)[0];
+      saveNotes();
+      if (removed && removed.id && window.SyncManager && window.SyncManager.isAvailable()) {
+        try {
+          window.SyncManager.deleteNote(removed.id);
+        } catch (e) { }
+      }
+      requestAnimationFrame(function () {
+        renderNotes();
+      });
+    }
+    window.pinNote = function (idx) {
+      if (!notes[idx]) return;
+      notes[idx].pinned = !notes[idx].pinned;
+      notes[idx].updatedAt = Date.now();
+      if (notes[idx].pinned) {
+        var pinnedNote = notes.splice(idx, 1)[0];
+        notes.unshift(pinnedNote);
+      }
+      saveNotes();
+      if (SyncManager.isAvailable()) {
+        var n = notes.find(n => n === (pinnedNote || notes[idx])); // Find the note we just toggled
+        if (n) SyncManager.saveNote(n.id, "", n.text);
+      }
+      renderNotes();
+    }
+    // initial render
     renderNotes();
-  }
-  renderNotes();
-</script>
+    // Cloud Sync Listeners
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.notes) {
+        let changed = false;
+        cloudData.notes.forEach(cloudNote => {
+          const existing = notes.find(n => n.id === cloudNote.id);
+          if (!existing) {
+            notes.push({
+              id: cloudNote.id,
+              text: cloudNote.content,
+              date: new Date(cloudNote.updatedAt || Date.now()).toLocaleString(),
+              pinned: false,
+              updatedAt: cloudNote.updatedAt
+            });
+            changed = true;
+          } else if ((cloudNote.updatedAt || 0) > (existing.updatedAt || 0)) {
+            existing.text = cloudNote.content;
+            existing.updatedAt = cloudNote.updatedAt;
+            changed = true;
+          }
+        });
+        if (changed) {
+          saveNotes();
+          renderNotes();
+        }
+      }
+    });
+    window.addEventListener('timerhaven:cloudDataChanged', function () {
+      if (SyncManager.isAvailable()) SyncManager.initialize();
+    });
+  </script>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);">
+    <div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>online notepad</strong> and other <strong>privacy-first productivity tools</strong>.</div>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
+    <a href="/privacy.html">Privacy Policy</a> ·
+    <a href="/terms.html">Terms</a> ·
+    <a href="/pricing.html">Pricing</a> · <a href="/contact.html">Contact</a>
+  
+    
+    
 
-<footer>
-  &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
-  <a href="privacy.html">Privacy Policy</a> &bull;
-  <a href="terms.html">Terms</a> &bull;
-  <a href="contact.html">Contact</a>
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Notes & Quick Memo</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A lightweight digital notepad for capturing thoughts, lists, and reminders instantly.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">History</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Type your notes in the main text area.</li><li>Your progress is saved locally using browser storage.</li><li>Copy or export your notes when they are ready for formal processing.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Use short, bulleted lists for rapid capture of ideas during meetings or focus sessions."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
 </footer>
+  <script defer src="assets/newsletter.js"></script>
+  
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Notes & Quick Memo</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A lightweight digital notepad for capturing thoughts, lists, and reminders instantly.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">History</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Type your notes in the main text area.</li><li>Your progress is saved locally using browser storage.</li><li>Copy or export your notes when they are ready for formal processing.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Use short, bulleted lists for rapid capture of ideas during meetings or focus sessions."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
+  <script>
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() {
+          // Initialize non-critical widgets here if needed
+        });
+      }
+    });
+  </script>
 </body>
 </html>
+
+

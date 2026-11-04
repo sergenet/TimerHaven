@@ -1,18 +1,299 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>stopwatch — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for stopwatch guide (ru)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Секундомер — Измеряйте результаты, интервалы и прогресс | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Подробное руководство по использованию секундомера для продуктивности, тренировок, экспериментов и встреч."> />
+  <link rel="canonical" href="https://timerhaven.com/ru/stopwatch/stopwatch-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Эффективное использование секундомера",
+        "description":"Запускайте, ставьте на паузу, фиксируйте круги (lap) и измеряйте прошедшее время для экспериментов, тренировок, встреч и продуктивной работы. Руководство покрывает рабочие процессы, использование кругов, сбор данных, замечания по точности и устранение неполадок.",
+        "image":"https://timerhaven.com/assets/images/stopwatch-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Секундомер (TimerHaven)","Блокнот или таблица","Опционально: пульсометр для тренировок"],
+        "step":[
+          {"@type":"HowToStep","name":"Определите цель","text":"Решите, что вы измеряете (длительность задачи, интервальная производительность, время до завершения)."},
+          {"@type":"HowToStep","name":"Запуск и запись кругов","text":"Нажмите Старт и фиксируйте круги в заданных контрольных точках; при необходимости помечайте или экспортируйте времена кругов."},
+          {"@type":"HowToStep","name":"Просмотрите и проанализируйте","text":"Соберите данные о кругах в таблицу и вычислите средние, лучшие результаты и дисперсию, чтобы понять динамику производительности."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Будет ли секундомер работать при переключении вкладок?","acceptedAnswer":{"@type":"Answer","text":"Да — секундомеры обычно вычисляют прошедшее время по меткам времени (start + now), поэтому остаются точными даже если вкладка в фоне. Некоторые браузеры могут троттлить обновление интерфейса, но не сам расчёт прошедшего времени."}},
+          {"@type":"Question","name":"Как фиксировать круги (lap)?","acceptedAnswer":{"@type":"Answer","text":"Нажимайте кнопку Lap, чтобы зафиксировать текущее прошедшее время. Экспортируйте или копируйте времена, чтобы сохранить записи для дальнейшего анализа."}},
+          {"@type":"Question","name":"Достаточно ли секундомера для экспериментов с высокой точностью?","acceptedAnswer":{"@type":"Answer","text":"Для большинства задач продуктивности и тренировок — да. Для научных измерений высокой точности лучше использовать специализированное оборудование или нативные приложения с гарантиями реального времени."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Секундомер — Измеряйте результаты, интервалы и прогресс | TimerHaven">
+  <meta property="og:description" content="Подробное руководство по использованию секундомера для продуктивности, тренировок, экспериментов и встреч. Включает шаблоны тайминга, лучшие практики для кругов (lap), заметки по точности и устранение неполадок.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ru/stopwatch/stopwatch-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Секундомер — Измеряйте результаты, интервалы и прогресс | TimerHaven">
+  <meta name="twitter:description" content="Подробное руководство по использованию секундомера для продуктивности, тренировок, экспериментов и встреч. Включает шаблоны тайминга, лучшие практики для кругов (lap), заметки по точности и устранение неполадок.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/stopwatch/stopwatch-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/stopwatch/stopwatch-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">stopwatch — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Секундомер — измеряйте прошедшее время, интервалы и прогресс</h1>
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — автор по продуктивности и измерениям</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 1015 мин.</div>
+        </div>
+      </div>
+      <p class="lead">Секундомер — самый простой измерительный инструмент, но области его применения широки: измерение длительности задач, тайминг интервалов в тренировках, логирование времени выполнения экспериментов или контроль пунктов повестки на встречах. Руководство описывает рабочие процессы, лучшие практики для кругов (lap), сбор данных, нюансы точности и использование результатов для улучшения производительности.</p>
+      <nav class="toc" aria-label="Содержание">
+        <a href="#when">Когда использовать секундомер</a>
+        <a href="#start">Старт/пауза/круги</a>
+        <a href="#workflows">Практические рабочие процессы</a>
+        <a href="#data">Сбор и анализ данных по кругам</a>
+        <a href="#precision">Точность и особенности окружения</a>
+        <a href="#integration">Интеграции и экспорт</a>
+        <a href="#troubleshoot">Устранение неполадок</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="when" class="section" aria-labelledby="when-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="when-title">Когда использовать секундомер</h2>
+        <p>Секундомеры особенно полезны, когда требуется аккуратно измерить прошедшее время для ограниченной активности. Распространённые сценарии:</p>
+        <ul>
+          <li><strong>Эксперименты по продуктивности:</strong> измеряйте, сколько реально занимает задача по сравнению с вашей оценкой.</li>
+          <li><strong>Тренировки и интервалы:</strong> фиксируйте сплиты для пробежек, подходов или интервалов.</li>
+          <li><strong>Юзабилити‑тесты и эксперименты:</strong> измеряйте время на выполнение задач для бенчмаркинга.</li>
+          <li><strong>Встречи:</strong> таймируйте пункты повестки и следите за равномерностью выступлений.</li>
+        </ul>
+      </section>
+      <section id="start" class="section" aria-labelledby="start-title">
+        <h2 id="start-title">Старт, пауза и круги — базовые принципы</h2>
+        <p>Современные веб‑секундомеры обычно опираются на метки времени, поэтому остаются точными даже при троттлинге интерфейса. Основные концепции:</p>
+        <ul>
+          <li><strong>Старт:</strong> фиксируйте метку времени запуска (Date.now()).</li>
+          <li><strong>Прошедшее:</strong> вычисляйте now − start (с учётом ранее накопленного времени при возобновлении после паузы).</li>
+          <li><strong>Пауза/возобновление:</strong> при паузе сохраняйте накопленное прошедшее и очищайте текущий старт; при возобновлении выставляйте start = now − accumulated.</li>
+          <li><strong>Круг (Lap):</strong> фиксируйте текущее прошедшее время как сплит — при необходимости сбрасывайте счётчик кругов, если вам нужны продолжительности отдельных кругов (разница между типами: накопленный сплит vs длительность круга).</li>
+        </ul>
+        <p class="small-note">Два режима кругов: (A) накопленные сплиты (время с начала) и (B) длительности кругов (время с предыдущего круга). Решите заранее, что вам нужно, прежде чем записывать.</p>
+      </section>
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Практические рабочие процессы</h2>
+        <div class="recipe" aria-labelledby="timing-task">
+          <strong id="timing-task">Время до завершения (оценка задач)</strong>
+          <ol>
+            <li>Определите цель: «Написать вступление — первый черновик».</li>
+            <li>Запустите секундомер в начале задачи; избегайте многозадачности во время измерения.</li>
+            <li>Используйте Lap для отметки значимых контрольных точек (написание плана, завершение первого абзаца).</li>
+            <li>По завершении запишите общее прошедшее в задаче или заметке в календаре.</li>
+          </ol>
+        </div>
+        <div class="recipe" aria-labelledby="interval-training">
+          <strong id="interval-training">Интервальные тренировки (повторяемые циклы)</strong>
+          <ol>
+            <li>Нажимайте Lap для фиксации каждого интервала; если нужно засечь отдых, используйте Pause, чтобы отдельно измерить время восстановления.</li>
+            <li>Экспортируйте круги, чтобы вычислять среднее время интервала, лучший результат и дисперсию для отслеживания прогресса.</li>
+            <li>Соблюдайте стабильные правила разминки и заминки для корректных сравнений между сессиями.</li>
+          </ol>
+        </div>
+        <p class="small-note">Подсказка: для повторяемых рабочих процессов заведите короткий ритуал перед стартом (открыть материалы, проверить позу), чтобы измерения были сопоставимы.</p>
+      </section>
+      <section id="data" class="section" aria-labelledby="data-title">
+        <h2 id="data-title">Сбор и анализ данных по кругам</h2>
+        <p>Сырые времена кругов полезны при агрегации. Экспортируйте или копируйте круги в таблицу и вычисляйте простые метрики:</p>
+        <ul>
+          <li><strong>Среднее (mean)</strong> — типичное время на круг/итерацию.</li>
+          <li><strong>Медиана</strong> — устойчива к выбросам.</li>
+          <li><strong>Стандартное отклонение / дисперсия</strong> — мера согласованности.</li>
+          <li><strong>Лучший / худший</strong> — отслеживайте лучшие и худшие результаты.</li>
+        </ul>
+        <pre class="template">CSV столбцы: index,split_seconds,lap_seconds,timestamp
+1,30.12,30.12,2025-11-24T10:02:12Z</pre>
+        <p>Используйте эти метрики в недельных обзорах, чтобы находить тренды и понимать, когда изменения процесса улучшили скорость или стабильность.</p>
+      </section>
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Точность и особенности окружения</h2>
+        <p>Веб‑секундомеры подходят для повседневных задач, но учтите ограничения:</p>
+        <ul>
+          <li><strong>Троттлинг интерфейса:</strong> фоновые вкладки могут реже обновлять UI, но корректная реализация на основе меток времени сохраняет точность расчёта.</li>
+          <li><strong>Сон системы / режим сна:</strong> при уходе устройства в спящий режим значение wall‑clock продвинется — учитывайте это при анализе сессий.</li>
+          <li><strong>Высокая точность:</strong> для научных задач или синхронизации A/V используйте специализированные инструменты (аппаратные таймеры, таймкод DAW, системы, синхронизированные по NTP).</li>
+        </ul>
+      </section>
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Интеграции и экспорт</h2>
+        <p>Хорошие инструменты секундомера позволяют копировать или экспортировать список кругов для последующего анализа. Идеи интеграции:</p>
+        <ul>
+          <li><strong>Лог задач:</strong> добавляйте прошедшее время в элементы задач или описания событий в календаре.</li>
+          <li><strong>Экспорт CSV:</strong> импортируйте данные кругов в таблицы для анализа трендов.</li>
+          <li><strong>API / Webhooks:</strong> отправляйте события тайминга на бэкенд для хранения истории сессий в личных дашбордах.</li>
+        </ul>
+      </section>
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Устранение неполадок</h2>
+        <ul>
+          <li><strong>Таймер не обновляется визуально:</strong> некоторые браузеры троттлят перерисовку; опирайтесь на итоговый прошедший результат, а не на каждую «тик‑»обновление.</li>
+          <li><strong>Круги не сохраняются после перезагрузки:</strong> используйте экспорт или инструмент, который сохраняет круги в localStorage, если вам нужны долгосрочные записи.</li>
+          <li><strong>Неправильный часовой пояс в метках времени:</strong> храните метки в ISO UTC, чтобы избежать путаницы при агрегации с разных устройств.</li>
+        </ul>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Можно ли измерять несколько параллельных задач одним секундомером?<br><strong>Ответ:</strong> Возможно при аккуратной семантике кругов (помечайте каждый круг), но для параллельных задач удобнее несколько таймеров или Task Timer с поддержкой одновременных таймеров.</p>
+          <p><strong>Вопрос:</strong> Как помечать круги?<br><strong>Ответ:</strong> Используйте короткие, последовательные метки (напр., «Разминка», «Повтор 1», «Контроль»). Если инструмент не поддерживает метки, записывайте заметку с временной меткой в системе задач рядом с индексом круга.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/stopwatch-ru.html">Открыть секундомер</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Stopwatch" target="_blank" rel="noopener">Stopwatch — Wikipedia</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/stopwatch-ru.html" class="cta" aria-label="Открыть секундомер">Открыть секундомер</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Прочитайте нашу <a href="/privacy.html">Политику конфиденциальности</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذ‍ذ½ذ»ذ°ذ¹ذ½-رپذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذ،ذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€ â€” رچر‚ذ¾ ر‚ذ¾ر‡ذ½ر‹ذ¹ ر‚ذ°ذ¹ذ¼ذµر€, ذ¸رپذ؟ذ¾ذ»رŒذ·رƒذµذ¼ر‹ذ¹ ذ´ذ»رڈ ذ¸ذ·ذ¼ذµر€ذµذ½ذ¸رڈ ذ؛ذ¾ذ»ذ¸ر‡ذµرپر‚ذ²ذ° ذ²ر€ذµذ¼ذµذ½ذ¸, ذ؟ر€ذ¾رˆذµذ´رˆذµذ³ذ¾ ذ¼ذµذ¶ذ´رƒ ذµذ³ذ¾ ذ°ذ؛ر‚ذ¸ذ²ذ°ر†ذ¸ذµذ¹ ذ¸ ذ´ذµذ°ذ؛ر‚ذ¸ذ²ذ°ر†ذ¸ذµذ¹.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;">ذںذµر€ذ²ر‹ذµ ذ¼ذµر…ذ°ذ½ذ¸ر‡ذµرپذ؛ذ¸ذµ ر…ر€ذ¾ذ½ذ¾ذ³ر€ذ°ر„ر‹ ذ±ر‹ذ»ذ¸ ر€ذ°ذ·ر€ذ°ذ±ذ¾ر‚ذ°ذ½ر‹ ذ² XIX ذ²ذµذ؛ذµ ذ´ذ»رڈ ذ؛ذ¾ذ½ذ½ر‹ر… رپذ؛ذ°ر‡ذµذ؛. ذ،ذµذ³ذ¾ذ´ذ½رڈ ر†ذ¸ر„ر€ذ¾ذ²ر‹ذµ رپذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€ر‹ ذ¾ذ±ذµرپذ؟ذµر‡ذ¸ذ²ذ°رژر‚ ر‚ذ¾ر‡ذ½ذ¾رپر‚رŒ ذ´ذ¾ ذ¼ذ¸ذ»ذ»ذ¸رپذµذ؛رƒذ½ذ´.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذ‌ذ°ذ¶ذ¼ذ¸ر‚ذµ 'ذ،ر‚ذ°ر€ر‚', ر‡ر‚ذ¾ذ±ر‹ ذ½ذ°ر‡ذ°ر‚رŒ ذ¾ر‚رپر‡ذµر‚.</li><li>ذکرپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ 'ذڑر€رƒذ³' ذ´ذ»رڈ ذ·ذ°ذ؟ذ¸رپذ¸ ر€ذµذ·رƒذ»رŒر‚ذ°ر‚ذ¾ذ² ذ±ذµذ· ذ¾رپر‚ذ°ذ½ذ¾ذ²ذ؛ذ¸.</li><li>ذ‌ذ°ذ¶ذ¼ذ¸ر‚ذµ 'ذ،ر‚ذ¾ذ؟', ر‡ر‚ذ¾ذ±ر‹ ذ·ذ°ر„ذ¸ذ؛رپذ¸ر€ذ¾ذ²ذ°ر‚رŒ ذ²ر€ذµذ¼رڈ, ذ¸ 'ذ،ذ±ر€ذ¾رپ', ر‡ر‚ذ¾ذ±ر‹ ذ¾ر‡ذ¸رپر‚ذ¸ر‚رŒ رچر؛ر€ذ°ذ½.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذکرپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ ر„رƒذ½ذ؛ر†ذ¸رژ 'ذڑر€رƒذ³' ذ´ذ»رڈ ذ¸ذ½ر‚ذµر€ذ²ذ°ذ»رŒذ½ر‹ر… ر‚ر€ذµذ½ذ¸ر€ذ¾ذ²ذ¾ذ؛ ذ¸ذ»ذ¸ ذ½ذ°رƒر‡ذ½ر‹ر… ذ½ذ°ذ±ذ»رژذ´ذµذ½ذ¸ذ¹."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="../../stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="../../unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="../../weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="../../world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="../../calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="../../clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="../../countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="../../currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="../../focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="../../habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="../../meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="../../notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="../../password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/stopwatch-ru.html" class="return-to-tool" id="returnToToolStopwatch" aria-label="Вернуться к секундомеру">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К секундомеру</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolStopwatch');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

@@ -1,18 +1,250 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8">
-  <title>task-timer — Guide (ru)</title>
+  <title>Таймер задач — Измерение времени и улучшение оценок | TimerHaven</title>
+  <meta name="description" content="Полное руководство по измерению длительности задач, анализу прерываний και улучшению проектных оценок. Включает инструкции, FAQ и шаблон CSV.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for task-timer guide (ru)">
+  <link rel="canonical" href="https://timerhaven.com/ru/task-timer/task-timer-index.html">
+  <meta name="author" content="Серж Шаммас">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "HowTo",
+        "name": "Запись и анализ времени выполнения задач с помощью Таймера задач",
+        "description": "Алгоритм измерения реального времени, затраченного на задачи, и корректировки планирования.",
+        "image": "https://timerhaven.com/assets/images/tasktimer-snapshot.webp",
+        "totalTime": "PT2H",
+        "supply": ["Таймер", "Список задач", "Шаблон отслеживания времени"],
+        "step": [
+          {"@type":"HowToStep","name":"Определение четких целей","text":"Сформулируйте название задачи в структурированном формате и установите ожидаемую длительность."},
+          {"@type":"HowToStep","name":"Запуск таймера и работа","text":"Запустите таймер и сфокусируйтесь на одной задаче. При переключении внимания остановите таймер."},
+          {"@type":"HowToStep","name":"Фиксация прерываний","text":"Каждый раз, когда вас прерывают, делайте пометку, чтобы оценить скрытые потери времени на переключение контекста."},
+          {"@type":"HowToStep","name":"Обзор και анализ","text":"В конце дня или недели сравните фактическое время с расчетным и выявите самые трудозатратные задачи."}
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff;
+      --link-blue: #0d6efd;
+    }
+    body { font-family: 'Inter', Arial, sans-serif; background: var(--bg); color: #102a43; margin: 0; padding: 2rem; line-height: 1.6; }
+    .container { max-width: 920px; margin: 0 auto; }
+    .card { background: var(--card); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); }
+    h1 { color: var(--brand); margin-top: 0; font-size: 1.8rem; }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    .lead { font-size: 1.05rem; margin-top: 0; margin-bottom: 1rem; }
+    .section { margin-top: 1.1rem; }
+    .workflow { background: #fff7f0; border-left: 4px solid #ffd1a7; padding: 0.9rem; border-radius: 8px; margin-bottom: 0.9rem; }
+    .cta { display: inline-block; padding: 0.6rem 1rem; border-radius: 8px; background: var(--brand); color: #fff; text-decoration: none; font-weight: 700; }
+    .back-link { display: inline-block; margin-bottom: .75rem; color: var(--link-blue) !important; text-decoration: none; font-weight: 700; }
+    nav.toc { margin: 0.75rem 0; padding: 0.5rem 0; border-left: 3px solid #eef5fb; }
+    nav.toc a { display: inline-block; margin-right: 1rem; color: var(--brand); text-decoration: none; font-weight: 600; }
+    pre.template { background: #f3f7fb; padding: 0.75rem; border-radius: 6px; overflow: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.75rem; border: 1px solid #e2e8f0; text-align: left; }
+    th { background: #f8fafc; }
+    .return-to-tool { position: fixed; right: 26px; bottom: 26px; z-index: 999; display: inline-flex; align-items: center; gap: 12px; padding: 11px 16px; border-radius: 999px; background: linear-gradient(180deg, #2faaff, #0b63a0); color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 18px 40px rgba(3, 56, 102, 0.22); }
+    .return-to-tool .icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: rgba(255, 255, 255, 0.12); font-size: 18px; }
+  </style>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+
+    
+    <!-- Social preview (added: page previously had none) -->
+    <meta property="og:title" content="Таймер задач — Измерение времени и улучшение оценок | TimerHaven">
+    <meta property="og:description" content="Полное руководство по измерению длительности задач, анализу прерываний και улучшению проектных оценок. Включает инструкции, FAQ и шаблон CSV.">
+    <meta property="og:url" content="https://timerhaven.com/ru/task-timer/task-timer-index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TimerHaven">
+    <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Таймер задач — Измерение времени и улучшение оценок | TimerHaven">
+    <meta name="twitter:description" content="Полное руководство по измерению длительности задач, анализу прерываний και улучшению проектных оценок. Включает инструкции, FAQ и шаблон CSV.">
+    <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer/task-timer-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">task-timer — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <a href="/index-ru.html" class="back-link">&larr;&nbsp;Вернуться в главное меню</a>
+      <h1 id="title">Таймер задач — Измерение времени и улучшение оценок</h1>
+      
+      <div class="meta">Автор: Серж Шаммас · Опубликовано: 2025-10-25 · Время чтения: 12 минут</div>
+      
+      <p class="lead">Таймер задач — это не просто секундомер, это диагностический инструмент вашей продуктивности. Записывая реальное время, затраченное на работу, вы сможете найти скрытые «утечки», оценить стоимость прерываний и планировать дела более реалистично.</p>
+
+      <nav class="toc" aria-label="Содержание">
+        <a href="#setup">Настройка</a>
+        <a href="#howto">Порядок работы</a>
+        <a href="#interruptions">Управление прерываниями</a>
+        <a href="#analysis">Экспорт и анализ</a>
+        <a href="#faq">Вопросы и ответы</a>
+      </nav>
+
+      <section class="section" id="setup">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2>Фаза 1: Настройка и стратегия именования</h2>
+        <p>Эффективный учет времени начинается с правильных названий. Мы рекомендуем использовать формат: <strong>[Проект] - [Тип работы] - [Результат]</strong>.</p>
+        <p>Например, вместо простого «Встреча» напишите <em>«Проект Феникс - Созвон - Согласование макетов»</em>. Это поможет вам при анализе отфильтровать время по проектам и понять, на что уходит больше всего ресурсов.</p>
+      </section>
+
+      <section class="section" id="howto">
+        <h2>Фаза 2: Идеальный рабочий процесс</h2>
+        <div class="workflow">
+          <strong>Пошаговая методика</strong>
+          <ol>
+            <li><strong>Установка намерения:</strong> Перед запуском четко определите, какой результат вы хотите получить в конце сессии.</li>
+            <li><strong>Старт:</strong> Нажмите кнопку запуска. Этот физический акт дает мозгу сигнал о начале периода глубокой концентрации.</li>
+            <li><strong>Мониторинг:</strong> Держите таймер на виду, чтобы сохранять чувство времени.</li>
+            <li><strong>Завершение:</strong> В конце сессии добавьте краткую заметку о том, что было сделано на самом деле.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="interruptions">
+        <h2>Управление прерываниями</h2>
+        <p>Прерывания — главный враг продуктивности. Таймер задач позволяет оценить масштаб проблемы. Каждый раз, когда вас отвлекают, делайте пометку в поле комментариев. Помните: одноминутное прерывание на самом деле «стоит» вам 10–15 минут на обратное вхождение в состояние потока.</p>
+      </section>
+
+      <section class="section" id="analysis">
+        <h2>Фаза 3: Аналитика на основе данных</h2>
+        <p>В конце каждой недели экспортируйте данные в CSV и сравнивайте план с фактом. Если вы стабильно недооцениваете задачи на 30%, просто закладывайте этот коэффициент во все будущие планы.</p>
+        <h3>Пример таблицы анализа</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Метрика</th>
+              <th>Цель</th>
+              <th>Факт</th>
+              <th>Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Глубокая работа</td>
+              <td>4 часа/день</td>
+              <td>2.5 часа</td>
+              <td style="color:red">Ниже нормы</td>
+            </tr>
+            <tr>
+              <td>Цена прерывания (сред)</td>
+              <td>&lt; 15 мин</td>
+              <td>22 мин</td>
+              <td style="color:orange">Внимание</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="faq">
+        <h2>Часто задаваемые вопросы</h2>
+        <div class="muted">
+          <p><strong>В: Нужно ли мне отслеживать каждую минуту дня?</strong><br> О: Нет. Начните с самых важных задач (Deep Work). Отслеживание мелких административных дел может привести к выгоранию.</p>
+          <p><strong>В: Насколько это безопасно?</strong><br> О: Все инструменты TimerHaven заботятся о приватности. Ваши данные хранятся локально в браузере и не отправляются на наши серверы.</p>
+        </div>
+      </section>
+
+      <p class="muted" style="margin-top:2rem;">Похожие инструменты: <a href="/notes-ru.html">Заметки</a> · <a href="/pomodoro.html">Таймер Помодоро</a> · <a href="/calendar-ru.html">Календарь-планировщик</a></p>
+      
+      <p style="margin-top:1.5rem;"><a href="/timer-ru.html" class="cta">Открыть Таймер задач</a></p>
+      
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>&copy; 2025 TimerHaven. Все инструменты бесплатны и сохраняют вашу приватность.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذ¢ذ°ذ¹ذ¼ذµر€ ذ·ذ°ذ´ذ°ر‡</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذ“ذ¸ذ±ذ؛ذ¸ذ¹ ذ¸ذ½رپر‚ر€رƒذ¼ذµذ½ر‚ ذ¾ذ±ر€ذ°ر‚ذ½ذ¾ذ³ذ¾ ذ¾ر‚رپر‡ذµر‚ذ° ذ´ذ»رڈ ر€ذ°ذ±ذ¾ر‚ر‹ ذ¸ذ»ر¸ رƒر‡ذµذ±ر‹.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذ£رپر‚ذ°ذ½ذ¾ذ²ذ¸ر‚ذµ ذ¼ذ¸ذ½رƒر‚ر‹ ذ¸ رپذµذ؛رƒذ½ذ´ر‹.</li><li>ذ‌ذ°ذ¶ذ¼ذ¸ر‚ذµ 'ذ،ر‚ذ°ر€ر‚'.</li><li>ذ’ر‹ذ؟ذ¾ذ»ذ½رڈر¹ر‚ذµ ذ·ذ°ذ´ذ°ر‡رƒ, ذ؟ذ¾ذ؛ذ° ذ½ذµ ذ؟ر€ذ¾ذ·ذ²ذµذ½ذ¸ر‚ رپذ¸ذ³ذ½ذ°ذ».</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذ’ذµذ´ذ¸ر‚ذµ ر€ذµذ³ذ¸رپر‚ر€ذ°ر†ذ¸رژ ر€ذµذ·رƒذ»رŒر‚ذ°ر‚ذ¾ذ² رپذµرپرپذ¸ذ¸, ر‡ر‚ذ¾ذ±ر‹ ذ²ذ¸ذ´ذµر‚رŒ ر€ذµذ°ذ»رŒذ½رƒرژ ذ؟ر€ذ¾ذ´رƒذ؛ر‚ذ¸ذ²ذ½ذ¾رپر‚رŒ."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="../../stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="../../unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="../../weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="../../world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="../../calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="../../clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="../../countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="../../currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="../../focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="../../habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="../../meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="../../notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="../../password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+
+  <a href="/timer-ru.html" class="return-to-tool">
+    <span class="icon">↩</span>
+    <span class="label">Вернуться к таймеру</span>
+  </a>
 </body>
 </html>

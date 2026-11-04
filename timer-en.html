@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-X7WBE4P25');
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Deep Work Timeboxing Session Timer Online | TimerHaven</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description"
+    content="Structure your workday with our deep work timeboxing session timer. A minimalist, privacy-first tool to enforce strict time blocks and prevent burnout.">
+  <meta name="author" content="Serge Shammas">
+  <meta name="datePublished" content="2026-01-09">
+  <meta name="dateModified" content="2026-01-09">
+  <link rel="canonical" href="https://timerhaven.com/timer-en.html" />
+  <!-- Multilingual SEO -->
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Social Media Optimization -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- Structured data (TechArticle pattern for tool + guide relation) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Task Timer — Measure Time, Improve Estimates",
+    "description":"Task Timer ? interactive timer plus practical guide: measure sessions, log interruptions, and use results to plan work.",
+    "author": {"@type":"Person","name":"Serge Shammas","url":"https://timerhaven.com/authors/serge-shammas"},
+    "datePublished":"2026-01-09",
+    "dateModified":"2026-01-09",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://timerhaven.com/timer-en.html"}
+  }
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="assets/newsletter.css"  media="print" onload="this.media='all'">
+  <style>
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif; font-display: swap;
+      color: #0b2545;
+    }
+
+    .page-wrap {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .center-row {
+      display: flex;
+      gap: 1.6rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .center-row.single {
+      justify-content: center;
+    }
+
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      width: 410px;
+      padding: 1.3rem;
+    }
+
+    .timer-display {
+      font-size: 2em;
+      font-weight: 700;
+      text-align: center;
+      margin: 0.9rem 0;
+    }
+
+    .timer-controls input {
+      width: 80px;
+      display: inline-block;
+      margin-left: .4rem;
+    }
+
+    .timer-btns {
+      margin-top: .5rem;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    footer.site {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #6b7280;
+    }
+
+    .guide-links {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      margin: .6rem 0;
+      flex-wrap: wrap;
+    }
+
+    /* Mobile-specific compact summary and ordering */
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+
+      .timer-section {
+        order: 1;
+      }
+
+      .tool-intro {
+        order: 2;
+      }
+
+      .tool-intro p {
+        display: none;
+      }
+
+      /* hide long paragraphs on narrow screens */
+      .tool-card {
+        width: 94vw;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width:900px) {
+      .center-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .tool-card {
+        width: 98%;
+        max-width: 540px;
+      }
+    }
+  </style>
+  <script>
+  </script>
+  <script src="assets/js/app-interface.js"></script>
+  <script src="assets/js/syncManager.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Deep Work Timeboxing Session Timer Online | TimerHaven">
+  <meta property="og:description" content="Structure your workday with our deep work timeboxing session timer. A minimalist, privacy-first tool to enforce strict time blocks and prevent burnout.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/timer-en.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Deep Work Timeboxing Session Timer Online | TimerHaven">
+  <meta name="twitter:description" content="Structure your workday with our deep work timeboxing session timer. A minimalist, privacy-first tool to enforce strict time blocks and prevent burnout.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta name="keywords" content="timeboxing timer, deep work session timer, timebox tool online, adhd timeboxing, flow state timer">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/timer-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/timer-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/timer-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/timer-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/timer-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/timer-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/timer-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/timer-en.html">
+</head>
+
+<body>
+    <div class="page-wrap">
+    <!-- Removed the page hero that duplicated the tool intro above the card per request -->
+    <div class="center-row single" id="center-row">
+      <div class="tool-card" role="region" aria-label="Task Timer">
+        <!-- Back to main menu should always point to root (/) -->
+        <a href="/" class="d-block mb-2" style="text-decoration:none; color:#0d6efd; font-weight:600;">&larr; Back to
+          Main Menu</a>
+        <h3><i class="fa fa-hourglass-half"></i> Task Timer</h3>
+        <div class="mobile-summary">Quick timer — <a href="en/task-timer/task-timer-index.html">Read full guide</a>
+        </div>
+        <!-- Visible editorial intro (server-rendered). data-preserve prevents client-side replacements -->
+        <a id="read-guide-btn" class="btn btn-sm btn-primary" href="en/task-timer/task-timer-index.html" rel="help"
+          aria-label="Read full Task Timer guide">Read full guide</a>
+        <div class="timer-section" aria-live="polite" style="margin-top:.6rem;">
+          <div class="timer-controls mb-2">
+            <label style="font-weight:600;">Minutes:
+              <input id="minutes" type="number" min="0" max="999" value="25" class="form-control"
+                style="width:80px; display:inline-block; margin-left:.4rem;">
+            </label>
+            <label style="font-weight:600; margin-left:0.8rem;">Seconds:
+              <input id="seconds" type="number" min="0" max="59" value="0" class="form-control"
+                style="width:80px; display:inline-block; margin-left:.4rem;">
+            </label>
+          </div>
+          <div id="timerDisplay" class="timer-display">25:00</div>
+          <div class="timer-btns">
+            <button id="startBtn" class="btn btn-success btn-small"><i class="fa fa-play"></i> Start</button>
+            <button id="pauseBtn" class="btn btn-secondary btn-small"><i class="fa fa-pause"></i> Pause</button>
+            <button id="resetBtn" class="btn btn-danger btn-small"><i class="fa fa-refresh"></i> Reset</button>
+          </div>
+          <div class="mt-4">
+            <h5 style="font-size:1rem;font-weight:700;">Record Session</h5>
+            <input id="sessionName" type="text" class="form-control mb-2" placeholder="What did you achieve?">
+            <button id="recordBtn" class="btn btn-outline-primary btn-sm w-100">Log Completed Session</button>
+          </div>
+          <div id="sessionLog" class="mt-3"
+            style="max-height:150px; overflow-y:auto; font-size:0.9rem; border-top:1px solid #eee; padding-top:10px;">
+            <div class="text-muted">No sessions logged yet.</div>
+          </div>
+          <details class="faq-section" style="margin-top:1rem;">
+            <summary style="font-weight:700; font-size:1rem;">FAQs</summary>
+            <ul style="padding-left:1.1rem; color:#374151;">
+              <li><b>Can I set custom durations?</b> Yes, choose any time period.</li>
+              <li><b>Will sessions persist?</b> Yes, your logged sessions are saved locally and synced to the cloud if
+                you are a Pro user.</li>
+              <li><b>Is this free?</b> Yes — all TimerHaven tools are free and privacy-friendly.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </div>
+    <!-- Newsletter Signup Section -->
+    <div class="newsletter-signup" style="width: 100%; max-width: 500px; margin: 0;">
+      <div class="newsletter-container">
+        <div class="newsletter-icon">📬</div>
+        <h3 class="newsletter-title">Optimized Timing</h3>
+        <p class="newsletter-description">
+          Get weekly time-management frameworks, advanced Pomodoro techniques, and flow state protocols.
+        </p>
+        <form class="newsletter-form" id="newsletterForm">
+          <div class="form-group">
+            <input type="email" name="email" class="newsletter-input" placeholder="Your email address" required
+              aria-label="Email address">
+            <button type="submit" class="newsletter-button">Join Now</button>
+          </div>
+          <p id="newsletterMessage" style="display: none;"></p>
+          <p class="newsletter-privacy">
+            <small>Respectful of your inbox. View our <a href="/privacy.html">Privacy Policy</a>.</small>
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
+{% include "partials/tool-footer.njk" %}
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Task Timer</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A flexible countdown tool for managing work blocks, cooking times, or focus sessions.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">History</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Set your desired time using minutes and seconds.</li><li>Click 'Start' to begin the countdown.</li><li>The tool will alert you when the session is complete.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Use the 'Session Log' to record what you achieved during each time block—this builds a record of productivity over time."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
+  </div>
+  <script defer src="assets/newsletter.js"></script>
+  </div>
+  <script>
+    (function () {
+      // Timer logic
+      var timer = null;
+      var totalSeconds = 25 * 60;
+      var running = false;
+      function updateTimerDisplay() {
+        var min = Math.floor(totalSeconds / 60);
+        var sec = totalSeconds % 60;
+        var disp = document.getElementById('timerDisplay');
+        if (disp) disp.textContent = String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+      }
+      function setTimerLengths() {
+        var minEl = document.getElementById('minutes');
+        var secEl = document.getElementById('seconds');
+        var min = minEl ? parseInt(minEl.value, 10) : 25;
+        var sec = secEl ? parseInt(secEl.value, 10) : 0;
+        min = isNaN(min) ? 0 : min;
+        sec = isNaN(sec) ? 0 : sec;
+        totalSeconds = Math.max(0, min * 60 + sec);
+        updateTimerDisplay();
+      }
+      // Safe hookup: check elements exist before binding
+      function safeBind(id, ev, fn) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener(ev, fn);
+      }
+      safeBind('minutes', 'change', setTimerLengths);
+      safeBind('seconds', 'change', setTimerLengths);
+      safeBind('startBtn', 'click', function () {
+        if (running) return;
+        running = true;
+        timer = setInterval(function () {
+          if (totalSeconds > 0) {
+            totalSeconds--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timer);
+            running = false;
+            if (window.TimerHavenApp) {
+              window.TimerHavenApp.notifyTimerEnd("Timer Finished", "Your task session has ended.");
+            }
+            try { alert("Time's up!"); } catch (e) {/*ignore*/ }
+          }
+        }, 1000);
+      });
+      safeBind('pauseBtn', 'click', function () {
+        if (timer) clearInterval(timer);
+        running = false;
+      });
+      safeBind('resetBtn', 'click', function () {
+        if (timer) clearInterval(timer);
+        running = false;
+        setTimerLengths();
+      });
+      // initialize
+      setTimerLengths();
+      // Persistence & Sync
+      var sessions = [];
+      try {
+        var saved = localStorage.getItem('timerSessions');
+        if (saved) sessions = JSON.parse(saved);
+      } catch (e) { sessions = []; }
+      function saveSessions() {
+        localStorage.setItem('timerSessions', JSON.stringify(sessions));
+        requestAnimationFrame(renderSessions);
+      }
+      function renderSessions() {
+        var log = document.getElementById('sessionLog');
+        if (!log) return;
+        if (sessions.length === 0) {
+          log.innerHTML = '<div class="text-muted">No sessions logged yet.</div>';
+          return;
+        }
+        log.innerHTML = sessions.map(function (s, idx) {
+          return '<div style="margin-bottom:6px; padding-bottom:4px; border-bottom:1px solid #f0f0f0; display:flex; justify-content:space-between; align-items:center;">' +
+            '<div><strong>' + (s.name || 'Unnamed Session') + '</strong><br>' +
+            '<span class="text-muted" style="font-size:0.8rem;">' + s.duration + 'm — ' + s.date + '</span></div>' +
+            '<button class="btn btn-sm btn-outline-danger" onclick="deleteSession(' + idx + ')" title="Delete session"><i class="fa fa-trash"></i></button>' +
+            '</div>';
+        }).join('');
+      }
+      window.deleteSession = function (idx) {
+        var removed = sessions.splice(idx, 1)[0];
+        saveSessions();
+        if (removed && removed.id && window.SyncManager && window.SyncManager.isAvailable()) {
+          try {
+            window.SyncManager.deleteTaskSession(removed.id);
+          } catch (e) { }
+        }
+      };
+      safeBind('recordBtn', 'click', function () {
+        var nameInput = document.getElementById('sessionName');
+        var name = nameInput ? nameInput.value.trim() : '';
+        var minEl = document.getElementById('minutes');
+        var duration = minEl ? minEl.value : '25';
+        var session = {
+          id: 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          name: name,
+          duration: duration,
+          date: new Date().toLocaleString(),
+          timestamp: Date.now()
+        };
+        sessions.unshift(session);
+        saveSessions();
+        if (window.SyncManager && window.SyncManager.isAvailable()) {
+          try {
+            window.SyncManager.saveTaskSession(session.id, session);
+          } catch (e) { }
+        }
+        if (nameInput) nameInput.value = '';
+      });
+      renderSessions();
+      // Cloud Sync Listeners
+      window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+        const cloudData = e.detail;
+        if (cloudData && cloudData.tasks) {
+          let changed = false;
+          cloudData.tasks.forEach(cloudTask => {
+            const existing = sessions.find(s => s.id === cloudTask.id);
+            if (!existing) {
+              sessions.push(cloudTask);
+              changed = true;
+            }
+          });
+          if (changed) {
+            sessions.sort(function (a, b) { return (b.timestamp || 0) - (a.timestamp || 0); });
+            saveSessions();
+          }
+        }
+      });
+      window.addEventListener('timerhaven:cloudDataChanged', function () {
+        if (SyncManager.isAvailable()) SyncManager.initialize();
+      });
+    })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() {
+          // Initialize non-critical widgets here if needed
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
+

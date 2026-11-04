@@ -1,18 +1,315 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>countdown — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for countdown guide (ru)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Таймер обратного отсчёта — Планируйте дедлайны и сохраняйте фокус | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Подробное руководство по использованию таймера обратного отсчёта: планирование дедлайнов, выбор длительности, рабочие сценарии для встреч и фокус‑сессий…"> />
+  <link rel="canonical" href="https://timerhaven.com/ru/countdown/countdown-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Эффективное использование таймера обратного отсчёта",
+        "description":"Установка и управление таймерами обратного отсчёта для дедлайнов, встреч, фокус‑сессий и напоминаний. В руководстве рассмотрены планирование, практические шаблоны, выбор уведомлений и рекомендуемые практики для повышения внимательности ко времени.",
+        "image":"https://timerhaven.com/assets/images/countdown-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Таймер обратного отсчёта (TimerHaven)","Календарь или список задач","Звуковые уведомления на телефоне или рабочем столе"],
+        "step":[
+          {"@type":"HowToStep","name":"Определите цель","text":"Выясните, нужен ли таймер для приближающегося дедлайна, для управления встречей или для концентрации на задаче."},
+          {"@type":"HowToStep","name":"Установите длительность","text":"Введите минуты и секунды; для встреч используйте целые минуты, для фокус‑сессий — интервалы, согласованные с вашим рабочим ритмом."},
+          {"@type":"HowToStep","name":"Выберите способ уведомления","text":"Включите звуковой сигнал или уведомление рабочего стола, чтобы не пропустить окончание; проверьте громкость и разрешения."},
+          {"@type":"HowToStep","name":"Запустите и проанализируйте","text":"Запустите таймер и фиксируйте перерывы; после сессии запишите последующие шаги или не выполненные задачи."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Будет ли таймер работать, если я переключусь на другую вкладку?","acceptedAnswer":{"@type":"Answer","text":"Да — современные браузеры продолжают выполнение JavaScript, если вкладка открыта. В некоторых браузерах фоновые вкладки могут подвергаться троттлингу, что влияет на точность отображения тиков, но общий обратный отсчёт при корректной реализации продолжит идти."}},
+          {"@type":"Question","name":"Могу ли я задать очень длительный таймер?","acceptedAnswer":{"@type":"Answer","text":"Да — укажите минуты в пределах возможностей интерфейса. Для очень длительных отсчётов дополнительно заведите событие в календаре как резервную напоминалку."}},
+          {"@type":"Question","name":"Какие настройки уведомлений лучше?","acceptedAnswer":{"@type":"Answer","text":"Рекомендуется использовать и звуковой сигнал, и уведомление рабочего стола, если это возможно. Для встреч выбирайте более громкий тон, для фокуса — мягкий звонок."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Таймер обратного отсчёта — Планируйте дедлайны и сохраняйте фокус | TimerHaven">
+  <meta property="og:description" content="Подробное руководство по использованию таймера обратного отсчёта: планирование дедлайнов, выбор длительности, рабочие сценарии для встреч и фокус‑сессий, уведомления и устранение неполадок.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ru/countdown/countdown-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Таймер обратного отсчёта — Планируйте дедлайны и сохраняйте фокус | TimerHaven">
+  <meta name="twitter:description" content="Подробное руководство по использованию таймера обратного отсчёта: планирование дедлайнов, выбор длительности, рабочие сценарии для встреч и фокус‑сессий, уведомления и устранение неполадок.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/countdown/countdown-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/countdown/countdown-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/countdown/countdown-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/countdown/countdown-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/countdown/countdown-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/countdown/countdown-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">countdown — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Таймер обратного отсчёта — Используйте дедлайны, чтобы сосредоточиться и завершать задачи</h1>
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong>, специалист по продуктивности и UX‑исследователь</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 1216 мин.</div>
+        </div>
+      </div>
+      <p class="lead">Таймеры обратного отсчёта — простой, но мощный способ создать чувство срочности, управлять встречами и сохранять небольшие окна концентрации. В этом руководстве рассмотрены практические настройки для рабочих сессий, встреч и личных рутин, выбор уведомлений и степень информативности, интеграция с календарём и Pomodoro, а также устранение проблем с разрешениями и точностью.</p>
+      <nav class="toc" aria-label="Содержание">
+        <a href="#why">Почему таймеры полезны</a>
+        <a href="#setup">Выбор длительности и опций</a>
+        <a href="#workflows">Практические сценарии</a>
+        <a href="#alerts">Уведомления и доступность</a>
+        <a href="#integration">Интеграция с календарём и Pomodoro</a>
+        <a href="#precision">Точность и фоновые ограничения</a>
+        <a href="#troubleshoot">Устранение неполадок</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="why" class="section" aria-labelledby="why-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="why-title">Почему таймеры полезны</h2>
+        <p>Дедлайны меняют поведение. Видимый обратный отсчёт фокусирует внимание, превращая расплывчатое время в конкретный ресурс. Для многих задач короткий таймер создаёт «порыв», уменьшающий прокрастинацию и помогающий закончить работу в чёткой точке — идеально для сортировки почты, правки текста или тренировки презентации.</p>
+        <p>Используйте обратный отсчёт, когда нужно:</p>
+        <ul>
+          <li>Разбить работу на ограниченные блоки (например, 15‑минутные сессии).</li>
+          <li>Получить визуальные сигналы для управления встречами и перерывами.</li>
+          <li>Иметь надёжное напоминание о приближении дедлайна, чтобы приоритезировать действия сейчас, а не позже.</li>
+        </ul>
+      </section>
+      <section id="setup" class="section" aria-labelledby="setup-title">
+        <h2 id="setup-title">Выбор длительности и опций</h2>
+        <p>Подбирайте длительность с учётом цели. Разные задачи требуют разных интервалов. На первых попытках выбирайте чуть меньшую длительность, затем корректируйте по факту.</p>
+        <h3>Типичные длительности и когда их применять</h3>
+        <ul>
+          <li><strong>510 минут:</strong> быстрые проверки, мелкая уборка, микро‑перерывы.</li>
+          <li><strong>1530 минут:</strong> сортировка почты, короткие правки, концентрированное обучение.</li>
+          <li><strong>4590 минут:</strong> длительные фокус‑сессии или отрезки встречи (с подготовительными ритуалами).</li>
+          <li><strong>Пользовательские длительности:</strong> точное время для репетиций или интервью (например, 12 или 20 минут).</li>
+        </ul>
+        <h3>Опции, которые стоит учитывать</h3>
+        <ul>
+          <li><strong>Звук против уведомления рабочего стола:</strong> звук полезен, если вы не смотрите в экран; уведомление для тихой работы и визуальных сигналов.</li>
+          <li><strong>Автозапуск следующего периода:</strong> для цепочек интервалов включайте осторожно, чтобы избежать неожиданных запусков.</li>
+          <li><strong>Пауза/возобновление:</strong> сохраняет оставшееся время при прерываниях.</li>
+        </ul>
+      </section>
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Практические сценарии</h2>
+        <p>Ниже приведены шаблоны для типичных задач; используйте их как отправную точку и адаптируйте под свой ритм.</p>
+        <div class="recipe" aria-labelledby="email-tidy">
+          <strong id="email-tidy">Сортировка почты — 25 минут</strong>
+          <ol>
+            <li>Установите 25 минут. Обрабатывайте только приоритетные письма.</li>
+            <li>Первых 5 минут используйте для быстрой пометки и флагирования, затем 20 минут — на решение или делегирование.</li>
+            <li>В конце архивируйте или откладывайте оставшиеся письма; запишите последующие шаги в систему задач.</li>
+          </ol>
+        </div>
+        <div class="recipe" aria-labelledby="meeting">
+          <strong id="meeting">Встречи — сигнал за 5 минут до конца</strong>
+          <ol>
+            <li>Запустите отсчёт на последние 5 минут повестки, чтобы выделить действия и принять решения.</li>
+            <li>Покажите таймер или поделитесь экраном, чтобы все видели оставшееся время.</li>
+            <li>Для сигнала окончания используйте более громкий тон, чтобы удалённые участники заметили его.</li>
+          </ol>
+        </div>
+        <div class="recipe" aria-labelledby="focus">
+          <strong id="focus">Фокус‑сессия — 45 минут</strong>
+          <ol>
+            <li>Заблокируйте 45 минут и установите таймер.</li>
+            <li>Проведите краткую подготовку (35 минут): план и открытые материалы.</li>
+            <li>Работайте без прерываний; если прерывание случилось — зафиксируйте его и продолжите.</li>
+            <li>По завершении запишите прогресс и назначьте следующий шаг.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="alerts" class="section" aria-labelledby="alerts-title">
+        <h2 id="alerts-title">Уведомления и доступность</h2>
+        <p>Уведомления связывают таймер с вашим поведением. Подбирайте режимы в зависимости от контекста: офис, удалённая работа или тихая фокус‑сессия.</p>
+        <h3>Рекомендации</h3>
+        <ul>
+          <li>Включите уведомления в браузере и один раз проверьте разрешения.</li>
+          <li>Выбирайте звук, который слышно, но который не пугает при частом использовании; громкие сигналы — для критических дедлайнов.</li>
+          <li>Для доступности: обеспечьте высокий контраст визуального отображения и, если поддерживается, вибрацию на мобильных устройствах.</li>
+        </ul>
+      </section>
+      <section id="integration" class="section" aria-labelledby="integration-title">
+        <h2 id="integration-title">Интеграция с календарём и Pomodoro</h2>
+        <p>Таймеры работают лучше в контексте плана. Используйте их вместе с календарём или Pomodoro‑последовательностями, чтобы отслеживание времени коррелировало с результатами.</p>
+        <ul>
+          <li><strong>Отметки в календаре:</strong> добавляйте ожидаемое время окончания в событие, чтобы участники видели сроки.</li>
+          <li><strong>Связь с Pomodoro:</strong> используйте таймер для нестандартных интервалов (например, 40/10) и фиксируйте циклы в журнале задач.</li>
+          <li><strong>Подготовка к встречам:</strong> короткий таймер перед встречей помогает переключиться и кратко подвести итоги.</li>
+        </ul>
+      </section>
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">Точность и фоновые ограничения</h2>
+        <p>Браузерные таймеры обычно подходят для пользовательских сценариев, но фоновые вкладки могут троттлить обновление UI. Если точность критична (например, живые события), примените дополнительные меры:</p>
+        <ul>
+          <li>Используйте системные уведомления или приложение‑будильник как резерв.</li>
+          <li>Держите вкладку видимой во время критичных отсчётов или используйте нативное приложение для сверхточного времени.</li>
+          <li>Для долгих отсчётов задавайте абсолютное конечное время и, при желании, создавайте событие в календаре как независимую справку.</li>
+        </ul>
+      </section>
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Устранение неполадок</h2>
+        <ul>
+          <li><strong>Уведомления заблокированы:</strong> разрешите уведомления в настройках сайта (Настройки сайта → Уведомления).</li>
+          <li><strong>Звук не слышен:</strong> проверьте системную громкость и разрешение на автозапуск аудио — некоторые браузеры блокируют звук до пользовательского взаимодействия.</li>
+          <li><strong>Таймер «зависает»: </strong>убедитесь, что вкладка открыта; троттлинг может замедлять тики, но не обязательно ломать расчёт конечного времени.</li>
+          <li><strong>Проблемы на мобильных:</strong> мобильные браузеры могут приостанавливать фоновые страницы; используйте нативное напоминание или календарь в качестве резервного варианта.</li>
+        </ul>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>В:</strong> Подходят ли таймеры для повторяющихся напоминаний?<br><strong>О:</strong> Для повторяющихся напоминаний лучше использовать календарь или напоминания в задачах. Таймер обратного отсчёта идеален для одноразовых, текущих сессий.</p>
+          <p><strong>В:</strong> Тревожит ли таймер, если экран заблокирован?<br><strong>О:</strong> Вкладки браузера могут быть приостановлены, когда устройство спит. Для оповещений при заблокированном экране используйте будильник устройства или уведомление календаря.</p>
+          <p><strong>В:</strong> Можно ли задать таймер в часах?<br><strong>О:</strong> Да — введите нужное количество минут (например, 120 минут = 2 часа) или используйте метод с абсолютным временем окончания и календарём.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/countdown-ru.html">Открыть инструмент «Таймер обратного отсчёта»</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/Countdown" target="_blank" rel="noopener">Countdown — Wikipedia</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/countdown-ru.html" class="cta" aria-label="Открыть таймер обратного отсчёта">Открыть таймер обратного отсчёта</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Политика конфиденциальности: <a href="/privacy.html">Privacy Policy</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذ¢ذ°ذ¹ذ¼ذµر€ ذ¾ذ±ر€ذ°ر‚ذ½ذ¾ذ³ذ¾ ذ¾ر‚رپر‡ذµر‚ذ°</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذکذ½رپر‚ر€رƒذ¼ذµذ½ر‚, ذ؛ذ¾ر‚ذ¾ر€ر‹ذ¹ ذ¾ر‚رپر‡ذ¸ر‚ر‹ذ²ذ°ذµر‚ ذ²ر€ذµذ¼رڈ ذ¾ر‚ ذ·ذ°ذ´ذ°ذ½ذ½ذ¾ذ¹ ذ´ذ°ر‚ر‹ ذ´ذ¾ ذ½رƒذ»رڈ.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;">ذ‍ذ±ر€ذ°ر‚ذ½ر‹ذ¹ ذ¾ر‚رپر‡ذµر‚ ذ±ر‹ذ» ذ؟ذ¾ذ؟رƒذ»رڈر€ذ¸ذ·ذ¸ر€ذ¾ذ²ذ°ذ½ ر€ذµذ¶ذ¸رپرپذµر€ذ¾ذ¼ ذ¤ر€ذ¸ر‚ر†ذµذ¼ ذ›ذ°ذ½ذ³ذ¾ذ¼ ذ² ر„ذ¸ذ»رŒذ¼ذµ 1929 ذ³ذ¾ذ´ذ° 'ذ–ذµذ½ر‰ذ¸ذ½ذ° ذ½ذ° ذ›رƒذ½ذµ'. ذںذ¾ذ·ذ¶ذµ ذ¾ذ½ ذ±ر‹ذ» ذ؟ر€ذ¸ذ½رڈر‚ NASA ذ´ذ»رڈ ذ¼ذ¸رپرپذ¸ذ¹ 'ذگذ؟ذ¾ذ»ذ»ذ¾ذ½'.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذ£رپر‚ذ°ذ½ذ¾ذ²ذ¸ر‚ذµ ر†ذµذ»ذµذ²رƒرژ ذ´ذ°ر‚رƒ ذ¸ ذ²ر€ذµذ¼رڈ.</li><li>ذ—ذ°ذ؟رƒرپر‚ذ¸ر‚ذµ ذ¾ر±ر€ذ°ر‚ذ½ر‹ذ¹ ذ¾ر‚رپر‡ذµر‚.</li><li>ذکذ½رپر‚ر€رƒذ¼ذµذ½ر‚ ذ¾ذ؟ذ¾ذ²ذµرپر‚ذ¸ر‚ ذ²ذ°رپ, ذ؛ذ¾ذ³ذ´ذ° ذ²ر€ذµذ¼رڈ ذ¸رپر‚ذµر‡ذµر‚.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذکرپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ 'T-Minus' ذ´ذ»رڈ ذ·ذ°ذ؟رƒرپذ؛ذ° ذ؛ر€رƒذ؟ذ½ر‹ر… ذ؟ر€ذ¾ذµذ؛ر‚ذ¾ذ²."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="../../stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="../../unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="../../weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="../../world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="../../calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="../../clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="../../countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="../../currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="../../focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="../../habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="../../meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="../../notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="../../password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/countdown-ru.html" class="return-to-tool" id="returnToToolCountdown" aria-label="Вернуться к таймеру обратного отсчёта">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К таймеру</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCountdown');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

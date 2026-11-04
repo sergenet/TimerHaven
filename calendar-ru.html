@@ -1,457 +1,629 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="ru">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="notranslate" name="google"/>
-<title>Календарь — TimerHaven</title>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Легко сохраняйте и управляйте несколькими заметками в календаре. Узнайте, как пользоваться Календарём, получите советы по продуктивности, FAQ и экспертные статьи." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    /* Layout & visuals matched to calendar-en.html but with RU text */
-    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; color: #102a43; }
-    .main-container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; min-height: 90vh; }
-    .center-row { display: flex; gap: 2rem; align-items: flex-start; justify-content: center; }
-    .article-card, .tool-card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      width: 340px;
-      min-width: 220px;
-      max-width: 340px;
-      flex: 1 1 340px;
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <title>Календарь — TimerHaven</title>
+<meta name="description" content="Календарь - бесплатный онлайн-инструмент и практическое руководство TimerHaven.">
+  <link rel="canonical" href="https://timerhaven.com/calendar-ru.html" />
+  
+  
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  
+  <meta name="author" content="Serge Shammas">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  media="print" onload="this.media='all'">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tool-theme.css"  media="print" onload="this.media='all'">
+  <style>
+    /* True Center Layout */
+    :root {
+      --brand: #185a9d;
+      --muted: #6b7c89;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background: #f4f7fb;
+      margin: 0;
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      color: #102a43;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      padding: 2rem 1.3rem 1rem 1.3rem;
+      min-height: 100vh;
+    }
+
+    .main-container {
+      flex: 1;
+      width: 100%;
+      max-width: 100%;
+      padding: 2.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-sizing: border-box;
-      min-height: 500px;
-    }
-    .tool-card { max-width: 640px; min-width: 320px; flex: 1 1 640px; }
-    .article-card h2, .tool-card h3 { font-size: 1.35em; font-weight: 700; margin-bottom: .4em; display:flex; align-items:center; gap:.3em; }
-    .article-card ul, .article-card ol, .tool-card ul, .tool-card ol { margin-left:1em; font-size:1em; margin-bottom:.2em; padding-right:.2em; word-break:break-word; }
-    .article-card .btn, .tool-card .btn { margin-top:1.2em; margin-bottom:.6em; align-self:center; min-width:180px; border-radius:8px; font-weight:600; }
-
-    /* Header layout: keep nav buttons and month/year on one line on desktop */
-    .calendar-header { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.6rem; flex-wrap:nowrap; }
-    .calendar-nav { display:flex; gap:.25rem; align-items:center; flex-shrink:0; }
-
-    /* Make the nav buttons and selects share consistent height and vertical alignment */
-    .calendar-nav .btn {
-      min-width:40px;
-      padding:.28rem .55rem;
-      height:36px;
-      line-height:1;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
     }
 
-    .calendar-select {
-      border-radius:8px;
-      padding:.18rem .45rem;
-      border:1px solid #e4edf5;
-      background:#fff;
-      font-size:.92rem;
-      height:36px;               /* match button height */
-      line-height:1;
-      display:inline-block;
-      vertical-align:middle;
-      box-sizing:border-box;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    /* Reduced widths to prevent overflow inside the tool card */
-    .calendar-select.month { width:130px; }
-    .calendar-select.year { width:90px; }
-
-    .calendar-table { width:100%; margin-top:1em; border-collapse:separate; border-spacing:0; background:#fff; border-radius:8px; overflow:hidden; table-layout: fixed; }
-    .calendar-table th, .calendar-table td { text-align:center; padding:.6rem .45rem; min-width:36px; max-width:40px; vertical-align:middle; }
-    .day-cell { cursor:pointer; border-radius:6px; transition: background 0.1s; display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; margin:0 auto; }
-    .day-cell:hover { background:#e0e7ef; }
-    .has-note { background:#ffeeba !important; }
-    .calendar-today { background:#43cea2 !important; color:#fff !important; border-radius:50% !important; font-weight:bold; box-shadow:0 0 6px #185a9d33; }
-
-    .modal-header { background:#f4f7fb; }
-    .modal-footer { background:#f7fafc; }
-    .note-list { list-style:none; padding:0; margin-bottom:1em; }
-    .note-list li { background:#f7fafc; border-radius:6px; margin-bottom:0.5em; padding:0.5em 0.8em; display:flex; align-items:center; justify-content:space-between; }
-    .note-text { word-break:break-word; flex-grow:1; }
-    .note-meta { font-size:0.85em; color:#888; margin-right:1em; }
-    .delete-note-btn { font-size:0.9em; color:#c00; background:none; border:none; cursor:pointer; }
-
-    details[open] summary::after { content: " ▲"; font-size: 0.9em; }
-    details summary { cursor:pointer; padding:0.35em 0; font-weight:bold; font-size:1.09em; }
-    details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
-
-    /* Make How-to heading smaller (less overwhelming) while keeping Tips heading larger */
-    #howto-title { font-size: 1.05em; font-weight:700; }
-    #tips-title { font-size: 1.35em; font-weight:700; }
-
-    @media (max-width:1100px) {
-      .main-container{padding:0 8px;}
-      .center-row{gap:1em;}
-      .tool-card,.article-card{width:97vw;max-width:540px;height:auto;}
-    }
-    @media (max-width:800px) {
-      .main-container{padding:0;}
-      .center-row{flex-direction:column;align-items:center;}
-      .tool-card,.article-card{width:98vw;max-width:540px;height:auto;}
-      .article-card{display:none!important;}
-      .howto-mobile {display:block!important; margin-bottom:1em;}
-      /* allow the header to wrap on narrow screens */
-      .calendar-header{flex-wrap:wrap; justify-content:flex-start;}
-      .calendar-select{width:48%; max-width:220px; margin-top:.45rem;}
-      .calendar-nav{margin-right:.5rem;}
-    }
-  </style>
-<!-- Defensive override: force true horizontal table layout for the calendar -->
-<style id="calendar-table-fix">
-    /* Force the calendar to behave as a real table regardless of injected styles or transforms */
-    #calendar-table,
-    table#calendar-table,
-    .calendar-table {
-      display: table !important;
-      table-layout: fixed !important;
-      width: 100% !important;
-      border-collapse: collapse !important;
-      transform: none !important;
-      writing-mode: horizontal-tb !important;
-      -webkit-writing-mode: horizontal-tb !important;
+    .tool-card {
+      width: 100%;
+      max-width: 640px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
+      box-sizing: border-box;
     }
 
-    /* Ensure table groups and rows are correct */
-    #calendar-table thead,
-    #calendar-table tbody,
-    #calendar-table tr {
-      display: table-row-group !important;
-    }
-    #calendar-table tr {
-      display: table-row !important;
+    .back-link {
+      display: inline-block;
+      margin-bottom: .6rem;
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 700;
     }
 
-    /* Force cells to behave like table-cells */
-    #calendar-table th,
-    #calendar-table td {
-      display: table-cell !important;
-      vertical-align: middle !important;
-      white-space: nowrap !important;
-      float: none !important;
-      position: static !important;
-      width: auto !important;
-      max-width: none !important;
-      box-sizing: border-box !important;
-      padding: .6rem .45rem !important;
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .5rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--brand) !important;
     }
 
-    /* Defensive: prevent ancestor transforms or unusual writing-modes from stacking/rotating cells */
-    #calendar-table,
-    #calendar-table * {
-      transform: none !important;
-      -webkit-transform: none !important;
-      writing-mode: horizontal-tb !important;
-      -webkit-writing-mode: horizontal-tb !important;
+    .small-muted {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: .8rem;
+    }
+
+    /* Alarm Overlay */
+    #alarmOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(16, 42, 67, 0.9);
+      z-index: 9999;
+      color: #fff;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: pulseBG 2s infinite;
+    }
+
+    @keyframes pulseBG {
+      0% { background: rgba(16, 42, 67, 0.9); }
+      50% { background: rgba(184, 28, 28, 0.9); }
+      100% { background: rgba(16, 42, 67, 0.9); }
+    }
+
+    #alarmOverlay h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+    #alarmOverlay p { font-size: 1.5rem; margin-bottom: 2rem; }
+    #stopAlarmBtn { padding: 1rem 2.5rem; font-size: 1.5rem; font-weight: bold; border-radius: 50px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .8rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .calendar-nav { display: flex; gap: .35rem; align-items: center; }
+    .calendar-nav .btn { height: 34px; display: inline-flex; align-items: center; justify-content: center; }
+
+    .right-controls { display: flex; gap: .45rem; align-items: center; }
+    .calendar-select { border-radius: 8px; padding: .18rem .32rem; border: 1px solid #e4edf5; background: #fff; font-size: .92rem; height: 34px; }
+
+    .calendar-table { width: 100%; margin-top: 1rem; border-collapse: separate; border-spacing: 0; background: #fff; border-radius: 8px; overflow: hidden; table-layout: fixed; }
+    .calendar-table thead th { text-align: center; font-weight: 700; padding: .6rem .3rem; border-bottom: 1px solid #eef2f6; }
+    .calendar-table tbody td { text-align: center; vertical-align: middle; padding: .5rem .25rem; height: 52px; }
+
+    .day-cell { cursor: pointer; border-radius: 6px; transition: background .12s; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; margin: 0 auto; }
+    .day-cell:hover, .day-cell:focus { background: #eef6fb; outline: none; }
+    .has-note { background: #ffecb3 !important; }
+    .calendar-today { background: linear-gradient(180deg, #e6f7ff 0%, #cfefff 100%); color: #004e73; border-radius: 50%; font-weight: 700; border: 1px solid rgba(0, 126, 204, 0.18); }
+
+    .note-list { list-style: none; padding: 0; margin: 0; }
+
+    /* Modal Styling - Robust Custom Implementation */
+    .modal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center; z-index: 2000;
+    }
+    .modal.show { display: flex; }
+    .modal-dialog {
+      background: white; width: 95%; max-width: 500px; border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; display: flex; flex-direction: column;
+    }
+    .modal-content { display: flex; flex-direction: column; width: 100%; }
+    .modal-header { padding: 1rem; border-bottom: 1px solid #eef2f6; display: flex; justify-content: space-between; align-items: center; }
+    .modal-title { margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--brand); }
+    .btn-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #667c89; }
+    .modal-body { padding: 1rem; overflow-y: auto; flex-grow: 1; }
+    .modal-footer { padding: 1rem; border-top: 1px solid #eef2f6; display: flex; justify-content: flex-end; gap: 0.5rem; }
+
+    .modal .list-group-item {
+      border: 1px solid #eef2f6; border-radius: 8px; margin-bottom: .6rem; padding: .75rem;
+      background: #f8fafc; display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    
+    @media (max-width: 480px) {
+      .calendar-header { flex-direction: column; align-items: stretch; }
+      .right-controls { justify-content: space-between; }
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"  media="print" onload="this.media='all'">
+  <meta name="keywords" content="free online calendar, localized calendar, productivity calendar, schedule planner, productivity tools, privacy-first, no login">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ذ‍ذ½ذ»ذ°ذ¹ذ½-ذ؛ذ°ذ»ذµذ½ذ´ذ°ر€رŒ",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "ذ¦ذ¸ر„ر€ذ¾ذ²ذ¾ذ¹ ذ؛ذ°ذ»ذµذ½ذ´ذ°ر€رŒ ذ´ذ»رڈ ذ¾ر€ذ³ذ°ذ½ذ¸ذ·ذ°ر†ذ¸ذ¸ ذ´ذ°ر‚, رپذ¾ذ±ر‹ر‚ذ¸ذ¹ ذ¸ ر€ذ°رپذ؟ذ¸رپذ°ذ½ذ¸ذ¹.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+
+    
+    <!-- Social preview (added: page previously had none) -->
+    <meta property="og:title" content="Календарь — TimerHaven">
+    <meta property="og:description" content="Save and manage multiple calendar notes easily. Learn how Calendar works, get productivity tips, FAQs, and expert articles.">
+    <meta property="og:url" content="https://timerhaven.com/calendar-ru.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TimerHaven">
+    <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Календарь — TimerHaven">
+    <meta name="twitter:description" content="Save and manage multiple calendar notes easily. Learn how Calendar works, get productivity tips, FAQs, and expert articles.">
+    <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/calendar-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/calendar-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/calendar-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/calendar-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/calendar-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/calendar-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/calendar-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/calendar-en.html">
 </head>
+
 <body>
-<div class="main-container">
-<div class="center-row">
-<!-- LEFT -->
+    <div id="alarmOverlay">
+    <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="alarmTitle">Напоминание!</h2>
+    <p id="alarmBody">Time for your scheduled task.</p>
+    <button id="stopAlarmBtn" class="btn btn-danger btn-lg">ОСТАНОВИТЬ</button>
+  </div>
 
-<!-- CENTER -->
-<div class="tool-card">
-<a class="back-link" href="index.html" id="back-link">Вернуться в главное меню</a>
-<h3 id="tool-title"><i class="fa fa-calendar-days"></i> Календарь</h3>
-<div class="help-section">
-<b id="tool-help">Кликните любой день, чтобы добавить/просмотреть/редактировать заметки. Для каждого дня поддерживается несколько заметок!</b>
-</div>
-<!-- Header controls (buttons + month/year selects) - now kept on one line on desktop -->
-<div aria-label="Навигация календаря" class="calendar-header">
-<div aria-label="Навигация месяц/год" class="calendar-nav" role="toolbar">
-<button aria-label="Предыдущий год" class="btn btn-sm btn-outline-secondary" id="nav-prev-year">«</button>
-<button aria-label="Предыдущий месяц" class="btn btn-sm btn-outline-secondary" id="nav-prev-month">‹</button>
-<button aria-label="Сегодня" class="btn btn-sm btn-outline-secondary" id="nav-today">Сегодня</button>
-<button aria-label="Следующий месяц" class="btn btn-sm btn-outline-secondary" id="nav-next-month">›</button>
-<button aria-label="Следующий год" class="btn btn-sm btn-outline-secondary" id="nav-next-year">»</button>
-</div>
-<div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0;">
-<select aria-label="Выбрать месяц" class="calendar-select month" id="calendar-month-select"></select>
-<select aria-label="Выбрать год" class="calendar-select year" id="calendar-year-select"></select>
-</div>
-</div>
-<table aria-label="Календарь" class="table calendar-table" id="calendar-table"></table>
-<details class="faq-section" id="faq-section">
-<summary id="faq-title">Часто задаваемые вопросы</summary>
-<ul id="faq-list" style="padding-left:1em;"></ul>
-</details>
-</div>
-<!-- RIGHT -->
+  <main class="main-container" role="main">
+    <section class="tool-card">
+      <a id="back-link" class="back-link" href="index.html">← Вернуться в меню</a>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-calendar-days"></i> Календарь</h3>
+      <a id="read-guide-btn" class="read-guide btn btn-sm btn-primary mb-2" href="https://timerhaven.com/ru/calendar-planning/calendar-planning-index.html" target="_blank" rel="noopener">Читать полное руководство</a>
+      
+      <div class="small-muted" id="tool-help">Нажмите на день для заметок. Можно добавить несколько заметок!</div>
+      
+      <div class="calendar-header" aria-label="Calendar Navigation">
+        <div class="calendar-nav" role="toolbar">
+          <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary">«</button>
+          <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary">‹</button>
+          <button id="nav-today" class="btn btn-sm btn-outline-secondary">Сегодня</button>
+          <button id="nav-next-month" class="btn btn-sm btn-outline-secondary">›</button>
+          <button id="nav-next-year" class="btn btn-sm btn-outline-secondary">»</button>
+        </div>
+        <div class="right-controls">
+          <select id="calendar-month-select" class="calendar-select month"></select>
+          <select id="calendar-year-select" class="calendar-select year"></select>
+          <input id="default-start-time" class="calendar-select" type="time" lang="en-GB" title="Default start time">
+        </div>
+      </div>
+      
+      <table id="calendar-table" class="calendar-table table" role="grid"></table>
+    </section>
+  </main>
 
-</div>
-</div>
-<!-- Modal -->
-<div aria-hidden="true" aria-labelledby="noteModalLabel" class="modal fade" id="noteModal" tabindex="-1">
-<div class="modal-dialog"><div class="modal-content">
-<form autocomplete="off" id="noteForm">
-<div class="modal-header">
-<h5 class="modal-title" id="noteModalLabel">Заметки для <span id="modal-date-label"></span></h5>
-<button aria-label="Закрыть" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-</div>
-<div class="modal-body">
-<ul class="note-list" id="noteList"></ul>
-<textarea class="form-control" id="noteInput" placeholder="Добавить новую заметку на этот день..." rows="3"></textarea>
-</div>
-<div class="modal-footer">
-<button class="btn btn-secondary" data-bs-dismiss="modal" id="note-close-btn" type="button">Закрыть</button>
-<button class="btn btn-success" id="note-add-btn" type="submit">Добавить заметку</button>
-</div>
-</form>
-</div></div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Force RU UI for this file
-    try { localStorage.setItem('timerhavenLang', 'ru'); } catch(e){}
+  <div class="modal" id="noteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="noteForm" autocomplete="off">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noteModalLabel">Заметки на <span id="modal-date-label"></span></h5>
+            <button type="button" class="btn-close" onclick="closeNoteModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <ul id="noteList" class="note-list"></ul>
+            <textarea id="noteInput" class="form-control mb-3" rows="3" placeholder="Добавить заметку..."></textarea>
+            <div class="row g-2" style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <div class="col-6" style="flex: 1;">
+                <label id="label-time" class="form-label small fw-bold" style="display:block; font-size:0.8rem;">Время</label>
+                <input type="time" lang="en-GB" id="noteTime" class="form-control" style="padding: 4px;">
+              </div>
+              <div class="col-6" style="flex: 1;">
+                <label id="label-repeat" class="form-label small fw-bold" style="display:block; font-size:0.8rem;">Повтор</label>
+                <select id="noteRepeat" class="form-select" style="padding: 4px;">
+                  <option value="none" selected>Нет</option>
+                  <option value="daily">Ежедневно</option>
+                  <option value="weekly">Еженедельно</option>
+                  <option value="monthly">Ежемесячно</option>
+                  <option value="yearly">Ежегодно</option>
+                </select>
+              </div>
+              <div class="col-12" style="width: 100%; margin-top: 8px;">
+                <label id="label-sound" class="form-label small fw-bold" style="display:block; font-size:0.8rem;">Звук будильника</label>
+                <select id="noteSound" class="form-select" style="padding: 4px;">
+                  <option value="beep" selected>Цифровой сигнал</option>
+                  <option value="siren">Аварийная сирена</option>
+                  <option value="pulse">Пульсирующий сигнал</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer" style="display:flex; justify-content: space-between; align-items: center;">
+            <button type="button" class="btn btn-sm btn-outline-primary" id="note-test-alarm">Проверка</button>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn btn-secondary" onclick="closeNoteModal()" id="note-close-btn">Закрыть</button>
+              <button type="submit" class="btn btn-success" id="note-add-btn">Добавить</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    // Safe load of notes
-    let notes = {};
-    try { notes = JSON.parse(localStorage.getItem('calendarNotes') || '{}'); } catch(e) { notes = {}; }
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;padding:18px 12px;color:var(--muted);"><div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>free online calendar</strong> and other <strong>privacy-first productivity tools</strong>.</div>
+    &copy; 2025 TimerHaven. <a href="/privacy.html">Privacy</a> · <a href="/pricing.html">Pricing</a> · <a href="/contact.html">Contact</a>
+    
+    
 
-    let currentYear, currentMonth, selectedDay;
+    
+    
+    
 
-    function getLang(){ return localStorage.getItem('timerhavenLang') || 'ru'; }
-    function getLocaleForLang(lang){ if(!lang) return 'ru-RU'; const map={en:'en-US',fr:'fr-FR',de:'de-DE',ru:'ru-RU',el:'el-GR',es:'es-ES',ar:'ar-SA'}; return map[lang]||lang; }
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذ‍ذ½ذ»ذ°ذ¹ذ½-ذ؛ذ°ذ»ذµذ½ذ´ذ°ر€رŒ</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذ¦ذ¸ر„ر€ذ¾ذ²ذ¾ذ¹ ذ؛ذ°ذ»ذµذ½ذ´ذ°ر€رŒ ذ´ذ»رڈ ذ¾ر€ذ³ذ°ذ½ذ¸ذ·ذ°ر†ذ¸ذ¸ ذ´ذ°ر‚, رپذ¾ذ±ر‹ر‚ذ¸ذ¹ ذ¸ ر€ذ°رپذ؟ذ¸رپذ°ذ½ذ¸ذ¹.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;">ذںذµر€ذ²ر‹ذµ ذ؛ذ°ذ»ذµذ½ذ´ذ°ر€ذ¸ ذ±ر‹ذ»ذ¸ ذ»رƒذ½ذ½ر‹ذ¼ذ¸ (ذ’ذ°ذ²ذ¸ذ»ذ¾ذ½/ذ•ذ³ذ¸ذ؟ذµر‚). ذ’ 46 ذ³ذ¾ذ´رƒ ذ´ذ¾ ذ½.رچ. ذ®ذ»ذ¸ذ¹ ذ¦ذµذ·ذ°ر€رŒ ذ²ذ²ذµذ» رژذ»ذ¸ذ°ذ½رپذ؛ذ¸ذ¹ ذ؛ذ°ذ»ذµذ½ذ´ذ°ر€رŒ, ذ؛ذ¾ر‚ذ¾ر€ر‹ذ¹ ذ² 1582 ذ³ذ¾ذ´رƒ ذ؟ذ°ذ؟ذ° أر€ذ¸ذ³ذ¾ر€ذ¸ذ¹ XIII رƒرپذ¾ذ²ذµر€رˆذµذ½رپر‚ذ²ذ¾ذ²ذ°ذ» ذ´ذ¾ ذ³ر€ذ¸ذ³ذ¾ر€ذ¸ذ°ذ½رپذ؛ذ¾ذ¹ رپذ¸رپر‚ذµذ¼ر‹.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذںذµر€ذµذ¹ذ´ذ¸ر‚ذµ ذ؛ ر‚ذµذ؛رƒر‰ذµذ¼رƒ ذ¼ذµرپرڈر†رƒ ذ¸ذ»ذ¸ ذ½ذ°ذ¹ذ´ذ¸ر‚ذµ ذ؛ذ¾ذ½ذ؛ر€ذµر‚ذ½رƒرژ ذ´ذ°ر‚رƒ.</li><li>ذ”ذ¾ذ±ذ°ذ²رŒر‚ذµ رپذ¾ذ±ر‹ر‚ذ¸رڈ ذ¸ذ»ذ¸ ذ·ذ°ذ¼ذµر‚ذ؛ذ¸ ذ؛ ذ¾ذ؟ر€ذµذ´ذµذ»ذµذ½ذ½ر‹ذ¼ ذ´ذ½رڈر¼.</li><li>ذکرپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ ذ؛ذ½ذ¾ذ؟ذ؛رƒ 'ذ،ذµذ³ذ¾ذ´ذ½رڈ', ر‡ر‚ذ¾ذ±ر‹ ذ±ر‹رپر‚ر€ذ¾ ذ²ذµر€ذ½رƒر‚رŒرپرڈ ذ؛ ر‚ذµذ؛رƒر‰ذµذ¹ ذ´ذ°ر‚ذµ.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذ’ذ¸ذ·رƒذ°ذ»ذ¸ذ·ذ°ر†ذ¸رڈ ذ؟ذ»ذ°ذ½ذ¾ذ² ذ½ذ° ذ¼ذµرپرڈر† رپذ½ذ¸ذ¶ذ°ذµر‚ ذ؛ذ¾ذ³ذ½ذ¸ر‚ذ¸ذ²ذ½رƒرژ ذ½ذ°ذ³ر€رƒذ·ذ؛رƒ."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="pomodoro-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    const STORAGE_KEY = 'calendarNotes';
+    const DEFAULT_START_KEY = 'calendarDefaultStart';
+    const notes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    let currentYear, currentMonth, selectedDay, controlsHooked = false;
 
     const translations = {
-      ru: {
-        "back-link":"Вернуться в главное меню",
-        "tool-title":"Календарь",
-        "tool-help":"Кликните любой день, чтобы добавить/просмотреть/редактировать заметки. Для каждого дня поддерживается несколько заметок!",
-        "faq-title":"Часто задаваемые вопросы",
-        "faq-list": `<li><b>Сохраняются ли мои заметки?</b> Да! Заметки сохраняются в вашем браузере и остаются до удаления.</li>
-          <li><b>Могу ли я добавить несколько заметок?</b> Да — можно добавлять любое количество заметок для каждого дня.</li>
-          <li><b>Могу ли я удалить заметки?</b> Да — удаляйте отдельные заметки с помощью иконки корзины.</li>
-          <li><b>Синхронизируются ли заметки на других устройствах?</b> Пока нет — заметки сохраняются в конкретном браузере. Для доступа с разных устройств используйте облачные приложения.</li>`,
-        "howto-title":"<i class='fa fa-calendar-check'></i> Как пользоваться Календарём",
-        "howto-steps": `<li><b>Кликните по дню:</b> Откройте окно для добавления/просмотра нескольких заметок на день.</li>
-          <li><b>Организация событий:</b> Каждая заметка с меткой времени, можно удалить отдельно.</li>
-          <li><b>Долговечно:</b> Заметки сохраняются до удаления.</li>`,
-        "noteModalLabel":"Заметки для",
-        "noteInput":"Добавить новую заметку на этот день...",
-        "note-none":"Для этого дня заметок ещё нет.",
-        "note-delete":"Удалить эту заметку",
-        "note-close-btn":"Закрыть",
-        "note-add-btn":"Добавить заметку",
-        "days":["Вс","Пн","Вт","Ср","Чт","Пт","Сб"]
+      "ru": {
+            "back-link": "Вернуться в меню",
+            "tool-title": "Календарь",
+            "tool-help": "Нажмите на день для заметок. Можно добавить несколько заметок!",
+            "noteModalLabel": "Заметки на",
+            "noteInput": "Добавить заметку...",
+            "note-none": "Заметок нет.",
+            "note-delete": "Удалить",
+            "note-close-btn": "Закрыть",
+            "note-add-btn": "Добавить",
+            "delete-prompt-title": "Повторяющаяся заметка",
+            "delete-series-btn": "Вся серия",
+            "delete-occurrence-btn": "Это событие",
+            "cancel-btn": "Отмена",
+            "label-time": "Время",
+            "label-repeat": "Повтор",
+            "label-sound": "Звук будильника",
+            "reminder-title": "Напоминание!",
+            "test-alarm-title": "Проверка",
+            "test-alarm-btn": "Проверка",
+            "test-alarm-body": "Тестирование настроек звука...",
+            "days": [
+                  "Вс",
+                  "Пн",
+                  "Вт",
+                  "Ср",
+                  "Чт",
+                  "Пт",
+                  "Сб"
+            ],
+            "months": [
+                  "Январь",
+                  "Февраль",
+                  "Март",
+                  "Апрель",
+                  "Май",
+                  "Июнь",
+                  "Июль",
+                  "Август",
+                  "Сентябрь",
+                  "Октябрь",
+                  "Ноябрь",
+                  "Декабрь"
+            ]
       }
-    };
+};
 
-    // Update UI strings and re-render if calendar already initialized
-    function updateLanguage(lang){
-      lang = lang || getLang();
-      document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-      const t = translations[lang] || translations['ru'];
-      const el = id => document.getElementById(id);
-      if (el("back-link")) el("back-link").textContent = t["back-link"];
-      if (el("tool-title")) el("tool-title").innerHTML = `<i class="fa fa-calendar-days"></i> ${t["tool-title"]}`;
-      if (el("tool-help")) el("tool-help").textContent = t["tool-help"];
-      if (el("faq-title")) el("faq-title").textContent = t["faq-title"];
-      if (el("faq-list")) el("faq-list").innerHTML = t["faq-list"];
-      if (el("howto-title")) el("howto-title").innerHTML = t["howto-title"];
-      if (el("howto-steps")) el("howto-steps").innerHTML = t["howto-steps"];
-      if (el("tips-title")) el("tips-title").innerHTML = t["tips-title"] || '';
-      if (el("noteModalLabel")) el("noteModalLabel").innerHTML = `${t["noteModalLabel"]} <span id="modal-date-label"></span>`;
-      if (el("noteInput")) el("noteInput").placeholder = t["noteInput"];
-      if (el("note-close-btn")) el("note-close-btn").textContent = t["note-close-btn"];
-      if (el("note-add-btn")) el("note-add-btn").textContent = t["note-add-btn"];
-      if (typeof currentYear === 'number' && typeof currentMonth === 'number') renderCalendar(currentYear, currentMonth, lang);
+    function saveNotes() { localStorage.setItem(STORAGE_KEY, JSON.stringify(notes)); }
+    function getLang() { return 'ru'; }
+
+    function getDefaultStartTime() {
+        const stored = localStorage.getItem(DEFAULT_START_KEY);
+        if (stored) return stored;
+        const now = new Date();
+        return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    }
+    function setDefaultStartTime(val) { localStorage.setItem(DEFAULT_START_KEY, val); }
+
+    function getNotesForDate(dateStr) {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const targetDate = new Date(y, m - 1, d, 0, 0, 0);
+      const results = [];
+      for (const originStr in notes) {
+        if (!Array.isArray(notes[originStr])) continue;
+        const [oy, om, od] = originStr.split('-').map(Number);
+        const originDate = new Date(oy, om - 1, od, 0, 0, 0);
+        const diffDays = Math.round((targetDate - originDate) / (1000 * 60 * 60 * 24));
+        notes[originStr].forEach(item => {
+          let match = (originStr === dateStr);
+          if (!match && item.repeat && item.repeat !== 'none' && diffDays > 0) {
+            if (item.repeat === 'daily') match = true;
+            else if (item.repeat === 'weekly' && diffDays % 7 === 0) match = true;
+            else if (item.repeat === 'monthly' && d === od) match = true;
+            else if (item.repeat === 'yearly' && d === od && m === om) match = true;
+          }
+          if (match && item.exclusions && item.exclusions.includes(dateStr)) match = false;
+          if (match) results.push({ ...item, originStr });
+        });
+      }
+      return results;
     }
 
-    window.addEventListener('storage', function(e){
-      if (e.key === 'timerhavenLang') updateLanguage(e.newValue || 'ru');
-    });
-
-    // Populate month/year selects with localized month names
-    function populateMonthYearControls(year, month, lang) {
-      lang = lang || getLang();
-      const monthSelect = document.getElementById('calendar-month-select');
-      const yearSelect = document.getElementById('calendar-year-select');
-      if (!monthSelect || !yearSelect) return;
-      const locale = getLocaleForLang(lang);
-      const mf = new Intl.DateTimeFormat(locale, { month: 'long' });
-      monthSelect.innerHTML = '';
-      for (let m=0; m<12; m++) {
-        const opt = document.createElement('option');
-        opt.value = String(m);
-        opt.textContent = mf.format(new Date(2000,m,1));
-        if (m === month) opt.selected = true;
-        monthSelect.appendChild(opt);
-      }
-      const now = new Date();
-      const base = now.getFullYear();
-      const start = base - 50, end = base + 50;
-      yearSelect.innerHTML = '';
-      for (let y = start; y <= end; y++) {
-        const opt = document.createElement('option');
-        opt.value = String(y);
-        opt.textContent = String(y);
-        if (y === year) opt.selected = true;
-        yearSelect.appendChild(opt);
-      }
-    }
-
-    // Calendar renderer
     function renderCalendar(year, month, lang) {
-      currentYear = year;
-      currentMonth = month;
-      lang = lang || getLang();
+      currentYear = year; currentMonth = month; lang = lang || getLang();
       const table = document.getElementById('calendar-table');
-      if (!table) return;
       const firstDay = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      let html = `<thead><tr>`;
-      const dayNames = (translations[lang] && translations[lang].days) ? translations[lang].days : translations['ru'].days;
-      dayNames.forEach(day => { html += `<th>${day}</th>`; });
-      html += `</tr></thead><tbody><tr>`;
-
-      for (let i = 0; i < firstDay; i++) html += `<td></td>`;
-
+      
+      let html = '<thead><tr>'; translations[lang].days.forEach(d => html += `<th>${d}</th>`); html += '</tr></thead><tbody><tr>';
+      for (let i = 0; i < firstDay; i++) html += '<td></td>';
       const now = new Date();
-      const todayYear = now.getFullYear();
-      const todayMonth = now.getMonth();
-      const todayDay = now.getDate();
-
       for (let d = 1; d <= daysInMonth; d++) {
-        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        const dayNotes = notes[dateStr] || [];
-        const hasNote = dayNotes.length > 0;
-        if ((firstDay + d - 1) % 7 === 0 && d !== 1) html += `</tr><tr>`;
-        const isToday = (d === todayDay && month === todayMonth && year === todayYear);
-        /* PERMANENT FIX: add inline style to force table-cell behaviour even if site/extension CSS tries to override */
-        html += `<td class="day-cell${hasNote ? ' has-note' : ''}${isToday ? ' calendar-today' : ''}" data-date="${dateStr}" style="display:table-cell !important; vertical-align:middle;">${d}${hasNote ? ' <span title="Заметки сохранены">📝</span>' : ''}</td>`;
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const dayNotes = getNotesForDate(dateStr);
+        if ((firstDay + d - 1) % 7 === 0 && d !== 1) html += '</tr><tr>';
+        const isToday = (d === now.getDate() && month === now.getMonth() && year === now.getFullYear());
+        html += `<td data-date="${dateStr}"><div class="day-cell ${dayNotes.length ? 'has-note' : ''} ${isToday ? 'calendar-today' : ''}">${d}</div></td>`;
       }
-      html += `</tr></tbody>`;
-      table.innerHTML = html;
-
-      // Ensure the month/year selects reflect the currently rendered calendar
-      populateMonthYearControls(currentYear, currentMonth, lang);
-
-      Array.from(table.getElementsByClassName('day-cell')).forEach(cell => {
-        cell.addEventListener('click', function() {
-          selectedDay = this.getAttribute('data-date');
-          showNoteModal(selectedDay);
-        });
-      });
+      html += '</tr></tbody>'; table.innerHTML = html;
     }
 
     function showNoteModal(dateStr) {
-      const modalDateLabel = document.getElementById('modal-date-label');
-      if (modalDateLabel) modalDateLabel.textContent = dateStr;
+      selectedDay = dateStr;
+      document.getElementById('modal-date-label').textContent = dateStr;
+      document.getElementById('noteTime').value = getDefaultStartTime();
       renderNoteList(dateStr);
-      const ni = document.getElementById('noteInput');
-      if (ni) ni.value = '';
-      try { new bootstrap.Modal(document.getElementById('noteModal')).show(); } catch(e) {}
+      document.getElementById('noteModal').classList.add('show');
+    }
+
+    function closeNoteModal() {
+      document.getElementById('noteModal').classList.remove('show');
+      renderCalendar(currentYear, currentMonth, getLang());
     }
 
     function renderNoteList(dateStr) {
       const list = document.getElementById('noteList');
-      if (!list) return;
       list.innerHTML = '';
-      const lang = getLang();
-      const dayNotes = notes[dateStr] || [];
-      if (dayNotes.length === 0) {
-        list.innerHTML = `<li style="color:#888;">${translations[lang]["note-none"] || translations['ru']["note-none"]}</li>`;
-        return;
-      }
-      dayNotes.forEach((note, idx) => {
+      const dayNotes = getNotesForDate(dateStr);
+      if (!dayNotes.length) { list.innerHTML = `<li class="text-center text-muted p-2">${translations[getLang()]['note-none']}</li>`; return; }
+      dayNotes.forEach(note => {
         const li = document.createElement('li');
-        const text = document.createElement('span'); text.className = 'note-text'; text.innerHTML = escapeHtml(note.text);
-        const meta = document.createElement('span'); meta.className = 'note-meta';
-        try { meta.textContent = new Date(note.ts).toLocaleString(getLocaleForLang(lang)); } catch(e){ meta.textContent = new Date(note.ts).toLocaleString(); }
-        const btn = document.createElement('button'); btn.className = 'delete-note-btn'; btn.title = translations[lang]['note-delete'] || 'Удалить'; btn.innerHTML = '<i class="fa fa-trash"></i>';
-        btn.addEventListener('click', () => deleteNote(dateStr, idx));
-        li.appendChild(text); li.appendChild(meta); li.appendChild(btn);
+        li.className = 'list-group-item';
+        let repeatIcon = (note.repeat && note.repeat !== 'none') ? '<i class="fa fa-redo ms-2 text-info" style="font-size:0.7rem;"></i>' : '';
+        li.innerHTML = `<div style="flex:1;"><small class="badge bg-light text-dark border me-2">${note.time || ''}</small><b>${escapeHtml(note.text)}</b>${repeatIcon}</div>`;
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn btn-sm btn-outline-danger ms-2';
+        delBtn.innerHTML = '<i class="fa fa-trash"></i>';
+        delBtn.onclick = () => handleDelete(note, dateStr);
+        li.appendChild(delBtn);
         list.appendChild(li);
       });
     }
 
-    function escapeHtml(s) {
-      if (!s) return '';
-      return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
-    }
-
-    function attachNoteForm() {
-      const form = document.getElementById('noteForm');
-      if (!form) return;
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (!selectedDay) return;
-        const textEl = document.getElementById('noteInput');
-        if (!textEl) return;
-        const text = textEl.value.trim();
-        if (!text) return;
-        if (!notes[selectedDay]) notes[selectedDay] = [];
-        notes[selectedDay].push({ text, ts: Date.now() });
-        try { localStorage.setItem('calendarNotes', JSON.stringify(notes)); } catch(e) {}
-        textEl.value = '';
-        renderNoteList(selectedDay);
-        renderCalendar(currentYear, currentMonth, getLang());
-      });
-    }
-
-    window.deleteNote = function(dateStr, idx) {
-      if (!notes[dateStr]) return;
-      notes[dateStr].splice(idx, 1);
-      if (notes[dateStr].length === 0) delete notes[dateStr];
-      try { localStorage.setItem('calendarNotes', JSON.stringify(notes)); } catch(e) {}
-      renderNoteList(dateStr);
-      renderCalendar(currentYear, currentMonth, getLang());
-    };
-
-    function hookupCalendarControls() {
-      const prevYear=document.getElementById('nav-prev-year');
-      const prevMonth=document.getElementById('nav-prev-month');
-      const nextMonth=document.getElementById('nav-next-month');
-      const nextYear=document.getElementById('nav-next-year');
-      const todayBtn=document.getElementById('nav-today');
-      prevYear && prevYear.addEventListener('click', ()=> renderCalendar(currentYear-1, currentMonth, getLang()));
-      nextYear && nextYear.addEventListener('click', ()=> renderCalendar(currentYear+1, currentMonth, getLang()));
-      prevMonth && prevMonth.addEventListener('click', ()=> { let y=currentYear,m=currentMonth-1; if(m<0){m=11;y--;} renderCalendar(y,m,getLang()); });
-      nextMonth && nextMonth.addEventListener('click', ()=> { let y=currentYear,m=currentMonth+1; if(m>11){m=0;y++;} renderCalendar(y,m,getLang()); });
-      todayBtn && todayBtn.addEventListener('click', ()=> { const n=new Date(); renderCalendar(n.getFullYear(), n.getMonth(), getLang()); });
-
-      const mSel=document.getElementById('calendar-month-select');
-      const ySel=document.getElementById('calendar-year-select');
-      if(mSel && ySel){
-        mSel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
-        ySel.addEventListener('change', ()=> renderCalendar(parseInt(ySel.value,10), parseInt(mSel.value,10), getLang()));
+    function handleDelete(note, dateStr) {
+      const lang = getLang();
+      if (note.repeat && note.repeat !== 'none') {
+        const prompt = document.createElement('div');
+        prompt.className = 'p-2 bg-light border rounded mt-2 w-100';
+        prompt.innerHTML = `<p class="small fw-bold mb-2">${translations[lang]['delete-prompt-title']}</p>
+          <button class="btn btn-sm btn-danger w-100 mb-1" id="del-series">${translations[lang]['delete-series-btn']}</button>
+          <button class="btn btn-sm btn-warning w-100" id="del-occ">${translations[lang]['delete-occurrence-btn']}</button>
+          <button class="btn btn-sm btn-secondary w-100 mt-1" id="del-cancel">${translations[lang]['cancel-btn']}</button>`;
+        const li = event.target.closest('li');
+        li.appendChild(prompt);
+        prompt.querySelector('#del-series').onclick = () => {
+          const idx = notes[note.originStr].findIndex(n => n.id === note.id);
+          if (idx !== -1) notes[note.originStr].splice(idx, 1);
+          saveNotes(); renderNoteList(dateStr);
+        };
+        prompt.querySelector('#del-occ').onclick = () => {
+          const item = notes[note.originStr].find(n => n.id === note.id);
+          if (item) { item.exclusions = item.exclusions || []; item.exclusions.push(dateStr); }
+          saveNotes(); renderNoteList(dateStr);
+        };
+        prompt.querySelector('#del-cancel').onclick = () => renderNoteList(dateStr);
+      } else {
+        const idx = notes[note.originStr].findIndex(n => n.id === note.id);
+        if (idx !== -1) notes[note.originStr].splice(idx, 1);
+        saveNotes(); renderNoteList(dateStr);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const now = new Date();
-      currentYear = now.getFullYear();
-      currentMonth = now.getMonth();
+    function escapeHtml(str) { return str.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
-      updateLanguage(getLang());
-      populateMonthYearControls(currentYear, currentMonth, getLang());
-      hookupCalendarControls();
-      attachNoteForm();
+    function hookupCalendarControls() {
+      if (controlsHooked) return; controlsHooked = true;
+      document.getElementById('calendar-table').addEventListener('click', (e) => {
+        const td = e.target.closest('td[data-date]');
+        if (td) showNoteModal(td.dataset.date);
+      });
+      document.getElementById('nav-prev-month').onclick = () => { currentMonth--; if(currentMonth < 0){currentMonth=11;currentYear--;} renderCalendar(currentYear, currentMonth); };
+      document.getElementById('nav-next-month').onclick = () => { currentMonth++; if(currentMonth > 11){currentMonth=0;currentYear++;} renderCalendar(currentYear, currentMonth); };
+      document.getElementById('nav-today').onclick = () => { const n=new Date(); currentYear=n.getFullYear(); currentMonth=n.getMonth(); renderCalendar(currentYear, currentMonth); };
+      
+      const monSel = document.getElementById('calendar-month-select');
+      const yrSel = document.getElementById('calendar-year-select');
+      translations.ru.months.forEach((m, i) => monSel.add(new Option(m, i)));
+      const curYr = new Date().getFullYear();
+      for(let y=curYr-10; y<=curYr+10; y++) yrSel.add(new Option(y, y));
+      monSel.value = currentMonth; yrSel.value = currentYear;
+      monSel.onchange = () => { currentMonth = parseInt(monSel.value); renderCalendar(currentYear, currentMonth); };
+      yrSel.onchange = () => { currentYear = parseInt(yrSel.value); renderCalendar(currentYear, currentMonth); };
 
-      try { renderCalendar(currentYear, currentMonth, getLang()); } catch(e) { console.error('renderCalendar error', e); }
+      const defaultTimeInput = document.getElementById('default-start-time');
+      defaultTimeInput.value = getDefaultStartTime();
+      defaultTimeInput.onchange = () => setDefaultStartTime(defaultTimeInput.value);
 
-      // helper to verify server file
-      window.verifyCalendarFile = function(){
-        fetch(window.location.href).then(r=>r.text()).then(t=>console.log('fileLen=', t.length, 'startsWith=', t.slice(0,400))).catch(e=>console.error('fetch failed', e));
-        console.log('typeof renderCalendar =', typeof renderCalendar);
-        console.log('#faq-list present?', !!document.getElementById('faq-list'));
+      document.getElementById('noteForm').onsubmit = (e) => {
+        e.preventDefault();
+        const text = document.getElementById('noteInput').value.trim();
+        if (!text) return;
+        const item = {
+          id: 'cal_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          text, time: document.getElementById('noteTime').value,
+          repeat: document.getElementById('noteRepeat').value,
+          sound: document.getElementById('noteSound').value,
+          updatedAt: Date.now()
+        };
+        notes[selectedDay] = notes[selectedDay] || [];
+        notes[selectedDay].push(item);
+        saveNotes();
+        document.getElementById('noteInput').value = '';
+        renderNoteList(selectedDay);
       };
+
+      document.getElementById('note-test-alarm').onclick = () => {
+          const lang = getLang();
+          triggerLoopingAlarm(translations[lang]["test-alarm-title"] || "Проверка", "Тестирование настроек звука...", document.getElementById('noteSound').value);
+      };
+      document.getElementById('stopAlarmBtn').onclick = stopAlarm;
+    }
+
+    let alarmInterval = null;
+    let activeAlarmSound = 'beep';
+
+    function playAlarmSound(type) {
+      if (!window.audioCtx) window.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = window.audioCtx;
+      if (ctx.state === 'suspended') ctx.resume();
+      const osc = ctx.createOscillator(), g = ctx.createGain();
+      osc.connect(g); g.connect(ctx.destination);
+      if (type === 'siren') { osc.type = 'square'; osc.frequency.setValueAtTime(300, ctx.currentTime); osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.5); }
+      else if (type === 'pulse') { osc.type = 'sine'; osc.frequency.setValueAtTime(1500, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2); }
+      else { osc.frequency.setValueAtTime(880, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3); }
+      osc.start(); osc.stop(ctx.currentTime + 0.5);
+    }
+
+    function triggerLoopingAlarm(title, body, soundType) {
+      if (alarmInterval) return;
+      document.getElementById('alarmTitle').textContent = title;
+      document.getElementById('alarmBody').textContent = body;
+      document.getElementById('alarmOverlay').style.display = 'flex';
+      activeAlarmSound = soundType;
+      playAlarmSound(activeAlarmSound);
+      alarmInterval = setInterval(() => {
+        playAlarmSound(activeAlarmSound);
+      }, 1000); 
+    }
+
+    function stopAlarm() { if (alarmInterval) { clearInterval(alarmInterval); alarmInterval = null; } document.getElementById('alarmOverlay').style.display = 'none'; }
+
+    function checkReminders() {
+      const now = new Date();
+      const tStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+      const dStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+      const todayNotes = getNotesForDate(dStr);
+      todayNotes.forEach(n => {
+        if (n.time === tStr && n.lastFired !== dStr + tStr) {
+          n.lastFired = dStr + tStr;
+          triggerLoopingAlarm("Напоминание!", n.text, n.sound);
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const now = new Date(); currentYear = now.getFullYear(); currentMonth = now.getMonth();
+      renderCalendar(currentYear, currentMonth);
+      hookupCalendarControls();
+      setInterval(checkReminders, 30000);
+      flatpickr("#noteTime", { enableTime: true, noCalendar: true, dateFormat: "H:i", time_24hr: true });
+      flatpickr("#default-start-time", { enableTime: true, noCalendar: true, dateFormat: "H:i", time_24hr: true });
     });
   </script>
-<p style="margin-top:1rem;"><a class="cta" href="/ru/calendar/calendar-index.html">Read full guide</a></p></body>
+</body>
 </html>
+
+

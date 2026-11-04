@@ -1,18 +1,272 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>world-clock — Guide (de)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for world-clock guide (de)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Weltzeituhr — Zeitzonen vergleichen und Termine sicher planen | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Umfassender Leitfaden zur Nutzung der Weltzeituhr: Zonen auswählen, Offsets lesen, Meetings über Regionen planen, Sommerzeit‑Fallstricke und…"> />
+  <link rel="canonical" href="https://timerhaven.com/de/world-clock/world-clock-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Weltzeituhr zum Planen verwenden",
+        "description":"Zeitzonen vergleichen, lokale Zeiten für Teilnehmende anzeigen und Sommerzeit‑Verwirrung vermeiden. Anleitung mit Planungsrezepte, Umrechnungs‑Tipps und Automatisierungs‑Ideen.",
+        "image":"https://timerhaven.com/assets/images/world-clock-snapshot.webp",
+        "totalTime":"PT45M",
+        "supply":["Weltzeituhr (TimerHaven)","Kalender","Zeitzonen‑Angaben der Teilnehmenden"],
+        "step":[
+          {"@type":"HowToStep","name":"Referenzpunkte wählen","text":"Wählen Sie eine Organisator‑Referenz und fügen Sie Teilnehmer‑Zonen hinzu, um lokale Zeiten zu vergleichen."},
+          {"@type":"HowToStep","name":"DST‑Wechsel beachten","text":"Prüfen Sie Sommerzeitregeln und bestätigen Sie Zeiten in der Nähe von Übergangsdatumsangaben."},
+          {"@type":"HowToStep","name":"Lokale Zeiten teilen","text":"Teilen Sie Slots mit Organisator‑ und Teilnehmer‑lokalen Zeiten, um Missverständnisse zu vermeiden."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Wie gehe ich mit Sommerzeit‑Übergängen um?","acceptedAnswer":{"@type":"Answer","text":"Vermeiden Sie, wenn möglich, Termine an DST‑Übergangstagen; andernfalls bestätigen Sie lokale Zeiten explizit und fügen Sie IANA‑Zeitzonenkennungen in Einladungen hinzu."}},
+          {"@type":"Question","name":"Sollte ich mehrere lokale Zeiten in Einladungen anzeigen?","acceptedAnswer":{"@type":"Answer","text":"Ja — die Anzeige von Organisator‑ und Teilnehmer‑lokalzeiten reduziert Fehler, besonders bei verteilten Teams."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Weltzeituhr — Zeitzonen vergleichen und Termine sicher planen | TimerHaven">
+  <meta property="og:description" content="Umfassender Leitfaden zur Nutzung der Weltzeituhr: Zonen auswählen, Offsets lesen, Meetings über Regionen planen, Sommerzeit‑Fallstricke und Automatisierungstipps.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/de/world-clock/world-clock-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Weltzeituhr — Zeitzonen vergleichen und Termine sicher planen | TimerHaven">
+  <meta name="twitter:description" content="Umfassender Leitfaden zur Nutzung der Weltzeituhr: Zonen auswählen, Offsets lesen, Meetings über Regionen planen, Sommerzeit‑Fallstricke und Automatisierungstipps.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/world-clock/world-clock-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/world-clock/world-clock-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/world-clock/world-clock-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/world-clock/world-clock-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/world-clock/world-clock-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/world-clock/world-clock-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/world-clock/world-clock-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/world-clock/world-clock-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">world-clock — Guide (de)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Weltzeituhr — Zeitzonen vergleichen und Termine sicher planen</h1>
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — verteiltes Arbeiten & Terminplanung</div>
+          <div class="meta">Veröffentlicht: 2025-11-24 · Lesezeit: 1216 Min.</div>
+        </div>
+      </div>
+      <p class="lead">Das Planen über Zeitzonen hinweg ist eine häufige Fehlerquelle. Eine verlässliche Weltzeituhr hilft, lokale Zeiten zu vergleichen, Sommerzeit‑Probleme zu vermeiden und Einladungen eindeutig zu kommunizieren. Dieser Leitfaden behandelt Zeitzonengrundlagen, Planungsrezepte, DST‑Fallen, IANA‑Bezeichnungen, Automatisierungs‑Tipps und Sharing‑Muster, die Fehler reduzieren.</p>
+      <nav class="toc" aria-label="Inhaltsverzeichnis">
+        <a href="#basics">Grundlagen zu Zeitzonen</a> ·
+        <a href="#dst">Sommerzeit & Fallstricke</a> ·
+        <a href="#planning">Planungsrezepte</a> ·
+        <a href="#naming">IANA‑Bezeichnungen & klare Labels</a> ·
+        <a href="#automation">Automatisierung & Kalender‑Tipps</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="basics" class="section" aria-labelledby="basics-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anzeige</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="basics-title">Grundlagen — Offsets, UTC und lokale Zeit</h2>
+        <p>Zeitzonen sind relativ zu Coordinated Universal Time (UTC) definiert (z. B. UTC+1). Kommunizieren Sie stets sowohl die Uhrzeit als auch die Zone oder den Offset, wenn Sie über Regionen hinweg terminieren.</p>
+        <ul>
+          <li><strong>UTC‑Referenz:</strong> Verwenden Sie UTC für systemseitige Koordination, um lokale Mehrdeutigkeiten zu vermeiden.</li>
+          <li><strong>Lokale Zeiten:</strong> Für Einladungen zeigen Sie lokal konvertierte Zeiten für Empfänger an — idealerweise sowohl Organisator‑ als auch Empfänger‑Zeit.</li>
+          <li><strong>24‑ vs. 12‑Stunden:</strong> Verwenden Sie das Format, das Ihr Publikum versteht — 24‑Stunden reduziert AM/PM‑Verwirrung.</li>
+        </ul>
+      </section>
+      <section id="dst" class="section" aria-labelledby="dst-title">
+        <h2 id="dst-title">Sommerzeit — häufige Fallstricke</h2>
+        <p>Sommerzeit‑Übergänge verschieben lokal den Offset und führen oft zu Planungsfehlern, besonders rund um das Übergangsdatum. Vermeiden Sie nach Möglichkeit wiederkehrende Termine an DST‑Tagen oder fügen Sie die Zeitzonenkennung in Einladungen ein.</p>
+        <h3>Praktische Regeln</h3>
+        <ul>
+          <li>Vermeiden Sie kritische Deadlines oder internationale Meetings an DST‑Übergangstagen.</li>
+          <li>Nennen Sie die Zeitzone explizit (z. B. "09:00 America/Los_Angeles (PDT)"), statt sich auf lokale Bezeichnungen zu verlassen.</li>
+          <li>Beim Bestätigen zeigen Sie Teilnehmern ihre lokale Zeit und zusätzlich die UTC‑Zeit als definitive Referenz an.</li>
+        </ul>
+      </section>
+      <section id="planning" class="section" aria-labelledby="planning-title">
+        <h2 id="planning-title">Planungsrezepte — Reibung minimieren</h2>
+        <p>Nutzen Sie die Weltzeituhr, um faire Zeitfenster zu finden und Zeiten klar zu kommunizieren.</p>
+        <div class="recipe" aria-labelledby="small-meeting">
+          <strong id="small-meeting">Kleines verteiltes Team — 30‑Minuten‑Meeting</strong>
+          <ol>
+            <li>Sammeln Sie bevorzugte Verfügbarkeitsfenster der Teilnehmenden (lokaler Morgen/Nachmittag).</li>
+            <li>Zeigen Sie Kandidatenzeiten in den lokalen Zeiten der Teilnehmenden mithilfe der Weltzeituhr an.</li>
+            <li>Bieten Sie 23 Slots an und finalisieren Sie zügig; fügen Sie Organisator‑ und Teilnehmer‑Lokaluhrzeiten in die Einladung.</li>
+          </ol>
+        </div>
+        <div class="recipe" aria-labelledby="global">
+          <strong id="global">Globales Town‑Hall — Unannehmlichkeiten minimieren</strong>
+          <ol>
+            <li>Wählen Sie Zeitfenster, die extreme frühe/späte Zeiten für die meisten Teilnehmenden vermeiden; rotieren Sie die Zeiten bei wiederkehrenden Events.</li>
+            <li>Nehmen Sie eine Aufzeichnung auf und teilen Sie sie für Teilnehmende in ungünstigen Zeitslots.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="naming" class="section" aria-labelledby="naming-title">
+        <h2 id="naming-title">IANA‑Bezeichnungen & klare Labels verwenden</h2>
+        <p>IANA‑Zone (z. B. Europe/London, America/New_York) ist eindeutig und beinhaltet DST‑Regeln. Zeigen Sie in Nachrichten sowohl ein lesbares Label als auch die IANA‑Kennung oder den UTC‑Offset an.</p>
+        <pre class="template">Beispiel Einladungszeile:
+Meeting: Project Sync
+Zeit: 2025‑11‑30 09:00 America/Los_Angeles (UTC‑8) — 17:00 Europe/London (UTC+0)
+Agenda: ...</pre>
+      </section>
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Automatisierung & Kalender‑Tipps</h2>
+        <p>Gestalten Sie Planung vorhersehbar mit Automatisierung und klaren Kalendereinstellungen.</p>
+        <ul>
+          <li><strong>Zeitzone pro Ereignis setzen:</strong> Speichern Sie die Organisator‑Zeitzone in den Event‑Metadaten, damit Einladungen korrekt konvertiert werden.</li>
+          <li><strong>Zeitzonen‑bewusste Links:</strong> Fügen Sie konvertierte lokale Zeiten wichtiger Teilnehmender in die Eventbeschreibung ein.</li>
+          <li><strong>Scheduling‑Tools nutzen:</strong> Verwenden Sie Tools, die optimale Fenster anhand von Teilnehmer‑Zeitzonen und Arbeitszeiten vorschlagen.</li>
+        </ul>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>F:</strong> Was tun, wenn Teilnehmende unterschiedliche Zeiten sehen?<br><strong>A:</strong> Bestätigen Sie die Zeitzone des Events und fügen Sie die UTC‑Zeit in die Einladung. Fordern Sie Teilnehmende auf, das Event in ihrer Kalenderapp zu öffnen, um die automatische Konvertierung zu prüfen.</p>
+          <p><strong>F:</strong> Sollte ich immer in UTC planen?<br><strong>A:</strong> UTC ist ideal für Systeme und Automatisierung, aber für die Kommunikation mit Menschen zeigen Sie lokale Zeiten und ergänzen UTC als Fallback. Lokale Zeiten sind für die meisten Nutzer verständlicher; UTC beseitigt technische Mehrdeutigkeiten.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ressourcen</h2>
+        <ul class="muted">
+          <li><a href="/world-clock-de.html">Weltzeituhr öffnen</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">IANA Zeitzonen</a></li>
+          <li><a href="https://timeanddate.com" target="_blank" rel="noopener">timeanddate.com — Konvertierungen & DST</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/world-clock-de.html" class="cta" aria-label="Weltzeituhr öffnen">Weltzeituhr öffnen</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anzeige</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Fragen oder Feedback? Kontaktieren Sie uns unter <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Lesen Sie unsere <a href="/privacy.html">Datenschutzerklärung</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Weltuhr & Zeitzonen</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Eine Weltuhr zeigt die aktuelle Zeit fأ¼r verschiedene Orte auf der ganzen Welt an und berأ¼cksichtigt das komplexe Geflecht internationaler Zeitzonen und Sommerzeitumstellungen.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Geschichte</h3>
+                <p style="line-height: 1.7; color: #4b5563;">Die Standardzeit wurde im 19. Jahrhundert durch die Eisenbahn popularisiert. Sir Sandford Fleming schlug 1878 das 24-Zonen-System vor, und der Greenwich-Meridian wurde 1884 als 'Nullmeridian' festgelegt.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Anleitung</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Wأ¤hlen Sie die Stadt oder das Land aus.</li><li>Das Tool berechnet den Offset zur koordinierten Weltzeit (UTC).</li><li>Prأ¼fen Sie die Anzeige fأ¼r Sommerzeit ffأ¼r die korrekte Ortszeit.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"UTC (Atomzeit) ist prأ¤ziser als GMT (Sonnenzeit) und der bevorzugte Standard fأ¼r Wissenschaft und Technik."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Weitere kostenlose Produktivitäts-Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Aufgaben-Timer</a> <a href="../../stopwatch-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stoppuhr</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Einheitenumrechner</a> <a href="../../weather-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Wetter</a> <a href="../../world-clock-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weltuhr</a> <a href="../../calendar-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Kalender</a> <a href="../../clipboard-manager-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Zwischenablage</a> <a href="../../countdown-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="../../currency-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Währungsrechner</a> <a href="../../focus-music-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Fokus-Musik</a> <a href="../../habit-tracker-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Gewohnheiten</a> <a href="../../meeting-planner-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting-Planer</a> <a href="../../notes-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notizen</a> <a href="../../password-generator-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwörter</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/world-clock-de.html" class="return-to-tool" id="returnToToolWorldClock" aria-label="Zurück zur Weltzeituhr">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zur Weltzeituhr</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolWorldClock');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

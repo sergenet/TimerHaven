@@ -1,130 +1,359 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>World Clock — TimerHaven</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="See the time anywhere in the world, instantly.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <title>Digital Nomad Dual Timezone Clock & Dashboard | TimerHaven</title>
+  <link rel="canonical" href="https://timerhaven.com/world-clock-en.html" />
+  
+  
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description"
+    content="Track global time zones instantly with our digital nomad dual timezone clock. Build your own multi-city dashboard for remote work and travel.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" rel="stylesheet" />
   <style>
-    body { background:#f4f7fb; font-family: 'Montserrat', Arial, sans-serif; color:#0b2545; margin:0; }
-    .main-container { max-width:1200px; margin:2.4rem auto; padding:0 1rem; box-sizing:border-box; min-height:90vh; display:flex; justify-content:center; align-items:flex-start; }
-    .tool-card { background:#fff; border-radius:18px; box-shadow:0 6px 20px rgba(11,37,69,0.06); width:420px; padding:1.6rem 1.5rem; box-sizing:border-box; }
-    .back-link { color:var(--brand,#0d6efd) !important; display:inline-block; margin-bottom:.6rem; text-decoration:none; font-weight:700; }
-    .tool-title { color:#185a9d; font-size:1.35rem; margin:0 0 .6rem 0; display:flex; align-items:center; gap:.5rem; }
-    .read-guide { display:inline-block; margin:.35rem 0 .8rem 0; padding:.45rem .7rem; border-radius:8px; background:var(--brand,#0d6efd); color:#fff; text-decoration:none; font-weight:700; font-size:.95rem; border:none; }
-    .clock-form { display:flex; gap:.5rem; flex-direction:column; }
-    .clock-item { background:#f7fafc; border-radius:8px; padding:.8rem; margin-bottom:.6rem; display:flex; align-items:center; justify-content:space-between; }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; box-shadow:0 1px 4px #e0e7ef; }
-    @media (max-width:900px) { .tool-card{ width:98vw; padding:1rem; } }
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif; font-display: swap;
+      color: #0b2545;
+      margin: 0;
+    }
+    .main-container {
+      max-width: 1200px;
+      margin: 2.4rem auto;
+      padding: 0 1rem;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+    }
+    .tool-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(11, 37, 69, 0.06);
+      width: 420px;
+      padding: 1.6rem;
+      box-sizing: border-box;
+    }
+    .back-link {
+      color: #0d6efd;
+      display: inline-block;
+      margin-bottom: .6rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .tool-title {
+      color: #185a9d;
+      font-size: 1.35rem;
+      margin: 0 0 .6rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .clock-item {
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: .8rem;
+      margin-bottom: .6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+    .visible-chooser {
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+    }
+    .visible-chooser .awesomplete {
+      flex: 1;
+    }
+    @media (max-width:900px) {
+      .tool-card {
+        width: 98vw;
+      }
+    }
+    /* Mobile compact summary + ordering */
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+    .clock-main {
+      display: block;
+    }
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+      .clock-main {
+        order: 1;
+      }
+      .tool-intro {
+        order: 2;
+      }
+      .tool-intro p {
+        display: none;
+      }
+      .tool-card {
+        padding: 12px;
+      }
+    }
   </style>
+  <script>
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Digital Nomad Dual Timezone Clock & Dashboard | TimerHaven">
+  <meta property="og:description" content="Track global time zones instantly with our digital nomad dual timezone clock. Build your own multi-city dashboard for remote work and travel.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/world-clock-en.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Digital Nomad Dual Timezone Clock & Dashboard | TimerHaven">
+  <meta name="twitter:description" content="Track global time zones instantly with our digital nomad dual timezone clock. Build your own multi-city dashboard for remote work and travel.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta name="keywords" content="digital nomad dual timezone clock, multi timezone dashboard, remote work clock, travel timezone tracker, global clock web app">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "World Clock & Time Zones",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "A World Clock displays the current time for various locations around the globe, accounting for the complex web of international time zones and daylight saving adjustments.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/world-clock-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/world-clock-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/world-clock-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/world-clock-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/world-clock-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/world-clock-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/world-clock-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/world-clock-en.html">
 </head>
 <body>
-  <main class="main-container" role="main">
+    <main class="main-container" role="main">
     <section class="tool-card" aria-labelledby="tool-title">
-      <a href="index.html" class="back-link">&larr; Back to Main Menu</a>
-
-      <h3 id="tool-title" class="tool-title"><i class="fa fa-globe"></i> World Clock</h3>
-
-      <a id="read-guide-btn" class="read-guide" href="world-how-to-en.html" role="button">Read full guide</a>
-
-      <p class="lead" style="margin:0 0 .8rem 0; color:#6b7280;">See the time anywhere in the world, instantly.</p>
-
-      <form class="clock-form" id="clockForm" onsubmit="return false;">
-        <select id="cityDropdown" class="form-select city-dropdown" aria-label="Select a popular city">
-          <option value="">Select city...</option>
-        </select>
-
-        <input type="text" id="cityInput" class="form-control awesomplete" placeholder="Or enter city or IANA time zone (e.g. London, America/Denver, GMT+2)" autocomplete="off">
-
-        <div style="display:flex; gap:.6rem; margin-top:.5rem;">
-          <button id="addClockBtn" class="btn btn-success btn-sm" type="button">Add Clock</button>
-          <button id="clearClocksBtn" class="btn btn-outline-secondary btn-sm" type="button">Clear All</button>
-        </div>
-      </form>
-
-      <div id="errorMsg" style="color:#b00;margin-top:.6rem;"></div>
-      <div id="clockList" style="margin-top:.8rem;"></div>
-
+      <a href="index.html" class="back-link">&larr; Back to main menu</a>
+      <div class="mobile-summary">Quick world clock — <a href="en/world-clock/world-clock-index.html">Read full
+          guide</a></div>
+      <div class="tool-intro" id="tool-help" data-preserve="true"
+        style="margin-bottom:.8rem;color:#374151;line-height:1.5;">
+        <p><strong>Quick guide — compare times across zones</strong> — Add cities or paste an IANA time zone to
+          instantly compare local times. Use this when scheduling meetings across regions: prefer 23 candidate slots
+          and present them in both organizer and participant local time to avoid confusion. The tool is lightweight and
+          stores your selected clocks locally for quick reuse.</p>
+        <p style="margin-top:.5rem;color:#51606b;font-size:.95rem;"><strong>By Serge Shammas ·</strong> · Last updated:
+          Jan 6, 2026</p>
+        <p style="margin-top:.5rem;font-size:.95rem;color:#51606b;">Full guide and best practices: <a
+            href="/en/world-clock/world-clock-index.html">World Clock — How to schedule across time zones</a>.</p>
+      </div>
+      <a id="read-guide-btn" class="read-guide" href="en/world-clock/world-clock-index.html" role="button"
+        style="display:inline-block;margin:.35rem 0 .8rem 0;padding:.45rem .7rem;border-radius:8px;background:#0d6efd;color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;">
+        Read full guide
+      </a>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-globe"></i> Digital Nomad Dual Timezone Clock</h3>
+      <div class="clock-main">
+        <form class="clock-form" id="clockForm" onsubmit="return false;">
+          <select id="cityDropdown" class="form-select city-dropdown" aria-label="Select city">
+            <option value="">Select city...</option>
+          </select>
+          <div class="visible-chooser" style="margin-top:.6rem;">
+            <input id="cityInput" class="form-control awesomplete"
+              placeholder="Or enter city or IANA time zone (eg. Paris, Europe/Paris, GMT+2)" autocomplete="off">
+            <button id="addClockBtn" class="btn btn-success btn-sm" type="button" style="min-width:110px;">Add</button>
+          </div>
+          <div style="display:flex; gap:.6rem; margin-top:.6rem;">
+            <button id="clearClocksBtn" class="btn btn-outline-secondary btn-sm" type="button">Clear all</button>
+          </div>
+        </form>
+        <div id="errorMsg" style="color:#b00;margin-top:.6rem;"></div>
+        <div id="clockList" style="margin-top:.8rem;"></div>
+      </div>
       <details class="faq-section" style="margin-top:1rem;">
-        <summary style="font-weight:700; font-size:1rem;">FAQs</summary>
+        <summary style="font-weight:700; font-size:1rem;">FAQ</summary>
         <ul style="padding-left:1.1rem; color:#374151;">
-          <li><b>Add a city:</b> Use the dropdown for popular cities or start typing any city name.</li>
+          <li><b>Add a city:</b> Use the menu or start typing any city.</li>
           <li><b>Compare times:</b> Add multiple clocks to compare zones.</li>
-          <li><b>Remove:</b> Click the Remove button to delete a city from your list.</li>
-          <li>Full list of time zones: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">See here</a></li>
+          <li><b>Remove:</b> Click delete to remove a city.</li>
         </ul>
       </details>
     </section>
   </main>
-
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
   <script>
-    // Clock logic adapted from the original; keeps behavior and localStorage persistence
+    // World-clock (EN) with localized display support
     const { DateTime } = luxon;
-    let cityList = [];
-    let cityToZone = {};
-    let cityNames = [];
-    let awesompleteInstance;
-
-    // Try to load world-cities.json if available (server should provide it). Fallback: a small sample.
-    (function loadCities() {
-      fetch('world-cities.json').then(r => r.json()).then(data => {
-        initCityData(data);
-      }).catch(() => {
-        // fallback sample list if world-cities.json not found
-        const sample = [
-          { name: 'London', timezone: 'Europe/London' },
-          { name: 'New York', timezone: 'America/New_York' },
-          { name: 'Tokyo', timezone: 'Asia/Tokyo' },
-          { name: 'Sydney', timezone: 'Australia/Sydney' },
-          { name: 'Paris', timezone: 'Europe/Paris' },
-          { name: 'Los Angeles', timezone: 'America/Los_Angeles' },
-          { name: 'Dubai', timezone: 'Asia/Dubai' },
-          { name: 'Moscow', timezone: 'Europe/Moscow' },
-          { name: 'Beijing', timezone: 'Asia/Shanghai' }
-        ];
-        initCityData(sample);
-      });
-
-      function initCityData(data) {
-        cityList = data;
+    function normalizeKey(s) { if (!s) return ''; try { return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); } catch (e) { return String(s).toLowerCase().trim(); } }
+    function escapeHtml(s) { if (!s) return ''; return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
+    // language detection and display helpers
+    function pageLang() {
+      const sel = document.getElementById('language-select-top');
+      if (sel && sel.value) return sel.value.toLowerCase();
+      if (document.documentElement && document.documentElement.lang) return document.documentElement.lang.slice(0, 2).toLowerCase();
+      return 'en';
+    }
+    function displayFor(city, lang) {
+      if (!city) return '';
+      if (lang && city.localizedNames && city.localizedNames[lang]) return city.localizedNames[lang];
+      if (city.nativeName) return city.nativeName;
+      return city.name || '';
+    }
+    function localizedCountryName(countryCode, lang) {
+      try {
+        if (!countryCode || typeof Intl === 'undefined' || !Intl.DisplayNames) return '';
+        const dn = new Intl.DisplayNames([lang], { type: 'region' });
+        return dn.of(countryCode.toUpperCase()) || '';
+      } catch (e) { return ''; }
+    }
+    // Tolerant loader & population
+    let cityList = [], cityToZone = {}, cityNames = [], awesompleteInstance = null;
+    (async function loadCities() {
+      const dropdown = document.getElementById('cityDropdown');
+      const input = document.getElementById('cityInput');
+      const lang = pageLang();
+      const PATHS = ['/world-cities.json', '/assets/data/world-cities.json', '/world-cities.json?cachebust=' + Date.now()];
+      async function tryFetchPaths(paths) {
+        for (const p of paths) {
+          try {
+            const res = await fetch(p, { cache: 'no-cache' });
+            if (!res.ok) continue;
+            const json = await res.json();
+            if (Array.isArray(json)) return json;
+            if (json && Array.isArray(json.cities)) return json.cities;
+          } catch (e) { }
+        }
+        return null;
+      }
+      const FALLBACK = [
+        { name: "London", timezone: "Europe/London", countryCode: "GB" },
+        { name: "New York", timezone: "America/New_York", countryCode: "US" },
+        { name: "Boston", timezone: "America/New_York", countryCode: "US" },
+        { name: "Tokyo", timezone: "Asia/Tokyo", countryCode: "JP" },
+        { name: "Sydney", timezone: "Australia/Sydney", countryCode: "AU" },
+        { name: "Paris", timezone: "Europe/Paris", countryCode: "FR" },
+        { name: "Berlin", timezone: "Europe/Berlin", countryCode: "DE" },
+        { name: "Los Angeles", timezone: "America/Los_Angeles", countryCode: "US" },
+        { name: "Toronto", timezone: "America/Toronto", countryCode: "CA" },
+        { name: "Dubai", timezone: "Asia/Dubai", countryCode: "AE" },
+        { name: "Singapore", timezone: "Asia/Singapore", countryCode: "SG" },
+        { name: "Mumbai", timezone: "Asia/Kolkata", countryCode: "IN" }
+      ];
+      try {
+        let raw = await tryFetchPaths(PATHS);
+        if (!raw || !raw.length) {
+          console.info('World Clock: falling back to embedded list');
+          raw = FALLBACK;
+        }
+        const list = raw.map(item => {
+          return {
+            name: item.name || item.city || '',
+            timezone: item.timezone || item.tz || item.IANA || '',
+            countryCode: item.countryCode || item.country || '',
+            localizedNames: item.localizedNames || {},
+            nativeName: item.nativeName || ''
+          };
+        }).filter(it => it.name);
+        // Deduplicate
+        const map = new Map();
+        list.forEach(i => {
+          const key = normalizeKey(i.name);
+          if (!map.has(key)) map.set(key, i);
+        });
+        const entries = Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name, lang, { sensitivity: 'base' }));
+        cityList = entries;
         cityToZone = {};
         cityNames = [];
-        const dropdown = document.getElementById('cityDropdown');
-        dropdown.innerHTML = '<option value="">Select city...</option>';
-        data.forEach(city => {
-          cityToZone[city.name.toLowerCase()] = city.timezone;
-          cityNames.push(city.name);
-          const opt = document.createElement('option');
-          opt.value = city.timezone;
-          opt.textContent = city.name;
-          dropdown.appendChild(opt);
+        if (dropdown) {
+          const placeholder = dropdown.querySelector('option[value=""]') ? dropdown.querySelector('option[value=""]').outerHTML : '<option value="">Select city...</option>';
+          dropdown.innerHTML = placeholder;
+        }
+        entries.forEach(e => {
+          const key = normalizeKey(e.name);
+          cityToZone[key] = e.timezone || '';
+          const label = displayFor(e, lang) || e.name;
+          cityNames.push(label);
+          if (dropdown) {
+            const opt = document.createElement('option');
+            opt.value = e.timezone || '';
+            const country = e.countryCode ? localizedCountryName(e.countryCode, lang) : '';
+            opt.textContent = country ? `${label} · ${country}` : label;
+            dropdown.appendChild(opt);
+          }
         });
-        const input = document.getElementById('cityInput');
-        awesompleteInstance = new Awesomplete(input, { list: cityNames, minChars: 1, maxItems: 12, autoFirst: true });
+        if (typeof Awesomplete !== 'undefined' && input) {
+          if (input.awesomplete) input.awesomplete.list = cityNames;
+          else awesompleteInstance = new Awesomplete(input, { list: cityNames, minChars: 1, maxItems: 12, autoFirst: true });
+        }
+        console.info('world-cities: populated', entries.length, 'entries');
+      } catch (err) {
+        console.warn('world-cities load failed', err);
       }
     })();
-
+    // Clocks storage & rendering
     let clocks = JSON.parse(localStorage.getItem('worldClocks') || '[]');
     function saveClocks() { localStorage.setItem('worldClocks', JSON.stringify(clocks)); }
     function renderClocks() {
       const list = document.getElementById('clockList');
       list.innerHTML = '';
       if (!clocks || clocks.length === 0) {
-        list.innerHTML = '<div style="color:#888;">No clocks added yet.</div>';
+        list.innerHTML = '<div style="color:#888;">No clocks added.</div>';
         return;
       }
       clocks.forEach((clock, idx) => {
-        let timeStr = '...';
-        let error = false;
+        let timeStr = '...'; let error = false;
         try {
-          let now = DateTime.now().setZone(clock.tz);
-          if (!now.isValid) throw new Error('Invalid zone');
+          const now = DateTime.now().setZone(clock.tz);
+          if (!now.isValid) throw new Error('invalid zone');
           timeStr = now.toFormat('cccc, dd LLL yyyy<br>HH:mm:ss');
         } catch {
           timeStr = 'Invalid time zone';
@@ -133,77 +362,120 @@
         const div = document.createElement('div');
         div.className = 'clock-item';
         div.innerHTML = `
+        <div style="display:flex;gap:.9rem;align-items:center;">
+          <span style="background:#0b2545;color:#fff;border-radius:50%;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;"><i class="fa fa-clock"></i></span>
           <div style="min-width:0;">
             <div style="font-weight:700;">${escapeHtml(clock.label)}</div>
-            <div style="font-size:.95rem;color:#444;">${timeStr}${error ? ' <span style="color:#b00;">(check spelling or use IANA zone)</span>' : ''}</div>
+            <div style="font-size:.95rem;color:#444;">${timeStr}${error ? ' <span style="color:#b00;">(check spelling or use an IANA time zone)</span>' : ''}</div>
           </div>
-          <div style="display:flex;gap:.5rem;">
-            <button class="btn btn-outline-danger btn-sm" onclick="deleteClock(${idx})" aria-label="Remove clock"><i class="fa fa-trash"></i></button>
-          </div>
-        `;
+        </div>
+        <div><button class="btn btn-outline-danger btn-sm" onclick="deleteClock(${idx})" aria-label="Delete"><i class="fa fa-trash"></i></button></div>
+      `;
         list.appendChild(div);
       });
     }
-
     function normalizeInput(input) { return input.trim().toLowerCase().replace(/[\s\-_]+/g, ' '); }
-    function escapeHtml(s){ if(!s) return ''; return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'", '&#39;'); }
-
-    function addClock(label, tz) {
-      clocks.push({ label, tz });
-      saveClocks();
-      renderClocks();
+    function resolveZoneFromInput(val) {
+      if (!val) return '';
+      if (/^[A-Za-z]+\/[A-Za-z_]+$/.test(val)) return val;
+      const key = normalizeKey(val);
+      return cityToZone[key] || '';
     }
-
-    document.getElementById('addClockBtn').addEventListener('click', function() {
+    function addClock(label, tz) { clocks.push({ label, tz }); saveClocks(); renderClocks(); }
+    document.getElementById('addClockBtn').addEventListener('click', function () {
       document.getElementById('errorMsg').textContent = '';
-      const cityInput = document.getElementById('cityInput').value.trim();
-      const dropdownVal = document.getElementById('cityDropdown').value;
+      const inputVal = document.getElementById('cityInput').value.trim();
+      const dropdown = document.getElementById('cityDropdown');
+      const dropdownVal = dropdown ? dropdown.value : '';
       let label = '', zone = '';
-      if (dropdownVal) {
-        label = document.getElementById('cityDropdown').options[document.getElementById('cityDropdown').selectedIndex].text;
+      if (inputVal) {
+        zone = resolveZoneFromInput(inputVal);
+        if (!zone) { document.getElementById('errorMsg').innerHTML = 'City not recognized. Try the suggestions or enter a valid IANA zone (eg. Europe/Paris).'; return; }
+        const canonical = cityList.find(c => normalizeKey(c.name) === normalizeKey(inputVal) || (c.localizedNames && normalizeKey(c.localizedNames[pageLang()] || '') === normalizeKey(inputVal)));
+        label = canonical ? displayFor(canonical, pageLang()) : inputVal;
+      } else if (dropdownVal) {
+        label = dropdown.options[dropdown.selectedIndex].text;
         zone = dropdownVal;
-      } else if (cityInput) {
-        label = cityInput;
-        // allow raw IANA zone input like "Europe/London"
-        if (/^[A-Za-z]+\/[A-Za-z_]+$/.test(cityInput)) {
-          zone = cityInput;
-        } else {
-          const norm = normalizeInput(cityInput);
-          if (cityToZone[norm]) zone = cityToZone[norm];
-          else {
-            document.getElementById('errorMsg').innerHTML = 'City not recognized. Try the dropdown, autocomplete, or enter a valid IANA time zone (e.g. Europe/London). <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">Full list here</a>.';
-            return;
-          }
-        }
       } else {
         document.getElementById('errorMsg').textContent = 'Please select or enter a city or time zone.';
         return;
       }
       addClock(label, zone);
       document.getElementById('cityInput').value = '';
-      document.getElementById('cityDropdown').selectedIndex = 0;
+      if (dropdown) dropdown.selectedIndex = 0;
     });
-
-    document.getElementById('clearClocksBtn').addEventListener('click', function() {
+    document.getElementById('cityInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('addClockBtn').click(); } });
+    document.getElementById('clearClocksBtn').addEventListener('click', function () {
       if (!clocks || clocks.length === 0) return;
       if (!confirm('Clear all clocks?')) return;
-      clocks = [];
-      saveClocks();
-      renderClocks();
+      clocks = []; saveClocks(); renderClocks();
     });
-
-    window.deleteClock = function(idx) {
-      clocks.splice(idx,1);
-      saveClocks();
-      renderClocks();
-    };
-
-    // update every second
+    window.deleteClock = function (idx) { clocks.splice(idx, 1); saveClocks(); renderClocks(); }
     setInterval(renderClocks, 1000);
     renderClocks();
   </script>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+    <div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>world clock</strong> and other <strong>privacy-first productivity tools</strong>.</div>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br>
+    <a href="/privacy.html">Privacy Policy</a> ·
+    <a href="/terms.html">Terms</a> ·
+    <a href="/pricing.html">Pricing</a> · <a href="/contact.html">Contact</a>
+  
+    
+    
 
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">World Clock & Time Zones</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A World Clock displays the current time for various locations around the globe, accounting for the complex web of international time zones and daylight saving adjustments.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">History</h3>
+                <p style="line-height: 1.7; color: #4b5563;">Standard time was popularized by railroads in the 19th century. Sir Sandford Fleming proposed the 24-zone system in 1878, and the Greenwich Meridian was established as 'longitude zero' at the 1884 International Prime Meridian Conference.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Select the city or country you wish to track.</li><li>The tool calculates the offset from Coordinated Universal Time (UTC).</li><li>Check the 'Daylight Saving Time' indicator for accurate local time.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"UTC (Atomic Clock) is more precise than GMT (Solar Time) and is the preferred standard for science and technology."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 </body>
 </html>
+

@@ -1,13 +1,24 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="de">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8">
   <title>Notizen — Praktischer Leitfaden für umsetzbare Notizen | TimerHaven</title>
-  <meta name="description" content="Wie man Notizen in TimerHaven effektiv erfasst, taggt, priorisiert und in Aufgaben überführt. Inklusive Workflows mit Pomodoro und Task Timer, Vorlagen, FAQ und strukturierten Daten.">
+  <meta name="description" content="Wie man Notizen in TimerHaven effektiv erfasst, taggt, priorisiert und in Aufgaben überführt.">>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="canonical" href="https://timerhaven.com/de/notes-index.html">
+  <link rel="canonical" href="https://timerhaven.com/de/notes/notes-index.html">
   <meta name="author" content="Serge Shammas">
-
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -16,29 +27,28 @@
         "@type":"HowTo",
         "name":"Nützliche Notizen erfassen, taggen und in Arbeit überführen",
         "description":"Ein Praxisleitfaden zum Erfassen kurzer Notizen, zum Taggen für Kontext und zur Konvertierung in Aufgaben mit TimerHaven Notes, Pomodoro und Task Timer.",
-        "image":"https://timerhaven.com/assets/images/notes-snapshot.png",
+        "image":"https://timerhaven.com/assets/images/notes-snapshot.webp",
         "totalTime":"PT30M",
         "supply":["TimerHaven Notes","Pomodoro Timer (TimerHaven)","Task Timer oder Spreadsheet"],
         "step":[
-          {"@type":"HowToStep","name":"Schnell erfassen","text":"Titel in einer Zeile, 2–4 Stichpunkte mit Kerninformationen, ein kurzes Tag."},
+          {"@type":"HowToStep","name":"Schnell erfassen","text":"Titel in einer Zeile, 24 Stichpunkte mit Kerninformationen, ein kurzes Tag."},
           {"@type":"HowToStep","name":"Taggen & priorisieren","text":"Primärtag setzen (#task/#idea/#research) und Dringlichkeit markieren (#now/#later)."},
           {"@type":"HowToStep","name":"Konvertieren & planen","text":"Aktion erforderlich? In Task Timer übertragen oder in den Kalender legen."},
-          {"@type":"HowToStep","name":"Regelmäßig prüfen","text":"Tägliche Triage (5–10 Min.) und wöchentliche Review (15–30 Min.) durchführen."}
+          {"@type":"HowToStep","name":"Regelmäßig prüfen","text":"Tägliche Triage (510 Min.) und wöchentliche Review (1530 Min.) durchführen."}
         ]
       },
       {
         "@type":"FAQPage",
         "mainEntity":[
           {"@type":"Question","name":"Werden Notizen lokal oder in der Cloud gespeichert?","acceptedAnswer":{"@type":"Answer","text":"Standardmäßig werden Notizen lokal im Browser gespeichert. Sie können Notizen exportieren, um Backups zu erstellen oder manuell zu synchronisieren."}},
-          {"@type":"Question","name":"Wie oft sollte ich meine Notizen prüfen?","acceptedAnswer":{"@type":"Answer","text":"Eine kurze tägliche Triage (5–10 Minuten) hält die Liste handhabbar; eine wöchentliche Durchsicht (15–30 Minuten) hilft beim Planen und Priorisieren."}},
+          {"@type":"Question","name":"Wie oft sollte ich meine Notizen prüfen?","acceptedAnswer":{"@type":"Answer","text":"Eine kurze tägliche Triage (510 Minuten) hält die Liste handhabbar; eine wöchentliche Durchsicht (1530 Minuten) hilft beim Planen und Priorisieren."}},
           {"@type":"Question","name":"Wie nutze ich Notizen mit Pomodoro?","acceptedAnswer":{"@type":"Answer","text":"Wählen Sie vor dem Start eines Pomodoro eine Notiz als Ziel. Nutzen Sie die Pausen, um den Fortschritt zu dokumentieren und gegebenenfalls Aufgaben zu generieren."}}
         ]
       },
-      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/serge-shammas-400.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
     ]
   }
   </script>
-
   <style>
     :root{--brand:#0b63a0;--muted:#6b7c89;--bg:#fbfeff}
     body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
@@ -57,17 +67,52 @@
     .badge{display:inline-block;padding:.12rem .5rem;border-radius:999px;background:#eef6fb;color:#0b63a0;font-weight:700;font-size:.85rem;margin-right:.4rem}
     table.sample{border-collapse:collapse;margin-top:.5rem;width:100%;max-width:680px;}
     table.sample td, table.sample th{border:1px solid #eef5fb;padding:.35rem .5rem;text-align:left;}
+    /* author block styling */
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    /* Floating return button */
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
   </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Notizen — Praktischer Leitfaden für umsetzbare Notizen | TimerHaven">
+  <meta property="og:description" content="Wie man Notizen in TimerHaven effektiv erfasst, taggt, priorisiert und in Aufgaben überführt. Inklusive Workflows mit Pomodoro und Task Timer, Vorlagen, FAQ und strukturierten Daten.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/de/notes/notes-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Notizen — Praktischer Leitfaden für umsetzbare Notizen | TimerHaven">
+  <meta name="twitter:description" content="Wie man Notizen in TimerHaven effektiv erfasst, taggt, priorisiert und in Aufgaben überführt. Inklusive Workflows mit Pomodoro und Task Timer, Vorlagen, FAQ und strukturierten Daten.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/notes/notes-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/notes/notes-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/notes/notes-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/notes/notes-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/notes/notes-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/notes/notes-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/notes/notes-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/notes/notes-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
       <h1 id="title">Notizen — Erfassen, taggen und in Arbeit überführen</h1>
-
-      <div class="meta">Von Serge Shammas — Veröffentlicht: 2025‑10‑22 · Letzte Aktualisierung: 2025‑11‑22 · Lesezeit: 10–12 Min.</div>
-
+      <div class="author" role="articleauthor" aria-label="Autor">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Von Serge Shammas</strong> — Produktivität & UX</div>
+          <div class="meta">Veröffentlicht: 2025‑10‑22 · Letzte Aktualisierung: 2025‑11‑22 · Lesezeit: 1012 Min.</div>
+        </div>
+      </div>
       <p class="lead">Gute Notizen sind kurz, kontextreich und handlungsorientiert. Dieser Leitfaden zeigt eine einfache, messbare Methode: Notizen schnell erfassen, mit konsistenten Tags versehen, bei Bedarf in Aufgaben überführen und regelmäßig prüfen, damit Ideen nicht verstauben.</p>
-
       <nav class="toc" aria-label="Inhaltsverzeichnis">
         <a href="#why">Warum strukturierte Notizen</a>
         <a href="#capture">Schnell erfassen</a>
@@ -79,12 +124,14 @@
         <a href="#cases">Kurz‑Fallstudien</a>
         <a href="#faq">FAQ</a>
       </nav>
-
       <section id="why" class="section">
-        <h2>Warum strukturierte Notizen?</h2>
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anzeige</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2>Warum strukturierte Notizen?</h2>
         <p>Ideen gehen verloren, wenn sie unstrukturiert oder nicht unmittelbar mit Aktionen verknüpft werden. Eine gute Notiz beantwortet: Was ist es? Warum ist es wichtig? Was ist der nächste Schritt? Wenn Notizen so aufgebaut sind, lassen sie sich leicht in Tasks, Kalender‑Einträge oder Recherche‑Sammlungen überführen.</p>
       </section>
-
       <section id="capture" class="section">
         <h2>Schnell erfassen — Prinzipien</h2>
         <p>Beim Erfassen geht es um Geschwindigkeit und Wiederfindbarkeit, nicht um Perfektion.</p>
@@ -92,13 +139,12 @@
           <strong>Erfassen‑Checklist</strong>
           <ol>
             <li><strong>Titel:</strong> Ergebnisorientiert, eine Zeile (z. B. „Entwurf: Projekt X Intro“).</li>
-            <li><strong>Stichpunkte:</strong> 2–4 bullets mit Kernpunkten, Links oder Schritten.</li>
+            <li><strong>Stichpunkte:</strong> 24 bullets mit Kernpunkten, Links oder Schritten.</li>
             <li><strong>Taggen:</strong> Primärtags wie <span class="badge">#task</span> oder <span class="badge">#idea</span>.</li>
-            <li><strong>Action‑Flag:</strong> Sofort erledigen (<5 min) oder in Task konvertieren.</li>
+            <li><strong>Action‑Flag:</strong> Sofort erledigen (&lt;5 min) oder in Task konvertieren.</li>
           </ol>
         </div>
       </section>
-
       <section id="structure" class="section">
         <h2>Struktur & Tags — Praktische Regeln</h2>
         <p>Verwenden Sie kurze, vorhersehbare Tags. Vermeiden Sie Varianten (z. B. #projX vs #projectX) – entscheiden Sie sich für eine Schreibweise.</p>
@@ -111,11 +157,9 @@
         </ul>
         <p><strong>Titel‑Konvention:</strong> Beginnen Sie mit einem Verb für Aufgaben („E‑Mail senden: Kunde Y“), mit einem Nomen für Referenzen („API‑Limits – Notizen“).</p>
       </section>
-
       <section id="workflows" class="section">
         <h2>Workflows — Notizen mit Pomodoro & Task Timer verbinden</h2>
         <p>Notizen liefern Kontext; der nächste Schritt ist, sie in gemessene Arbeit zu überführen.</p>
-
         <h3>Kurzer Workflow — 1 Pomodoro</h3>
         <ol>
           <li>Wählen Sie eine Notiz <span class="badge">#task</span> als Pomodoro‑Ziel.</li>
@@ -123,11 +167,9 @@
           <li>Pausen: 5 Minuten — eine Sätze Fortschritt notieren.</li>
           <li>Bei Bedarf: Notiz in Task Timer konvertieren und zusätzliche Pomodoros einplanen.</li>
         </ol>
-
         <h3>Messbare Arbeit (Task Timer)</h3>
         <p>Für Schätzverbesserung erstellen Sie aus der Notiz eine Task Timer‑Eintrag mit erwarteter Dauer; erfassen Sie Start/Ende und Unterbrechungen, exportieren Sie CSVs zur Wochenanalyse.</p>
       </section>
-
       <section id="templates" class="section">
         <h2>Vorlagen — Einheitliche Erfassung</h2>
         <p>Nutzen Sie diese Vorlage, um Konsistenz sicherzustellen.</p>
@@ -138,7 +180,6 @@ Tags: #task #projectX
 2) Schritt / Ressource
 3) Einschränkung / Hinweis
 Aktion: [umwandeln / planen / archivieren]</pre>
-
         <script>
           document.getElementById('downloadNotes').addEventListener('click', function(e){
             e.preventDefault();
@@ -153,28 +194,24 @@ Aktion: [umwandeln / planen / archivieren]</pre>
           });
         </script>
       </section>
-
       <section id="review" class="section">
         <h2>Triage — täglich & wöchentlich</h2>
-        <h3>5–10 Minuten täglich</h3>
+        <h3>510 Minuten täglich</h3>
         <ul>
           <li>Schnell neue Notizen prüfen, dringende <span class="badge">#task</span> markieren.</li>
           <li>Kurze Aktionen sofort erledigen; größere Aufgaben in Task Timer überführen.</li>
           <li>Referenzen archivieren oder in Projektordner verschieben.</li>
         </ul>
-
-        <h3>15–30 Minuten wöchentlich</h3>
+        <h3>1530 Minuten wöchentlich</h3>
         <ul>
           <li>Notizen <span class="badge">#idea</span> bewerten: handeln / recherchieren / archivieren.</li>
           <li>Verwandte Notizen zu Projektnotizen zusammenführen und Pomodoro‑Rezepte planen.</li>
           <li>Optional: Weekly‑Export für persönliche Kennzahlen (Konversionen, mittlere Zeit bis Umsetzung).</li>
         </ul>
       </section>
-
       <section id="search" class="section">
         <h2>Suche & Wiederfinden</h2>
         <p>Kurze Tags und Titel‑Präfixe vereinfachen das Filtern. Verwenden Sie das Notes‑Filter‑Panel, um nach Tag, Datum oder Schlüsselwort zu suchen. Für große Archive: regelmäßige Exporte in Cloud‑Speicher.</p>
-
         <table class="sample" aria-hidden="false">
           <thead><tr><th>Feld</th><th>Beispiel</th></tr></thead>
           <tbody>
@@ -184,7 +221,6 @@ Aktion: [umwandeln / planen / archivieren]</pre>
           </tbody>
         </table>
       </section>
-
       <section id="cases" class="section">
         <h2>Kurz‑Fallstudien</h2>
         <div class="workflow">
@@ -196,24 +232,90 @@ Aktion: [umwandeln / planen / archivieren]</pre>
           <p>Alex taggt Quellen mit <span class="badge">#research</span> und fügt Links hinzu; wöchentliche Reviews vereinfachen Literaturübersichten.</p>
         </div>
       </section>
-
       <section id="faq" class="section">
         <h2>FAQ</h2>
         <div class="muted">
           <p><strong>F:</strong> Kann ich Notizen exportieren?<br><strong>A:</strong> Ja — JSON/CSV/Text‑Export verfügbar; ideal für Backups oder Übertragung.</p>
-          <p><strong>F:</strong> Wie verhindere ich Note‑Bloat?<br><strong>A:</strong> Tägliche Triage und Archivierungsregeln: ungenutzte Referenzen nach 1–2 Jahren archivieren.</p>
-          <p><strong>F:</strong> Wie lange aufbewahren?<br><strong>A:</strong> Actionable Notes bis Abschluss behalten; Referenzen je nach Relevanz archivieren.</p>
+          <p><strong>F:</strong> Wie verhindere ich Note‑Bloat”<br><strong>A:</strong> Tägliche Triage und Archivierungsregeln: ungenutzte Referenzen nach 12 Jahren archivieren.</p>
+          <p><strong>F:</strong> Wie lange aufbewahren”<br><strong>A:</strong> Actionable Notes bis Abschluss behalten; Referenzen je nach Relevanz archivieren.</p>
         </div>
       </section>
-
-      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/de/pomodoro-de.html">Pomodoro</a> · <a href="/timer-de.html#startBtn">Task Timer</a> · <a href="/de/calendar-planning-index.html">Kalender</a></p>
-
+      <p class="muted" style="margin-top:1rem;">Verwandte Tools: <a href="/pomodoro-de.html">Pomodoro</a> · <a href="/timer-de.html#startBtn">Task Timer</a> · <a href="/de/calendar-planning/calendar-planning-index.html">Kalender</a></p>
       <p style="margin-top:1.2rem;"><a href="/notes-de.html" class="cta">Notizen‑Tool öffnen</a></p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anzeige</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:.95rem;">
+        <p>Fragen” <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Datenschutz: <a href="/privacy.html">Privacy Policy</a>.</p>
+      
+    
+    
 
-      <footer style="margin-top:1.4rem;color:var(--muted);font-size:.95rem;">
-        <p>Fragen? <a href="mailto:contact@timerhaven.com">contact@timerhaven.com</a>. Datenschutz: <a href="/privacy/">Privacy Policy</a>.</p>
-      </footer>
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Notizen & Quick-Memo</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Ein leichtes digitales Notizbuch zum schnellen Erfassen von Gedanken und Listen.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Geschichte</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Anleitung</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Tippen Sie Ihre Notizen ein.</li><li>Der Fortschritt wird lokal gespeichert.</li><li>Exportieren Sie Ihre Notizen bei Bedarf.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Nutzen Sie kurze Listen fأ¼r die schnelle Erfassung von Ideen wأ¤hrend Meetings."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Weitere kostenlose Produktivitäts-Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Aufgaben-Timer</a> <a href="../../stopwatch-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stoppuhr</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Einheitenumrechner</a> <a href="../../weather-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Wetter</a> <a href="../../world-clock-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weltuhr</a> <a href="../../calendar-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Kalender</a> <a href="../../clipboard-manager-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Zwischenablage</a> <a href="../../countdown-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="../../currency-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Währungsrechner</a> <a href="../../focus-music-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Fokus-Musik</a> <a href="../../habit-tracker-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Gewohnheiten</a> <a href="../../meeting-planner-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting-Planer</a> <a href="../../notes-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notizen</a> <a href="../../password-generator-de.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwörter</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/notes-de.html" class="return-to-tool" id="returnToToolNotes" aria-label="Zurück zu Notizen">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Zum Notizen‑Tool</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolNotes');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

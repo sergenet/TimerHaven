@@ -1,154 +1,529 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8" />
-  <title>Clipboard Manager — TimerHaven</title>
+  <title>Privacy-First Local Browser Clipboard Manager | TimerHaven</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Save quick text snippets to reuse later. Clips are stored locally in your browser.">
-  <meta name="author" content="Serge Shammas">
-
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description"
+    content="Save quick text snippets to reuse later. Clips are stored locally in your browser." />
+  <meta name="author" content="Serge Shammas" />
+  <meta name="datePublished" content="2025-10-07" />
+  <meta name="dateModified" content="2026-01-06" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/tool-theme.css"  media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  media="print" onload="this.media='all'">
+  <link rel="canonical" href="https://timerhaven.com/clipboard-manager-en.html" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Clipboard Manager  Save quick text snippets locally",
+    "description":"Clipboard Manager stores short text snippets locally in your browser for quick reuse. Export and import backups to move clips between devices.",
+    "author":{"@type":"Person","name":"Serge Shammas","url":"https://timerhaven.com/authors/serge-shammas"},
+    "datePublished":"2025-10-07",
+    "dateModified":"2026-01-06",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://timerhaven.com/clipboard-manager-en.html"}
+  }
+  </script>
   <style>
     /* Minor page-local tweaks (no brand overrides) */
-    .tool-title { font-size:1.25rem; margin:4px 0 .6rem 0; font-weight:700; display:flex; gap:.5rem; align-items:center; }
-    .top-controls { display:flex; gap:.6rem; margin-top:8px; flex-wrap:wrap; }
-    .clipboard-form textarea { width:100%; min-height:72px; border-radius:10px; border:1px solid #e6eef5; padding:10px; box-sizing:border-box; }
-    .clips-list { max-height:260px; overflow:auto; margin-top:.75rem; }
-    .clip-item { background:#f7fafc; border-radius:8px; padding:.6rem; margin-bottom:.6rem; display:flex; justify-content:space-between; gap:.6rem; align-items:flex-start; }
-    .clip-text { flex:1; word-break:break-word; color:#22313f; margin-right:.6rem; }
-    .example-card { margin-top:12px; padding:10px; background:#fbfdff; border:1px solid #eef5fb; border-radius:8px; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
-    .muted { color:var(--muted); font-size:.95rem; }
-
+    .tool-title {
+      font-size: 1.25rem;
+      margin: 4px 0 .6rem 0;
+      font-weight: 700;
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+    .top-controls {
+      display: flex;
+      gap: .6rem;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .clipboard-form textarea {
+      width: 100%;
+      min-height: 72px;
+      border-radius: 10px;
+      border: 1px solid #e6eef5;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .clips-list {
+      max-height: 260px;
+      overflow: auto;
+      margin-top: .75rem;
+    }
+    .clip-item {
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: .6rem;
+      margin-bottom: .6rem;
+      display: flex;
+      justify-content: space-between;
+      gap: .6rem;
+      align-items: flex-start;
+    }
+    .clip-text {
+      flex: 1;
+      word-break: break-word;
+      color: #22313f;
+      margin-right: .6rem;
+    }
+    .example-card {
+      margin-top: 12px;
+      padding: 10px;
+      background: #fbfdff;
+      border: 1px solid #eef5fb;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .muted {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    /* in-card intro styling */
+    .tool-intro-in-card {
+      font-size: 1rem;
+      color: #415a6b;
+      margin-bottom: .9rem;
+      max-width: 820px;
+    }
+    .tool-intro-in-card p:first-child {
+      margin: 0 0 .35rem 0;
+      line-height: 1.5;
+    }
+    .tool-intro-in-card strong {
+      color: #22313f;
+    }
     /* Ensure in-card tool title uses the darker blue used across other tools */
-    section.tool-card .tool-title { color: #185a9d !important; }
-
+    section.tool-card .tool-title {
+      color: #185a9d !important;
+    }
     /* Read guide button: blue rounded rectangular style to match other tools */
     .read-guide {
-      display:inline-block;
-      margin:.35rem 0 .8rem 0;
-      padding:.45rem .7rem;
-      border-radius:8px;
-      background:var(--brand,#0d6efd);
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      font-size:.95rem;
-      border:none;
+      display: inline-block;
+      margin: .35rem 0 .8rem 0;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: var(--brand, #0d6efd);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+    }
+    /* mobile compact */
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+      .tool-intro-in-card {
+        order: 2;
+      }
+      .clipboard-form,
+      .clips-list {
+        order: 1;
+      }
+      .tool-intro-in-card p {
+        display: none;
+      }
+      .tool-card {
+        width: 94vw;
+        padding: 12px;
+      }
+      .clip-item {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .clip-actions {
+        flex-direction: row;
+        margin-top: 0.5rem;
+        justify-content: flex-start;
+      }
     }
   </style>
+  <script>
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Privacy-First Local Browser Clipboard Manager | TimerHaven">
+  <meta property="og:description" content="Store and organize text snippets securely with our privacy-first local browser clipboard manager. No data leaves your device. 100% free and ad-free.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/clipboard-manager-en.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Privacy-First Local Browser Clipboard Manager | TimerHaven">
+  <meta name="twitter:description" content="Store and organize text snippets securely with our privacy-first local browser clipboard manager. No data leaves your device. 100% free and ad-free.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta name="keywords" content="privacy first clipboard manager, local browser clipboard history, secure text snippet tool, offline clipboard manager online">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/clipboard-manager-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/clipboard-manager-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/clipboard-manager-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/clipboard-manager-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/clipboard-manager-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/clipboard-manager-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/clipboard-manager-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/clipboard-manager-en.html">
 </head>
 <body>
-  <header style="text-align:center;padding:48px 12px 20px;">
-    <h1 style="margin:0;color:var(--brand);font-size:2.1rem;">Clipboard Manager</h1>
-    <p class="small-muted" style="margin:10px auto 0;max-width:880px;color:#415a6b;">Save and reuse text snippets across tasks. Use Export/Import for backups and keep frequently used text handy.</p>
-  </header>
-
-  <main style="display:flex;justify-content:center;padding:28px 12px 64px;">
+    <main style="display:flex;justify-content:center;padding:28px 12px 64px;">
     <article class="tool-card" role="main" aria-labelledby="tool-title" style="width:420px;padding:1.6rem;">
-      <a href="index.html" class="back-link" style="margin-bottom:8px;display:inline-block;">&larr;&nbsp;Back to Main Menu</a>
-
-      <div class="tool-title" id="tool-title" style="color:#185a9d !important;"><i class="fa fa-clipboard"></i> Clipboard Manager</div>
-
-      <a href="clipboard-how-to.html" class="read-guide" aria-label="Read full guide">Read full guide</a>
-
-      <p class="muted" style="margin:0 0 .6rem 0;">Save quick text snippets to reuse later. Clips are stored locally in your browser.</p>
-
+      <a href="index.html" class="back-link" style="margin-bottom:8px;display:inline-block;">&larr;&nbsp;Back to Main
+        Menu</a>
+      <div class="mobile-summary">Save short snippets locally  <a
+          href="en/clipboard-manager/clipboard-manager-index.html">Read full guide</a></div>
+      <div class="tool-title" id="tool-title" style="color:#185a9d !important;"><i class="fa fa-clipboard"></i>
+        Clipboard Manager</div>
+      <a id="read-guide-btn" href="en/clipboard-manager/clipboard-manager-index.html" class="read-guide"
+        aria-label="Read full guide">Read full guide</a>
+      <!-- server-rendered in-card intro (visible on desktop; simplified on mobile) -->
+      <div class="tool-intro-in-card" id="tool-help-card" data-preserve="true">
+        <p>Stop pasting passwords into shady cloud apps. Our clipboard manager saves your frequently used snippets entirely locally within your browser's storage. Your data never touches our servers.</p>
+        <p style="margin:.4rem 0 0;"><strong>By Serge Shammas ·</strong> · Last updated: <time datetime="2026-01-06">Jan
+            6, 2026</time></p>
+      </div>
       <div class="top-controls">
         <button id="show-info" class="btn btn-outline-secondary btn-sm">Show Info</button>
         <button id="export-clips" class="btn btn-outline-primary btn-sm">Export</button>
         <button id="import-clips" class="btn btn-outline-success btn-sm">Import</button>
         <button id="clear-all" class="btn btn-danger btn-sm ms-auto">Clear All</button>
       </div>
-
       <form id="clipboardForm" class="clipboard-form" aria-label="Add clipboard note" style="margin-top:.6rem;">
-        <textarea id="clipboardInput" placeholder="Type or paste your note here..." class="form-control" aria-label="Clipboard input"></textarea>
+        <textarea id="clipboardInput" placeholder="Type or paste your note here..." class="form-control"
+          aria-label="Clipboard input"></textarea>
         <div style="display:flex; gap:.5rem; margin-top:.6rem;">
           <button type="submit" id="add-btn" class="btn btn-success">Add</button>
           <button type="button" id="paste-btn" class="btn btn-outline-secondary">Paste</button>
           <button type="button" id="clear-input" class="btn btn-outline-danger">Clear</button>
         </div>
       </form>
-
       <div class="clips-list" id="clips-list" aria-live="polite" aria-atomic="true" style="margin-top:.8rem;"></div>
-
       <div class="example-card" role="group" aria-labelledby="example-title">
         <div style="min-width:0;flex:1 1 260px;">
           <strong id="example-title">Download sample clips</strong>
           <div class="muted">Small backup file illustrating common clips (for import)</div>
         </div>
         <div style="flex:0 0 auto;">
-          <button id="exportDemoBtnInline" class="btn btn-outline-primary btn-sm" aria-label="Download sample backup">Download sample backup</button>
+          <button id="exportDemoBtnInline" class="btn btn-outline-primary btn-sm"
+            aria-label="Download sample backup">Download sample backup</button>
         </div>
       </div>
-
       <details class="faq" id="faq-section" style="margin-top:12px;">
         <summary style="font-weight:700;">FAQs</summary>
         <div style="margin-top:8px;">
-          <p class="muted" style="margin:0 0 .5rem 0;"><strong>Where are clips saved?</strong> Clips are saved locally in your browser. Use Export to download a backup file you can keep or restore later.</p>
+          <p class="muted" style="margin:0 0 .5rem 0;"><strong>Where are clips saved?</strong> Clips are saved locally
+            in your browser. Use Export to download a backup file you can keep or restore later.</p>
         </div>
       </details>
     </article>
   </main>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:8px;color:var(--muted);font-size:13px;padding-bottom:24px;">
+    <div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>online clipboard</strong> and other <strong>privacy-first productivity tools</strong>.</div>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.
+    &nbsp; <a href="/privacy.html">Privacy Policy</a>
+    &nbsp; | &nbsp; <a href="/terms.html">Terms of Service</a>
+    &nbsp; | &nbsp; <a href="/pricing.html">Pricing</a> · <a href="/contact.html">Contact</a>
+  
+    
+    
 
-  <footer style="text-align:center;margin-top:8px;color:var(--muted);font-size:13px;padding-bottom:24px;">&copy; 2025 TimerHaven. All tools are free and privacy-friendly. &nbsp; <a href="privacy.html">Privacy Policy</a></footer>
+    
+    
+    
 
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Clipboard Manager</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A productivity tool that extends the default clipboard by storing a history of copied items, making them searchable and reusable.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">History</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Copy items as you normally would.</li><li>Open the manager to view your history.</li><li>Select any previous item to re-paste it instantly.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Use a clipboard manager to store frequently used code snippets or email signatures for rapid access."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
+  <script src="assets/js/syncManager.js"></script>
   <script>
+    // console.error for mobile errors
+    window.onerror = function (msg, url, line) {
+      console.error('JS Error: ' + msg + '\nLine: ' + line);
+      return false;
+    };
     // Storage helpers
-    function safeSet(key, value){ try{ localStorage.setItem(key, value); return true; }catch(e){ return false; } }
-    function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
-
+    function safeSet(key, value) { try { localStorage.setItem(key, value); return true; } catch (e) { console.error('Storage Save Error: ' + e.message); return false; } }
+    function safeGet(key) { try { return localStorage.getItem(key); } catch (e) { console.error('Storage Read Error: ' + e.message); return null; } }
     const STORAGE_KEY = 'clipboardClips_v1';
-    let clips = JSON.parse(safeGet(STORAGE_KEY) || '[]');
-
+    let clips;
+    try {
+      clips = JSON.parse(safeGet(STORAGE_KEY) || '[]');
+    } catch (e) {
+      clips = [];
+    }
+    if (!Array.isArray(clips)) clips = [];
+    // Assign IDs to legacy clips if missing
+    clips.forEach(c => { if (!c.id) c.id = 'clip_' + Math.random().toString(36).substr(2, 9) + '_' + (c.created || Date.now()); });
+    function saveClips() {
+      safeSet(STORAGE_KEY, JSON.stringify(clips));
+      requestAnimationFrame(renderClips);
+    }
+    // Layered clipboard helpers (navigator.clipboard -> native bridge -> execCommand)
+    function status(msg) {
+      const s = document.getElementById('status');
+      if (s) s.textContent = msg || '';
+    }
+    function safeWriteToClipboard(text) {
+      // Prefer modern clipboard API
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text).then(function () {
+          return 'navigator';
+        }).catch(function (err) {
+          // Try native bridge if present
+          if (window.AndroidClipboard && typeof window.AndroidClipboard.writeText === 'function') {
+            try { window.AndroidClipboard.writeText(text); return Promise.resolve('native'); } catch (e) { }
+          }
+          // Fallback to execCommand
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            return Promise.resolve('exec');
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        });
+      }
+      // If no navigator.clipboard, try native bridge
+      if (window.AndroidClipboard && typeof window.AndroidClipboard.writeText === 'function') {
+        try { window.AndroidClipboard.writeText(text); return Promise.resolve('native'); } catch (e) { }
+      }
+      // Last-resort execCommand fallback
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        return Promise.resolve('exec');
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+    function safeReadFromClipboard() {
+      // Prefer modern clipboard API
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        return navigator.clipboard.readText().then(function (txt) { return { source: 'navigator', text: txt }; })
+          .catch(function (err) {
+            // fallback to native bridge if present
+            if (window.AndroidClipboard && typeof window.AndroidClipboard.readText === 'function') {
+              try { const r = window.AndroidClipboard.readText(); return Promise.resolve({ source: 'native', text: r || '' }); } catch (e) { }
+            }
+            return Promise.resolve({ source: 'none', text: '' });
+          });
+      }
+      // If no navigator.clipboard, try native bridge
+      if (window.AndroidClipboard && typeof window.AndroidClipboard.readText === 'function') {
+        try { const r = window.AndroidClipboard.readText(); return Promise.resolve({ source: 'native', text: r || '' }); } catch (e) { }
+      }
+      // No reliable read available
+      return Promise.resolve({ source: 'none', text: '' });
+    }
+    // Acquire DOM refs safely
     const clipsList = document.getElementById('clips-list'),
-          clipboardForm = document.getElementById('clipboardForm'),
-          clipboardInput = document.getElementById('clipboardInput');
-
-    function renderClips(){
+      clipboardForm = document.getElementById('clipboardForm'),
+      clipboardInput = document.getElementById('clipboardInput');
+    // Render clips using safeWriteToClipboard for copy action
+    function renderClips() {
+      if (!clipsList) return;
       clipsList.innerHTML = '';
       if (!clips || clips.length === 0) {
-        const p = document.createElement('div'); p.className = 'muted'; p.textContent = 'No clips yet.';
-        clipsList.appendChild(p); return;
+        const p = document.createElement('div'); p.className = 'muted'; p.textContent = 'No clips yet.'; clipsList.appendChild(p); return;
       }
-      clips.forEach((c,i) => {
+      clips.forEach((c, i) => {
         const item = document.createElement('div'); item.className = 'clip-item';
         const text = document.createElement('div'); text.className = 'clip-text'; text.textContent = c.text;
         const actions = document.createElement('div'); actions.className = 'clip-actions';
         const copyBtn = document.createElement('button'); copyBtn.className = 'btn btn-sm btn-outline-success'; copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copy';
-        copyBtn.onclick = async () => {
-          try { await navigator.clipboard.writeText(c.text); copyBtn.textContent = 'Copied'; setTimeout(()=>copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copy',900); }
-          catch (e) { alert('Copy failed — your browser may block clipboard access.'); }
+        copyBtn.onclick = function () {
+          // Use layered clipboard helper
+          safeWriteToClipboard(c.text).then((method) => {
+            if (method === 'navigator') { copyBtn.textContent = 'Copied'; setTimeout(() => copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copy', 900); }
+            else if (method === 'native') { copyBtn.textContent = 'Copied'; setTimeout(() => copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copy', 900); }
+            else if (method === 'exec') { copyBtn.textContent = 'Copied'; setTimeout(() => copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copy', 900); }
+          }).catch((err) => {
+            console.error('Copy failed  your browser may block clipboard access.');
+          });
         };
         const editBtn = document.createElement('button'); editBtn.className = 'btn btn-sm btn-outline-secondary'; editBtn.textContent = 'Edit';
-        editBtn.onclick = () => { clipboardInput.value = c.text; clipboardInput.focus(); }
+        editBtn.onclick = function () { if (clipboardInput) { clipboardInput.value = c.text; clipboardInput.focus(); } };
         const delBtn = document.createElement('button'); delBtn.className = 'btn btn-sm btn-outline-danger'; delBtn.innerHTML = '<i class="fa fa-trash"></i>';
-        delBtn.onclick = () => { if (!confirm('Remove this clip?')) return; clips.splice(i,1); safeSet(STORAGE_KEY, JSON.stringify(clips)); renderClips(); };
-
+        delBtn.onclick = function () {
+          const removed = clips.splice(i, 1)[0];
+          saveClips();
+          if (removed && removed.id && window.SyncManager && window.SyncManager.isAvailable()) {
+            try {
+              window.SyncManager.deleteClip(removed.id);
+            } catch (e) { }
+          }
+        };
         actions.appendChild(copyBtn); actions.appendChild(editBtn); actions.appendChild(delBtn);
         item.appendChild(text); item.appendChild(actions); clipsList.appendChild(item);
       });
     }
-
-    clipboardForm.addEventListener('submit', function(e){ e.preventDefault(); const v = clipboardInput.value.trim(); if (!v) return; clips.unshift({ text: v, created: Date.now() }); safeSet(STORAGE_KEY, JSON.stringify(clips)); clipboardInput.value = ''; renderClips(); });
-
-    document.getElementById('paste-btn').addEventListener('click', async () => { try{ const text = await navigator.clipboard.readText(); clipboardInput.value = text; } catch(e){ alert('Unable to read from clipboard (permission denied).'); } });
-
-    document.getElementById('clear-input').addEventListener('click', () => { clipboardInput.value = ''; });
-
-    document.getElementById('clear-all').addEventListener('click', () => { if (!confirm('Clear all clips? This cannot be undone.')) return; clips = []; safeSet(STORAGE_KEY, JSON.stringify(clips)); renderClips(); });
-
-    document.getElementById('export-clips').addEventListener('click', () => {
+    function addClip() {
+      if (!clipboardInput) return;
+      const v = clipboardInput.value.trim();
+      if (!v) return;
+      const newClip = {
+        id: 'clip_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+        text: v,
+        created: Date.now()
+      };
+      clips.unshift(newClip);
+      saveClips();
+      if (window.SyncManager && window.SyncManager.isAvailable()) {
+        try {
+          window.SyncManager.saveClip(newClip.id, newClip.text, newClip.created);
+        } catch (e) { }
+      }
+      clipboardInput.value = '';
+    }
+    if (clipboardForm) {
+      clipboardForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        addClip();
+      });
+    }
+    const addBtn = document.getElementById('add-btn');
+    if (addBtn) {
+      addBtn.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        addClip();
+      });
+      addBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        addClip();
+      });
+    }
+    // Paste button uses safeReadFromClipboard
+    const pasteBtnEl = document.getElementById('paste-btn');
+    if (pasteBtnEl) pasteBtnEl.addEventListener('click', async () => {
+      try {
+        const res = await safeReadFromClipboard();
+        if (clipboardInput) clipboardInput.value = res.text || '';
+        if (res.source === 'navigator') status('Pasted from navigator.clipboard');
+        else if (res.source === 'native') status('Pasted from native bridge (AndroidClipboard)');
+        else status('No clipboard content available or reading unsupported.');
+      } catch (e) {
+        console.error('Unable to read from clipboard (permission denied or unsupported).');
+      }
+    });
+    const clearInputEl = document.getElementById('clear-input');
+    if (clearInputEl) clearInputEl.addEventListener('click', () => { if (clipboardInput) clipboardInput.value = ''; });
+    const clearAllEl = document.getElementById('clear-all');
+    if (clearAllEl) clearAllEl.addEventListener('click', () => {
+      if (!confirm('Clear all clips? This cannot be undone.')) return;
+      clips = []; safeSet(STORAGE_KEY, JSON.stringify(clips)); renderClips();
+    });
+    const exportClipsEl = document.getElementById('export-clips');
+    if (exportClipsEl) exportClipsEl.addEventListener('click', () => {
       const data = JSON.stringify(clips, null, 2);
       const blob = new Blob([data], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = 'clipboard-backup.json';
       document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
     });
-
-    document.getElementById('import-clips').addEventListener('click', () => {
+    const importClipsEl = document.getElementById('import-clips');
+    if (importClipsEl) importClipsEl.addEventListener('click', () => {
       const input = document.createElement('input'); input.type = 'file'; input.accept = 'application/json';
       input.onchange = () => {
         const file = input.files[0]; if (!file) return;
@@ -160,39 +535,67 @@
             clips = imported.concat(clips);
             safeSet(STORAGE_KEY, JSON.stringify(clips));
             renderClips();
-            alert('Imported clips.');
+            // Imported clips.
           } catch (err) {
-            alert('Failed to import: ' + err.message);
+            console.error('Failed to import: ' + err.message);
           }
         };
         reader.readAsText(file);
       };
       input.click();
     });
-
-    document.getElementById('show-info').addEventListener('click', function() {
-      alert('This Clipboard Manager stores clips locally in your browser. Use Export to download a backup file you can keep or restore later.');
+    const showInfoEl = document.getElementById('show-info');
+    if (showInfoEl) showInfoEl.addEventListener('click', function () {
+      console.log('This Clipboard Manager stores clips locally in your browser. Use Export to download a backup file you can keep or restore later.');
     });
-
     // Demo download (sample backup)
-    (function(){
+    (function () {
       const btn = document.getElementById('exportDemoBtnInline');
       if (!btn) return;
-      btn.addEventListener('click', function(){
+      btn.addEventListener('click', function () {
         const sample = [
-          { "text": "Client: Acme Corp — kickoff notes", "created": 1700000000000 },
-          { "text": "Login: user@example.com — placeholder", "created": 1700000500000 },
-          { "text": "Refund policy summary — include clause X", "created": 1700001000000 }
+          { "text": "Client: Acme Corp  kickoff notes", "created": 1700000000000 },
+          { "text": "Login: user@example.com  placeholder", "created": 1700000500000 },
+          { "text": "Refund policy summary  include clause X", "created": 1700001000000 }
         ];
         const blob = new Blob([JSON.stringify(sample, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a'); a.href = url; a.download = 'clipboard-sample-backup.json';
         document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-        const orig = btn.innerHTML; btn.innerHTML = 'Downloaded'; btn.disabled = true; setTimeout(()=>{ btn.innerHTML = orig; btn.disabled = false; }, 1200);
+        const orig = btn.innerHTML; btn.innerHTML = 'Downloaded'; btn.disabled = true; setTimeout(() => { btn.innerHTML = orig; btn.disabled = false; }, 1200);
       });
     })();
-
     document.addEventListener('DOMContentLoaded', () => { if (!Array.isArray(clips)) clips = []; renderClips(); window.__timerhaven_clips = clips; });
+    // Cloud Sync Listeners
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.clipboard) {
+        let changed = false;
+        cloudData.clipboard.forEach(cloudClip => {
+          const existing = clips.find(c => c.id === cloudClip.id);
+          if (!existing) {
+            clips.push(cloudClip);
+            changed = true;
+          } else {
+            const cloudTs = cloudClip.timestamp || 0;
+            const localTs = existing.created || 0;
+            if (cloudTs > localTs) {
+              existing.text = cloudClip.text;
+              existing.created = cloudTs;
+              changed = true;
+            }
+          }
+        });
+        if (changed) {
+          saveClips();
+          renderClips();
+        }
+      }
+    });
+    window.addEventListener('timerhaven:cloudDataChanged', function () {
+      if (SyncManager.isAvailable()) SyncManager.initialize();
+    });
   </script>
 </body>
 </html>
+

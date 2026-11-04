@@ -1,13 +1,29 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+    <link rel="manifest" href="calendar.webmanifest">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+
   <meta charset="utf-8" />
   <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Calendar — TimerHaven</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <meta name="description" content="Easily save and manage multiple calendar notes. Learn how to use Calendar, get productivity tips, FAQs, and read expert articles.">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  media="print" onload="this.media='all'">
   <style>
     /* Avoid page shift when scrollbar appears/disappears */
     html { overflow-y: scroll; }
@@ -206,15 +222,57 @@
 
     footer { padding:1rem; text-align:center; color:var(--muted); font-size:.95rem; }
   </style>
-</head>
+<script>
+
+</script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Calendar — TimerHaven">
+  <meta property="og:description" content="Easily save and manage multiple calendar notes. Learn how to use Calendar, get productivity tips, FAQs, and read expert articles.">
+  <meta property="og:image" content="https://timerhaven.com/images/social-banner.webp">
+  <meta property="og:url" content="https://timerhaven.com/calendar.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calendar — TimerHaven">
+  <meta name="twitter:description" content="Easily save and manage multiple calendar notes. Learn how to use Calendar, get productivity tips, FAQs, and read expert articles.">
+  <meta name="twitter:image" content="https://timerhaven.com/images/social-banner.webp">
+
+  <meta name="keywords" content="free online calendar, localized calendar, productivity calendar, schedule planner, productivity tools, privacy-first, no login">
+
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Online Calendar",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "A digital calendar tool for organizing dates, events, and schedules. It builds on thousands of years of human timekeeping evolution.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="canonical" href="https://timerhaven.com/calendar-en.html" /></head>
 <body>
-  <main class="main-container" id="main">
-    <div class="center-row">
+    <main class="main-container" id="main">
+    
       <aside class="card-base article-card" id="left-card">
-        <h2 id="howto-title"></h2>
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="howto-title"></h2>
         <ol id="howto-steps"></ol>
         <div style="margin-top:auto;">
-          <a id="howto-article-btn" class="btn btn-outline-primary" href="calendar-how-to.html">Read Full Article</a>
+          <a id="howto-article-btn" class="btn btn-outline-primary" href="en/calendar-planning/calendar-planning-index.html">Read Full Article</a>
         </div>
       </aside>
 
@@ -222,6 +280,12 @@
         <a id="back-link" class="back-link" href="index.html" style="margin-bottom:.25rem;display:inline-block;color:var(--brand);font-weight:600;text-decoration:none;">Back to Main Menu</a>
 
         <h3 id="tool-title"></h3>
+      <a id="read-guide-btn" class="read-guide btn btn-sm btn-primary" href="https://timerhaven.com/en/calendar-planning/calendar-planning-index.html" role="button" target="_blank" rel="noopener" style="margin-bottom: 0.8rem; margin-right: 0.5rem; text-decoration: none;">Read full guide</a>
+
+      <!-- PWA Install Button -->
+      <button id="installAppBtn" class="btn btn-sm btn-outline-primary ms-2" style="display: inline-block; border-radius: 8px; font-weight: 600; vertical-align: baseline; margin-bottom: 0.8rem; margin-right: 0.5rem;">
+        <i class="fa fa-download"></i> Install App
+      </button>
         <div id="tool-help" style="color:var(--muted);margin-bottom:.25rem;"></div>
 
         <div class="calendar-header" aria-label="Calendar navigation">
@@ -241,17 +305,14 @@
 
         <table id="calendar-table" class="calendar-table table" role="grid" aria-describedby="tool-help"></table>
 
-        <details class="faq-section" id="faq-section">
-          <summary id="faq-title">FAQs ▾</summary>
-          <ul id="faq-list"></ul>
-        </details>
+        
       </section>
 
       <aside class="card-base article-card" id="right-card">
         <h2 id="tips-title"></h2>
         <ul id="tips-list"></ul>
         <div style="margin-top:auto;">
-          <a id="tips-article-btn" class="btn btn-outline-primary" href="calendar-tips.html">Read Full Article</a>
+          <a id="tips-article-btn" class="btn btn-outline-primary" href="en/calendar-planning/calendar-planning-index.html">Read Full Article</a>
         </div>
       </aside>
     </div>
@@ -279,7 +340,55 @@
     </div>
   </div>
 
-  <footer>&copy; 2025 TimerHaven. All tools are free and privacy-friendly. <br><a href="privacy.html">Privacy Policy</a> · <a href="contact.html">Contact</a></footer>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer><div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>free online calendar</strong> and other <strong>privacy-first productivity tools</strong>.</div>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly. <br><a href="/privacy.html">Privacy Policy</a> · <a href="/pricing.html">Pricing</a> · <a href="/contact.html">Contact</a>
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Online Calendar</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A digital calendar tool for organizing dates, events, and schedules. It builds on thousands of years of human timekeeping evolution.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">History</h3>
+                <p style="line-height: 1.7; color: #4b5563;">The earliest calendars were lunar-based (Babylonian/Egyptian). In 46 BC, Julius Caesar introduced the Julian calendar, which was refined in 1582 by Pope Gregory XIII into the Gregorian system used today.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Navigate to the current month or search for a specific date.</li><li>Add events or notes to specific days.</li><li>Use the 'Today' button to quickly return to the current date.</li></ul>
+            </div>
+        </div>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Visualizing your month helps reduce cognitive load and allows for better long-term planning and goal setting."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -305,12 +414,12 @@
         "howto-steps": `<li><strong>Click a day:</strong> Open the modal to add/view multiple notes for each day.</li>
                         <li><strong>Organize events:</strong> Every note is timestamped and can be deleted individually.</li>
                         <li><strong>Persistent:</strong> Notes are saved in your browser and remain until you remove them.</li>`,
-        "howto-article-link":"calendar-how-to.html",
+        "howto-article-link":"en/calendar-planning/calendar-planning-index.html",
         "tips-title":"<i class='fa fa-lightbulb'></i> Calendar Productivity Tips",
         "tips-list": `<li><strong>Color code your notes:</strong> Use emojis or tags for quick visual organization.</li>
                       <li><strong>Review regularly:</strong> Remove outdated notes.</li>
                       <li><strong>Plan ahead:</strong> Add notes for future dates.</li>`,
-        "tips-article-link":"calendar-tips.html",
+        "tips-article-link":"en/calendar-planning/calendar-planning-index.html",
         "noteModalLabel":"Notes for",
         "noteInput":"Add a new note for this day...",
         "note-none":"No notes yet for this day.",
@@ -497,8 +606,8 @@
       const ni = document.getElementById('noteInput'); ni && (ni.placeholder = obj['noteInput']);
       const nc = document.getElementById('note-close-btn'); nc && (nc.textContent = obj['note-close-btn']);
       const na = document.getElementById('note-add-btn'); na && (na.textContent = obj['note-add-btn']);
-      const howtoBtn = document.getElementById('howto-article-btn'); howtoBtn && (howtoBtn.href = obj['howto-article-link'] || 'calendar-how-to.html');
-      const tipsBtn = document.getElementById('tips-article-btn'); tipsBtn && (tipsBtn.href = obj['tips-article-link'] || 'calendar-tips.html');
+      const howtoBtn = document.getElementById('howto-article-btn'); howtoBtn && (howtoBtn.href = obj['howto-article-link'] || 'en/calendar-planning/calendar-planning-index.html');
+      const tipsBtn = document.getElementById('tips-article-btn'); tipsBtn && (tipsBtn.href = obj['tips-article-link'] || 'en/calendar-planning/calendar-planning-index.html');
     }
 
     document.addEventListener('DOMContentLoaded', function(){
@@ -511,6 +620,44 @@
       hookupCalendarControls();
       renderCalendar(currentYear, currentMonth, getLang());
     });
+
+
+    // PWA Install Logic and Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+          console.log('SW registered:', reg);
+        }).catch(err => console.log('SW registration failed:', err));
+      });
+    }
+
+    let deferredPrompt;
+    const installBtn = document.getElementById('installAppBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+    
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+        } else {
+          alert('To install this app on your device, please open your browser menu and select "Add to Home Screen" or "Install App".');
+        }
+      });
+    }
+    
+    window.addEventListener('appinstalled', (evt) => {
+      if (installBtn) installBtn.style.display = 'none';
+      console.log('App successfully installed!');
+    });
   </script>
 </body>
 </html>
+
+
+
+

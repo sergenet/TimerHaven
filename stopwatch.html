@@ -1,14 +1,29 @@
-<!DOCTYPE html>
+ï»؟<!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+
   <meta charset="UTF-8" />
   <title data-i18n="pageTitle">Stopwatch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Measure elapsed time for any activity." />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  / media="print" onload="this.media='all'">
   <style>
-    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; font-display: swap; }
     .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
     .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
     .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 340px; height: 340px; display:flex; flex-direction:column; padding:1em; box-sizing:border-box; }
@@ -21,13 +36,53 @@
     .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
     @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
   </style>
-</head>
+<script>
+
+</script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Stopwatch">
+  <meta property="og:description" content="Measure elapsed time for any activity.">
+  <meta property="og:image" content="https://timerhaven.com/images/social-banner.webp">
+  <meta property="og:url" content="https://timerhaven.com/stopwatch.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stopwatch">
+  <meta name="twitter:description" content="Measure elapsed time for any activity.">
+  <meta name="twitter:image" content="https://timerhaven.com/images/social-banner.webp">
+
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Online Stopwatch",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "A stopwatch is a precision timekeeper used to measure the amount of time that elapses between its activation and deactivation.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="canonical" href="https://timerhaven.com/stopwatch-en.html" /></head>
 <body>
-  <div class="main-container">
+    <div class="main-container">
     <div class="center-row">
       <div class="article-card" aria-label="How to">
         <div>
-          <h2><i class="fa fa-clock"></i> <span data-i18n="howToHeading">How to Use Stopwatch</span></h2>
+          <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2><i class="fa fa-clock"></i> <span data-i18n="howToHeading">How to Use Stopwatch</span></h2>
           <ol>
             <li data-i18n="howTo1"><b>Start the timer:</b> Click "Start" to begin tracking time.</li>
             <li data-i18n="howTo2"><b>Pause or reset:</b> Use pause and reset as needed.</li>
@@ -35,7 +90,7 @@
           </ol>
         </div>
         <!-- default hrefs kept for safety; script will rewrite to language-specific files on load -->
-        <a id="howto-link" href="stopwatch-how-to.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" data-i18n="readFull">Read Full Article</a>
+        <a id="howto-link" href="en/stopwatch/stopwatch-index.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" data-i18n="readFull">Read Full Article</a>
       </div>
 
       <div class="tool-card" role="region" aria-labelledby="sw-title">
@@ -73,7 +128,7 @@
           </ul>
         </div>
         <!-- default href; will be rewritten to language-specific variant on load -->
-        <a id="tips-link" href="stopwatch-tips.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" data-i18n="readFull">Read Full Article</a>
+        <a id="tips-link" href="en/stopwatch/stopwatch-index.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" data-i18n="readFull">Read Full Article</a>
       </div>
     </div>
   </div>
@@ -145,136 +200,136 @@
         tip3: "Review laps: Analyze lap times to improve efficiency."
       },
       fr: {
-        pageTitle: "Chronomètre",
+        pageTitle: "Chronomأ¨tre",
         back: "Retour au menu principal",
-        howToHeading: "Comment utiliser le chronomètre",
-        howTo1: "Démarrez le chronomètre : cliquez sur « Démarrer » pour commencer.",
-        howTo2: "Mettre en pause ou réinitialiser : utilisez pause et réinitialiser selon besoin.",
+        howToHeading: "Comment utiliser le chronomأ¨tre",
+        howTo1: "Dأ©marrez le chronomأ¨tre : cliquez sur آ« Dأ©marrer آ» pour commencer.",
+        howTo2: "Mettre en pause ou rأ©initialiser : utilisez pause et rأ©initialiser selon besoin.",
         howTo3: "Enregistrez des tours : Notez les temps au tour.",
         readFull: "Lire l'article complet",
-        toolTitle: "Chronomètre",
-        start: "Démarrer",
+        toolTitle: "Chronomأ¨tre",
+        start: "Dأ©marrer",
         pause: "Pause",
-        reset: "Réinitialiser",
+        reset: "Rأ©initialiser",
         lap: "Tour",
         faqs: "FAQ",
         faq1: "Puis-je suivre plusieurs tours ? Oui, utilisez le bouton Tour.",
-        faq2: "Le temps persiste-t-il ? Non, il est réinitialisé au rechargement.",
+        faq2: "Le temps persiste-t-il ? Non, il est rأ©initialisأ© au rechargement.",
         faq3: "Est-ce gratuit ? Oui, tous les outils TimerHaven sont gratuits.",
-        tipsHeading: "Conseils pour le chronomètre",
-        tip1: "Utilisez-le pour l'entraînement : suivez séries et pauses.",
-        tip2: "Chronométrez les tâches : mesurez les sessions de travail.",
-        tip3: "Analysez les tours : améliorez vos performances."
+        tipsHeading: "Conseils pour le chronomأ¨tre",
+        tip1: "Utilisez-le pour l'entraأ®nement : suivez sأ©ries et pauses.",
+        tip2: "Chronomأ©trez les tأ¢ches : mesurez les sessions de travail.",
+        tip3: "Analysez les tours : amأ©liorez vos performances."
       },
       es: {
-        pageTitle: "Cronómetro",
-        back: "Volver al menú principal",
-        howToHeading: "Cómo usar el cronómetro",
-        howTo1: "Inicia el cronómetro: haz clic en \"Iniciar\" para comenzar.",
-        howTo2: "Pausar o reiniciar: usa pausa y reiniciar según necesites.",
+        pageTitle: "Cronأ³metro",
+        back: "Volver al menأ؛ principal",
+        howToHeading: "Cأ³mo usar el cronأ³metro",
+        howTo1: "Inicia el cronأ³metro: haz clic en \"Iniciar\" para comenzar.",
+        howTo2: "Pausar o reiniciar: usa pausa y reiniciar segأ؛n necesites.",
         howTo3: "Registrar vueltas: guarda los tiempos por vuelta.",
-        readFull: "Leer artículo completo",
-        toolTitle: "Cronómetro",
+        readFull: "Leer artأ­culo completo",
+        toolTitle: "Cronأ³metro",
         start: "Iniciar",
         pause: "Pausa",
         reset: "Reiniciar",
         lap: "Vuelta",
         faqs: "Preguntas frecuentes",
-        faq1: "¿Puedo registrar varias vueltas? Sí, usa el botón Vuelta.",
-        faq2: "¿Persiste el tiempo? No, se reinicia al recargar la página.",
-        faq3: "¿Es gratis? Sí, todas las herramientas de TimerHaven son gratuitas.",
-        tipsHeading: "Consejos para el cronómetro",
-        tip1: "Úsalo para entrenamientos: controla series y descansos.",
+        faq1: "آ؟Puedo registrar varias vueltas? Sأ­, usa el botأ³n Vuelta.",
+        faq2: "آ؟Persiste el tiempo? No, se reinicia al recargar la pأ،gina.",
+        faq3: "آ؟Es gratis? Sأ­, todas las herramientas de TimerHaven son gratuitas.",
+        tipsHeading: "Consejos para el cronأ³metro",
+        tip1: "أڑsalo para entrenamientos: controla series y descansos.",
         tip2: "Cronometra tareas: mide sesiones de trabajo.",
         tip3: "Revisa vueltas: mejora tu eficiencia."
       },
       de: {
         pageTitle: "Stoppuhr",
-        back: "Zurück zum Hauptmenü",
+        back: "Zurأ¼ck zum Hauptmenأ¼",
         howToHeading: "So benutzt du die Stoppuhr",
         howTo1: "Starte die Zeitmessung: Klicke 'Start', um zu beginnen.",
-        howTo2: "Pause oder Zurücksetzen: Nutze Pause und Zurücksetzen bei Bedarf.",
+        howTo2: "Pause oder Zurأ¼cksetzen: Nutze Pause und Zurأ¼cksetzen bei Bedarf.",
         howTo3: "Runden aufzeichnen: Speichere Rundenzeiten.",
         readFull: "Ganzen Artikel lesen",
         toolTitle: "Stoppuhr",
         start: "Start",
         pause: "Pause",
-        reset: "Zurücksetzen",
+        reset: "Zurأ¼cksetzen",
         lap: "Runde",
         faqs: "FAQ",
         faq1: "Kann ich mehrere Runden aufzeichnen? Ja, benutze den Runden-Button.",
-        faq2: "Bleibt die Zeit erhalten? Nein, sie wird beim Neuladen zurückgesetzt.",
+        faq2: "Bleibt die Zeit erhalten? Nein, sie wird beim Neuladen zurأ¼ckgesetzt.",
         faq3: "Ist das kostenlos? Ja, alle TimerHaven-Tools sind kostenlos.",
-        tipsHeading: "Tipps für die Stoppuhr",
-        tip1: "Für Workouts: Verfolge Sätze und Pausen.",
+        tipsHeading: "Tipps fأ¼r die Stoppuhr",
+        tip1: "Fأ¼r Workouts: Verfolge Sأ¤tze und Pausen.",
         tip2: "Zeit Aufgaben: Messe Arbeitssitzungen.",
         tip3: "Analysiere Runden: Verbessere die Effizienz."
       },
       ru: {
-        pageTitle: "Секундомер",
-        back: "Назад в главное меню",
-        howToHeading: "Как пользоваться секундомером",
-        howTo1: "Запустите таймер: нажмите «Старт», чтобы начать.",
-        howTo2: "Пауза или сброс: используйте паузу и сброс при необходимости.",
-        howTo3: "Запись кругов: фиксируйте время кругов.",
-        readFull: "Читать полностью",
-        toolTitle: "Секундомер",
-        start: "Старт",
-        pause: "Пауза",
-        reset: "Сброс",
-        lap: "Круг",
-        faqs: "Частые вопросы",
-        faq1: "Можно ли записывать несколько кругов? Да, используйте кнопку Круг.",
-        faq2: "Сохранится ли время? Нет, оно сбрасывается при перезагрузке.",
-        faq3: "Это бесплатно? Да, все инструменты TimerHaven бесплатны.",
-        tipsHeading: "Советы по использованию секундомера",
-        tip1: "Для тренировок: отслеживайте подходы и паузы.",
-        tip2: "Измеряйте задачи: фиксируйте рабочие сессии.",
-        tip3: "Анализируйте круги: улучшайте эффективность."
+        pageTitle: "ذ،ذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€",
+        back: "ذ‌ذ°ذ·ذ°ذ´ ذ² ذ³ذ»ذ°ذ²ذ½ذ¾ذµ ذ¼ذµذ½رژ",
+        howToHeading: "ذڑذ°ذ؛ ذ؟ذ¾ذ»رŒذ·ذ¾ذ²ذ°ر‚رŒرپرڈ رپذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€ذ¾ذ¼",
+        howTo1: "ذ—ذ°ذ؟رƒرپر‚ذ¸ر‚ذµ ر‚ذ°ذ¹ذ¼ذµر€: ذ½ذ°ذ¶ذ¼ذ¸ر‚ذµ آ«ذ،ر‚ذ°ر€ر‚آ», ر‡ر‚ذ¾ذ±ر‹ ذ½ذ°ر‡ذ°ر‚رŒ.",
+        howTo2: "ذںذ°رƒذ·ذ° ذ¸ذ»ذ¸ رپذ±ر€ذ¾رپ: ذ¸رپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ ذ؟ذ°رƒذ·رƒ ذ¸ رپذ±ر€ذ¾رپ ذ؟ر€ذ¸ ذ½ذµذ¾ذ±ر…ذ¾ذ´ذ¸ذ¼ذ¾رپر‚ذ¸.",
+        howTo3: "ذ—ذ°ذ؟ذ¸رپرŒ ذ؛ر€رƒذ³ذ¾ذ²: ر„ذ¸ذ؛رپذ¸ر€رƒذ¹ر‚ذµ ذ²ر€ذµذ¼رڈ ذ؛ر€رƒذ³ذ¾ذ².",
+        readFull: "ذ§ذ¸ر‚ذ°ر‚رŒ ذ؟ذ¾ذ»ذ½ذ¾رپر‚رŒرژ",
+        toolTitle: "ذ،ذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€",
+        start: "ذ،ر‚ذ°ر€ر‚",
+        pause: "ذںذ°رƒذ·ذ°",
+        reset: "ذ،ذ±ر€ذ¾رپ",
+        lap: "ذڑر€رƒذ³",
+        faqs: "ذ§ذ°رپر‚ر‹ذµ ذ²ذ¾ذ؟ر€ذ¾رپر‹",
+        faq1: "ذœذ¾ذ¶ذ½ذ¾ ذ»ذ¸ ذ·ذ°ذ؟ذ¸رپر‹ذ²ذ°ر‚رŒ ذ½ذµرپذ؛ذ¾ذ»رŒذ؛ذ¾ ذ؛ر€رƒذ³ذ¾ذ²? ذ”ذ°, ذ¸رپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ ذ؛ذ½ذ¾ذ؟ذ؛رƒ ذڑر€رƒذ³.",
+        faq2: "ذ،ذ¾ر…ر€ذ°ذ½ذ¸ر‚رپرڈ ذ»ذ¸ ذ²ر€ذµذ¼رڈ? ذ‌ذµر‚, ذ¾ذ½ذ¾ رپذ±ر€ذ°رپر‹ذ²ذ°ذµر‚رپرڈ ذ؟ر€ذ¸ ذ؟ذµر€ذµذ·ذ°ذ³ر€رƒذ·ذ؛ذµ.",
+        faq3: "ذ­ر‚ذ¾ ذ±ذµرپذ؟ذ»ذ°ر‚ذ½ذ¾? ذ”ذ°, ذ²رپذµ ذ¸ذ½رپر‚ر€رƒذ¼ذµذ½ر‚ر‹ TimerHaven ذ±ذµرپذ؟ذ»ذ°ر‚ذ½ر‹.",
+        tipsHeading: "ذ،ذ¾ذ²ذµر‚ر‹ ذ؟ذ¾ ذ¸رپذ؟ذ¾ذ»رŒذ·ذ¾ذ²ذ°ذ½ذ¸رژ رپذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€ذ°",
+        tip1: "ذ”ذ»رڈ ر‚ر€ذµذ½ذ¸ر€ذ¾ذ²ذ¾ذ؛: ذ¾ر‚رپذ»ذµذ¶ذ¸ذ²ذ°ذ¹ر‚ذµ ذ؟ذ¾ذ´ر…ذ¾ذ´ر‹ ذ¸ ذ؟ذ°رƒذ·ر‹.",
+        tip2: "ذکذ·ذ¼ذµر€رڈذ¹ر‚ذµ ذ·ذ°ذ´ذ°ر‡ذ¸: ر„ذ¸ذ؛رپذ¸ر€رƒذ¹ر‚ذµ ر€ذ°ذ±ذ¾ر‡ذ¸ذµ رپذµرپرپذ¸ذ¸.",
+        tip3: "ذگذ½ذ°ذ»ذ¸ذ·ذ¸ر€رƒذ¹ر‚ذµ ذ؛ر€رƒذ³ذ¸: رƒذ»رƒر‡رˆذ°ذ¹ر‚ذµ رچر„ر„ذµذ؛ر‚ذ¸ذ²ذ½ذ¾رپر‚رŒ."
       },
       el: {
-        pageTitle: "Χρονόμετρο",
-        back: "Επιστροφή στο κύριο μενού",
-        howToHeading: "Πώς να χρησιμοποιήσετε το χρονόμετρο",
-        howTo1: "Εκκινήστε τον χρονοδιακόπτη: Κάντε κλικ στο «Έναρξη» για να ξεκινήσετε.",
-        howTo2: "Παύση ή επαναφορά: Χρησιμοποιήστε παύση και επαναφορά όταν χρειάζεται.",
-        howTo3: "Καταγράψτε γύρους: Αποθηκεύστε χρόνους γύρων.",
-        readFull: "Διαβάστε το πλήρες άρθρο",
-        toolTitle: "Χρονόμετρο",
-        start: "Έναρξη",
-        pause: "Παύση",
-        reset: "Επαναφορά",
-        lap: "Γύρος",
-        faqs: "Συχνές Ερωτήσεις",
-        faq1: "Μπορώ να καταγράψω πολλούς γύρους; Ναι, χρησιμοποιήστε το κουμπί γύρου.",
-        faq2: "Θα παραμείνει ο χρόνος; Όχι, επαναφέρεται στην ανανέωση.",
-        faq3: "Είναι δωρεάν; Ναι, όλα τα εργαλεία είναι δωρεάν.",
-        tipsHeading: "Συμβουλές για το χρονόμετρο",
-        tip1: "Για προπόνηση: Παρακολουθήστε σετ και διαλείμματα.",
-        tip2: "Χρονόμετρο εργασιών: Μετρήστε τις συνεδρίες εργασίας.",
-        tip3: "Αναλύστε γύρους: Βελτιώστε την απόδοση."
+        pageTitle: "خ§دپخ؟خ½دŒخ¼خµد„دپخ؟",
+        back: "خ•د€خ¹دƒد„دپخ؟د†خ® دƒد„خ؟ خ؛دچدپخ¹خ؟ خ¼خµخ½خ؟دچ",
+        howToHeading: "خ دژد‚ خ½خ± د‡دپخ·دƒخ¹خ¼خ؟د€خ؟خ¹خ®دƒخµد„خµ د„خ؟ د‡دپخ؟خ½دŒخ¼خµد„دپخ؟",
+        howTo1: "خ•خ؛خ؛خ¹خ½خ®دƒد„خµ د„خ؟خ½ د‡دپخ؟خ½خ؟خ´خ¹خ±خ؛دŒد€د„خ·: خڑخ¬خ½د„خµ خ؛خ»خ¹خ؛ دƒد„خ؟ آ«خˆخ½خ±دپخ¾خ·آ» خ³خ¹خ± خ½خ± خ¾خµخ؛خ¹خ½خ®دƒخµد„خµ.",
+        howTo2: "خ خ±دچدƒخ· خ® خµد€خ±خ½خ±د†خ؟دپخ¬: خ§دپخ·دƒخ¹خ¼خ؟د€خ؟خ¹خ®دƒد„خµ د€خ±دچدƒخ· خ؛خ±خ¹ خµد€خ±خ½خ±د†خ؟دپخ¬ دŒد„خ±خ½ د‡دپخµخ¹خ¬خ¶خµد„خ±خ¹.",
+        howTo3: "خڑخ±د„خ±خ³دپخ¬دˆد„خµ خ³دچدپخ؟د…د‚: خ‘د€خ؟خ¸خ·خ؛خµدچدƒد„خµ د‡دپدŒخ½خ؟د…د‚ خ³دچدپد‰خ½.",
+        readFull: "خ”خ¹خ±خ²خ¬دƒد„خµ د„خ؟ د€خ»خ®دپخµد‚ خ¬دپخ¸دپخ؟",
+        toolTitle: "خ§دپخ؟خ½دŒخ¼خµد„دپخ؟",
+        start: "خˆخ½خ±دپخ¾خ·",
+        pause: "خ خ±دچدƒخ·",
+        reset: "خ•د€خ±خ½خ±د†خ؟دپخ¬",
+        lap: "خ“دچدپخ؟د‚",
+        faqs: "خ£د…د‡خ½خ­د‚ خ•دپد‰د„خ®دƒخµخ¹د‚",
+        faq1: "خœد€خ؟دپدژ خ½خ± خ؛خ±د„خ±خ³دپخ¬دˆد‰ د€خ؟خ»خ»خ؟دچد‚ خ³دچدپخ؟د…د‚; خ‌خ±خ¹, د‡دپخ·دƒخ¹خ¼خ؟د€خ؟خ¹خ®دƒد„خµ د„خ؟ خ؛خ؟د…خ¼د€خ¯ خ³دچدپخ؟د….",
+        faq2: "خکخ± د€خ±دپخ±خ¼خµخ¯خ½خµخ¹ خ؟ د‡دپدŒخ½خ؟د‚; خŒد‡خ¹, خµد€خ±خ½خ±د†خ­دپخµد„خ±خ¹ دƒد„خ·خ½ خ±خ½خ±خ½خ­د‰دƒخ·.",
+        faq3: "خ•خ¯خ½خ±خ¹ خ´د‰دپخµخ¬خ½; خ‌خ±خ¹, دŒخ»خ± د„خ± خµدپخ³خ±خ»خµخ¯خ± خµخ¯خ½خ±خ¹ خ´د‰دپخµخ¬خ½.",
+        tipsHeading: "خ£د…خ¼خ²خ؟د…خ»خ­د‚ خ³خ¹خ± د„خ؟ د‡دپخ؟خ½دŒخ¼خµد„دپخ؟",
+        tip1: "خ“خ¹خ± د€دپخ؟د€دŒخ½خ·دƒخ·: خ خ±دپخ±خ؛خ؟خ»خ؟د…خ¸خ®دƒد„خµ دƒخµد„ خ؛خ±خ¹ خ´خ¹خ±خ»خµخ¯خ¼خ¼خ±د„خ±.",
+        tip2: "خ§دپخ؟خ½دŒخ¼خµد„دپخ؟ خµدپخ³خ±دƒخ¹دژخ½: خœخµد„دپخ®دƒد„خµ د„خ¹د‚ دƒد…خ½خµخ´دپخ¯خµد‚ خµدپخ³خ±دƒخ¯خ±د‚.",
+        tip3: "خ‘خ½خ±خ»دچدƒد„خµ خ³دچدپخ؟د…د‚: خ’خµخ»د„خ¹دژدƒد„خµ د„خ·خ½ خ±د€دŒخ´خ؟دƒخ·."
       },
       ar: {
-        pageTitle: "المؤقت",
-        back: "العودة إلى القائمة الرئيسية",
-        howToHeading: "كيفية استخدام المؤقت",
-        howTo1: "ابدأ المؤقت: انقر 'ابدأ' لبدء التتبع.",
-        howTo2: "إيقاف مؤقت أو إعادة ضبط: استخدم الإيقاف المؤقت وإعادة الضبط حسب الحاجة.",
-        howTo3: "تتبع اللفات: سجّل أوقات اللفات للنشاطات.",
-        readFull: "اقرأ المقال الكامل",
-        toolTitle: "المؤقت",
-        start: "ابدأ",
-        pause: "إيقاف مؤقت",
-        reset: "إعادة ضبط",
-        lap: "لفة",
-        faqs: "الأسئلة الشائعة",
-        faq1: "هل يمكنني تتبع عدة لفات؟ نعم، استخدم زر اللفة.",
-        faq2: "هل يبقى الوقت محفوظاً؟ لا، يتم إعادة ضبطه عند إعادة تحميل الصفحة.",
-        faq3: "هل هذا مجاني؟ نعم، جميع أدوات TimerHaven مجانية.",
-        tipsHeading: "نصائح لاستخدام المؤقت",
-        tip1: "لاستخدامه في التمارين: تتبع المجموعات وفترات الراحة.",
-        tip2: "توقيت المهام: قياس جلسات العمل.",
-        tip3: "راجع اللفات: حسّن الكفاءة."
+        pageTitle: "ط§ظ„ظ…ط¤ظ‚طھ",
+        back: "ط§ظ„ط¹ظˆط¯ط© ط¥ظ„ظ‰ ط§ظ„ظ‚ط§ط¦ظ…ط© ط§ظ„ط±ط¦ظٹط³ظٹط©",
+        howToHeading: "ظƒظٹظپظٹط© ط§ط³طھط®ط¯ط§ظ… ط§ظ„ظ…ط¤ظ‚طھ",
+        howTo1: "ط§ط¨ط¯ط£ ط§ظ„ظ…ط¤ظ‚طھ: ط§ظ†ظ‚ط± 'ط§ط¨ط¯ط£' ظ„ط¨ط¯ط، ط§ظ„طھطھط¨ط¹.",
+        howTo2: "ط¥ظٹظ‚ط§ظپ ظ…ط¤ظ‚طھ ط£ظˆ ط¥ط¹ط§ط¯ط© ط¶ط¨ط·: ط§ط³طھط®ط¯ظ… ط§ظ„ط¥ظٹظ‚ط§ظپ ط§ظ„ظ…ط¤ظ‚طھ ظˆط¥ط¹ط§ط¯ط© ط§ظ„ط¶ط¨ط· ط­ط³ط¨ ط§ظ„ط­ط§ط¬ط©.",
+        howTo3: "طھطھط¨ط¹ ط§ظ„ظ„ظپط§طھ: ط³ط¬ظ‘ظ„ ط£ظˆظ‚ط§طھ ط§ظ„ظ„ظپط§طھ ظ„ظ„ظ†ط´ط§ط·ط§طھ.",
+        readFull: "ط§ظ‚ط±ط£ ط§ظ„ظ…ظ‚ط§ظ„ ط§ظ„ظƒط§ظ…ظ„",
+        toolTitle: "ط§ظ„ظ…ط¤ظ‚طھ",
+        start: "ط§ط¨ط¯ط£",
+        pause: "ط¥ظٹظ‚ط§ظپ ظ…ط¤ظ‚طھ",
+        reset: "ط¥ط¹ط§ط¯ط© ط¶ط¨ط·",
+        lap: "ظ„ظپط©",
+        faqs: "ط§ظ„ط£ط³ط¦ظ„ط© ط§ظ„ط´ط§ط¦ط¹ط©",
+        faq1: "ظ‡ظ„ ظٹظ…ظƒظ†ظ†ظٹ طھطھط¨ط¹ ط¹ط¯ط© ظ„ظپط§طھطں ظ†ط¹ظ…طŒ ط§ط³طھط®ط¯ظ… ط²ط± ط§ظ„ظ„ظپط©.",
+        faq2: "ظ‡ظ„ ظٹط¨ظ‚ظ‰ ط§ظ„ظˆظ‚طھ ظ…ط­ظپظˆط¸ط§ظ‹طں ظ„ط§طŒ ظٹطھظ… ط¥ط¹ط§ط¯ط© ط¶ط¨ط·ظ‡ ط¹ظ†ط¯ ط¥ط¹ط§ط¯ط© طھط­ظ…ظٹظ„ ط§ظ„طµظپط­ط©.",
+        faq3: "ظ‡ظ„ ظ‡ط°ط§ ظ…ط¬ط§ظ†ظٹطں ظ†ط¹ظ…طŒ ط¬ظ…ظٹط¹ ط£ط¯ظˆط§طھ TimerHaven ظ…ط¬ط§ظ†ظٹط©.",
+        tipsHeading: "ظ†طµط§ط¦ط­ ظ„ط§ط³طھط®ط¯ط§ظ… ط§ظ„ظ…ط¤ظ‚طھ",
+        tip1: "ظ„ط§ط³طھط®ط¯ط§ظ…ظ‡ ظپظٹ ط§ظ„طھظ…ط§ط±ظٹظ†: طھطھط¨ط¹ ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ ظˆظپطھط±ط§طھ ط§ظ„ط±ط§ط­ط©.",
+        tip2: "طھظˆظ‚ظٹطھ ط§ظ„ظ…ظ‡ط§ظ…: ظ‚ظٹط§ط³ ط¬ظ„ط³ط§طھ ط§ظ„ط¹ظ…ظ„.",
+        tip3: "ط±ط§ط¬ط¹ ط§ظ„ظ„ظپط§طھ: ط­ط³ظ‘ظ† ط§ظ„ظƒظپط§ط،ط©."
       }
     };
 
@@ -298,20 +353,20 @@
         const lang = getLang() || 'en';
         const suffix = `-${lang}`;
         const mappings = {
-          'stopwatch-how-to.html': `stopwatch-how-to${suffix}.html`,
-          'stopwatch-tips.html': `stopwatch-tips${suffix}.html`
+          'en/stopwatch/stopwatch-index.html': `stopwatch-how-to${suffix}.html`,
+          'en/stopwatch/stopwatch-index.html': `stopwatch-tips${suffix}.html`
         };
 
         // Update specific anchors with known ids
         const howto = document.getElementById('howto-link');
         if (howto) {
-          const newHref = mappings['stopwatch-how-to.html'];
+          const newHref = mappings['en/stopwatch/stopwatch-index.html'];
           howto.setAttribute('href', newHref);
           howto.href = location.origin.replace(/\/$/,'') + '/' + newHref;
         }
         const tips = document.getElementById('tips-link');
         if (tips) {
-          const newHref = mappings['stopwatch-tips.html'];
+          const newHref = mappings['en/stopwatch/stopwatch-index.html'];
           tips.setAttribute('href', newHref);
           tips.href = location.origin.replace(/\/$/,'') + '/' + newHref;
         }
@@ -356,9 +411,78 @@
     };
   </script>
 
-  <footer>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer>
     &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br />
-    <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>
-  </footer>
+    <a href="/privacy.html">Privacy Policy</a> &bull; <a href="/terms.html">Terms</a> &bull; <a href="/pricing.html">Pricing</a> · <a href="/contact.html">Contact</a>
+  
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Free Online Stopwatch with Laps</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A stopwatch is a precision timekeeper designed to measure the exact amount of time elapsed between activation and deactivation. Whether you're tracking your workout intervals, timing a presentation, or conducting a science experiment, our free online stopwatch provides accuracy down to the millisecond with an easy-to-use lap feature.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Why Use a Digital Stopwatch?</h3>
+                <p style="line-height: 1.7; color: #4b5563;">While physical stopwatches were once the standard for coaches and scientists, digital online stopwatches offer unmatched convenience. You can access it instantly from any browser on your desktop or mobile device. There are no batteries to replace, and features like unlimited lap tracking allow you to monitor complex, multi-stage events with ease.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use the Lap Feature</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;">
+                    <li><strong>Start:</strong> Click the Start button to begin the overall timer.</li>
+                    <li><strong>Record a Lap:</strong> Click the 'Lap' button every time a specific interval finishes (e.g., finishing one lap on a track). This records the split time in a list below without pausing the main timer.</li>
+                    <li><strong>Review:</strong> Analyze your lap times to find your fastest and slowest intervals.</li>
+                    <li><strong>Stop and Reset:</strong> Use Stop to freeze the clock, and Reset to clear all data and start fresh.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Common Uses for an Online Stopwatch</h3>
+            <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;">
+                <li><strong>Fitness and Workouts:</strong> Time your HIIT (High-Intensity Interval Training) rest periods, sprints, or plank holds.</li>
+                <li><strong>Cooking and Baking:</strong> Keep track of exactly how long a dish has been in the oven or on the stove.</li>
+                <li><strong>Work and Productivity:</strong> Time how long it takes you to write an email, complete a coding task, or read a document to improve your time estimation skills.</li>
+                <li><strong>Public Speaking:</strong> Practice your presentation pacing by timing individual slides using the lap function.</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Use the 'Lap' feature for interval training or multi-step scientific observations. It allows you to keep a clean record of individual phases while the main clock keeps ticking."</p>
+        </div>
+        
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
 </body>
 </html>
+
+
+
+

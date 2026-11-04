@@ -1,18 +1,263 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>currency — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for currency guide (ru)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Конвертер валют — Конвертируйте курсы и используйте умные рабочие практики | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Практическое руководство по конвертации валют: выбор источников курсов, округление и отображение, советы для путешествий и бизнеса, автоматизация конверсий." />
+  <link rel="canonical" href="https://timerhaven.com/ru/currency/currency-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Практическая конвертация валют",
+        "description":"Как надёжно конвертировать валюты, выбирать источники курсов, корректно отображать результаты и работать с округлением в бизнес‑сценариях.",
+        "image":"https://timerhaven.com/assets/images/currency-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Конвертер валют (TimerHaven)","ExchangeRate API или банковские курсы","Таблица (Spreadsheet)"],
+        "step":[
+          {"@type":"HowToStep","name":"Выбрать источник","text":"Определите, нужен ли вам межбанковский mid‑market курс или курсы провайдера/банка (банки и платёжные сервисы добавляют спреды)."},
+          {"@type":"HowToStep","name":"Решить правила округления","text":"Выберите правила округления для отображения (2 знака для цен, 46 знаков для аналитики по курсам)."},
+          {"@type":"HowToStep","name":"Показать контекст","text":"Отображайте курс, сконвертированную сумму и временную отметку, чтобы пользователи понимали, на какой момент был дан расчёт."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Обновляются ли курсы конвертера в реальном времени?","acceptedAnswer":{"@type":"Answer","text":"Инструменты конвертации могут получать актуальные mid‑market курсы через API, но курсы банков и платёжных провайдеров могут отличаться из‑за спредов и комиссий."}},
+          {"@type":"Question","name":"Нужно ли округлять сконвертированные суммы?","acceptedAnswer":{"@type":"Answer","text":"Да — отображайте суммы с подходящим округлением для валют (обычно 2 знака для фиатных валют) и при необходимости показывайте курс с большей точностью."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Конвертер валют — Конвертируйте курсы и используйте умные рабочие практики | TimerHaven">
+  <meta property="og:description" content="Практическое руководство по конвертации валют: выбор источников курсов, округление и отображение, советы для путешествий и бизнеса, автоматизация конверсий.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ru/currency/currency-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Конвертер валют — Конвертируйте курсы и используйте умные рабочие практики | TimerHaven">
+  <meta name="twitter:description" content="Практическое руководство по конвертации валют: выбор источников курсов, округление и отображение, советы для путешествий и бизнеса, автоматизация конверсий.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/currency/currency-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/currency/currency-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/currency/currency-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/currency/currency-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/currency/currency-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/currency/currency-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">currency — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Конвертер валют — Практическое руководство по надёжной конвертации</h1>
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — специалист по платежам и продуктивности</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 1216 мин.</div>
+        </div>
+      </div>
+      <p class="lead">Конвертер валют должен сообщать не только числа — он должен давать контекст: какой курс использовался, на какой момент и включены ли комиссии. В этом руководстве объясняются источники курсов, варианты отображения, практики для путешествий и бизнеса, правила округления и способы автоматизации частых конверсий.</p>
+      <nav class="toc" aria-label="Содержание">
+        <a href="#sources">Источники курсов</a>
+        <a href="#presentation">Отображение и округление</a>
+        <a href="#travel">Советы для путешествий и бюджета</a>
+        <a href="#business">Бизнес и ценообразование</a>
+        <a href="#automation">Автоматизация и скрипты</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="sources" class="section" aria-labelledby="sources-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="sources-title">Источники курсов — выбирайте в зависимости от задачи</h2>
+        <p>Не все курсы одинаковы. Mid‑market (межбанковский) курс — это обычно то, что возвращают публичные API. Банки и платёжные провайдеры добавляют спреды и комиссии; для клиентских цен учитывайте либо котировки провайдеров, либо показывайте и mid‑market, и оценку итоговой стоимости с комиссиями.</p>
+        <h3>Распространённые источники</h3>
+        <ul>
+          <li><strong>API курсов:</strong> бесплатные или платные API, подходящие для получения mid‑market курсов.</li>
+          <li><strong>Котировки банков:</strong> точнее для платежей, но часто требуют авторизации или ключа API.</li>
+          <li><strong>Курсы платёжных процессоров:</strong> используются при транзакциях по карте и включают спред и комиссии.</li>
+        </ul>
+      </section>
+      <section id="presentation" class="section" aria-labelledby="presentation-title">
+        <h2 id="presentation-title">Отображение и округление — прозрачность укрепляет доверие</h2>
+        <p>Показывайте сконвертированную сумму, использованный курс и отметку времени. Правила округления важны: для цен отображайте 2 десятичных знака, для аналитики — больше точности для самого курса.</p>
+        <div class="recipe" aria-labelledby="display-recipe">
+          <strong id="display-recipe">Минимальный формат отображения</strong>
+          <ol>
+            <li>Сконвертированная сумма (округлённая для показа), например: 123.45 EUR</li>
+            <li>Курс — например: 1.234567 (показывайте 46 знаков)</li>
+            <li>Отметка времени или подпись «по состоянию на» — чтобы пользователь знал момент котировки</li>
+            <li>Необязательно: указание поставщика данных при использовании платного источника</li>
+          </ol>
+        </div>
+      </section>
+      <section id="travel" class="section" aria-labelledby="travel-title">
+        <h2 id="travel-title">Путешествия и советы по бюджету</h2>
+        <p>При путешествиях небольшие расхождения при округлении складываются. Для быстрых оценок используйте mid‑market, но учитывайте вероятные комиссии при расчёте наличных снятий или оплатой картой.</p>
+        <ul>
+          <li>При снятии наличных ожидайте дополнительные ATM‑ и банковские комиссии; заложите запас 35 % сверх mid‑market оценки.</li>
+          <li>Держите небольшой ежедневный буфер при конвертации для поездок, чтобы не недооценить расходы.</li>
+        </ul>
+      </section>
+      <section id="business" class="section" aria-labelledby="business-title">
+        <h2 id="business-title">Бизнес и ценообразование</h2>
+        <p>Для счётов и цен будьте прозрачны: выставляйте счёт в валюте покупателя с указанием конверсии или считайте в вашей валюте и показывайте оценку в валюте покупателя. Указывайте курс и временную отметку в счётах для прозрачности.</p>
+        <h3>Шаблон для счёта</h3>
+        <pre class="template">Поля счёта:
+- Сумма (валюта продавца)
+- Сконвертированная сумма (валюта покупателя) с округлением
+- Использованный курс
+- Отметка времени курса
+- Примечание: "Курс получен от [поставщик]"</pre>
+      </section>
+      <section id="automation" class="section" aria-labelledby="automation-title">
+        <h2 id="automation-title">Автоматизация и скрипты</h2>
+        <p>Автоматизируйте частые конверсии с помощью простых скриптов или формул в таблицах. Многие API возвращают JSON — их удобно использовать в таблицах или небольших утилитах.</p>
+        <h3>Формула для таблицы</h3>
+        <pre class="template">Если курс в ячейке B2, сумма в A2:
+=ROUND(A2 * B2, 2)</pre>
+        <p class="muted">Для регулярных задач кешируйте курсы и обновляйте с разумной частотой (например, ежечасно), чтобы не превышать лимиты бесплатных API.</p>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Всегда ли нужно использовать mid‑market курс?<br><strong>Ответ:</strong> Mid‑market удобен для оценок. Для реального выставления счетов или переводов используйте котировки провайдера, включающие комиссии и спред.</p>
+          <p><strong>Вопрос:</strong> Как часто обновляются курсы?<br><strong>Ответ:</strong> Многие API обновляют курсы каждую минуту; выбор частоты обновления зависит от потребностей и ограничений API.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Ресурсы</h2>
+        <ul class="muted">
+          <li><a href="/currency-ru.html">Открыть конвертер валют</a></li>
+          <li><a href="https://exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate API</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/currency-ru.html" class="cta" aria-label="Открыть конвертер валют">Открыть конвертер валют</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Политика конфиденциальности: <a href="/privacy.html">Privacy Policy</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذڑذ¾ذ½ذ²ذµر€ر‚ذµر€ ذ²ذ°ذ»رژر‚</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذ¤ذ¸ذ½ذ°ذ½رپذ¾ذ²ر‹ذ¹ ذ¸ذ½رپر‚ر€رƒذ¼ذµذ½ر‚ ذ² ر€ذµذ°ذ»رŒذ½ذ¾ذ¼ ذ²ر€ذµذ¼ذµذ½ذ¸ ذ´ذ»رڈ ر€ذ°رپرپر‡ذµر‚ذ° ذ¾ذ±ذ¼ذµذ½ذ½ذ¾ذ¹ رپر‚ذ¾ذ¸ذ¼ذ¾رپر‚ذ¸ ذ¼ذµذ¶ذ´رƒ ذ´ذ²رƒذ¼رڈر¼ذ° ذ²ذ°ذ»رژر‚ذ°ذ¼ذ¸.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;">ذ‍ذ±ذ¼ذµذ½ ذ½ذ°ر‡ذ°ذ»رپرŒ رپ ذ±ذ°ر€ر‚ذµر€ذ½ر‹ر… رپذ¸رپر‚ذµذ¼ (3000 ذ»ذµر‚ ذ´ذ¾ ذ½.رچ.). ذکرپر‚ذ¾ر€ذ¸رڈر‡ذµرپذ؛ذ¾ذµ ذ‘ر€ذµر‚ر‚ذ¾ذ½-ذ’رƒذ´رپذ؛ذ¾ذµ رپذ¾ذ³ذ»ذ°رˆذµذ½ذ¸ذµ (1944) رƒرپر‚ذ°ذ½ذ¾ذ²ذ¸ذ»ذ¾ ر„ذ¸ذ؛رپذ¸ر€ذ¾ذ²ذ°ذ½ذ½ر‹ذµ ذ؛رƒر€رپر‹, ذ؛ذ¾ر‚ذ¾ر€ر‹ذµ ذ؟ذ¾ذ·ذ¶ذµ رپر‚ذ°ذ»ذ¸ ر€ر‹ذ½ذ¾ر‡ذ½ر‹ذ¼ذ¸.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذ’ر‹ذ±ر€ذ°ر‚رŒ ذ¼ذµرپر‚ذ½رƒرژ ذ²ذ°ذ»رژر‚رƒ ذ¸ ر†ذµذ»ذµذ²رƒرژ ذ²ذ°ذ»رژر‚رƒ.</li><li>ذ’ذ²ذµرپر‚ذ¸ رپرƒذ¼ذ¼رƒ ذ´ذ»رڈ ذ؛ذ¾ذ½ذ²ذµر€ر‚ذ°ر†ذ¸ذ¸.</li><li>ذںر€ذ¾رپذ¼ذ¾ر‚ر€ذµر‚رŒ ر€ذµذ·رƒذ»رŒر‚ذ°ر‚ ذ؟ذ¾ ر‚ذµذ؛رƒر‰ذµذ¼رƒ ر€ر‹ذ½ذ¾ر‡ذ½ذ¾ذ¼رƒ ذ؛رƒر€رپرƒ.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذںذ¾ذ¼ذ½ذ¸ر‚ذµ, ر‡ر‚ذ¾ ر€ر‹ذ½ذ¾ر‡ذ½ر‹ذµ ذ؛رƒر€رپر‹ رڈر²ذ»رڈرژر‚رپرڈ intermediate; ذ±ذ°ذ½ذ؛ذ¸ ذ¼ذ¾ذ³رƒر‚ ذ²ذ·ذ¸ذ¼ذ°ر‚رŒ ذ؛ذ¾ذ¼ذ¸رپرپذ¸رژ."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="../../stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="../../unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="../../weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="../../world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="../../calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="../../clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="../../countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="../../currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="../../focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="../../habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="../../meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="../../notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="../../password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to tool" button -->
+  <a href="/currency-ru.html" class="return-to-tool" id="returnToToolCurrency" aria-label="Вернуться к конвертеру валют">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К конвертеру валют</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolCurrency');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

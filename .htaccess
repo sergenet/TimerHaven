@@ -1,16 +1,82 @@
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/sergbcqk/TimerHavenWeatherProxy"
-PassengerBaseURI "/"
-PassengerNodejs "/home/sergbcqk/nodevenv/TimerHavenWeatherProxy/18/bin/node"
-PassengerAppType node
-PassengerStartupFile server.js
-# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
-
-# 301 redirect for world-clock -> world-clock-en (added by assistant)
-# Place this AFTER the Passenger block so the Passenger config remains untouched.
-Redirect 301 /world-clock.html https://timerhaven.com/world-clock-en.html
-# ensure HTML files are served as UTF-8AddDefaultCharset UTF-8<IfModule mod_mime.c>  AddCharset UTF-8 .html .htm</IfModule>
-# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
-<IfModule Litespeed>
-</IfModule>
-# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
+# Ensure directory requests serve index.html
+DirectoryIndex index.html
+
+# Redirects must run before Passenger — put canonical redirects at the top.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # 1) If the host is www.timerhaven.com, redirect to https://timerhaven.com (preserve path)
+  RewriteCond %{HTTP_HOST} ^www\.timerhaven\.com$ [NC]
+  RewriteRule ^ https://timerhaven.com%{REQUEST_URI} [L,R=301]
+  # 2) If request is not HTTPS (and not already www→non‑www handled above), redirect to https://timerhaven.com
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^ https://timerhaven.com%{REQUEST_URI} [L,R=301]
+  
+  # Exclude api folder from further processing (so Passenger doesn't capture it)
+  RewriteRule ^api/ - [L]
+</IfModule># DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGINPassengerAppRoot "/home/sergbcqk/TimerHavenWeatherProxy"PassengerBaseURI "/"PassengerNodejs "/home/sergbcqk/nodevenv/TimerHavenWeatherProxy/18/bin/node"PassengerAppType nodePassengerStartupFile server.js# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END# Preserve the specific tool redirects
+Redirect 301 /world-clock.html https://timerhaven.com/world-clock-en.html
+Redirect 301 /weather.html https://timerhaven.com/weather-en.html
+Redirect 301 /unit-converter.html https://timerhaven.com/unit-converter-en.html
+Redirect 301 /calendar.html https://timerhaven.com/calendar-en.html
+Redirect 301 /clipboard-manager.html https://timerhaven.com/clipboard-manager-en.html
+Redirect 301 /countdown.html https://timerhaven.com/countdown-en.html
+Redirect 301 /currency.html https://timerhaven.com/currency-en.html
+Redirect 301 /focus-music.html https://timerhaven.com/focus-music-en.html
+Redirect 301 /habit-tracker.html https://timerhaven.com/habit-tracker-en.html
+Redirect 301 /meeting-planner.html https://timerhaven.com/meeting-planner-en.html
+Redirect 301 /notes.html https://timerhaven.com/notes-en.html
+Redirect 301 /password-generator.html https://timerhaven.com/password-generator-en.html
+Redirect 301 /pomodoro.html https://timerhaven.com/pomodoro-en.html
+Redirect 301 /stopwatch.html https://timerhaven.com/stopwatch-en.html
+Redirect 301 /timer.html https://timerhaven.com/timer-en.html
+
+# --- pages retired 2026-11-04 (foreign-language copies of an English page) ---
+Redirect 301 /calendar-how.html https://timerhaven.com/calendar-how-to.html
+Redirect 301 /countdown-how.html https://timerhaven.com/countdown-how-to.html
+Redirect 301 /currency-how.html https://timerhaven.com/currency-how-to.html
+Redirect 301 /focus-music-how.html https://timerhaven.com/focus-music-how-to.html
+Redirect 301 /habit-how.html https://timerhaven.com/habit-how-to.html
+Redirect 301 /focus.html https://timerhaven.com/focus-music-tips.html
+Redirect 301 /habit.html https://timerhaven.com/habit-tips.html
+Redirect 301 /meeting-how-to.html https://timerhaven.com/meeting-planner-en.html
+Redirect 301 /meeting-how.html https://timerhaven.com/meeting-planner-en.html
+
+# --- guide directory aliases (301 to the -index page) ---
+RedirectMatch 301 ^/el/notes/(?:index\.html)?$ https://timerhaven.com/el/notes/notes-index.html
+RedirectMatch 301 ^/el/pomodoro\-timer/(?:index\.html)?$ https://timerhaven.com/el/pomodoro-timer/pomodoro-index.html
+RedirectMatch 301 ^/el/task\-timer/(?:index\.html)?$ https://timerhaven.com/el/task-timer/task-timer-index.html
+RedirectMatch 301 ^/es/task\-timer/(?:index\.html)?$ https://timerhaven.com/es/task-timer/task-timer-index.html
+RedirectMatch 301 ^/ru/task\-timer/(?:index\.html)?$ https://timerhaven.com/ru/task-timer/task-timer-index.html
+
+# --- thin duplicates (301 to the page that survives) ---
+RedirectMatch 301 ^/clipboard\-how\.html$ https://timerhaven.com/clipboard-how-to-en.html
+RedirectMatch 301 ^/notes\-how\.html$ https://timerhaven.com/notes-how-to-en.html
+RedirectMatch 301 ^/password\-how\.html$ https://timerhaven.com/password-how-to-en.html
+RedirectMatch 301 ^/pomodoro\-how\.html$ https://timerhaven.com/pomodoro-how-to-en.html
+RedirectMatch 301 ^/stopwatch\-how\.html$ https://timerhaven.com/stopwatch-how-to-en.html
+RedirectMatch 301 ^/timer\-how\.html$ https://timerhaven.com/timer-how-to-en.html
+RedirectMatch 301 ^/unit\-how\.html$ https://timerhaven.com/unit-how-to-en.html
+RedirectMatch 301 ^/weather\-how\.html$ https://timerhaven.com/weather-how-to-en.html
+RedirectMatch 301 ^/world\-how\.html$ https://timerhaven.com/world-how-to-en.html
+
+# --- PHASE 12: PERFORMANCE EXCELLENCE ---
+# Aggressive Browser Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Gzip Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>
+
+# ensure HTML files are served as UTF-8AddDefaultCharset UTF-8<IfModule mod_mime.c>  AddCharset UTF-8 .html .htm</IfModule># If mod_headers is available, explicitly add charset for .html/.htm responses.# This makes the HTTP Content-Type header include charset=utf-8 (helps CLI tools and proxies).<IfModule mod_headers.c>  <FilesMatch "\.(html|htm)$">    Header always set Content-Type "text/html; charset=utf-8"  </FilesMatch></IfModule># DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN<IfModule Litespeed></IfModule># DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END

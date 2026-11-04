@@ -1,18 +1,249 @@
-<!doctype html>
-<html lang="ar">
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8">
-  <title>task-timer — Guide (ar)</title>
+  <title>مؤقت المهام — قياس الوقت وتحسين التقديرات | TimerHaven</title>
+  <meta name="description" content="دليل شامل لقياس مدة المهام، وتحليل الانقطاعات، وتحسين التقديرات. يتضمن طريقة الاستخدام، والأسئلة الشائعة، ونموذج CSV قابل للتنزيل.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for task-timer guide (ar)">
+  <link rel="canonical" href="https://timerhaven.com/ar/task-timer/task-timer-index.html">
+  <meta name="author" content="سيرج شماس">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "HowTo",
+        "name": "تسجيل وتحليل وقت المهام باستخدام مؤقت المهام",
+        "description": "سير عمل لقياس الوقت الفعلي الذي تقضيه في المهام، وحساب الانقطاعات، واستخدام تلك البيانات للتخطيط بشكل أفضل.",
+        "image": "https://timerhaven.com/assets/images/tasktimer-snapshot.webp",
+        "totalTime": "PT2H",
+        "supply": ["مؤقت (متصفح أو هاتف)", "قائمة المهام", "نموذج تتبع الوقت"],
+        "step": [
+          {"@type":"HowToStep","name":"تحديد نتائج واضحة للمهمة","text":"قبل البدء، قم بتغيير اسم مهمتك بتنسيق مهيكل وحدد مدة تقديرية."},
+          {"@type":"HowToStep","name":"بدء المؤقت والعمل","text":"ابدأ المؤقت وركز على المهمة الواحدة. إذا غيرت تركيزك، أوقف المؤقت وسجل المدة الحالية."},
+          {"@type":"HowToStep","name":"سجل الانقطاعات","text":"في كل مرة يتم فيها مقاطعتك، أضف ملاحظة أو قم بزيادة عداد الانقطاع لالتقاط التكلفة الخفية لتبديل السياق."},
+          {"@type":"HowToStep","name":"المراجعة والتحليل","text":"في نهاية اليوم أو الأسبوع، قارن الأوقات الفعلية مقابل المقدرة وحدد أكبر مسببات ضياع الوقت."}
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background: var(--bg); color: #102a43; margin: 0; padding: 2rem; line-height: 1.6; }
+    .container { max-width: 920px; margin: 0 auto; }
+    .card { background: var(--card); padding: 2rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); }
+    h1 { color: var(--brand); margin-top: 0; font-size: 1.8rem; }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    .lead { font-size: 1.05rem; margin-top: 0; margin-bottom: 1rem; }
+    .section { margin-top: 1.1rem; }
+    .workflow { background: #fff7f0; border-right: 4px solid #ffd1a7; padding: 0.9rem; border-radius: 8px; margin-bottom: 0.9rem; }
+    .cta { display: inline-block; padding: 0.6rem 1rem; border-radius: 8px; background: var(--brand); color: #fff; text-decoration: none; font-weight: 700; }
+    .back-link { display: inline-block; margin-bottom: .75rem; color: #0d6efd !important; text-decoration: none; font-weight: 700; }
+    nav.toc { margin: 0.75rem 0; padding: 0.5rem 0; border-right: 3px solid #eef5fb; }
+    nav.toc a { display: inline-block; margin-left: 1rem; color: var(--brand); text-decoration: none; font-weight: 600; }
+    pre.template { background: #f3f7fb; padding: 0.75rem; border-radius: 6px; overflow: auto; direction: ltr; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    th, td { padding: 0.75rem; border: 1px solid #e2e8f0; text-align: right; }
+    th { background: #f8fafc; }
+    .return-to-tool { position: fixed; left: 26px; bottom: 26px; z-index: 999; display: inline-flex; align-items: center; gap: 12px; padding: 11px 16px; border-radius: 999px; background: linear-gradient(180deg, #2faaff, #0b63a0); color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 18px 40px rgba(3, 56, 102, 0.22); }
+    .return-to-tool .icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(255, 255, 255, 0.12); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  </style>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+
+    
+    <!-- Social preview (added: page previously had none) -->
+    <meta property="og:title" content="مؤقت المهام — قياس الوقت وتحسين التقديرات | TimerHaven">
+    <meta property="og:description" content="دليل شامل لقياس مدة المهام، وتحليل الانقطاعات، وتحسين التقديرات. يتضمن طريقة الاستخدام، والأسئلة الشائعة، ونموذج CSV قابل للتنزيل.">
+    <meta property="og:url" content="https://timerhaven.com/ar/task-timer/task-timer-index.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TimerHaven">
+    <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="مؤقت المهام — قياس الوقت وتحسين التقديرات | TimerHaven">
+    <meta name="twitter:description" content="دليل شامل لقياس مدة المهام، وتحليل الانقطاعات، وتحسين التقديرات. يتضمن طريقة الاستخدام، والأسئلة الشائعة، ونموذج CSV قابل للتنزيل.">
+    <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/task-timer/task-timer-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/task-timer/task-timer-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">task-timer — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <a href="/index-ar.html" class="back-link">&larr;&nbsp;العودة إلى القائمة الرئيسية</a>
+      <h1 id="title">مؤقت المهام — قياس الوقت وتحسين التقديرات</h1>
+      
+      <div class="meta">بقلم سيرج شماس · تاريخ النشر: 2025-10-25 · وقت القراءة: 10 دقائق</div>
+      
+      <p class="lead">مؤقت المهام ليس مجرد عد تنازلي؛ إنه أداة تشخيصية لإنتاجيتك. من خلال تسجيل الوقت الفعلي الذي تقضيه في المهام، يمكنك تحديد الاختناقات الخفية، وقياس التكلفة الحقيقية للانقطاعات، وتحسين تخطيطك.</p>
+
+      <nav class="toc" aria-label="جدول المحتويات">
+        <a href="#setup">الإعداد</a>
+        <a href="#howto">طريقة التسجيل</a>
+        <a href="#interruptions">إدارة الانقطاعات</a>
+        <a href="#analysis">التصدير والتحليل</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+
+      <section class="section" id="setup">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2>أولاً: الإعداد واستراتيجية التسمية</h2>
+        <p>يبدأ تتبع الوقت الفعال بتسمية متسقة. نوصي باستخدام تنسيق مهيكل: <strong>[المشروع] - [النشاط] - [النتيجة]</strong>.</p>
+        <p>على سبيل المثال، بدلاً من "اجتماع"، استخدم <em>"مشروع ميركوري - اجتماع يومي - حل معوقات"</em>. يتيح لك ذلك تصفية بياناتك لاحقاً ومعرفة عدد الساعات المستغرقة بدقة في كل فئة.</p>
+      </section>
+
+      <section class="section" id="howto">
+        <h2>ثانياً: سير عمل التسجيل المثالي</h2>
+        <div class="workflow">
+          <strong>خطوات العمل</strong>
+          <ol>
+            <li><strong>تحديد النية:</strong> قبل الضغط على بدء، حدد ما ستحققه بالضبط.</li>
+            <li><strong>البدء:</strong> اضغط على زر البدء؛ هذا الفعل يرسل إشارة لعقلك بأن جلسة التركيز قد بدأت.</li>
+            <li><strong>المراقبة النشطة:</strong> اجعل المؤقت مرئياً للحفاظ على الوعي بالوقت.</li>
+            <li><strong>المراجعة السريعة:</strong> عند انتهاء الجلسة، سجل ملاحظة مختصرة عما تم تحقيقه.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="interruptions">
+        <h2>إدارة الانقطاعات</h2>
+        <p>الانقطاعات هي أكبر تهديد للإنتاجية. يتيح لك مؤقت المهام تحديد حجم هذا التهديد. في كل مرة تتم فيها مقاطعتك، سجل ذلك في حقل الملاحظات. تذكر: كل انقطاع مدته دقيقة واحدة يكلفك فعلياً 10-15 دقيقة لاستعادة التركيز العميق.</p>
+      </section>
+
+      <section class="section" id="analysis">
+        <h2>التصدير والتحليل</h2>
+        <p>في نهاية كل أسبوع، قم بتصدير بياناتك بتنسيق CSV وقارن الأوقات الفعلية بالمقدرة. إذا كنت تقلل دائماً من التقدير بنسبة 30٪، فقم بتطبيق هذا المعامل على خططك المستقبلية.</p>
+        <h3>نموذج لجدول التحليل</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>المعيار</th>
+              <th>المستهدف</th>
+              <th>الفعلي</th>
+              <th>الحالة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>التركيز العميق</td>
+              <td>4 ساعات/يوم</td>
+              <td>2.5 ساعة</td>
+              <td style="color:red">غير مثالي</td>
+            </tr>
+            <tr>
+              <td>تكلفة الانقطاع</td>
+              <td>&lt; 15 دقيقة</td>
+              <td>22 دقيقة</td>
+              <td style="color:orange">تحذير</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section" id="faq">
+        <h2>الأسئلة الشائعة</h2>
+        <div style="color:var(--muted)">
+          <p><strong>س: هل يجب علي تتبع كل دقيقة من يومي؟</strong><br> ج: لا. ابدأ بتتبع أهم أعمالك فقط (العمل العميق). لا داعي لتتبع المهام الإدارية البسيطة التي قد تؤدي للاحتراق.</p>
+          <p><strong>س: هل الخصوصية مضمونة؟</strong><br> ج: نعم. يتم تخزين بياناتك محلياً في متصفحك ولا يتم إرسالها إلى خوادمنا.</p>
+        </div>
+      </section>
+
+      <p style="margin-top:2rem;">أدوات ذات صلة: <a href="/notes-ar.html">أداة الملاحظات</a> · <a href="/pomodoro.html">مؤقت بومودورو</a> · <a href="/calendar-ar.html">مخطط التقويم</a></p>
+      
+      <p style="margin-top:1.5rem;"><a href="/timer-ar.html" class="cta">فتح أداة مؤقت المهام</a></p>
+
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer>
+        <p>&copy; 2025 TimerHaven. جميع الأدوات مجانية وتحترم خصوصيتك.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="rtl" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: right;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">مؤقت المهام</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">أداة عد تنازلي مرنة لإدارة فترات العمل أو الطبخ.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">التاريخ</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">كيفية الاستخدام</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-right: 1.25rem;"><li>اضبط الوقت بالدقائق والثواني.</li><li>انقر على 'ابدأ' لبدء العد.</li><li>ستنبهك الأداة عند انتهاء الوقت.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"راقب ما أنجزته خلال كل فترة زمنية لبناء سجل إنتاجية."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">المزيد من أدوات الإنتاجية المجانية</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">مؤقت المهام</a> <a href="../../stopwatch-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">ساعة الإيقاف</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">بومودورو</a> <a href="../../unit-converter-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">محول الوحدات</a> <a href="../../weather-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الطقس</a> <a href="../../world-clock-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الساعة العالمية</a> <a href="../../calendar-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">التقويم</a> <a href="../../clipboard-manager-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الحافظة</a> <a href="../../countdown-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العد التنازلي</a> <a href="../../currency-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العملات</a> <a href="../../focus-music-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">موسيقى التركيز</a> <a href="../../habit-tracker-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العادات</a> <a href="../../meeting-planner-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الاجتماعات</a> <a href="../../notes-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الملاحظات</a> <a href="../../password-generator-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">كلمات المرور</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+
+  <a href="/timer-ar.html" class="return-to-tool">
+    <span class="icon">↩</span>
+    <span class="label">العودة إلى المؤقت</span>
+  </a>
 </body>
 </html>

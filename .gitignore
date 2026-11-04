@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Ignore OS files
 .DS_Store
 Thumbs.db
@@ -12,23 +11,41 @@ Thumbs.db
 # Ignore log files
 *.log
 
-# Ignore node dependencies (if used in future)
+# Ignore node dependencies
 node_modules/
+**/node_modules/
 
 # Ignore environment files
 .env
+.env.*
+.env.txt
+*.key
+TH_KEY.txt
+**/*credentials*
 
-# Ignore PHP sessions and cache (if using PHP for currency proxy)
+# Ignore PHP sessions and cache
 *.session
 *.cache
+__pycache__/
+*.pyc
 
 # Ignore other backup files
 *~
-=======
-.env
->>>>>>> master
-n.expo/n
-n.expo/n
-n# Local env files (ignored to avoid committing secrets)n.envn.env.localn.env.*.local
-n# Local env files (ignored to avoid committing secrets)n.envn.env.localn.env.*.local
-n# backup filesn.bak
+*.bak
+*.orig
+
+# Build output and tool caches (generated, never edited by hand)
+_site/
+.expo/
+.caret/
+.cache/
+
+# Credentials that live on the server (or in the environment) only\.
+api/secrets.local.php
+scripts/_secrets.py
+
+# Local scratch: retired pages, sitemap downloads, deploy artefacts
+_attic/
+_live_sm.xml
+_remote*
+_preview*

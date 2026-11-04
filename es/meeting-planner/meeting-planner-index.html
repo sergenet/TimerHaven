@@ -1,18 +1,291 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>meeting-planner — Guide (es)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for meeting-planner guide (es)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Planificador de reuniones — Organiza reuniones eficaces a través de husos horarios | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía para planificar y coordinar reuniones: patrones de invitación, planificación por huso horario, diseño de agenda, recetas de programación y compartir…"> />
+  <link rel="canonical" href="https://timerhaven.com/es/meeting-planner/meeting-planner-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Planificar reuniones efectivas",
+        "description":"Recetas prácticas para programar a través de husos horarios, preparar agendas, dirigir discusiones eficientes y compartir horarios de reunión.",
+        "image":"https://timerhaven.com/assets/images/meeting-planner-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Planificador de reuniones (TimerHaven)","Calendario","Husos horarios de los participantes"],
+        "step":[
+          {"@type":"HowToStep","name":"Recopilar husos horarios","text":"Reúna el huso horario o la ciudad preferida de cada participante."},
+          {"@type":"HowToStep","name":"Elegir ventanas candidatas","text":"Use el planificador para proponer 23 horarios candidatos que minimicen las molestias entre los diferentes husos."},
+          {"@type":"HowToStep","name":"Compartir y confirmar","text":"Comparta las horas como organizador‑local → participante‑local para reducir confusiones; confirme un horario y envíe la invitación de calendario."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"¿Cuántas opciones debería proponer?","acceptedAnswer":{"@type":"Answer","text":"Ofrezca 23 ventanas razonables. Demasiadas opciones ralentizan la decisión; muy pocas pueden impedir la disponibilidad."}},
+          {"@type":"Question","name":"¿Debería mostrar siempre la hora local del participante?","acceptedAnswer":{"@type":"Answer","text":"Sí — mostrar tanto la hora del organizador como la del participante reduce errores y genera confianza."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; right:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Planificador de reuniones — Organiza reuniones eficaces a través de husos horarios | TimerHaven">
+  <meta property="og:description" content="Guía para planificar y coordinar reuniones: patrones de invitación, planificación por huso horario, diseño de agenda, recetas de programación y compartir propuestas horarias.">
+  <meta property="og:image" content="https://timerhaven.com/images/meeting-planner-hero.webp">
+  <meta property="og:url" content="https://timerhaven.com/es/meeting-planner/meeting-planner-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Planificador de reuniones — Organiza reuniones eficaces a través de husos horarios | TimerHaven">
+  <meta name="twitter:description" content="Guía para planificar y coordinar reuniones: patrones de invitación, planificación por huso horario, diseño de agenda, recetas de programación y compartir propuestas horarias.">
+  <meta name="twitter:image" content="https://timerhaven.com/images/meeting-planner-hero.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/meeting-planner/meeting-planner-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/meeting-planner/meeting-planner-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">meeting-planner — Guide (es)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Planificador de reuniones — Organiza mejores reuniones entre husos horarios</h1>
+      <div class="author" role="articleauthor" aria-label="Autor del artículo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Por Serge Shammas</strong> — redactor sobre reuniones & colaboración</div>
+          <div class="meta">Publicado: 2025-11-24 · Tiempo de lectura: 1218 min</div>
+        </div>
+      </div>
+      <p class="lead">Organizar reuniones a través de husos horarios o con equipos distribuidos requiere claridad y empatía. El Planificador de reuniones te ayuda a proponer horarios, visualizar las horas locales de los participantes y seleccionar franjas que minimicen las molestias. Esta guía cubre la recogida de participantes, la selección de ventanas horarias, el diseño de agendas, buenas prácticas para compartir y los errores típicos con husos horarios.</p>
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#collect">Recopilar participantes & husos</a> ·
+        <a href="#propose">Proponer horarios eficazmente</a> ·
+        <a href="#agenda">Diseñar la agenda</a> ·
+        <a href="#timezone">Errores con husos & horarios de verano</a> ·
+        <a href="#sync">Recetas para reuniones síncronas</a> ·
+        <a href="#share">Compartir & confirmar</a> ·
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="collect" class="section" aria-labelledby="collect-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anuncio</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="collect-title">Recopilar participantes y husos horarios</h2>
+        <p>Empieza por pedir a cada invitado su huso horario o ciudad preferida y sus ventanas de disponibilidad (mañana/tarde). Usa el planificador para almacenar ciudades y calcular horas locales rápidamente.</p>
+        <h3>Consejos prácticos</h3>
+        <ul>
+          <li>Pide a los participantes sus horas preferidas para reunirse (en su hora local).</li>
+          <li>Permite que indiquen restricciones "no antes de" o "no después de" para acotar las ventanas.</li>
+          <li>Si es posible, prefiere franjas de mediodía para una amplia participación — minimizan las horas extremas en la mayoría de regiones.</li>
+        </ul>
+      </section>
+      <section id="propose" class="section" aria-labelledby="propose-title">
+        <h2 id="propose-title">Proponer horarios eficazmente — limite las opciones</h2>
+        <p>Ofrece 23 franjas razonables en lugar de una encuesta abierta. Usa la herramienta para mostrar hora organizador → hora local del participante y reducir confusiones.</p>
+        <div class="recipe">
+          <strong>Receta para proponer franjas</strong>
+          <ol>
+            <li>Elige 23 ventanas candidatas que cumplan la mayoría de restricciones.</li>
+            <li>Comparte la lista con las horas locales para cada participante (organizador → local del participante).</li>
+            <li>Pide confirmación sobre preferencias o conflictos y finaliza rápidamente.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="agenda" class="section" aria-labelledby="agenda-title">
+        <h2 id="agenda-title">Diseñar una agenda corta — timebox y anclar decisiones</h2>
+        <p>Una agenda orienta los resultados. Incluye objetivos, reparto de tiempos, roles (facilitador, quien toma notas) y las decisiones o entregables esperados.</p>
+        <ul>
+          <li><strong>Comienza con la intención:</strong> una frase que describa el resultado deseado.</li>
+          <li><strong>Timeboxea los puntos:</strong> asigna minutos a cada tema y controla el tiempo durante la reunión.</li>
+          <li><strong>Termina con decisiones & responsables:</strong> reserva siempre 5 minutos para confirmar siguientes pasos y responsables.</li>
+        </ul>
+      </section>
+      <section id="timezone" class="section" aria-labelledby="timezone-title">
+        <h2 id="timezone-title">Errores con husos horarios & horario de verano</h2>
+        <p>Tenga cuidado con las transiciones de horario de verano y los nombres de huso ambiguos. Cuando sea posible, use identificadores IANA (p. ej. Europe/London) y muestre offsets explícitos.</p>
+        <h3>Checklist</h3>
+        <ul>
+          <li>Verifique la fecha y si en cada zona de los participantes aplica el horario de verano (DST).</li>
+          <li>Muestre nombres de husos y offsets (p. ej. GMT+1) en las comunicaciones.</li>
+          <li>Pruebe enlaces e invitaciones de calendario con una cuenta participante de ejemplo al programar eventos críticos.</li>
+        </ul>
+      </section>
+      <section id="sync" class="section" aria-labelledby="sync-title">
+        <h2 id="sync-title">Recetas para reuniones síncronas</h2>
+        <p>Aquí hay recetas para tipos comunes de reunión que ayudan a conducirlas eficazmente.</p>
+        <div class="recipe">
+          <strong>Daily standup (15 minutos)</strong>
+          <ol>
+            <li>Temporizador estricto de 15 minutos. Cada participante responde tres preguntas (ayer/hoy/impedimentos).</li>
+            <li>El facilitador gestiona el tiempo y aparca las discusiones largas como seguimientos.</li>
+          </ol>
+        </div>
+        <div class="recipe">
+          <strong>Reunión de decisiones (3060 minutos)</strong>
+          <ol>
+            <li>Distribuya documentos de pre‑lectura 2448 horas antes.</li>
+            <li>Comience con los criterios de decisión y las opciones; permita una discusión corta y cierre con una votación o decisión de un responsable.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="share" class="section" aria-labelledby="share-title">
+        <h2 id="share-title">Compartir, confirmar & enviar invitaciones</h2>
+        <p>Cuando confirme una franja, envíe una invitación de calendario con horas claras y conscientes del huso horario, agenda y adjuntos. Incluya una nota corta de "qué preparar" y los resultados esperados.</p>
+        <ul>
+          <li>Incluya un enlace a la nota de la reunión o al documento colaborativo en la invitación.</li>
+          <li>Liste las decisiones o entregables esperados en la descripción de la invitación.</li>
+          <li>Use la visibilidad "Ocupado" para el evento y proteger la franja.</li>
+        </ul>
+      </section>
+      <section id="troubleshoot" class="section" aria-labelledby="troubleshoot-title">
+        <h2 id="troubleshoot-title">Resolución de problemas</h2>
+        <ul>
+          <li><strong>Confusión sobre la hora:</strong> reenvíe las horas con etiquetas locales del participante si aparece una discordancia.</li>
+          <li><strong>Cambios de huso de última hora:</strong> confirme la hora del participante y ofrezca una alternativa si es necesario.</li>
+          <li><strong>Ausencias:</strong> registre quién no pudo asistir y reprograme proponiendo pocas franjas.</li>
+        </ul>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ¿Cómo gestionar equipos distribuidos muy grandes?<br><strong>R:</strong> Divida en grupos de trabajo más pequeños o use actualizaciones asíncronas; las reuniones síncronas grandes son costosas y a menudo ineficientes.</p>
+          <p><strong>P:</strong> ¿Debería mostrar siempre dos husos horarios?<br><strong>R:</strong> Muestre siempre la hora del organizador y la hora local del participante; cuando hay varios participantes, considere una tabla con las horas locales para la franja elegida.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">Recursos</h2>
+        <ul class="muted">
+          <li><a href="/meeting-planner-es.html">Abrir herramienta Planificador de reuniones</a></li>
+          <li><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank" rel="noopener">Lista de husos IANA</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="/meeting-planner-es.html" class="cta" aria-label="Abrir Planificador de reuniones">Abrir Planificador</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Anuncio</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>¿Preguntas o comentarios? Contáctenos en <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Lea nuestra <a href="/privacy.html">Política de privacidad</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Planificador de Reuniones y Coordinador de Zonas Horarias</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Una herramienta de coordinación para encontrar el mejor horario superpuesto para reuniones en varias zonas horarias globales.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Historia</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Cómo usar</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Ingrese las ciudades de todos los participantes.</li><li>Vea los espacios 'Verdes' (horas laborables) superpuestos.</li><li>Seleccione el mejor horario y comparta la invitación.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Intente siempre elegir horarios 'socialmente aceptables' (9 AM - 6 PM) para todos los participantes siempre que sea posible para garantizar un alto compromiso."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Más Herramientas de Productividad Gratuitas</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Temporizador de Tareas</a> <a href="../../stopwatch-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Cronómetro</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="../../unit-converter-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Conversor de Unidades</a> <a href="../../weather-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clima</a> <a href="../../world-clock-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Reloj Mundial</a> <a href="../../calendar-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendario</a> <a href="../../clipboard-manager-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Portapapeles</a> <a href="../../countdown-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Cuenta Regresiva</a> <a href="../../currency-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Divisas</a> <a href="../../focus-music-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Música Focus</a> <a href="../../habit-tracker-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Hábitos</a> <a href="../../meeting-planner-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Reuniones</a> <a href="../../notes-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notas</a> <a href="../../password-generator-es.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Contraseñas</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Botón flotante "Volver a la herramienta" -->
+  <a href="/meeting-planner-es.html" class="return-to-tool" id="returnToToolMeeting" aria-label="Volver al Planificador de reuniones">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Volver al Planificador</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolMeeting');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

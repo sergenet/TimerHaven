@@ -1,137 +1,350 @@
-<!DOCTYPE html>
-
-<html dir="rtl" lang="ar">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>الموقت — TimerHaven</title>
-<meta content="قِس الوقت المنقضي لأي نشاط. تعلّم كيفية استخدام الموقت، واحصل على نصائح والأسئلة الشائعة." name="description"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
-<style>
-    body { background:#f4f7fb; font-family:'Montserrat', Arial, sans-serif; color:#0b2545; }
-    .page-wrap { max-width:1200px; margin:2rem auto; padding:0 1rem; }
-    .top-row { display:flex; justify-content:flex-end; gap:.6rem; margin-bottom:.6rem; }
-    .language-select { width:220px; border-radius:10px; padding:.28rem .6rem; border:1px solid rgba(13,110,253,0.25); background:#fff; color:#0d6efd; }
-    .center-row { display:flex; gap:1.6rem; justify-content:center; align-items:flex-start; }
-    .article-card, .tool-card { background:#fff; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); width:340px; padding:1.3rem; }
-    .article-card h2 { color:#185a9d; font-size:1.25rem; margin-bottom:.6rem; }
-    .tool-card h3 { color:#185a9d; font-size:1.35rem; margin-bottom:.5rem; }
-    .stopwatch-display { font-weight:700; font-size:1.25rem; margin-top:.5rem; margin-bottom:.5rem; }
-    .controls-row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin-top:.5rem; }
-    .lap-list { margin-top:.8rem; }
-    .faq-section { margin-top:1rem; background:#f7fafc; border-radius:8px; padding:1rem; }
-    .btn-small { padding:.35rem .7rem; font-size:.9rem; }
-    footer.site { text-align:center; margin-top:1.5rem; color:#6b7280; }
-    @media (max-width:900px) { .center-row{flex-direction:column;align-items:center;} .article-card, .tool-card{width:98%; max-width:540px;} }
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
 
-    /* Hide the visible language indicator while keeping the markup and JS behavior intact */
-    .top-row { display: none !important; }
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ساعة إيقاف — TimerHaven</title>
+  <link rel="canonical" href="https://timerhaven.com/stopwatch-ar.html" />
+  
+  
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description"
+    content="قِس الوقت المنقضي لأي نشاط. تعلّم كيفية استخدام ساعة الإيقاف، واحصل على نصائح، والأسئلة الشائعة، والمقالات.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" dir="rtl">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  media="print" onload="this.media='all'">
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --brand-dark: #09507a;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+    html,
+    body {
+      height: 100%
+    }
+    body {
+      background: var(--bg);
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      color: #0b2545;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: #007bff !important;
+      text-decoration: none;
+      font-weight: 700
+    }
+    .back-link:hover {
+      text-decoration: underline
+    }
+    .tool-title {
+      color: var(--brand);
+      font-size: 1.35rem;
+      margin: 0 0 .6rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .cta {
+      display: inline-block;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: #007bff !important;
+      color: #fff !important;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+      box-shadow: 0 6px 18px rgba(0, 123, 255, 0.08);
+    }
+    .cta:hover {
+      background: #0056d6
+    }
+    .stopwatch-display {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+      color: #102a43;
+    }
+    .controls-row {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+    }
+    .lap-list {
+      margin-top: .8rem;
+    }
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+    .svg-btn {
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+    .svg-btn:focus {
+      outline: 3px solid rgba(11, 99, 160, 0.18);
+      border-radius: 6px;
+    }
+    .svg-btn svg {
+      display: block;
+    }
+    .btn-fallback {
+      display: none;
+    }
+    .lap-item {
+      background: #f7fafc;
+      padding: .45rem;
+      border-radius: 8px;
+      margin-bottom: .4rem;
+    }
+    @media (max-width:900px) {
+      .card {
+        padding: 1rem
+      }
+    }
   </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ساعة إيقاف — TimerHaven">
+  <meta property="og:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/stopwatch-ar.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ساعة إيقاف — TimerHaven">
+  <meta name="twitter:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ط³ط§ط¹ط© ط§ظ„ط¥ظٹظ‚ط§ظپ ط¹ط¨ط± ط§ظ„ط¥ظ†طھط±ظ†طھ",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "ط³ط§ط¹ط© ط§ظ„ط¥ظٹظ‚ط§ظپ ظ‡ظٹ ط£ط¯ط§ط© ظ„ظ‚ظٹط§ط³ ط§ظ„ظˆظ‚طھ ط§ظ„ظ…ظ†ظ‚ط¶ظٹ ط¨ظٹظ† ط¨ط¯ط، ط§ظ„طھط´ط؛ظٹظ„ ظˆط§ظ„طھظˆظ‚ظپ.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/stopwatch-ar.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/stopwatch-de.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/stopwatch-el.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/stopwatch-es.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/stopwatch-fr.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/stopwatch-ru.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/stopwatch-en.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/stopwatch-en.html">
 </head>
 <body>
-<div class="page-wrap">
-<div class="top-row">
-<label for="language-select-top" style="align-self:center; font-weight:600; margin-right:.5rem;">Language:</label>
-<select aria-label="Language selector" class="language-select" id="language-select-top">
-<option value="en">English</option><option value="fr">Français</option><option value="es">Español</option><option value="de">Deutsch</option><option value="ru">Русский</option><option value="el">Ελληνικά</option><option selected="" value="ar">العربية</option>
-</select>
-</div>
-<div class="text-center mb-4">
-<h1 style="margin-bottom:.25rem;">الموقت</h1>
-<p class="lead" style="color:#374151; margin-bottom:1rem;">قِس الوقت المنقضي لأي نشاط. تعلّم كيفية استخدام الموقت، واحصل على نصائح والأسئلة الشائعة.</p>
-</div>
-<div class="center-row">
-<!-- Left summary card -->
-
-<!-- Main tool card -->
-<div aria-label="Stopwatch" class="tool-card" role="region">
-<a class="d-block mb-2" href="index.html" style="text-decoration:none; color:#0d6efd; font-weight:600;">← العودة إلى القائمة الرئيسية</a>
-<h3><i class="fa fa-clock"></i> الموقت</h3>
-<div aria-live="polite" class="stopwatch-section">
-<div class="stopwatch-display" id="swDisplay">00:00:00</div>
-<div class="controls-row">
-<button class="btn btn-success btn-small" id="swStartBtn">ابدأ</button>
-<button class="btn btn-secondary btn-small" id="swPauseBtn">إيقاف مؤقت</button>
-<button class="btn btn-danger btn-small" id="swResetBtn">إعادة ضبط</button>
-<button class="btn btn-info btn-small" id="swLapBtn">لفة</button>
-</div>
-<div class="lap-list" id="lapList"></div>
-<details class="faq-section" style="margin-top:1rem;">
-<summary style="font-weight:700; font-size:1rem;">الأسئلة الشائعة</summary>
-<ul style="padding-left:1.1rem; color:#374151;">
-<li><b>هل يمكن تسجيل لفات متعددة؟</b> نعم، استخدم زر اللفة.</li>
-<li><b>هل يبقى الوقت محفوظاً؟</b> لا، يعاد عند إعادة التحميل.</li>
-<li><b>هل هو مجاني؟</b> نعم، جميع أدوات TimerHaven مجانية.</li>
-</ul>
-</details>
-</div>
-</div>
-<!-- Right summary card -->
-
-</div>
-<footer class="site" style="text-align:center; margin-top:1.5rem; color:#6b7280;">
-      © 2025 TimerHaven. <a href="privacy.html">سياسة الخصوصية</a>
-</footer>
-</div>
-<script>
-  (function(){
-    // language selector redirect
-    var sel = document.getElementById('language-select-top');
-    if (sel) {
-      sel.addEventListener('change', function() {
-        var v = this.value || 'en';
-        window.location.href = 'stopwatch-' + v + '.html';
-      });
-    }
-
-    // Stopwatch logic (keeps the same behavior on all localized pages)
-    var swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
-    function swFormat(ms) {
-      var t = Math.floor(ms / 1000);
-      var h = Math.floor(t / 3600);
-      var m = Math.floor((t % 3600) / 60);
-      var s = t % 60;
-      return String(h).padStart(2,'0')+":"+String(m).padStart(2,'0')+":"+String(s).padStart(2,'0');
-    }
-    function renderLaps() {
-      var lapList = document.getElementById('lapList');
-      lapList.innerHTML = laps.map(function(l,i){
-        return '<div class="lap-item">Lap '+(i+1)+': '+swFormat(l)+'</div>';
-      }).join('');
-    }
-    function swUpdateDisplay() {
-      document.getElementById('swDisplay').textContent = swFormat(swElapsed);
-      renderLaps();
-    }
-    document.getElementById('swStartBtn').onclick = function() {
-      if (swRunning) return;
-      swRunning = true;
-      swStart = Date.now() - swElapsed;
-      swTimer = setInterval(function(){
-        swElapsed = Date.now() - swStart;
+    <script>try { localStorage.setItem('timerhavenLang', 'ar'); } catch (e) { };</script>
+  <main class="container" role="main">
+    <article class="card" aria-labelledby="tool-title">
+      <a href="index-ar.html" class="back-link" id="back-link">&larr;&nbsp;العودة إلى القائمة الرئيسية</a>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-clock" aria-hidden="true"></i> ساعة إيقاف</h3>
+      <p style="margin:0 0 .6rem 0;">
+        <a id="read-guide-btn" class="cta read-guide" href="https://timerhaven.com/ar/stopwatch/stopwatch-index.html"
+          role="button" aria-label="اقرأ الدليل الكامل" target="_blank" rel="noopener">اقرأ الدليل الكامل</a>
+      </p>
+      <div class="stopwatch-section" aria-live="polite">
+        <div id="swDisplay" class="stopwatch-display" aria-atomic="true">00:00:00</div>
+        <div class="controls-row" role="toolbar" aria-label="ضوابط ساعة الإيقاف">
+          <!-- Inline SVG button -->
+          <button id="swStartBtn" class="svg-btn" type="button" aria-label="بدء ساعة الإيقاف" title="بدء">
+            <svg width="72" height="36" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" role="img"
+              aria-hidden="false" focusable="false">
+              <rect x="0" y="0" rx="6" ry="6" width="72" height="36" fill="#0b63a0"></rect>
+              <text x="36" y="22" font-family="Montserrat, Arial, Helvetica, sans-serif" font-size="14"
+                font-weight="700" text-anchor="middle" fill="#ffffff">بدء</text>
+            </svg>
+          </button>
+          <!-- Fallback plain button -->
+          <button id="swStartBtnFallback" class="btn btn-brand btn-fallback" type="button"
+            style="background:#0b63a0;color:#fff;border-color:rgba(0,0,0,0.05);">بدء</button>
+          <button id="swPauseBtn" class="btn btn-secondary" type="button" aria-label="إيقاف مؤقت">إيقاف مؤقت</button>
+          <button id="swResetBtn" class="btn btn-danger" type="button" aria-label="إعادة ضبط">إعادة ضبط</button>
+          <button id="swLapBtn" class="btn btn-info" type="button" aria-label="دورة">دورة</button>
+        </div>
+        <div id="lapList" class="lap-list" style="margin-top:.8rem;" aria-live="polite"></div>
+        <details class="faq-section" style="margin-top:1rem;">
+          <summary style="font-weight:700; font-size:1rem;">الأسئلة الشائعة</summary>
+          <ul style="padding-right:1.1rem; color:#374151;">
+            <li><strong>هل يمكنني تسجيل دورات متعددة؟</strong> نعم، استخدم زر "دورة".</li>
+            <li><strong>هل يستمر الوقت؟</strong> لا، يتم إعادة الضبط عند تحديث الصفحة.</li>
+            <li><strong>هل هو مجاني؟</strong> نعم، جميع أدوات TimerHaven مجانية.</li>
+          </ul>
+        </details>
+      </div>
+    </article>
+  </main>
+  <script>
+    (function () {
+      var swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
+      function swFormat(ms) {
+        var t = Math.floor(ms / 1000);
+        var h = Math.floor(t / 3600);
+        var m = Math.floor((t % 3600) / 60);
+        var s = t % 60;
+        return String(h).padStart(2, '0') + ":" + String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
+      }
+      function renderLaps() {
+        var lapList = document.getElementById('lapList');
+        lapList.innerHTML = laps.map(function (l, i) {
+          return '<div class="lap-item">دورة ' + (i + 1) + ': ' + swFormat(l) + '</div>';
+        }).join('');
+      }
+      function swUpdateDisplay() {
+        document.getElementById('swDisplay').textContent = swFormat(swElapsed);
+        renderLaps();
+      }
+      function startStopwatch() {
+        if (swRunning) return;
+        swRunning = true;
+        swStart = Date.now() - swElapsed;
+        swTimer = setInterval(function () {
+          swElapsed = Date.now() - swStart;
+          swUpdateDisplay();
+        }, 100);
+      }
+      function pauseStopwatch() {
+        swRunning = false;
+        clearInterval(swTimer);
+      }
+      function resetStopwatch() {
+        swRunning = false;
+        clearInterval(swTimer);
+        swElapsed = 0;
+        laps = [];
         swUpdateDisplay();
-      }, 100);
-    };
-    document.getElementById('swPauseBtn').onclick = function() {
-      swRunning = false;
-      clearInterval(swTimer);
-    };
-    document.getElementById('swResetBtn').onclick = function() {
-      swRunning = false;
-      clearInterval(swTimer);
-      swElapsed = 0;
-      laps = [];
-      swUpdateDisplay();
-    };
-    document.getElementById('swLapBtn').onclick = function() {
-      if (swRunning) laps.push(swElapsed);
-      swUpdateDisplay();
-    };
-    swUpdateDisplay();
-  })();
+      }
+      function lapStopwatch() {
+        if (swRunning) laps.push(swElapsed);
+        swUpdateDisplay();
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        var svgStart = document.getElementById('swStartBtn');
+        var fallbackStart = document.getElementById('swStartBtnFallback');
+        var pauseBtn = document.getElementById('swPauseBtn');
+        var resetBtn = document.getElementById('swResetBtn');
+        var lapBtn = document.getElementById('swLapBtn');
+        if (svgStart) {
+          svgStart.addEventListener('click', startStopwatch);
+          svgStart.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startStopwatch(); } });
+          svgStart.setAttribute('tabindex', '0');
+        }
+        if (fallbackStart) fallbackStart.addEventListener('click', startStopwatch);
+        if (pauseBtn) pauseBtn.addEventListener('click', pauseStopwatch);
+        if (resetBtn) resetBtn.addEventListener('click', resetStopwatch);
+        if (lapBtn) lapBtn.addEventListener('click', lapStopwatch);
+        swUpdateDisplay();
+      });
+    })();
   </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-<p style="margin-top:1rem;"><a class="cta" href="/ar/stopwatch/stopwatch-index.html">Read full guide</a></p></body>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="text-align:center;margin-top:1.2rem;color:var(--muted,#6b7c89);padding-bottom:2rem;">
+    &copy; 2025 TimerHaven. جميع الأدوات مجانية وتحترم خصوصيتك.<br>
+    <a href="/privacy.html">الخصوصية</a> ·
+    <a href="/terms.html">شروط الخدمة</a> ·
+    <a href="/contact.html">اتصل بنا</a>
+  
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="rtl" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: right;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ساعة الإيقاف عبر الإنترنت</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ساعة الإيقاف هي أداة لقياس الوقت المنقضي بين بدء التشغيل والتوقف.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">التاريخ</h3>
+                <p style="line-height: 1.7; color: #4b5563;">تطورت أول ساعات التوقيت الميكانيكية في القرن التاسع عشر لسباقات الخيول والتجارب العلمية.</p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">كيفية الاستخدام</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-right: 1.25rem;"><li>انقر على 'ابدأ' لبدء التوقيت.</li><li>استخدم 'لفة' لتسجيل فترات معينة دون إيقاف العد.</li><li>انقر على 'إيقاف' لتجميد الوقت و'إعادة ضبط' للمسح.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"استخدم ميزة 'اللفة' للتدريب المكثφ أو للملاحظات العلمية متعددة الخطوات."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">المزيد من أدوات الإنتاجية المجانية</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">مؤقت المهام</a> <a href="stopwatch-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">ساعة الإيقاف</a> <a href="pomodoro-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">بومودورو</a> <a href="unit-converter-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">محول الوحدات</a> <a href="weather-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الطقس</a> <a href="world-clock-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الساعة العالمية</a> <a href="calendar-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">التقويم</a> <a href="clipboard-manager-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الحافظة</a> <a href="countdown-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العد التنازلي</a> <a href="currency-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العملات</a> <a href="focus-music-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">موسيقى التركيز</a> <a href="habit-tracker-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العادات</a> <a href="meeting-planner-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الاجتماعات</a> <a href="notes-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الملاحظات</a> <a href="password-generator-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">كلمات المرور</a></div>
+        </div>
+    </section>
+    
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+</body>
 </html>

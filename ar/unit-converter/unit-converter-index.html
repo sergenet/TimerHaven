@@ -1,18 +1,305 @@
-<!doctype html>
-<html lang="ar">
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8">
-  <title>unit-converter — Guide (ar)</title>
+  <title>دليل محول الوحدات — Unit Converter (العربية)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for unit-converter guide (ar)">
+  <meta name="description" content="دليل شامل لتحويل الوحدات: مجموعات الوحدات، الدقة والتقريب، حالات خاصة (الحرارة)، وصفات تحويل شائعة، وأمثلة لجداول البيانات والبرمجة.">
+  <link rel="canonical" href="https://timerhaven.com/ar/unit-converter/unit-converter-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;direction:rtl;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;text-align:right;}
+    .muted{color:var(--muted);}
+    .author{display:flex;flex-direction:row-reverse;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-right:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-left:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;text-align:left;direction:ltr;}
+    .return-to-tool { position:fixed; left:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease; opacity:0.98; }
+    .return-to-tool .icon { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,0.12); color:#fff; font-size:16px;}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    @media (max-width:520px) { .return-to-tool .label { display:none; } .return-to-tool{ padding:.45rem .5rem; left:14px; bottom:14px; } }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="دليل محول الوحدات — Unit Converter (العربية)">
+  <meta property="og:description" content="دليل شامل لتحويل الوحدات: مجموعات الوحدات، الدقة والتقريب، حالات خاصة (الحرارة)، وصفات تحويل شائعة، وأمثلة لجداول البيانات والبرمجة.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ar/unit-converter/unit-converter-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="دليل محول الوحدات — Unit Converter (العربية)">
+  <meta name="twitter:description" content="دليل شامل لتحويل الوحدات: مجموعات الوحدات، الدقة والتقريب، حالات خاصة (الحرارة)، وصفات تحويل شائعة، وأمثلة لجداول البيانات والبرمجة.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ظ…ط­ظˆظ„ ط§ظ„ظˆط­ط¯ط§طھ",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "ظ…ط­ظˆظ„ ط§ظ„ظˆط­ط¯ط§طھ ظ‡ظˆ ط£ط¯ط§ط© طھظڈط³طھط®ط¯ظ… ظ„طھط­ظˆظٹظ„ ظ‚ظٹط§ط³ ظ…ظ† ظˆط­ط¯ط© ط¥ظ„ظ‰ ط£ط®ط±ظ‰ ط¯ظˆظ† طھط؛ظٹظٹط± ط§ظ„ظƒظ…ظٹط© ط§ظ„ظپط¹ظ„ظٹط©. ظˆظ‡ظˆ ط£ظ…ط± ط¶ط±ظˆط±ظٹ ظ„ظ„ط¹ظ„ظˆظ… ظˆط§ظ„ظ‡ظ†ط¯ط³ط© ظˆط§ظ„ط­ظٹط§ط© ط§ظ„ظٹظˆظ…ظٹط©.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/unit-converter/unit-converter-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/unit-converter/unit-converter-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/unit-converter/unit-converter-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/unit-converter/unit-converter-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/unit-converter/unit-converter-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/unit-converter/unit-converter-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/unit-converter/unit-converter-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/unit-converter/unit-converter-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">unit-converter — Guide (ar)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">محول الوحدات — دليل عملي</h1>
+      <div class="author" role="articleauthor" aria-label="Author">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="64" height="64" alt="Serge Shammas">
+        <div style="text-align:right;">
+          <div><strong>بقلم Serge Shammas</strong> — كاتب في قابلية الاستخدام والهندسة</div>
+          <div class="meta">نُشر: 2025-11-24 · وقت القراءة: 1015 دقيقة</div>
+        </div>
+      </div>
+      <p class="lead">يستعمل محول الوحدات يوميًا في الطهي، السفر، الهندسة، وتحليل البيانات. أخطاء صغيرة في الوحدات أو التقريب قد تؤدي إلى نتائج خاطئة. يشرح هذا الدليل أسرار عائلات الوحدات، قواعد الدقة، الحالات الخاصة مثل الحرارة، وصفات التحويل الشائعة، ونماذج لجداول البيانات والبرمجة.</p>
+      <nav class="toc" aria-label="جدول المحتويات">
+        <a href="#families">عائلات الوحدات والأساسيات</a>
+        <a href="#precision">الدقة وقواعد التقريب</a>
+        <a href="#temperature">الحرارة — حالات خاصة</a>
+        <a href="#recipes">وصفات تحويل شائعة</a>
+        <a href="#spreadsheet">أمثلة: جداول البيانات والبرمجة</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+      <section id="families" class="section" aria-labelledby="families-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="families-title">عائلات الوحدات والأساسيات</h2>
+        <p>تنتمي الوحدات إلى عائلات: الطول، الكتلة/الوزن، الحرارة، الحجم، الزمن، المساحة، الطاقة، القدرة، البيانات، وغيرها. لا تحول بين عائلات مختلفة — مثلاً لا تحول متر إلى كيلوجرام مباشرة.</p>
+        <ul style="text-align:right;">
+          <li><strong>الطول:</strong> متر، كيلومتر، ميل، قدم، بوصة.</li>
+          <li><strong>الكتلة/الوزن:</strong> كيلوغرام، جرام، رطل، أوقية.</li>
+          <li><strong>الحجم:</strong> لتر، مليلتر، غالون (فرق بين US/UK)، كوب، أوقية سائلة.</li>
+          <li><strong>الحرارة:</strong> درجة مئوية، فهرنهايت، كلفن — تحويلات أفيْن (تضم إزاحة).</li>
+          <li><strong>الزمن:</strong> ثانية، دقيقة، ساعة، يوم.</li>
+          <li><strong>السرعة:</strong> م/ث، كم/س، ميل/س.</li>
+          <li><strong>المساحة:</strong> متر مربع، هكتار، فدان، ميل مربع.</li>
+          <li><strong>البيانات:</strong> بايت (SI) وكيبيبايت/ميبيبايت (ثنائي — Bin).</li>
+          <li><strong>استهلاك الوقود:</strong> لتر/100كم و mpg (US/UK) — صيغ خاصة.</li>
+        </ul>
+        <p class="muted">للاستخدام الهندسي الدقيق، راجع المصادر المعيارية (NIST, BIPM) للحصول على عوامل تحويل رسمية.</p>
+      </section>
+      <section id="precision" class="section" aria-labelledby="precision-title">
+        <h2 id="precision-title">الدقة وقواعد التقريب</h2>
+        <p>اختر دقة العرض وفق السياق. التقريب المفرط قد يخلق انحرافًا منهجيًا، والعرض بدقة مفرطة قد يعطي انطباعًا بدقة غير حقيقية.</p>
+        <h3>إرشادات حسب السياق</h3>
+        <ul style="text-align:right;">
+          <li><strong>التسوق واليوميات:</strong> منزلتان عشريتان كافيتان عادةً.</li>
+          <li><strong>الطهي:</strong> استخدم وحدات معقولة (ملاعق، غرام) وقدم بدائل (ميترية/إمبريال).</li>
+          <li><strong>الهندسة:</strong> استخدم أرقامًا معنوية تتوافق مع دقة الأدوات (36 منازل أو أكثر عند الحاجة).</li>
+          <li><strong>التحليلات:</strong> خزّن القيم بدقة عالية وقم بالتقريب فقط عند العرض.</li>
+        </ul>
+        <p class="muted">اعرض الوحدة مع الرقم دائمًا، وفكر في إظهار معامل التحويل أو وقت القياس إذا كانت القيم ديناميكية (مثل أسعار الصرف).</p>
+      </section>
+      <section id="temperature" class="section" aria-labelledby="temperature-title">
+        <h2 id="temperature-title">الحرارة — حالة خاصة</h2>
+        <p>تحويل درجات الحرارة هو تحويل أفيْن (يتضمّن مقياسًا وإزاحة). تحويل اختلاف درجة حرارة مختلف عن تحويل قيمة مطلقة.</p>
+        <ul style="text-align:right;">
+          <li>تحويل قيم مطلقة:
+            <ul>
+              <li>C → F: F = C × 9/5 + 32</li>
+              <li>F → C: C = (F − 32) × 5/9</li>
+              <li>C ↔ K: K = C + 273.15</li>
+            </ul>
+          </li>
+          <li>تحويل تغير درجة حرارة (Δ): ضاعف فقط بالمقياس (مثلاً ΔC → ΔF اضرب بـ 9/5) ولا تضف الإزاحة.</li>
+        </ul>
+        <p>خطأ شائع: تحويل "فرق 10°C" لا يحتاج +32؛ فرق 10°C = فرق 18°F.</p>
+      </section>
+      <section id="recipes" class="section" aria-labelledby="recipes-title">
+        <h2 id="recipes-title">وصفات تحويل شائعة (مع الإضافات الحديثة)</h2>
+        <div class="recipe">
+          <strong>الطول: ميل ↔ كيلومتر</strong>
+          <ol style="text-align:right;">
+            <li>عامل: 1 ميل = 1.60934 كيلومتر.</li>
+            <li>مثال: 5 ميل × 1.60934 = 8.0467 كم → عرض 8.05 كم للاستخدام اليومي.</li>
+          </ol>
+        </div>
+        <div class="recipe">
+          <strong>الوزن: رطل ↔ كيلوغرام</strong>
+          <ol style="text-align:right;">
+            <li>عامل: 1 lb = 0.45359237 kg.</li>
+            <li>مثال: 150 lb × 0.45359237 = 68.0389 kg → عرض 68.04 kg (2 منازل) أو 68.0 حسب السياق الطبي.</li>
+          </ol>
+        </div>
+        <div class="recipe">
+          <strong>الحجم: لتر ↔ غالون (US)</strong>
+          <ol style="text-align:right;">
+            <li>عامل: 1 US gallon = 3.785411784 لتر.</li>
+            <li>مثال: 2.5 US gal × 3.785411784 = 9.46352946 L → عرض 9.464 L.</li>
+            <li>احذر الفروقات الإقليمية: Imperial gallon أكبر من US gallon (~4.54609 L).</li>
+          </ol>
+        </div>
+        <div class="recipe">
+          <strong>البيانات: تحويل SI ↔ ثنائي (Bin)</strong>
+          <ol style="text-align:right;">
+            <li>SI: 1 KB = 1000 بايت، 1 MB = 1,000,000 بايت.</li>
+            <li>ثنائي (Bin): 1 KiB = 1024 بايت، 1 MiB = 1024² بايت.</li>
+            <li>حدّد وضع الأداء (SI أو Bin) عند تحويل وحدات البيانات.</li>
+          </ol>
+        </div>
+        <div class="recipe">
+          <strong>استهلاك الوقود: L/100km ↔ MPG</strong>
+          <ol style="text-align:right;">
+            <li>الصيغة الشائعة: تقريبًا 1 mpg (US) ≈ 235.214583 / (L/100km).</li>
+            <li>مثال: 8 L/100km ≈ 29.4 mpg (US) تقريبًا.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="spreadsheet" class="section" aria-labelledby="spreadsheet-title">
+        <h2 id="spreadsheet-title">أمثلة: جداول البيانات والبرمجة</h2>
+        <p>نماذج مفيدة لتطبيق التحويلات تلقائيًا.</p>
+        <h3>مثال جداول (Google Sheets / Excel)</h3>
+        <pre class="template">تحويل الأميال في A2 إلى كيلومترات:
+=ROUND(A2 * 1.60934, 2)</pre>
+        <h3>مقتطف JavaScript</h3>
+        <pre class="template">// عامل الطول محفوظ بالمتر لكل وحدة
+const lengthFactors = { Meter:1, Kilometer:1000, Mile:1609.34 };
+function convertLength(val, fromKey, toKey) {
+  return val * (lengthFactors[fromKey] / lengthFactors[toKey]);
+}
+// مثال: miles->km: convertLength(5, 'Mile', 'Kilometer');
+</pre>
+        <p class="muted">خزّن عوامل التحويل المركزية في مكان واحد وأعد استخدامها لتجنّب التناقضات بين الجداول والبرمجيات.</p>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">الأسئلة الشائعة</h2>
+        <div class="muted" style="text-align:right;">
+          <p><strong>س: لماذا تبدو بعض التحويلات "مختلفة" بين المصادر؟</strong><br>
+          ج: قد يختلف العامل حسب التعريف (مثلاً لـ gallon هناك US و Imperial)، وأيضًا طرق التقريب والعرض.</p>
+          <p><strong>س: هل يمكن عرض الوحدتين معًا للمستخدم؟</strong><br>
+          ج: نعم — عرض الوحدة الرئيسية والفرعية مفيد (مثال 68.04 kg (150 lb)).</p>
+          <p><strong>س: كيف أتعامل مع بيانات الحاسوب (KB vs KiB)؟</strong><br>
+          ج: قدّم خيار وضع البيانات: SI (قوى 10) أو Bin (قوى 2). تأكد من توضيح الوضع للمستخدم.</p>
+        </div>
+      </section>
+      <section id="resources" class="section" aria-labelledby="resources">
+        <h2 id="resources">موارد</h2>
+        <ul class="muted" style="text-align:right;">
+          <li><a href="/unit-converter-ar.html">افتح أداة محول الوحدات</a></li>
+          <li><a href="https://www.nist.gov/pml/weights-and-measures/metric-si" target="_blank" rel="noopener">NIST — الوحدات المعيارية (SI)</a></li>
+        </ul>
+      </section>
+      <p style="margin-top:1.2rem; text-align:right;">
+        <a href="/unit-converter-ar.html" class="cta" aria-label="فتح أداة محول الوحدات">فتح محول الوحدات</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">إعلان</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;text-align:right;">
+        <p>أسئلة أو ملاحظات؟ راسلنا على <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. اطلع على <a href="/privacy.html">سياسة الخصوصية</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="rtl" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: right;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">محول الوحدات</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">أداة لتحويل القياسات من وحدة إلى أخرى بدقة وسهولة.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">التاريخ</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">كيفية الاستخدام</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-right: 1.25rem;"><li>حدد وحدة المصدر والهدف.</li><li>أدخل القيمة.</li><li>احصل على النتيجة فوراً.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"راجع معاملات التحويل للتأكد من الدقة العلمية."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">المزيد من أدوات الإنتاجية المجانية</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">مؤقت المهام</a> <a href="../../stopwatch-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">ساعة الإيقاف</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">بومودورو</a> <a href="../../unit-converter-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">محول الوحدات</a> <a href="../../weather-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الطقس</a> <a href="../../world-clock-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الساعة العالمية</a> <a href="../../calendar-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">التقويم</a> <a href="../../clipboard-manager-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الحافظة</a> <a href="../../countdown-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العد التنازلي</a> <a href="../../currency-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العملات</a> <a href="../../focus-music-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">موسيقى التركيز</a> <a href="../../habit-tracker-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">العادات</a> <a href="../../meeting-planner-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الاجتماعات</a> <a href="../../notes-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">الملاحظات</a> <a href="../../password-generator-ar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">كلمات المرور</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- زر العودة للأداة -->
+  <a href="/unit-converter-ar.html" class="return-to-tool" id="returnToToolUnit" aria-label="العودة إلى محول الوحدات">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">العودة إلى المحول</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolUnit');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function toggleOpacity(){ try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){} }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

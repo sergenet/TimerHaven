@@ -1,18 +1,364 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
   <meta charset="utf-8">
-  <title>notes — Guide (ru)</title>
+  <title>Заметки — Практическое руководство по записи действенных заметок | TimerHaven</title>
+  <meta name="description" content="Как эффективно использовать Notes вместе с Pomodoro и Task Timer. Пошаговое руководство, FAQ, скриншоты, шаблон для скачивания и структурированные данные.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for notes guide (ru)">
+  <link rel="canonical" href="https://timerhaven.com/ru/notes/notes-index.html">
+  <meta name="author" content="Serge Shammas">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Фиксируйте, тегируйте и превращайте заметки в задачи с TimerHaven Notes",
+        "description":"Практический рабочий процесс: быстро фиксировать заметки, помечать их тэгами, превращать выполнимые пункты в задачи и еженедельно просматривать в связке с Pomodoro и Task Timer.",
+        "image":"https://timerhaven.com/assets/images/notes-snapshot.webp",
+        "totalTime":"PT30M",
+        "supply":["TimerHaven Notes","Pomodoro‑таймер (TimerHaven)","Таблица (опционально)"],
+        "step":[
+          {"@type":"HowToStep","name":"Сделайте короткую заметку","text":"Создайте заметку с одно‑строчным заголовком и 24 буллет‑пунктами, описывающими идею, контекст или шаги."},
+          {"@type":"HowToStep","name":"Тегируйте и приоритезируйте","text":"Добавьте один короткий контекстный тэг и маркер приоритета; отметьте как выполняемую, если нужно сделать в ближайшее время."},
+          {"@type":"HowToStep","name":"Преобразуйте в задачу или запланируйте","text":"Если заметка требует работы — превратите её в запись Task Timer или событие в календаре и прикрепите идентификатор заметки для контекста."},
+          {"@type":"HowToStep","name":"Регулярно просматривайте","text":"Проводите быструю триаж‑проверку ежедневно и глубокий недельный обзор, чтобы заметки не пылились."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Хранятся ли заметки локально или в облаке?","acceptedAnswer":{"@type":"Answer","text":"По умолчанию заметки хранятся локально в браузере. Вы можете экспортировать заметки в файл для резервной копии или вручную синхронизировать с другим устройством."}},
+          {"@type":"Question","name":"Как часто нужно просматривать заметки?","acceptedAnswer":{"@type":"Answer","text":"Короткая ежедневная триаж‑проверка (510 минут) удерживает список в рабочем состоянии; глубинный недельный обзор (1530 минут) подходит для обработки и планирования."}},
+          {"@type":"Question","name":"Можно ли использовать Notes вместе с Pomodoro?","acceptedAnswer":{"@type":"Answer","text":"Да — выберите одну заметку как цель Pomodoro перед запуском сессии и используйте перерывы для записи прогресса или преобразования буллетов в задачи."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    img.screenshot{max-width:100%;border-radius:8px;border:1px solid #eef5fb;margin-top:0.6rem;}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:48px;height:48px;border-radius:50%;object-fit:cover;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    table.sample{border-collapse:collapse;margin-top:0.5rem;width:100%;max-width:680px;}
+    table.sample td, table.sample th{border:1px solid #eef5fb;padding:0.35rem 0.5rem;text-align:left;}
+    .return-to-tool {
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:1200;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .9rem;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 8px 20px rgba(11,99,160,0.18);
+      transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+      opacity:0.98;
+    }
+    .return-to-tool:hover { transform: translateY(-3px); box-shadow:0 14px 36px rgba(11,99,160,0.22); text-decoration:none; color:#fff; }
+    .return-to-tool .icon {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      font-size:16px;
+    }
+    .return-to-tool .label { font-size:0.95rem; line-height:1; white-space:nowrap; }
+    @media (max-width:520px) {
+      .return-to-tool { padding:.45rem .5rem; right:14px; bottom:14px; }
+      .return-to-tool .label { display:none; }
+      .return-to-tool { border-radius:12px; }
+    }
+    .return-to-tool:focus { outline:3px solid rgba(11,99,160,0.18); outline-offset:4px; }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Заметки — Практическое руководство по записи действенных заметок | TimerHaven">
+  <meta property="og:description" content="Как эффективно использовать Notes вместе с Pomodoro и Task Timer. Пошаговое руководство, FAQ, скриншоты, шаблон для скачивания и структурированные данные.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ru/notes/notes-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Заметки — Практическое руководство по записи действенных заметок | TimerHaven">
+  <meta name="twitter:description" content="Как эффективно использовать Notes вместе с Pomodoro и Task Timer. Пошаговое руководство, FAQ, скриншоты, шаблон для скачивания и структурированные данные.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/notes/notes-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/notes/notes-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/notes/notes-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/notes/notes-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/notes/notes-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/notes/notes-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/notes/notes-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/notes/notes-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">notes — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Заметки — Фиксируйте, тегируйте и превращайте идеи в работу</h1>
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="48" height="48" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор — Serge Shammas</strong> — специалист по продуктивности и UX‑исследованию</div>
+          <div class="meta">Опубликовано: 2025-10-22 · Обновлено: 2025-11-21 · Время чтения: 1012 мин.</div>
+        </div>
+      </div>
+      <p class="lead">Заметки — мост между мимолётной идеей и завершённой работой. Это руководство предлагает практичный подход, ориентированный на действие: кратко фиксируйте заметки, тегируйте их по контексту, превращайте выполнимые пункты в запланированные задачи (Pomodoro/Task Timer) и еженедельно просматривайте — так заметки начинают приносить результат, а не пыляться.</p>
+      <nav class="toc" aria-label="Содержание">
+        <a href="#why">Почему важны хорошие заметки</a>
+        <a href="#capture">Как быстро фиксировать</a>
+        <a href="#structure">Структура и теги</a>
+        <a href="#workflows">Рабочие процессы с Pomodoro и Task Timer</a>
+        <a href="#templates">Шаблоны</a>
+        <a href="#review">Ежедневный и недельный обзор</a>
+        <a href="#search">Поиск и извлечение</a>
+        <a href="#cases">Краткие кейсы</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="why" class="section" aria-labelledby="why-title">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="why-title">Почему важны хорошие заметки</h2>
+        <p>
+          Большинство идей исчезает, потому что они плохо записаны или не связаны с действием. Хорошая заметка короткая, содержательная и ориентирована на действие. Она отвечает трём вопросам: что это, почему это важно и какой следующий шаг. При такой структуре заметки становятся надёжным источником задач, материалов для исследования или справочной информации.
+        </p>
+      </section>
+      <section id="capture" class="section" aria-labelledby="capture-title">
+        <h2 id="capture-title">Фиксация — быстро, лаконично, минимально</h2>
+        <div class="workflow" aria-labelledby="capture-check">
+          <strong id="capture-check">Контрольный список фиксации</strong>
+          <ol>
+            <li><strong>Заголовок:</strong> одно‑строчная цель (не процесс), например «Черновик: вступление к предложению».</li>
+            <li><strong>Буллеты:</strong> 24 коротких пункта с ключевыми идеями, ресурсами или ограничениями.</li>
+            <li><strong>Тег:</strong> добавьте один основной тэг (#task, #idea, #research) и опционально контекст (#projectX, #meeting).</li>
+            <li><strong>Флаг действия:</strong> отметьте как выполняемое, если это нужно сделать в ближайшее время; иначе оставьте как справочное.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="structure" class="section" aria-labelledby="structure-title">
+        <h2 id="structure-title">Структура и теги — делаем заметки удобными для поиска</h2>
+        <p>
+          Последовательная конвенция именования и тегирования превращает заметки из хаоса в базу знаний. Используйте короткие предсказуемые теги и избегайте длинных вариаций с разной пунктуацией или написанием.
+        </p>
+        <h3>Рекомендуемая таксономия тегов</h3>
+        <ul>
+          <li><strong>#task</strong> Выполнимые пункты, которые нужно сделать.</li>
+          <li><strong>#idea</strong> Идеи, которые стоит сохранить, но пока не выполнять.</li>
+          <li><strong>#research</strong> Ссылки, данные или краткие обзоры для будущей работы.</li>
+          <li><strong>#quick</strong> Пункты, которые занимают менее 5 минут.</li>
+        </ul>
+      </section>
+      <section id="workflows" class="section" aria-labelledby="workflows-title">
+        <h2 id="workflows-title">Рабочие процессы: связываем заметки с тайм‑работой</h2>
+        <h3>Быстрый рабочий процесс на один Pomodoro</h3>
+        <ol>
+          <li>Выберите одну заметку с тегом <strong>#task</strong> как цель Pomodoro.</li>
+          <li>Запустите Pomodoro на 25 минут в TimerHaven; работайте только по пунктам из этой заметки.</li>
+          <li>Во время 5‑минутного перерыва добавьте короткую строку о прогрессе в заметку.</li>
+          <li>После блока преобразуйте выполненные буллеты в записи Task Timer и проанализируйте затраченное время.</li>
+        </ol>
+      </section>
+      <section id="templates" class="section" aria-labelledby="templates-title">
+        <h2 id="templates-title">Шаблоны — быстрый старт</h2>
+        <p>Используйте эти шаблоны для единого способа фиксации. Нажмите, чтобы скачать текстовый шаблон.</p>
+        <p><a href="#" id="downloadNotes" class="cta" aria-label="Скачать шаблон заметок">Скачать шаблон заметок (.txt)</a></p>
+        <pre id="notesTemplate" class="template" aria-hidden="true">Заголовок: [Краткое заявление о результате]
+Теги: #task #projectX
+1) Пункт — контекст / ссылка
+2) Пункт — ресурс / шаг
+3) Пункт — ограничение / заметка
+Действие: [преобразовать в задачу / запланировать / архивировать]</pre>
+        <script>
+          document.getElementById('downloadNotes').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('notesTemplate').textContent;
+            var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'notes-template-ru.txt';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+      <section id="review" class="section" aria-labelledby="review-title">
+        <h2 id="review-title">Триаж: ежедневный и недельный обзор</h2>
+        <h3>Ежедневный триаж (510 минут)</h3>
+        <ul>
+          <li>Быстро просмотрите новые заметки и пометьте срочные пункты тегом <strong>#task</strong> или <strong>#quick</strong>.</li>
+          <li>Преобразуйте любой выполнимый пункт в запись Task Timer или запланируйте в календаре, если нужно выделить время.</li>
+          <li>Архивируйте чисто справочные записи или переместите их в проектную папку.</li>
+        </ul>
+        <h3>Глубокий недельный обзор (1530 минут)</h3>
+        <ul>
+          <li>Откройте все заметки с тегом <strong>#idea</strong> и решите: выполнить, исследовать или архивировать.</li>
+          <li>Группируйте связанные заметки в проектную запись и планируйте следующие шаги (рецепты Pomodoro или оценки Task Timer).</li>
+          <li>Экспортируйте краткое еженедельное резюме, если ведёте личные метрики.</li>
+        </ul>
+      </section>
+      <section id="search" class="section" aria-labelledby="search-title">
+        <h2 id="search-title">Поиск и извлечение — делайте заметки находимыми</h2>
+        <p>Держите теги короткими и используйте префиксы в заголовках для быстрого фильтра (например, "Idea:", "Task:", "Ref:"). Используйте фильтры Notes по тегам, датам или ключевым словам. Для больших архивов экспортируйте заметки и храните резервную копию в облаке.</p>
+        <table class="sample" aria-hidden="false">
+          <thead><tr><th>Поле</th><th>Пример</th></tr></thead>
+          <tbody>
+            <tr><td>Заголовок</td><td>Черновик: заголовок лендинга</td></tr>
+            <tr><td>Теги</td><td>#task #marketing</td></tr>
+            <tr><td>Буллеты</td><td>Целевая аудитория, ключевое преимущество, идея CTA</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="cases" class="section" aria-labelledby="cases-title">
+        <h2 id="cases-title">Краткие кейсы</h2>
+        <div class="case">
+          <strong>Product Manager — Imani</strong>
+          <p>Imani использует заметки во время созвонов со стейкхолдерами, чтобы фиксировать решения и пункты действий. Она превращает любой пункт в запись Task Timer в той же сессии и планирует Pomodoro для выполнения на следующее утро.</p>
+        </div>
+        <div class="case">
+          <strong>Researcher — Alex</strong>
+          <p>Alex помечает заметки тегом #research и сохраняет ссылки на источники. Недельные обзоры позволяют быстро собрать литературные обзоры, объединяя связанные буллеты в один документ.</p>
+        </div>
+      </section>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Часто задаваемые вопросы</h2>
+        <div class="muted">
+          <p><strong>Вопрос:</strong> Можно ли экспортировать заметки в другие инструменты?<br><strong>Ответ:</strong> Да — экспортируйте в plain text или CSV и импортируйте в другие приложения. Используйте согласованные заголовки и теги для простого соответствия полей.</p>
+          <p><strong>Вопрос:</strong> Как часто пересматривать заметки?<br><strong>Ответ:</strong> Быстрый ежедневный триаж (510 минут) держит заметки в рабочем состоянии; полный обзор — еженедельно.</p>
+          <p><strong>Вопрос:</strong> Есть ли рекомендуемая политика хранения?<br><strong>Ответ:</strong> Храните выполняемые заметки, пока они не завершены; архивируйте справочные заметки старше 12 лет, если они не являются критичными.</p>
+        </div>
+      </section>
+      <p class="muted" style="margin-top:1rem;">Связанные инструменты: <a href="/pomodoro.html">Pomodoro</a> · <a href="/timer-ru.html#startBtn">Task Timer</a> · <a href="/calendar-ru.html">Календарь</a></p>
+      <p style="margin-top:1.2rem;">
+        <a href="/notes-ru.html" class="cta" aria-label="Открыть инструмент Notes">Открыть Notes</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы или отзывы? Свяжитесь с нами: <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Политика конфиденциальности: <a href="/privacy.html">Privacy Policy</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذ—ذ°ذ¼ذµر‚ذ؛ذ¸ ذ¸ ذ±ر‹رپر‚ر€ر‹ذµ ذ·ذ°ذ؟ذ¸رپذ¸</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذ›ذµذ³ذ؛ذ¸ذ¹ ر†ذ¸ر„ر€ذ¾ذ²ذ¾ذ¹ ذ±ذ»ذ¾ذ؛ذ½ذ¾ر‚ ذ´ذ»رڈ ذ¼ذ³ذ½ذ¾ذ²ذµذ½ذ½ذ¾ذ¹ ر„ذ¸ذ؛رپذ°ر†ذ¸ذ¸ ذ¼ر‹رپذ»ذµذ¹.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذ’ذ²ذµذ´ذ¸ر‚ذµ ذ²ذ°رˆذ¸ ذ·ذ°ذ¼ذµر‚ذ؛ذ¸.</li><li>ذںر€ذ¾ذ³ر€ذµرپرپ رپذ¾ر…ر€ذ°ذ½رڈرµر‚رپرڈ ذ² ذ±ر€ذ°رƒذ·ذµر€ذµ.</li><li>ذ،ذ؛ذ¾ذ؟ذ¸ر€رƒذ¹ر‚ذµ ذ¸ذ»ذ¸ رچر؛رپذ؟ذ¾ر€ر‚ذ¸ر€رƒذ¹ر‚ذµ ذ·ذ°ذ¼ذµر‚ذ؛ذ¸.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذذ¸رپر‚ذ¾ر€ذ¸ر‡ذµرپذ؛ذ¸, رپذ؟ذ¸رپذ؛ذ¸ ذ´ذµذ» ذ»رƒر‡رˆذµ ذ²رپذµذ³ذ¾ ر€ذ°ذ±ذ¾ر‚ذ°رژر‚ ذ؟ر€ذ¸ ذ؛ر€ذ°ر‚ذ؛ذ¾ذ¹ ر„ذ¾ر€ذ¼رƒذ»ذ¸ر€ذ¾ذ²ذ؛ذµ."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="../../stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="../../unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="../../weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="../../world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="../../calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="../../clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="../../countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="../../currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="../../focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="../../habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="../../meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="../../notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="../../password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <!-- Floating "Return to Notes" button -->
+  <a href="/notes-ru.html"
+     class="return-to-tool"
+     id="returnToToolNotes"
+     aria-label="Вернуться к Notes">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">К Notes</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToToolNotes');
+      if (!btn) return;
+      // keyboard activation
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+      // adjust subtle opacity when at top vs scrolled
+      function toggleOpacity(){
+        try { btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; } catch(e){}
+      }
+      window.addEventListener('scroll', toggleOpacity);
+      toggleOpacity();
+    })();
+  </script>
 </body>
 </html>
+
+

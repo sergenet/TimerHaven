@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+
   <meta charset="UTF-8" />
   <title>Clipboard Manager — TimerHaven</title>
 
@@ -26,9 +39,11 @@
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <meta name="description" content="Save, manage, and organize multiple clipboard snippets." />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"  / media="print" onload="this.media='all'">
   <style>
     :root {
       --card-bg: #fff;
@@ -37,7 +52,7 @@
       --accent-2: #43cea2;
     }
     html,body { height: 100%; margin:0; }
-    body { background: var(--page-bg); font-family: 'Montserrat', Arial, sans-serif; color:#1f2937; }
+    body { background: var(--page-bg); font-family: 'Montserrat', Arial, sans-serif; font-display: swap; color:#1f2937; }
 
     /* Ensure the language indicator is always hidden (forceful) */
     .language-indicator { display: none !important; visibility: hidden !important; opacity: 0 !important; height: 0 !important; width: 0 !important; }
@@ -93,15 +108,57 @@
       .center-row > .col { min-width: auto; }
     }
   </style>
-</head>
+<script>
+
+</script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Clipboard Manager — TimerHaven">
+  <meta property="og:description" content="Save, manage, and organize multiple clipboard snippets.">
+  <meta property="og:image" content="https://timerhaven.com/images/social-banner.webp">
+  <meta property="og:url" content="https://timerhaven.com/clipboard-manager.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Clipboard Manager — TimerHaven">
+  <meta name="twitter:description" content="Save, manage, and organize multiple clipboard snippets.">
+  <meta name="twitter:image" content="https://timerhaven.com/images/social-banner.webp">
+
+  <meta name="keywords" content="online clipboard, clipboard history manager, copy paste tool, productivity tools, privacy-first, no login">
+
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Clipboard Manager",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "description": "A productivity tool that extends the default clipboard by storing a history of copied items, making them searchable and reusable.",
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+    </script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="canonical" href="https://timerhaven.com/clipboard-manager-en.html" /></head>
 <body>
-  <div class="main-container" id="page-main">
+    <div class="main-container" id="page-main">
     <div class="center-row">
       <div class="col">
         <article class="card-base article-card" id="left-article">
           <div class="card-inner">
             <header class="card-content">
-              <h2 id="howto-title"><i class="fa fa-clipboard"></i> How to Use Clipboard Manager</h2>
+              <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2 id="howto-title"><i class="fa fa-clipboard"></i> How to Use Clipboard Manager</h2>
               <ol id="howto-steps">
                 <li><b>Add a clip:</b> Type or paste your text, then click <b>Add Clip</b>.</li>
                 <li><b>Copy a clip:</b> Click the <b>Copy</b> button next to any clip to copy instantly.</li>
@@ -110,7 +167,7 @@
               </ol>
             </header>
             <div class="card-actions">
-              <a id="left-article-btn" class="btn btn-outline-primary w-100" href="clipboard-how-to.html">Read Full Article</a>
+              <a id="left-article-btn" class="btn btn-outline-primary w-100" href="en/clipboard-manager/clipboard-manager-index.html">Read Full Article</a>
             </div>
           </div>
         </article>
@@ -169,7 +226,7 @@
             </header>
 
             <div class="card-actions">
-              <a id="right-article-btn" class="btn btn-outline-primary w-100" href="clipboard-tips.html">Read Full Article</a>
+              <a id="right-article-btn" class="btn btn-outline-primary w-100" href="en/clipboard-manager/clipboard-manager-index.html">Read Full Article</a>
             </div>
           </div>
         </aside>
@@ -177,16 +234,70 @@
     </div>
   </div>
 
-  <footer>
+  <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer>
+    <div style="font-size: 0.85em; color: #6b7c89; margin-bottom: 1em; max-width: 600px; margin-left: auto; margin-right: auto; text-align: center;">TimerHaven is your go-to destination for <strong>online clipboard</strong> and other <strong>privacy-first productivity tools</strong>.</div>
     &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br />
-    <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>
-  </footer>
+    <a href="/privacy.html">Privacy Policy</a> &bull; <a href="/terms.html">Terms</a> &bull; <a href="/pricing.html">Pricing</a> · <a href="/contact.html">Contact</a>
+  
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Clipboard Manager</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">A productivity tool that extends the default clipboard by storing a history of copied items, making them searchable and reusable.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">History</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">How to Use</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Copy items as you normally would.</li><li>Open the manager to view your history.</li><li>Select any previous item to re-paste it instantly.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Use a clipboard manager to store frequently used code snippets or email signatures for rapid access."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">More Free Productivity Tools</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Task Timer</a> <a href="stopwatch.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Stopwatch</a> <a href="pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Pomodoro</a> <a href="unit-converter.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Unit Converter</a> <a href="weather.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Weather</a> <a href="world-clock.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">World Clock</a> <a href="calendar.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Calendar</a> <a href="clipboard-manager.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Clipboard</a> <a href="countdown.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Countdown</a> <a href="currency.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Currency</a> <a href="focus-music.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Focus Music</a> <a href="habit-tracker.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Habit Tracker</a> <a href="meeting-planner.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Meeting Planner</a> <a href="notes.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Notes</a> <a href="password-generator.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Passwords</a></div>
+        </div>
+    </section>
+    
+</footer>
 
   <script>
     // update article links based on timerhavenLang (unchanged mapping approach)
     const articleMap = {
-      howto: { en:'clipboard-how-to.html', fr:'clipboard-how-to-fr.html', de:'clipboard-how-to-de.html', es:'clipboard-how-to-es.html', ru:'clipboard-how-to-ru.html', el:'clipboard-how-to-el.html', ar:'clipboard-how-to-ar.html' },
-      tips:  { en:'clipboard-tips.html',     fr:'clipboard-tips-fr.html',    de:'clipboard-tips-de.html',    es:'clipboard-tips-es.html',    ru:'clipboard-tips-ru.html',    el:'clipboard-tips-el.html',    ar:'clipboard-tips-ar.html' }
+      howto: { en:'en/clipboard-manager/clipboard-manager-index.html', fr:'clipboard-how-to-fr.html', de:'clipboard-how-to-de.html', es:'clipboard-how-to-es.html', ru:'clipboard-how-to-ru.html', el:'clipboard-how-to-el.html', ar:'clipboard-how-to-ar.html' },
+      tips:  { en:'en/clipboard-manager/clipboard-manager-index.html',     fr:'clipboard-tips-fr.html',    de:'clipboard-tips-de.html',    es:'clipboard-tips-es.html',    ru:'clipboard-tips-ru.html',    el:'clipboard-tips-el.html',    ar:'clipboard-tips-ar.html' }
     };
 
     function getLang(){ try { return (localStorage.getItem('timerhavenLang')||'en').slice(0,2); } catch(e){ return 'en'; } }
@@ -348,3 +459,7 @@
   </script>
 </body>
 </html>
+
+
+
+

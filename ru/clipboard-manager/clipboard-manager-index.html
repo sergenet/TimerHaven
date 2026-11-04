@@ -1,18 +1,270 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>clipboard-manager — Guide (ru)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="/assets/css/tool-theme.css">
-  <meta name="description" content="Scaffold placeholder for clipboard-manager guide (ru)">
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+  <meta charset="utf-8" />
+  <title>Менеджер буфера — Сохранять и повторно использовать фрагменты | TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Практическое руководство по использованию менеджера буфера: быстрые сценарии захвата, организация, экспорт/импорт, горячие клавиши, безопасность и…"> />
+  <link rel="canonical" href="https://timerhaven.com/ru/clipboard-manager/clipboard-manager-index.html">
+  <meta name="author" content="Serge Shammas">
+  <meta name="published" content="2025-11-24">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Эффективное управление буфером",
+        "description":"Сохраняйте, организуйте и переиспользуйте короткие текстовые фрагменты с локальным менеджером буфера. Руководство описывает рабочие процессы, бэкапы, горячие клавиши и рекомендации по конфиденциальности.",
+        "image":"https://timerhaven.com/assets/images/clipboard-snapshot.webp",
+        "totalTime":"PT1H",
+        "supply":["Локальный менеджер буфера","Браузер","Заметки","Task Timer"],
+        "step":[
+          {"@type":"HowToStep","name":"Быстрый захват","text":"Вставьте фрагмент в менеджер и сохраните с тегом или коротким заголовком."},
+          {"@type":"HowToStep","name":"Организация","text":"Группируйте клипы тегами или схемой именования (проект:тема). Используйте поиск."},
+          {"@type":"HowToStep","name":"Повторное использование","text":"Копируйте клипы в активный документ или вставляйте из менеджера. Используйте горячие клавиши для скорости."},
+          {"@type":"HowToStep","name":"Резервное копирование","text":"Экспортируйте клипы в JSON для бэкапа; импортируйте для восстановления или переноса."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Где хранятся клипы?","acceptedAnswer":{"@type":"Answer","text":"Клипы хранятся локально в localStorage браузера. Они не покидают устройство, пока вы их не экспортируете."}},
+          {"@type":"Question","name":"Как сделать бэкап или перенести клипы?","acceptedAnswer":{"@type":"Answer","text":"Используйте кнопку Экспорт для скачивания JSON; импортируйте этот файл на другом устройстве."}},
+          {"@type":"Question","name":"Насколько безопасны менеджеры буфера?","acceptedAnswer":{"@type":"Answer","text":"Локальные менеджеры относительно безопасны, но не сохраняйте пароли в открытом виде; для секретов используйте менеджер паролей."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/assets/images/authors/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--muted:#6b7c89;--card:#fff;--bg:#fbfeff}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .recipe{background:#f0f8ff;border-left:4px solid #bfe7ff;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    .small-note{font-size:0.95rem;color:#51606b}
+    .kbd{display:inline-block;padding:.15rem .45rem;border-radius:6px;background:#f3f7fb;border:1px solid #e6eef5;font-family:monospace;font-size:.95rem}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid #eef5fb}
+    .return-to-tool { position:fixed; right:22px; bottom:22px; z-index:1200; display:flex; align-items:center; gap:.6rem; padding:.55rem .9rem; border-radius:999px; background:var(--brand); color:#fff; font-weight:700; text-decoration:none; box-shadow:0 8px 20px rgba(11,99,160,0.18); }
+    .return-to-tool .icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;font-size:16px;}
+    .return-to-tool .label{font-size:0.95rem;}
+    @media (max-width:520px){ .return-to-tool{padding:.45rem .5rem; right:14px; bottom:14px;} .return-to-tool .label{display:none;} .return-to-tool{border-radius:12px;} }
+  </style>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Менеджер буфера — Сохранять и повторно использовать фрагменты | TimerHaven">
+  <meta property="og:description" content="Практическое руководство по использованию менеджера буфера: быстрые сценарии захвата, организация, экспорт/импорт, горячие клавиши, безопасность и командные практики.">
+  <meta property="og:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <meta property="og:url" content="https://timerhaven.com/ru/clipboard-manager/clipboard-manager-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Менеджер буфера — Сохранять и повторно использовать фрагменты | TimerHaven">
+  <meta name="twitter:description" content="Практическое руководство по использованию менеджера буфера: быстрые сценарии захвата, организация, экспорт/импорт, горячие клавиши, безопасность и командные практики.">
+  <meta name="twitter:image" content="https://timerhaven.com/assets/images/social-share-image.webp">
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high">
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/ar/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/de/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/el/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/es/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/fr/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/ru/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/en/clipboard-manager/clipboard-manager-index.html">
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/en/clipboard-manager/clipboard-manager-index.html">
 </head>
 <body>
+    <div style="background: linear-gradient(90deg, #185a9d, #43cea2); color: #fff; text-align: center; font-size: 0.85rem; padding: 6px; font-weight: 600;"><a href="https://chromewebstore.google.com/detail/timerhaven-pomodoro-focus/hanaohaanjchdnobojdceammonokodof" target="_blank" rel="noopener" style="color: #fff; text-decoration: underline;">✨ TimerHaven Chrome Extension is now live on the Chrome Web Store! Add to Chrome for free &rarr;</a></div>
+
   <main class="container">
     <article class="card" aria-labelledby="title">
-      <header><h1 id="title">clipboard-manager — Guide (ru)</h1></header>
-      <p class="lead">Scaffold placeholder. Full guide content to be added.</p>
+      <h1 id="title">Менеджер буфера — Захват, организация и повторное использование</h1>
+      <div class="author" role="articleauthor" aria-label="Автор">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"  width="64" height="64" alt="Serge Shammas">
+        <div>
+          <div><strong>Автор: Serge Shammas</strong> — автор по продуктивности и исследователь UX</div>
+          <div class="meta">Опубликовано: 2025-11-24 · Время чтения: 1014 мин</div>
+        </div>
+      </div>
+      <p class="lead">Лёгкий менеджер буфера помогает сохранять небольшие часто используемые фрагменты — шаблоны писем, куски кода, ID — чтобы быстро вставлять их. В этом руководстве — рабочие процессы захвата, организация, бэкапы, горячие клавиши и рекомендации по безопасности для личного и командного использования.</p>
+      <nav class="toc" aria-label="Оглавление">
+        <a href="#why">Зачем нужен менеджер</a> · <a href="#capture">Захват</a> · <a href="#organize">Организация</a> · <a href="#reuse">Повторное использование</a> · <a href="#backup">Бэкап</a> · <a href="#security">Безопасность</a> · <a href="#team">Команда</a> · <a href="#troubleshoot">Устранение проблем</a> · <a href="#faq">FAQ</a>
+      </nav>
+      <section id="why" class="section">
+        <div class="th-ad-slot" data-ad-placement="in-article" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h2>Почему менеджер буфера полезен</h2>
+        <p>Современная работа часто требует повторного вставления небольших текстов. Менеджер уменьшает трения, ошибки и сохраняет контекст для текущей работы.</p>
+        <ul>
+          <li><strong>Скорость:</strong> доступ за два клика или по горячей клавише.</li>
+          <li><strong>Согласованность:</strong> использование проверенных текстов.</li>
+          <li><strong>Память:</strong> кратковременное хранилище для текущих задач.</li>
+          <li><strong>Бэкап:</strong> экспорт/импорт библиотеки фрагментов.</li>
+        </ul>
+      </section>
+      <section id="capture" class="section">
+        <h2>Захват — сохраняем на ходу</h2>
+        <div class="recipe">
+          <strong>Рецепт быстрого захвата</strong>
+          <ol>
+            <li>Скопировали полезный текст — откройте менеджер и вставьте в поле.</li>
+            <li>Добавьте короткий заголовок или тег (например: "Invoice: Acme — IBAN").</li>
+            <li>Сохраните — элемент появится первым в списке.</li>
+            <li>Периодически очищайте устаревшие клипы.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="organize" class="section">
+        <h2>Организация & поиск</h2>
+        <p>Используйте простой подход: заголовки, теги и понятные имена.</p>
+        <ul>
+          <li><strong>Заголовок:</strong> 36 слов.</li>
+          <li><strong>Тег:</strong> project, client, template, code.</li>
+          <li><strong>Превью:</strong> не сохраняйте огромные тексты.</li>
+        </ul>
+      </section>
+      <section id="reuse" class="section">
+        <h2>Быстрое повторное использование & горячие клавиши</h2>
+        <ul>
+          <li><span class="kbd">Ctrl/Cmd+Shift+V</span> — открыть менеджер и вставить последний элемент.</li>
+          <li><span class="kbd">Ctrl/Cmd+Alt+C</span> — быстрый захват.</li>
+          <li><span class="kbd">Стрелки</span> — навигация; <span class="kbd">Enter</span> — копировать.</li>
+        </ul>
+      </section>
+      <section id="backup" class="section">
+        <h2>Экспорт / импорт & бэкапы</h2>
+        <div class="recipe">
+          <strong>Рутина бэкапа</strong>
+          <ol>
+            <li>Раз в неделю экспортируйте JSON.</li>
+            <li>Храните файл в безопасном месте (зашифрованный облачный бакет).</li>
+            <li>При смене устройства импортируйте JSON.</li>
+          </ol>
+        </div>
+      </section>
+      <section id="security" class="section">
+        <h2>Безопасность</h2>
+        <ul>
+          <li>Не храните пароли/ключи в открытом виде.</li>
+          <li>Шифруйте бэкапы при необходимости.</li>
+          <li>На общих устройствах экспортируйте и удаляйте клипы.</li>
+        </ul>
+      </section>
+      <section id="troubleshoot" class="section">
+        <h2>Устранение проблем</h2>
+        <ul>
+          <li>Клипы пропали — проверьте настройки браузера и импортируйте бэкап.</li>
+          <li>Вставка блокируется — проверьте разрешения.</li>
+          <li>Экспорт не срабатывает — проверьте права на запись.</li>
+        </ul>
+      </section>
+      <section id="faq" class="section">
+        <h2>FAQ</h2>
+        <div class="muted">
+          <p><strong>В:</strong> Где хранятся клипы?<br><strong>О:</strong> В localStorage браузера.</p>
+        </div>
+      </section>
+      <p style="margin-top:1.2rem;">
+        <a href="https://timerhaven.com/clipboard-manager-ru.html" class="cta" aria-label="Открыть Clipboard Manager">Открыть Clipboard Manager</a>
+      </p>
+      <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
+<span class="th-ad-label" style="display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin-bottom:4px">Реклама</span>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="1522640584" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>Вопросы: <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Политика конфиденциальности: <a href="/privacy.html">Privacy</a>.</p>
+      
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    
+    
+
+    <!-- SEO Content Section -->
+    <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذœذµذ½ذµذ´ذ¶ذµر€ ذ±رƒر„ذµر€ذ° ذ¾ذ±ذ¼ذµذ½ذ°</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذکذ½رپر‚ر€رƒذ¼ذµذ½ر‚ ذ؟ر€ذ¾ذ¸ذ·ذ²ذ¾ذ´ذ¸ر‚ذµذ»رŒذ½ذ¾رپر‚ذ¸, ذ؛ذ¾ر‚ذ¾ر€ر‹ذ¹ ر€ذ°رپرˆذ¸ر€رڈرµر‚ standard clipboard, رپذ¾ر…ر€ذ°ذ½رڈرڈ ذ¸رپر‚ذ¾ر€ذ¸رژ رپذ؛ذ¾ذ؟ذ¸ر€ذ¾ذ²ذ°ذ½ذ½ر‹ر… رچر»ذµذ¼ذµذ½ر‚ذ¾ذ².</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
+                <p style="line-height: 1.7; color: #4b5563;"></p>
+            </div>
+            <div>
+                <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذڑذ¾ذ؟ذ¸ر€رƒذ¹ر‚ذµ رچر»ذµذ¼ذµذ½ر‚ر‹ ذ؛ذ°ذ؛ ذ¾ذ±ر‹ر‡ذ½ذ¾.</li><li>ذ‍ر‚ذ؛ر€ذ¾ذ¹ر‚ذµ ذ¼ذµذ½ذµذ´ذ¶ذµر€, ر‡ر‚ذ¾ذ±ر‹ ذ؟ر€ذ¾رپذ¼ذ¾ر‚ر€ذµر‚رŒ ذ¸رپر‚ذ¾ر€ذ¸رژ.</li><li>ذ’ر‹ذ±ذµر€ذ¸ر‚ذµ ذ»رژذ±ذ¾ذ¹ رچر»ذµذ¼ذµذ½ر‚ ذ´ذ»رڈ ذ¼ذ³ذ½ذ¾ذ²ذµذ½ذ½ذ¾ذ¹ ذ²رپر‚ذ°ذ²ذ؛ذ¸.</li></ul>
+            </div>
+        </div>
+        <pre style="display:none">Pro Tip Section</pre>
+        <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
+            <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذکرپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ ذ¼ذµذ½ذµذ´ذ¶ذµر€ ذ´ذ»رڈ ر…ر€ذ°ذ½ذµذ½ذ¸رڈ ر‡ذ°رپر‚ذ¾ ذ¸رپذ؟ذ¾ذ»رŒذ·رƒذµذ¼ر‹ر… ر„ر€ذ°ذ³ذ¼ذµذ½ر‚ذ¾ذ² ذ؛ذ¾ذ´ذ° ذ¸ذ»ذ¸ ذ؟ذ¾ذ´ذ؟ذ¸رپذµذ¹."</p>
+        </div>
+        <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
+            <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="../../timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="../../stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="../../pomodoro.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="../../unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="../../weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="../../world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="../../calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="../../clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="../../countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="../../currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="../../focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="../../habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="../../meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="../../notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="../../password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+        </div>
+    </section>
+    
+</footer>
     </article>
   </main>
+  <a href="https://timerhaven.com/clipboard-manager-ru.html" class="return-to-tool" id="returnToTool" aria-label="Вернуться к Clipboard Manager">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Вернуться к Clipboard Manager</span>
+  </a>
+  <script>
+    (function(){
+      var btn = document.getElementById('returnToTool');
+      if (!btn) return;
+      btn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
+      function t(){ try{ btn.style.opacity = (window.scrollY < 80) ? '0.85' : '0.98'; }catch(e){} }
+      window.addEventListener('scroll', t);
+      t();
+    })();
+  </script>
 </body>
 </html>
+
+
