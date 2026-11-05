@@ -98,6 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Content
             $mail->isHTML(true);
             $mail->Subject = "Welcome to TimerHaven: Master Your Focus";
+
+            // Signed unsubscribe link (HMAC of the address) so nobody can unsubscribe
+            // another person just by putting their email in the URL.
+            $unsub_token = hash_hmac('sha256', strtolower(trim($email)), th_secret('unsubscribe_secret', 'TH_UNSUBSCRIBE_SECRET'));
+            $unsub_url = 'https://timerhaven.com/api/unsubscribe.php?email=' . urlencode($email) . '&token=' . $unsub_token;
+
             $mail->Body    = '
             <html>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -121,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
                     <p style="font-size: 0.8rem; color: #888;">
                         You received this email because you signed up at TimerHaven.com.<br>
-                        <a href="https://timerhaven.com/api/unsubscribe.php?email='.urlencode($email).'">Unsubscribe</a>
+                        <a href="' . $unsub_url . '">Unsubscribe</a>
                     </p>
                 </div>
             </body>

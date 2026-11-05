@@ -10,6 +10,19 @@ $db_path = __DIR__ . '/../data/subscribers.db';
 $blog_index_path = __DIR__ . '/../blog/index.html';
 $sender_email = "newsletter@timerhaven.com";
 
+// Credentials come from api/secrets.local.php (never committed) or the environment.
+$__secrets = is_file(__DIR__ . '/secrets.local.php') ? (include __DIR__ . '/secrets.local.php') : [];
+if (!is_array($__secrets)) { $__secrets = []; }
+
+if (!function_exists('th_secret')) {
+    function th_secret($key, $env_name) {
+        global $__secrets;
+        $from_env = getenv($env_name);
+        if ($from_env !== false && $from_env !== '') { return $from_env; }
+        return isset($__secrets[$key]) ? $__secrets[$key] : '';
+    }
+}
+
 // 1. Fetch Latest Articles from blog/index.html
 $articles = [];
 if (file_exists($blog_index_path)) {
@@ -78,7 +91,7 @@ $message_template = '
         <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
         <p style="font-size: 0.8rem; color: #888;">
             You received this because you master focus at TimerHaven.com.<br>
-            <a href="https://timerhaven.com/api/unsubscribe.php?email={{EMAIL}}">Unsubscribe</a>
+            <a href="{{UNSUB}}">Unsubscribe</a>
         </p>
     </div>
 </body>
@@ -87,7 +100,9 @@ $message_template = '
 
 // 4. Send to each subscriber (Batching would be better for massive lists, but this works for starter growth)
 foreach ($subscribers as $email) {
-    $personal_message = str_replace('{{EMAIL}}', urlencode($email), $message_template);
+    $unsub_token = hash_hmac('sha256', strtolower(trim($email)), th_secret('unsubscribe_secret', 'TH_UNSUBSCRIBE_SECRET'));
+    $unsub_url = 'https://timerhaven.com/api/unsubscribe.php?email=' . urlencode($email) . '&token=' . $unsub_token;
+    $personal_message = str_replace('{{UNSUB}}', $unsub_url, $message_template);
     @mail($email, $subject, $personal_message, $headers);
 }
 

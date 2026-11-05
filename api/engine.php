@@ -215,7 +215,10 @@ $subscribers = $db->query("SELECT email, lang FROM subscribers WHERE status = 'a
         $tool_url = str_replace('%l', $lang, $featured_tool['url']);
         if ($lang == 'en' && strpos($tool_url, '/en/') !== false) $tool_url = str_replace('/en/', '/', $tool_url); // Root fix
         
-        $unsub_link = "https://timerhaven.com/api/unsubscribe.php?email=" . urlencode($to);
+        // Signed unsubscribe link: the token is an HMAC of the address, so nobody can
+        // unsubscribe someone else just by guessing their email address.
+        $unsub_token = hash_hmac('sha256', strtolower(trim($to)), th_secret('unsubscribe_secret', 'TH_UNSUBSCRIBE_SECRET'));
+        $unsub_link = "https://timerhaven.com/api/unsubscribe.php?email=" . urlencode($to) . "&token=" . $unsub_token;
 
         $message = "
         <html>

@@ -15,6 +15,15 @@ if (!function_exists('th_secret')) {
     }
 }
 
+if (!function_exists('th_log_error')) {
+    // Failures are written to data/contact-errors.log (not web-readable) so the
+    // caller only ever sees a generic message, never the SMTP detail.
+    function th_log_error($context, $detail) {
+        $log = __DIR__ . '/../data/contact-errors.log';
+        @file_put_contents($log, date('c') . ' [' . $context . '] ' . $detail . PHP_EOL, FILE_APPEND | LOCK_EX);
+    }
+}
+
 // contact.php - PHPMailer + SMTP contact endpoint
 // ---------------------- IMPORTANT ----------------------
 // Edit only the configuration block below BEFORE uploading.
@@ -118,8 +127,9 @@ try {
 
     if (!$mail->send()) {
         // In rare case send() returns false
+        th_log_error('send_failed', $mail->ErrorInfo);
         http_response_code(500);
-        echo json_encode(['ok' => false, 'error' => 'mail_failed', 'detail' => $mail->ErrorInfo]);
+        echo json_encode(['ok' => false, 'error' => 'send_failed']);
         exit;
     }
 
@@ -128,7 +138,8 @@ try {
     exit;
 } catch (Exception $e) {
     // PHPMailer exception (network/auth issues)
+    th_log_error('exception', $e->getMessage());
     http_response_code(500);
-    echo json_encode(['ok' => false, 'error' => 'exception', 'detail' => $e->getMessage()]);
+    echo json_encode(['ok' => false, 'error' => 'send_failed']);
     exit;
 }
