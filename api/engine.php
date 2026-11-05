@@ -24,7 +24,9 @@ if (!function_exists('th_secret')) {
 // --- CONFIGURATION ---
 $db_path = __DIR__ . '/../data/subscribers.db';
 $sender_email = "support@timerhaven.com";
-$secret_token = "th_automation_2026_beta";
+// The web-run token lives in api/secrets.local.php (never committed). It used to be a
+// literal here, which meant anyone reading the public repo could fire a full send.
+$secret_token = th_secret('engine_token', 'TH_ENGINE_TOKEN');
 $batch_size = 50;
 $batch_delay = 2;
 
@@ -36,10 +38,13 @@ $rss_feeds = [
     'Ness Labs' => 'https://nesslabs.com/feed'
 ];
 
-// Security: Check token if run via web
+// Security: cron may run this over CLI; a web run must present the secret token.
+// Fail closed: with no configured token, the web path is disabled entirely.
 if (php_sapi_name() !== 'cli') {
-    if (($_GET['token'] ?? '') !== $secret_token) {
-        die("Unauthorized access.");
+    $provided = (string)($_GET['token'] ?? '');
+    if ($secret_token === '' || !hash_equals($secret_token, $provided)) {
+        http_response_code(403);
+        exit('Forbidden');
     }
 }
 
