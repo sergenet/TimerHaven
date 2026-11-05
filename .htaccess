@@ -1,6 +1,14 @@
 # Ensure directory requests serve index.html
 DirectoryIndex index.html
 
+# Never expose folder contents. Without this, every locale root (/de/, /es/ ...),
+# every guide folder and even /assets/ and /images/ answered with an "Index of /"
+# listing - a crawlable map of the site that nothing links to and no canonical
+# covers. `Options -Indexes` is a delta, not a reset, so it cannot disturb the
+# handler configuration the host sets in its own vhost. Verified on this host:
+# the directive is honoured (403, not 500).
+Options -Indexes
+
 # Redirects must run before Passenger — put canonical redirects at the top.
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -41,6 +49,10 @@ Redirect 301 /focus.html https://timerhaven.com/focus-music-tips.html
 Redirect 301 /habit.html https://timerhaven.com/habit-tips.html
 Redirect 301 /meeting-how-to.html https://timerhaven.com/meeting-planner-en.html
 Redirect 301 /meeting-how.html https://timerhaven.com/meeting-planner-en.html
+
+# --- bare locale roots have no page of their own: send them to that language's hub ---
+RedirectMatch 301 ^/(ar|de|el|es|fr|ru)/$ https://timerhaven.com/$1/blog/
+RedirectMatch 301 ^/en/$ https://timerhaven.com/blog/
 
 # --- guide directory aliases (301 to the -index page) ---
 RedirectMatch 301 ^/el/notes/(?:index\.html)?$ https://timerhaven.com/el/notes/notes-index.html
