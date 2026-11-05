@@ -1,21 +1,89 @@
-﻿#th-consent-banner {
+/* Cookie-consent banner for TimerHaven.
+   Selectors are classes because assets/js/consent.js builds the element with
+   class="th-consent-banner". While this file targeted an #id, the banner was
+   appended to the end of <body> with no positioning or styling, so visitors
+   never saw it and the AdSense/GA gate never opened. */
+.th-consent-banner {
   position: fixed;
   left: 12px;
   right: 12px;
   bottom: 12px;
   z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   background: rgba(6, 30, 45, 0.98);
   color: #fff;
   border-radius: 10px;
-  box-shadow: 0 12px 36px rgba(2,10,20,0.45);
-  padding: 10px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 12px;
+  box-shadow: 0 12px 36px rgba(2, 10, 20, 0.45);
+  padding: 14px 16px;
   font-size: 14px;
+  line-height: 1.5;
 }
-#th-consent-banner .th-consent-inner { display:flex; gap:12px; width:100%; align-items:center; justify-content:space-between; }
-#th-consent-banner .th-btn { background:#0b63a0; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:700; }
-#th-consent-banner .th-btn.th-btn-muted { background:transparent; border:1px solid rgba(255,255,255,0.15); color:#fff; }
-#th-consent-banner a { color: #bfe7ff; text-decoration: underline; }
+
+.th-consent-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.th-consent-message {
+  flex: 1 1 18rem;
+  max-width: 44rem;
+}
+
+.th-consent-message strong {
+  display: block;
+  font-weight: 700;
+}
+
+.th-consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.th-consent-banner .th-btn {
+  background: #0b63a0;
+  color: #fff;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.th-consent-banner .th-btn.th-btn-muted,
+.th-consent-banner .th-btn.th-decline,
+.th-consent-banner .th-btn.th-manage {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.th-consent-banner .th-btn:hover,
+.th-consent-banner .th-btn:focus-visible {
+  outline: 2px solid #bfe7ff;
+  outline-offset: 2px;
+}
+
+.th-consent-banner a {
+  color: #bfe7ff;
+  text-decoration: underline;
+}
+
+@media (max-width: 34rem) {
+  .th-consent-actions {
+    width: 100%;
+  }
+
+  .th-consent-banner .th-btn {
+    flex: 1 1 auto;
+  }
+}
