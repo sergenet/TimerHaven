@@ -20,6 +20,14 @@ Options -Indexes
   RewriteCond %{HTTP_HOST} !^www\. [NC]
   RewriteRule ^ https://timerhaven.com%{REQUEST_URI} [L,R=301]
   
+  # 3) A guide folder has no index.html of its own: its hub sits beside it as
+  #    <folder>-index.html. Those folders used to answer with an "Index of /"
+  #    listing; now that listings are off they would 403, so send each one to
+  #    the page it was standing in for. The -f test means a folder that truly
+  #    has no hub is left alone.
+  RewriteCond %{DOCUMENT_ROOT}/$1/$2-index.html -f
+  RewriteRule ^((?:[a-z]{2}/)?([a-z0-9-]+))/?$ https://timerhaven.com/$1/$2-index.html [R=301,L]
+
   # Exclude api folder from further processing (so Passenger doesn't capture it)
   RewriteRule ^api/ - [L]
 </IfModule># DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGINPassengerAppRoot "/home/sergbcqk/TimerHavenWeatherProxy"PassengerBaseURI "/"PassengerNodejs "/home/sergbcqk/nodevenv/TimerHavenWeatherProxy/18/bin/node"PassengerAppType nodePassengerStartupFile server.js# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END# Preserve the specific tool redirects
@@ -55,6 +63,17 @@ RedirectMatch 301 ^/(ar|de|el|es|fr|ru)/$ https://timerhaven.com/$1/blog/
 RedirectMatch 301 ^/en/$ https://timerhaven.com/blog/
 
 # --- guide directory aliases (301 to the -index page) ---
+# Hubs whose name is not <folder>-index.html, so the generic folder rule above
+# cannot resolve them.
+RedirectMatch 301 ^/ar/pomodoro\-timer/?$ https://timerhaven.com/ar/pomodoro-timer/pomodoro-index.html
+RedirectMatch 301 ^/de/pomodoro\-timer/?$ https://timerhaven.com/de/pomodoro-timer/pomodoro-index.html
+RedirectMatch 301 ^/en/pomodoro\-timer/?$ https://timerhaven.com/en/pomodoro-timer/pomodoro-index.html
+RedirectMatch 301 ^/es/pomodoro\-timer/?$ https://timerhaven.com/es/pomodoro-timer/pomodoro-index.html
+RedirectMatch 301 ^/fr/pomodoro\-timer/?$ https://timerhaven.com/fr/pomodoro-timer/pomodoro-index.html
+RedirectMatch 301 ^/ru/pomodoro\-timer/?$ https://timerhaven.com/ru/pomodoro-timer/pomodoro-index.html
+RedirectMatch 301 ^/en/countdown\-timer/?$ https://timerhaven.com/en/countdown-timer/countdown-index.html
+RedirectMatch 301 ^/en/currency\-converter/?$ https://timerhaven.com/en/currency-converter/currency-index.html
+
 RedirectMatch 301 ^/el/notes/(?:index\.html)?$ https://timerhaven.com/el/notes/notes-index.html
 RedirectMatch 301 ^/el/pomodoro\-timer/(?:index\.html)?$ https://timerhaven.com/el/pomodoro-timer/pomodoro-index.html
 RedirectMatch 301 ^/el/task\-timer/(?:index\.html)?$ https://timerhaven.com/el/task-timer/task-timer-index.html
