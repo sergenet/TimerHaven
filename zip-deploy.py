@@ -34,12 +34,38 @@ import zipfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
+def _secret(name):
+    """Environment variable first, else scripts/_secrets.py (gitignored)."""
+    value = os.environ.get(name)
+    if value:
+        return value
+    try:
+        import sys as _sys
+        _sys.path.insert(0, str(Path(__file__).resolve().parent / "scripts"))
+        import _secrets  # local, never committed
+    except ImportError:
+        return ""
+    return getattr(_secrets, name.replace("TH_", ""), "")
+
+
 FTP_HOST = os.environ.get("TH_FTP_HOST", "ftp.timerhaven.com")
 FTP_USER = os.environ.get("TH_FTP_USER", "contact@timerhaven.com")
-FTP_PASS = os.environ.get("TH_FTP_PASS", "Sako!!TH2025")
+FTP_PASS = _secret("TH_FTP_PASS")
+if not FTP_PASS:
+    raise SystemExit("set FTP_PASS in scripts/_secrets.py - the password is never stored in this file")
 PUBLIC = "https://timerhaven.com"
 
 BASE = Path(__file__).resolve().parent
+# Trees that exist in the checkout but are not served from the web root: app
+# sources, build copies, store assets and throwaway scratch. Anything here must
+# never be uploaded, so it is also never part of the changed-file scan.
+NOT_LIVE = {
+    ".git", ".expo", ".idea", ".vscode", "_attic", "_includes", "_site",
+    "android", "api", "chrome_extension", "chrome_store_screenshots",
+    "components", "data", "docs", "images", "ios", "node_modules",
+    "scripts", "timerhaven-extension", "timerhaven-extension-v2", "tmp",
+    "tools", "__pycache__", "YouTube experiments", "_SYNCAPP",
+}
 WORKERS = 6           # host rejects with 421 beyond ~8 connections from one IP
 MAX_ATTEMPTS = 5
 ZIP_NAME = "th-pkg.zip"
@@ -84,13 +110,22 @@ def target_files():
     sitemap.xml, .htaccess and robots.txt are appended explicitly: no sitemap
     lists them, and a deploy that changed crawl rules while shipping the old
     sitemap would leave the two out of step.
+
+    Directory canonicals are resolved to their index.html; see the note below.
     """
     xml = (BASE / "sitemap.xml").read_text(encoding="utf-8", errors="replace")
     urls = [m.strip() for m in re.findall(r"<loc>([^<]+)</loc>", xml)]
     out = []
     seen = set()
     for u in urls:
-        rel = re.sub(r"^https?://[^/]+", "", u).lstrip("/") or "index.html"
+        rel = re.sub(r"^https?://[^/]+", "", u).lstrip("/")
+        # A canonical that names a directory (/, /blog/, /el/task-timer/) refers to
+        # that directory's index.html. Without this the path resolved to a
+        # directory, failed is_file(), and the page was dropped from the package:
+        # the homepage and every blog hub therefore never shipped, no matter what
+        # changed locally.
+        if not rel or rel.endswith("/"):
+            rel += "index.html"
         p = BASE / rel
         if p.is_file():
             out.append(Path(rel))
@@ -101,6 +136,21 @@ def target_files():
                 if img and img not in seen and (BASE / img).is_file():
                     out.append(Path(img))
                     seen.add(img)
+    # The sitemap is a list of canonical URLs, not a list of files that are
+    # served. Legacy short URLs (calendar.html, notes.html, timer.html, ...)
+    # are live, return 200 and carry the same head - analytics, ads, nav - but
+    # they canonicalise to the -en.html page, so the sitemap omits them by
+    # design and a head-level change never reached them. Ship every local page
+    # that is actually part of the live web root and let the SIZE diff below
+    # decide whether it changed.
+    for path in BASE.rglob("*.html"):
+        rel = path.relative_to(BASE).as_posix()
+        if rel.split("/")[0] in NOT_LIVE:
+            continue
+        if rel not in seen:
+            out.append(Path(rel))
+            seen.add(rel)
+
     for extra in ("sitemap.xml", ".htaccess", "robots.txt"):
         if extra not in seen and (BASE / extra).is_file():
             out.append(Path(extra))

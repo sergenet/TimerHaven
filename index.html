@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,18 +6,18 @@
   <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
 
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R1F6Y45MW2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
-    gtag('config', 'G-X7WBE4P25');
+    gtag('config', 'G-R1F6Y45MW2');
   </script>
 
   <meta charset="UTF-8">
-  <title id="page-title">TimerHaven | Best Free Pomodoro Timer, Meeting Planner & Productivity Tools 2026</title>
-  <link rel="canonical" href="https://timerhaven.com/index-en.html" />
+  <title id="page-title">Free Pomodoro Timer, Meeting Planner & Productivity Tools</title>
+  <link rel="canonical" href="https://timerhaven.com/" />
   <link rel="alternate" href="https://timerhaven.com/" hreflang="en" />
   <link rel="alternate" href="https://timerhaven.com/" hreflang="x-default" />
   <link rel="alternate" href="https://timerhaven.com/index-fr.html" hreflang="fr" />
@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <meta name="description"
-    content="TimerHaven offers the best free online Pomodoro timer, world clock, meeting planner, and 10+ productivity tools. Master your focus with no trackers or ads.">
+    content="TimerHaven offers the best free online Pomodoro timer, world clock, meeting planner, and 10+ productivity tools. No sign-up and no account needed — open a tool and focus.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -2145,6 +2145,29 @@
     });
   </script>
   <script src="assets/js/tool-directory.js"></script>
+
+<nav class="th-page-nav" aria-label="Home / Back" style="max-width:1100px;margin:0 auto 8px;padding:8px 16px 0;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+  <a href="/" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:1px solid currentColor;text-decoration:none;font-size:14px;opacity:.85">&#8962; Home</a>
+  <button type="button" data-th-back style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;font:inherit;font-size:14px;opacity:.85">&#8592; Back</button>
+</nav>
+<button type="button" data-th-top aria-label="Back to top" title="Back to top" style="position:fixed;right:18px;bottom:18px;z-index:2147483000;width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,0,0,.15);background:rgba(255,255,255,.92);color:#222;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18);display:none">&#8593;</button>
+<script>
+(function () {
+  var back = document.querySelector('[data-th-back]');
+  if (back) back.addEventListener('click', function () {
+    if (window.history.length > 1) { window.history.back(); } else { window.location.href = '/'; }
+  });
+  var top = document.querySelector('[data-th-top]');
+  if (top) {
+    var toggle = function () { top.style.display = window.scrollY > 300 ? 'block' : 'none'; };
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+    top.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+</script>
 </body>
 
 </html>
