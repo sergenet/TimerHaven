@@ -178,6 +178,20 @@ $featured_tool = $tools[$featured_tool_id];
 // --- 4. SEND CAMPAIGN ---
 $subscribers = $db->query("SELECT email, lang FROM subscribers WHERE status = 'active'")->fetchAll();
 
+// Dry run: everything up to here has run for real (article picked, state read,
+// recipients counted) but no mail is sent. Lets the schedule be tested safely.
+$is_dry_run = isset($_GET['dry']) || (isset($argv) && is_array($argv) && in_array('--dry-run', $argv, true));
+if ($is_dry_run) {
+    header('Content-Type: text/plain');
+    echo "DRY RUN - nothing was sent.\n";
+    echo "Recipients who would receive it: " . count($subscribers) . "\n";
+    echo "Article: " . $article['title'] . "\n";
+    echo "Source:  " . $article['source'] . "\n";
+    echo "Featured tool: " . $featured_tool_id . "\n";
+    echo "Rotation index: " . $next_tool_index . "\n";
+    exit;
+}
+
     // --- 4. SEND EMAILS using PHPMailer ---
     require_once __DIR__ . '/PHPMailer/src/Exception.php';
     require_once __DIR__ . '/PHPMailer/src/PHPMailer.php';
