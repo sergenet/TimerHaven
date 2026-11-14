@@ -21,7 +21,9 @@ Usage:
   python zip-deploy.py [--dry-run]
 """
 
+import hashlib
 import io
+import json
 import os
 import re
 import secrets
@@ -69,7 +71,39 @@ NOT_LIVE = {
 WORKERS = 6           # host rejects with 421 beyond ~8 connections from one IP
 MAX_ATTEMPTS = 5
 ZIP_NAME = "th-pkg.zip"
+# Local record of what the last successful deploy actually shipped. The SIZE
+# diff above cannot see an edit that keeps the byte count identical - a fixed
+# typo, a swapped character, a changed digit - so those used to be skipped as
+# "unchanged". Comparing a hash against this manifest catches them. It lives in
+# scripts/ (never served, never uploaded) and only ever describes files that
+# were confirmed extracted on the server.
+MANIFEST = BASE / "scripts" / "_deploy_manifest.json"
 UA = {"User-Agent": "Mozilla/5.0 (compatible; th-deploy)"}
+
+
+def file_sha256(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def load_manifest():
+    try:
+        with open(MANIFEST, encoding="utf-8") as handle:
+            data = json.load(handle)
+    except (OSError, ValueError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def save_manifest(files):
+    data = {rel.as_posix(): file_sha256(BASE / rel) for rel in files}
+    MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+    with open(MANIFEST, "w", encoding="utf-8") as handle:
+        json.dump(data, handle, indent=0, sort_keys=True)
+    return len(data)
 
 
 def connect():
@@ -155,6 +189,24 @@ def target_files():
         if extra not in seen and (BASE / extra).is_file():
             out.append(Path(extra))
             seen.add(extra)
+
+    # Installable-web-app assets. None of these appear in the sitemap, but every
+    # page links a manifest, a service worker and the install script, so they have
+    # to ship alongside the pages that reference them.
+    for pattern in (
+        "sw.js",
+        "manifest.json",
+        "manifests/*.json",
+        "assets/js/*.js",
+        "assets/css/*.css",
+        "assets/icons/*.png",
+        "assets/icons/*.webp",
+    ):
+        for path in sorted(BASE.glob(pattern)):
+            rel = path.relative_to(BASE).as_posix()
+            if rel not in seen:
+                out.append(Path(rel))
+                seen.add(rel)
     return out
 
 
@@ -235,11 +287,31 @@ def main():
     files = target_files()
     print(f"{len(files)} local files listed by the local sitemap", flush=True)
 
-    changed = scan(files)
+    size_changed = scan(files)
+    manifest = load_manifest()
+
+    # Same-size edits: the remote SIZE matches but the content does not. Only
+    # possible to judge once a manifest exists, which is written after the first
+    # successful deploy below.
+    seen = set(size_changed)
+    content_changed = []
+    if manifest:
+        content_changed = [
+            rel for rel in files
+            if rel not in seen and manifest.get(rel.as_posix()) != file_sha256(BASE / rel)
+        ]
+        for rel in content_changed:
+            print(f"same size, new content: {rel.as_posix()}", flush=True)
+
+    changed = sorted(seen | set(content_changed))
     if not changed:
+        if not dry and not manifest:
+            print(f"seeded manifest with {save_manifest(files)} file hashes", flush=True)
         print("Nothing changed remotely - no upload needed.")
         return 0
     print(f"changed/new: {len(changed)} files ({time.time() - t0:.0f}s scan)", flush=True)
+    if not manifest:
+        print("note: no manifest yet - seeding it after this deploy", flush=True)
 
     if dry:
         for rel in changed[:40]:
@@ -285,6 +357,9 @@ def main():
         except urllib.error.HTTPError as e:
             print(f"{name} gone:", e.code)
 
+    # Only now is it safe to record: the extract succeeded, so the server holds
+    # exactly this content.
+    print(f"manifest: {save_manifest(files)} file hashes recorded", flush=True)
     print(f"done in {time.time() - t0:.0f}s - {len(changed)} files extracted")
     return 0
 

@@ -1,6 +1,24 @@
 # Ensure directory requests serve index.html
 DirectoryIndex index.html
 
+# HTML must not be cached for a month. The host's LiteSpeed config sends
+# `cache-control: public, max-age=2592000` for text/html, which meant a returning
+# visitor kept the old page for 30 days after a deploy - a shipped change (the
+# per-tool "Pin to home screen" button, for instance) stayed invisible to anyone
+# who had visited before. HTML now revalidates after five minutes and honours
+# If-Modified-Since; hashed-free static assets keep the long cache below.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "public, max-age=300, must-revalidate"
+    Header unset Expires
+  </FilesMatch>
+  # The service worker is the update path for installed tools: a stale copy keeps
+  # serving old HTML and old assets, so it must never be cached.
+  <FilesMatch "^(sw\.js|install\.js)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
 # Never expose folder contents. Without this, every locale root (/de/, /es/ ...),
 # every guide folder and even /assets/ and /images/ answered with an "Index of /"
 # listing - a crawlable map of the site that nothing links to and no canonical
