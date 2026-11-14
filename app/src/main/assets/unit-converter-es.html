@@ -1,0 +1,515 @@
+﻿<!doctype html>
+<html lang="es">
+
+<head>
+  <!-- Local Version: External trackers removed -->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Convertidor de unidades — TimerHaven</title>
+  <meta name="description"
+    content="Convierte longitud, peso, temperatura, volumen, área, velocidad, datos y más. Herramienta con control de precisión, filtros y opciones útiles.">
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/unit-converter-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/unit-converter-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/unit-converter-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/unit-converter-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/unit-converter-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/unit-converter-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/unit-converter-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/unit-converter-en.html" hreflang="x-default" />
+  <style>
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #0b2545;
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 90vh;
+      box-sizing: border-box;
+    }
+
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      width: 520px;
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--brand, #0d6efd) !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .tool-title {
+      color: #185a9d;
+      font-size: 1.35rem;
+      margin: 0 0 .6rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .converter-result {
+      font-weight: 700;
+      font-size: 1.12em;
+      margin-bottom: 1rem;
+      color: #102a43;
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+    }
+
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+
+      .unit-section {
+        order: 1;
+      }
+
+      .tool-intro {
+        order: 2;
+      }
+
+      .tool-intro p {
+        display: none;
+      }
+
+      .tool-card {
+        width: 94vw;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width:900px) {
+      .tool-card {
+        width: 98vw;
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .unit-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+      .unit-row select {
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      .swap-btn {
+        align-self: center;
+        transform: rotate(90deg);
+      }
+    }
+
+    /* Basic Button Fallbacks */
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      border: 1px solid transparent;
+      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+    }
+
+    .btn-outline-danger {
+      color: #dc3545;
+      border-color: #dc3545;
+      background-color: transparent;
+    }
+
+    .btn-outline-success {
+      color: #198754;
+      border-color: #198754;
+      background-color: transparent;
+    }
+
+    .btn-sm {
+      padding: .25rem .5rem;
+      font-size: .875rem;
+      border-radius: .2rem;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+
+    .form-control,
+    .form-select {
+      display: block;
+      width: 100%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+    }
+
+    .small-muted {
+      font-size: 0.85rem;
+      color: #6b7c89;
+    }
+
+    .swap-btn,
+    .copy-btn {
+      background: #f7fafc;
+      border: 1px solid #d0d0d0;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .swap-btn.active {
+      background: #0d6efd;
+      color: #fff;
+      border-color: #0d6efd;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+  <script>
+  </script>
+</head>
+
+<body>
+  <main class="main-container" role="main">
+    <section class="tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" onclick="window.location.href='index.html'; return false;">← Volver al menú
+        principal</a>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-ruler-combined"></i> Conversor de unidades</h3>
+      <div class="tool-intro" id="tool-help" data-preserve="true"
+        style="margin-bottom:.8rem;color:#374151;line-height:1.5;display:none;">
+      </div>
+      <!-- Converter UI -->
+      <div class="unit-section">
+        <form class="converter-form" id="unitForm" aria-label="Conversor de unidades">
+          <label for="typeSelect" class="small-muted" style="align-self:center;">Categoría</label>
+          <select id="typeSelect" class="form-select" style="max-width:160px;" aria-label="Categoría">
+            <option value="length">Longitud</option>
+            <option value="weight">Peso</option>
+            <option value="temperature">Temperatura</option>
+            <option value="volume">Volumen</option>
+            <option value="area">Área</option>
+            <option value="speed">Velocidad</option>
+            <option value="time">Tiempo</option>
+            <option value="pressure">Presión</option>
+            <option value="energy">Energía</option>
+            <option value="power">Potencia</option>
+            <option value="data">Datos</option>
+            <option value="fuel">Consumo</option>
+            <option value="angle">Ángulo</option>
+            <option value="frequency">Frecuencia</option>
+          </select>
+          <input type="number" id="inputValue" class="form-control" placeholder="Valor" style="max-width:120px;"
+            aria-label="Valor" step="any">
+          <div style="display:flex;flex-direction:column;gap:.35rem;">
+            <input id="unitFilter" class="form-control unit-filter" placeholder="Filtrar unidades..."
+              title="Filtrar unidades..." />
+            <div class="unit-row" style="display:flex;gap:.5rem;align-items:center;">
+              <select id="fromUnit" class="form-select" style="min-width:160px; flex:1;" aria-label="From"></select>
+              <button type="button" id="swapBtn" class="swap-btn" title="Intercambiar unidades"
+                aria-label="Intercambiar unidades">&#8644;</button>
+              <select id="toUnit" class="form-select" style="min-width:160px; flex:1;" aria-label="To"></select>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.35rem;align-items:flex-end;">
+            <label for="precisionSelect" class="small-muted" style="margin:0;">Precisión</label>
+            <select id="precisionSelect" class="form-select" style="max-width:96px;" aria-label="Precisión">
+              <option value="6">6</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2" selected>2</option>
+              <option value="1">1</option>
+              <option value="0">0</option>
+            </select>
+          </div>
+          <div style="width:100%"></div>
+          <div style="display:flex;gap:.5rem;align-items:center;margin-top:.6rem;">
+            <button type="submit" class="btn btn-primary" id="convertBtn">Convertir</button>
+            <button type="button" class="btn btn-outline-danger" id="clearBtn">Borrar</button>
+            <button type="button" id="copyBtn" class="btn btn-outline-success" title="Copiar resultado"><i
+                class="fa fa-copy"></i> Copiar</button>
+            <div id="dataModeContainer" style="display:flex;flex-direction:column;gap:.25rem;margin-left:6px;">
+              <label class="small-muted" style="margin:0;">Modo datos</label>
+              <div style="display:flex;gap:.25rem;">
+                <button type="button" id="dataModeSI" class="swap-btn active" title="SI (1000)">SI</button>
+                <button type="button" id="dataModeBin" class="swap-btn" title="Binary (1024)">Bin</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div id="unitResult" class="converter-result" aria-live="polite">
+          <span id="unitResultText">El resultado aparecerá aquí.</span>
+          <span id="resultExtras" class="small-muted"></span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // --- Extended unitTypes with conversion functions ---
+    const unitTypes = {
+      length: {
+        units: { "Metro": 1, "Kilómetro": 1000, "Centímetro": 0.01, "Milímetro": 0.001, "Milla": 1609.344, "Yarda": 0.9144, "Pie": 0.3048, "Pulgada": 0.0254 },
+        convert: (val, from, to) => val * unitTypes.length.units[from] / unitTypes.length.units[to]
+      },
+      weight: {
+        units: { "Kilogramo": 1, "Gramo": 0.001, "Miligramo": 0.000001, "Libra": 0.45359237, "Onza": 0.028349523125, "Tonelada (métrica)": 1000 },
+        convert: (val, from, to) => val * unitTypes.weight.units[from] / unitTypes.weight.units[to]
+      },
+      temperature: {
+        units: { "Celsius": "C", "Fahrenheit": "F", "Kelvin": "K" },
+        convert: (val, from, to) => {
+          if (from === to) return val;
+          if (from === "Celsius" && to === "Fahrenheit") return val * 9 / 5 + 32;
+          if (from === "Fahrenheit" && to === "Celsius") return (val - 32) * 5 / 9;
+          if (from === "Celsius" && to === "Kelvin") return val + 273.15;
+          if (from === "Kelvin" && to === "Celsius") return val - 273.15;
+          if (from === "Fahrenheit" && to === "Kelvin") return (val - 32) * 5 / 9 + 273.15;
+          if (from === "Kelvin" && to === "Fahrenheit") return (val - 273.15) * 9 / 5 + 32;
+        }
+      },
+      volume: {
+        units: { "Litro": 1, "Mililitro": 0.001, "Metro cúbico": 1000, "Galón (EE. UU.)": 3.785411784, "Cuarto (EE. UU.)": 0.946352946, "Pinta (EE. UU.)": 0.473176473, "Galón imperial": 4.54609, "Pulgada cúbica": 0.016387064, "Pie cúbico": 28.316846592 },
+        convert: (val, from, to) => val * unitTypes.volume.units[from] / unitTypes.volume.units[to]
+      },
+      area: {
+        units: { "Metro cuadrado": 1, "Kilómetro cuadrado": 1e6, "Hectárea": 10000, "Acre": 4046.8564224, "Milla cuadrada": 2589988.110336, "Pie cuadrado": 0.09290304, "Yarda cuadrada": 0.83612736, "Pulgada cuadrada": 0.00064516 },
+        convert: (val, from, to) => val * unitTypes.area.units[from] / unitTypes.area.units[to]
+      },
+      speed: {
+        units: { "m/s": 1, "km/h": 1 / 3.6, "mph": 0.44704, "nudos": 0.514444 },
+        convert: (val, from, to) => val * unitTypes.speed.units[from] / unitTypes.speed.units[to]
+      },
+      time: {
+        units: { "Segundo": 1, "Minuto": 60, "Hora": 3600, "Día": 86400, "Semana": 604800 },
+        convert: (val, from, to) => val * unitTypes.time.units[from] / unitTypes.time.units[to]
+      },
+      pressure: {
+        units: { "Pascal": 1, "kPa": 1000, "Bar": 100000, "atm": 101325, "psi": 6894.757293168 },
+        convert: (val, from, to) => val * unitTypes.pressure.units[from] / unitTypes.pressure.units[to]
+      },
+      energy: {
+        units: { "Julio": 1, "Kilojulio": 1000, "Caloría": 4.184, "kcal": 4184, "Wh": 3600 },
+        convert: (val, from, to) => val * unitTypes.energy.units[from] / unitTypes.energy.units[to]
+      },
+      power: {
+        units: { "Vatio": 1, "Kilovatio": 1000, "Caballo de fuerza (métrico)": 735.49875, "Caballo de fuerza (mecánico)": 745.69987158227022 },
+        convert: (val, from, to) => val * unitTypes.power.units[from] / unitTypes.power.units[to]
+      },
+      data: {
+        unitsSI: { "Byte": 1, "KB": 1e3, "MB": 1e6, "GB": 1e9, "TB": 1e12 },
+        unitsBin: { "Byte": 1, "KiB": 1024, "MiB": 1024 ** 2, "GiB": 1024 ** 3, "TiB": 1024 ** 4 },
+        convert: (val, from, to, mode = 'SI') => {
+          const table = (mode === 'Bin') ? unitTypes.data.unitsBin : unitTypes.data.unitsSI;
+          if (!table[from] || !table[to]) return NaN;
+          return val * table[from] / table[to];
+        }
+      },
+      fuel: {
+        units: { "L/100km": "L100", "mpg (US)": "mpgus", "mpg (UK)": "mpguk" },
+        convert: (val, from, to) => {
+          if (from === to) return val;
+          const toL100 = (v, src) => { if (src === "L/100km") return v; if (src === "mpg (US)") return 235.214583 / v; if (src === "mpg (UK)") return 282.480936 / v; };
+          const fromL100 = (l100, dst) => { if (dst === "L/100km") return l100; if (dst === "mpg (US)") return 235.214583 / l100; if (dst === "mpg (UK)") return 282.480936 / l100; };
+          return fromL100(toL100(val, from), to);
+        }
+      },
+      angle: {
+        units: { "Grado": 1, "Radián": (180 / Math.PI), "Gradián": 0.9 },
+        convert: (val, from, to) => val * unitTypes.angle.units[from] / unitTypes.angle.units[to]
+      },
+      frequency: {
+        units: { "Hz": 1, "kHz": 1e3, "MHz": 1e6, "GHz": 1e9 },
+        convert: (val, from, to) => val * unitTypes.frequency.units[from] / unitTypes.frequency.units[to]
+      }
+    };
+    const LS_KEYS = {
+      lastType: 'th_unit_lastType_es',
+      lastFrom: 'th_unit_lastFrom_es',
+      lastTo: 'th_unit_lastTo_es',
+      lastValue: 'th_unit_lastValue_es',
+      lastPrecision: 'th_unit_lastPrecision_es',
+      dataMode: 'th_unit_dataMode_es'
+    };
+    function saveState(k, v) { try { localStorage.setItem(k, v); } catch (e) { } }
+    function loadState(k, def) { try { const v = localStorage.getItem(k); return v !== null ? v : def; } catch (e) { return def; } }
+    const typeSelect = document.getElementById('typeSelect');
+    const fromUnit = document.getElementById('fromUnit');
+    const toUnit = document.getElementById('toUnit');
+    const inputValue = document.getElementById('inputValue');
+    const unitFilter = document.getElementById('unitFilter');
+    const precisionSelect = document.getElementById('precisionSelect');
+    const unitResultText = document.getElementById('unitResultText');
+    const resultExtras = document.getElementById('resultExtras');
+    const dataModeSI = document.getElementById('dataModeSI');
+    const dataModeBin = document.getElementById('dataModeBin');
+    const copyBtn = document.getElementById('copyBtn');
+    const swapBtn = document.getElementById('swapBtn');
+    const dataModeContainer = document.getElementById('dataModeContainer');
+    let currentDataMode = loadState(LS_KEYS.dataMode, 'SI');
+    function setDataModeUI() {
+      if (currentDataMode === 'SI') { dataModeSI.classList.add('active'); dataModeBin.classList.remove('active'); }
+      else { dataModeBin.classList.add('active'); dataModeSI.classList.remove('active'); }
+    }
+    function setDataModeVisibility(type) {
+      if (type === 'data') { dataModeContainer.classList.remove('hidden'); }
+      else { dataModeContainer.classList.add('hidden'); }
+    }
+    function getUnitsForType(type) {
+      if (type === 'data') return (currentDataMode === 'Bin') ? Object.keys(unitTypes.data.unitsBin) : Object.keys(unitTypes.data.unitsSI);
+      if (unitTypes[type] && unitTypes[type].units) return Object.keys(unitTypes[type].units);
+      if (unitTypes[type] && unitTypes[type].unitsSI) return Object.keys(unitTypes[type].unitsSI);
+      return [];
+    }
+    function populateUnits(type) {
+      const allUnits = getUnitsForType(type);
+      fromUnit.innerHTML = ''; toUnit.innerHTML = '';
+      allUnits.forEach(u => {
+        const o1 = document.createElement('option'); o1.value = u; o1.textContent = u; fromUnit.appendChild(o1);
+        const o2 = document.createElement('option'); o2.value = u; o2.textContent = u; toUnit.appendChild(o2);
+      });
+      applyUnitFilter();
+      setDataModeVisibility(type);
+      const lastFrom = loadState(LS_KEYS.lastFrom, '');
+      const lastTo = loadState(LS_KEYS.lastTo, '');
+      if (lastFrom && Array.from(fromUnit.options).some(o => o.value === lastFrom)) fromUnit.value = lastFrom;
+      if (lastTo && Array.from(toUnit.options).some(o => o.value === lastTo)) toUnit.value = lastTo;
+      if (!fromUnit.value && fromUnit.options.length) fromUnit.selectedIndex = 0;
+      if (!toUnit.value && toUnit.options.length) toUnit.selectedIndex = Math.min(1, toUnit.options.length - 1);
+    }
+    function applyUnitFilter() {
+      const q = (unitFilter.value || '').toLowerCase().trim();
+      const type = typeSelect.value;
+      const allUnits = getUnitsForType(type);
+      const filtered = q ? allUnits.filter(u => u.toLowerCase().includes(q)) : allUnits.slice();
+      const final = filtered.length ? filtered : allUnits;
+      fromUnit.innerHTML = ''; toUnit.innerHTML = '';
+      final.forEach(u => {
+        const o1 = document.createElement('option'); o1.value = u; o1.textContent = u; fromUnit.appendChild(o1);
+        const o2 = document.createElement('option'); o2.value = u; o2.textContent = u; toUnit.appendChild(o2);
+      });
+    }
+    function doConvert() {
+      const type = typeSelect.value;
+      const val = parseFloat(inputValue.value);
+      const from = fromUnit.value;
+      const to = toUnit.value;
+      const precision = parseInt(precisionSelect.value, 10);
+      if (!isFinite(val)) { unitResultText.textContent = 'Ingrese un valor válido.'; resultExtras.textContent = ''; return; }
+      let result;
+      try {
+        if (type === 'data') result = unitTypes.data.convert(val, from, to, currentDataMode === 'Bin' ? 'Bin' : 'SI');
+        else if (type === 'fuel') result = unitTypes.fuel.convert(val, from, to);
+        else if (type === 'temperature') result = unitTypes.temperature.convert(val, from, to);
+        else if (unitTypes[type] && typeof unitTypes[type].convert === 'function') result = unitTypes[type].convert(val, from, to);
+        else result = NaN;
+      } catch (e) { console.error('convert error', e); result = NaN; }
+      if (!isFinite(result)) { unitResultText.textContent = 'Conversión no disponible.'; resultExtras.textContent = ''; return; }
+      const formatted = Number.isFinite(result) ? Number(result).toFixed(precision) : String(result);
+      unitResultText.textContent = `${val} ${from} = ${formatted} ${to}`;
+      if (parseFloat(formatted) !== result) { resultExtras.textContent = ` (raw ${result})`; }
+      else { resultExtras.textContent = ''; }
+      saveState(LS_KEYS.lastType, type); saveState(LS_KEYS.lastFrom, from); saveState(LS_KEYS.lastTo, to);
+      saveState(LS_KEYS.lastValue, inputValue.value); saveState(LS_KEYS.lastPrecision, precisionSelect.value);
+    }
+    swapBtn.addEventListener('click', function () { const a = fromUnit.value, b = toUnit.value; fromUnit.value = b; toUnit.value = a; doConvert(); });
+    copyBtn.addEventListener('click', function () {
+      const text = unitResultText.textContent + (resultExtras.textContent ? ' ' + resultExtras.textContent : '');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          copyBtn.innerHTML = '<i class="fa fa-check"></i> Copiar'; setTimeout(() => { copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copiar'; }, 1200);
+        }).catch(() => { alert('Error al copiar'); });
+      } else {
+        const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); copyBtn.innerHTML = '<i class="fa fa-check"></i> Copiar'; setTimeout(() => { copyBtn.innerHTML = '<i class="fa fa-copy"></i> Copiar'; }, 1200); } catch (e) { alert('Error al copiar'); }
+        ta.remove();
+      }
+    });
+    document.getElementById('clearBtn').addEventListener('click', function () {
+      inputValue.value = '';
+      unitResultText.textContent = 'El resultado aparecerá aquí.';
+      resultExtras.textContent = '';
+      saveState(LS_KEYS.lastValue, '');
+    });
+    dataModeSI.addEventListener('click', () => { currentDataMode = 'SI'; saveState(LS_KEYS.dataMode, 'SI'); setDataModeUI(); if (typeSelect.value === 'data') populateUnits('data'); });
+    dataModeBin.addEventListener('click', () => { currentDataMode = 'Bin'; saveState(LS_KEYS.dataMode, 'Bin'); setDataModeUI(); if (typeSelect.value === 'data') populateUnits('data'); });
+    document.getElementById('unitForm').addEventListener('submit', function (e) { e.preventDefault(); doConvert(); });
+    typeSelect.addEventListener('change', function () { unitFilter.value = ''; populateUnits(this.value); const lastVal = loadState(LS_KEYS.lastValue, ''); if (lastVal) inputValue.value = lastVal; });
+    unitFilter.addEventListener('input', function () { applyUnitFilter(); });
+    document.addEventListener('keydown', function (e) { if (e.ctrlKey && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); inputValue.focus(); inputValue.select(); } });
+    (function init() {
+      setDataModeUI();
+      const lastType = loadState(LS_KEYS.lastType, 'length');
+      if (Array.from(typeSelect.options).some(o => o.value === lastType)) typeSelect.value = lastType;
+      populateUnits(typeSelect.value);
+      const lastFrom = loadState(LS_KEYS.lastFrom, ''); const lastTo = loadState(LS_KEYS.lastTo, '');
+      if (lastFrom && Array.from(fromUnit.options).some(o => o.value === lastFrom)) fromUnit.value = lastFrom;
+      if (lastTo && Array.from(toUnit.options).some(o => o.value === lastTo)) toUnit.value = lastTo;
+      const lastVal = loadState(LS_KEYS.lastValue, ''); if (lastVal) inputValue.value = lastVal;
+      const lastPrecision = loadState(LS_KEYS.lastPrecision, '');
+      if (lastPrecision && Array.from(precisionSelect.options).some(o => o.value === lastPrecision)) precisionSelect.value = lastPrecision;
+      if (!fromUnit.value && fromUnit.options.length) fromUnit.selectedIndex = 0;
+      if (!toUnit.value && toUnit.options.length) toUnit.selectedIndex = Math.min(1, toUnit.options.length - 1);
+      if (inputValue.value) doConvert();
+    })();
+    [fromUnit, toUnit, precisionSelect].forEach(el => el.addEventListener('change', () => doConvert()));
+    const observer = new MutationObserver(() => { document.getElementById('unitResult').setAttribute('aria-live', 'polite'); });
+    observer.observe(unitResultText, { childList: true, characterData: true, subtree: true });
+  </script>
+  <!-- External JS dependencies removed -->
+</body>
+
+</html>

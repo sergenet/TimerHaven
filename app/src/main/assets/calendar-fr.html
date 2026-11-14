@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <!-- Local Version: External trackers removed -->
+
+  <meta charset="utf-8" />
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+  <title>Calendrier — TimerHaven</title>
+  
+  <meta name="description"
+    content="Enregistrez et gérez facilement plusieurs notes de calendrier. Apprenez à utiliser le calendrier, découvrez des conseils de productivité, consultez les questions fréquemment posées et lisez des articles d'experts.">
+  <meta name="author" content="Serge Shammas">
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+  <style>
+    /* Match the single central card styling */
+    :root {
+      --brand: #185a9d;
+      --muted: #6b7c89;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background: #f4f7fb;
+      margin: 0;
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      color: #102a43;
+    }
+
+    .main-container {
+      max-width: 900px;
+      margin: 1.5rem auto;
+      padding: 0 0.5rem;
+      min-height: 85vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .day-number {
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    /* Alarm Overlay */
+    #alarmOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(16, 42, 67, 0.9);
+      z-index: 9999;
+      color: #fff;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: pulseBG 2s infinite;
+    }
+
+    @keyframes pulseBG {
+      0% {
+        background: rgba(16, 42, 67, 0.9);
+      }
+
+      50% {
+        background: rgba(184, 28, 28, 0.9);
+      }
+
+      100% {
+        background: rgba(16, 42, 67, 0.9);
+      }
+    }
+
+    #alarmOverlay h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    #alarmOverlay p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    #stopAlarmBtn {
+      padding: 1.5rem 3.5rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+    }
+
+    #stopAlarmBtn:hover {
+      transform: scale(1.1);
+    }
+
+    .tool-card {
+      width: 100%;
+      max-width: 800px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(16, 42, 67, 0.06);
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: .6rem;
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .5rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--brand) !important;
+    }
+
+    .small-muted {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: .8rem;
+    }
+
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .8rem;
+      white-space: nowrap;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .calendar-nav {
+      display: flex;
+      gap: .35rem;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .calendar-nav .btn {
+      min-width: 36px;
+      padding: .2rem .4rem;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .right-controls {
+      display: flex;
+      gap: .45rem;
+      align-items: center;
+      flex-shrink: 0;
+      min-width: 0;
+    }
+
+    .calendar-select {
+      border-radius: 8px;
+      padding: .18rem .32rem;
+      border: 1px solid #e4edf5;
+      background: #fff;
+      font-size: .92rem;
+      height: 34px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .calendar-select.month {
+      width: 120px;
+      max-width: 150px;
+    }
+
+    .calendar-select.year {
+      width: 110px;
+      max-width: 150px;
+    }
+
+    #default-start-time.calendar-select {
+      width: 120px;
+      max-width: 150px;
+      padding: .18rem .36rem;
+      text-align: center;
+      font-size: .9rem;
+    }
+
+    .calendar-table {
+      width: 100%;
+      margin-top: 1rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 360px;
+      table-layout: fixed;
+    }
+
+    .calendar-table thead th {
+      text-align: center;
+      font-weight: 700;
+      padding: .6rem .3rem;
+      border-bottom: 1px solid #eef2f6;
+      background: #fff;
+    }
+
+    .calendar-table tbody td {
+      text-align: center;
+      vertical-align: middle;
+      padding: .5rem .25rem;
+      height: 52px;
+    }
+
+    .day-cell {
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background .12s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      margin: 0 auto;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .day-cell:hover,
+    .day-cell:focus {
+      background: #eef6fb;
+      outline: none;
+    }
+
+    .has-note {
+      background: #ffecb3 !important;
+    }
+
+    .has-note span {
+      font-size: 0.75rem;
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+
+    .calendar-today {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(180deg, #e6f7ff 0%, #cfefff 100%);
+      color: #004e73;
+      border-radius: 50%;
+      font-weight: 700;
+      border: 1px solid rgba(0, 126, 204, 0.18);
+      box-shadow: 0 4px 12px rgba(24, 144, 255, 0.08);
+      padding: 0;
+      margin: 0;
+    }
+
+    .note-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Custom Modal Styling - Replaces Bootstrap */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-dialog {
+      background: white;
+      width: 98%;
+      max-width: 600px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-height: 95vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+
+    .modal-content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .modal-header {
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #eef2f6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--brand);
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #667c89;
+      padding: 0;
+      line-height: .8;
+    }
+
+    .modal-body {
+      padding: 1rem;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+
+    .modal-footer {
+      padding: 1rem;
+      border-top: 1px solid #eef2f6;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+
+    .modal .list-group-item {
+      border: 1px solid #eef2f6;
+      border-radius: 8px;
+      margin-bottom: .6rem;
+      padding: .75rem;
+      background: #f8fafc;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    details.faq-section summary {
+      cursor: pointer;
+      padding: .2rem 0;
+      font-weight: 600;
+    }
+
+    details.faq-section ul {
+      margin-top: .5rem;
+      color: var(--muted);
+      padding-left: 1rem;
+    }
+
+    @media (max-width:520px) {
+      .calendar-header {
+        gap: .4rem;
+      }
+
+      .right-controls {
+        flex: 1 1 100%;
+        width: 100%;
+        margin-left: 0;
+        justify-content: space-between;
+        margin-top: 4px;
+      }
+
+      .calendar-select.month {
+        width: 32%;
+        max-width: none;
+      }
+
+      .calendar-select.year {
+        width: 28%;
+        max-width: none;
+      }
+
+      #default-start-time.calendar-select {
+        width: 35%;
+        max-width: none;
+      }
+    }
+
+    /* Basic Bootstrap Button Fallbacks */
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      border: 1px solid transparent;
+      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      text-decoration: none;
+    }
+
+    .btn-success {
+      color: #fff;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-outline-secondary {
+      color: #6c757d;
+      border-color: #6c757d;
+      background-color: transparent;
+    }
+
+    .btn-outline-danger {
+      color: #dc3545;
+      border-color: #dc3545;
+      background-color: transparent;
+    }
+
+    .btn-outline-primary {
+      color: #007bff;
+      border-color: #007bff;
+      background-color: transparent;
+    }
+
+    .btn-sm {
+      padding: .25rem .5rem;
+      font-size: .875rem;
+      border-radius: .2rem;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+    }
+
+    .form-select {
+      display: block;
+      width: 100%;
+      padding: .375rem 2.25rem .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      background-color: #fff;
+      background-repeat: no-repeat;
+      background-position: right .75rem center;
+      background-size: 16px 12px;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      appearance: none;
+    }
+
+    .form-select-sm {
+      padding-top: .25rem;
+      padding-bottom: .25rem;
+      padding-left: .5rem;
+      font-size: .875rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .35em .65em;
+      font-size: .75em;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: .25rem;
+    }
+
+    .bg-info {
+      background-color: #e0f2fe !important;
+      color: #0369a1 !important;
+      border: 1px solid #bae6fd;
+    }
+
+    .bg-light {
+      background-color: #f8f9fa !important;
+    }
+
+    .text-dark {
+      color: #212529 !important;
+    }
+  </style>
+
+
+  <link rel="stylesheet" href="assets/vendor/flatpickr.min.css">
+
+<style>
+/* Mobile-friendly Flatpickr adjustments */
+@media (max-width: 600px) {
+  .flatpickr-calendar.hasTime.noCalendar {
+    width: 80% !important;
+    max-width: 320px !important;
+    padding: 15px !important;
+  }
+  .flatpickr-time {
+    height: 80px !important;
+    max-height: 80px !important;
+  }
+  .flatpickr-time input.numInput {
+    font-size: 36px !important;
+    height: 100% !important;
+  }
+  .flatpickr-time .numInputWrapper {
+    width: 90px !important;
+  }
+  .flatpickr-time .flatpickr-time-separator {
+    font-size: 36px !important;
+    height: 100% !important;
+    line-height: 80px !important;
+  }
+  .flatpickr-time .numInputWrapper span.arrowUp,
+  .flatpickr-time .numInputWrapper span.arrowDown {
+    width: 35px !important;
+  }
+  .flatpickr-time .numInputWrapper span.arrowUp:after,
+  .flatpickr-time .numInputWrapper span.arrowDown:after {
+    border-width: 7px !important;
+  }
+}
+</style>
+</head>
+
+<body>
+  <!-- Alarm Overlay -->
+  <div id="alarmOverlay">
+    <h2 id="alarmTitle">Rappel !</h2>
+    <p id="alarmBody">C'est l'heure de votre tâche planifiée.</p>
+    <button id="stopAlarmBtn" class="btn btn-danger btn-lg">ARRÊTER L'ALARME</button>
+  </div>
+
+  <main class="main-container" role="main">
+    <section class="tool-card" aria-labelledby="tool-title">
+      <a id="back-link" class="back-link" href="index.html" onclick="window.location.href='index.html'; return false;">←
+        Retour au menu principal</a>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-calendar-days"></i> Calendrier</h3>
+      <a id="read-guide-btn" class="read-guide btn btn-sm btn-primary mb-2" href="fr/calendar-planning/calendar-planning-index.html" target="_blank" rel="noopener">Lire le guide complet</a>
+      <div class="small-muted" id="tool-help">Cliquez sur n'importe quel jour pour ajouter/voir/modifier vos notes. Plusieurs notes par jour sont possibles et elles restent !</div>
+      <div class="calendar-header" aria-label="Navigation du calendrier">
+        <div class="calendar-nav" role="toolbar" aria-label="Navigation du mois et de l'année">
+          <button id="nav-prev-year" class="btn btn-sm btn-outline-secondary" aria-label="Année précédente">«</button>
+          <button id="nav-prev-month" class="btn btn-sm btn-outline-secondary" aria-label="Mois précédent">‹</button>
+          <button id="nav-today" class="btn btn-sm btn-outline-secondary" aria-label="Aujourd'hui">Aujourd'hui</button>
+          <button id="nav-next-month" class="btn btn-sm btn-outline-secondary" aria-label="Mois suivant">›</button>
+          <button id="nav-next-year" class="btn btn-sm btn-outline-secondary" aria-label="Année suivante">»</button>
+        </div>
+        <div class="right-controls" aria-hidden="false">
+          <select id="calendar-month-select" class="calendar-select month" aria-label="Choisir le mois"></select>
+          <select id="calendar-year-select" class="calendar-select year" aria-label="Choisir l'année"></select>
+          <input id="default-start-time" class="calendar-select" type="time" lang="en-GB" aria-label="Heure de début par défaut"
+            title="Heure de début par défaut pour la première note">
+        </div>
+      </div>
+      <table id="calendar-table" class="calendar-table table" role="grid" aria-describedby="tool-help"></table>
+    </section>
+  </main>
+  <!-- Notes Modal -->
+  <div class="modal" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="noteForm" autocomplete="off">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noteModalLabel"></h5>
+            <button type="button" class="btn-close" onclick="closeNoteModal()" aria-label="Fermer">&times;</button>
+          </div>
+          <div class="modal-body">
+            <ul id="noteList" class="note-list" aria-live="polite"></ul>
+            <textarea id="noteInput" class="form-control mb-3" rows="3"
+              placeholder="Ajouter une nouvelle note..."></textarea>
+            <div class="row g-2" style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <div class="col-6" style="flex: 1;">
+                <label for="noteTime" class="form-label small fw-bold" style="display:block; font-size:0.8rem; font-weight:bold;">Heure</label>
+                <input type="time" lang="en-GB" id="noteTime" class="form-control" style="padding: 4px;">
+              </div>
+              <div class="col-6" style="flex: 1;">
+                <label for="noteRepeat" class="form-label small fw-bold" style="display:block; font-size:0.8rem; font-weight:bold;">Répéter</label>
+                <select id="noteRepeat" class="form-select" style="padding: 4px;">
+                  <option value="none" selected>Aucune</option>
+                  <option value="daily">Quotidienne</option>
+                  <option value="weekly">Hebdomadaire</option>
+                  <option value="monthly">Mensuelle</option>
+                  <option value="yearly">Annuelle</option>
+                </select>
+              </div>
+              <div class="col-12" style="width: 100%; margin-top: 8px;">
+                <label for="noteSound" class="form-label small fw-bold" style="display:block; font-size:0.8rem; font-weight:bold;">Son de l'alarme</label>
+                <select id="noteSound" class="form-select" style="padding: 4px;">
+                  <option value="beep" selected>Bip numérique</option>
+                  <option value="siren">Sirène d'urgence</option>
+                  <option value="pulse">Alerte pulsée</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer" style="display:flex; justify-content: space-between; align-items: center; padding: 1rem;">
+            <div>
+              <button type="button" class="btn btn-sm btn-outline-primary" id="note-test-alarm">Tester l'alarme</button>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn btn-secondary" onclick="closeNoteModal()" id="note-close-btn">Fermer</button>
+              <button type="submit" class="btn btn-success" id="note-add-btn">Ajouter</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'calendarNotes';
+    const DEFAULT_START_KEY = 'calendar_default_start_time';
+    const notes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    let currentYear, currentMonth, selectedDay, controlsHooked = false;
+    const pendingDeletions = new Set();
+    function saveNotes() { localStorage.setItem(STORAGE_KEY, JSON.stringify(notes)); }
+    function ensureCalendarIds() {
+      let changed = false;
+      for (const date in notes) {
+        if (!Array.isArray(notes[date])) continue;
+        notes[date].forEach(n => {
+          if (!n.id) {
+            n.id = 'cal_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+            changed = true;
+          }
+          if (!n.date) {
+            n.date = date;
+            changed = true;
+          }
+        });
+      }
+      if (changed) saveNotes();
+    }
+    const translations = {
+      fr: {
+        "back-link": "Retour au menu principal",
+        "tool-title": "Calendrier",
+        "tool-help": "Cliquez sur n'importe quel jour pour ajouter/voir/modifier vos notes. Plusieurs notes par jour sont possibles et elles s'enregistrent !",
+        "noteModalLabel": "Notes pour le",
+        "noteInput": "Ajouter une nouvelle note pour ce jour...",
+        "note-none": "Aucune note pour ce jour.",
+        "note-delete": "Supprimer cette note",
+        "note-close-btn": "Fermer",
+        "note-add-btn": "Ajouter",
+        "repeat-none": "Aucune",
+        "repeat-daily": "Quotidienne",
+        "repeat-weekly": "Hebdomadaire",
+        "repeat-monthly": "Mensuelle",
+        "repeat-yearly": "Annuelle",
+        "days": ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+        "months": ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+        "delete-prompt-title": "Note récurrente",
+        "delete-prompt-body": "Voulez-vous supprimer toute la série ou juste cette occurrence ?",
+        "delete-series-btn": "Toute la série",
+        "delete-occurrence-btn": "Cette occurrence",
+        "cancel-btn": "Annuler"
+      }
+    };
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'fr';
+        return (l && l.slice(0, 2)) || 'fr';
+      } catch (e) {
+        return 'fr';
+      }
+    }
+    function t(lang, key) {
+      const l = lang || getLang();
+      return (translations[l] && translations[l][key]) ? translations[l][key] : (translations['fr'][key] || '');
+    }
+    function parseDurationFromText(text) {
+      if (!text || typeof text !== 'string') return null;
+      const rangeMatch = text.match(/(\d{1,3})\s*(?:–|-)\s*(\d{1,3})\s*(?:minutes?|mins?|min)/i);
+      if (rangeMatch) return parseInt(rangeMatch[1], 10);
+      const singleMatch = text.match(/(\d{1,3})\s*(?:minutes?|mins?|min)/i);
+      if (singleMatch) return parseInt(singleMatch[1], 10);
+      return null;
+    }
+    function getDefaultStartTime() { return localStorage.getItem(DEFAULT_START_KEY) || '20:00'; }
+    function setDefaultStartTime(value) { localStorage.setItem(DEFAULT_START_KEY, value); }
+    function dateFromDateStrAndTime(dateStr, timeStr) {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const [hh = 0, mm = 0] = (timeStr || '00:00').split(':').map(Number);
+      return new Date(y, m - 1, d, hh, mm, 0, 0);
+    }
+    function updateLanguage(lang) {
+      document.getElementById('back-link') && (document.getElementById('back-link').textContent = t(lang, 'back-link'));
+      document.getElementById('tool-title') && (document.getElementById('tool-title').innerHTML = `<i class="fa fa-calendar-days"></i> ${t(lang, 'tool-title')}`);
+      document.getElementById('tool-help') && (document.getElementById('tool-help').textContent = t(lang, 'tool-help'));
+      document.getElementById('noteModalLabel') && (document.getElementById('noteModalLabel').innerHTML = `${t(lang, 'noteModalLabel')} <span id="modal-date-label"></span>`);
+      document.getElementById('noteInput') && (document.getElementById('noteInput').placeholder = t(lang, 'noteInput'));
+      document.getElementById('note-close-btn') && (document.getElementById('note-close-btn').textContent = t(lang, 'note-close-btn'));
+      document.getElementById('note-add-btn') && (document.getElementById('note-add-btn').textContent = t(lang, 'note-add-btn'));
+    }
+    function populateMonthYearControls(year, month, lang) {
+      const monthSelect = document.getElementById('calendar-month-select'), yearSelect = document.getElementById('calendar-year-select');
+      if (!monthSelect || !yearSelect) return;
+      const months = t(lang, 'months');
+      monthSelect.innerHTML = '';
+      for (let m = 0; m < 12; m++) {
+        const opt = document.createElement('option'); opt.value = String(m); opt.textContent = months[m];
+        if (m === month) opt.selected = true; monthSelect.appendChild(opt);
+      }
+      const now = new Date(); const base = now.getFullYear(); const start = base - 50, end = base + 50;
+      yearSelect.innerHTML = '';
+      for (let y = start; y <= end; y++) {
+        const opt = document.createElement('option'); opt.value = String(y); opt.textContent = String(y);
+        if (y === year) opt.selected = true; yearSelect.appendChild(opt);
+      }
+    }
+    function getNotesForDate(dateStr) {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      const targetDate = new Date(y, m - 1, d, 0, 0, 0);
+      const results = [];
+      for (const originStr in notes) {
+        if (!Array.isArray(notes[originStr])) continue;
+        const [oy, om, od] = originStr.split('-').map(Number);
+        const originDate = new Date(oy, om - 1, od, 0, 0, 0);
+        const diffDays = Math.round((targetDate - originDate) / (1000 * 60 * 60 * 24));
+        const dayItems = migrateLegacyNotes(notes[originStr]);
+        dayItems.forEach(item => {
+          let match = false;
+          if (originStr === dateStr) match = true;
+          else if (item.repeat && item.repeat !== 'none' && diffDays > 0) {
+            if (item.repeat === 'daily') match = true;
+            else if (item.repeat === 'weekly' && diffDays % 7 === 0) match = true;
+            else if (item.repeat === 'monthly' && d === od) match = true;
+            else if (item.repeat === 'yearly' && d === od && m === om) match = true;
+          }
+          if (match && item.exclusions && item.exclusions.includes(dateStr)) match = false;
+          if (match) results.push({ ...item, originStr });
+        });
+      }
+      return results;
+    }
+    function renderCalendar(year, month, lang) {
+      currentYear = year; currentMonth = month;
+      const table = document.getElementById('calendar-table');
+      if (table) { const maxRows = 6, rowHeight = 44, headerHeight = 48; table.style.minHeight = (maxRows * rowHeight + headerHeight) + 'px'; }
+      populateMonthYearControls(year, month, lang);
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      let html = '<thead><tr>'; (t(lang, 'days')).forEach(d => html += `<th scope="col">${d}</th>`); html += '</tr></thead><tbody><tr>';
+      for (let i = 0; i < firstDay; i++) html += '<td></td>';
+      const now = new Date(); const todayY = now.getFullYear(), todayM = now.getMonth(), todayD = now.getDate();
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const dayNotes = getNotesForDate(dateStr); const hasNote = dayNotes.length > 0;
+        if ((firstDay + d - 1) % 7 === 0 && d !== 1) html += '</tr><tr>';
+        const isToday = (d === todayD && month === todayM && year === todayY);
+        const classes = ['day-cell', hasNote ? 'has-note' : '', isToday ? 'calendar-today' : ''].join(' ').trim();
+        html += `<td role="gridcell" tabindex="0" data-date="${dateStr}" aria-label="${dateStr}"><div class="${classes}" ${isToday ? 'aria-current="date"' : ''}>${d}${hasNote ? ' <span title="Note enregistrée">📝</span>' : ''}</div></td>`;
+      }
+      html += '</tr></tbody>'; if (table) table.innerHTML = html;
+    }
+    function showNoteModal(dateStr) {
+      selectedDay = dateStr;
+      const ml = document.getElementById('modal-date-label');
+      if (ml) ml.textContent = dateStr;
+      renderNoteList(dateStr);
+      const input = document.getElementById('noteInput');
+      if (input) input.value = '';
+      const modalEl = document.getElementById('noteModal');
+      modalEl.classList.add('show');
+      setTimeout(() => {
+        try { input && input.focus(); } catch (e) { }
+      }, 50);
+    }
+    function closeNoteModal() {
+      const modalEl = document.getElementById('noteModal');
+      modalEl.classList.remove('show');
+      renderCalendar(currentYear, currentMonth, getLang());
+    }
+    function migrateLegacyNotes(raw) {
+      if (!Array.isArray(raw)) return [];
+      return raw.map(n => {
+        if (typeof n === 'string') return { text: n, durationMinutes: parseDurationFromText(n) || null, createdAt: null };
+        if (n && typeof n === 'object') {
+          return {
+            ...n,
+            text: n.text || String(n),
+            durationMinutes: (typeof n.durationMinutes === 'number') ? n.durationMinutes : parseDurationFromText(n.text || String(n)) || null,
+            createdAt: n.createdAt || n.ts || null
+          };
+        }
+        return { text: String(n), durationMinutes: null, createdAt: null };
+      });
+    }
+    function renderNoteList(dateStr) {
+      const list = document.getElementById('noteList');
+      if (!list) return;
+      list.innerHTML = '';
+      const dayNotes = getNotesForDate(dateStr);
+      if (dayNotes.length === 0) {
+        list.innerHTML = `<li style="color:#888;text-align:center;padding:10px;">${t('fr', 'note-none')}</li>`;
+        return;
+      }
+      dayNotes.forEach((noteObj, index) => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.style.display = 'flex';
+        li.style.justifyContent = 'space-between';
+        li.style.alignItems = 'flex-start';
+        const formattedTime = noteObj.time ? formatTime(noteObj.time, getLang()) : '';
+        let timeInfo = formattedTime ? `<span class="badge bg-light text-dark border me-2">${formattedTime}</span>` : '';
+        let repeatInfo = (noteObj.repeat && noteObj.repeat !== 'none') ? `<span class="badge bg-info ms-1" style="font-size: 0.65rem; padding: 2px 4px;"><i class="fa fa-redo"></i></span>` : '';
+        const left = document.createElement('div');
+        left.style.flex = '1 1 auto';
+        left.innerHTML = `<div style="font-weight:500; display: flex; align-items: center; gap: 4px; overflow-wrap: anywhere;">${timeInfo}<span>${escapeHtml(noteObj.text)}</span>${repeatInfo}</div>`;
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn btn-sm btn-outline-danger ms-3 delete-note-btn';
+        delBtn.setAttribute('data-id', noteObj.id || '');
+        delBtn.setAttribute('data-origin', noteObj.originStr || dateStr);
+        delBtn.setAttribute('data-repeat', (noteObj.repeat && noteObj.repeat !== 'none') ? 'true' : 'false');
+        delBtn.innerHTML = '<svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/></svg>';
+        li.appendChild(left);
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+    }
+    function formatTime(timeStr) {
+      return timeStr || '';
+    }
+    function escapeHtml(str) { if (!str) return ''; return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); }
+    function hookupCalendarControls() {
+      if (controlsHooked) return; controlsHooked = true;
+      const table = document.getElementById('calendar-table');
+      if (table) {
+        table.addEventListener('click', function (e) {
+          const cell = e.target.closest('.day-cell');
+          if (cell) {
+            const td = cell.closest('td'); if (!td) return;
+            selectedDay = td.getAttribute('data-date'); showNoteModal(selectedDay);
+          }
+        });
+      }
+      const list = document.getElementById('noteList');
+      if (list) {
+        list.addEventListener('click', function (e) {
+          const btn = e.target.closest('.delete-note-btn');
+          if (!btn || !selectedDay) return;
+          const id = btn.getAttribute('data-id'), originStr = btn.getAttribute('data-origin'), isRepeat = (btn.getAttribute('data-repeat') === 'true'), dateStr = selectedDay;
+          if (isRepeat) {
+            const promptHtml = `
+              <div id="deleteOptions" style="padding:10px; text-align:center; background:#fff3cd; border-radius:8px; border:1px solid #ffeeba; margin-top:8px; width:100%;">
+                <p style="margin-bottom:8px; font-weight:600; color:#856404;">${t(getLang(), 'delete-prompt-title')}</p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <button class="btn btn-danger btn-sm" id="delSeriesBtn">${t(getLang(), 'delete-series-btn')}</button>
+                  <button class="btn btn-warning btn-sm" id="delOccurrenceBtn">${t(getLang(), 'delete-occurrence-btn')}</button>
+                  <button class="btn btn-secondary btn-sm" id="cancelDelBtn">${t(getLang(), 'cancel-btn')}</button>
+                </div>
+              </div>
+            `;
+            const container = btn.parentElement;
+            if (container.querySelector('#deleteOptions')) return;
+            container.innerHTML = promptHtml;
+            container.querySelector('#delSeriesBtn').onclick = () => {
+              if (notes[originStr]) {
+                const idx = notes[originStr].findIndex(n => n.id === id);
+                if (idx !== -1) {
+                  const removed = notes[originStr].splice(idx, 1)[0];
+                  if (removed && removed.id) {
+                    pendingDeletions.add(removed.id);
+                    setTimeout(() => pendingDeletions.delete(removed.id), 10000);
+                    if (typeof SyncManager !== 'undefined' && SyncManager.isAvailable()) SyncManager.deleteCalendar(removed.id);
+                  }
+                }
+                if (notes[originStr].length === 0) delete notes[originStr];
+                saveNotes(); renderCalendar(currentYear, currentMonth, getLang()); renderNoteList(selectedDay);
+              }
+            };
+            container.querySelector('#delOccurrenceBtn').onclick = () => {
+              if (notes[originStr]) {
+                const item = notes[originStr].find(n => n.id === id);
+                if (item) {
+                  if (!item.exclusions) item.exclusions = [];
+                  if (!item.exclusions.includes(dateStr)) item.exclusions.push(dateStr);
+                  item.updatedAt = Date.now();
+                  saveNotes(); renderCalendar(currentYear, currentMonth, getLang()); renderNoteList(selectedDay);
+                }
+              }
+            };
+            container.querySelector('#cancelDelBtn').onclick = () => renderNoteList(selectedDay);
+            return;
+          }
+          if (notes[originStr]) {
+            const idx = notes[originStr].findIndex(n => n.id === id);
+            if (idx !== -1) {
+              const removed = notes[originStr].splice(idx, 1)[0];
+              if (removed && removed.id) {
+                pendingDeletions.add(removed.id);
+                setTimeout(() => pendingDeletions.delete(removed.id), 10000);
+                if (typeof SyncManager !== 'undefined' && SyncManager.isAvailable()) SyncManager.deleteCalendar(removed.id);
+              }
+            }
+            if (notes[originStr].length === 0) delete notes[originStr];
+            saveNotes(); renderCalendar(currentYear, currentMonth, getLang()); renderNoteList(selectedDay);
+          }
+        });
+      }
+      const prevYear = document.getElementById('nav-prev-year'), prevMonth = document.getElementById('nav-prev-month'), nextMonth = document.getElementById('nav-next-month'), nextYear = document.getElementById('nav-next-year'), todayBtn = document.getElementById('nav-today'), monthSelect = document.getElementById('calendar-month-select'), yearSelect = document.getElementById('calendar-year-select');
+      if (prevYear) prevYear.addEventListener('click', function () { currentYear--; renderCalendar(currentYear, currentMonth, getLang()); });
+      if (nextYear) nextYear.addEventListener('click', function () { currentYear++; renderCalendar(currentYear, currentMonth, getLang()); });
+      if (prevMonth) prevMonth.addEventListener('click', function () { currentMonth = (currentMonth - 1 + 12) % 12; if (currentMonth === 11) currentYear--; renderCalendar(currentYear, currentMonth, getLang()); });
+      if (nextMonth) nextMonth.addEventListener('click', function () { currentMonth = (currentMonth + 1) % 12; if (currentMonth === 0) currentYear++; renderCalendar(currentYear, currentMonth, getLang()); });
+      if (todayBtn) todayBtn.addEventListener('click', function () { const now = new Date(); currentYear = now.getFullYear(); currentMonth = now.getMonth(); renderCalendar(currentYear, currentMonth, getLang()); });
+      if (monthSelect) monthSelect.addEventListener('change', function () { const m = Number(this.value); if (!isNaN(m)) { currentMonth = m; renderCalendar(currentYear, currentMonth, getLang()); } });
+      if (yearSelect) yearSelect.addEventListener('change', function () { const y = Number(this.value); if (!isNaN(y)) { currentYear = y; renderCalendar(currentYear, currentMonth, getLang()); } });
+      const defaultTimeInput = document.getElementById('default-start-time');
+      if (defaultTimeInput) { defaultTimeInput.value = getDefaultStartTime(); defaultTimeInput.addEventListener('change', function () { setDefaultStartTime(this.value); }); }
+      const noteForm = document.getElementById('noteForm');
+      if (noteForm) {
+        noteForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          try {
+            const input = document.getElementById('noteInput'); if (!input) return;
+            const text = input.value.trim(); if (!text) return;
+            input.value = '';
+            notes[selectedDay] = notes[selectedDay] || [];
+            let createdAt = (notes[selectedDay].length === 0) ? dateFromDateStrAndTime(selectedDay, getDefaultStartTime()).toISOString() : new Date().toISOString();
+            const noteTime = document.getElementById('noteTime').value;
+            const noteRepeat = document.getElementById('noteRepeat').value;
+            const noteSound = document.getElementById('noteSound').value;
+            const item = {
+              id: 'cal_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+              text: text, time: noteTime, repeat: noteRepeat, sound: noteSound,
+              date: selectedDay, createdAt: createdAt, updatedAt: Date.now()
+            };
+            notes[selectedDay].push(item);
+            saveNotes();
+            if (window.SyncManager && window.SyncManager.isAvailable()) {
+              try { window.SyncManager.saveCalendar(item.id, item); } catch (e) { }
+            }
+            renderNoteList(selectedDay);
+          } catch (err) { console.error('Erreur lors de l’ajout de la note:', err); }
+          return false;
+        });
+      }
+      const testAlarmBtn = document.getElementById('note-test-alarm');
+      if (testAlarmBtn) {
+        testAlarmBtn.addEventListener('click', function () {
+          const selectedSound = document.getElementById('noteSound').value || 'beep';
+          spawnNotification("Test TimerHaven", "Ceci est un test du système de rappel.", 'test-id', selectedSound);
+        });
+      }
+      const stopAlarmBtn = document.getElementById('stopAlarmBtn');
+      if (stopAlarmBtn) stopAlarmBtn.addEventListener('click', stopAlarm);
+    }
+
+    let alarmInterval = null, activeAlarmSound = 'beep';
+    function spawnNotification(title, body, itemId, soundType) {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification(title, { body: body });
+      }
+      triggerLoopingAlarm(title, body, itemId, soundType);
+    }
+    function triggerLoopingAlarm(title, body, itemId, soundType) {
+      if (alarmInterval) return;
+      const overlay = document.getElementById('alarmOverlay');
+      if (overlay) {
+        document.getElementById('alarmTitle').textContent = title;
+        document.getElementById('alarmBody').textContent = body;
+        overlay.style.display = 'flex';
+      }
+      activeAlarmSound = soundType || 'beep';
+      playAlarmSound(activeAlarmSound);
+      if (typeof navigator.vibrate === 'function') {
+        navigator.vibrate([200, 100, 200]);
+      }
+      alarmInterval = setInterval(() => {
+        playAlarmSound(activeAlarmSound);
+        if (typeof navigator.vibrate === 'function') {
+          navigator.vibrate([200, 100, 200]);
+        }
+      }, 2000);
+    }
+    function stopAlarm() {
+      if (alarmInterval) { clearInterval(alarmInterval); alarmInterval = null; }
+      const overlay = document.getElementById('alarmOverlay');
+      if (overlay) overlay.style.display = 'none';
+    }
+    window.unlockAudio = function() {
+      try {
+        if (!window.thAudioCtx) window.thAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const ctx = window.thAudioCtx;
+        if (ctx.state === 'suspended') {
+          ctx.resume().then(() => {
+            const o = ctx.createOscillator(), g = ctx.createGain();
+            g.gain.value = 0.0001; o.connect(g); g.connect(ctx.destination);
+            o.start(0); o.stop(0.01);
+          });
+        }
+      } catch (e) { }
+    };
+    document.addEventListener('click', window.unlockAudio, { capture: true });
+    document.addEventListener('touchstart', window.unlockAudio, { capture: true });
+
+    function playAlarmSound(soundType) {
+      try {
+        if (!window.thAudioCtx) window.thAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const ctx = window.thAudioCtx;
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator(), gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        const startTime = ctx.currentTime;
+        if (soundType === 'siren') {
+          osc.type = 'square'; osc.frequency.setValueAtTime(300, startTime);
+          osc.frequency.exponentialRampToValueAtTime(1200, startTime + 0.4);
+          osc.frequency.exponentialRampToValueAtTime(300, startTime + 0.8);
+          gain.gain.setValueAtTime(0, startTime);
+          gain.gain.linearRampToValueAtTime(0.3, startTime + 0.1);
+          gain.gain.linearRampToValueAtTime(0, startTime + 0.8);
+          osc.start(startTime); osc.stop(startTime + 0.8);
+        } else if (soundType === 'pulse') {
+          osc.type = 'sine'; osc.frequency.setValueAtTime(1500, startTime);
+          gain.gain.setValueAtTime(0, startTime);
+          gain.gain.linearRampToValueAtTime(0.8, startTime + 0.02);
+          gain.gain.linearRampToValueAtTime(0, startTime + 0.08);
+          gain.gain.linearRampToValueAtTime(0.8, startTime + 0.12);
+          gain.gain.linearRampToValueAtTime(0, startTime + 0.18);
+          osc.start(startTime); osc.stop(startTime + 0.2);
+        } else {
+          osc.type = 'sine'; osc.frequency.setValueAtTime(880, startTime);
+          gain.gain.setValueAtTime(0, startTime);
+          gain.gain.linearRampToValueAtTime(0.8, startTime + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.5);
+          osc.start(startTime); osc.stop(startTime + 0.5);
+        }
+      } catch (e) { }
+    }
+    function checkReminders() {
+      if (alarmInterval) return;
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0'), m = String(now.getMinutes()).padStart(2, '0');
+      const timeStr = `${h}:${m}`, dateStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      const todayNotes = getNotesForDate(dateStr);
+      todayNotes.forEach(item => {
+        if (!item.time || item.time !== timeStr) return;
+        const lastFired = item.lastFiredMinute || '';
+        if (lastFired !== (dateStr + ' ' + timeStr)) {
+          item.lastFiredMinute = dateStr + ' ' + timeStr;
+          spawnNotification("Rappel TimerHaven", item.text, item.id, item.sound || 'beep');
+          saveNotes();
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      const now = new Date(); currentYear = now.getFullYear(); currentMonth = now.getMonth();
+      updateLanguage(getLang()); populateMonthYearControls(currentYear, currentMonth, getLang()); hookupCalendarControls(); ensureCalendarIds(); renderCalendar(currentYear, currentMonth, getLang());
+      if ('Notification' in window && Notification.permission !== 'granted' && Notification.permission !== 'denied') Notification.requestPermission();
+      setInterval(checkReminders, 30000);
+    });
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.calendar) {
+        let changed = false;
+        cloudData.calendar.forEach(cloudItem => {
+          const itemDate = cloudItem.date;
+          if (!itemDate || !cloudItem.id || pendingDeletions.has(cloudItem.id)) return;
+          if (!notes[itemDate]) notes[itemDate] = [];
+          const existing = notes[itemDate].find(n => n.id === cloudItem.id);
+          if (!existing) { notes[itemDate].push(cloudItem); changed = true; }
+          else if ((cloudItem.updatedAt || 0) > (existing.updatedAt || 0)) { Object.assign(existing, cloudItem); changed = true; }
+        });
+        if (changed) { saveNotes(); renderCalendar(currentYear, currentMonth, getLang()); if (selectedDay) renderNoteList(selectedDay); }
+      }
+    });
+    window.addEventListener('timerhaven:cloudDataChanged', function () { if (SyncManager.isAvailable()) SyncManager.initialize(); });
+  </script>
+
+  <script src="assets/vendor/flatpickr.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      flatpickr("input[type='time']", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true,
+        disableMobile: false
+      });
+    });
+  </script>
+</body>
+</html>

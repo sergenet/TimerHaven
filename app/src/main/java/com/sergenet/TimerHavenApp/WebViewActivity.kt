@@ -10,6 +10,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.MailTo
 import androidx.core.net.toUri
+import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.os.Message
@@ -26,11 +27,25 @@ import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.VibrationEffect
+import android.os.Vibrator
+import androidx.core.app.NotificationCompat
+import android.os.Build
 
 import okhttp3.Call
 import okhttp3.Callback
@@ -41,6 +56,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import java.net.URLEncoder
+import java.util.Locale
 
 class WebViewActivity : AppCompatActivity() {
 
@@ -50,12 +67,13 @@ class WebViewActivity : AppCompatActivity() {
 
         // Consider moving this secret to BuildConfig for production.
         private const val CONTACT_ENDPOINT = "https://timerhaven.com/api/contact.php"
-        private const val CONTACT_SECRET = "469b5d7e1ef245d7b82185dda0572841cf7fdd9d223148f0b8debb90bcb9697f"
 
         private val JSON_MEDIA_TYPE = "application/json; charset=utf-8".toMediaType()
+        private const val REQ_NOTIFICATIONS = 9137
     }
 
     private lateinit var webView: WebView
+    private lateinit var adView: AdView
     private lateinit var progress: ProgressBar
 
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
@@ -63,42 +81,44 @@ class WebViewActivity : AppCompatActivity() {
     private var pendingGeoCallback: GeolocationPermissions.Callback? = null
 
     private val httpClient = OkHttpClient()
+	private var lastLoadedUrl: String = ""
+    private var notificationPermissionAsked = false
 
-    // Compact per-page injection snippets (kept behavioral)
-    private val calendarInjectionReplace = """(function(){ try{ if (!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro')||document.querySelector('.tool-intro-in-card'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Quick access to scheduling — <a href="/en/calendar-planning/calendar-planning-index.html">Read full guide</a></p>'; }catch(e){} } var table=document.getElementById('calendar-table')||document.querySelector('.calendar-table'); if(table){ try{ table.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'calendar:applied'; } return 'calendar:applied-no-table'; }catch(e){ return 'calendar:error:'+e.toString(); }})();""".trimIndent()
-
-    private val clipboardScrollJs = """(function(){ try{ var el=document.getElementById('clipboardForm')||document.getElementById('clips-list')||document.querySelector('.clipboard-form'); if(el){ el.scrollIntoView({behavior:'auto', block:'start'}); return 'clipboard:scrolled'; } return 'clipboard:tool-not-found'; }catch(e){ return 'clipboard:error:'+e.toString(); }})();""".trimIndent()
-
-    private val countdownScrollJs = """(function(){ try{ var el=document.getElementById('display')||document.getElementById('minutes')||document.querySelector('.countdown-row'); if(el){ el.scrollIntoView({behavior:'auto', block:'start'}); return 'countdown:scrolled'; } return 'countdown:tool-not-found'; }catch(e){ return 'countdown:error:'+e.toString(); }})();""".trimIndent()
-
-    private val currencyInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Quick currency checks — <a href="/en/currency-converter/currency-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('currencyForm')||document.querySelector('.converter-section')||document.getElementById('result'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'currency:applied'; } return 'currency:applied-no-tool'; }catch(e){ return 'currency:error:'+e.toString(); }})();""".trimIndent()
-
-    private val focusMusicInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro-in-card'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Play focus music — <a href="/en/focus-music/focus-music-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('music-select')||document.querySelector('.music-player'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'focus-music:applied'; } return 'focus-music:applied-no-tool'; }catch(e){ return 'focus-music:error:'+e.toString(); }})();""".trimIndent()
-
-    private val habitTrackerInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro-in-card'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Track daily habits — <a href="/en/habit-tracker/habit-tracker-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('habitForm')||document.getElementById('habitList')||document.querySelector('.habit-section'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'habit-tracker:applied'; } return 'habit-tracker:applied-no-tool'; }catch(e){ return 'habit-tracker:error:'+e.toString(); }})();""".trimIndent()
-
-    private val meetingInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro')||document.querySelector('.tool-intro-in-card'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Plan meetings & choose times — <a href="/en/meeting-planner/meeting-planner-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('meetingForm')||document.getElementById('meetingTimes')||document.getElementById('participantList'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'meeting:applied'; } return 'meeting:applied-no-tool'; }catch(e){ return 'meeting:error:'+e.toString(); }})();""".trimIndent()
-
-    private val notesInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro')||document.querySelector('.tool-intro-in-card'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Quick notes — <a href="/en/notes/notes-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('noteInput')||document.getElementById('notesList')||document.querySelector('.notes-section'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'notes:applied'; } return 'notes:applied-no-tool'; }catch(e){ return 'notes:error:'+e.toString(); }})();""".trimIndent()
-
-    private val passwordInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Generate secure passwords locally — <a href="/en/password-generator/password-generator-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('passwordForm')||document.getElementById('pwResult')||document.querySelector('.password-section'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'password:applied'; } return 'password:applied-no-tool'; }catch(e){ return 'password:error:'+e.toString(); }})();""".trimIndent()
-
-    private val timerInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var el=document.getElementById('timerDisplay')||document.getElementById('minutes'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'timer:scrolled'; } return 'timer:no-tool'; }catch(e){ return 'timer:error:'+e.toString(); }})();""".trimIndent()
-
-    private val stopwatchInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var el=document.getElementById('swDisplay')||document.getElementById('swStartBtn'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'stopwatch:scrolled'; } return 'stopwatch:no-tool'; }catch(e){ return 'stopwatch:error:'+e.toString(); }})();""".trimIndent()
-
-    private val pomodoroInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var el=document.getElementById('pomodoroDisplay')||document.getElementById('startBtn'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'pomodoro:scrolled'; } return 'pomodoro:no-tool'; }catch(e){ return 'pomodoro:error:'+e.toString(); }})();""".trimIndent()
-
-    private val unitConverterInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Quick unit conversions — <a href="/en/unit-converter/unit-converter-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('unitForm')||document.getElementById('unitResult')||document.querySelector('.unit-section'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'unit-converter:applied'; } return 'unit-converter:no-tool'; }catch(e){ return 'unit-converter:error:'+e.toString(); }})();""".trimIndent()
-
-    private val weatherInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">Quick weather lookup — <a href="/en/weather/weather-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('weatherForm')||document.getElementById('weatherResult')||document.querySelector('.weather-main'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'weather:applied'; } return 'weather:no-tool'; }catch(e){ return 'weather:error:'+e.toString(); }})();""".trimIndent()
-
-    private val worldClockInjectionReplace = """(function(){ try{ if(!location||!location.hostname||location.hostname.indexOf('timerhaven.com')===-1) return 'not-target-domain'; var intro=document.getElementById('tool-help')||document.querySelector('.tool-intro'); if(intro){ try{ intro.innerHTML='<p style="margin:0;color:#51606b;font-size:.95rem">World Clock — add cities to compare times quickly — <a href="/world-clock/world-clock-index.html">Read full guide</a></p>'; }catch(e){} } var el=document.getElementById('clockForm')||document.getElementById('clockList')||document.querySelector('.clock-main'); if(el){ try{ el.scrollIntoView({behavior:'auto', block:'start'}); }catch(e){}; return 'world-clock:applied'; } return 'world-clock:no-tool'; }catch(e){ return 'world-clock:error:'+e.toString(); }})();""".trimIndent()
+    // Injection snippets removed - no longer needed for offline tools mode
 
     @SuppressLint("SetJavaScriptEnabled")
+    @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Draw edge-to-edge on every Android version instead of relying on the
+        // API 36 platform enforcement, then inset the content below.
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_webview)
+
+        val mainLayout = findViewById<View>(R.id.main_layout)
+        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(
+                left = systemBars.left,
+                top = systemBars.top,
+                right = systemBars.right,
+                bottom = systemBars.bottom
+            )
+            insets
+        }
+
+        adView = findViewById(R.id.adView)
+        
+        // Check if user is Pro and hide ads
+        val isPro = SubscriptionManager.isPremiumActive(this)
+        if (isPro) {
+            adView.visibility = View.GONE
+            Log.d(TAG, "Pro user - ads hidden")
+        } else {
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
+            Log.d(TAG, "Free user - loading ads")
+        }
 
         WebView.setWebContentsDebuggingEnabled(true)
 
@@ -122,7 +142,9 @@ class WebViewActivity : AppCompatActivity() {
         }
 
         try {
-            val toolbar = findViewById(R.id.topAppBar) as? MaterialToolbar
+            val toolbar = findViewById<MaterialToolbar>(R.id.topAppBar)
+            setSupportActionBar(toolbar)  // Enable menu to appear
+            
             val dismissible = intent?.getBooleanExtra("dismissible", false) ?: false
             toolbar?.let { tb ->
                 fun removeNav() {
@@ -158,17 +180,31 @@ class WebViewActivity : AppCompatActivity() {
         settings.loadsImagesAutomatically = true
         settings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
         settings.allowFileAccess = true
+        settings.allowContentAccess = true
+        settings.allowFileAccessFromFileURLs = true
+        settings.allowUniversalAccessFromFileURLs = true
         settings.setGeolocationEnabled(true)
+        
+        // Use default caching for fast local asset loading
+        settings.cacheMode = WebSettings.LOAD_DEFAULT
+        
+        // Ensure media playback doesn't require extra user gesture interaction
+        settings.mediaPlaybackRequiresUserGesture = false
 
-        webView.addJavascriptInterface(ClipboardBridge(this), "AndroidClipboard")
+
+        webView.addJavascriptInterface(ClipboardBridge(this@WebViewActivity), "AndroidClipboard")
         webView.addJavascriptInterface(JSBridge(), "AndroidBridge")
+        webView.addJavascriptInterface(CloudSyncBridge(this@WebViewActivity, webView), "TimerHavenSync")
 
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 val url = request?.url?.toString() ?: return false
                 val lower = url.lowercase()
-                // Let WebView handle http(s) links; only intercept non-http schemes
-                return if (lower.startsWith("http://") || lower.startsWith("https://")) {
+                // Let WebView handle http(s) and local asset links; only intercept non-http schemes
+                return if (lower.startsWith("http://") || 
+                    lower.startsWith("https://") || 
+                    lower.startsWith("file:///android_asset/") || 
+                    lower.startsWith("file:///android_res/")) {
                     false
                 } else {
                     handleUrl(url)
@@ -179,7 +215,9 @@ class WebViewActivity : AppCompatActivity() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 val u = url ?: return false
                 val lower = u.lowercase()
-                return if (lower.startsWith("http://") || lower.startsWith("https://")) {
+                return if (lower.startsWith("http://") || 
+                    lower.startsWith("https://") || 
+                    lower.startsWith("file:///android_asset/")) {
                     false
                 } else {
                     handleUrl(u)
@@ -188,116 +226,9 @@ class WebViewActivity : AppCompatActivity() {
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                try {
-                    val aggressiveMailtoInterceptor = """
-                      (function(){
-                        try{
-                          document.addEventListener('click', function(e){
-                            try {
-                              var t = e.target;
-                              while (t && t.tagName !== 'A') t = t.parentElement;
-                              if (t && t.href && t.href.indexOf('mailto:') === 0) {
-                                e.preventDefault();
-                                try { AndroidBridge.openLink(t.href); } catch(err) {}
-                              }
-                            } catch(err) {}
-                          }, true);
-
-                          document.addEventListener('submit', function(e){
-                            try {
-                              var f = e.target;
-                              if (!f) return;
-                              var action = f.action || '';
-                              if (action.indexOf('mailto:') === 0) {
-                                e.preventDefault();
-                                var fd = new FormData(f);
-                                var parts = [];
-                                fd.forEach(function(value, key){
-                                  parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
-                                });
-                                var url = action;
-                                if (parts.length > 0) {
-                                  if (url.indexOf('?') === -1) url += '?' + parts.join('&');
-                                  else url += '&' + parts.join('&');
-                                }
-                                try { AndroidBridge.openLink(url); } catch(err) {}
-                              }
-                            } catch(err) {}
-                          }, true);
-
-                          (function(){
-                            var _open = window.open;
-                            window.open = function(url){
-                              try {
-                                if (url && String(url).indexOf('mailto:') === 0) {
-                                  try { AndroidBridge.openLink(url); } catch(e){}
-                                  return null;
-                                }
-                              } catch(e){}
-                              return _open.apply(window, arguments);
-                            };
-                          })();
-
-                          (function(){
-                            var _assign = window.location.assign;
-                            var _replace = window.location.replace;
-                            window.location.assign = function(url){
-                              try {
-                                if (url && String(url).indexOf('mailto:') === 0) {
-                                  try { AndroidBridge.openLink(url); } catch(e){}
-                                  return;
-                                }
-                              } catch(e){}
-                              return _assign.apply(window.location, arguments);
-                            };
-                            window.location.replace = function(url){
-                              try {
-                                if (url && String(url).indexOf('mailto:') === 0) {
-                                  try { AndroidBridge.openLink(url); } catch(e){}
-                                  return;
-                                }
-                              } catch(e){}
-                              return _replace.apply(window.location, arguments);
-                            };
-                          })();
-                        }catch(e){}
-                      })();
-                    """.trimIndent()
-                    view?.evaluateJavascript(aggressiveMailtoInterceptor, null)
-
-                    val u = url ?: ""
-                    val isMobile = resources.configuration.smallestScreenWidthDp < 600
-                    val forceCompact = intent?.getBooleanExtra("compact", false) ?: false
-                    if (!isMobile && !forceCompact) {
-                        // skip assists on large screens
-                    }
-
-                    when {
-                        u.contains("/calendar-en.html") || u.endsWith("calendar-en.html") -> view?.evaluateJavascript(calendarInjectionReplace, null)
-                        u.contains("/clipboard-manager-en.html") || u.endsWith("clipboard-manager-en.html") -> view?.evaluateJavascript(clipboardScrollJs, null)
-                        u.contains("/countdown-en.html") || u.endsWith("countdown-en.html") -> view?.evaluateJavascript(countdownScrollJs, null)
-                        u.contains("/currency-en.html") || u.endsWith("currency-en.html") -> view?.evaluateJavascript(currencyInjectionReplace, null)
-                        u.contains("/focus-music-en.html") || u.endsWith("focus-music-en.html") -> view?.evaluateJavascript(focusMusicInjectionReplace, null)
-                        u.contains("/habit-tracker-en.html") || u.endsWith("habit-tracker-en.html") -> view?.evaluateJavascript(habitTrackerInjectionReplace, null)
-                        u.contains("/meeting-planner-en.html") || u.endsWith("meeting-planner-en.html") -> view?.evaluateJavascript(meetingInjectionReplace, null)
-                        u.contains("/notes-en.html") || u.endsWith("notes-en.html") -> view?.evaluateJavascript(notesInjectionReplace, null)
-                        u.contains("/password-generator-en.html") || u.endsWith("password-generator-en.html") -> view?.evaluateJavascript(passwordInjectionReplace, null)
-                        u.contains("/timer-en.html") || u.endsWith("timer-en.html") -> view?.evaluateJavascript(timerInjectionReplace, null)
-                        u.contains("/stopwatch-en.html") || u.endsWith("stopwatch-en.html") -> view?.evaluateJavascript(stopwatchInjectionReplace, null)
-                        u.contains("/pomodoro-en.html") || u.endsWith("pomodoro-en.html") -> view?.evaluateJavascript(pomodoroInjectionReplace, null)
-                        u.contains("/unit-converter-en.html") || u.endsWith("unit-converter-en.html") -> view?.evaluateJavascript(unitConverterInjectionReplace, null)
-                        u.contains("/weather-en.html") || u.endsWith("weather-en.html") -> view?.evaluateJavascript(weatherInjectionReplace, null)
-                        u.contains("/world-clock-en.html") || u.endsWith("world-clock-en.html") -> view?.evaluateJavascript(worldClockInjectionReplace, null)
-                    }
-
-                    try {
-                        injectContactFormInterceptorToView(view)
-                    } catch (e: Exception) {
-                        Log.w(TAG, "injectContactFormInterceptor failed", e)
-                    }
-                } catch (e: Exception) {
-                    Log.w(TAG, "onPageFinished injections failed", e)
-                }
+                val u = url ?: ""
+                lastLoadedUrl = u
+                Log.d(TAG, "Page finished loading: $u")
             }
         }
 
@@ -305,6 +236,11 @@ class WebViewActivity : AppCompatActivity() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 progress.visibility = if (newProgress >= 100) View.GONE else View.VISIBLE
                 progress.progress = newProgress
+            }
+
+            override fun onConsoleMessage(consoleMessage: android.webkit.ConsoleMessage?): Boolean {
+                Log.d("WebViewConsole", "[${consoleMessage?.messageLevel()}] ${consoleMessage?.message()} -- From line ${consoleMessage?.lineNumber()} of ${consoleMessage?.sourceId()}")
+                return true
             }
 
             override fun onCreateWindow(view: WebView?, isDialog: Boolean, isUserGesture: Boolean, resultMsg: Message?): Boolean {
@@ -379,7 +315,9 @@ class WebViewActivity : AppCompatActivity() {
             }
         }
 
-        val url = intent?.getStringExtra(EXTRA_URL) ?: "https://timerhaven.com/index.html"
+        val url = ToolCatalog.resolveLaunchUrl(intent)
+            ?: intent?.getStringExtra(EXTRA_URL)
+            ?: ToolCatalog.homeUrl()
         webView.loadUrl(url)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -391,48 +329,33 @@ class WebViewActivity : AppCompatActivity() {
 
     private fun handleUrl(url: String): Boolean {
         Log.d(TAG, "handleUrl called: $url")
-
-        Log.d(TAG, "handleUrl: $url")
         val lower = url.lowercase()
         return try {
             when {
+                // mailto: -> open contact page in webview (prefer site form)
                 lower.startsWith("mailto:") -> {
-                    val mailUri = try { url.toUri() } catch (e: Exception) { null }
-                    try {
-                        if (mailUri != null) {
-                            val sendToIntent = Intent(Intent.ACTION_SENDTO, mailUri)
-                            if (sendToIntent.resolveActivity(packageManager) != null) {
-                                startActivity(Intent.createChooser(sendToIntent, "Send email"))
-                                return true
-                            }
-                        }
-                    } catch (e: Exception) {
-                        Log.w(TAG, "Primary mailto ACTION_SENDTO failed", e)
-                    }
-
                     try {
                         val mailTo = try { MailTo.parse(url) } catch (e: Exception) { null }
                         val to = mailTo?.to ?: ""
                         val subject = mailTo?.subject ?: ""
                         val body = mailTo?.body ?: ""
-                        val webUrl = "https://mail.google.com/mail/?view=cm&fs=1" +
-                                (if (to.isNotBlank()) "&to=${Uri.encode(to)}" else "") +
-                                (if (subject.isNotBlank()) "&su=${Uri.encode(subject)}" else "") +
-                                (if (body.isNotBlank()) "&body=${Uri.encode(body)}" else "")
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)))
-                        return true
-                    } catch (e: Exception) {
-                        Log.w(TAG, "Web compose fallback failed", e)
-                    }
 
-                    try {
-                        val mailTo = try { MailTo.parse(url) } catch (e: Exception) { null }
-                        val cb = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                        val clip = ClipData.newPlainText("email", mailTo?.to ?: "")
-                        cb.setPrimaryClip(clip)
-                        Toast.makeText(this, "Email address copied to clipboard", Toast.LENGTH_LONG).show()
-                    } catch (ignored: Exception) {
-                        Toast.makeText(this, "No app available to handle this link", Toast.LENGTH_LONG).show()
+                        // Load contact.html (site form); do not rely on query params if the form doesn't support them
+                        val contactPage = "https://timerhaven.com/contact.html"
+
+                        this@WebViewActivity.runOnUiThread {
+                            try {
+                                webView.loadUrl(contactPage)
+                            } catch (e: Exception) {
+                                Log.w(TAG, "Failed to load contact page, falling back to showContactFallbackDialog", e)
+                                showContactFallbackDialog("", to, body)
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.w(TAG, "mailto handling failed", e)
+                        runOnUiThread {
+                            showContactFallbackDialog("", "", "")
+                        }
                     }
                     true
                 }
@@ -442,7 +365,9 @@ class WebViewActivity : AppCompatActivity() {
                     true
                 }
 
-                lower.startsWith("http://") || lower.startsWith("https://") -> {
+                lower.startsWith("http://") || 
+                lower.startsWith("https://") || 
+                lower.startsWith("file:///android_asset/") -> {
                     false
                 }
 
@@ -533,12 +458,49 @@ class WebViewActivity : AppCompatActivity() {
         @JavascriptInterface
         fun submitContact(jsonString: String) {
             try {
+// --- SUBMIT GUARD: only allow submissions coming from contact pages ---
+val currentUrl = try { webView.url ?: lastLoadedUrl ?: "" } catch (e: Exception) { lastLoadedUrl ?: "" }
+if (currentUrl.isNullOrEmpty()) return
+
+// Strictly require 'contact' in the URL before we even look at the payload
+if (!currentUrl.contains("contact", ignoreCase = true)) {
+    Log.d(TAG, "submitContact ignored: url does not contain 'contact'. currentUrl=$currentUrl")
+    return
+}
+
+// Extra safety: block known tool pages even if they have 'contact' (unlikely but possible)
+val disallowedToolMarkers = listOf("calendar", "habit", "notes", "checklist", "clipboard", "clips", "clipboard-manager", "timer", "stopwatch", "pomodoro", "password")
+if (disallowedToolMarkers.any { currentUrl.contains(it, ignoreCase = true) }) {
+    Log.d(TAG, "submitContact ignored: request from tool page. currentUrl=$currentUrl")
+    return
+}
+// --- END GUARD ---
+
+                Log.d(TAG, "submitContact called with payload: $jsonString")
+
                 val obj = JSONObject(jsonString)
-                val name = obj.optString("name", "")
-                val email = obj.optString("email", "")
-                val message = obj.optString("message", "")
+                val name = obj.optString("name", "").trim()
+                val email = obj.optString("email", "").trim()
+                val message = obj.optString("message", "").trim()
                 val pageUrlFromJs = obj.optString("pageUrl").takeIf { it.isNotEmpty() }
                 val userAgent = obj.optString("userAgent", "")
+
+                // Also fetch current webview URL if JS didn't provide one
+                // val currentUrl = try { webView.url ?: "" } catch (e: Exception) { "" }
+
+                // Decide whether this is a genuine contact-page submission:
+                val effectivePageUrl = pageUrlFromJs ?: currentUrl
+                val pageLooksLikeContact = effectivePageUrl.contains("contact", ignoreCase = true)
+
+                if (!pageLooksLikeContact && name.isBlank() && email.isBlank() && message.isBlank()) {
+                    Log.d(TAG, "submitContact ignored: not from contact page and payload empty or trivial. page=$effectivePageUrl")
+                    return
+                }
+
+                if (!pageLooksLikeContact && message.length < 3 && email.isBlank() && name.isBlank()) {
+                    Log.d(TAG, "submitContact ignored: tiny payload not from contact page. messageLen=${message.length}")
+                    return
+                }
 
                 fun buildAndSend(pageUrlValue: String) {
                     val requestJson = JSONObject().apply {
@@ -555,8 +517,8 @@ class WebViewActivity : AppCompatActivity() {
                     buildAndSend(pageUrlFromJs)
                 } else {
                     runOnUiThread {
-                        val currentUrl = try { webView.url ?: "" } catch (e: Exception) { "" }
-                        buildAndSend(currentUrl)
+                        val cur = try { webView.url ?: "" } catch (e: Exception) { "" }
+                        buildAndSend(cur)
                     }
                 }
             } catch (e: Exception) {
@@ -566,6 +528,150 @@ class WebViewActivity : AppCompatActivity() {
                 }
             }
         }
+
+        @JavascriptInterface
+        fun onTimerEnd(title: String, message: String) {
+            runOnUiThread {
+                showNativeNotification(title, message)
+                triggerVibration()
+            }
+        }
+
+        /** Mirrors a Pomodoro session started on the page into the notification, widget and service. */
+        @JavascriptInterface
+        fun timerStart(workMin: Int, breakMin: Int, phase: String, remainingSec: Int) {
+            runOnUiThread {
+                ensureNotificationPermission()
+                PomodoroTimer.start(this@WebViewActivity, workMin, breakMin, phase, remainingSec)
+                PomodoroWidgetProvider.updateAll(this@WebViewActivity)
+            }
+        }
+
+        @JavascriptInterface
+        fun timerPause() {
+            runOnUiThread {
+                PomodoroTimer.pause(this@WebViewActivity)
+                PomodoroWidgetProvider.updateAll(this@WebViewActivity)
+            }
+        }
+
+        @JavascriptInterface
+        fun timerResume() {
+            runOnUiThread {
+                PomodoroTimer.resume(this@WebViewActivity)
+                PomodoroWidgetProvider.updateAll(this@WebViewActivity)
+            }
+        }
+
+        @JavascriptInterface
+        fun timerReset() {
+            runOnUiThread {
+                PomodoroTimer.reset(this@WebViewActivity)
+                PomodoroWidgetProvider.updateAll(this@WebViewActivity)
+            }
+        }
+
+        @JavascriptInterface
+        fun timerSetLengths(workMin: Int, breakMin: Int, phase: String) {
+            runOnUiThread {
+                PomodoroTimer.setLengths(this@WebViewActivity, workMin, breakMin, phase)
+                PomodoroWidgetProvider.updateAll(this@WebViewActivity)
+            }
+        }
+
+        /** JSON snapshot so the page can pick a running session back up after a relaunch. */
+        @JavascriptInterface
+        fun timerState(): String = PomodoroTimer.snapshot(this@WebViewActivity).toJson()
+
+        @JavascriptInterface
+        fun timerStop() {
+            runOnUiThread {
+                PomodoroTimerService.stop(this@WebViewActivity)
+                PomodoroTimer.refresh(this@WebViewActivity)
+                PomodoroWidgetProvider.updateAll(this@WebViewActivity)
+            }
+        }
+
+        @JavascriptInterface
+        fun vibratePhone() {
+            runOnUiThread {
+                triggerVibration()
+            }
+        }
+    }
+
+    private fun requestPomodoroWidget() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            Toast.makeText(this, "Widgets need Android 8 or newer. Long-press your home screen instead.", Toast.LENGTH_LONG).show()
+            return
+        }
+        try {
+            val manager = android.appwidget.AppWidgetManager.getInstance(this)
+            val provider = android.content.ComponentName(this, PomodoroWidgetProvider::class.java)
+            if (!manager.isRequestPinAppWidgetSupported) {
+                Toast.makeText(this, "Long-press your home screen and pick Widgets to add the Pomodoro widget.", Toast.LENGTH_LONG).show()
+                return
+            }
+            val added = manager.requestPinAppWidget(provider, null, null)
+            if (!added) {
+                Toast.makeText(this, "Long-press your home screen and pick Widgets to add the Pomodoro widget.", Toast.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "requestPinAppWidget failed", e)
+            Toast.makeText(this, "Long-press your home screen and pick Widgets to add the Pomodoro widget.", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun ensureNotificationPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
+        val granted = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.POST_NOTIFICATIONS
+        ) == PackageManager.PERMISSION_GRANTED
+        if (!granted && !notificationPermissionAsked) {
+            notificationPermissionAsked = true
+            try {
+                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQ_NOTIFICATIONS)
+            } catch (e: Exception) {
+                Log.w(TAG, "POST_NOTIFICATIONS request failed", e)
+            }
+        }
+    }
+
+    private fun showNativeNotification(title: String, message: String) {
+        val channelId = "timer_notifications"
+        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, "Timer Alerts", NotificationManager.IMPORTANCE_HIGH)
+            manager.createNotificationChannel(channel)
+        }
+
+        val builder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_timer)
+            .setContentTitle(title)
+            .setContentText(message)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+
+        manager.notify(1001, builder.build())
+    }
+
+    private fun triggerVibration() {
+        val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val vibratorManager = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as android.os.VibratorManager
+            vibratorManager.defaultVibrator
+        } else {
+            @Suppress("DEPRECATION")
+            getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            @Suppress("DEPRECATION")
+            vibrator.vibrate(500)
+        }
     }
 
     private fun sendContactRequest(jsonBody: String, name: String, email: String, message: String) {
@@ -573,15 +679,14 @@ class WebViewActivity : AppCompatActivity() {
         val request = Request.Builder()
             .url(CONTACT_ENDPOINT)
             .addHeader("Content-Type", "application/json")
-            .addHeader("X-Contact-Secret", CONTACT_SECRET)
+            .addHeader("X-Contact-Secret", BuildConfig.CONTACT_SECRET)
             .post(body)
             .build()
 
         httpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-                    Toast.makeText(this@WebViewActivity, "Failed to send — opening mail app", Toast.LENGTH_SHORT).show()
-                    openMailClientFallback(name, email, message)
+                    showContactFallbackDialog(name, email, message)
                 }
             }
 
@@ -612,13 +717,52 @@ class WebViewActivity : AppCompatActivity() {
                         }
                     } else {
                         runOnUiThread {
-                            Toast.makeText(this@WebViewActivity, "Server rejected message — opening mail app", Toast.LENGTH_SHORT).show()
-                            openMailClientFallback(name, email, message)
+                            showContactFallbackDialog(name, email, message)
                         }
                     }
                 }
             }
         })
+    }
+
+    private fun showContactFallbackDialog(name: String, email: String, message: String) {
+        try {
+            val builder = AlertDialog.Builder(this@WebViewActivity)
+                .setTitle("Can't send message")
+                .setMessage("We couldn't send your message automatically. Choose an action:")
+                .setCancelable(true)
+                .setPositiveButton("Open mail app") { _, _ ->
+                    openMailClientFallback(name, email, message)
+                }
+                .setNeutralButton("Copy email") { _, _ ->
+                    try {
+                        val cb = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                        val clip = ClipData.newPlainText("email", "support@timerhaven.com")
+                        cb.setPrimaryClip(clip)
+                        Toast.makeText(this@WebViewActivity, "Support email copied to clipboard", Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Toast.makeText(this@WebViewActivity, "Unable to copy email", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Open contact page") { _, _ ->
+                    try {
+                        webView.loadUrl("https://timerhaven.com/contact.html")
+                    } catch (e: Exception) {
+                        Toast.makeText(this@WebViewActivity, "Unable to open contact page", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            runOnUiThread {
+                try {
+                    builder.show()
+                } catch (e: Exception) {
+                    Toast.makeText(this@WebViewActivity, "Unable to send message. Support: support@timerhaven.com", Toast.LENGTH_LONG).show()
+                }
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "showContactFallbackDialog failed", e)
+            Toast.makeText(this@WebViewActivity, "Unable to send message. Support: support@timerhaven.com", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun openMailClientFallback(name: String, email: String, message: String) {
@@ -641,163 +785,61 @@ class WebViewActivity : AppCompatActivity() {
         }
     }
 
-    private fun injectContactFormInterceptorToView(view: WebView?) {
-        val script = """
-            (function() {
-                function getElValue(el) {
-                    try {
-                        if (!el) return "";
-                        if (el.tagName === 'SELECT') return el.value || "";
-                        if (typeof el.value !== 'undefined') return el.value || "";
-                        if (el.getAttribute && el.getAttribute('contenteditable') === 'true') return el.innerText || "";
-                        return el.textContent || "";
-                    } catch (e) { return ""; }
-                }
+    /** Pins the tool currently on screen, or asks which tool when the menu is open. */
+    private fun pinCurrentToolOrAsk() {
+        val current = try { webView.url } catch (e: Exception) { null } ?: lastLoadedUrl
+        val tool = ToolCatalog.byUrl(current)
+        if (tool != null) {
+            ToolShortcuts.requestPin(this, tool)
+            return
+        }
 
-                function guessNameFor(el) {
-                    try {
-                        var candidates = [];
-                        if (el.name) candidates.push(el.name);
-                        if (el.id) candidates.push(el.id);
-                        if (el.placeholder) candidates.push(el.placeholder);
-                        if (el.getAttribute && el.getAttribute('aria-label')) candidates.push(el.getAttribute('aria-label'));
-                        if (el.getAttribute && el.getAttribute('data-name')) candidates.push(el.getAttribute('data-name'));
-                        return (candidates.join(' ') || '').toLowerCase();
-                    } catch (e) { return ''; }
-                }
-
-                function detectSemanticKey(hint) {
-                    if (!hint) return null;
-                    hint = hint.toLowerCase();
-                    if (/(^|\s)(name|your name|full name|first name|last name)/.test(hint)) return 'name';
-                    if (/(^|\s)(email|e-mail|your email)/.test(hint)) return 'email';
-                    if (/(^|\s)(message|comment|note|feedback|question|bug|description)/.test(hint)) return 'message';
-                    return null;
-                }
-
-                function serializeFormBestEffort(form) {
-                    var data = {};
-                    try {
-                        var inputs = Array.prototype.slice.call(form.querySelectorAll('input,textarea,select,[contenteditable=true]'));
-                        inputs.forEach(function(el) {
-                            var n = el.name || el.id;
-                            var v = getElValue(el);
-                            if (n) {
-                                if (data[n] === undefined) data[n] = v;
-                            }
-                        });
-                        inputs.forEach(function(el) {
-                            var v = getElValue(el);
-                            if (!v) return;
-                            var hint = guessNameFor(el);
-                            var key = detectSemanticKey(hint);
-                            if (key && !data[key]) {
-                                data[key] = v;
-                            }
-                        });
-                        inputs.forEach(function(el) {
-                            var v = getElValue(el);
-                            if (!v) return;
-                            var hint = (el.placeholder || '').toLowerCase();
-                            var key = detectSemanticKey(hint);
-                            if (key && !data[key]) data[key] = v;
-                        });
-                        if (!data['message']) {
-                            var textareas = form.querySelectorAll('textarea');
-                            if (textareas && textareas.length > 0) {
-                                for (var i=0;i<textareas.length;i++) {
-                                    var val = getElValue(textareas[i]);
-                                    if (val && val.trim().length>0) { data['message'] = val; break; }
-                                }
-                            }
-                        }
-                        if (data['name'] === undefined) data['name'] = '';
-                        if (data['email'] === undefined) data['email'] = '';
-                        if (data['message'] === undefined) data['message'] = '';
-                    } catch (e) {}
-                    return data;
-                }
-
-                try {
-                    var hooked = new WeakSet();
-
-                    function hookForm(form) {
-                        if (!form || hooked.has(form)) return;
-                        hooked.add(form);
-
-                        function handleSubmitEvent(e) {
-                            try {
-                                e.preventDefault();
-                                if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-
-                                var payloadFields = serializeFormBestEffort(form) || {};
-                                payloadFields.pageUrl = location.href;
-                                payloadFields.userAgent = navigator.userAgent || '';
-
-                                if (window.AndroidBridge && typeof window.AndroidBridge.submitContact === 'function') {
-                                    try {
-                                        window.AndroidBridge.submitContact(JSON.stringify(payloadFields));
-                                        return;
-                                    } catch (err) {}
-                                }
-
-                                try { form.submit(); } catch (x) {}
-                            } catch (err) {
-                                try { form.submit(); } catch (x) {}
-                            }
-                        }
-
-                        form.addEventListener('submit', handleSubmitEvent, true);
-
-                        form.addEventListener('click', function(e) {
-                            try {
-                                var t = e.target;
-                                if (!t) return;
-                                var isSubmit = false;
-                                if (t.tagName === 'BUTTON') isSubmit = true;
-                                var type = (t.getAttribute && t.getAttribute('type')) || '';
-                                if (type && type.toLowerCase() === 'submit') isSubmit = true;
-                                if (t.tagName === 'INPUT' && (t.type === 'submit' || t.type === 'image')) isSubmit = true;
-                                if (isSubmit) {
-                                    try { e.preventDefault(); if (e.stopImmediatePropagation) e.stopImmediatePropagation(); } catch(_) {}
-                                    handleSubmitEvent(e);
-                                }
-                            } catch (err) {}
-                        }, true);
-                    }
-
-                    var forms = document.getElementsByTagName('form');
-                    for (var i = 0; i < forms.length; i++) {
-                        hookForm(forms[i]);
-                    }
-
-                    var observer = new MutationObserver(function(mutations) {
-                        try {
-                            mutations.forEach(function(m) {
-                                m.addedNodes && m.addedNodes.forEach(function(node) {
-                                    try {
-                                        if (!node) return;
-                                        if (node.nodeType !== 1) return;
-                                        if (node.tagName === 'FORM') hookForm(node);
-                                        var nested = node.querySelectorAll && node.querySelectorAll('form');
-                                        if (nested && nested.length) {
-                                            for (var j=0;j<nested.length;j++) hookForm(nested[j]);
-                                        }
-                                    } catch (e) {}
-                                });
-                            });
-                        } catch (e) {}
-                    });
-                    observer.observe(document.documentElement || document.body, { childList: true, subtree: true });
-                } catch (e) {}
-            })();
-        """.trimIndent()
-
-        view?.post {
-            try {
-                view.evaluateJavascript(script, null)
-            } catch (ignored: Exception) {
+        val tools = ToolCatalog.tools
+        val labels = tools.map { it.title }.toTypedArray()
+        AlertDialog.Builder(this)
+            .setTitle(R.string.pin_tool_dialog_title)
+            .setItems(labels) { _, which ->
+                tools.getOrNull(which)?.let { ToolShortcuts.requestPin(this, it) }
             }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    // injectContactFormInterceptorToView removed - no longer needed
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_webview, menu)
+
+        // Hide upgrade button if user is already Pro
+        val upgradeItem = menu?.findItem(R.id.action_upgrade)
+        val isPro = SubscriptionManager.isPremiumActive(this)
+        upgradeItem?.isVisible = !isPro
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: android.view.MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_pin_tool -> {
+                pinCurrentToolOrAsk()
+                true
+            }
+            R.id.action_pomodoro_widget -> {
+                requestPomodoroWidget()
+                true
+            }
+            R.id.action_upgrade -> {
+                // Open PaywallActivity
+                val intent = Intent(this, PaywallActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.action_settings -> {
+                // Open SettingsActivity
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

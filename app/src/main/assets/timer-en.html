@@ -1,0 +1,521 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Local Version: External trackers removed -->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Task Timer — TimerHaven</title>
+  <meta name="description"
+    content="Track work sessions, focus tasks, and breaks. Learn how to use Task Timer, get productivity tips, FAQs, and read expert articles.">
+  <meta name="author" content="Serge Shammas">
+  <meta name="datePublished" content="2026-01-09">
+  <meta name="dateModified" content="2026-01-09">
+  <link rel="canonical" href="https://timerhaven.com/timer-en.html" />
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/timer-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/timer-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/timer-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/timer-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/timer-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/timer-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/timer-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/timer-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Timer — TimerHaven">
+  <meta property="og:description" content="Boost your productivity with our free Timer. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/timer-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/timer-en.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Timer — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Timer to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/timer-share-image.png">
+
+  <!-- Structured data (TechArticle pattern for tool + guide relation) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Task Timer — Measure Time, Improve Estimates",
+    "description":"Task Timer ? interactive timer plus practical guide: measure sessions, log interruptions, and use results to plan work.",
+    "author": {"@type":"Person","name":"Serge Shammas","url":"https://timerhaven.com/authors/serge-shammas"},
+    "datePublished":"2026-01-09",
+    "dateModified":"2026-01-09",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://timerhaven.com/timer-en.html"}
+  }
+  </script>
+  <!-- External CDN dependencies removed -->
+  <style>
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #0b2545;
+    }
+
+    .page-wrap {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .center-row {
+      display: flex;
+      gap: 1.6rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .center-row.single {
+      justify-content: center;
+    }
+
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      width: 410px;
+      padding: 1.3rem;
+    }
+
+    .timer-display {
+      font-size: 2em;
+      font-weight: 700;
+      text-align: center;
+      margin: 0.9rem 0;
+    }
+
+    .timer-controls input {
+      width: 80px;
+      display: inline-block;
+      margin-left: .4rem;
+    }
+
+    .timer-btns {
+      margin-top: .5rem;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    footer.site {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #6b7280;
+    }
+
+    .guide-links {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      margin: .6rem 0;
+      flex-wrap: wrap;
+    }
+
+    /* Mobile-specific compact summary and ordering */
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+
+      .timer-section {
+        order: 1;
+      }
+
+      .tool-intro {
+        order: 2;
+      }
+
+      .tool-intro p {
+        display: none;
+      }
+
+      /* hide long paragraphs on narrow screens */
+      .tool-card {
+        width: 94vw;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width:900px) {
+      .center-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .tool-card {
+        width: 98%;
+        max-width: 540px;
+      }
+    }
+
+    /* Basic Bootstrap Button Fallbacks */
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      border: 1px solid transparent;
+      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      text-decoration: none;
+    }
+
+    .btn-success {
+      color: #fff;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-outline-primary {
+      color: #007bff;
+      border-color: #007bff;
+      background-color: transparent;
+    }
+
+    .btn-outline-danger {
+      color: #dc3545;
+      border-color: #dc3545;
+      background-color: transparent;
+    }
+
+    .btn-sm {
+      padding: .25rem .5rem;
+      font-size: .875rem;
+      border-radius: .2rem;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+    }
+
+    /* Hide native spin buttons */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .spin-arrows button:active {
+      background: #e2e8f0 !important;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+    <!-- Removed the page hero that duplicated the tool intro above the card per request -->
+    <div class="center-row single" id="center-row">
+      <div class="tool-card" role="region" aria-label="Task Timer">
+        <!-- Back to main menu should always point to root (/) -->
+        <a href="index.html" class="d-block mb-2" onclick="window.location.href='index.html'; return false;"
+          style="text-decoration:none; color:#0d6efd; font-weight:600;">&larr; Back to
+          Main Menu</a>
+        <h3><i class="fa fa-hourglass-half"></i> Task Timer</h3>
+        <div class="tool-intro" id="tool-help" data-preserve="true"
+          style="margin-bottom:.8rem;color:#374151;line-height:1.5;">
+          <p>Measure work sessions, focus tasks, and breaks locally.</p>
+        </div>
+        <div class="timer-section" aria-live="polite" style="margin-top:.6rem;">
+          <div class="timer-controls mb-3"
+            style="display:flex; flex-direction:column; align-items:flex-start; gap:0.6rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <label style="font-weight:600; width:65px; margin:0;">Hours:</label>
+              <div style="position:relative; display:inline-flex; align-items:center;">
+                <input id="hours" type="number" min="0" max="24" value="0" class="form-control"
+                  style="width:75px; padding-right:20px; text-align:center;">
+                <div class="spin-arrows"
+                  style="position:absolute; right:2px; display:flex; flex-direction:column; background:transparent;">
+                  <button type="button" onclick="adjTime('hours',1)"
+                    style="border:none;background:none;font-size:10px;padding:0 5px;cursor:pointer;color:#495057;">▲</button>
+                  <button type="button" onclick="adjTime('hours',-1)"
+                    style="border:none;background:none;font-size:10px;padding:0 5px;cursor:pointer;color:#495057;">▼</button>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <label style="font-weight:600; width:65px; margin:0;">Minutes:</label>
+              <div style="position:relative; display:inline-flex; align-items:center;">
+                <input id="minutes" type="number" min="0" max="59" value="25" class="form-control"
+                  style="width:75px; padding-right:20px; text-align:center;">
+                <div class="spin-arrows"
+                  style="position:absolute; right:2px; display:flex; flex-direction:column; background:transparent;">
+                  <button type="button" onclick="adjTime('minutes',1)"
+                    style="border:none;background:none;font-size:10px;padding:0 5px;cursor:pointer;color:#495057;">▲</button>
+                  <button type="button" onclick="adjTime('minutes',-1)"
+                    style="border:none;background:none;font-size:10px;padding:0 5px;cursor:pointer;color:#495057;">▼</button>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <label style="font-weight:600; width:65px; margin:0;">Seconds:</label>
+              <div style="position:relative; display:inline-flex; align-items:center;">
+                <input id="seconds" type="number" min="0" max="59" value="0" class="form-control"
+                  style="width:75px; padding-right:20px; text-align:center;">
+                <div class="spin-arrows"
+                  style="position:absolute; right:2px; display:flex; flex-direction:column; background:transparent;">
+                  <button type="button" onclick="adjTime('seconds',1)"
+                    style="border:none;background:none;font-size:10px;padding:0 5px;cursor:pointer;color:#495057;">▲</button>
+                  <button type="button" onclick="adjTime('seconds',-1)"
+                    style="border:none;background:none;font-size:10px;padding:0 5px;cursor:pointer;color:#495057;">▼</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="timerDisplay" class="timer-display">00:25:00</div>
+          <div class="timer-btns">
+            <button id="startBtn" class="btn btn-success btn-small"><i class="fa fa-play"></i> Start</button>
+            <button id="pauseBtn" class="btn btn-secondary btn-small"><i class="fa fa-pause"></i> Pause</button>
+            <button id="resetBtn" class="btn btn-danger btn-small"><i class="fa fa-refresh"></i> Reset</button>
+          </div>
+          <div class="mt-4">
+            <h5 style="font-size:1rem;font-weight:700;">Record Session</h5>
+            <input id="sessionName" type="text" class="form-control mb-2" placeholder="What did you achieve?">
+            <button id="recordBtn" class="btn btn-outline-primary btn-sm w-100">Log Completed Session</button>
+          </div>
+          <div id="sessionLog" class="mt-3"
+            style="max-height:150px; overflow-y:auto; font-size:0.9rem; border-top:1px solid #eee; padding-top:10px;">
+            <div class="text-muted">No sessions logged yet.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Newsletter Signup Removed -->
+  </div>
+  <script src="assets/newsletter.js"></script>
+  </div>
+  <script>
+    (function () {
+      // Timer logic
+      var timer = null;
+      var totalSeconds = 25 * 60;
+      var running = false;
+      function updateTimerDisplay() {
+        var hrs = Math.floor(totalSeconds / 3600);
+        var min = Math.floor((totalSeconds % 3600) / 60);
+        var sec = totalSeconds % 60;
+        var disp = document.getElementById('timerDisplay');
+        if (disp) disp.textContent = String(hrs).padStart(2, '0') + ':' + String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+      }
+
+      window.adjTime = function (id, delta) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var val = parseInt(el.value, 10);
+        if (isNaN(val)) val = 0;
+        val += delta;
+        var max = parseInt(el.max, 10) || 59;
+        var min = parseInt(el.min, 10) || 0;
+        if (val > max) val = max;
+        if (val < min) val = min;
+        el.value = val;
+        setTimerLengths();
+      };
+      function setTimerLengths() {
+        var hrEl = document.getElementById('hours');
+        var minEl = document.getElementById('minutes');
+        var secEl = document.getElementById('seconds');
+        var hr = hrEl ? parseInt(hrEl.value, 10) : 0;
+        var min = minEl ? parseInt(minEl.value, 10) : 25;
+        var sec = secEl ? parseInt(secEl.value, 10) : 0;
+        hr = isNaN(hr) ? 0 : hr;
+        min = isNaN(min) ? 0 : min;
+        sec = isNaN(sec) ? 0 : sec;
+        totalSeconds = Math.max(0, hr * 3600 + min * 60 + sec);
+        updateTimerDisplay();
+      }
+      // Safe hookup: check elements exist before binding
+      function safeBind(id, ev, fn) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener(ev, fn);
+      }
+      safeBind('hours', 'change', setTimerLengths);
+      safeBind('minutes', 'change', setTimerLengths);
+      safeBind('seconds', 'change', setTimerLengths);
+      safeBind('startBtn', 'click', function () {
+        if (running) return;
+        running = true;
+        timer = setInterval(function () {
+          if (totalSeconds > 0) {
+            totalSeconds--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timer);
+            running = false;
+            if (window.TimerHavenApp) {
+              window.TimerHavenApp.notifyTimerEnd("Timer Finished", "Your task session has ended.");
+            }
+            try { alert("Time's up!"); } catch (e) {/*ignore*/ }
+          }
+        }, 1000);
+      });
+      safeBind('pauseBtn', 'click', function () {
+        if (timer) clearInterval(timer);
+        running = false;
+      });
+      safeBind('resetBtn', 'click', function () {
+        if (timer) clearInterval(timer);
+        running = false;
+        var hrEl = document.getElementById('hours');
+        var minEl = document.getElementById('minutes');
+        var secEl = document.getElementById('seconds');
+        if (hrEl) hrEl.value = '0';
+        if (minEl) minEl.value = '25';
+        if (secEl) secEl.value = '0';
+        var nameInput = document.getElementById('sessionName');
+        if (nameInput) nameInput.value = '';
+        setTimerLengths();
+      });
+      // initialize
+      setTimerLengths();
+      // Persistence & Sync
+      var sessions = [];
+      try {
+        var saved = localStorage.getItem('timerSessions_en');
+        if (saved) sessions = JSON.parse(saved);
+      } catch (e) { sessions = []; }
+      function saveSessions() {
+        localStorage.setItem('timerSessions_en', JSON.stringify(sessions));
+        requestAnimationFrame(renderSessions);
+      }
+      function renderSessions() {
+        var log = document.getElementById('sessionLog');
+        if (!log) return;
+        if (sessions.length === 0) {
+          log.innerHTML = '<div class="text-muted">No sessions logged yet.</div>';
+          return;
+        }
+        log.innerHTML = sessions.map(function (s, idx) {
+          return '<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid #f0f0f0; display:flex; justify-content:space-between; align-items:center;">' +
+            '<div><strong>' + (s.name || 'Unnamed Session') + '</strong><br>' +
+            '<span class="text-muted" style="font-size:0.8rem;">' + s.duration + ' — ' + s.date + '</span></div>' +
+            '<button class="btn btn-sm btn-outline-danger" onclick="deleteSession(' + idx + ')" title="Delete session"><i class="fa fa-trash"></i> Delete</button>' +
+            '</div>';
+        }).join('');
+      }
+      window.deleteSession = function (idx) {
+        var removed = sessions.splice(idx, 1)[0];
+        saveSessions();
+        if (removed && removed.id && window.SyncManager && window.SyncManager.isAvailable()) {
+          try {
+            window.SyncManager.deleteTaskSession(removed.id);
+          } catch (e) { }
+        }
+      };
+      safeBind('recordBtn', 'click', function () {
+        var nameInput = document.getElementById('sessionName');
+        var name = nameInput ? nameInput.value.trim() : '';
+        var hrEl = document.getElementById('hours');
+        var minEl = document.getElementById('minutes');
+        var secEl = document.getElementById('seconds');
+        var hrStr = hrEl ? hrEl.value : '0';
+        var minStr = minEl ? minEl.value : '25';
+        var secStr = secEl ? secEl.value : '0';
+        var duration = (parseInt(hrStr) > 0 ? hrStr + 'h ' : '') + minStr + 'm ' + secStr + 's';
+        var session = {
+          id: 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          name: name,
+          duration: duration,
+          date: new Date().toLocaleString(),
+          timestamp: Date.now()
+        };
+        sessions.unshift(session);
+        saveSessions();
+        if (window.SyncManager && window.SyncManager.isAvailable()) {
+          try {
+            window.SyncManager.saveTaskSession(session.id, session);
+          } catch (e) { }
+        }
+        if (nameInput) nameInput.value = '';
+      });
+      renderSessions();
+      // Cloud Sync Listeners
+      window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+        const cloudData = e.detail;
+        if (cloudData && cloudData.tasks) {
+          let changed = false;
+          cloudData.tasks.forEach(cloudTask => {
+            const existing = sessions.find(s => s.id === cloudTask.id);
+            if (!existing) {
+              sessions.push(cloudTask);
+              changed = true;
+            }
+          });
+          if (changed) {
+            sessions.sort(function (a, b) { return (b.timestamp || 0) - (a.timestamp || 0); });
+            saveSessions();
+          }
+        }
+      });
+      window.addEventListener('timerhaven:cloudDataChanged', function () {
+        if (SyncManager.isAvailable()) SyncManager.initialize();
+      });
+    })();
+  </script>
+  <!-- External JS dependencies removed -->
+</body>
+
+</html>

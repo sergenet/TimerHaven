@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-X7WBE4P25');
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Habit Tracker — TimerHaven">
+  <meta property="og:description"
+    content="Boost your productivity with our free Habit Tracker. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/habit-tracker-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/habit-tracker-ar.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Habit Tracker — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Habit Tracker to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/habit-tracker-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <title>متعقب العادات — TimerHaven</title>
+  <meta name="description"
+    content="تتبع عاداتك اليومية وحافظ على سلاسل نجاحك. احصل على نصائح الخبراء حول بناء عادات دائمة، الأسئلة الشائعة، ودليل الاستخدام الكامل." />
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tool-theme.css">
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+  <script src="assets/js/syncManager.js"></script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #0b2545;
+      margin: 0;
+      padding: 2rem;
+      direction: rtl;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box
+    }
+
+    /* Back link styled consistently */
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: #007bff !important;
+      text-decoration: none;
+      font-weight: 700;
+      direction: rtl
+    }
+
+    .back-link:hover {
+      text-decoration: underline
+    }
+
+    .tool-title {
+      color: #185a9d;
+      font-size: 1.35rem;
+      margin: 0 0 .6rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      justify-content: flex-end
+    }
+
+    .stat-bar {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #f0f4f8;
+      padding-bottom: .6rem;
+      display: flex;
+      gap: 1.2rem;
+      font-size: .95rem;
+      color: var(--muted);
+      justify-content: flex-end
+    }
+
+    .habit-form {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+      justify-content: flex-end
+    }
+
+    .habit-item {
+      background: #f7fafc;
+      border-radius: 12px;
+      padding: .85rem 1rem;
+      margin-bottom: .7rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      direction: rtl
+    }
+
+    .streak-badge {
+      background: #eefbff;
+      color: #185a9d;
+      padding: .25rem .5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: .85rem;
+      margin-right: .5rem
+    }
+
+    .habit-actions {
+      display: flex;
+      gap: .4rem;
+      align-items: center
+    }
+
+    .done-today {
+      text-decoration: line-through;
+      color: var(--muted);
+      opacity: .7
+    }
+
+    #habit-all-done-banner {
+      display: none
+    }
+
+    @media (max-width:900px) {
+      .card {
+        padding: 1rem
+      }
+
+      .habit-form {
+        flex-direction: column
+      }
+
+      .stat-bar {
+        font-size: .85rem;
+        gap: .6rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container" role="main">
+    <section class="card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">← العودة إلى القائمة الرئيسية</a>
+      <h3 id="tool-title" class="tool-title">✅ متعقب العادات</h3>
+      <div id="habit-all-done-banner" class="alert alert-success py-2 mb-3" style="font-size:.9rem; text-align:right;">
+        🎉 تم الانتهاء من جميع العادات اليوم! عمل رائع!</div>
+      <div class="stat-bar" id="stat-bar">
+        <span id="stat-tracked">المتعقبة: 0</span>
+        <span id="stat-done">تم اليوم: 0</span>
+        <span id="stat-best">أفضل سلسلة: 0</span>
+      </div>
+      <div class="habit-section">
+        <form class="habit-form" id="habitForm" autocomplete="off" onsubmit="return false;">
+          <input type="text" id="habitInput" class="form-control" placeholder="أضف عادة جديدة..."
+            style="max-width:320px;">
+          <button type="button" id="add-btn" class="btn btn-success btn-sm">إضافة</button>
+        </form>
+        <div id="habitList" class="habit-list" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const habitTranslations = {
+      ar: {
+        "tool-title": "متعقب العادات",
+        "habitInput": "أضف عادة جديدة...",
+        "add-btn": "إضافة",
+        "stats-tracked": "المتعقبة: ",
+        "stats-done": "تم اليوم: ",
+        "stats-best": "أفضل سلسلة: ",
+        "mark-done": "تم",
+        "done-today": "تم اليوم",
+        "streak": "السلسلة: ",
+        "delete": "حذف",
+        "archive": "أرشفة",
+        "banner-all-done": "🎉 تم الانتهاء من جميع العادات اليوم! عمل رائع!",
+        "history": "السجل: ",
+        "no-habits": "لا توجد عادات بعد. ابدأ بإضافة واحدة!"
+      }
+    };
+    const t = habitTranslations['ar'];
+    function updateStaticText() {
+      const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-check-double"></i> ${t['tool-title'] || ''}`;
+      const input = document.getElementById('habitInput'); if (input) input.placeholder = t['habitInput'] || '';
+      const addBtn = document.getElementById('add-btn'); if (addBtn) addBtn.textContent = t['add-btn'] || '';
+      renderHabits();
+    }
+    function ensureHabitIds() {
+      habits.forEach(h => {
+        if (!h.id) h.id = 'hb_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+      });
+    }
+    let habits = [];
+    try {
+      const saved = localStorage.getItem('habits_v1');
+      if (saved) habits = JSON.parse(saved);
+    } catch (e) { habits = []; }
+    if (!Array.isArray(habits)) habits = [];
+    ensureHabitIds();
+    function saveHabits() {
+      localStorage.setItem('habits_v1', JSON.stringify(habits));
+      requestAnimationFrame(renderHabits);
+    }
+    function renderHabits() {
+      const list = document.getElementById('habitList');
+      if (!list) return;
+      list.innerHTML = '';
+      if (habits.length === 0) {
+        list.innerHTML = `<div class="text-muted" style="text-align:right;">${t['no-habits']}</div>`;
+        updateStats();
+        return;
+      }
+      const today = new Date().toDateString();
+      habits.forEach((h, idx) => {
+        const item = document.createElement('div');
+        item.className = 'habit-item';
+        const isDone = h.lastDone === today;
+        item.innerHTML = `
+          <div style="display:flex; align-items:center; gap:.75rem; min-width:0;">
+            <span class="streak-badge" title="${t['streak']}">${h.streak || 0}</span>
+            <span class="${isDone ? 'done-today' : ''}" style="overflow-wrap:anywhere; text-align:right;">${escapeHtml(h.name)}</span>
+          </div>
+          <div class="habit-actions">
+            <button class="btn btn-sm ${isDone ? 'btn-success' : 'btn-outline-secondary'}" onclick="toggleHabit(${idx})" title="${t['mark-done']}">
+              ${isDone ? '✅' : '⚪'}
+            </button>
+            <button class="btn btn-sm btn-outline-danger" onclick="deleteHabit(${idx})" title="${t['delete']}">
+              🗑️
+            </button>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+      updateStats();
+    }
+    function updateStats() {
+      const today = new Date().toDateString();
+      const doneToday = habits.filter(h => h.lastDone === today).length;
+      const best = habits.reduce((max, h) => Math.max(max, h.streak || 0), 0);
+      document.getElementById('stat-tracked').textContent = t['stats-tracked'] + habits.length;
+      document.getElementById('stat-done').textContent = t['stats-done'] + doneToday;
+      document.getElementById('stat-best').textContent = t['stats-best'] + best;
+      const banner = document.getElementById('habit-all-done-banner');
+      if (banner) banner.style.display = (habits.length > 0 && doneToday === habits.length) ? 'block' : 'none';
+    }
+    window.toggleHabit = function (idx) {
+      const h = habits[idx];
+      const today = new Date().toDateString();
+      if (h.lastDone === today) {
+        h.lastDone = null;
+        h.streak = Math.max(0, (h.streak || 0) - 1);
+      } else {
+        h.lastDone = today;
+        h.streak = (h.streak || 0) + 1;
+      }
+      saveHabits();
+      if (SyncManager.isAvailable()) SyncManager.saveHabit(h.id, h);
+    };
+    window.deleteHabit = function (idx) {
+      const removed = habits.splice(idx, 1)[0];
+      saveHabits();
+      if (removed && removed.id && SyncManager.isAvailable()) SyncManager.deleteHabit(removed.id);
+    };
+    document.getElementById('add-btn').onclick = function () {
+      const input = document.getElementById('habitInput');
+      const name = input.value.trim();
+      if (!name) return;
+      const newHabit = {
+        id: 'hb_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+        name: name,
+        streak: 0,
+        lastDone: null,
+        created: Date.now()
+      };
+      habits.unshift(newHabit);
+      saveHabits();
+      if (SyncManager.isAvailable()) SyncManager.saveHabit(newHabit.id, newHabit);
+      input.value = '';
+    };
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+    }
+    updateStaticText();
+    // Cloud Sync
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.habits) {
+        let changed = false;
+        cloudData.habits.forEach(ch => {
+          const existing = habits.find(h => h.id === ch.id);
+          if (!existing) {
+            habits.push(ch);
+            changed = true;
+          } else if ((ch.updatedAt || 0) > (existing.updatedAt || 0)) {
+            Object.assign(existing, ch);
+            changed = true;
+          }
+        });
+        if (changed) saveHabits();
+      }
+    });
+  </script>
+</body>
+
+</html>

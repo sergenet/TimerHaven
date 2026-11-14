@@ -2,38 +2,99 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Network permission (already present) -->
+    <!-- Network / ads permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- Add location permissions so the runtime grant actually enables device location for the WebView -->
+    <!-- Add these two for location (if applicable): -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Pomodoro timer session + completion alerts -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <!-- AD_ID permission -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"
+        tools:node="merge" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TimerhavenNewApp"
-        tools:targetApi="31">
+        android:theme="@style/Theme.TimerhavenNewApp">
 
-        <!-- Register the in-app WebView Activity using the class's exact package -->
-        <activity android:name="com.sergenet.timerhaven.WebViewActivity" android:exported="false" />
+        <!-- AdMob configuration -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-0467059729557007~2448227957" />
+        <meta-data
+            android:name="com.google.android.gms.ads.INITIALIZE_ON_CREATE"
+            android:value="false" />
 
-        <!-- Use the MainActivity's exact fully-qualified package+class name so Android can find it -->
+        <property
+            android:name="android.adservices.AD_SERVICES_CONFIG"
+            android:resource="@xml/gma_ad_services_config"
+            tools:replace="android:resource" />
+
         <activity
-            android:name="com.sergenet.timerhaven.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.TimerhavenNewApp">
+            android:enableOnBackInvokedCallback="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-    </application>
 
+            <!-- Long-press shortcuts for the top tools (res/xml/shortcuts.xml) -->
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+
+        <activity
+            android:name=".PaywallActivity"
+            android:exported="false"
+            android:enableOnBackInvokedCallback="true" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:enableOnBackInvokedCallback="true" />
+
+        <activity
+            android:name=".WebViewActivity"
+            android:exported="false"
+            android:enableOnBackInvokedCallback="true" />
+
+        <service
+            android:name=".PomodoroTimerService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Pomodoro focus timer countdown" />
+        </service>
+
+        <receiver
+            android:name=".PomodoroWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.sergenet.TimerHavenApp.POMODORO_STATE" />
+                <action android:name="com.sergenet.TimerHavenApp.WIDGET_TOGGLE" />
+                <action android:name="com.sergenet.TimerHavenApp.WIDGET_RESET" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/pomodoro_widget_info" />
+        </receiver>
+
+    </application>
 </manifest>

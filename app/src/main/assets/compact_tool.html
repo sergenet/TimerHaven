@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Open full guide</title>
+  <style>
+    :root{--bg:#f7fafc;--card:#ffffff;--accent:#5b21b6;--text:#123;--muted:#6b7280}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);color:var(--text);display:flex;align-items:center;justify-content:center;height:100vh}
+    .card{width:92%;max-width:420px;background:var(--card);border-radius:14px;padding:20px;box-shadow:0 6px 18px rgba(11,37,69,0.06);text-align:center}
+    h1{font-size:1.05rem;margin:0 0 8px;color:var(--accent)}
+    p{font-size:.92rem;color:var(--muted);margin:0 0 16px}
+    .btn{display:inline-block;width:100%;padding:12px 14px;border-radius:10px;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#fff;font-weight:700;text-decoration:none;margin-bottom:10px}
+    .btn.secondary{background:transparent;color:var(--accent);border:1px solid #e6e6e6}
+    .footer{font-size:.78rem;margin-top:8px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="title">
+    <h1 id="title">Open full guide</h1>
+    <p id="desc">Quick access to the tool — open the full guide or open in your browser.</p>
+
+    <a id="openTool" class="btn" href="#">Open in app</a>
+    <a id="openExternal" class="btn secondary" href="#" target="_blank">Open in browser</a>
+
+    <div class="footer">Tip: use the Back button to return to the main app screen.</div>
+  </div>
+
+  <script>
+    // Read ?target= encoded URL from the file URL
+    (function(){
+      function getQueryParam(name) {
+        var q = location.search.replace('?', '').split('&').map(function(p){return p.split('=')});
+        for (var i=0;i<q.length;i++){ if (q[i][0]===name) return decodeURIComponent(q[i][1]||''); }
+        return '';
+      }
+      var target = getQueryParam('target') || 'https://timerhaven.com/index.html';
+      // Populate links
+      var openTool = document.getElementById('openTool');
+      var openExternal = document.getElementById('openExternal');
+      openTool.href = target;
+      openExternal.href = target;
+
+      // Accessibility: focus first button
+      openTool.focus();
+    })();
+  </script>
+</body>
+</html>

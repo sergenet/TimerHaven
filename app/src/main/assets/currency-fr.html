@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-X7WBE4P25');
+  </script>
+
+  <meta charset="utf-8" />
+  <title>Convertisseur de devises — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/currency-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/currency-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/currency-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/currency-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/currency-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/currency-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/currency-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/currency-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Currency Converter — TimerHaven">
+  <meta property="og:description"
+    content="Boost your productivity with our free Currency Converter. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/currency-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/currency-fr.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Currency Converter — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Currency Converter to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/currency-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <meta name="description" content="Convertissez les devises en utilisant les taux de change en temps réel.">
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tool-theme.css">
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--text-dark, #102a43);
+      margin: 0;
+      padding: 2rem;
+    }
+
+    /* Centered single-tool layout */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 90vh;
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+
+    .center-row {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    /* Standard blue used across tools for back link & guide */
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: #007bff !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .4rem 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: #185a9d;
+    }
+
+    .tool-help {
+      color: var(--muted);
+      margin-bottom: .8rem;
+    }
+
+    .converter-form {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .converter-result {
+      font-weight: 700;
+      font-size: 1.12rem;
+      margin-bottom: 1rem;
+      color: var(--text-dark, #102a43);
+    }
+
+    details.faq-section summary {
+      cursor: pointer;
+      padding: .2rem 0;
+      font-weight: 700;
+    }
+
+    details.faq-section ul {
+      margin-top: .5rem;
+      color: var(--muted);
+      padding-left: 1rem;
+    }
+
+    @media (max-width:900px) {
+      .tool-card {
+        padding: 1rem;
+      }
+
+      .converter-form {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>try { localStorage.setItem('timerhavenLang', 'fr'); } catch (e) { }</script>
+  <main class="main-container" role="main">
+    <div class="center-row">
+      <section class="tool-card" aria-labelledby="tool-title">
+        <a href="index.html" class="back-link" id="back-link">← Retour au menu principal</a>
+        <div id="tool-title" class="tool-title"><i class="fa fa-dollar-sign"></i> Convertisseur de devises</div>
+        <!-- Read full guide button (language-specific link will be set by JS) -->
+        <div class="tool-help" id="tool-help">Convertissez les devises en utilisant les taux de change en temps réel.
+        </div>
+        <div class="converter-section">
+          <form class="converter-form" id="currencyForm">
+            <input type="number" min="0" step="any" id="amount" class="form-control" placeholder=""
+              style="max-width:120px;">
+            <select id="fromCurrency" class="form-select" style="max-width:140px;"></select>
+            <span style="font-size:1.3em;">→</span>
+            <select id="toCurrency" class="form-select" style="max-width:140px;"></select>
+            <button type="submit" class="btn btn-primary btn-sm" id="convert-btn">Convertir</button>
+          </form>
+          <div id="result" class="converter-result">Le montant converti s'affichera ici.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script>
+    // -- Currency Converter JS using ExchangeRate-API --
+    const apiKey = "5f484bfa921ef56c9c279660";
+    const currencyList = [
+      "USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "SEK", "NZD", "MXN", "SGD", "HKD", "NOK", "KRW", "TRY", "INR", "RUB", "BRL", "ZAR"
+    ];
+    const currencyTranslations = {
+      en: {
+        "language-label": "Language:",
+        "back-link": "← Back to Main Menu",
+        "tool-title": "Currency Converter",
+        "tool-help": "Convert currencies using live exchange rates.",
+        "amount": "Amount",
+        "convert": "Convert",
+        "result-placeholder": "Converted amount will appear here.",
+        "fetching": "Fetching rate...",
+        "amount-error": "Please enter a valid amount.",
+        "conversion-unavailable": "Conversion not available.",
+        "fetch-error": "Could not fetch conversion.",
+        "howto-title": '<i class="fa fa-dollar-sign"></i> How to Use Currency Converter',
+        "howto-steps": `<li><b>Select currencies:</b> Choose the currencies you want to convert between.</li>
+          <li><b>Enter amount:</b> Type the amount you want to convert.</li>
+          <li><b>View result:</b> The converted amount shows instantly.</li>`,
+        "howto-article-btn": "Read Full Article",
+        "howto-article-link": "currency-how-to.html",
+        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Currency Productivity Tips',
+        "tips-list": `<li><b>Double-check rates:</b> For large transfers, confirm rates with your bank.</li>
+          <li><b>Keep a history:</b> Record conversions for budgeting.</li>
+          <li><b>Use for travel:</b> Convert local prices on the go.</li>`,
+        "tips-article-btn": "Read Full Article",
+        "tips-article-link": "currency-tips.html"
+      },
+      fr: {
+        "language-label": "Langue :",
+        "back-link": "← Retour au menu principal",
+        "tool-title": "Convertisseur de devises",
+        "tool-help": "Convertissez les devises en utilisant les taux de change en temps réel.",
+        "amount": "Montant",
+        "convert": "Convertir",
+        "result-placeholder": "Le montant converti s'affichera ici.",
+        "fetching": "Récupération du taux...",
+        "amount-error": "Veuillez entrer un montant valide.",
+        "conversion-unavailable": "Conversion non disponible.",
+        "fetch-error": "Impossible de récupérer la conversion.",
+        "howto-title": '<i class="fa fa-dollar-sign"></i> Comment utiliser le Convertisseur de devises',
+        "howto-steps": `<li><b>Sélectionnez les devises :</b> Choisissez les devises à convertir.</li>
+          <li><b>Entrez le montant :</b> Saisissez le montant à convertir.</li>
+          <li><b>Voir le résultat :</b> Le montant converti s'affiche instantanément.</li>`,
+        "howto-article-btn": "Lire l'article complet",
+        "howto-article-link": "https://timerhaven.com/fr/currency/currency-index.html",
+        "tips-title": '<i class="fa fa-lightbulb" style="color:#43cea2;"></i> Conseils pour la conversion de devises',
+        "tips-list": `<li><b>Vérifiez les taux :</b> Pour de gros transferts, confirmez auprès de votre banque.</li>
+          <li><b>Gardez un historique :</b> Notez vos conversions pour votre budget.</li>
+          <li><b>Utilisez en voyage :</b> Convertissez les prix locaux facilement.</li>`,
+        "tips-article-btn": "Lire l'article complet",
+        "tips-article-link": "currency-tips-fr.html"
+      }
+      // other languages omitted for brevity
+    };
+    const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
+    function populateCurrencySelects() {
+      const from = document.getElementById('fromCurrency');
+      const to = document.getElementById('toCurrency');
+      from.innerHTML = '';
+      to.innerHTML = '';
+      currencyList.forEach(cur => {
+        from.innerHTML += `<option value="${cur}">${cur}</option>`;
+        to.innerHTML += `<option value="${cur}">${cur}</option>`;
+      });
+      from.value = "USD";
+      to.value = "EUR";
+    }
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'fr';
+        return (l && l.slice(0, 2)) || 'fr';
+      } catch (e) {
+        return 'fr';
+      }
+    }
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0, 2);
+      const t = currencyTranslations[lang] || currencyTranslations['fr'];
+      // direction
+      document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      // UI text
+      const back = document.getElementById('back-link');
+      if (back) back.textContent = t['back-link'] || '';
+      const toolTitle = document.getElementById('tool-title');
+      if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-dollar-sign"></i> ${t['tool-title'] || ''}`;
+      const help = document.getElementById('tool-help');
+      if (help) help.textContent = t['tool-help'] || '';
+      const amount = document.getElementById('amount');
+      if (amount) amount.placeholder = t['amount'] || '';
+      const convertBtn = document.getElementById('convert-btn');
+      if (convertBtn) convertBtn.textContent = t['convert'] || 'Convertir';
+      const resultEl = document.getElementById('result');
+      if (resultEl) resultEl.textContent = t['result-placeholder'] || '';
+    }
+    // form submit: use getLang() to determine messages
+    document.getElementById('currencyForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const amountVal = parseFloat(document.getElementById('amount').value);
+      const fromCur = document.getElementById('fromCurrency').value;
+      const toCur = document.getElementById('toCurrency').value;
+      const lang = getLang();
+      const t = currencyTranslations[lang] || currencyTranslations['fr'];
+      if (isNaN(amountVal) || amountVal <= 0) {
+        document.getElementById('result').innerText = t['amount-error'] || "Veuillez entrer un montant valide.";
+        return;
+      }
+      document.getElementById('result').innerText = t['fetching'] || "Récupération du taux...";
+      fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${fromCur}/${toCur}/${amountVal}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data && typeof data.conversion_result !== 'undefined') {
+            const conv = (Math.round((data.conversion_result + Number.EPSILON) * 100000) / 100000);
+            const rate = (Math.round((data.conversion_rate + Number.EPSILON) * 100000) / 100000);
+            document.getElementById('result').innerText = `${amountVal} ${fromCur} = ${conv} ${toCur} (Taux: ${rate})`;
+          } else {
+            document.getElementById('result').innerText = t['conversion-unavailable'] || "Conversion non disponible.";
+          }
+        })
+        .catch(() => {
+          document.getElementById('result').innerText = t['fetch-error'] || "Impossible de récupérer la conversion.";
+        });
+    });
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', function () {
+      populateCurrencySelects();
+      applyLanguage(getLang());
+    });
+  </script>
+</body>
+
+</html>

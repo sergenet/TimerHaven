@@ -1,5 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Theme.TimerhavenNewApp" parent="android:Theme.Material.Light.NoActionBar" />
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- App theme using MaterialComponents so MaterialToolbar inflates correctly -->
+    <style name="Theme.TimerhavenNewApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <!-- System bar colours are applied at runtime by enableEdgeToEdge(); the
+             android:statusBarColor / android:navigationBarColor /
+             android:windowDrawsSystemBarBackgrounds theme attributes are deprecated
+             and no-ops when targeting API 36. -->
+    </style>
 </resources>

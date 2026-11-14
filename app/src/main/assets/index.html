@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#43cea2">
+  <meta name="description" content="Timers, clocks and quiet productivity tools.">
+  <style>
+    :root {
+      --brand: #185a9d;
+      --accent: #2bb673;
+      --ink: #0b2545;
+      --muted: #5b6b81;
+      --card: #ffffff;
+      --line: #e3ebf4;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f4f7fb;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+      padding-bottom: env(safe-area-inset-bottom);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------- header ---------- */
+
+    .top {
+      padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    }
+
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      color: #0b3f6e;
+    }
+
+    #lang {
+      appearance: none;
+      border: 1px solid rgba(24, 90, 157, 0.25);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 5px 8px;
+      max-width: 108px;
+    }
+
+    .search {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px 14px;
+      font-size: 16px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(11, 37, 69, 0.06);
+    }
+
+    .search::placeholder { color: #94a3b8; }
+    .search:focus {
+      outline: none;
+      border-color: #8ecdf3;
+      box-shadow: 0 0 0 3px rgba(142, 205, 243, 0.28);
+    }
+
+    /* ---------- content ---------- */
+
+    main {
+      padding: 14px 14px 8px;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0;
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .group { margin-bottom: 18px; }
+
+    .group h2 {
+      margin: 0 0 8px 2px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    @media (min-width: 620px) {
+      .grid { grid-template-columns: repeat(5, 1fr); }
+    }
+
+    .tool {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      padding: 12px 6px 10px;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      min-height: 88px;
+      transition: transform 0.08s ease, border-color 0.15s ease;
+    }
+
+    .tool:active {
+      transform: scale(0.96);
+      border-color: #bcd8ee;
+    }
+
+    .tool svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--brand);
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .tool .name {
+      font-size: 12.5px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .tool .hint {
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* recents */
+
+    .recents .grid { grid-template-columns: repeat(5, 1fr); }
+
+    .recents .tool {
+      min-height: 0;
+      padding: 9px 4px;
+      gap: 4px;
+      background: #eef7ff;
+      border-color: #d5e8f8;
+    }
+
+    .recents .tool .name { font-size: 11.5px; }
+
+    /* states */
+
+    .empty {
+      padding: 28px 8px 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    [hidden] { display: none !important; }
+
+    footer {
+      padding: 4px 16px calc(18px + env(safe-area-inset-bottom));
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--brand);
+      text-decoration: none;
+      margin: 0 6px;
+    }
+      /* Phones: 4 across instead of 3 so groups of 4 fit one row,
+       and drop the sub-labels so the whole launcher fits one screen. */
+    /* ---------- phones: 5 compact columns, whole launcher on one screen ---------- */
+
+    @media (max-width: 619px) {
+      .top { padding: calc(8px + env(safe-area-inset-top)) 12px 9px; }
+      .brand { font-size: 17px; }
+      #lang { font-size: 11px; padding: 4px 7px; max-width: 96px; }
+
+      .search { margin-top: 7px; padding: 8px 11px; font-size: 15px; border-radius: 10px; }
+
+      main { padding: clamp(6px, 1.4vh, 14px) 10px clamp(4px, 1vh, 10px); }
+      .group { margin-bottom: clamp(8px, 4.2vh, 34px); }
+      .group h2 { font-size: 10px; letter-spacing: 0.5px; margin: 0 0 clamp(3px, 0.6vh, 6px) 2px; }
+
+      .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; grid-auto-rows: 1fr; }
+      .recents .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+
+      /* Compact card: 20px icon + up to two 10px label lines = 56px tall.
+         Wider grid gap makes each card narrower without changing the column count. */
+      .tool {
+        min-height: 56px;
+        padding: 6px 2px 5px;
+        gap: 3px;
+        border-radius: 10px;
+        justify-content: center;
+        min-width: 0;
+      }
+      .tool svg { width: 20px; height: 20px; }
+      .tool .name { font-size: 10px; line-height: 1.1; overflow-wrap: break-word; }
+      .tool .hint { display: none; }
+
+      .recents .tool { padding: 5px 2px; gap: 2px; border-radius: 9px; }
+      .recents .tool svg { width: 16px; height: 16px; }
+      .recents .tool .name { font-size: 9.5px; }
+
+      footer { font-size: 11px; padding: 6px 0 8px; }
+    }
+
+
+    /* ---------- 320dp phones: 4 columns, tighter chrome, still one screen ---------- */
+
+    @media (max-width: 359px) {
+      .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .recents .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+      .top { padding: calc(6px + env(safe-area-inset-top)) 10px 7px; }
+      .brand { font-size: 16px; }
+      .search { margin-top: 6px; padding: 7px 10px; font-size: 14px; }
+
+      main { padding: 6px 8px 4px; }
+      .group { margin-bottom: 7px; }
+      .group h2 { margin-bottom: 3px; }
+
+      .tool { min-height: 52px; padding: 5px 2px 5px; gap: 3px; }
+      .tool svg { width: 19px; height: 19px; }
+      .tool .name { font-size: 9.5px; line-height: 1.1; }
+
+      .recents .tool { padding: 4px 2px; }
+      footer { font-size: 10.5px; padding: 4px 0 6px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- inline icon sprite: no icon font, no network -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-countdown" viewBox="0 0 24 24">
+      <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 2h6"/>
+    </symbol>
+    <symbol id="i-pomodoro" viewBox="0 0 24 24">
+      <circle cx="12" cy="13" r="8"/><circle cx="12" cy="13" r="3"/><path d="M12 5V2"/>
+    </symbol>
+    <symbol id="i-stopwatch" viewBox="0 0 24 24">
+      <circle cx="12" cy="14" r="7.5"/><path d="M12 10.5V14l2.5 2M10 2h4M12 2v4.5"/>
+    </symbol>
+    <symbol id="i-tasktimer" viewBox="0 0 24 24">
+      <path d="M7 3h10M7 21h10M8 3c0 4.5 8 4.5 8 9s-8 4.5-8 9M16 3c0 4.5-8 4.5-8 9s8 4.5 8 9"/>
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>
+    </symbol>
+    <symbol id="i-habit" viewBox="0 0 24 24">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8 12.5l3 3 5-6"/>
+    </symbol>
+    <symbol id="i-meeting" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3.3 2.5-5.5 5.5-5.5s5.5 2.2 5.5 5.5"/>
+      <path d="M16 6.2a3 3 0 0 1 0 5.6M17.5 14.8c2 .6 3.3 2.4 3.3 5.2"/>
+    </symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24">
+      <rect x="5" y="4.5" width="14" height="16.5" rx="2.5"/><path d="M9 4.5V3h6v1.5M9 10h6M9 14h4"/>
+    </symbol>
+    <symbol id="i-music" viewBox="0 0 24 24">
+      <path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>
+    </symbol>
+    <symbol id="i-notes" viewBox="0 0 24 24">
+      <path d="M6 3.5h9L19 8v12.5H6z"/><path d="M15 3.5V8h4M9 12h6M9 16h4"/>
+    </symbol>
+    <symbol id="i-password" viewBox="0 0 24 24">
+      <circle cx="8" cy="14" r="4"/><path d="M11 11l8-8M16.5 5.5l2 2M14 8l2 2"/>
+    </symbol>
+    <symbol id="i-currency" viewBox="0 0 24 24">
+      <path d="M4 8h13l-3-3M20 16H7l3 3"/><path d="M8.5 12h7"/>
+    </symbol>
+    <symbol id="i-unit" viewBox="0 0 24 24">
+      <rect x="2.5" y="8" width="19" height="8" rx="1.5" transform="rotate(-8 12 12)"/><path d="M7 9.2v3M11 8.6v4M15 8v3.4M19 7.4v3"/>
+    </symbol>
+    <symbol id="i-weather" viewBox="0 0 24 24">
+      <circle cx="8.5" cy="8.5" r="3"/><path d="M8.5 2v1.5M2 8.5h1.5M3.6 3.6l1 1M13.4 3.6l-1 1"/>
+      <path d="M8 18h9.5a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.4 1.2A3 3 0 0 0 8 18z"/>
+    </symbol>
+    <symbol id="i-world" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.3 3.6 8.5S14.4 18.1 12 20.5c-2.4-2.4-3.6-5.3-3.6-8.5S9.6 5.9 12 3.5z"/>
+    </symbol>
+  </svg>
+
+  <header class="top">
+    <div class="top-row">
+      <div class="brand">TimerHaven</div>
+      <select id="lang" aria-label="Language">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+        <option value="ru">Русский</option>
+        <option value="el">Ελληνικά</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
+    <input id="q" class="search" type="search" placeholder="Search tools" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" aria-label="Search tools">
+  </header>
+
+  <main>
+    <section id="recents" class="group recents" hidden>
+      <h2>Recent</h2>
+      <div class="grid" id="recent-grid"></div>
+    </section>
+
+    <section class="group" data-group>
+      <h2>Timers</h2>
+      <div class="grid">
+        <a class="tool" href="countdown-en.html" data-tool="countdown" data-name="Countdown" data-keywords="timer alarm deadline clock">
+          <svg aria-hidden="true"><use href="#i-countdown"/></svg>
+          <span class="name">Countdown</span>
+          <span class="hint">Time limit</span>
+        </a>
+        <a class="tool" href="pomodoro-en.html" data-tool="pomodoro" data-name="Pomodoro" data-keywords="focus 25 5 break session timer">
+          <svg aria-hidden="true"><use href="#i-pomodoro"/></svg>
+          <span class="name">Pomodoro</span>
+          <span class="hint">25 / 5 focus</span>
+        </a>
+        <a class="tool" href="stopwatch-en.html" data-tool="stopwatch" data-name="Stopwatch" data-keywords="elapsed lap count up timer">
+          <svg aria-hidden="true"><use href="#i-stopwatch"/></svg>
+          <span class="name">Stopwatch</span>
+          <span class="hint">Count up</span>
+        </a>
+        <a class="tool" href="timer-en.html" data-tool="timer" data-name="Task Timer" data-keywords="work break session log tasks timer">
+          <svg aria-hidden="true"><use href="#i-tasktimer"/></svg>
+          <span class="name">Task Timer</span>
+          <span class="hint">Log sessions</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="group" data-group>
+      <h2>Planning</h2>
+      <div class="grid">
+        <a class="tool" href="calendar-en.html" data-tool="calendar" data-name="Calendar" data-keywords="date month plan events">
+          <svg aria-hidden="true"><use href="#i-calendar"/></svg>
+          <span class="name">Calendar</span>
+          <span class="hint">Dates</span>
+        </a>
+        <a class="tool" href="habit-tracker-en.html" data-tool="habit-tracker" data-name="Habit Tracker" data-keywords="routine streak daily">
+          <svg aria-hidden="true"><use href="#i-habit"/></svg>
+          <span class="name">Habits</span>
+          <span class="hint">Streaks</span>
+        </a>
+        <a class="tool" href="meeting-planner-en.html" data-tool="meeting-planner" data-name="Meeting Planner" data-keywords="time zones schedule call team">
+          <svg aria-hidden="true"><use href="#i-meeting"/></svg>
+          <span class="name">Meeting</span>
+          <span class="hint">Time zones</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="group" data-group>
+      <h2>Focus</h2>
+      <div class="grid">
+        <a class="tool" href="clipboard-manager-en.html" data-tool="clipboard-manager" data-name="Clipboard Manager" data-keywords="copy paste snippets text">
+          <svg aria-hidden="true"><use href="#i-clipboard"/></svg>
+          <span class="name">Clipboard</span>
+          <span class="hint">Snippets</span>
+        </a>
+        <a class="tool" href="focus-music-en.html" data-tool="focus-music" data-name="Focus Music" data-keywords="sounds concentration ambient noise">
+          <svg aria-hidden="true"><use href="#i-music"/></svg>
+          <span class="name">Focus Music</span>
+          <span class="hint">Sounds</span>
+        </a>
+        <a class="tool" href="notes-en.html" data-tool="notes" data-name="Notes" data-keywords="write list ideas scratch">
+          <svg aria-hidden="true"><use href="#i-notes"/></svg>
+          <span class="name">Notes</span>
+          <span class="hint">Quick notes</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="group" data-group>
+      <h2>Utilities</h2>
+      <div class="grid">
+        <a class="tool" href="currency-en.html" data-tool="currency" data-name="Currency Converter" data-keywords="exchange rate money dollar euro">
+          <svg aria-hidden="true"><use href="#i-currency"/></svg>
+          <span class="name">Currency</span>
+          <span class="hint">Rates</span>
+        </a>
+        <a class="tool" href="password-generator-en.html" data-tool="password-generator" data-name="Password Generator" data-keywords="secure key random passphrase">
+          <svg aria-hidden="true"><use href="#i-password"/></svg>
+          <span class="name">Passwords</span>
+          <span class="hint">Generate</span>
+        </a>
+        <a class="tool" href="unit-converter-en.html" data-tool="unit-converter" data-name="Unit Converter" data-keywords="convert length weight temperature metric">
+          <svg aria-hidden="true"><use href="#i-unit"/></svg>
+          <span class="name">Units</span>
+          <span class="hint">Convert</span>
+        </a>
+        <a class="tool" href="weather-en.html" data-tool="weather" data-name="Weather" data-keywords="forecast temperature city rain">
+          <svg aria-hidden="true"><use href="#i-weather"/></svg>
+          <span class="name">Weather</span>
+          <span class="hint">Forecast</span>
+        </a>
+        <a class="tool" href="world-clock-en.html" data-tool="world-clock" data-name="World Clock" data-keywords="time zone cities gmt utc">
+          <svg aria-hidden="true"><use href="#i-world"/></svg>
+          <span class="name">World Clock</span>
+          <span class="hint">Time zones</span>
+        </a>
+      </div>
+    </section>
+
+    <p id="empty" class="empty" hidden></p>
+  </main>
+
+  <footer>
+    <a href="privacy.html">Privacy</a>
+    <a href="contact.html">Contact</a>
+  </footer>
+
+  <script>
+    (function () {
+      var LANGS = ['en', 'fr', 'es', 'de', 'ru', 'el', 'ar'];
+      var RECENT_KEY = 'timerhaven.recent';
+      var LANG_KEY = 'timerhavenLang';
+      var MAX_RECENT = 4;
+
+      var input = document.getElementById('q');
+      var empty = document.getElementById('empty');
+      var langSelect = document.getElementById('lang');
+      var recentsSection = document.getElementById('recents');
+      var recentGrid = document.getElementById('recent-grid');
+      var tiles = Array.prototype.slice.call(document.querySelectorAll('a.tool[data-tool]'));
+      var groups = Array.prototype.slice.call(document.querySelectorAll('[data-group]'));
+
+      function read(key, fallback) {
+        try {
+          var raw = localStorage.getItem(key);
+          return raw === null ? fallback : raw;
+        } catch (e) { return fallback; }
+      }
+
+      function write(key, value) {
+        try { localStorage.setItem(key, value); } catch (e) {}
+      }
+
+      function currentLang() {
+        var stored = read(LANG_KEY, '');
+        if (LANGS.indexOf(stored) !== -1) return stored;
+        var device = (navigator.language || 'en').slice(0, 2).toLowerCase();
+        return LANGS.indexOf(device) !== -1 ? device : 'en';
+      }
+
+      function rewriteLinks(lang) {
+        tiles.forEach(function (tile) {
+          tile.setAttribute('href', tile.getAttribute('data-tool') + '-' + lang + '.html');
+        });
+        document.documentElement.lang = lang;
+        langSelect.value = lang;
+      }
+
+      function toolById(id) {
+        for (var i = 0; i < tiles.length; i++) {
+          if (tiles[i].getAttribute('data-tool') === id) return tiles[i];
+        }
+        return null;
+      }
+
+      function recentIds() {
+        var raw = read(RECENT_KEY, '[]');
+        try {
+          var parsed = JSON.parse(raw);
+          return Array.isArray(parsed) ? parsed.filter(function (id) { return !!toolById(id); }) : [];
+        } catch (e) { return []; }
+      }
+
+      function renderRecents() {
+        var ids = recentIds();
+        recentGrid.innerHTML = '';
+        if (!ids.length) {
+          recentsSection.hidden = true;
+          return;
+        }
+        ids.slice(0, MAX_RECENT).forEach(function (id) {
+          var tile = toolById(id);
+          if (!tile) return;
+          var clone = tile.cloneNode(true);
+          clone.querySelectorAll('.hint').forEach(function (el) { el.remove(); });
+          recentGrid.appendChild(clone);
+        });
+        recentsSection.hidden = false;
+      }
+
+      function remember(id) {
+        var ids = recentIds().filter(function (existing) { return existing !== id; });
+        ids.unshift(id);
+        write(RECENT_KEY, JSON.stringify(ids.slice(0, MAX_RECENT)));
+      }
+
+      function filter() {
+        var query = input.value.trim().toLowerCase();
+        var visible = 0;
+
+        tiles.forEach(function (tile) {
+          var haystack = (tile.getAttribute('data-name') + ' ' + tile.getAttribute('data-keywords')).toLowerCase();
+          var match = !query || haystack.indexOf(query) !== -1;
+          tile.hidden = !match;
+          if (match) visible++;
+        });
+
+        groups.forEach(function (group) {
+          var shown = group.querySelectorAll('a.tool:not([hidden])').length;
+          group.hidden = shown === 0;
+        });
+
+        // Recents are a shortcut, not a search result: hide them while typing.
+        if (query) {
+          recentsSection.hidden = true;
+        } else {
+          renderRecents();
+        }
+
+        if (query && visible === 0) {
+          empty.hidden = false;
+          empty.textContent = 'No tool matches \u201C' + input.value.trim() + '\u201D.';
+        } else {
+          empty.hidden = true;
+        }
+      }
+
+      document.addEventListener('click', function (event) {
+        var tile = event.target.closest ? event.target.closest('a.tool[data-tool]') : null;
+        if (tile) remember(tile.getAttribute('data-tool'));
+      }, true);
+
+      langSelect.addEventListener('change', function () {
+        var lang = LANGS.indexOf(langSelect.value) !== -1 ? langSelect.value : 'en';
+        write(LANG_KEY, lang);
+        rewriteLinks(lang);
+        renderRecents();
+      });
+
+      input.addEventListener('input', filter);
+      input.addEventListener('search', filter);
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') { input.value = ''; filter(); }
+      });
+
+      rewriteLinks(currentLang());
+      renderRecents();
+      filter();
+    })();
+  </script>
+</body>
+</html>

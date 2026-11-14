@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Local Version: External trackers removed -->
+
+  <meta charset="UTF-8">
+  <title>Notes — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Take quick notes and organize your thoughts. Learn how to use Notes, get productivity tips, FAQs, and read expert articles.">
+  <meta name="author" content="Serge Shammas">
+  <meta name="datePublished" content="2026-01-08">
+  <meta name="dateModified" content="2026-01-08">
+  <!-- External CDN dependencies removed -->
+  <link rel="canonical" href="https://timerhaven.com/notes-en.html" />
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/notes-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/notes-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/notes-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/notes-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/notes-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/notes-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/notes-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/notes-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Notes — TimerHaven">
+  <meta property="og:description" content="Boost your productivity with our free Notes. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/notes-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/notes-en.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Notes — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Notes to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/notes-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <link rel="stylesheet" href="assets/newsletter.css">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Notes — Capture and organize quick thoughts",
+    "description":"Notes tool for quick capture and simple organization; stores notes locally in the browser. Includes tips for taking actionable notes.",
+    "author":{"@type":"Person","name":"Serge Shammas","url":"https://timerhaven.com/authors/serge-shammas"},
+    "datePublished":"2026-01-08",
+    "dateModified":"2026-01-08",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://timerhaven.com/notes-en.html"}
+  }
+  </script>
+  <style>
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      min-height: 90vh;
+      box-sizing: border-box;
+    }
+
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #e0e7ef;
+      width: 420px;
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--brand, #0d6efd) !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .4rem 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: #185a9d;
+    }
+
+
+    .notes-form {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    .notes-list {
+      margin-bottom: 1rem;
+    }
+
+    .note-item {
+      background: #f7fafc;
+      border-radius: 7px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .note-meta {
+      font-size: 0.9em;
+      color: #888;
+      margin-right: 1em;
+    }
+
+    .note-pinned {
+      font-weight: 700;
+      color: #185a9d;
+      margin-right: 0.6em;
+    }
+
+    .faq-section {
+      margin-top: 1.1rem;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+
+    .faq-section summary {
+      font-weight: 700;
+      font-size: 1.02rem;
+      cursor: pointer;
+    }
+
+    .mobile-summary {
+      display: none;
+      margin-bottom: .6rem;
+      color: #51606b;
+      font-size: .95rem;
+    }
+
+    @media (max-width:520px) {
+      .mobile-summary {
+        display: block;
+      }
+
+      .notes-section {
+        order: 1;
+      }
+
+      .tool-intro {
+        order: 2;
+      }
+
+      .tool-intro p {
+        display: none;
+      }
+
+      .tool-card {
+        width: 94vw;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width:900px) {
+      .tool-card {
+        width: 98vw;
+        padding: 1rem;
+      }
+    }
+
+    /* Basic Bootstrap Button Fallbacks */
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      border: 1px solid transparent;
+      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      text-decoration: none;
+    }
+
+    .btn-success {
+      color: #fff;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-outline-info {
+      color: #17a2b8;
+      border-color: #17a2b8;
+      background-color: transparent;
+    }
+
+    .btn-outline-secondary {
+      color: #6c757d;
+      border-color: #6c757d;
+      background-color: transparent;
+    }
+
+    .btn-outline-danger {
+      color: #dc3545;
+      border-color: #dc3545;
+      background-color: transparent;
+    }
+
+    .btn-sm {
+      padding: .25rem .5rem;
+      font-size: .875rem;
+      border-radius: .2rem;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+    }
+  </style>
+  <script>
+  </script>
+</head>
+
+<body>
+  <main class="main-container" role="main">
+    <section class="tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link"
+        onclick="window.location.href='index.html'; return false;">&larr; Back to Main Menu</a>
+      <h3 id="tool-title" class="tool-title">📝 Notes</h3>
+      <div class="tool-intro" id="tool-help" data-preserve="true"
+        style="margin-top:.6rem;margin-bottom:.9rem;color:#374151;line-height:1.45;">
+        <p>Take quick notes and organize your thoughts locally.</p>
+      </div>
+      <div class="notes-section">
+        <form class="notes-form" id="notesForm">
+          <input type="text" id="noteInput" class="form-control" placeholder="Type your note..."
+            style="max-width:220px;">
+          <button type="submit" id="addNoteBtn" class="btn btn-success btn-sm">Add Note</button>
+        </form>
+        <div id="notesList" class="notes-list"></div>
+      </div>
+    </section>
+    <!-- Newsletter Signup Removed -->
+  </main>
+  <script>
+    window.onerror = function (msg, url, line) {
+      console.error('JS Error: ' + msg + ' @ ' + line);
+      return false;
+    };
+    // Safe storage wrappers
+    function safeSet(key, value) {
+      try {
+        localStorage.setItem(key, value);
+        return true;
+      } catch (e) {
+        console.error('Storage Save Error', e);
+        return false;
+      }
+    }
+    function safeGet(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        console.error('Storage Read Error', e);
+        return null;
+      }
+    }
+    function $id(id) { return document.getElementById(id); }
+    // Load notes
+    var notes = [];
+    try {
+      const saved = safeGet('notesData');
+      if (saved) notes = JSON.parse(saved);
+    } catch (e) {
+      notes = [];
+    }
+    if (!Array.isArray(notes)) notes = [];
+    // Assign IDs to legacy notes
+    notes.forEach(function (n) { if (!n.id) n.id = 'note_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now(); });
+    function saveNotes() {
+      safeSet('notesData', JSON.stringify(notes));
+      requestAnimationFrame(function () {
+        renderNotes();
+      });
+    }
+    // Fixed escapeHtml (no replaceAll for old browsers)
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function renderNotes() {
+      var list = $id('notesList');
+      if (!list) return;
+      list.innerHTML = '';
+      if (!notes || notes.length === 0) {
+        list.innerHTML = '<div style="color:#888;">No notes yet.</div>';
+        return;
+      }
+      notes.forEach(function (note, idx) {
+        var pinned = note.pinned ? '<span class="note-pinned">📌</span>' : '';
+        var div = document.createElement('div');
+        div.className = 'note-item';
+        div.innerHTML = '<div style="display:flex;align-items:center;gap:.6rem;">' + pinned + '<span>' + escapeHtml(note.text) + '</span></div>' +
+          '<div style="display:flex;align-items:center;gap:.5rem;">' +
+          '<span class="note-meta">' + escapeHtml(note.date) + '</span>' +
+          '<button class="btn btn-outline-' + (note.pinned ? 'secondary' : 'info') + ' btn-sm" onclick="pinNote(' + idx + ')" title="Pin/unpin">📌</button>' +
+          '<button class="btn btn-outline-danger btn-sm" onclick="deleteNote(' + idx + ')">🗑</button>' +
+          '</div>';
+        list.appendChild(div);
+      });
+    }
+    window.addNote = function () {
+      var input = document.getElementById('noteInput');
+      if (!input) return;
+      var text = input.value.trim();
+      if (!text) return;
+      try {
+        var newNote = {
+          id: 'note_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          text: text,
+          date: new Date().toLocaleString(),
+          pinned: false,
+          updatedAt: Date.now()
+        };
+        notes.unshift(newNote);
+        // Clear input BEFORE async render
+        input.value = '';
+        input.defaultValue = '';
+        saveNotes();
+        if (window.SyncManager && window.SyncManager.isAvailable()) {
+          try {
+            window.SyncManager.saveNote(newNote.id, "", newNote.text);
+          } catch (e) { }
+        }
+      } catch (e) {
+        console.error('Error adding note', e);
+      }
+    };
+    var frm = $id('notesForm');
+    if (frm) {
+      frm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        window.addNote();
+      });
+    }
+    window.deleteNote = function (idx) {
+      var removed = notes.splice(idx, 1)[0];
+      saveNotes();
+      if (removed && removed.id && window.SyncManager && window.SyncManager.isAvailable()) {
+        try {
+          window.SyncManager.deleteNote(removed.id);
+        } catch (e) { }
+      }
+      requestAnimationFrame(function () {
+        renderNotes();
+      });
+    }
+    window.pinNote = function (idx) {
+      if (!notes[idx]) return;
+      notes[idx].pinned = !notes[idx].pinned;
+      notes[idx].updatedAt = Date.now();
+      if (notes[idx].pinned) {
+        var pinnedNote = notes.splice(idx, 1)[0];
+        notes.unshift(pinnedNote);
+      }
+      saveNotes();
+      if (window.SyncManager && window.SyncManager.isAvailable()) {
+        var n = notes.find(function (n) { return n === (pinnedNote || notes[idx]); }); // Find the note we just toggled
+        if (n) SyncManager.saveNote(n.id, "", n.text);
+      }
+      renderNotes();
+    }
+    // initial render
+    renderNotes();
+    // Cloud Sync Listeners
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.notes) {
+        let changed = false;
+        cloudData.notes.forEach(cloudNote => {
+          const existing = notes.find(n => n.id === cloudNote.id);
+          if (!existing) {
+            notes.push({
+              id: cloudNote.id,
+              text: cloudNote.content,
+              date: new Date(cloudNote.updatedAt || Date.now()).toLocaleString(),
+              pinned: false,
+              updatedAt: cloudNote.updatedAt
+            });
+            changed = true;
+          } else if ((cloudNote.updatedAt || 0) > (existing.updatedAt || 0)) {
+            existing.text = cloudNote.content;
+            existing.updatedAt = cloudNote.updatedAt;
+            changed = true;
+          }
+        });
+        if (changed) {
+          saveNotes();
+          renderNotes();
+        }
+      }
+    });
+    window.addEventListener('timerhaven:cloudDataChanged', function () {
+      if (SyncManager.isAvailable()) SyncManager.initialize();
+    });
+  </script>
+<!-- External JS dependencies removed -->
+</body>
+
+</html>

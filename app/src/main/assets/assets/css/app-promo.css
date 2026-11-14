@@ -1,0 +1,102 @@
+/* Premium App Promotion & Banner Styles */
+.app-promo-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #185a9d 0%, #43cea2 100%);
+    color: #fff;
+    padding: 12px 20px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 1000;
+}
+.app-promo-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.app-promo-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.app-promo-text h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.app-promo-text p {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+.app-promo-actions {
+    display: flex;
+    gap: 10px;
+}
+.btn-app-store {
+    background: #000;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s, background 0.2s;
+}
+.btn-app-store:hover {
+    transform: translateY(-2px);
+    background: #222;
+    color: #fff;
+}
+/* Tool Toolbar Sharing & App Buttons */
+.tool-top-actions .btn.share {
+    background: #6c757d;
+    color: #fff;
+}
+.tool-top-actions .btn.get-app {
+    background: #185a9d;
+    color: #fff;
+    font-weight: 700;
+}
+/* Hero Section App Promo (for homepage) */
+.hero-app-promo {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    text-align: center;
+    border: 1px solid #eef2f6;
+}
+.hero-app-promo h2 {
+    color: #185a9d;
+    margin-bottom: 1rem;
+}
+.hero-app-visuals {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 1.5rem 0;
+}
+.hero-app-visuals img {
+    max-width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+@media (max-width: 768px) {
+    .app-promo-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    .app-promo-content {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

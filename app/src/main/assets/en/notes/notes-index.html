@@ -1,0 +1,493 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+
+  <meta charset="utf-8">
+  <title>Notes — Practical Guide to Taking Actionable Notes | TimerHaven</title>
+  <meta name="description"
+    content="How to use Notes effectively with Pomodoro and Task Timer workflows. Includes step-by-step HowTo, the PARA method, neuroscience-backed tips, and structured data.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="https://timerhaven.com/en/notes/notes-index.html">
+  <meta name="author" content="Serge Shammas">
+  
+  
+  
+  
+  
+  
+  
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"HowTo",
+        "name":"Capture, tag and act on notes with TimerHaven Notes",
+        "description":"A practical workflow to capture quick notes, tag them for context, convert actionable items into tasks, and review weekly using Pomodoro and Task Timer workflows.",
+        "image":"https://timerhaven.com/assets/images/notes-snapshot.png",
+        "totalTime":"PT30M",
+        "supply":["TimerHaven Notes","Pomodoro timer (TimerHaven)","Spreadsheet (optional)"],
+        "step":[
+          {"@type":"HowToStep","name":"Capture a concise note","text":"Create a note with a one-line title and 24 bullets describing the idea, context, or steps."},
+          {"@type":"HowToStep","name":"Tag and prioritize","text":"Add a short context tag and a priority marker; mark as actionable if it must be done soon."},
+          {"@type":"HowToStep","name":"Convert to a task or schedule","text":"If the note requires work, convert it into a Task Timer entry or calendar event and attach the note ID for context."},
+          {"@type":"HowToStep","name":"Review regularly","text":"Triage notes daily for quick actions and run a weekly review to process remaining items."}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "mainEntity":[
+          {"@type":"Question","name":"Are Notes stored locally or in the cloud?","acceptedAnswer":{"@type":"Answer","text":"By default notes are stored locally in your browser for maximum privacy. You can export notes to a file for backup or sync with another device manually."}},
+          {"@type":"Question","name":"How often should I review notes?","acceptedAnswer":{"@type":"Answer","text":"A brief daily triage (510 minutes) keeps items actionable, and a weekly deep review (1530 minutes) is ideal for processing and planning."}},
+          {"@type":"Question","name":"Can I use Notes with Pomodoro?","acceptedAnswer":{"@type":"Answer","text":"Yespick a single note as your Pomodoro goal before starting a Pomodoro session and use breaks to log progress or convert bullets into tasks."}}
+        ]
+      },
+      {"@type":"Person","name":"Serge Shammas","image":"https://timerhaven.com/images/Serge.jpg","url":"https://timerhaven.com/authors/serge-shammas"}
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --brand-dark: #09507a;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff;
+      --link-blue: #0d6efd
+    }
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: #102a43;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+    h1 {
+      color: var(--brand);
+      margin-top: 0;
+      font-size: 1.8rem;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+    .lead {
+      font-size: 1.05rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .section {
+      margin-top: 2rem;
+    }
+    .workflow {
+      background: #fff7f0;
+      border-left: 4px solid #ffd1a7;
+      padding: 0.9rem;
+      border-radius: 8px;
+      margin-bottom: 0.9rem;
+    }
+    .cta {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      background: var(--brand);
+      color: #fff;
+      text-decoration: none;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .author img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    pre.template {
+      background: #f3f7fb;
+      padding: 0.75rem;
+      border-radius: 6px;
+      overflow: auto;
+    }
+    nav.toc {
+      margin: 0.75rem 0;
+      padding: 0.5rem 0;
+      border-left: 3px solid #eef5fb;
+    }
+    nav.toc a {
+      display: inline-block;
+      margin-right: 1rem;
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--link-blue) !important;
+      text-decoration: none;
+      font-weight: 700
+    }
+    .back-link:hover {
+      text-decoration: underline
+    }
+    /* Floating return-to-tool button (shared pattern) */
+    .return-to-tool {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      z-index: 2147483647;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #2faaff, #0b63a0);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 18px 40px rgba(3, 56, 102, 0.22);
+      cursor: pointer;
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .return-to-tool:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 50px rgba(3, 56, 102, 0.3);
+      color: #fff;
+      text-decoration: none;
+    }
+    .return-to-tool .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 18px;
+      flex: 0 0 44px;
+    }
+    .return-to-tool .label {
+      font-size: 16px;
+      line-height: 1;
+      white-space: nowrap;
+      padding-right: 6px;
+    }
+    @media (max-width:520px) {
+      .card {
+        padding: 1rem
+      }
+      .return-to-tool .label {
+        display: none;
+      }
+      .return-to-tool {
+        padding: 8px;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../../assets/css/app-promo.css">
+  <script>window.__timerhaven_ad_client = "ca-pub-0467059729557007";</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007"
+    crossorigin="anonymous"></script>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Notes — Practical Guide to Taking Actionable Notes | TimerHaven">
+  <meta property="og:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta property="og:image" content="https://timerhaven.com/images/social-banner.png">
+  <meta property="og:url" content="https://timerhaven.com/en/notes/notes-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Notes — Practical Guide to Taking Actionable Notes | TimerHaven">
+  <meta name="twitter:description" content="Master your focus with TimerHaven's free productivity tools.">
+  <meta name="twitter:image" content="https://timerhaven.com/images/social-banner.png">
+</head>
+<body>
+  <div class="app-promo-banner" id="smart-app-banner">
+    <div class="app-promo-content">
+      <img src="https://timerhaven.com/social-share-image.png" alt="TimerHaven Icon" class="app-promo-icon">
+      <div class="app-promo-text">
+        <h4>TimerHaven: Focus & Tools</h4>
+        <p>Get the best experience on our mobile app</p>
+      </div>
+    </div>
+    <div class="app-promo-actions">
+      <a href="https://play.google.com/store/apps/details?id=com.sergenet.TimerHavenApp" class="btn-app-store">
+        <i class="fab fa-google-play"></i> Google Play
+      </a>
+      <button onclick="document.getElementById('smart-app-banner').style.display='none'" class="btn btn-sm text-white">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <a href="/" class="back-link" id="back-link">&larr;&nbsp;Back to Main Menu</a>
+      <h1 id="title">Notes — Capture, Tag, and Turn Ideas into Work</h1>
+      <div class="author" role="articleauthor" aria-label="Article author">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x"
+          width="56" height="56" alt="Serge Shammas" loading="lazy">
+        <div>
+          <div class="byline"><strong>By Serge Shammas ·</strong> productivity writer and UX researcher</div>
+          <div class="meta">Published: 2025-10-22 · Last updated: 2026-02-09 · Reading time: 2025 min</div>
+        </div>
+      </div>
+      <p class="lead">At its core, professional note-taking isn't about storageit's about <strong>retrieval and
+          action</strong>. In an age of information overload, the value of your notes is determined by how quickly they
+        can be converted into meaningful progress.</p>
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#why">Why notes matter</a>
+        <a href="#neuroscience">Neuroscience of Capture</a>
+        <a href="#capture">Capture best practices</a>
+        <a href="#para">The PARA Method</a>
+        <a href="#structure">Structure & tags</a>
+        <a href="#workflows">Workflows & Systems</a>
+        <a href="#linking">Linking to Tools</a>
+        <a href="#review">Daily & weekly review</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section id="why" class="section">
+        <h2>Why most note-taking systems fail</h2>
+        <p>Most people treat their notes like a "digital junk drawer." They capture scraps of information without
+          context, assuming they will remember the significance later. This leads to <strong>Note Fatigue</strong>,
+          where the sheer volume of unorganized data prevents you from ever looking back.</p>
+        <p>A high-performance note-taking system focuses on the <em>relationship</em> between an idea and a task. Every
+          note should serve as the "scaffolding" for a future focus session. If a note doesn't lead to an action, it is
+          merely trivia.</p>
+        <p>The goal of professional note-taking is to reduce the <strong>Activation Energy</strong> required to start a
+          project. By having your research, steps, and context ready in a concise note, you can skip the "blank page"
+          paralysis and jump straight into execution.</p>
+      </section>
+      <section id="neuroscience" class="section">
+        <h2>The Neuroscience of "External Brain" Capture</h2>
+        <p>Our brains are evolved for having ideas, not for storing them. The <strong>Zeigarnik Effect</strong> suggests
+          that our minds will loop indefinitely on an incomplete task until it is externalized. By capturing a note, you
+          effectively "close the loop" in your subconscious, freeing up significant cognitive bandwidth for focus.</p>
+        <p>TimerHaven Notes is designed for this "capture first" mentality. By using a lightweight, browser-based tool,
+          you can externalize a thought in seconds, preventing it from cluttering your working memory during deep work
+          sessions.</p>
+        <p>Think of your notes as an extension of your prefrontal cortex. By offloading data to an external system, you
+          reserve your brain's processing power for complex problem-solving and creative synthesis.</p>
+      </section>
+      <section id="capture" class="section">
+        <h2>Capture  Fast, Focused, Minimal</h2>
+        <div class="workflow">
+          <strong>The "Action-Oriented" Checklist</strong>
+          <ol>
+            <li><strong>Outcome-Based Titles:</strong> Don't write "Notes from meeting." Write "Decisions: Project Alpha
+              - Marketing Pivot."</li>
+            <li><strong>The "Three Bullet" Rule:</strong> Summarize context in three bullets. If a note requires more
+              than five, it should probably be a separate document or project.</li>
+            <li><strong>The Searchable Tag:</strong> Use tags to indicate <em>mode</em>, not just topic. #waiting
+              represents blocked work; #research represents passive consumption.</li>
+          </ol>
+        </div>
+        <p>The key to effective capture is speed. If the tool takes too long to load or requires too many clicks to
+          start typing, you will lose the thought. TimerHaven Notes prioritizes immediate entry over complex
+          formatting.</p>
+      </section>
+      <section id="para" class="section">
+        <h2>Organizing with the PARA Method</h2>
+        <p>To keep your notes from becoming overwhelming, we suggest implementing the <strong>PARA Method</strong>
+          (developed by Tiago Forte):</p>
+        <ul>
+          <li><strong>Projects:</strong> Active notes with a specific deadline (e.g., "Build new landing page").</li>
+          <li><strong>Areas:</strong> Long-term responsibilities (e.g., "Health," "Finances," "SEO").</li>
+          <li><strong>Resources:</strong> Topics of ongoing interest (e.g., "Note-taking theory," "CSS Best Practices").
+          </li>
+          <li><strong>Archives:</strong> Completed projects or inactive areas.</li>
+        </ul>
+        <p>By tagging your notes with #projects or #areas, you can instantly filter your archive to see only what is
+          relevant to your current focus. This "Just-In-Time" organization is a pillar of
+          <strong><a href="../blog/building-a-second-brain.html">Building a Second Brain</a></strong>.
+        </p>
+      </section>
+      <section id="structure" class="section">
+        <h2>Structure & Tags  Keeping Notes Searchable</h2>
+        <p>A consistent naming and tagging convention transforms notes from noise into a searchable knowledge base. Use
+          short, predictable tags and avoid free-form long tags that vary in punctuation or spelling.</p>
+        <table class="table table-striped mt-3" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+              <th style="padding: 0.75rem; text-align: left;">Tag</th>
+              <th style="padding: 0.75rem; text-align: left;">Usage Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 0.75rem;"><strong>#task</strong></td>
+              <td style="padding: 0.75rem;">Requires immediate action or scheduling in the next 48 hours.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 0.75rem;"><strong>#ref</strong></td>
+              <td style="padding: 0.75rem;">Pure reference material (manuals, quotes, facts) for later lookup.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 0.75rem;"><strong>#someday</strong></td>
+              <td style="padding: 0.75rem;">Aspirational ideas you might explore in a future quarter.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+              <td style="padding: 0.75rem;"><strong>#waiting</strong></td>
+              <td style="padding: 0.75rem;">Blocked items where you are waiting for a external response.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="workflows" class="section">
+        <h2>Workflows: The "Digital Gardening" Approach</h2>
+        <p>Think of your notes as a garden that needs tending. Notes should grow and change over time. As you learn more
+          about a topic, update your #research notes. When a #task is completed, add a "Lessons Learned" section before
+          archiving it.</p>
+        <p>This approach, often called <strong>Progressive Summarization</strong>, involves bolding the most important
+          sentences in a note, then highlighting the "best of the best," and finally creating a 1-paragraph summary.
+          This makes the note valuable for your "Future Self" who will only have 30 seconds to re-read it.</p>
+      </section>
+      <section id="linking" class="section">
+        <h2>Interconnecting Your Productivity Tools</h2>
+        <p>The most powerful use of TimerHaven Notes is as a primer for the <strong>Task Timer</strong> and
+          <strong>Pomodoro Timer</strong>. Before starting a timed session, review the relevant note. This ensures you
+          aren't starting from a blank slate, reducing the friction of "getting started."
+        </p>
+        <p>When you finish a Pomodoro session, use the 5-minute break to quickly log a note about what you achieved.
+          This "Interstitial Journaling" provides a clear trail of progress and makes your weekly review a breeze.</p>
+      </section>
+      <section id="review" class="section">
+        <h2>Triage: The Secret to Long-Term Utility</h2>
+        <p>Without regular review, even the best system will decay. We recommend a two-tier review process:</p>
+        <ul>
+          <li><strong>Daily Triage (5 mins):</strong> Scan new notes. Are they understandable Are they tagged If it
+            takes less than 2 minutes to act on, do it now. If it's a larger task, schedule it on your <a
+              href="/calendar-en.html">Calendar</a>.</li>
+          <li><strong>Weekly Review (20 mins):</strong> The most important habit. Go through your #projects. Are they
+            moving forward Move completed items to #archives. This ensures your active list stays lean and motivating.
+            Master this process with our <strong><a href="../blog/art-of-the-review.html">Art of the Review</a></strong>
+            guide.
+          </li>
+        </ul>
+        <p>During your weekly review, ask yourself: "What notes no longer serve me?" Be ruthless in archiving or
+          deleting clutter. A smaller, high-signal system is infinitely more valuable than a massive, noisy one.</p>
+      </section>
+      <section id="faq" class="section">
+        <h2>Frequently asked questions</h2>
+        <div class="muted">
+          <p><strong>Q: Is digital note-taking better than paper</strong><br><strong>A:</strong> Digital wins for
+            retrieval and searchability; however, paper is often better for initial ideation. We recommend "Paper to
+            digital" capture: sketch on paper, then summarize the outcome in TimerHaven Notes for long-term storage and
+            action.</p>
+          <p><strong>Q: How do I handle very long research notes</strong><br><strong>A:</strong> Don't. High-volume
+            research should be summarized into "Atomic Notes"small, single-concept notes that are easier to reference
+            and link to specific tasks. If you have 10 pages of PDF highlights, convert them into 10 separate Atomic
+            Notes.</p>
+          <p><strong>Q: Can I share my notes</strong><br><strong>A:</strong> Since TimerHaven stores metadata locally
+            for privacy, sharing is best done by Exporting to TXT and sending the file, or copy-pasting into a
+            collaborative document like Notion or Google Docs.</p>
+        </div>
+      </section>
+      <p class="muted" style="margin-top:2rem;">Related tools: <a href="/pomodoro-en.html">Pomodoro Timer</a>  <a
+          href="/timer-en.html#startBtn">Task Timer</a>  <a href="/calendar-en.html">Calendar Planner</a></p>
+      <p style="margin-top:1.5rem;"><a href="/notes-en.html" class="cta" aria-label="Open Notes tool">Open Notes
+          tool</a></p>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="https://ko-fi.com/sergenet" target="_blank" rel="noopener"
+          style="color: var(--muted); text-decoration: none; font-size: 0.9rem;">
+          <i class="fa fa-coffee"></i> Support TimerHaven on Ko-fi
+        </a>
+      </div>
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>&copy; 2026 TimerHaven. All tools are free and privacy-friendly.<br>
+          Questions or feedback Contact us at <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Read
+          our <a href="/privacy.html">Privacy Policy</a>.</p>
+      </footer>
+    </article>
+  
+    
+    <div class="author-card" style="margin-top: 3rem; background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 1.5rem; align-items: center; border: 1px solid #e2e8f0;">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" alt="Serge Shammas" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #43cea2;">
+        <div class="author-info">
+            <div style="font-weight: 700; color: #185a9d; font-size: 1.2rem;">Serge Shammas</div>
+            <p style="margin: 0.25rem 0 0 0; color: #64748b; font-size: 0.95rem; line-height: 1.5;">Productivity enthusiast and developer of TimerHaven. Follow my journey in mastering focus with simple, free systems.</p>
+        </div>
+    </div>
+    <section class="related-articles" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #eee;">
+        <h3 style="color: #185a9d; margin-bottom: 1.5rem;">Deep Dive Productivity Articles</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;"><a href="../blog/building-a-second-brain.html" style="color: #185a9d; text-decoration: none;">Building a Second Brain (BASB)</a></h4>
+                <p style="font-size: 0.9rem; color: #64748b; margin: 0;">Explore the science and systems behind this tool.</p>
+                <a href="../blog/building-a-second-brain.html" style="display: inline-block; margin-top: 1rem; font-weight: 700; color: #43cea2; text-decoration: none; font-size: 0.9rem;">Read Article &rarr;</a>
+            </div>
+            <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem;"><a href="../blog/digital-minimalism-guide.html" style="color: #185a9d; text-decoration: none;">Digital Minimalism: Reclaiming Attention</a></h4>
+                <p style="font-size: 0.9rem; color: #64748b; margin: 0;">Explore the science and systems behind this tool.</p>
+                <a href="../blog/digital-minimalism-guide.html" style="display: inline-block; margin-top: 1rem; font-weight: 700; color: #43cea2; text-decoration: none; font-size: 0.9rem;">Read Article &rarr;</a>
+            </div>
+        </div>
+    </section>
+</main>
+  <!-- Floating pill button -->
+  <a href="/notes-en.html" class="return-to-tool" role="button" aria-label="Back to Notes">
+    <span class="icon" aria-hidden="true">↩</span>
+    <span class="label">Back to Notes</span>
+  </a>
+  <script>
+    (function () {
+      try {
+        var pill = document.querySelector('.return-to-tool');
+        if (!pill) return;
+        if (!pill.hasAttribute('tabindex')) pill.setAttribute('tabindex', '0');
+        pill.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pill.click(); }
+        });
+        try {
+          var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+          if (!mq || !mq.matches) {
+            pill.style.opacity = '0';
+            pill.style.transform = 'translateY(15px)';
+            window.addEventListener('load', function () {
+              setTimeout(function () {
+                pill.style.transition = 'transform .4s cubic-bezier(.2,.9,.2,1.2), opacity .3s ease';
+                pill.style.opacity = '1';
+                pill.style.transform = 'translateY(0)';
+              }, 200);
+            });
+          }
+        } catch (e) { }
+      } catch (err) { }
+    })();
+  </script>
+</body>
+</html>

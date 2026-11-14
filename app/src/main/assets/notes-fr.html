@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-X7WBE4P25');
+  </script>
+
+  <meta charset="UTF-8">
+  <title>Notes — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/notes-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/notes-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/notes-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/notes-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/notes-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/notes-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/notes-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/notes-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Notes — TimerHaven">
+  <meta property="og:description" content="Boost your productivity with our free Notes. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/notes-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/notes-fr.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Notes — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Notes to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/notes-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <meta name="description"
+    content="Prenez des notes rapides et organisez vos idées. Découvrez comment utiliser Notes, obtenez des conseils de productivité, des FAQs et lisez des articles d'experts.">
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/newsletter.css">
+  <script src="assets/js/syncManager.js"></script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      color: var(--text-dark, #102a43);
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    /* Back link — use consistent blue */
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: #007bff !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .4rem 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: #185a9d;
+    }
+
+    /* Read full guide styled to match other tools */
+    .notes-form {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    .notes-list {
+      margin-bottom: 1rem;
+    }
+
+    .note-item {
+      background: #f7fafc;
+      border-radius: 7px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .note-meta {
+      font-size: 0.9em;
+      color: #888;
+      margin-right: 1em;
+    }
+
+    .note-pinned {
+      font-weight: 700;
+      color: #185a9d;
+      margin-right: 0.6em;
+    }
+
+    .faq-section {
+      margin-top: 1.1rem;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+
+    .faq-section summary {
+      font-weight: 700;
+      font-size: 1.02rem;
+      cursor: pointer;
+    }
+
+    @media (max-width:520px) {
+      .container {
+        max-width: 94vw !important;
+        padding: 0 !important;
+      }
+
+      .card {
+        padding: 12px !important;
+        border-radius: 12px !important;
+      }
+
+      .notes-form {
+        flex-direction: column;
+        align-items: stretch !important;
+      }
+
+      #noteInput {
+        max-width: none !important;
+        margin-bottom: .5rem;
+      }
+    }
+
+    @media (max-width:900px) {
+      .card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container" role="main">
+    <section class="card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">← Retour au menu principal</a>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-note-sticky"></i> Notes</h3>
+      <p style="margin:0 0 .6rem 0;"></p>
+      <div class="notes-section">
+        <form class="notes-form" id="notesForm">
+          <input type="text" id="noteInput" class="form-control" placeholder="Tapez votre note..."
+            style="max-width:220px;">
+          <button type="submit" id="addNoteBtn" class="btn btn-success btn-sm">Ajouter une note</button>
+        </form>
+        <div id="notesList" class="notes-list"></div>
+      </div>
+
+    </section>
+
+  </main>
+  <script>
+    window.onerror = function (msg, url, line) { console.error('JS Error: ' + msg + ' @ ' + line); return false; };
+    function safeSet(key, value) { try { localStorage.setItem(key, value); return true; } catch (e) { console.error('Storage Save Error', e); return false; } }
+    function safeGet(key) { try { return localStorage.getItem(key); } catch (e) { console.error('Storage Read Error', e); return null; } }
+    let notes = [];
+    try {
+      const saved = safeGet('notesData');
+      if (saved) notes = JSON.parse(saved);
+    } catch (e) { notes = []; }
+    if (!Array.isArray(notes)) notes = [];
+    // Assign IDs to legacy notes
+    notes.forEach(function (n) { if (!n.id) n.id = 'note_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now(); });
+    function saveNotes() {
+      safeSet('notesData', JSON.stringify(notes));
+      requestAnimationFrame(function () {
+        renderNotes();
+      });
+    }
+    function escapeHtml(s) { if (!s) return ''; return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
+    function renderNotes() {
+      const list = document.getElementById('notesList');
+      list.innerHTML = '';
+      if (!notes || notes.length === 0) {
+        list.innerHTML = '<div style="color:#888;">Aucune note pour le moment.</div>';
+        return;
+      }
+      notes.forEach((note, idx) => {
+        const pinned = note.pinned ? '<span class="note-pinned"><i class="fa fa-thumbtack"></i></span>' : '';
+        const div = document.createElement('div');
+        div.className = 'note-item';
+        div.innerHTML = `
+        <div style="display:flex;align-items:center;gap:.6rem;min-width:0;">
+          ${pinned}
+          <span style="overflow-wrap: anywhere;">${escapeHtml(note.text)}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <span class="note-meta">${escapeHtml(note.date)}</span>
+          <button class="btn btn-outline-${note.pinned ? 'secondary' : 'info'} btn-sm" onclick="pinNote(${idx})" title="Épingler / Détacher"><i class="fa fa-thumbtack"></i></button>
+          <button class="btn btn-outline-danger btn-sm" onclick="deleteNote(${idx})" title="Supprimer"><i class="fa fa-trash"></i></button>
+        </div>
+      `;
+        list.appendChild(div);
+      });
+    }
+    window.addNote = function () {
+      const input = document.getElementById('noteInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+      try {
+        const newNote = {
+          id: 'note_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+          text,
+          date: new Date().toLocaleString(),
+          pinned: false,
+          updatedAt: Date.now()
+        };
+        notes.unshift(newNote);
+        saveNotes();
+        if (window.SyncManager && window.SyncManager.isAvailable()) {
+          try {
+            window.SyncManager.saveNote(newNote.id, "", newNote.text);
+          } catch (e) { }
+        }
+        input.value = "";
+      } catch (e) {
+        console.error('Erreur lors de l’ajout de la note', e);
+      }
+    };
+    const form = document.getElementById('notesForm');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        window.addNote();
+      });
+    }
+    const addBtn = document.getElementById('addNoteBtn');
+    if (addBtn) {
+      addBtn.addEventListener('click', function (e) {
+        // Le gestionnaire de soumission du formulaire s'en occupera
+      });
+    }
+    window.deleteNote = function (idx) {
+      const removed = notes.splice(idx, 1)[0];
+      saveNotes();
+      if (removed && removed.id && window.SyncManager && window.SyncManager.isAvailable()) {
+        try {
+          window.SyncManager.deleteNote(removed.id);
+        } catch (e) { }
+      }
+    }
+    window.pinNote = function (idx) {
+      if (!notes[idx]) return;
+      notes[idx].pinned = !notes[idx].pinned;
+      notes[idx].updatedAt = Date.now();
+      if (notes[idx].pinned) {
+        var pinnedNote = notes.splice(idx, 1)[0];
+        notes.unshift(pinnedNote);
+      }
+      saveNotes();
+      if (window.SyncManager && window.SyncManager.isAvailable()) {
+        var n = notes.find(function (n) { return n === (pinnedNote || notes[idx]); }); // Find the note we just toggled
+        if (n) SyncManager.saveNote(n.id, "", n.text);
+      }
+      renderNotes();
+    }
+    renderNotes();
+    // Cloud Sync Listeners
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.notes) {
+        let changed = false;
+        cloudData.notes.forEach(cloudNote => {
+          const existing = notes.find(n => n.id === cloudNote.id);
+          if (!existing) {
+            notes.push({
+              id: cloudNote.id,
+              text: cloudNote.content,
+              date: new Date(cloudNote.updatedAt || Date.now()).toLocaleString(),
+              pinned: false,
+              updatedAt: cloudNote.updatedAt
+            });
+            changed = true;
+          } else if ((cloudNote.updatedAt || 0) > (existing.updatedAt || 0)) {
+            existing.text = cloudNote.content;
+            existing.updatedAt = cloudNote.updatedAt;
+            changed = true;
+          }
+        });
+        if (changed) {
+          saveNotes();
+          renderNotes();
+        }
+      }
+    });
+    window.addEventListener('timerhaven:cloudDataChanged', function () {
+      if (SyncManager.isAvailable()) SyncManager.initialize();
+    });
+  </script>
+  <script src="assets/newsletter.js"></script>
+</body>
+
+</html>

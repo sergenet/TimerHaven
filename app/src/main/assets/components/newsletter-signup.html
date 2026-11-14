@@ -1,0 +1,174 @@
+<!-- Email Newsletter Signup Component -->
+<!-- Add this to blog articles and key pages for email list building -->
+<div class="newsletter-signup">
+    <div class="newsletter-container">
+        <div class="newsletter-icon">📬</div>
+        <h3 class="newsletter-title">Get Productivity Tips Delivered</h3>
+        <p class="newsletter-description">
+            Join our newsletter for weekly productivity insights, new tool announcements, and exclusive tips. No spam,
+            unsubscribe anytime.
+        </p>
+        <!-- Mailchimp / ConvertKit / Substack Form -->
+        <!-- Replace with your actual email provider form -->
+        <form class="newsletter-form" id="newsletterForm">
+            <div class="form-group">
+                <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address"
+                    required aria-label="Email address">
+                <button type="submit" class="newsletter-button">
+                    Subscribe
+                </button>
+            </div>
+            <p id="newsletterMessage" style="margin-top: 1rem; display: none; color: white;"></p>
+            <p class="newsletter-privacy">
+                <small>We respect your privacy. View our <a href="/privacy.html">Privacy Policy</a>.</small>
+            </p>
+        </form>
+        <script>
+            document.getElementById('newsletterForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const form = this;
+                const message = document.getElementById('newsletterMessage');
+                const data = new FormData(form);
+                fetch('/api/subscribe.php', {
+                    method: 'POST',
+                    body: data
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        message.textContent = result.message;
+                        message.style.display = 'block';
+                        if (result.status === 'success') {
+                            form.reset();
+                            message.style.color = '#43cea2';
+                        } else {
+                            message.style.color = '#ff9999';
+                        }
+                    })
+                    .catch(error => {
+                        message.textContent = 'Something went wrong. Please try again.';
+                        message.style.display = 'block';
+                        message.style.color = '#ff9999';
+                    });
+            });
+        </script>
+    </div>
+</div>
+<style>
+    .newsletter-signup {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 16px;
+        padding: 2.5rem 2rem;
+        margin: 3rem 0;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    .newsletter-icon {
+        font-size: 3em;
+        margin-bottom: 1rem;
+        animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+        0%,
+        100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+    .newsletter-title {
+        color: white;
+        font-size: 1.8em;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+    }
+    .newsletter-description {
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 1.05em;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .newsletter-form {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    .form-group {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+    .newsletter-input {
+        flex: 1;
+        padding: 0.9rem 1.2rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50px;
+        font-size: 1em;
+        background: rgba(255, 255, 255, 0.95);
+        color: #334155;
+        transition: all 0.3s ease;
+    }
+    .newsletter-input:focus {
+        outline: none;
+        border-color: white;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+    .newsletter-button {
+        padding: 0.9rem 2rem;
+        background: white;
+        color: #667eea;
+        border: none;
+        border-radius: 50px;
+        font-size: 1em;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .newsletter-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        background: #f8fafc;
+    }
+    .newsletter-button:active {
+        transform: translateY(0);
+    }
+    .newsletter-privacy {
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 0.5rem;
+        font-size: 0.85em;
+    }
+    .newsletter-privacy a {
+        color: white;
+        text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+        .newsletter-signup {
+            padding: 2rem 1.5rem;
+        }
+        .newsletter-title {
+            font-size: 1.4em;
+        }
+        .form-group {
+            flex-direction: column;
+        }
+        .newsletter-button {
+            width: 100%;
+        }
+    }
+</style>
+<!-- Usage Instructions:
+1. Choose an email provider (Mailchimp, ConvertKit, Substack, etc.)
+2. Get your signup form action URL from the provider
+3. Replace action="#" with your actual form action URL
+4. Add any hidden fields required by your provider
+5. Test the form to ensure it works correctly
+Popular options:
+- Mailchimp: Free up to 500 subscribers
+- ConvertKit: Great for creators
+- Substack: Built-in newsletter platform
+- Buttondown: Privacy-focused, markdown support
+-->

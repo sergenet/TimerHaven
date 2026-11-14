@@ -1,0 +1,284 @@
+﻿<!doctype html>
+<html lang="el">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-X7WBE4P25');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/stopwatch-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/stopwatch-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/stopwatch-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/stopwatch-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/stopwatch-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/stopwatch-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/stopwatch-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/stopwatch-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Stopwatch — TimerHaven">
+  <meta property="og:description" content="Boost your productivity with our free Stopwatch. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/stopwatch-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/stopwatch-el.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stopwatch — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Stopwatch to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/stopwatch-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <title>Χρονόμετρο — TimerHaven</title>
+  <meta name="description"
+    content="Μετρήστε τον χρόνο που έχει περάσει για οποιαδήποτε δραστηριότητα με το Χρονόμετρο.">
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff;
+      --accent: #007bff
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #0b2545;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--accent) !important;
+      text-decoration: none;
+      font-weight: 700
+    }
+
+    .back-link:hover {
+      text-decoration: underline
+    }
+
+    .tool-title {
+      color: var(--brand);
+      font-size: 1.35rem;
+      margin: 0 0 .6rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+      box-shadow: 0 6px 18px rgba(0, 123, 255, 0.08);
+    }
+
+    .cta:hover {
+      background: #0056d6
+    }
+
+    .stopwatch-display {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+      color: #102a43;
+    }
+
+    .controls-row {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+    }
+
+    .lap-list {
+      margin-top: .8rem;
+    }
+
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+
+    .svg-btn {
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+
+    .svg-btn:focus {
+      outline: 3px solid rgba(11, 99, 160, 0.18);
+      border-radius: 6px;
+    }
+
+    .svg-btn svg {
+      display: block;
+    }
+
+    .btn-fallback {
+      display: none;
+    }
+
+    .lap-item {
+      background: #f7fafc;
+      padding: .45rem;
+      border-radius: 8px;
+      margin-bottom: .4rem;
+    }
+
+    @media (max-width:900px) {
+      .card {
+        padding: 1rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>try { localStorage.setItem('timerhavenLang', 'el'); } catch (e) { };</script>
+  <main class="container" role="main">
+    <article class="card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">&larr;&nbsp;Επιστροφή στο κυρίως μενού</a>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-clock" aria-hidden="true"></i> Χρονόμετρο</h3>
+
+      <div class="stopwatch-section" aria-live="polite">
+        <div id="swDisplay" class="stopwatch-display" aria-atomic="true">00:00:00</div>
+        <div class="controls-row" role="toolbar" aria-label="Στοιχεία ελέγχου χρονόμετρου">
+          <!-- Inline SVG Start button (fill #0b63a0 to match the other tools) -->
+          <button id="swStartBtn" class="svg-btn" type="button" aria-label="Εκκίνηση χρονομέτρου" title="Έναρξη">
+            <svg width="72" height="36" viewBox="0 0 72 36" xmlns="http://www.w3.org/2000/svg" role="img"
+              aria-hidden="false" focusable="false">
+              <rect x="0" y="0" rx="6" ry="6" width="72" height="36" fill="#0b63a0"></rect>
+              <text x="36" y="22" font-family="Montserrat, Arial, Helvetica, sans-serif" font-size="14"
+                font-weight="700" text-anchor="middle" fill="#ffffff">Έναρξη</text>
+            </svg>
+          </button>
+          <!-- Fallback plain button (hidden visually) -->
+          <button id="swStartBtnFallback" class="btn btn-brand btn-fallback" type="button"
+            style="background:#0b63a0;color:#fff;border-color:rgba(0,0,0,0.05);">Έναρξη</button>
+          <button id="swPauseBtn" class="btn btn-secondary" type="button" aria-label="Παύση">Παύση</button>
+          <button id="swResetBtn" class="btn btn-danger" type="button" aria-label="Επαναφορά">Επαναφορά</button>
+          <button id="swLapBtn" class="btn btn-info" type="button" aria-label="Γύρος">Γύρος</button>
+        </div>
+        <div id="lapList" class="lap-list" style="margin-top:.8rem;" aria-live="polite"></div>
+
+      </div>
+    </article>
+  </main>
+  <script>
+    (function () {
+      // Stopwatch logic (keeps the same behavior as stopwatch-en; Greek UI labels)
+      var swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
+      function swFormat(ms) {
+        var t = Math.floor(ms / 1000);
+        var h = Math.floor(t / 3600);
+        var m = Math.floor((t % 3600) / 60);
+        var s = t % 60;
+        return String(h).padStart(2, '0') + ":" + String(m).padStart(2, '0') + ":" + String(s).padStart(2, '0');
+      }
+      function renderLaps() {
+        var lapList = document.getElementById('lapList');
+        lapList.innerHTML = laps.map(function (l, i) {
+          return '<div class="lap-item">Γύρος ' + (i + 1) + ': ' + swFormat(l) + '</div>';
+        }).join('');
+      }
+      function swUpdateDisplay() {
+        document.getElementById('swDisplay').textContent = swFormat(swElapsed);
+        renderLaps();
+      }
+      function startStopwatch() {
+        if (swRunning) return;
+        swRunning = true;
+        swStart = Date.now() - swElapsed;
+        swTimer = setInterval(function () {
+          swElapsed = Date.now() - swStart;
+          swUpdateDisplay();
+        }, 100);
+      }
+      function pauseStopwatch() {
+        swRunning = false;
+        clearInterval(swTimer);
+      }
+      function resetStopwatch() {
+        swRunning = false;
+        clearInterval(swTimer);
+        swElapsed = 0;
+        laps = [];
+        swUpdateDisplay();
+      }
+      function lapStopwatch() {
+        if (swRunning) laps.push(swElapsed);
+        swUpdateDisplay();
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        var svgStart = document.getElementById('swStartBtn');
+        var fallbackStart = document.getElementById('swStartBtnFallback');
+        var pauseBtn = document.getElementById('swPauseBtn');
+        var resetBtn = document.getElementById('swResetBtn');
+        var lapBtn = document.getElementById('swLapBtn');
+        if (svgStart) {
+          svgStart.addEventListener('click', startStopwatch);
+          svgStart.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startStopwatch(); } });
+          svgStart.setAttribute('tabindex', '0');
+        }
+        if (fallbackStart) fallbackStart.addEventListener('click', startStopwatch);
+        if (pauseBtn) pauseBtn.addEventListener('click', pauseStopwatch);
+        if (resetBtn) resetBtn.addEventListener('click', resetStopwatch);
+        if (lapBtn) lapBtn.addEventListener('click', lapStopwatch);
+        // initialize display
+        swUpdateDisplay();
+      });
+    })();
+  </script>
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+  <script src="assets/fontawesome/js/all.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-X7WBE4P25');
+  </script>
+
+  <meta charset="utf-8" />
+  <title>Трекер привычек — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/habit-tracker-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Habit Tracker — TimerHaven">
+  <meta property="og:description"
+    content="Boost your productivity with our free Habit Tracker. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/habit-tracker-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/habit-tracker-ru.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Habit Tracker — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Habit Tracker to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/habit-tracker-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <meta name="description"
+    content="Отслеживайте ежедневные привычки и формируйте новые рутины. Узнайте, как использовать трекер привычек, получите советы по продуктивности, FAQ и статьи экспертов." />
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tool-theme.css">
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+  <script src="assets/js/syncManager.js"></script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--text-dark, #102a43);
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: #007bff !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .4rem 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: #185a9d;
+    }
+
+    .cta {
+      display: inline-block;
+      margin: .35rem 0 .8rem 0;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: #007bff !important;
+      color: #fff !important;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+      box-shadow: 0 6px 18px rgba(0, 123, 255, 0.08);
+    }
+
+    .banner {
+      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+      color: #fff;
+      border-radius: 10px;
+      font-size: 1.11em;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1em;
+      padding: .7em .8em;
+      display: none;
+    }
+
+    .stats-bar {
+      background: #f6fbfa;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      padding: .7rem 1rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #185a9d;
+      display: flex;
+      gap: 2em;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .habit-form {
+      margin-bottom: 1rem;
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .habit-form input {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .habit-form button {
+      flex: 0 0 auto;
+    }
+
+    .habit-list {
+      margin-bottom: 1rem;
+    }
+
+    .habit-item {
+      background: #f7fafc;
+      border-radius: 7px;
+      padding: .6rem .8rem;
+      margin-bottom: .6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .habit-meta {
+      font-size: .9em;
+      color: #888;
+      margin-left: .6em;
+      margin-right: 1em;
+    }
+
+    .habit-history {
+      display: flex;
+      gap: 3px;
+      margin-left: 1em;
+      align-items: center;
+    }
+
+    .dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      background: #e0e7ef;
+      border: 1px solid #d0d0d0;
+    }
+
+    .dot.done {
+      background: #43cea2;
+      border: 1.5px solid #185a9d;
+    }
+
+    .dot.today {
+      border: 2px solid #43cea2;
+    }
+
+    .archive-btn {
+      font-size: .9em;
+      margin-left: .6em;
+      background: #fff;
+      border: 1px solid #43cea2;
+      color: #43cea2;
+      border-radius: 6px;
+      padding: .15rem .7rem;
+    }
+
+    .archive-btn.archived {
+      opacity: .65;
+      color: #888;
+      border-color: #d0d0d0;
+    }
+
+    @media (max-width:900px) {
+      .card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>try { localStorage.setItem('timerhavenLang', 'ru'); } catch (e) { };</script>
+  <main class="container" role="main">
+    <section class="card tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">← Назад в главное меню</a>
+      <div id="tool-title" class="tool-title"><i class="fa fa-check-double"></i> Трекер привычек</div>
+      <!-- Read full guide button (canonical Russian path; opens in new tab) -->
+      <p style="margin:0 0 .6rem 0;"></p>
+      <div id="banner" class="banner"></div>
+      <div id="stats-bar" class="stats-bar">Отслеживается: 0 · Выполнено сегодня: 0 · Лучшая серия: 0</div>
+      <div class="habit-section">
+        <form class="habit-form" id="habitForm">
+          <input type="text" id="habitInput" class="form-control" placeholder="Название привычки" />
+          <button type="submit" class="btn btn-success btn-sm" id="add-btn">Добавить</button>
+        </form>
+        <div id="habitList" class="habit-list"></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const habitTranslations = {
+      ru: {
+        "language-label": "Язык:",
+        "back-link": "← Назад в главное меню",
+        "tool-title": "Трекер привычек",
+        "habitInput": "Название привычки",
+        "add-btn": "Добавить",
+        "banner-all-done": "🎉 Все привычки выполнены сегодня! Отличная работа!",
+        "stats-tracked": "Отслеживается: ",
+        "stats-done": "Выполнено сегодня: ",
+        "stats-best": "Лучшая серия: ",
+        "mark-done": "Отметить",
+        "done-today": "Выполнено сегодня",
+        "streak": "Серия: ",
+        "longest": "Лучшее: ",
+        "archive": "Архивировать",
+        "unarchive": "Восстановить",
+        "delete": "Удалить",
+        "no-habits": "Пока нет привычек."
+      }
+    };
+    function escapeHtml(text) {
+      if (!text) return "";
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    function getTodayStr() { const d = new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1).toString().padStart(2, "0") + "-" + d.getDate().toString().padStart(2, "0"); }
+    function lastNDays(n) { const arr = []; for (let i = n - 1; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); arr.push(d.getFullYear() + "-" + (d.getMonth() + 1).toString().padStart(2, "0") + "-" + d.getDate().toString().padStart(2, "0")); } return arr; }
+    let habits = JSON.parse(localStorage.getItem('habits_v1') || '[]');
+    function getLang() { try { const l = localStorage.getItem('timerhavenLang') || 'ru'; return (l && l.slice(0, 2)) || 'ru'; } catch (e) { return 'ru'; } }
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0, 2);
+      const t = habitTranslations[lang] || habitTranslations['ru'];
+      document.body.dir = (lang === "ar") ? "rtl" : "ltr";
+      const back = document.getElementById('back-link'); if (back) back.textContent = t['back-link'] || '';
+      const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-check-double"></i> ${t['tool-title'] || ''}`;
+      const input = document.getElementById('habitInput'); if (input) input.placeholder = t['habitInput'] || '';
+      const addBtn = document.getElementById('add-btn'); if (addBtn) addBtn.textContent = t['add-btn'] || '';
+      const faqTitle = document.getElementById('faq-title'); if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
+      const faqList = document.getElementById('faq-list'); if (faqList) faqList.innerHTML = t['faq-list'] || '';
+
+      const tipsMobileTitle = document.getElementById('tips-mobile-title'); if (tipsMobileTitle) tipsMobileTitle.innerHTML = t['tips-mobile-title'] || '';
+      const tipsMobileList = document.getElementById('tips-mobile-list'); if (tipsMobileList) tipsMobileList.innerHTML = t['tips-mobile-list'] || '';
+      renderHabits();
+      const mobileDetails = document.getElementById('tips-mobile');
+      if (mobileDetails) mobileDetails.style.display = (window.innerWidth < 801) ? 'block' : 'none';
+    }
+    function ensureHabitIds() {
+      let changed = false;
+      habits.forEach(h => {
+        if (!h.id) {
+          h.id = 'habit_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+          changed = true;
+        }
+      });
+      if (changed) saveHabits();
+    }
+    function saveHabits() { localStorage.setItem('habits_v1', JSON.stringify(habits)); }
+    function resetHabitsIfNeeded() { const today = getTodayStr(); let changed = false; habits.forEach(h => { if (!h.history) h.history = []; if (h.lastChecked !== today) { h.doneToday = false; h.lastChecked = today; changed = true; } }); if (changed) saveHabits(); }
+    function refreshUI() {
+      if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(() => renderHabits());
+      } else {
+        renderHabits();
+      }
+    }
+    function renderHabits() {
+      try {
+        resetHabitsIfNeeded();
+        const lang = getLang();
+        const t = habitTranslations[lang] || habitTranslations['ru'];
+        const list = document.getElementById('habitList');
+        if (!list) return;
+        list.innerHTML = '';
+        const today = getTodayStr();
+        let doneTodayCount = 0;
+        let bestStreak = 0;
+        let activeCount = 0;
+        if (!habits) habits = [];
+        habits.forEach(h => { if (h && !h.archived) activeCount++; });
+        if (habits.length === 0 || activeCount === 0) {
+          list.innerHTML = `<div style="color:#888;">${t["no-habits"] || 'Привычек пока нет.'}</div>`;
+        }
+        habits.forEach((habit, idx) => {
+          if (!habit || habit.archived) return;
+          let streak = habit.streak || 0;
+          let longest = habit.longest || streak;
+          bestStreak = Math.max(bestStreak, longest);
+          if (!habit.history) habit.history = [];
+          let historyDots = "";
+          lastNDays(7).forEach((date) => {
+            const done = habit.history.includes(date);
+            historyDots += `<span class="dot${done ? ' done' : ''}${date === today ? ' today' : ''}" title="${date}"></span>`;
+          });
+          const isDone = habit.doneToday;
+          if (isDone) doneTodayCount++;
+          list.innerHTML += `
+          <div class="habit-item">
+            <span><b>${escapeHtml(habit.name)}</b>
+              <span class="habit-meta">${t["streak"]}${streak} ${t["longest"]}${longest}</span>
+              <span class="habit-history">${historyDots}</span>
+            </span>
+            <div>
+              <button class="btn btn-outline-${isDone ? 'secondary' : 'success'} btn-sm habit-btn" onclick="markDone(${idx})" ${isDone ? 'disabled' : ''}>
+                ${isDone ? t["done-today"] : t["mark-done"]}
+              </button>
+              <button class="archive-btn${habit.archived ? ' archived' : ''}" onclick="archiveHabit(${idx})">
+                ${habit.archived ? t["unarchive"] : t["archive"]}
+              </button>
+              <button class="btn btn-outline-danger btn-sm habit-btn" onclick="deleteHabit(${idx})"><i class="fa fa-trash"></i> ${t["delete"]}</button>
+            </div>
+          </div>
+        `;
+        });
+        renderStats(activeCount, doneTodayCount, bestStreak);
+        renderBanner(activeCount, doneTodayCount);
+      } catch (renderErr) { console.error("[HabitTracker] Render error:", renderErr); }
+    }
+    function renderStats(tracked, done, best) { const t = habitTranslations[getLang()] || habitTranslations['ru']; document.getElementById("stats-bar").innerHTML = `${t["stats-tracked"]}${tracked} · ${t["stats-done"]}${done} · ${t["stats-best"]}${best}`; }
+    function renderBanner(tracked, done) { const t = habitTranslations[getLang()] || habitTranslations['ru']; const banner = document.getElementById("banner"); if (tracked > 0 && done === tracked) { banner.textContent = t["banner-all-done"]; banner.style.display = "block"; } else { banner.style.display = "none"; } }
+    function initHabitTool() {
+      const form = document.getElementById('habitForm');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          try {
+            const el = document.getElementById('habitInput');
+            const name = (el && el.value || '').trim();
+            if (!name) return;
+            console.log("[HabitTracker] Adding habit:", name);
+            const newHabit = {
+              id: 'habit_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+              name,
+              streak: 0,
+              longest: 0,
+              doneToday: false,
+              lastChecked: getTodayStr(),
+              history: [],
+              archived: false,
+              updatedAt: Date.now()
+            };
+            habits.push(newHabit);
+            saveHabits();
+            try {
+              if (window.SyncManager && window.SyncManager.isAvailable()) {
+                window.SyncManager.saveHabit(newHabit.id, newHabit);
+              }
+            } catch (syncErr) { console.error("[HabitTracker] Sync error (Add):", syncErr); }
+            if (el) el.value = "";
+            refreshUI();
+          } catch (err) { console.error("[HabitTracker] Submit error:", err); }
+        });
+      }
+    }
+    window.markDone = function (idx) {
+      try {
+        const today = getTodayStr();
+        if (!habits[idx].doneToday) {
+          habits[idx].doneToday = true;
+          habits[idx].lastChecked = today;
+          habits[idx].streak = (habits[idx].streak || 0) + 1;
+          habits[idx].longest = Math.max(habits[idx].longest || 0, habits[idx].streak);
+          if (!habits[idx].history) habits[idx].history = [];
+          if (!habits[idx].history.includes(today)) habits[idx].history.push(today);
+          habits[idx].updatedAt = Date.now();
+          saveHabits();
+          try {
+            if (window.SyncManager && window.SyncManager.isAvailable()) {
+              window.SyncManager.saveHabit(habits[idx].id, habits[idx]);
+            }
+          } catch (syncErr) { console.error("[HabitTracker] Sync error (MarkDone):", syncErr); }
+          refreshUI();
+        }
+      } catch (err) { console.error("[HabitTracker] MarkDone error:", err); }
+    }
+    window.archiveHabit = function (idx) {
+      try {
+        habits[idx].archived = !habits[idx].archived;
+        habits[idx].updatedAt = Date.now();
+        saveHabits();
+        try {
+          if (window.SyncManager && window.SyncManager.isAvailable()) {
+            window.SyncManager.saveHabit(habits[idx].id, habits[idx]);
+          }
+        } catch (syncErr) { console.error("[HabitTracker] Sync error (Archive):", syncErr); }
+        refreshUI();
+      } catch (err) { console.error("[HabitTracker] Archive error:", err); }
+    }
+    window.deleteHabit = function (idx) {
+      try {
+        console.log("[HabitTracker] Deleting index:", idx);
+        const removed = habits.splice(idx, 1)[0];
+        saveHabits();
+        try {
+          if (removed && removed.id && window.SyncManager && window.SyncManager.isAvailable()) {
+            window.SyncManager.deleteHabit(removed.id);
+          }
+        } catch (syncErr) { console.error("[HabitTracker] Sync error (Delete):", syncErr); }
+        refreshUI();
+      } catch (err) { console.error("[HabitTracker] Delete error:", err); }
+    }
+    window.addEventListener('storage', function (e) { if (e.key === 'timerhavenLang') { const lang = (e.newValue || getLang()).slice(0, 2); applyLanguage(lang); } });
+    document.addEventListener('DOMContentLoaded', function () {
+      ensureHabitIds();
+      applyLanguage(getLang());
+      initHabitTool();
+      refreshUI();
+      window.addEventListener('resize', function () { applyLanguage(getLang()); });
+    });
+    // Cloud Sync Listeners
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.habits) {
+        let changed = false;
+        cloudData.habits.forEach(cloudHabit => {
+          const existing = habits.find(h => h.id === cloudHabit.id);
+          if (!existing) {
+            habits.push(cloudHabit);
+            changed = true;
+          } else if ((cloudHabit.updatedAt || 0) > (existing.updatedAt || 0)) {
+            Object.assign(existing, cloudHabit);
+            changed = true;
+          }
+        });
+        if (changed) {
+          saveHabits();
+          refreshUI();
+        }
+      }
+    });
+    window.addEventListener('timerhaven:cloudDataChanged', function () {
+      if (window.SyncManager && window.SyncManager.isAvailable()) window.SyncManager.initialize();
+    });
+  </script>
+</body>
+
+</html>

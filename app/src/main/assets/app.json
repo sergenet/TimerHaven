@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "TimerHavenApp",
+    "slug": "TimerHavenApp",
+    "version": "1.0.21",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sergenet.TimerHavenApp",
+      "buildNumber": "11",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSLocationWhenInUseUsageDescription": "Needed to show local weather for your location",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "We use your location to show local weather and location-based features. Location is used while the app is in use."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d56dbe45-5131-48a0-a12b-2aba9c2fff0a"
+      }
+    },
+    "plugins": [
+      [
+        "react-native-permissions",
+        {
+          "iosPermissions": [
+            "LocationWhenInUse"
+          ]
+        }
+      ]
+    ]
+  }
+}

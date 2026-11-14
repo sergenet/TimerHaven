@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimerHaven Tools</title>
+  <style>
+    :root {
+      --primary-color: #185a9d;
+      --secondary-color: #43cea2;
+      --bg-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 10px;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+
+    select {
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--secondary-color);
+      background: white;
+      color: var(--primary-color);
+      font-weight: bold;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .tool-card {
+      background: white;
+      padding: 10px 4px;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      color: #333;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: transform 0.1s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      min-height: 80px;
+    }
+
+    .tool-card:active {
+      transform: scale(0.95);
+    }
+
+    .tool-icon {
+      font-size: 2rem;
+      margin-bottom: 4px;
+    }
+
+    .tool-name {
+      font-weight: 600;
+      font-size: 0.75rem;
+      line-height: 1.1;
+      word-wrap: break-word;
+      max-width: 90%;
+    }
+
+    @media (min-width: 600px) {
+      .tool-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .tool-icon {
+        font-size: 2.2rem;
+      }
+
+      .tool-name {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>TimerHaven</h1>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="de">Deutsch</option>
+      <option value="ru">Русский</option>
+      <option value="el">Ελληνικά</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
+  <div class="tool-grid" id="tool-grid">
+    <!-- Tools will be injected here by JS -->
+  </div>
+
+  <script>
+    const tools = [
+      { id: 'pomodoro', name: { en: 'Pomodoro', fr: 'Pomodoro', es: 'Pomodoro', de: 'Pomodoro', ru: 'Помодоро', el: 'Pomodoro', ar: 'بومودورو' }, icon: '🍅', path: 'pomodoro-en.html' },
+      { id: 'meeting', name: { en: 'Meeting Planner', fr: 'Planificateur', es: 'Planificador', de: 'Meeting-Planer', ru: 'Планировщик', el: 'Meeting Planner', ar: 'مخطط الاجتماعات' }, icon: '🤝', path: 'meeting-planner-en.html' },
+      { id: 'calendar', name: { en: 'Calendar', fr: 'Calendrier', es: 'Calendario', de: 'Kalender', ru: 'Календарь', el: 'Ημερολόγιο', ar: 'التقويم' }, icon: '📅', path: 'calendar-en.html' },
+      { id: 'clipboard', name: { en: 'Clipboard', fr: 'Presse-papiers', es: 'Portapapeles', de: 'Zwischenablage', ru: 'Буфер обмена', el: 'Πρόχειρο', ar: 'الحافظة' }, icon: '📋', path: 'clipboard-manager-en.html' },
+      { id: 'countdown', name: { en: 'Countdown', fr: 'Compte à rebours', es: 'Cuenta regresiva', de: 'Countdown', ru: 'Таймер отсчета', el: 'Αντίστροφη μέτρηση', ar: 'العد التنازلي' }, icon: '⏳', path: 'countdown-en.html' },
+      { id: 'currency', name: { en: 'Currency', fr: 'Devise', es: 'Moneda', de: 'Währung', ru: 'Валюτα', el: 'Νόμισμα', ar: 'العملة' }, icon: '💱', path: 'currency-en.html' },
+      { id: 'focus', name: { en: 'Focus Music', fr: 'Musique de concentration', es: 'Música de enfoque', de: 'Fokus-Musik', ru: 'Музыка для фокуса', el: 'Μουσική εστίασης', ar: 'موسيقى التركيز' }, icon: '🎧', path: 'focus-music-en.html' },
+      { id: 'habit', name: { en: 'Habit Tracker', fr: 'Suivi d\'habitudes', es: 'Seguidor de hábitos', de: 'Gewohnheitstracker', ru: 'Трекер привычек', el: 'Παρακολούθηση συνηθειών', ar: 'تتبع العادات' }, icon: '✅', path: 'habit-tracker-en.html' },
+      { id: 'notes', name: { en: 'Notes', fr: 'Notes', es: 'Notas', de: 'Notizen', ru: 'Заметки', el: 'Σημειώσεις', ar: 'ملاحظات' }, icon: '📝', path: 'notes-en.html' },
+      { id: 'password', name: { en: 'Password Gen', fr: 'Mots de passe', es: 'Contraseñas', de: 'Passwort-Gen', ru: 'Пароли', el: 'Κωδικοί', ar: 'منشئ كلمة السر' }, icon: '🔑', path: 'password-generator-en.html' },
+      { id: 'stopwatch', name: { en: 'Stopwatch', fr: 'Chronomètre', es: 'Cronómetro', de: 'Stoppuhr', ru: 'Секундомер', el: 'Χρονόμετρο', ar: 'ساعة التوقيف' }, icon: '⏱️', path: 'stopwatch-en.html' },
+      { id: 'timer', name: { en: 'Timer', fr: 'Minuteur', es: 'Temporizador', de: 'Timer', ru: 'Таймер', el: 'Χρονοδιακόπτης', ar: 'المؤقت' }, icon: '⏲️', path: 'timer-en.html' },
+      { id: 'unit', name: { en: 'Unit Converter', fr: 'Unités', es: 'Unidades', de: 'Einheitenumrechner', ru: 'Единицы', el: 'Μετατροπέας μονάδων', ar: 'محول الوحدات' }, icon: '⚖️', path: 'unit-converter-en.html' },
+      { id: 'weather', name: { en: 'Weather', fr: 'Météo', es: 'Clima', de: 'Wetter', ru: 'Погода', el: 'Καιρός', ar: 'الطقس' }, icon: '🌡️', path: 'weather-en.html' },
+      { id: 'worldclock', name: { en: 'World Clock', fr: 'Horloge mondiale', es: 'Reloj mundial', de: 'Weltuhr', ru: 'Мировое время', el: 'Παγκόσμιο ρολόι', ar: 'الساعة العالمية' }, icon: '🌐', path: 'world-clock-en.html' }
+    ];
+
+    const langSelect = document.getElementById('lang-select');
+    const toolGrid = document.getElementById('tool-grid');
+
+    function renderTools(lang) {
+      toolGrid.innerHTML = '';
+      const today = new Date().getDate();
+      tools.forEach(tool => {
+        const card = document.createElement('a');
+        card.className = 'tool-card';
+        const localizedPath = tool.path.replace('-en.html', `-${lang}.html`);
+
+        let icon = tool.icon;
+        if (tool.id === 'calendar') {
+          // Fallback array for months to make sure they display in correct translations
+          const monthNames = {
+            'en': ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+            'fr': ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Aoû','Sep','Oct','Nov','Déc'],
+            'es': ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+            'de': ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],
+            'ru': ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+            'el': ['Ιαν','Φεβ','Μαρ','Απρ','Μαΐ','Ιουν','Ιουλ','Αυγ','Σεπ','Οκτ','Νοε','Δεκ'],
+            'ar': ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول']
+          };
+          const curMonth = (new Date()).getMonth();
+          const monthStr = (monthNames[lang] && monthNames[lang][curMonth]) || monthNames['en'][curMonth];
+          
+          icon = `<div style="width: 36px; height: 38px; box-sizing: border-box; background: white; border: 2px solid #185a9d; border-radius: 6px; display: inline-flex; flex-direction: column; overflow: hidden; margin: 2px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <div style="background: #185a9d; color: white; font-size: 0.6rem; font-weight: 700; text-align: center; text-transform: uppercase; padding: 2px 0; line-height: 1;">${monthStr}</div>
+                    <div style="flex: 1; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: #333; line-height: 1; padding-bottom: 2px;">${today}</div>
+                  </div>`;
+        }
+
+        card.href = localizedPath;
+        card.innerHTML = `
+                    <div class="tool-icon">${icon}</div>
+                    <div class="tool-name">${tool.name[lang] || tool.name['en']}</div>
+                `;
+        toolGrid.appendChild(card);
+      });
+    }
+
+    langSelect.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      localStorage.setItem('preferred_lang', lang);
+      renderTools(lang);
+    });
+
+    const savedLang = localStorage.getItem('preferred_lang') || 'en';
+    langSelect.value = savedLang;
+    renderTools(savedLang);
+  </script>
+</body>
+
+</html>

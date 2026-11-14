@@ -1,0 +1,472 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Local Version: External trackers removed -->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Free Pomodoro Timer Online — Master the Pomodoro Technique | TimerHaven</title>
+  <meta name="description"
+    content="Boost deep work with our free Pomodoro timer. Customizable sessions, no distractions, and expert productivity guides for the Pomodoro technique.">
+  <meta name="author" content="Serge Shammas">
+  <meta name="datePublished" content="2026-01-10">
+  <meta name="dateModified" content="2026-01-10">
+  <link rel="canonical" href="https://timerhaven.com/pomodoro-en.html" />
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/pomodoro-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/pomodoro-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/pomodoro-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/pomodoro-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/pomodoro-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/pomodoro-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/pomodoro-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/pomodoro-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pomodoro Timer — TimerHaven">
+  <meta property="og:description"
+    content="Boost your productivity with our free Pomodoro Timer. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/pomodoro-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/pomodoro-en.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pomodoro Timer — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Pomodoro Timer to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/pomodoro-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <!-- External CDN dependencies removed for full offline support -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"TechArticle",
+    "headline":"Pomodoro Timer — Boost focus with timed work and breaks",
+    "description":"Pomodoro Timer helps you run focus sessions using the Pomodoro technique. Adjust durations, start/pause/reset, and track completed cycles.",
+    "author":{"@type":"Person","name":"Serge Shammas","url":"https://timerhaven.com/authors/serge-shammas"},
+    "datePublished":"2026-01-10",
+    "dateModified":"2026-01-10",
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://timerhaven.com/pomodoro-en.html"}
+  }
+  </script>
+  <style>
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #0b2545;
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      min-height: 90vh;
+      box-sizing: border-box;
+    }
+
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      width: 420px;
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: var(--brand, #0d6efd) !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .tool-title {
+      color: #185a9d;
+      font-size: 1.35rem;
+      margin: 0 0 .8rem 0;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .pomodoro-display {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+    }
+
+    .controls-row {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: .5rem;
+    }
+
+    .toggles {
+      margin-top: .6rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .faq-section {
+      margin-top: 1rem;
+      background: #f7fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 4px #e0e7ef;
+    }
+
+    /* in-card intro styling */
+    .tool-intro-in-card {
+      font-size: 1rem;
+      color: #415a6b;
+      margin-bottom: .9rem;
+    }
+
+    .tool-intro-in-card p:first-child {
+      margin: 0 0 .35rem 0;
+      line-height: 1.5;
+    }
+
+    .tool-intro-in-card strong {
+      color: #22313f;
+    }
+
+    @media (max-width:520px) {
+      .pomodoro-section {
+        order: 1;
+      }
+
+      .tool-intro-in-card {
+        order: 2;
+      }
+
+      .tool-intro-in-card p {
+        display: none;
+      }
+
+      /* hide long intro on very narrow screens */
+      .tool-card {
+        width: 94vw;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width:900px) {
+      .tool-card {
+        width: 98vw;
+        padding: 1rem;
+      }
+    }
+
+    /* small excerpt styling */
+    .guide-excerpt h4 {
+      margin: 0 0 .4rem 0;
+      color: #185a9d;
+    }
+
+    .guide-excerpt p {
+      margin: 0 0 .5rem 0;
+      color: #374151;
+    }
+
+    /* Basic Bootstrap Button Fallbacks */
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: .25rem;
+      border: 1px solid transparent;
+      transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+      text-decoration: none;
+    }
+
+    .btn-success {
+      color: #fff;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+
+    .btn-danger {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn:active {
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .mb-2 {
+      margin-bottom: .5rem !important;
+    }
+  </style>
+  <script>
+  </script>
+</head>
+
+<body>
+  <script>try { localStorage.setItem('timerhavenLang', 'en'); } catch (e) { };</script>
+  <main class="main-container" role="main">
+    <!-- Tool card centered -->
+    <section class="tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link"
+        onclick="window.location.href='index.html'; return false;">&larr; Back to Main Menu</a>
+      <h3 id="tool-title" class="tool-title"><span class="pomodoro-emoji" aria-hidden="true">🍅</span><i
+          class="fa fa-stopwatch pomodoro-fa" aria-hidden="true"></i> Pomodoro Timer</h3>
+      <!-- Server-rendered in-card intro (preserved) -->
+      <div class="tool-intro-in-card" id="tool-help" data-preserve="true">
+        <p>Boost focus with the Pomodoro technique. Adjust work/break
+          lengths and use Start/Pause/Reset to control sessions.</p>
+      </div>
+      <div class="tool-help" style="color:#6b7c89; margin-bottom:.8rem; display:none;">
+        Boost focus with the Pomodoro technique. Set work and break durations and begin focused sessions.
+      </div>
+      <div class="pomodoro-section" aria-live="polite">
+        <div class="mb-2" style="display:flex;gap:.8rem;flex-wrap:wrap;">
+          <label style="font-weight:600;">Work (min):
+            <input id="workLength" type="number" min="1" max="60" value="25" class="form-control"
+              style="width:100px; margin-left:.4rem;">
+          </label>
+          <label style="font-weight:600;">Break (min):
+            <input id="breakLength" type="number" min="1" max="30" value="5" class="form-control"
+              style="width:100px; margin-left:.4rem;">
+          </label>
+        </div>
+        <div id="pomodoroStatus" style="font-weight:600; margin-bottom:.25rem;">Work</div>
+        <div id="pomodoroDisplay" class="pomodoro-display">25:00</div>
+        <div class="controls-row">
+          <button id="startBtn" class="btn btn-success btn-small"><i class="fa fa-play"></i> Start</button>
+          <button id="pauseBtn" class="btn btn-secondary btn-small"><i class="fa fa-pause"></i> Pause</button>
+          <button id="resetBtn" class="btn btn-danger btn-small"><i class="fa fa-refresh"></i> Reset</button>
+        </div>
+        <div id="pomodoroCycle" style="margin-top:.5rem; color:#185a9d; font-weight:600;">Completed cycles: 0</div>
+        <div class="toggles" aria-hidden="false" style="margin-top:.6rem;">
+          <label style="display:flex; align-items:center; gap:.35rem;">
+            <input type="checkbox" id="beepToggle" checked> Beep on end
+          </label>
+          <label style="display:flex; align-items:center; gap:.35rem;">
+            <input type="checkbox" id="autoStartToggle"> Auto-start next period
+          </label>
+        </div>
+      </div>
+    </section>
+    <!-- Newsletter Signup Removed in Local App -->
+  </main>
+  <script>
+    (function () {
+      // State
+      let timer = null;
+      let running = false;
+      let isWork = true;
+      let timeLeft = 25 * 60;
+      let cycleCount = 0;
+      let beepToggleEl, autoStartToggleEl;
+
+      // Play a beep using WebAudio oscillator (Android WebView compatible)
+      function playBeep() {
+        try {
+          var ctx = new (window.AudioContext || window.webkitAudioContext)();
+          if (ctx.state === 'suspended') ctx.resume();
+          var osc = ctx.createOscillator();
+          var gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(800, ctx.currentTime);
+          gain.gain.setValueAtTime(1.0, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.0);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 1.0);
+        } catch (e) {
+          if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
+        }
+      }
+
+      // Vibrate (if supported)
+      function vibrate(duration) {
+        try { if (navigator.vibrate) navigator.vibrate(duration || 400); } catch (e) { }
+      }
+
+      // Called when a period ends
+      function onPeriodEnd() {
+        if (beepToggleEl && beepToggleEl.checked) {
+          playBeep();
+        }
+        vibrate(300);
+        if (isWork) cycleCount++;
+        isWork = !isWork;
+        setLengths();
+        try {
+          var status = document.getElementById('pomodoroStatus');
+          if (status) {
+            status.setAttribute('aria-live', 'polite');
+            status.textContent = isWork ? "Work" : "Break";
+          }
+        } catch (e) { }
+        if (autoStartToggleEl && autoStartToggleEl.checked) {
+          setTimeout(function () { startTimer(); }, 250);
+        }
+      }
+
+      // Update display
+      function updateDisplay() {
+        var disp = document.getElementById('pomodoroDisplay');
+        var status = document.getElementById('pomodoroStatus');
+        var cycleEl = document.getElementById('pomodoroCycle');
+        if (!disp || !status || !cycleEl) return;
+        var min = Math.floor(timeLeft / 60);
+        var sec = timeLeft % 60;
+        disp.textContent = String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+        status.textContent = isWork ? "Work" : "Break";
+        cycleEl.textContent = "Completed cycles: " + cycleCount;
+      }
+
+      // Set timer lengths for current period
+      function setLengths() {
+        var workEl = document.getElementById('workLength');
+        var breakEl = document.getElementById('breakLength');
+        if (!workEl || !breakEl) return;
+        if (isWork) {
+          timeLeft = parseInt(workEl.value, 10) * 60;
+        } else {
+          timeLeft = parseInt(breakEl.value, 10) * 60;
+        }
+        updateDisplay();
+      }
+
+      // Start/Pause/Reset
+      function startTimer() {
+        if (running) return;
+        running = true;
+        timer = setInterval(function () {
+          if (timeLeft > 0) {
+            timeLeft--;
+            updateDisplay();
+          } else {
+            clearInterval(timer);
+            running = false;
+            onPeriodEnd();
+          }
+        }, 1000);
+      }
+      function pauseTimer() {
+        if (timer) clearInterval(timer);
+        running = false;
+      }
+      function resetTimer() {
+        if (timer) clearInterval(timer);
+        running = false;
+        cycleCount = 0;
+        isWork = true;
+        setLengths();
+      }
+
+
+      // Native bridge: let the Android app mirror this session (notification + widget).
+      window.TimerHavenPomodoro = {
+        getState: function () {
+          function num(id, fallback) {
+            var el = document.getElementById(id);
+            var value = el ? parseInt(el.value, 10) : NaN;
+            return isNaN(value) ? fallback : value;
+          }
+          return {
+            running: running,
+            phase: isWork ? 'work' : 'break',
+            remaining: timeLeft,
+            workMin: num('workLength', 25),
+            breakMin: num('breakLength', 5),
+            cycles: cycleCount
+          };
+        },
+        restore: function (state) {
+          if (!state) return;
+          var workEl = document.getElementById('workLength');
+          var breakEl = document.getElementById('breakLength');
+          if (workEl && state.workMin) workEl.value = state.workMin;
+          if (breakEl && state.breakMin) breakEl.value = state.breakMin;
+          isWork = state.phase !== 'break';
+          cycleCount = state.cycles || 0;
+          if (timer) clearInterval(timer);
+          running = false;
+          if (typeof state.remaining === 'number') timeLeft = state.remaining;
+          updateDisplay();
+          if (state.running && timeLeft > 0) startTimer();
+        }
+      };
+
+      function attachIfExists(id, event, cb) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener(event, cb);
+      }
+
+      // Initialize
+      function initPomodoro() {
+        beepToggleEl = document.getElementById('beepToggle');
+        autoStartToggleEl = document.getElementById('autoStartToggle');
+        attachIfExists('workLength', 'change', setLengths);
+        attachIfExists('breakLength', 'change', setLengths);
+        attachIfExists('startBtn', 'click', function () { startTimer(); });
+        attachIfExists('pauseBtn', 'click', function () { pauseTimer(); });
+        attachIfExists('resetBtn', 'click', function () { resetTimer(); });
+        // Create AudioContext on first click to satisfy autoplay policy
+        document.addEventListener('click', function onFirstClick() {
+          try { new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { }
+          document.removeEventListener('click', onFirstClick);
+        });
+        setLengths();
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          var help = document.getElementById('tool-help');
+          if (help && help.dataset && help.dataset.preserve === 'true') { /* keep */ }
+        } catch (e) { }
+        initPomodoro();
+      });
+    })();
+  </script>
+<!-- External JS dependencies removed -->
+<script src="native-timer.js"></script>
+</body>
+
+</html>

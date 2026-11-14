@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-X7WBE4P25');
+  </script>
+
+  <meta charset="UTF-8">
+  <title>Planificateur de Réunion — TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Trouvez le meilleur horaire de réunion pour tous, partout dans le monde.">
+  <link rel="canonical" href="https://timerhaven.com/meeting-planner-fr.html" />
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/meeting-planner-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/meeting-planner-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/meeting-planner-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/meeting-planner-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/meeting-planner-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/meeting-planner-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/meeting-planner-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/meeting-planner-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Meeting Planner — TimerHaven">
+  <meta property="og:description"
+    content="Boost your productivity with our free Meeting Planner. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/meeting-planner-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/meeting-planner-fr.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meeting Planner — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Meeting Planner to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/meeting-planner-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <!-- Hreflang tags for language variants -->
+  <link rel="alternate" hreflang="en" href="https://timerhaven.com/meeting-planner-en.html" />
+  <link rel="alternate" hreflang="de" href="https://timerhaven.com/meeting-planner-de.html" />
+  <link rel="alternate" hreflang="es" href="https://timerhaven.com/meeting-planner-es.html" />
+  <link rel="alternate" hreflang="el" href="https://timerhaven.com/meeting-planner-el.html" />
+  <link rel="alternate" hreflang="ru" href="https://timerhaven.com/meeting-planner-ru.html" />
+  <link rel="alternate" hreflang="ar" href="https://timerhaven.com/meeting-planner-ar.html" />
+  <link rel="alternate" hreflang="fr" href="https://timerhaven.com/meeting-planner-fr.html" />
+  <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/meeting-planner-en.html" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tool-theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/newsletter.css">
+  <script src="assets/js/syncManager.js"></script>
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      color: var(--text-dark, #102a43);
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      width: 100%;
+      max-width: 900px;
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: #007bff !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .4rem 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: #185a9d;
+    }
+
+    .cta {
+      display: inline-block;
+      margin: .35rem 0 .8rem 0;
+      padding: .45rem .7rem;
+      border-radius: 8px;
+      background: #007bff !important;
+      color: #fff !important;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+      box-shadow: 0 6px 18px rgba(0, 123, 255, 0.08);
+    }
+
+    .tool-help {
+      color: var(--muted);
+      margin-bottom: .8rem;
+    }
+
+    .meeting-form-row {
+      margin-bottom: .8rem;
+    }
+
+    .participant-item {
+      background: #fdfdfd;
+      border: 1px solid #edf2f7;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .organizer-item {
+      background: #eef4ff;
+      border: 2px solid #b3d1ff;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .participant-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Timeline Grid */
+    .timeline-container {
+      overflow-x: auto;
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 1.8rem .5rem .5rem .5rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .timeline-wrapper {
+      display: flex;
+      width: 100%;
+      position: relative;
+    }
+
+    .hour-block {
+      flex: 1;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      color: #64748b;
+      position: relative;
+      border-right: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .hour-block:last-child {
+      border-right: none;
+    }
+
+    .hour-block.work {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+
+    /* 8-16 */
+    .hour-block.evening {
+      background-color: #fef9c3;
+      color: #854d0e;
+    }
+
+    /* 16-24 */
+    .hour-block.sleep {
+      background-color: #f1f5f9;
+      color: #64748b;
+    }
+
+    /* 22-9 */
+    .hour-block.selected {
+      box-shadow: inset 0 0 0 2px #3b82f6;
+      font-weight: 900;
+      color: #b91c1c !important;
+      /* Red dot for visibility */
+      z-index: 2;
+      font-size: 1.2rem;
+    }
+
+    .hour-label {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: .75rem;
+      width: auto;
+      white-space: nowrap;
+      text-align: center;
+      color: #0b2545;
+      font-weight: 800;
+      z-index: 10;
+    }
+
+    .availability-legend {
+      display: flex;
+      gap: 1rem;
+      font-size: .8rem;
+      margin: .5rem 0 1rem 0;
+      color: #64748b;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+    }
+
+    .legend-box {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    @media (max-width:900px) {
+      .card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="main-container" role="main">
+    <section class="tool-card" aria-labelledby="tool-title">
+      <a href="index.html" class="back-link" id="back-link">← Retour au menu principal</a>
+      <h3 id="tool-title" class="tool-title"><i class="fa fa-users"></i> Planificateur de Réunion</h3>
+
+      <div class="tool-help" id="tool-help">Planifiez des réunions à travers les fuseaux horaires, ajoutez des
+        participants et choisissez le meilleur horaire.</div>
+      <!-- Participants -->
+      <form id="meetingForm" onsubmit="return false;">
+        <div class="meeting-form-row">
+          <label for="participantName" id="participant-name-label">Nom du participant</label>
+          <input autocomplete="off" type="text" id="participantName" class="form-control"
+            placeholder="Entrez le nom (ex. Jean)">
+        </div>
+        <div class="meeting-form-row">
+          <label for="participantCity" id="city-label">Fuseau horaire / Ville</label>
+          <div style="margin-bottom:.4rem;">
+            <input type="text" id="participantCityFilter" class="form-control"
+              placeholder="Rechercher une ville (ex. Paris)...">
+          </div>
+          <div style="display:flex;gap:.4rem;">
+            <select id="participantCity" class="form-select"></select>
+            <button type="button" class="btn btn-outline-primary btn-sm" id="toggle-custom-city"
+              title="Ajouter une ville personnalisée ou une zone IANA"><i class="fa fa-keyboard"></i></button>
+          </div>
+        </div>
+        <div class="meeting-form-row" id="custom-city-container"
+          style="display:none;background:#f0f7ff;padding:.6rem;border-radius:8px;">
+          <label class="small-muted" id="custom-city-title">Saisie personnalisée</label>
+          <input type="text" id="customCityName" class="form-control mb-1" placeholder="Nom affiché (ex. Lyon)">
+          <input type="text" id="customCityTz" class="form-control" placeholder="Zone IANA (ex. Europe/Paris)">
+        </div>
+        <div style="display:flex;gap:.5rem;align-items:center;">
+          <button type="button" class="btn btn-success btn-participant" id="add-participant-btn"><i
+              class="fa fa-plus"></i> <span id="add-participant-btn-text">Ajouter un participant</span></button>
+          <button type="button" class="btn btn-outline-secondary" id="clear-participants-btn"
+            title="Effacer les participants"><i class="fa fa-eraser"></i></button>
+        </div>
+      </form>
+      <div id="participantList" style="margin-top:1rem;"></div>
+      <hr>
+      <div class="meeting-form-row">
+        <label for="organizerTz" id="organizer-tz-label">Votre fuseau horaire (Organisateur)</label>
+        <div class="input-group mb-2">
+          <span class="input-group-text bg-white border-end-0 text-muted">
+            <i class="fa fa-search" style="font-size: 0.9em;"></i>
+          </span>
+          <input type="text" id="organizerTzFilter" class="form-control border-start-0 ps-0"
+            placeholder="Filtrer les villes de l'organisateur..." style="box-shadow: none;">
+        </div>
+        <select id="organizerTz" class="form-select"></select>
+      </div>
+      <div class="meeting-form-row">
+        <label for="meetingDate" id="meeting-date-label">Sélectionner la date</label>
+        <input type="date" id="meetingDate" class="form-control">
+      </div>
+      <div class="meeting-form-row">
+        <label for="meetingTimeSelect" id="meeting-time-label">Sélectionner l'heure</label>
+        <select id="meetingTimeSelect" class="form-select"></select>
+      </div>
+      <div class="availability-legend">
+        <div class="legend-item">
+          <div class="legend-box" style="background:#dcfce7;border:1px solid #166534"></div> Travail (8-16h)
+        </div>
+        <div class="legend-item">
+          <div class="legend-box" style="background:#fef9c3;border:1px solid #854d0e"></div> Soirée
+        </div>
+        <div class="legend-item">
+          <div class="legend-box" style="background:#f1f5f9;border:1px solid #64748b"></div> Nuit/Sommeil
+        </div>
+      </div>
+      <div id="meetingSummary" style="margin-top:1.2rem;display:none;">
+        <button class="btn btn-outline-primary btn-sm w-100 mb-3" id="share-summary-btn">
+          <i class="fa fa-copy"></i> Copier le résumé de la réunion
+        </button>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+  <script>
+    const translations = {
+      fr: {
+        "back-link": "← Retour au menu principal",
+        "tool-title": "Planificateur de Réunion",
+        "participant-name-label": "Nom du participant",
+        "participant-name-placeholder": "Entrez le nom (ex. Jean)",
+        "city-label": "Fuseau horaire / Ville",
+        "add-participant-btn-text": "Ajouter un participant",
+        "meeting-date-label": "Sélectionner la date",
+        "meeting-time-label": "Sélectionner l'heure (suggestion)",
+        "organizer-tz-label": "Votre fuseau horaire (Organisateur)",
+        "custom-city-title": "Saisie personnalisée",
+        "custom-city-name-placeholder": "Nom affiché (ex. Lyon)",
+        "custom-city-tz-placeholder": "Zone IANA (ex. Europe/Paris)",
+        "organizer-label": "Organisateur",
+        "howto-article-btn": "Lire l'article complet",
+        "howto-article-link": "https://timerhaven.com/fr/meeting-planner/meeting-planner-index.html",
+        "faq-list": [
+          { "bold": "Combien de participants ?", "text": "Ajoutez autant que vous le souhaitez." },
+          { "bold": "Quels fuseaux horaires ?", "text": "Choisissez parmi 30+ villes mondiales ou fuseaux horaires." },
+          { "bold": "Comment partager ?", "text": "Copiez les horaires et partagez avec vos participants." }
+        ],
+        "enter-name-msg": "Veuillez entrer un nom de participant.", "select-city-msg": "Veuillez choisir une ville / un fuseau horaire.",
+        "city-placeholder": "Rechercher une ville (ex. Paris)...", "organizer-tz-label": "Sélectionner la zone de l'organisateur",
+        "select-date-time-msg": "Veuillez sélectionner une date et une heure.", "no-participants-yet": "Aucun participant pour le moment.",
+        "meeting-times-heading": "Horaires de réunion (organisateur local → participants locaux)"
+      }
+    };
+    const localizedArticles = {
+      howto: { fr: 'https://timerhaven.com/fr/meeting-planner/meeting-planner-index.html' },
+      tips: { fr: 'meeting-tips.html' }
+    };
+    function getLang() { try { const l = localStorage.getItem('timerhavenLang') || 'fr'; return (l && l.slice(0, 2)) || 'fr'; } catch (e) { return 'fr'; } }
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0, 2);
+      const t = translations[lang] || translations.fr;
+      document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      const back = document.getElementById('back-link'); if (back) back.textContent = t['back-link'] || 'Retour au menu principal';
+      const toolTitle = document.getElementById('tool-title'); if (toolTitle) toolTitle.textContent = t['tool-title'] || 'Planificateur de Réunion';
+      const participantLabel = document.getElementById('participant-name-label'); if (participantLabel) participantLabel.textContent = t['participant-name-label'] || 'Nom du participant';
+      const participantPlaceholder = document.getElementById('participantName'); if (participantPlaceholder) participantPlaceholder.placeholder = t['participant-name-placeholder'] || '';
+      const cityLabel = document.getElementById('city-label'); if (cityLabel) cityLabel.textContent = t['city-label'] || 'Fuseau horaire / Ville';
+      const addBtnText = document.getElementById('add-participant-btn-text'); if (addBtnText) addBtnText.textContent = t['add-participant-btn-text'] || 'Ajouter un participant';
+      document.getElementById("meeting-date-label").textContent = t["meeting-date-label"] || 'Sélectionner la date';
+      document.getElementById("meeting-time-label").textContent = t["meeting-time-label"] || 'Sélectionner l\'heure (suggestion)';
+      const orgTzLabel = document.getElementById("organizer-tz-label"); if (orgTzLabel) orgTzLabel.textContent = t["organizer-tz-label"] || 'Votre fuseau horaire (Organisateur)';
+      const customTitle = document.getElementById("custom-city-title"); if (customTitle) customTitle.textContent = t["custom-city-title"] || 'Saisie personnalisée';
+      const customCityName = document.getElementById("customCityName"); if (customCityName) customCityName.placeholder = t["custom-city-name-placeholder"] || '';
+      const customCityTz = document.getElementById("customCityTz"); if (customCityTz) customCityTz.placeholder = t["custom-city-tz-placeholder"] || '';
+
+      populateCitySelect(lang);
+      populateTimeSelect();
+      updateMeetingTimes();
+    }
+    /* meeting planner logic */
+    const { DateTime } = window.luxon || {};
+    const LS_PARTICIPANTS = 'meetingPlannerParticipants_' + getLang();
+    const LS_DATE = 'meetingPlannerDate_' + getLang();
+    const LS_TIME = 'meetingPlannerTime_' + getLang();
+    async function populateCitySelect(lang) {
+      const sel = document.getElementById('participantCity');
+      const orgSel = document.getElementById('organizerTz');
+      const filterInput = document.getElementById('participantCityFilter');
+      const orgFilterInput = document.getElementById('organizerTzFilter');
+      if (!sel || !orgSel) return;
+
+      const FALLBACK = [
+        { name: "Athens", timezone: "Europe/Athens" }, { name: "Bangkok", timezone: "Asia/Bangkok" },
+        { name: "Beijing", timezone: "Asia/Shanghai" }, { name: "Berlin", timezone: "Europe/Berlin" },
+        { name: "Boston", timezone: "America/New_York" }, { name: "Buenos Aires", timezone: "America/Argentina/Buenos_Aires" },
+        { name: "Cairo", timezone: "Africa/Cairo" }, { name: "Chicago", timezone: "America/Chicago" },
+        { name: "Dubai", timezone: "Asia/Dubai" }, { name: "London", timezone: "Europe/London" },
+        { name: "Madrid", timezone: "Europe/Madrid" }, { name: "Mexico City", timezone: "America/Mexico_City" },
+        { name: "Mumbai", timezone: "Asia/Kolkata" }, { name: "New York", timezone: "America/New_York" },
+        { name: "Paris", timezone: "Europe/Paris" }, { name: "Rome", timezone: "Europe/Rome" },
+        { name: "San Francisco", timezone: "America/Los_Angeles" }, { name: "Sao Paulo", timezone: "America/Sao_Paulo" },
+        { name: "Seoul", timezone: "Asia/Seoul" }, { name: "Sydney", timezone: "Australia/Sydney" },
+        { name: "Tokyo", timezone: "Asia/Tokyo" }, { name: "Toronto", timezone: "America/Toronto" }
+      ];
+
+      function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+      function getOrCreateList(inputEl) {
+        let ul = inputEl.nextElementSibling;
+        if (!ul || !ul.classList.contains('autocomplete-list')) {
+          ul = document.createElement('ul');
+          ul.className = 'autocomplete-list';
+          ul.style.cssText = 'position:absolute; left:0; right:0; z-index:1000; background:#fff; border:1px solid #ced4da; border-radius:0 0 .25rem .25rem; max-height:200px; overflow-y:auto; margin:0; padding:0; list-style:none; box-shadow:0 4px 6px rgba(0,0,0,0.1); display:none; text-align:left;';
+          inputEl.parentNode.style.position = 'relative';
+          inputEl.parentNode.insertBefore(ul, inputEl.nextSibling);
+        }
+        return ul;
+      }
+
+      function renderAutocomplete(entries, inputEl, targetSel) {
+        const ul = getOrCreateList(inputEl);
+        if (!entries || entries.length === 0) {
+          ul.style.display = 'none';
+          return;
+        }
+        ul.innerHTML = entries.map(e => {
+          let label = e.name;
+          if (e.countryName) label += ` — ${e.countryName}`;
+          return `<li style="padding:.5rem .75rem; cursor:pointer; font-size:.95rem; border-bottom:1px solid #f0f0f0; color:#333;" data-val="${escapeHtml(e.name)}|${escapeHtml(e.timezone)}">${escapeHtml(label)} (${escapeHtml(e.timezone)})</li>`;
+        }).join('');
+        ul.style.display = 'block';
+
+        ul.querySelectorAll('li').forEach(li => {
+          li.onclick = function () {
+            const val = this.getAttribute('data-val');
+            targetSel.innerHTML = `<option value="${val}" selected>${this.textContent}</option>`;
+            targetSel.value = val;
+            inputEl.value = this.textContent;
+            ul.style.display = 'none';
+            targetSel.dispatchEvent(new Event('change'));
+          };
+        });
+      }
+
+      let latestQuery1 = '';
+      let latestQuery2 = '';
+      async function fetchCities(query, inputEl, targetSel) {
+        const isOrg = inputEl.id.toLowerCase().includes('org');
+        if (isOrg) latestQuery2 = query; else latestQuery1 = query;
+
+        if (!query || query.length < 2) {
+          renderAutocomplete(FALLBACK, inputEl, targetSel);
+          return;
+        }
+        try {
+          const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=10&language=${lang}&format=json`);
+          const data = await res.json();
+          // Check for race condition
+          if (isOrg && latestQuery2 !== query) return;
+          if (!isOrg && latestQuery1 !== query) return;
+
+          if (data && data.results && data.results.length > 0) {
+            const mapped = data.results.map(r => ({
+              name: r.name,
+              countryName: r.admin1 ? `${r.admin1}, ${r.country || ''}` : (r.country || ''),
+              timezone: r.timezone || 'UTC'
+            }));
+            renderAutocomplete(mapped, inputEl, targetSel);
+            return;
+          }
+        } catch (e) { console.warn("Open-Meteo fetch failed.", e); }
+
+        if (isOrg && latestQuery2 !== query) return;
+        if (!isOrg && latestQuery1 !== query) return;
+
+        const q = query.toLowerCase();
+        renderAutocomplete(FALLBACK.filter(e => e.name.toLowerCase().includes(q) || e.timezone.toLowerCase().includes(q)), inputEl, targetSel);
+      }
+
+      let debounceTimer1, debounceTimer2;
+      if (filterInput && !filterInput.dataset.hooked) {
+        filterInput.addEventListener('input', (e) => {
+          clearTimeout(debounceTimer1);
+          debounceTimer1 = setTimeout(() => fetchCities(e.target.value.trim(), filterInput, sel), 400);
+        });
+        filterInput.addEventListener('focus', (e) => {
+          if (!e.target.value.trim()) fetchCities('', filterInput, sel);
+        });
+        filterInput.dataset.hooked = "true";
+      }
+      if (orgFilterInput && !orgFilterInput.dataset.hooked) {
+        orgFilterInput.addEventListener('input', (e) => {
+          clearTimeout(debounceTimer2);
+          debounceTimer2 = setTimeout(() => fetchCities(e.target.value.trim(), orgFilterInput, orgSel), 400);
+        });
+        orgFilterInput.addEventListener('focus', (e) => {
+          if (!e.target.value.trim()) fetchCities('', orgFilterInput, orgSel);
+        });
+        orgFilterInput.dataset.hooked = "true";
+      }
+
+      document.addEventListener('click', e => {
+        document.querySelectorAll('.autocomplete-list').forEach(ul => {
+          if (!ul.contains(e.target) && e.target !== ul.previousElementSibling) {
+            ul.style.display = 'none';
+          }
+        });
+      });
+
+      const t = translations[lang] || translations.fr;
+      sel.innerHTML = `<option value="" disabled selected>${t["city-label"] || "Sélectionner la ville"}</option>` + FALLBACK.map(e => `<option value="${escapeHtml(e.name)}|${escapeHtml(e.timezone)}">${escapeHtml(e.name)} (${escapeHtml(e.timezone)})</option>`).join('');
+      orgSel.innerHTML = `<option value="" disabled selected>${t["organizer-tz-label"] || "Sélectionner votre zone"}</option>` + FALLBACK.map(e => `<option value="${escapeHtml(e.name)}|${escapeHtml(e.timezone)}">${escapeHtml(e.name)} (${escapeHtml(e.timezone)})</option>`).join('');
+
+      try {
+        const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+        for (let i = 0; i < orgSel.options.length; i++) {
+          if (orgSel.options[i].value.includes(browserTz)) {
+            orgSel.selectedIndex = i;
+            break;
+          }
+        }
+      } catch (e) { }
+    }
+    /* isLuxonReady checks if the library is loaded */
+    function isLuxonReady() { return typeof luxon !== 'undefined' && luxon.DateTime; }
+    const LS_ORG_TZ = 'meetingPlannerOrgTz_' + getLang();
+    function removeParticipant(idx) {
+      if (!window.participants || idx < 0 || idx >= window.participants.length) return;
+      window.participants.splice(idx, 1);
+      saveParticipants();
+      renderParticipants();
+      updateMeetingTimes();
+    }
+    function loadParticipants() {
+      try {
+        const raw = localStorage.getItem(LS_PARTICIPANTS);
+        window.participants = raw ? JSON.parse(raw) : [];
+        if (!Array.isArray(window.participants)) window.participants = [];
+      } catch (e) {
+        console.error("Failed to load participants", e);
+        window.participants = [];
+      }
+    }
+    function saveParticipants() {
+      try {
+        localStorage.setItem(LS_PARTICIPANTS, JSON.stringify(window.participants || []));
+        if (SyncManager.isAvailable()) {
+          SyncManager.saveMeeting('participants', { data: window.participants, updatedAt: Date.now() });
+        }
+      } catch (e) {
+        console.error("Failed to save participants", e);
+      }
+    }
+    function loadMeetingSettings() {
+      try {
+        const md = localStorage.getItem(LS_DATE); if (md) document.getElementById('meetingDate').value = md;
+        const mt = localStorage.getItem(LS_TIME); if (mt) document.getElementById('meetingTimeSelect').value = mt;
+        const otz = localStorage.getItem(LS_ORG_TZ);
+        if (otz) {
+          const orgTzEl = document.getElementById('organizerTz');
+          for (let i = 0; i < orgTzEl.options.length; i++) {
+            if (orgTzEl.options[i].value.endsWith('|' + otz)) {
+              orgTzEl.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      } catch (e) { console.error("Failed to load settings", e); }
+    }
+    function saveMeetingSettings() {
+      try {
+        const mdEl = document.getElementById('meetingDate');
+        const mtEl = document.getElementById('meetingTimeSelect');
+        const otzEl = document.getElementById('organizerTz');
+        if (mdEl) localStorage.setItem(LS_DATE, mdEl.value);
+        if (mtEl) localStorage.setItem(LS_TIME, mtEl.value);
+        if (otzEl) {
+          let val = otzEl.value;
+          if (val.includes('|')) val = val.split('|')[1];
+          localStorage.setItem(LS_ORG_TZ, val);
+        }
+        if (SyncManager.isAvailable()) {
+          SyncManager.saveMeeting('settings', {
+            date: mdEl ? mdEl.value : '',
+            time: mtEl ? mtEl.value : '',
+            orgTz: otzEl ? otzEl.value : '',
+            updatedAt: Date.now()
+          });
+        }
+      } catch (e) { console.error("Failed to save settings", e); }
+    }
+    function renderParticipants() {
+      const list = document.getElementById('participantList');
+      if (!list) return;
+      list.innerHTML = '';
+      if (!isLuxonReady()) {
+        list.innerHTML = `<div style="color:#b00;text-align:center;padding:1rem;">Erreur : La bibliothèque de calendrier (Luxon) n'a pas été chargée. Veuillez vérifier votre connexion et actualiser la page.</div>`;
+        return;
+      }
+      const lang = getLang();
+      const t = translations[lang] || translations.fr;
+
+      if (!window.participants || window.participants.length === 0) {
+        list.innerHTML = `<div style="color:#888;text-align:center;padding:1rem;">${t["no-participants-yet"] || "Aucun participant pour le moment."}</div>`;
+        const summary = document.getElementById('meetingSummary');
+        if (summary) summary.style.display = 'none';
+        return;
+      }
+
+      const dateInput = document.getElementById('meetingDate').value;
+      const timeInput = document.getElementById('meetingTimeSelect').value;
+      let orgTz = document.getElementById('organizerTz').value;
+      if (orgTz && orgTz.includes('|')) orgTz = orgTz.split('|')[1];
+      if (!orgTz) orgTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+
+      // Unified source of truth for the Organizer's selected moment
+      let orgBaseDate = DateTime.now().setZone(orgTz).startOf('day');
+      if (dateInput) {
+        let parsed = DateTime.fromISO(dateInput, { zone: orgTz });
+        if (!parsed.isValid) parsed = DateTime.fromFormat(dateInput, 'MM/dd/yyyy', { zone: orgTz });
+        if (!parsed.isValid) parsed = DateTime.fromFormat(dateInput, 'dd/MM/yyyy', { zone: orgTz });
+        if (parsed.isValid) orgBaseDate = parsed.startOf('day');
+      }
+
+      const selectedHour = timeInput ? parseInt(timeInput.split(':')[0]) : -1;
+      const selectedMin = timeInput ? parseInt(timeInput.split(':')[1]) : 0;
+      let selectedOrgDT = null;
+      if (selectedHour >= 0 && timeInput) {
+        selectedOrgDT = orgBaseDate.set({ hour: selectedHour, minute: selectedMin, second: 0 });
+      }
+
+      const validDateStr = orgBaseDate.toLocaleString(DateTime.DATE_HUGE);
+
+      function extractTz(cityStr) {
+        if (!cityStr) return orgTz;
+        if (cityStr.includes('(') && cityStr.includes(')')) {
+          return cityStr.split('(')[1].split(')')[0].trim();
+        }
+        return cityStr.trim();
+      }
+
+      function getSafeTz(tz) {
+        try {
+          if (!tz) return 'UTC';
+          const dt = DateTime.now().setZone(tz);
+          if (dt.isValid) return tz;
+          return 'UTC';
+        } catch (e) { return 'UTC'; }
+      }
+
+      // ===== ORGANIZER RIBBON =====
+      {
+        let orgTimelineHtml = '';
+        for (let h = 0; h < 24; h++) {
+          let statusClass = 'sleep';
+          if (h >= 8 && h < 16) statusClass = 'work';
+          else if (h >= 16 && h <= 23) statusClass = 'evening';
+          const isSelected = (h === selectedHour);
+          const hourTime = orgBaseDate.plus({ hours: h });
+          const hourLabel = isSelected && selectedOrgDT ? `<div class="hour-label">${selectedOrgDT.toFormat('h:mm a')}</div>` : '';
+          orgTimelineHtml += `<div class="hour-block ${statusClass} ${isSelected ? 'selected' : ''}" title="${hourTime.toFormat('h:mm a')} (${orgTz})">${hourLabel}${isSelected ? '●' : ''}</div>`;
+        }
+
+        let orgDisplayName = orgTz;
+        const orgSelEl = document.getElementById('organizerTz');
+        if (orgSelEl && orgSelEl.selectedIndex >= 0) {
+          const selText = orgSelEl.options[orgSelEl.selectedIndex].text;
+          if (selText) orgDisplayName = selText;
+        }
+
+        const orgItem = document.createElement('div');
+        orgItem.className = 'organizer-item';
+        orgItem.innerHTML = `
+          <div class="participant-header">
+            <div style="min-width:0;">
+              <div style="font-weight:700;color:#185a9d;"><i class="fa fa-star" style="color:#f59e0b;margin-right:.3rem;"></i>Organisateur <span style="font-weight:400;color:#64748b;font-size:0.9em;margin-left:0.5rem;">${selectedOrgDT ? selectedOrgDT.toFormat('h:mm a') : (timeInput || '')}</span></div>
+              <div style="font-size:.85em;color:#64748b;">${escapeHtml(orgDisplayName)}</div>
+            </div>
+          </div>
+          <div style="font-size:.7rem;color:#64748b;margin-bottom:.2rem;">${validDateStr}</div>
+          <div class="timeline-container">
+            <div class="timeline-wrapper">${orgTimelineHtml}</div>
+          </div>
+        `;
+        list.appendChild(orgItem);
+      }
+
+      window.participants.forEach((p, idx) => {
+        const item = document.createElement('div');
+        item.className = 'participant-item';
+        const actualTz = getSafeTz(extractTz(p.city));
+
+        let timelineHtml = '';
+        for (let h = 0; h < 24; h++) {
+          const orgTimeInstance = orgBaseDate.plus({ hours: h });
+          const pTimeInstance = orgTimeInstance.setZone(actualTz);
+          const ph = pTimeInstance.hour;
+
+          let statusClass = 'sleep';
+          if (ph >= 8 && ph < 16) statusClass = 'work';
+          else if (ph >= 16 && ph <= 23) statusClass = 'evening';
+
+          const isSelected = (h === selectedHour);
+          const hourLabel = isSelected && selectedOrgDT ? `<div class="hour-label">${selectedOrgDT.setZone(actualTz).toFormat('h:mm a')}</div>` : '';
+          timelineHtml += `<div class="hour-block ${statusClass} ${isSelected ? 'selected' : ''}" title="${pTimeInstance.toFormat('h:mm a')} (${actualTz})">${hourLabel}${isSelected ? '●' : ''}</div>`;
+        }
+
+        const pLocalTimeStr = selectedOrgDT ? selectedOrgDT.setZone(actualTz).toFormat('h:mm a') : DateTime.now().setZone(actualTz).toFormat('h:mm a');
+        const pLocalDateStr = (selectedOrgDT ? selectedOrgDT.setZone(actualTz) : DateTime.now().setZone(actualTz)).toLocaleString(DateTime.DATE_HUGE);
+
+        item.innerHTML = `
+          <div class="participant-header">
+            <div style="min-width:0;">
+              <div style="font-weight:700;color:#185a9d;">${escapeHtml(p.name)} <span style="font-weight:400;color:#64748b;font-size:0.9em;margin-left:0.5rem;">${pLocalTimeStr}</span></div>
+              <div style="font-size:.85em;color:#64748b;">${escapeHtml(p.city)}</div>
+            </div>
+            <button class="btn btn-outline-danger btn-sm trash-btn" data-idx="${idx}" aria-label="Retirer"><i class="fa fa-trash"></i></button>
+          </div>
+          <div style="font-size:.7rem;color:#64748b;margin-bottom:.2rem;">${pLocalDateStr}</div>
+          <div class="timeline-container">
+            <div class="timeline-wrapper">${timelineHtml}</div>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+
+      // Re-bind delete buttons
+      // Auto-scroll timeline to selected hour
+      list.querySelectorAll('.timeline-container').forEach(container => {
+        const selected = container.querySelector('.hour-block.selected');
+        if (selected) {
+          const containerCenter = container.clientWidth / 2;
+          const selectedCenter = selected.offsetLeft + (selected.offsetWidth / 2);
+          container.scrollTo({ left: selectedCenter - containerCenter, behavior: 'smooth' });
+        }
+      });
+      list.querySelectorAll('.trash-btn').forEach(btn => {
+        const handler = () => removeParticipant(parseInt(btn.dataset.idx));
+        btn.onclick = handler;
+        btn.ontouchstart = (e) => { e.preventDefault(); handler(); };
+      });
+    }
+    function escapeHtml(s) { if (!s) return ''; return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
+    document.addEventListener('DOMContentLoaded', function () {
+      applyLanguage(getLang());
+      populateTimeSelect();
+      loadParticipants();
+      renderParticipants();
+      loadMeetingSettings();
+      updateMeetingTimes();
+      const addBtn = document.getElementById('add-participant-btn');
+      if (addBtn) {
+        const handler = function () {
+          const name = document.getElementById('participantName').value.trim();
+          const customContainer = document.getElementById('custom-city-container');
+          let city = document.getElementById('participantCity').value.trim();
+          function findTz(name) {
+            if (!name || !window.allCities) return null;
+            const low = name.toLowerCase();
+            const match = window.allCities.find(c => c.name.toLowerCase() === low || (c.name + " (" + c.timezone + ")").toLowerCase() === low);
+            return match ? match.timezone : null;
+          }
+          if (customContainer && customContainer.style.display !== 'none') {
+            const customName = document.getElementById('customCityName').value.trim();
+            const customTz = document.getElementById('customCityTz').value.trim();
+            if (customTz) {
+              city = customTz;
+              if (customName) city = customName + " (" + customTz + ")";
+            } else if (customName) {
+              const matchedTz = findTz(customName);
+              if (matchedTz) {
+                city = customName + " (" + matchedTz + ")";
+              } else {
+                alert("Zone horaire introuvable pour : " + customName + ". Veuillez saisir la zone IANA manuellement.");
+                return;
+              }
+            }
+          } else if (city) {
+            if (city.includes('|')) {
+              const [cName, cTz] = city.split('|');
+              city = cName + " (" + cTz + ")";
+            } else {
+              const matchedTz = findTz(city);
+              if (matchedTz) city = city + " (" + matchedTz + ")";
+            }
+          }
+          const lang = getLang();
+          const t = translations[lang] || translations.fr;
+          if (!name) { alert(t['enter-name-msg'] || 'Veuillez entrer un nom de participant.'); return; }
+          if (!city) { alert(t['select-city-msg'] || 'Veuillez choisir une ville / un fuseau horaire.'); return; }
+          window.participants = window.participants || [];
+          window.participants.push({ name, city, id: 'p_' + Date.now() });
+          saveParticipants();
+          document.getElementById('participantName').value = '';
+          document.getElementById('participantCity').value = '';
+          document.getElementById('participantCityFilter').value = ''; // Clear city filter
+          document.getElementById('customCityName').value = '';
+          document.getElementById('customCityTz').value = '';
+          if (customContainer) customContainer.style.display = 'none';
+          updateMeetingTimes();
+        };
+        addBtn.addEventListener('click', handler);
+        addBtn.addEventListener('touchstart', (e) => { e.preventDefault(); handler(); });
+      }
+      const toggleCustomBtn = document.getElementById('toggle-custom-city');
+      if (toggleCustomBtn) {
+        const handler = function () {
+          const container = document.getElementById('custom-city-container');
+          if (container) {
+            container.style.display = (container.style.display === 'none') ? 'block' : 'none';
+          }
+        };
+        toggleCustomBtn.addEventListener('click', handler);
+        toggleCustomBtn.addEventListener('touchstart', (e) => { e.preventDefault(); handler(); });
+      }
+      const clearBtn = document.getElementById('clear-participants-btn');
+      if (clearBtn) {
+        const handler = function () {
+          if (!window.participants || window.participants.length === 0) return;
+          if (!confirm('Supprimer tous les participants ?')) return;
+          window.participants = [];
+          saveParticipants();
+          updateMeetingTimes();
+        };
+        clearBtn.addEventListener('click', handler);
+        clearBtn.addEventListener('touchstart', (e) => { e.preventDefault(); handler(); });
+      }
+      const meetingDateEl = document.getElementById('meetingDate');
+      if (meetingDateEl) meetingDateEl.addEventListener('input', updateMeetingTimes);
+      const meetingTimeEl = document.getElementById('meetingTimeSelect');
+      if (meetingTimeEl) meetingTimeEl.addEventListener('change', updateMeetingTimes);
+      const orgTzEl = document.getElementById('organizerTz');
+      if (orgTzEl) orgTzEl.addEventListener('change', updateMeetingTimes);
+    });
+    // Cloud Sync Listeners
+    window.addEventListener('timerhaven:cloudDataLoaded', function (e) {
+      const cloudData = e.detail;
+      if (cloudData && cloudData.meeting) {
+        let changed = false;
+        cloudData.meeting.forEach(cloudItem => {
+          if (cloudItem.id === 'participants') {
+            const cloudList = cloudItem.data || [];
+            if (JSON.stringify(cloudList) !== JSON.stringify(window.participants)) {
+              window.participants = cloudList;
+              localStorage.setItem(LS_PARTICIPANTS, JSON.stringify(window.participants));
+              changed = true;
+            }
+          } else if (cloudItem.id === 'settings') {
+            if (cloudItem.date) { document.getElementById('meetingDate').value = cloudItem.date; localStorage.setItem(LS_DATE, cloudItem.date); }
+            if (cloudItem.time) { document.getElementById('meetingTimeSelect').value = cloudItem.time; localStorage.setItem(LS_TIME, cloudItem.time); }
+            if (cloudItem.orgTz) {
+              const orgTzEl = document.getElementById('organizerTz');
+              for (let i = 0; i < orgTzEl.options.length; i++) {
+                if (orgTzEl.options[i].value.endsWith('|' + cloudItem.orgTz)) {
+                  orgTzEl.selectedIndex = i;
+                  break;
+                }
+              }
+              localStorage.setItem(LS_ORG_TZ, cloudItem.orgTz);
+            }
+            changed = true;
+          }
+        });
+        if (changed) {
+          renderParticipants();
+          updateMeetingTimes();
+        }
+      }
+    });
+    window.addEventListener('timerhaven:cloudDataChanged', function () {
+      if (SyncManager.isAvailable()) SyncManager.initialize();
+    });
+    window.removeParticipant = function (idx) { window.participants.splice(idx, 1); saveParticipants(); renderParticipants(); updateMeetingTimes(); };
+    function populateTimeSelect() {
+      const sel = document.getElementById('meetingTimeSelect');
+      if (!sel) return;
+      const lang = getLang(); const t = translations[lang] || translations.fr;
+      sel.innerHTML = '';
+      const placeholder = document.createElement('option'); placeholder.value = ''; placeholder.textContent = ' — ' + (t['meeting-time-label'] || 'Sélectionner l\'heure') + ' — '; sel.appendChild(placeholder);
+      for (let h = 0; h < 24; h++) { for (let m = 0; m < 60; m += 30) { const hr = String(h).padStart(2, '0'); const min = String(m).padStart(2, '0'); const opt = document.createElement('option'); opt.value = `${hr}:${min}`; opt.textContent = `${hr}:${min}`; sel.appendChild(opt); } }
+      if (!sel.value) {
+        const now = DateTime.local().startOf('minute'); const minutes = now.minute;
+        const next = now.plus({ minutes: (minutes < 30 ? (30 - minutes) : (60 - minutes)) });
+        const v = `${String(next.hour).padStart(2, '0')}:${String(Math.floor(next.minute / 30) * 30).padStart(2, '0')}`;
+        sel.value = v;
+      }
+    }
+    function updateMeetingTimes() {
+      if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(_updateMeetingTimesInternal);
+      } else {
+        _updateMeetingTimesInternal();
+      }
+    }
+    function _updateMeetingTimesInternal() {
+      if (!isLuxonReady()) return;
+      const dateInput = document.getElementById('meetingDate').value;
+      const timeInput = document.getElementById('meetingTimeSelect').value;
+      let orgTz = document.getElementById('organizerTz').value;
+      if (orgTz && orgTz.includes('|')) orgTz = orgTz.split('|')[1];
+      const summaryDiv = document.getElementById('meetingSummary');
+      const lang = getLang();
+      const t = translations[lang] || translations.fr;
+      saveMeetingSettings();
+      renderParticipants();
+      if (!dateInput || !timeInput || !window.participants || window.participants.length === 0) {
+        summaryDiv.style.display = 'none';
+        return;
+      }
+      summaryDiv.style.display = 'block';
+      // Attach share handler once
+      const shareBtn = document.getElementById('share-summary-btn');
+      if (shareBtn && !shareBtn.dataset.hooked) {
+        const handler = () => {
+          const text = generateShareText();
+          navigator.clipboard.writeText(text).then(() => {
+            const oldText = shareBtn.innerHTML;
+            shareBtn.innerHTML = '<i class="fa fa-check"></i> Copié !';
+            setTimeout(() => { shareBtn.innerHTML = oldText; }, 2000);
+          });
+        };
+        shareBtn.onclick = handler;
+        shareBtn.ontouchstart = (e) => { e.preventDefault(); handler(); };
+        shareBtn.dataset.hooked = "true";
+      }
+    }
+    function generateShareText() {
+      const dateInput = document.getElementById('meetingDate').value;
+      const timeInput = document.getElementById('meetingTimeSelect').value;
+      let orgTz = document.getElementById('organizerTz').value;
+      if (orgTz && orgTz.includes('|')) orgTz = orgTz.split('|')[1];
+      const localISO = `${dateInput}T${timeInput}`;
+      let organizerDT = DateTime.fromISO(localISO, { zone: orgTz });
+      let text = `📬 Invitation à une réunion (${dateInput})\n`;
+      text += `Organisateur : ${organizerDT.toLocaleString(DateTime.DATETIME_SHORT)} (${orgTz})\n\n`;
+      text += `Participants :\n`;
+      window.participants.forEach(p => {
+        let actualTz = p.city;
+        if (p.city.includes('(') && p.city.includes(')')) actualTz = p.city.split('(')[1].split(')')[0].trim();
+        const pTime = organizerDT.setZone(actualTz);
+        text += `- ${p.name} : ${pTime.toLocaleString(DateTime.DATETIME_SHORT)} (${p.city})\n`;
+      });
+      text += `\nGénéré par le planificateur de réunion TimerHaven`;
+      return text;
+    }
+    window.addEventListener('storage', function (e) {
+      if (e.key === 'timerhavenLang') {
+        applyLanguage((e.newValue || 'fr').slice(0, 2));
+      }
+    });
+  </script>
+</body>
+
+</html>

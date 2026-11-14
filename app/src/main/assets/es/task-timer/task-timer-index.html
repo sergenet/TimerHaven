@@ -1,0 +1,212 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+
+  <meta charset="utf-8">
+  <title>Task Timer — Medir el tiempo, mejorar estimaciones | TimerHaven</title>
+  <meta name="description" content="C?mo usar Task Timer para medir la duracin real de las tareas, analizar interrupciones y mejorar las estimaciones. Incluye HowTo, FAQ, plantilla CSV descargable y datos estructurados.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="canonical" href="https://timerhaven.com/es/task-timer/task-timer-index.html">
+  <meta name="author" content="Serge Shammas">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Registrar y analizar el tiempo de tareas con Task Timer",
+    "description": "Un flujo para medir el tiempo real dedicado a tareas, contabilizar interrupciones y usar esos datos para una mejor planificaci?n.",
+    "image": "/assets/images/tasktimer-snapshot.png"
+  }
+  </script>
+  <style>
+    :root{--brand:#0b63a0;--brand-dark:#09507a;--muted:#6b7c89;--card:#fff;--bg:#fbfeff;--link-blue:#0d6efd}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:#102a43;margin:0;padding:2rem;line-height:1.6;}
+    .container{max-width:920px;margin:0 auto;}
+    .card{background:var(--card);padding:2rem;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.06);}
+    h1{color:var(--brand);margin-top:0;font-size:1.8rem;}
+    .meta{color:var(--muted);font-size:0.95rem;margin-bottom:1rem;}
+    .lead{font-size:1.05rem;margin-top:0;margin-bottom:1rem;}
+    .section{margin-top:1.1rem;}
+    .workflow{background:#fff7f0;border-left:4px solid #ffd1a7;padding:0.9rem;border-radius:8px;margin-bottom:0.9rem;}
+    .cta{display:inline-block;padding:0.6rem 1rem;border-radius:8px;background:var(--brand);color:#fff;text-decoration:none;}
+    .muted{color:var(--muted);}
+    .author{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .author img{width:56px;height:56px;border-radius:50%;object-fit:cover;}
+    pre.template{background:#f3f7fb;padding:0.75rem;border-radius:6px;overflow:auto;}
+    nav.toc{margin:0.75rem 0;padding:0.5rem 0;border-left:3px solid #eef5fb;}
+    nav.toc a{display:inline-block;margin-right:1rem;color:var(--brand);text-decoration:none;font-weight:600;}
+    /* Back link and read-guide button colors explicit to blue */
+    .back-link{display:inline-block;margin-bottom:.75rem;color:var(--link-blue) !important;text-decoration:none;font-weight:700}
+    .back-link:hover{text-decoration:underline}
+    .read-guide-btn{display:inline-block;padding:.45rem .7rem;border-radius:8px;background:var(--link-blue);color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;border:none}
+    @media (max-width:520px) { .card{padding:1rem} }
+  </style>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Task Timer — Medir el tiempo, mejorar estimaciones | TimerHaven">
+  <meta property="og:description" content="C?mo usar Task Timer para medir la duracin real de las tareas, analizar interrupciones y mejorar las estimaciones. Incluye HowTo, FAQ, plantilla CSV descargable y datos estructurados.">
+  <meta property="og:image" content="https://timerhaven.com/images/social-banner.png">
+  <meta property="og:url" content="https://timerhaven.com/es/task-timer/task-timer-index.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Task Timer — Medir el tiempo, mejorar estimaciones | TimerHaven">
+  <meta name="twitter:description" content="C?mo usar Task Timer para medir la duracin real de las tareas, analizar interrupciones y mejorar las estimaciones. Incluye HowTo, FAQ, plantilla CSV descargable y datos estructurados.">
+  <meta name="twitter:image" content="https://timerhaven.com/images/social-banner.png">
+</head>
+<body>
+  <main class="container">
+    <article class="card" aria-labelledby="title">
+      <a href="/es/index.html" class="back-link" id="back-link">&larr;&nbsp;Volver al men? principal</a>
+      <h1 id="title">Task Timer — Medir el tiempo, mejorar estimaciones</h1>
+      <div class="author" role="articleauthor" aria-label="Autor del art?culo">
+        <img src="/assets/images/authors/serge-shammas-200.jpg" srcset="/assets/images/authors/serge-shammas-400.jpg 2x" width="56" height="56" alt="Serge Shammas  redactor de productividad e investigador UX" loading="lazy">
+        <div>
+          <div class="byline"><strong>Por Serge Shammas</strong>  redactor de productividad e investigador UX</div>
+          <div class="meta">Publicado: 2025-10-25  ?ltima actualizaci?n: 2025-11-21  Tiempo de lectura: 710 min</div>
+        </div>
+      </div>
+      <p class="lead">Task Timer te ayuda a registrar el tiempo real dedicado a las tareas para detectar trabajos subestimados, medir interrupciones y mejorar la planificaci?n. Esta gua cubre la configuraci?n, buenas prcticas de registro, exportacin CSV y recetas de an?lisis.</p>
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a href="#setup">Configuraci?n</a>
+        <a href="#howto">C?mo registrar</a>
+        <a href="#analysis">Exportar & analizar</a>
+        <a href="#download">Descargar CSV</a>
+        <a href="#case-studies">Casos de uso</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <section class="section" id="setup" aria-labelledby="setup">
+        <h2 id="setup">Configuraci?n & nomenclatura</h2>
+        <p>Usa nombres claros para las tareas e incluye una duracin esperada entre parntesis (p. ej., <em>Escribir tests unitarios (45m)</em>). Aade etiquetas para proyecto y tipo. Esta coherencia facilita el anlisis de los CSV exportados  las etiquetas deben ser cortas y constantes (project-alpha, meeting, review).</p>
+      </section>
+      <section class="section" id="howto" aria-labelledby="howto">
+        <h2>C?mo registrar una sesi?n</h2>
+        <div class="workflow">
+          <strong>Registrar</strong>
+          <ol>
+            <li>Crea la entrada de tarea con la duracin esperada y las etiquetas.</li>
+            <li>Inicia el Task Timer cuando empieces a trabajar; anota interrupciones en el campo de notas.</li>
+            <li>Det?n el temporizador al acabar y aade un breve resumen de lo realizado.</li>
+          </ol>
+        </div>
+      </section>
+      <section class="section" id="analysis" aria-labelledby="analysis">
+        <h2>Exportar & analizar</h2>
+        <p>Exporta CSV semanales y calcula medias por etiqueta o proyecto. Mtricas clave: tiempo medio por tarea, mediana (menos sensible a valores at?picos) y tasa de interrupciones (% de sesiones con interrupciones).</p>
+        <div class="workflow">
+          <strong>Receta  revisin semanal</strong>
+          <ol>
+            <li>Exporta las sesiones de la semana en CSV.</li>
+            <li>En una hoja de c?lculo, calcula la duracin media por etiqueta y ordena las tareas ms largas para refinar estimaciones.</li>
+            <li>Usa los hallazgos para reequilibrar bloques Pomodoro y eventos de calendario pr?ximos.</li>
+          </ol>
+        </div>
+        <div class="section" aria-labelledby="example">
+          <h3 id="example">Ejemplo de hoja de c?lculo</h3>
+          <table class="sample" aria-hidden="false">
+            <thead><tr><th>Fecha</th><th>Tarea</th><th>Real (min)</th><th>Interrupciones</th></tr></thead>
+            <tbody>
+              <tr><td>2025-11-03</td><td>Revisi?n de c?digo</td><td>60</td><td>1</td></tr>
+              <tr><td>2025-11-04</td><td>Feature X</td><td>120</td><td>0</td></tr>
+              <tr><td>2025-11-06</td><td>Correcci?n de bug</td><td>45</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="section" id="download" aria-labelledby="download">
+        <h2>Descargar  Plantilla CSV de Task Timer</h2>
+        <p class="muted">Usa este CSV para sembrar sesiones manualmente o probar flujos de importaci?n/exportaci?n.</p>
+        <p><a href="#" id="downloadTaskCsv" class="cta" aria-label="Descargar plantilla CSV Task Timer">Descargar plantilla CSV</a></p>
+        <pre id="taskCsvTemplate" class="template" aria-hidden="true">date,task,tag,expected_minutes,actual_minutes,interruptions,notes
+2025-11-01,Escribir feature X,project-alpha,45,50,1,"Interrupci?n: reuni?n"</pre>
+        <script>
+          document.getElementById('downloadTaskCsv').addEventListener('click', function(e){
+            e.preventDefault();
+            var text = document.getElementById('taskCsvTemplate').textContent;
+            var blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'tasktimer-template-es.csv';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 150);
+          });
+        </script>
+      </section>
+      <section class="section" id="case-studies" aria-labelledby="case-studies">
+        <h2>Casos de uso & consejos</h2>
+        <div class="workflow">
+          <strong>Desarrollador  Paolo</strong>
+          <p>Tras 2 semanas de seguimiento, Paolo descubri? que la revisin de cdigo supon—a el 20 % de su jornada. Program? bloques dedicados de revisin y redujo el cambio de contexto fragmentado.</p>
+        </div>
+        <div class="workflow">
+          <strong>Consultora  Rina</strong>
+          <p>Rina registraba llamadas con clientes como interrupciones; ahora reserva bloques de enfoque y registra el tiempo previsto de reunin para evitar sobrecompromisos.</p>
+        </div>
+      </section>
+      <section class="section" id="faq" aria-labelledby="faq">
+        <h2 id="faq">FAQ</h2>
+        <div class="muted">
+          <p><strong>P:</strong> ?Task Timer puede funcionar junto a Pomodoro?<br><strong>R:</strong> S?  usa Task Timer para un registro detallado y Pomodoro para bloques de enfoque; vincula una entrada de Task Timer a un Pomodoro antes de empezar para datos ms limpios.</p>
+          <p><strong>P:</strong> ?Hay exportacin offline?<br><strong>R:</strong> La exportacin CSV se realiza en el cliente y funciona sin conexi?n; guarda los archivos localmente para copias de seguridad o transferencia.</p>
+          <p><strong>P:</strong> ?Puedo importar CSVs de otras herramientas?<br><strong>R:</strong> El modelo contiene campos sencillos (date, task, tag, expected_minutes, actual_minutes, interruptions, notes). Mapea los campos de otros exports a estas columnas para importar o inicializar tu dataset.</p>
+        </div>
+      </section>
+      <p class="muted" style="margin-top:1rem;">Herramientas relacionadas: <a href="/notes-es.html">Notas</a>  <a href="/pomodoro-es.html">Pomodoro</a>  <a href="/calendar-es.html">Calendario</a></p>
+      <p style="margin-top:1.2rem;"><a href="https://timerhaven.com/timer-es.html" class="cta" aria-label="Abrir herramienta Task Timer" rel="help">Abrir Task Timer</a></p>
+      <footer style="margin-top:1.4rem;color:var(--muted);font-size:0.95rem;">
+        <p>?Preguntas o comentarios? Contctanos en <a href="mailto:support@timerhaven.com">support@timerhaven.com</a>. Lee nuestra <a href="/privacy.html">Pol?tica de privacidad</a>.</p>
+      </footer>
+    </article>
+  </main>
+  <!-- Floating pill inline (Volver a Task Timer) -->
+  <a
+    href="https://timerhaven.com/timer-es.html"
+    role="button"
+    aria-label="Volver a Task Timer"
+    title="Volver a Task Timer"
+    data-return-pill="tasktimer"
+    style="position:fixed;right:26px;bottom:26px;z-index:2147483647;display:inline-flex;align-items:center;gap:12px;padding:11px 16px;border-radius:999px;background:linear-gradient(180deg,#2faaff,#0b63a0);color:#fff;font-weight:700;text-decoration:none;box-shadow:0 18px 40px rgba(3,56,102,0.22);cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;backface-visibility:hidden;transform:translateZ(0);">
+    <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.12);color:#fff;font-size:18px;flex:0 0 44px;">?</span>
+    <span style="font-size:16px;line-height:1;white-space:nowrap;padding-right:6px;">Volver a Task Timer</span>
+  </a>
+  <script>
+    // Activacin por teclado + animacin de entrada (respeta reduced-motion)
+    (function(){
+      try {
+        var pill = document.querySelector('[data-return-pill="tasktimer"]');
+        if (!pill) return;
+        if (!pill.hasAttribute('tabindex')) pill.setAttribute('tabindex','0');
+        pill.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pill.click(); }
+        });
+        try {
+          var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+          if (!mq || !mq.matches) {
+            pill.style.opacity = '0';
+            pill.style.transform = 'translateY(8px)';
+            window.addEventListener('load', function(){
+              setTimeout(function(){
+                pill.style.transition = 'transform .32s cubic-bezier(.2,.9,.2,1), opacity .28s ease';
+                pill.style.opacity = '1';
+                pill.style.transform = 'translateY(0)';
+              }, 110);
+            });
+          }
+        } catch(e){}
+      } catch(err) { /* silent */ }
+    })();
+  </script>
+</body>
+</html>
+
+

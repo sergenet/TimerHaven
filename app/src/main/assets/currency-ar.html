@@ -1,0 +1,298 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-X7WBE4P25');
+  </script>
+
+  <meta charset="utf-8" />
+  <title>محول العملات — TimerHaven</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Multilingual SEO -->
+  <link rel="alternate" href="https://timerhaven.com/currency-en.html" hreflang="en" />
+  <link rel="alternate" href="https://timerhaven.com/currency-fr.html" hreflang="fr" />
+  <link rel="alternate" href="https://timerhaven.com/currency-es.html" hreflang="es" />
+  <link rel="alternate" href="https://timerhaven.com/currency-de.html" hreflang="de" />
+  <link rel="alternate" href="https://timerhaven.com/currency-ru.html" hreflang="ru" />
+  <link rel="alternate" href="https://timerhaven.com/currency-el.html" hreflang="el" />
+  <link rel="alternate" href="https://timerhaven.com/currency-ar.html" hreflang="ar" />
+  <link rel="alternate" href="https://timerhaven.com/currency-en.html" hreflang="x-default" />
+  <!-- Social Media Optimization -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Currency Converter — TimerHaven">
+  <meta property="og:description"
+    content="Boost your productivity with our free Currency Converter. No trackers, pure focus.">
+  <meta property="og:image" content="https://timerhaven.com/currency-share-image.png">
+  <meta property="og:url" content="https://timerhaven.com/currency-ar.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Currency Converter — TimerHaven">
+  <meta name="twitter:description" content="Use our privacy-friendly Currency Converter to master your day.">
+  <meta name="twitter:image" content="https://timerhaven.com/currency-share-image.png">
+
+  <!-- Multilingual SEO -->
+  <!-- Social Media Optimization -->
+
+  <meta name="description" content="حوّل العملات باستخدام أسعار الصرف المباشرة." />
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tool-theme.css">
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+  <style>
+    :root {
+      --brand: #0b63a0;
+      --muted: #6b7c89;
+      --card: #fff;
+      --bg: #fbfeff
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--text-dark, #102a43);
+      margin: 0;
+      padding: 2rem;
+      direction: rtl;
+    }
+
+    /* Centered single-tool layout (matches English version) */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 90vh;
+      padding: 0 12px;
+      box-sizing: border-box;
+    }
+
+    .center-row {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .tool-card {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      padding: 1.6rem 1.5rem;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 520px;
+      text-align: right;
+    }
+
+    /* Standard blue used across tools for Back link and Read full guide */
+    .back-link {
+      display: inline-block;
+      margin-bottom: .75rem;
+      color: #007bff !important;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .tool-title {
+      font-size: 1.35rem;
+      margin: 0 0 .4rem 0;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: #185a9d;
+      justify-content: flex-end;
+    }
+
+    .tool-help {
+      color: var(--muted);
+      margin-bottom: .8rem;
+      text-align: right;
+    }
+
+    /* Read guide (compact blue button, opens new tab) */
+    .converter-form {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .converter-result {
+      font-weight: 700;
+      font-size: 1.12rem;
+      margin-bottom: 1rem;
+      color: var(--text-dark, #102a43);
+      text-align: right;
+    }
+
+    @media (max-width:900px) {
+      .tool-card {
+        padding: 1rem;
+      }
+
+      .converter-form {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>try { localStorage.setItem('timerhavenLang', 'ar'); } catch (e) { };</script>
+  <main class="main-container" role="main">
+    <div class="center-row">
+      <section class="tool-card" aria-labelledby="tool-title">
+        <a href="index.html" class="back-link" id="back-link">← العودة إلى القائمة الرئيسية</a>
+        <div id="tool-title" class="tool-title"><i class="fa fa-dollar-sign"></i> محول العملات</div>
+        <!-- Read full guide button (Arabic canonical path) -->
+        <div class="tool-help" id="tool-help">حوّل العملات باستخدام أسعار الصرف المباشرة.</div>
+        <div class="converter-section">
+          <form class="converter-form" id="currencyForm">
+            <input type="number" min="0" step="any" id="amount" class="form-control" placeholder=""
+              style="max-width:120px;" aria-label="المبلغ">
+            <select id="fromCurrency" class="form-select" style="max-width:140px;"></select>
+            <span style="font-size:1.3em;line-height:1.6;">→</span>
+            <select id="toCurrency" class="form-select" style="max-width:140px;"></select>
+            <button type="submit" class="btn btn-primary btn-sm" id="convert-btn">تحويل</button>
+          </form>
+          <div id="result" class="converter-result">المبلغ المحول يظهر هنا.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script>
+    // -- Currency Converter JS using ExchangeRate-API --
+    const apiKey = "5f484bfa921ef56c9c279660";
+    const currencyList = [
+      "USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "CNY", "SEK", "NZD", "MXN", "SGD", "HKD", "NOK", "KRW", "TRY", "INR", "RUB", "BRL", "ZAR"
+    ];
+    const currencyTranslations = {
+      en: {
+        "language-label": "Language:",
+        "back-link": "← Back to Main Menu",
+        "tool-title": "Currency Converter",
+        "tool-help": "Convert currencies using live exchange rates.",
+        "amount": "Amount",
+        "convert": "Convert",
+        "result-placeholder": "Converted amount will appear here.",
+        "fetching": "Fetching rate...",
+        "amount-error": "Please enter a valid amount.",
+        "conversion-unavailable": "Conversion not available.",
+        "fetch-error": "Could not fetch conversion."
+      },
+      ar: {
+        "language-label": "اللغة:",
+        "back-link": "← العودة إلى القائمة الرئيسية",
+        "tool-title": "محول العملات",
+        "tool-help": "حوّل العملات باستخدام أسعار الصرف المباشرة.",
+        "amount": "المبلغ",
+        "convert": "تحويل",
+        "result-placeholder": "المبلغ المحول يظهر هنا.",
+        "fetching": "جاري جلب السعر...",
+        "amount-error": "يرجى إدخال مبلغ صحيح.",
+        "conversion-unavailable": "التحويل غير متاح.",
+        "fetch-error": "تعذر جلب التحويل.",
+        "fetch-error": "تعذر جلب التحويل."
+      }
+      // other languages may be present but are not required here
+    };
+    const langNames = { en: "English", fr: "Français", de: "Deutsch", ru: "Русский", el: "Ελληνικά", es: "Español", ar: "العربية" };
+    function populateCurrencySelects() {
+      const from = document.getElementById('fromCurrency');
+      const to = document.getElementById('toCurrency');
+      from.innerHTML = '';
+      to.innerHTML = '';
+      currencyList.forEach(cur => {
+        from.innerHTML += `<option value="${cur}">${cur}</option>`;
+        to.innerHTML += `<option value="${cur}">${cur}</option>`;
+      });
+      from.value = "USD";
+      to.value = "EUR";
+    }
+    function getLang() {
+      try {
+        const l = localStorage.getItem('timerhavenLang') || 'ar';
+        return (l && l.slice(0, 2)) || 'ar';
+      } catch (e) {
+        return 'ar';
+      }
+    }
+    function applyLanguage(lang) {
+      lang = (lang || getLang()).slice(0, 2);
+      const t = currencyTranslations[lang] || currencyTranslations['ar'];
+      // direction
+      document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      // UI text
+      const back = document.getElementById('back-link');
+      if (back) back.textContent = t['back-link'] || '';
+      const toolTitle = document.getElementById('tool-title');
+      if (toolTitle) toolTitle.innerHTML = `<i class="fa fa-dollar-sign"></i> ${t['tool-title'] || ''}`;
+      const help = document.getElementById('tool-help');
+      if (help) help.textContent = t['tool-help'] || '';
+      const amount = document.getElementById('amount');
+      if (amount) amount.placeholder = t['amount'] || '';
+      const convertBtn = document.getElementById('convert-btn');
+      if (convertBtn) convertBtn.textContent = t['convert'] || 'تحويل';
+      const resultEl = document.getElementById('result');
+      if (resultEl) resultEl.textContent = t['result-placeholder'] || '';
+    }
+    // handle conversion form submit
+    document.getElementById('currencyForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const amountVal = parseFloat(document.getElementById('amount').value);
+      const fromCur = document.getElementById('fromCurrency').value;
+      const toCur = document.getElementById('toCurrency').value;
+      const lang = getLang();
+      const t = currencyTranslations[lang] || currencyTranslations['ar'];
+      if (isNaN(amountVal) || amountVal <= 0) {
+        document.getElementById('result').innerText = t['amount-error'] || "يرجى إدخال مبلغ صحيح.";
+        return;
+      }
+      document.getElementById('result').innerText = t['fetching'] || "جاري جلب السعر...";
+      fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${fromCur}/${toCur}/${amountVal}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data && typeof data.conversion_result !== 'undefined') {
+            const conv = (Math.round((data.conversion_result + Number.EPSILON) * 100000) / 100000);
+            const rate = (Math.round((data.conversion_rate + Number.EPSILON) * 100000) / 100000);
+            document.getElementById('result').innerText = `${amountVal} ${fromCur} = ${conv} ${toCur} (السعر: ${rate})`;
+          } else {
+            document.getElementById('result').innerText = t['conversion-unavailable'] || "التحويل غير متاح.";
+          }
+        })
+        .catch(() => {
+          document.getElementById('result').innerText = t['fetch-error'] || "تعذر جلب التحويل.";
+        });
+    });
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', function () {
+      populateCurrencySelects();
+      applyLanguage(getLang());
+    });
+    // React to language changes from other tabs
+    window.addEventListener('storage', function (e) {
+      if (e.key === 'timerhavenLang') applyLanguage((e.newValue || 'ar').slice(0, 2));
+    });
+  </script>
+
+</body>
+
+</html>

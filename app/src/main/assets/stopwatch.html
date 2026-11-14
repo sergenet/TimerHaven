@@ -1,0 +1,383 @@
+﻿ï»؟<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X7WBE4P25"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X7WBE4P25');
+</script>
+
+  <meta charset="UTF-8" />
+  <title data-i18n="pageTitle">Stopwatch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Measure elapsed time for any activity." />
+  <link href="assets/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/fontawesome/css/all.min.css" />
+  <style>
+    body { background: #f4f7fb; font-family: 'Montserrat', Arial, sans-serif; }
+    .main-container { max-width: 1200px; margin: 2em auto; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+    .center-row { display: flex; flex-direction: row; justify-content: center; align-items: flex-start; gap: 2em; width: 100%; }
+    .article-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 330px; min-width: 200px; min-height: 340px; height: 340px; display:flex; flex-direction:column; padding:1em; box-sizing:border-box; }
+    .tool-card { background: #fff; border-radius: 16px; box-shadow: 0 2px 12px #e0e7ef; width: 410px; min-width: 240px; min-height: 330px; display:flex; flex-direction:column; padding:1em; box-sizing:border-box; }
+    .stopwatch-display { font-size: 2em; font-weight: bold; margin: 1em 0; text-align: center; }
+    .stopwatch-btns button { margin: 0 0.3em 0.3em 0; }
+    .lap-list { margin-top: 1em; margin-bottom: 1em; }
+    .lap-item { background: #f7fafc; border-radius: 7px; padding: 0.3em 0.8em; margin-bottom: 0.3em; font-size: 1em; }
+    .back-link { display: inline-block; margin-bottom: 1em; color: #007bff; text-decoration: none; font-weight: bold; font-size: 1em; }
+    .faq-section { margin-top: 1.1em; margin-bottom: 0.3em; font-size: 1em; background: #f7fafc; border-radius: 8px; padding: 1em; box-shadow: 0 1px 4px #e0e7ef; }
+    @media (max-width: 1100px) { .main-container{padding:0 8px;} .center-row{gap:1em;} .tool-card,.article-card{width:97vw;max-width:540px;height:auto;} }
+  </style>
+<script>
+
+</script>
+<script>
+window.__timerhaven_ad_client = "ca-pub-0467059729557007";
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="main-container">
+    <div class="center-row">
+      <div class="article-card" aria-label="How to">
+        <div>
+          <h2><i class="fa fa-clock"></i> <span data-i18n="howToHeading">How to Use Stopwatch</span></h2>
+          <ol>
+            <li data-i18n="howTo1"><b>Start the timer:</b> Click "Start" to begin tracking time.</li>
+            <li data-i18n="howTo2"><b>Pause or reset:</b> Use pause and reset as needed.</li>
+            <li data-i18n="howTo3"><b>Track laps:</b> Record lap times for activities.</li>
+          </ol>
+        </div>
+        <!-- default hrefs kept for safety; script will rewrite to language-specific files on load -->
+        <a id="howto-link" href="stopwatch-how-to.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" data-i18n="readFull">Read Full Article</a>
+      </div>
+
+      <div class="tool-card" role="region" aria-labelledby="sw-title">
+        <a href="index.html" class="back-link" data-i18n="back">Back to Main Menu</a>
+        <h3 id="sw-title"><i class="fa fa-clock"></i> <span data-i18n="toolTitle">Stopwatch</span></h3>
+
+        <div class="stopwatch-section">
+          <div class="stopwatch-display" id="swDisplay">00:00:00</div>
+          <div class="stopwatch-btns">
+            <button id="swStartBtn" class="btn btn-success btn-sm"><i class="fa fa-play"></i> <span data-i18n="start">Start</span></button>
+            <button id="swPauseBtn" class="btn btn-secondary btn-sm"><i class="fa fa-pause"></i> <span data-i18n="pause">Pause</span></button>
+            <button id="swResetBtn" class="btn btn-danger btn-sm"><i class="fa fa-refresh"></i> <span data-i18n="reset">Reset</span></button>
+            <button id="swLapBtn" class="btn btn-info btn-sm"><i class="fa fa-flag"></i> <span data-i18n="lap">Lap</span></button>
+          </div>
+          <div id="lapList" class="lap-list" aria-live="polite"></div>
+        </div>
+
+        <details class="faq-section">
+          <summary data-i18n="faqs">FAQs</summary>
+          <ul>
+            <li data-i18n="faq1"><b>Can I track multiple laps?</b> Yes, use the lap button.</li>
+            <li data-i18n="faq2"><b>Will the time persist?</b> No, it resets after page reload.</li>
+            <li data-i18n="faq3"><b>Is this free?</b> Yes, all TimerHaven tools are free.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="article-card" aria-label="Tips">
+        <div>
+          <h2><i class="fa fa-lightbulb" style="color:#43cea2;"></i> <span data-i18n="tipsHeading">Stopwatch Productivity Tips</span></h2>
+          <ul>
+            <li data-i18n="tip1"><b>Use for workouts:</b> Track sets and rest intervals.</li>
+            <li data-i18n="tip2"><b>Time tasks:</b> Measure work sessions for productivity.</li>
+            <li data-i18n="tip3"><b>Review laps:</b> Analyze lap times to improve efficiency.</li>
+          </ul>
+        </div>
+        <!-- default href; will be rewritten to language-specific variant on load -->
+        <a id="tips-link" href="stopwatch-tips.html" class="btn btn-outline-primary btn-sm" style="margin-bottom:0;" data-i18n="readFull">Read Full Article</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Preserve original stopwatch logic (unchanged behavior)
+    let swTimer = null, swStart = null, swElapsed = 0, swRunning = false, laps = [];
+    function swFormat(ms) {
+      let t = Math.floor(ms / 1000);
+      let h = Math.floor(t / 3600);
+      let m = Math.floor((t % 3600) / 60);
+      let s = t % 60;
+      return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+    function swUpdateDisplay() {
+      const disp = document.getElementById('swDisplay');
+      if (disp) disp.textContent = swFormat(swElapsed);
+      let lapList = document.getElementById('lapList');
+      if (lapList) lapList.innerHTML = laps.map((lap,i) => `<div class="lap-item">Lap ${i+1}: ${swFormat(lap)}</div>`).join('');
+    }
+    document.getElementById('swStartBtn').onclick = function() {
+      if(swRunning) return;
+      swRunning = true;
+      swStart = Date.now() - swElapsed;
+      swTimer = setInterval(function(){
+        swElapsed = Date.now() - swStart;
+        swUpdateDisplay();
+      },100);
+    };
+    document.getElementById('swPauseBtn').onclick = function() {
+      swRunning = false;
+      clearInterval(swTimer);
+    };
+    document.getElementById('swResetBtn').onclick = function() {
+      swRunning = false;
+      clearInterval(swTimer);
+      swElapsed = 0;
+      laps = [];
+      swUpdateDisplay();
+    };
+    document.getElementById('swLapBtn').onclick = function() {
+      if(swRunning) laps.push(swElapsed);
+      swUpdateDisplay();
+    };
+    swUpdateDisplay();
+
+    /* i18n layer: full translations (includes de, ru, el, ar) */
+    const translations = {
+      en: {
+        pageTitle: "Stopwatch",
+        back: "Back to Main Menu",
+        howToHeading: "How to Use Stopwatch",
+        howTo1: "Start the timer: Click \"Start\" to begin tracking time.",
+        howTo2: "Pause or reset: Use pause and reset as needed.",
+        howTo3: "Track laps: Record lap times for activities.",
+        readFull: "Read Full Article",
+        toolTitle: "Stopwatch",
+        start: "Start",
+        pause: "Pause",
+        reset: "Reset",
+        lap: "Lap",
+        faqs: "FAQs",
+        faq1: "Can I track multiple laps? Yes, use the lap button.",
+        faq2: "Will the time persist? No, it resets after page reload.",
+        faq3: "Is this free? Yes, all TimerHaven tools are free.",
+        tipsHeading: "Stopwatch Productivity Tips",
+        tip1: "Use for workouts: Track sets and rest intervals.",
+        tip2: "Time tasks: Measure work sessions for productivity.",
+        tip3: "Review laps: Analyze lap times to improve efficiency."
+      },
+      fr: {
+        pageTitle: "Chronomأ¨tre",
+        back: "Retour au menu principal",
+        howToHeading: "Comment utiliser le chronomأ¨tre",
+        howTo1: "Dأ©marrez le chronomأ¨tre : cliquez sur آ« Dأ©marrer آ» pour commencer.",
+        howTo2: "Mettre en pause ou rأ©initialiser : utilisez pause et rأ©initialiser selon besoin.",
+        howTo3: "Enregistrez des tours : Notez les temps au tour.",
+        readFull: "Lire l'article complet",
+        toolTitle: "Chronomأ¨tre",
+        start: "Dأ©marrer",
+        pause: "Pause",
+        reset: "Rأ©initialiser",
+        lap: "Tour",
+        faqs: "FAQ",
+        faq1: "Puis-je suivre plusieurs tours ? Oui, utilisez le bouton Tour.",
+        faq2: "Le temps persiste-t-il ? Non, il est rأ©initialisأ© au rechargement.",
+        faq3: "Est-ce gratuit ? Oui, tous les outils TimerHaven sont gratuits.",
+        tipsHeading: "Conseils pour le chronomأ¨tre",
+        tip1: "Utilisez-le pour l'entraأ®nement : suivez sأ©ries et pauses.",
+        tip2: "Chronomأ©trez les tأ¢ches : mesurez les sessions de travail.",
+        tip3: "Analysez les tours : amأ©liorez vos performances."
+      },
+      es: {
+        pageTitle: "Cronأ³metro",
+        back: "Volver al menأ؛ principal",
+        howToHeading: "Cأ³mo usar el cronأ³metro",
+        howTo1: "Inicia el cronأ³metro: haz clic en \"Iniciar\" para comenzar.",
+        howTo2: "Pausar o reiniciar: usa pausa y reiniciar segأ؛n necesites.",
+        howTo3: "Registrar vueltas: guarda los tiempos por vuelta.",
+        readFull: "Leer artأ­culo completo",
+        toolTitle: "Cronأ³metro",
+        start: "Iniciar",
+        pause: "Pausa",
+        reset: "Reiniciar",
+        lap: "Vuelta",
+        faqs: "Preguntas frecuentes",
+        faq1: "آ؟Puedo registrar varias vueltas? Sأ­, usa el botأ³n Vuelta.",
+        faq2: "آ؟Persiste el tiempo? No, se reinicia al recargar la pأ،gina.",
+        faq3: "آ؟Es gratis? Sأ­, todas las herramientas de TimerHaven son gratuitas.",
+        tipsHeading: "Consejos para el cronأ³metro",
+        tip1: "أڑsalo para entrenamientos: controla series y descansos.",
+        tip2: "Cronometra tareas: mide sesiones de trabajo.",
+        tip3: "Revisa vueltas: mejora tu eficiencia."
+      },
+      de: {
+        pageTitle: "Stoppuhr",
+        back: "Zurأ¼ck zum Hauptmenأ¼",
+        howToHeading: "So benutzt du die Stoppuhr",
+        howTo1: "Starte die Zeitmessung: Klicke 'Start', um zu beginnen.",
+        howTo2: "Pause oder Zurأ¼cksetzen: Nutze Pause und Zurأ¼cksetzen bei Bedarf.",
+        howTo3: "Runden aufzeichnen: Speichere Rundenzeiten.",
+        readFull: "Ganzen Artikel lesen",
+        toolTitle: "Stoppuhr",
+        start: "Start",
+        pause: "Pause",
+        reset: "Zurأ¼cksetzen",
+        lap: "Runde",
+        faqs: "FAQ",
+        faq1: "Kann ich mehrere Runden aufzeichnen? Ja, benutze den Runden-Button.",
+        faq2: "Bleibt die Zeit erhalten? Nein, sie wird beim Neuladen zurأ¼ckgesetzt.",
+        faq3: "Ist das kostenlos? Ja, alle TimerHaven-Tools sind kostenlos.",
+        tipsHeading: "Tipps fأ¼r die Stoppuhr",
+        tip1: "Fأ¼r Workouts: Verfolge Sأ¤tze und Pausen.",
+        tip2: "Zeit Aufgaben: Messe Arbeitssitzungen.",
+        tip3: "Analysiere Runden: Verbessere die Effizienz."
+      },
+      ru: {
+        pageTitle: "ذ،ذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€",
+        back: "ذ‌ذ°ذ·ذ°ذ´ ذ² ذ³ذ»ذ°ذ²ذ½ذ¾ذµ ذ¼ذµذ½رژ",
+        howToHeading: "ذڑذ°ذ؛ ذ؟ذ¾ذ»رŒذ·ذ¾ذ²ذ°ر‚رŒرپرڈ رپذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€ذ¾ذ¼",
+        howTo1: "ذ—ذ°ذ؟رƒرپر‚ذ¸ر‚ذµ ر‚ذ°ذ¹ذ¼ذµر€: ذ½ذ°ذ¶ذ¼ذ¸ر‚ذµ آ«ذ،ر‚ذ°ر€ر‚آ», ر‡ر‚ذ¾ذ±ر‹ ذ½ذ°ر‡ذ°ر‚رŒ.",
+        howTo2: "ذںذ°رƒذ·ذ° ذ¸ذ»ذ¸ رپذ±ر€ذ¾رپ: ذ¸رپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ ذ؟ذ°رƒذ·رƒ ذ¸ رپذ±ر€ذ¾رپ ذ؟ر€ذ¸ ذ½ذµذ¾ذ±ر…ذ¾ذ´ذ¸ذ¼ذ¾رپر‚ذ¸.",
+        howTo3: "ذ—ذ°ذ؟ذ¸رپرŒ ذ؛ر€رƒذ³ذ¾ذ²: ر„ذ¸ذ؛رپذ¸ر€رƒذ¹ر‚ذµ ذ²ر€ذµذ¼رڈ ذ؛ر€رƒذ³ذ¾ذ².",
+        readFull: "ذ§ذ¸ر‚ذ°ر‚رŒ ذ؟ذ¾ذ»ذ½ذ¾رپر‚رŒرژ",
+        toolTitle: "ذ،ذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€",
+        start: "ذ،ر‚ذ°ر€ر‚",
+        pause: "ذںذ°رƒذ·ذ°",
+        reset: "ذ،ذ±ر€ذ¾رپ",
+        lap: "ذڑر€رƒذ³",
+        faqs: "ذ§ذ°رپر‚ر‹ذµ ذ²ذ¾ذ؟ر€ذ¾رپر‹",
+        faq1: "ذœذ¾ذ¶ذ½ذ¾ ذ»ذ¸ ذ·ذ°ذ؟ذ¸رپر‹ذ²ذ°ر‚رŒ ذ½ذµرپذ؛ذ¾ذ»رŒذ؛ذ¾ ذ؛ر€رƒذ³ذ¾ذ²? ذ”ذ°, ذ¸رپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ ذ؛ذ½ذ¾ذ؟ذ؛رƒ ذڑر€رƒذ³.",
+        faq2: "ذ،ذ¾ر…ر€ذ°ذ½ذ¸ر‚رپرڈ ذ»ذ¸ ذ²ر€ذµذ¼رڈ? ذ‌ذµر‚, ذ¾ذ½ذ¾ رپذ±ر€ذ°رپر‹ذ²ذ°ذµر‚رپرڈ ذ؟ر€ذ¸ ذ؟ذµر€ذµذ·ذ°ذ³ر€رƒذ·ذ؛ذµ.",
+        faq3: "ذ­ر‚ذ¾ ذ±ذµرپذ؟ذ»ذ°ر‚ذ½ذ¾? ذ”ذ°, ذ²رپذµ ذ¸ذ½رپر‚ر€رƒذ¼ذµذ½ر‚ر‹ TimerHaven ذ±ذµرپذ؟ذ»ذ°ر‚ذ½ر‹.",
+        tipsHeading: "ذ،ذ¾ذ²ذµر‚ر‹ ذ؟ذ¾ ذ¸رپذ؟ذ¾ذ»رŒذ·ذ¾ذ²ذ°ذ½ذ¸رژ رپذµذ؛رƒذ½ذ´ذ¾ذ¼ذµر€ذ°",
+        tip1: "ذ”ذ»رڈ ر‚ر€ذµذ½ذ¸ر€ذ¾ذ²ذ¾ذ؛: ذ¾ر‚رپذ»ذµذ¶ذ¸ذ²ذ°ذ¹ر‚ذµ ذ؟ذ¾ذ´ر…ذ¾ذ´ر‹ ذ¸ ذ؟ذ°رƒذ·ر‹.",
+        tip2: "ذکذ·ذ¼ذµر€رڈذ¹ر‚ذµ ذ·ذ°ذ´ذ°ر‡ذ¸: ر„ذ¸ذ؛رپذ¸ر€رƒذ¹ر‚ذµ ر€ذ°ذ±ذ¾ر‡ذ¸ذµ رپذµرپرپذ¸ذ¸.",
+        tip3: "ذگذ½ذ°ذ»ذ¸ذ·ذ¸ر€رƒذ¹ر‚ذµ ذ؛ر€رƒذ³ذ¸: رƒذ»رƒر‡رˆذ°ذ¹ر‚ذµ رچر„ر„ذµذ؛ر‚ذ¸ذ²ذ½ذ¾رپر‚رŒ."
+      },
+      el: {
+        pageTitle: "خ§دپخ؟خ½دŒخ¼خµد„دپخ؟",
+        back: "خ•د€خ¹دƒد„دپخ؟د†خ® دƒد„خ؟ خ؛دچدپخ¹خ؟ خ¼خµخ½خ؟دچ",
+        howToHeading: "خ دژد‚ خ½خ± د‡دپخ·دƒخ¹خ¼خ؟د€خ؟خ¹خ®دƒخµد„خµ د„خ؟ د‡دپخ؟خ½دŒخ¼خµد„دپخ؟",
+        howTo1: "خ•خ؛خ؛خ¹خ½خ®دƒد„خµ د„خ؟خ½ د‡دپخ؟خ½خ؟خ´خ¹خ±خ؛دŒد€د„خ·: خڑخ¬خ½د„خµ خ؛خ»خ¹خ؛ دƒد„خ؟ آ«خˆخ½خ±دپخ¾خ·آ» خ³خ¹خ± خ½خ± خ¾خµخ؛خ¹خ½خ®دƒخµد„خµ.",
+        howTo2: "خ خ±دچدƒخ· خ® خµد€خ±خ½خ±د†خ؟دپخ¬: خ§دپخ·دƒخ¹خ¼خ؟د€خ؟خ¹خ®دƒد„خµ د€خ±دچدƒخ· خ؛خ±خ¹ خµد€خ±خ½خ±د†خ؟دپخ¬ دŒد„خ±خ½ د‡دپخµخ¹خ¬خ¶خµد„خ±خ¹.",
+        howTo3: "خڑخ±د„خ±خ³دپخ¬دˆد„خµ خ³دچدپخ؟د…د‚: خ‘د€خ؟خ¸خ·خ؛خµدچدƒد„خµ د‡دپدŒخ½خ؟د…د‚ خ³دچدپد‰خ½.",
+        readFull: "خ”خ¹خ±خ²خ¬دƒد„خµ د„خ؟ د€خ»خ®دپخµد‚ خ¬دپخ¸دپخ؟",
+        toolTitle: "خ§دپخ؟خ½دŒخ¼خµد„دپخ؟",
+        start: "خˆخ½خ±دپخ¾خ·",
+        pause: "خ خ±دچدƒخ·",
+        reset: "خ•د€خ±خ½خ±د†خ؟دپخ¬",
+        lap: "خ“دچدپخ؟د‚",
+        faqs: "خ£د…د‡خ½خ­د‚ خ•دپد‰د„خ®دƒخµخ¹د‚",
+        faq1: "خœد€خ؟دپدژ خ½خ± خ؛خ±د„خ±خ³دپخ¬دˆد‰ د€خ؟خ»خ»خ؟دچد‚ خ³دچدپخ؟د…د‚; خ‌خ±خ¹, د‡دپخ·دƒخ¹خ¼خ؟د€خ؟خ¹خ®دƒد„خµ د„خ؟ خ؛خ؟د…خ¼د€خ¯ خ³دچدپخ؟د….",
+        faq2: "خکخ± د€خ±دپخ±خ¼خµخ¯خ½خµخ¹ خ؟ د‡دپدŒخ½خ؟د‚; خŒد‡خ¹, خµد€خ±خ½خ±د†خ­دپخµد„خ±خ¹ دƒد„خ·خ½ خ±خ½خ±خ½خ­د‰دƒخ·.",
+        faq3: "خ•خ¯خ½خ±خ¹ خ´د‰دپخµخ¬خ½; خ‌خ±خ¹, دŒخ»خ± د„خ± خµدپخ³خ±خ»خµخ¯خ± خµخ¯خ½خ±خ¹ خ´د‰دپخµخ¬خ½.",
+        tipsHeading: "خ£د…خ¼خ²خ؟د…خ»خ­د‚ خ³خ¹خ± د„خ؟ د‡دپخ؟خ½دŒخ¼خµد„دپخ؟",
+        tip1: "خ“خ¹خ± د€دپخ؟د€دŒخ½خ·دƒخ·: خ خ±دپخ±خ؛خ؟خ»خ؟د…خ¸خ®دƒد„خµ دƒخµد„ خ؛خ±خ¹ خ´خ¹خ±خ»خµخ¯خ¼خ¼خ±د„خ±.",
+        tip2: "خ§دپخ؟خ½دŒخ¼خµد„دپخ؟ خµدپخ³خ±دƒخ¹دژخ½: خœخµد„دپخ®دƒد„خµ د„خ¹د‚ دƒد…خ½خµخ´دپخ¯خµد‚ خµدپخ³خ±دƒخ¯خ±د‚.",
+        tip3: "خ‘خ½خ±خ»دچدƒد„خµ خ³دچدپخ؟د…د‚: خ’خµخ»د„خ¹دژدƒد„خµ د„خ·خ½ خ±د€دŒخ´خ؟دƒخ·."
+      },
+      ar: {
+        pageTitle: "ط§ظ„ظ…ط¤ظ‚طھ",
+        back: "ط§ظ„ط¹ظˆط¯ط© ط¥ظ„ظ‰ ط§ظ„ظ‚ط§ط¦ظ…ط© ط§ظ„ط±ط¦ظٹط³ظٹط©",
+        howToHeading: "ظƒظٹظپظٹط© ط§ط³طھط®ط¯ط§ظ… ط§ظ„ظ…ط¤ظ‚طھ",
+        howTo1: "ط§ط¨ط¯ط£ ط§ظ„ظ…ط¤ظ‚طھ: ط§ظ†ظ‚ط± 'ط§ط¨ط¯ط£' ظ„ط¨ط¯ط، ط§ظ„طھطھط¨ط¹.",
+        howTo2: "ط¥ظٹظ‚ط§ظپ ظ…ط¤ظ‚طھ ط£ظˆ ط¥ط¹ط§ط¯ط© ط¶ط¨ط·: ط§ط³طھط®ط¯ظ… ط§ظ„ط¥ظٹظ‚ط§ظپ ط§ظ„ظ…ط¤ظ‚طھ ظˆط¥ط¹ط§ط¯ط© ط§ظ„ط¶ط¨ط· ط­ط³ط¨ ط§ظ„ط­ط§ط¬ط©.",
+        howTo3: "طھطھط¨ط¹ ط§ظ„ظ„ظپط§طھ: ط³ط¬ظ‘ظ„ ط£ظˆظ‚ط§طھ ط§ظ„ظ„ظپط§طھ ظ„ظ„ظ†ط´ط§ط·ط§طھ.",
+        readFull: "ط§ظ‚ط±ط£ ط§ظ„ظ…ظ‚ط§ظ„ ط§ظ„ظƒط§ظ…ظ„",
+        toolTitle: "ط§ظ„ظ…ط¤ظ‚طھ",
+        start: "ط§ط¨ط¯ط£",
+        pause: "ط¥ظٹظ‚ط§ظپ ظ…ط¤ظ‚طھ",
+        reset: "ط¥ط¹ط§ط¯ط© ط¶ط¨ط·",
+        lap: "ظ„ظپط©",
+        faqs: "ط§ظ„ط£ط³ط¦ظ„ط© ط§ظ„ط´ط§ط¦ط¹ط©",
+        faq1: "ظ‡ظ„ ظٹظ…ظƒظ†ظ†ظٹ طھطھط¨ط¹ ط¹ط¯ط© ظ„ظپط§طھطں ظ†ط¹ظ…طŒ ط§ط³طھط®ط¯ظ… ط²ط± ط§ظ„ظ„ظپط©.",
+        faq2: "ظ‡ظ„ ظٹط¨ظ‚ظ‰ ط§ظ„ظˆظ‚طھ ظ…ط­ظپظˆط¸ط§ظ‹طں ظ„ط§طŒ ظٹطھظ… ط¥ط¹ط§ط¯ط© ط¶ط¨ط·ظ‡ ط¹ظ†ط¯ ط¥ط¹ط§ط¯ط© طھط­ظ…ظٹظ„ ط§ظ„طµظپط­ط©.",
+        faq3: "ظ‡ظ„ ظ‡ط°ط§ ظ…ط¬ط§ظ†ظٹطں ظ†ط¹ظ…طŒ ط¬ظ…ظٹط¹ ط£ط¯ظˆط§طھ TimerHaven ظ…ط¬ط§ظ†ظٹط©.",
+        tipsHeading: "ظ†طµط§ط¦ط­ ظ„ط§ط³طھط®ط¯ط§ظ… ط§ظ„ظ…ط¤ظ‚طھ",
+        tip1: "ظ„ط§ط³طھط®ط¯ط§ظ…ظ‡ ظپظٹ ط§ظ„طھظ…ط§ط±ظٹظ†: طھطھط¨ط¹ ط§ظ„ظ…ط¬ظ…ظˆط¹ط§طھ ظˆظپطھط±ط§طھ ط§ظ„ط±ط§ط­ط©.",
+        tip2: "طھظˆظ‚ظٹطھ ط§ظ„ظ…ظ‡ط§ظ…: ظ‚ظٹط§ط³ ط¬ظ„ط³ط§طھ ط§ظ„ط¹ظ…ظ„.",
+        tip3: "ط±ط§ط¬ط¹ ط§ظ„ظ„ظپط§طھ: ط­ط³ظ‘ظ† ط§ظ„ظƒظپط§ط،ط©."
+      }
+    };
+
+    function getLang() {
+      try { const l = (localStorage.getItem('timerhavenLang') || 'en').slice(0,2); return translations[l] ? l : 'en'; } catch (e) { return 'en'; }
+    }
+    function applyLanguage(lang) {
+      if (!translations[lang]) lang = 'en';
+      const dict = translations[lang];
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.textContent = dict[key];
+      });
+      document.title = dict.pageTitle || document.title;
+    }
+
+    // --- NEW: rewrite only how-to and tips links to language-specific files (stopwatch-how-to-<lang>.html, stopwatch-tips-<lang>.html)
+    function rewriteToLocalizedFiles() {
+      try {
+        const lang = getLang() || 'en';
+        const suffix = `-${lang}`;
+        const mappings = {
+          'stopwatch-how-to.html': `stopwatch-how-to${suffix}.html`,
+          'stopwatch-tips.html': `stopwatch-tips${suffix}.html`
+        };
+
+        // Update specific anchors with known ids
+        const howto = document.getElementById('howto-link');
+        if (howto) {
+          const newHref = mappings['stopwatch-how-to.html'];
+          howto.setAttribute('href', newHref);
+          howto.href = location.origin.replace(/\/$/,'') + '/' + newHref;
+        }
+        const tips = document.getElementById('tips-link');
+        if (tips) {
+          const newHref = mappings['stopwatch-tips.html'];
+          tips.setAttribute('href', newHref);
+          tips.href = location.origin.replace(/\/$/,'') + '/' + newHref;
+        }
+
+        // Update any other anchors that reference these two generic files
+        document.querySelectorAll('a[href]').forEach(a => {
+          try {
+            const raw = (a.getAttribute('href') || '').toLowerCase();
+            const file = raw.split('/').pop();
+            if (!file) return;
+            if (mappings[file]) {
+              a.setAttribute('href', '/' + mappings[file]);
+              a.href = location.origin.replace(/\/$/,'') + '/' + mappings[file];
+            }
+          } catch (e) { /* ignore per-anchor errors */ }
+        });
+      } catch (err) {
+        console.warn('rewriteToLocalizedFiles error', err);
+      }
+    }
+
+    // Init on DOMContentLoaded so rewrites happen before a user clicks links
+    document.addEventListener('DOMContentLoaded', function(){
+      applyLanguage( getLang() );
+      rewriteToLocalizedFiles();
+    });
+
+    // Allow other tabs to change language and update links/UI
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'timerhavenLang') {
+        const lang = (e.newValue || 'en').slice(0,2);
+        applyLanguage(lang);
+        rewriteToLocalizedFiles();
+      }
+    });
+
+    // Provide a programmatic helper to set language from other pages
+    window._applyTimerHavenLang = function(lang){
+      try { localStorage.setItem('timerhavenLang', lang); } catch(e){}
+      applyLanguage(lang);
+      rewriteToLocalizedFiles();
+    };
+  </script>
+
+  <footer>
+    &copy; 2025 TimerHaven. All tools are free and privacy-friendly.<br />
+    <a href="privacy.html">Privacy Policy</a> &bull; <a href="terms.html">Terms</a> &bull; <a href="contact.html">Contact</a>
+  </footer>
+</body>
+</html>
+
+

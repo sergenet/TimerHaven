@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 // Load local keystore properties (keystore.properties in project root).
@@ -15,20 +17,36 @@ val keystoreProps = Properties().apply {
     }
 }
 
+// Read contact secret from local.properties (project root) or project properties
+val contactSecret: String = run {
+    val lp = rootProject.file("local.properties")
+    if (lp.exists()) {
+        val props = Properties().apply { load(FileInputStream(lp)) }
+        props.getProperty("contactSecret")?.takeIf { it.isNotBlank() } ?: (findProperty("contactSecret")?.toString() ?: "")
+    } else {
+        findProperty("contactSecret")?.toString() ?: ""
+    }
+}
+
 android {
     // Must exactly match the package in Play Console (case-sensitive)
     namespace = "com.sergenet.TimerHavenApp"
     compileSdk = 36
+    ndkVersion = "27.1.12297006"
 
     defaultConfig {
         // MUST match Play Console package exactly (case-sensitive)
         applicationId = "com.sergenet.TimerHavenApp"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 36
-        versionCode = 20
-        versionName = "1.0.2"
+        versionCode = 49
+        versionName = "1.1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            debugSymbolLevel = "FULL"
+        }
     }
 
     signingConfigs {
@@ -48,16 +66,19 @@ android {
     }
 
     buildTypes {
+        debug {
+            // Expose contact secret in debug builds for local testing (read from local.properties)
+            buildConfigField("String", "CONTACT_SECRET", "\"$contactSecret\"")
+        }
+
         release {
             signingConfig = signingConfigs.getByName("release")
+            // R8 code optimization + resource shrinking (Play's "R8 optimization" advice)
             isMinifyEnabled = true
+            isShrinkResources = true
 
-            // Produce native debug symbols for the release build so Gradle
-            // generates native-debug-symbols.zip that Play Console can consume.
-            ndk {
-                // Assign string value (compatible with Kotlin DSL / AGP 8+)
-                debugSymbolLevel = "FULL"
-            }
+            // Add contact secret to release BuildConfig (value taken from local.properties)
+            buildConfigField("String", "CONTACT_SECRET", "\"$contactSecret\"")
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -74,8 +95,9 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        compose = true
-    }
+    compose = true
+    buildConfig = true
+}
 }
 
 dependencies {
@@ -87,6 +109,15 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    // Crash reporting: uncaught exceptions and ANRs from real devices land in the
+    // Firebase console with device, OS and app-version context.
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -95,4 +126,45 @@ dependencies {
     implementation("androidx.browser:browser:1.5.0")
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // AdMob
+    implementation("com.google.android.gms:play-services-ads:23.1.0")
+
+    // Play Billing (ktx)
+    implementation("com.android.billingclient:billing-ktx:8.0.0")
+
+    // View-based Material components and AppCompat (required for MaterialToolbar)
+    implementation("com.google.android.material:material:1.8.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+
+    // Activity KTX (registerForActivityResult, etc.)
+    implementation("androidx.activity:activity-ktx:1.9.0")
+
+    // OkHttp for network POSTs
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
 }
+
+// Automated sync: Copy web files from c:\TimerHavenWebsite to assets before build
+tasks.register<Copy>("syncWebAssets") {
+    from("C:/TimerHavenWebsite") {
+        include("**/*.html")
+        include("**/*.js")
+        include("**/*.css")
+        include("**/*.json")
+        include("assets/img/**") 
+        exclude("node_modules/**")
+        exclude(".git/**")
+        exclude(".idea/**")
+        exclude("blog/**")
+        exclude("benefits-of-taking-breaks-*.html")
+        exclude("recommended-products.html")
+        exclude("**/*share-image.png")
+        exclude("**/*.docx")
+    }
+    into("src/main/assets")
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+// tasks.named("preBuild") {
+//     dependsOn("syncWebAssets")
+// }
