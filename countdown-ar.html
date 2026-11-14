@@ -55,8 +55,12 @@
   }
   @media (max-width:900px){ .read-guide{ min-width:120px; } }
   .countdown-section { margin-bottom:1.2em; }
-  .countdown-section .inputs { display:flex; gap:0.5rem; align-items:center; }
-  .countdown-section input[type="number"] { width:110px; display:inline-block; }
+  /* flex-shrink let the three fields narrow on phones (110px -> 91px at a
+     360px viewport), which clipped the seconds hint: "Sekunden" became
+     "Sekunde", "Δευτερόλεπτα" lost its last two letters. The fields now keep
+     their width and the row wraps instead. */
+  .countdown-section .inputs { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
+  .countdown-section input[type="number"] { width:110px; flex:0 0 110px; display:inline-block; }
   .countdown-section .btn { margin-right:0.4em; min-width:90px; margin-bottom:0.3em; }
   #display { font-size:2.1em; margin-top:1em; font-weight:700; color:#185a9d; }
   .help-section { margin-bottom:0.8em; font-size:1em; color:#2b2b2b; }
@@ -110,6 +114,13 @@
   <link rel="alternate" hreflang="ru" href="https://timerhaven.com/countdown-ru.html">
   <link rel="alternate" hreflang="en" href="https://timerhaven.com/countdown-en.html">
   <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/countdown-en.html">
+
+<!-- th-pwa:begin -->
+  <link rel="manifest" href="/manifests/countdown-ar.json">
+  <meta name="theme-color" content="#185a9d">
+  <link rel="apple-touch-icon" href="/assets/icons/app-192.png">
+  <link rel="stylesheet" href="/assets/css/install.css">
+  <!-- th-pwa:end -->
 </head>
 <body>
     <script>try{ localStorage.setItem('timerhavenLang','ar'); }catch(e){}</script>
@@ -282,9 +293,9 @@
         const h = parseInt(document.getElementById('hours').value,10);
         const m = parseInt(document.getElementById('minutes').value,10);
         const s = parseInt(document.getElementById('seconds').value,10);
-        const hours = isNaN(h) · 0 : h;
-        const minutes = isNaN(m) · 0 : m;
-        const seconds = isNaN(s) · 0 : s;
+        const hours = isNaN(h) ? 0 : h;
+        const minutes = isNaN(m) ? 0 : m;
+        const seconds = isNaN(s) ? 0 : s;
         totalSeconds = hours*3600 + minutes*60 + seconds;
         updateDisplay();
         if (totalSeconds <= 0) return;
@@ -407,5 +418,9 @@
   }
 })();
 </script>
+
+<!-- th-pwa:begin -->
+<script src="/assets/js/install.js" defer data-th-tool="countdown" data-th-scheme="/manifests/countdown-ar.json"></script>
+<!-- th-pwa:end -->
 </body>
 </html>

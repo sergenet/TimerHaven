@@ -38,8 +38,12 @@
   .read-guide{ display:inline-flex; align-self:flex-start; justify-content:center; min-width:132px; max-width:220px; padding:0.45rem 0.9rem; border-radius:10px; background:#0d6efd; color:#fff; text-decoration:none; font-weight:700; white-space:nowrap; box-shadow:0 2px 6px rgba(13,110,253,0.12); line-height:1; margin-top:0.45rem; }
   @media (max-width:900px){ .read-guide{ min-width:120px; } }
   .countdown-section { margin-bottom:1.2em; }
-  .countdown-section .inputs { display:flex; gap:0.5rem; align-items:center; }
-  .countdown-section input[type="number"] { width:110px; display:inline-block; text-align:center; }
+  /* flex-shrink let the three fields narrow on phones (110px -> 91px at a
+     360px viewport), which clipped the seconds hint: "Sekunden" became
+     "Sekunde", "Δευτερόλεπτα" lost its last two letters. The fields now keep
+     their width and the row wraps instead. */
+  .countdown-section .inputs { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
+  .countdown-section input[type="number"] { width:110px; flex:0 0 110px; display:inline-block; text-align:center; }
   .countdown-section .btn { margin-right:0.4em; min-width:90px; margin-bottom:0.3em; }
   #display { font-size:2.1em; margin-top:1em; font-weight:700; color:#185a9d; text-align:center; }
   .help-section { margin-bottom:0.8em; font-size:1em; color:#2b2b2b; }
@@ -72,7 +76,7 @@
     "name": "Countdown-Timer",
     "applicationCategory": "ProductivityApplication",
     "operatingSystem": "Web",
-    "description": "Ein Werkzeug, das von einer bestimmten Zeit rأ¼ckwأ¤rts zأ¤hlt, um den Beginn oder das Ende eines Ereignisses zu signalisieren.",
+    "description": "Ein Werkzeug, das von einer bestimmten Zeit rückwärts zählt, um den Beginn oder das Ende eines Ereignisses zu signalisieren.",
     "offers": {
         "@type": "Offer",
         "price": "0",
@@ -91,6 +95,16 @@
   <link rel="alternate" hreflang="ru" href="https://timerhaven.com/countdown-ru.html">
   <link rel="alternate" hreflang="en" href="https://timerhaven.com/countdown-en.html">
   <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/countdown-en.html">
+
+
+
+
+<!-- th-pwa:begin -->
+  <link rel="manifest" href="/manifests/countdown-de.json">
+  <meta name="theme-color" content="#185a9d">
+  <link rel="apple-touch-icon" href="/assets/icons/app-192.png">
+  <link rel="stylesheet" href="/assets/css/install.css">
+  <!-- th-pwa:end -->
 </head>
 <body>
     <script>try{ localStorage.setItem('timerhavenLang','de'); }catch(e){}</script>
@@ -242,9 +256,9 @@
         const h = parseInt(document.getElementById('hours').value,10);
         const m = parseInt(document.getElementById('minutes').value,10);
         const s = parseInt(document.getElementById('seconds').value,10);
-        const hours = isNaN(h) · 0 : h;
-        const minutes = isNaN(m) · 0 : m;
-        const seconds = isNaN(s) · 0 : s;
+        const hours = isNaN(h) ? 0 : h;
+        const minutes = isNaN(m) ? 0 : m;
+        const seconds = isNaN(s) ? 0 : s;
         totalSeconds = hours*3600 + minutes*60 + seconds;
         updateDisplay();
         if (totalSeconds <= 0) return;
@@ -328,11 +342,11 @@
     <!-- SEO Content Section -->
     <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
         <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Countdown-Timer</h2>
-        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Ein Werkzeug, das von einer bestimmten Zeit rأ¼ckwأ¤rts zأ¤hlt, um den Beginn oder das Ende eines Ereignisses zu signalisieren.</p>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Ein Werkzeug, das von einer bestimmten Zeit rückwärts zählt, um den Beginn oder das Ende eines Ereignisses zu signalisieren.</p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
             <div>
                 <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Geschichte</h3>
-                <p style="line-height: 1.7; color: #4b5563;">Das rأ¼ckwأ¤rtige Zأ¤hlen wurde durch den Regisseur Fritz Lang im Film 'Frau im Mond' (1929) popularisiert, um Spannung aufzubauen. Spأ¤ter wurde es von der NASA übernommen.</p>
+                <p style="line-height: 1.7; color: #4b5563;">Das rückwärtige Zählen wurde durch den Regisseur Fritz Lang im Film 'Frau im Mond' (1929) popularisiert, um Spannung aufzubauen. Später wurde es von der NASA übernommen.</p>
             </div>
             <div>
                 <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Anleitung</h3>
@@ -342,7 +356,7 @@
         <pre style="display:none">Pro Tip Section</pre>
         <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
             <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
-            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Nutzen Sie 'T-Minus'-Zأ¤hlung fأ¼r Projektstarts, um Teamaktionen zeitgenau zu synchronisieren."</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Nutzen Sie 'T-Minus'-Zählung für Projektstarts, um Teamaktionen zeitgenau zu synchronisieren."</p>
         </div>
         <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
             <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Weitere kostenlose Produktivitäts-Tools</h4>
@@ -374,5 +388,12 @@
   }
 })();
 </script>
+
+
+
+
+<!-- th-pwa:begin -->
+<script src="/assets/js/install.js" defer data-th-tool="countdown" data-th-scheme="/manifests/countdown-de.json"></script>
+<!-- th-pwa:end -->
 </body>
 </html>

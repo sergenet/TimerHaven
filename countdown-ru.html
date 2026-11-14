@@ -94,6 +94,7 @@
     details[open] summary::after { content: " ▲"; font-size: 0.9em; }
     details summary { cursor: pointer; padding: 0.35em 0; font-weight: bold; font-size: 1.09em; }
     details:not([open]) summary::after { content: " ▼"; font-size: 0.9em; }
+    .beep-indicator { display:inline-block; margin-left:0.6rem; padding:0.25rem 0.5rem; border-radius:999px; font-weight:700; color:#fff; background:#ffb703; font-size:0.85rem; }
   </style>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Таймер обратного отсчета — TimerHaven">
@@ -111,10 +112,10 @@
     {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "ذ¢ذ°ذ¹ذ¼ذµر€ ذ¾ذ±ر€ذ°ر‚ذ½ذ¾ذ³ذ¾ ذ¾ر‚رپر‡ذµر‚ذ°",
+    "name": "Таймер обратного отсчета",
     "applicationCategory": "ProductivityApplication",
     "operatingSystem": "Web",
-    "description": "ذکذ½رپر‚ر€رƒذ¼ذµذ½ر‚, ذ؛ذ¾ر‚ذ¾ر€ر‹ذ¹ ذ¾ر‚رپر‡ذ¸ر‚ر‹ذ²ذ°ذµر‚ ذ²ر€ذµذ¼رڈ ذ¾ر‚ ذ·ذ°ذ´ذ°ذ½ذ½ذ¾ذ¹ ذ´ذ°ر‚ر‹ ذ´ذ¾ ذ½رƒذ»رڈ.",
+    "description": "Инструмент, который отсчитывает время от заданной даты до нуля.",
     "offers": {
         "@type": "Offer",
         "price": "0",
@@ -133,6 +134,16 @@
   <link rel="alternate" hreflang="ru" href="https://timerhaven.com/countdown-ru.html">
   <link rel="alternate" hreflang="en" href="https://timerhaven.com/countdown-en.html">
   <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/countdown-en.html">
+
+
+
+
+<!-- th-pwa:begin -->
+  <link rel="manifest" href="/manifests/countdown-ru.json">
+  <meta name="theme-color" content="#185a9d">
+  <link rel="apple-touch-icon" href="/assets/icons/app-192.png">
+  <link rel="stylesheet" href="/assets/css/install.css">
+  <!-- th-pwa:end -->
 </head>
 <body>
     <!-- Force Russian for local-file testing so opening this local file shows Russian UI -->
@@ -165,6 +176,8 @@
           <button class="btn btn-success" id="startBtn"></button>
           <button class="btn btn-secondary" id="pauseBtn"></button>
           <button class="btn btn-danger" id="resetBtn"></button>
+          <button class="btn btn-outline-secondary" id="stopBeepBtn" disabled type="button"></button>
+          <span id="beepIndicator" class="beep-indicator" style="display:none">Звук</span>
         </div>
         <div id="display" aria-live="polite">00:00</div>
       </div>
@@ -199,6 +212,7 @@
       "reset": "Reset",
       "display": "00:00",
       "alert-end": "Time's up!",
+      "stop-beep": "Stop beep",
       "faq-title": "FAQs",
       "faq-list": `<li><b>Will the timer keep running if I switch tabs?</b> Yes, as long as this page is open.</li>
         <li><b>Can I set a timer for hours?</b> Enter minutes up to any value you need.</li>
@@ -229,6 +243,7 @@
       "reset": "Réinitialiser",
       "display": "00:00",
       "alert-end": "Le temps est écoulé !",
+      "stop-beep": "Arrêter le bip",
       "faq-title": "FAQ",
       "faq-list": `<li><b>Le minuteur continue-t-il si je change d'onglet ?</b> Oui, tant que la page reste ouverte.</li>
         <li><b>Puis-je définir un minuteur pour plusieurs heures ?</b> Saisissez le nombre de minutes souhaité.</li>
@@ -259,6 +274,7 @@
       "reset": "Zurücksetzen",
       "display": "00:00",
       "alert-end": "Zeit ist abgelaufen!",
+      "stop-beep": "Ton stoppen",
       "faq-title": "FAQ",
       "faq-list": `<li><b>Läuft der Timer weiter, wenn ich den Tab wechsle?</b> Ja, solange die Seite geöffnet ist.</li>
         <li><b>Kann ich einen Timer für Stunden einstellen?</b> Geben Sie einfach viele Minuten ein.</li>
@@ -289,6 +305,7 @@
       "reset": "Сброс",
       "display": "00:00",
       "alert-end": "Время вышло!",
+      "stop-beep": "Остановить звук",
       "faq-title": "Частые вопросы",
       "faq-list": `<li><b>Будет ли таймер работать, если я сменю вкладку?</b> Да, пока страница открыта.</li>
         <li><b>Можно ли установить таймер на часы?</b> Введите любое количество минут.</li>
@@ -319,6 +336,7 @@
       "reset": "Επαναφορά",
       "display": "00:00",
       "alert-end": "Τέλος χρόνου!",
+      "stop-beep": "Διακοπή ήχου",
       "faq-title": "Συχνές Ερωτήσεις",
       "faq-list": `<li><b>Το χρονόμετρο λειτουργεί αν αλλάξω καρτέλα;</b> Ναι, όσο η σελίδα είναι ανοιχτή.</li>
         <li><b>Μπορώ να ορίσω χρονόμετρο για ώρες;</b> Βάλτε όσα λεπτά θέλετε.</li>
@@ -349,6 +367,7 @@
       "reset": "Restablecer",
       "display": "00:00",
       "alert-end": "¡Se acabó el tiempo!",
+      "stop-beep": "Detener pitido",
       "faq-title": "Preguntas frecuentes",
       "faq-list": `<li><b>¿El temporizador sigue si cambio de pestaña?</b> Sí, mientras la página esté abierta.</li>
         <li><b>¿Puedo poner horas?</b> Pon los minutos que necesites.</li>
@@ -379,6 +398,7 @@
       "reset": "إعادة ضبط",
       "display": "00:00",
       "alert-end": "انتهى الوقت!",
+      "stop-beep": "إيقاف الصوت",
       "faq-title": "الأسئلة الشائعة",
       "faq-list": `<li><b>هل يستمر المؤقت إذا انتقلت بين الصفحات؟</b> نعم، طالما الصفحة مفتوحة.</li>
         <li><b>هل يمكنني ضبط ساعات؟</b> أدخل عدد الدقائق الذي تريد.</li>
@@ -435,6 +455,8 @@
     if (startBtn) startBtn.textContent = t['start'] || 'Старт';
     if (pauseBtn) pauseBtn.textContent = t['pause'] || 'Пауза';
     if (resetBtn) resetBtn.textContent = t['reset'] || 'Сброс';
+    const stopBeepBtnLbl = document.getElementById('stopBeepBtn');
+    if (stopBeepBtnLbl) stopBeepBtnLbl.textContent = t['stop-beep'] || 'Остановить звук';
     // faq & howto & tips
     const faqTitle = document.getElementById('faq-title');
     if (faqTitle) faqTitle.textContent = t['faq-title'] || '';
@@ -466,6 +488,64 @@
       applyLanguage((e.newValue || 'ru').slice(0,2));
     }
   });
+  // --- Minimal WebAudio beep helpers (robust, non-destructive) ---
+  let audioCtx = null, beepOsc = null, beepGain = null, beepPlaying = false;
+  function ensureAudioContext() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { audioCtx = null; }
+    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{});
+    return !!audioCtx;
+  }
+  function updateStopBeepUI() {
+    const btn = document.getElementById('stopBeepBtn');
+    const ind = document.getElementById('beepIndicator');
+    if (!btn) return;
+    btn.disabled = !beepPlaying;
+    if (ind) ind.style.display = beepPlaying ? 'inline-block' : 'none';
+  }
+  function startContinuousBeep(frequency = 880, gainLevel = 0.18) {
+    try {
+      if (!ensureAudioContext()) return false;
+      try { stopBeep(); } catch(e){}
+      beepOsc = audioCtx.createOscillator();
+      beepGain = audioCtx.createGain();
+      beepOsc.type = 'sine';
+      beepOsc.frequency.value = frequency;
+      beepOsc.connect(beepGain);
+      beepGain.connect(audioCtx.destination);
+      try {
+        const now = audioCtx.currentTime || 0;
+        beepGain.gain.setValueAtTime(gainLevel, now);
+      } catch(e) {
+        try { beepGain.gain.value = gainLevel; } catch(_) {}
+      }
+      try { beepOsc.start(); } catch(e) {
+        try { beepOsc.start(audioCtx.currentTime || 0); } catch(_) {}
+      }
+      beepPlaying = true;
+      updateStopBeepUI();
+      return true;
+    } catch (err) {
+      console.warn('startContinuousBeep error', err);
+      try { if (beepOsc) { beepOsc.disconnect(); beepOsc = null; } } catch(e){}
+      try { if (beepGain) { beepGain.disconnect(); beepGain = null; } } catch(e){}
+      beepPlaying = false;
+      updateStopBeepUI();
+      return false;
+    }
+  }
+  function stopBeep() {
+    try {
+      if (beepOsc) { try { beepOsc.stop(); } catch(e){} try { beepOsc.disconnect(); } catch(e){} }
+    } catch(e){}
+    beepOsc = null;
+    try { if (beepGain) { try { beepGain.disconnect(); } catch(e){} } } catch(e){}
+    beepGain = null;
+    beepPlaying = false;
+    updateStopBeepUI();
+  }
+  // --- end beep helpers ---
   // Timer logic
   let timerInterval = null;
   let totalSeconds = 0;
@@ -487,11 +567,13 @@
     const resetBtn = document.getElementById('resetBtn');
     if (startBtn) {
       startBtn.addEventListener('click', function() {
+        // create the AudioContext inside the user gesture so the beep is allowed later
+        ensureAudioContext();
         if (timerInterval) return; // already running
         let minutes = parseInt(document.getElementById('minutes').value, 10);
         let seconds = parseInt(document.getElementById('seconds').value, 10);
-        minutes = isNaN(minutes) · 0 : minutes;
-        seconds = isNaN(seconds) · 0 : seconds;
+        minutes = isNaN(minutes) ? 0 : minutes;
+        seconds = isNaN(seconds) ? 0 : seconds;
         totalSeconds = minutes * 60 + seconds;
         updateDisplay();
         if (totalSeconds <= 0) return;
@@ -507,6 +589,10 @@
           if (totalSeconds <= 0) {
             clearInterval(timerInterval);
             timerInterval = null;
+            totalSeconds = 0;
+            updateDisplay();
+            try { startContinuousBeep(920, 0.18); } catch(e){}
+            updateStopBeepUI();
             try {
               alert(t['alert-end'] || "Время вышло!");
             } catch (e) {}
@@ -528,6 +614,7 @@
         clearInterval(timerInterval);
         timerInterval = null;
         totalSeconds = 0;
+        stopBeep();
         updateDisplay();
         const lang = getLang();
         const t = countdownTranslations[lang] || countdownTranslations['ru'];
@@ -536,6 +623,13 @@
         paused = false;
       });
     }
+    const stopBeepBtnEl = document.getElementById('stopBeepBtn');
+    if (stopBeepBtnEl) {
+      stopBeepBtnEl.addEventListener('click', function() {
+        stopBeep();
+      });
+    }
+    updateStopBeepUI();
   });
 </script>
 <div class="th-ad-slot" data-ad-placement="footer" style="margin:24px auto;max-width:728px;min-height:90px;text-align:center;overflow:hidden">
@@ -572,26 +666,26 @@
 
     <!-- SEO Content Section -->
     <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
-        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">ذ¢ذ°ذ¹ذ¼ذµر€ ذ¾ذ±ر€ذ°ر‚ذ½ذ¾ذ³ذ¾ ذ¾ر‚رپر‡ذµر‚ذ°</h2>
-        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">ذکذ½رپر‚ر€رƒذ¼ذµذ½ر‚, ذ؛ذ¾ر‚ذ¾ر€ر‹ذ¹ ذ¾ر‚رپر‡ذ¸ر‚ر‹ذ²ذ°ذµر‚ ذ²ر€ذµذ¼رڈ ذ¾ر‚ ذ·ذ°ذ´ذ°ذ½ذ½ذ¾ذ¹ ذ´ذ°ر‚ر‹ ذ´ذ¾ ذ½رƒذ»رڈ.</p>
+        <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">Таймер обратного отсчета</h2>
+        <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">Инструмент, который отсчитывает время от заданной даты до нуля.</p>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
             <div>
                 <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">История</h3>
-                <p style="line-height: 1.7; color: #4b5563;">ذ‍ذ±ر€ذ°ر‚ذ½ر‹ذ¹ ذ¾ر‚رپر‡ذµر‚ ذ±ر‹ذ» ذ؟ذ¾ذ؟رƒذ»رڈر€ذ¸ذ·ذ¸ر€ذ¾ذ²ذ°ذ½ ر€ذµذ¶ذ¸رپرپذµر€ذ¾ذ¼ ذ¤ر€ذ¸ر‚ر†ذµذ¼ ذ›ذ°ذ½ذ³ذ¾ذ¼ ذ² ر„ذ¸ذ»رŒذ¼ذµ 1929 ذ³ذ¾ذ´ذ° 'ذ–ذµذ½ر‰ذ¸ذ½ذ° ذ½ذ° ذ›رƒذ½ذµ'. ذںذ¾ذ·ذ¶ذµ ذ¾ذ½ ذ±ر‹ذ» ذ؟ر€ذ¸ذ½رڈر‚ NASA ذ´ذ»رڈ ذ¼ذ¸رپرپذ¸ذ¹ 'ذگذ؟ذ¾ذ»ذ»ذ¾ذ½'.</p>
+                <p style="line-height: 1.7; color: #4b5563;">Обратный отсчет был популяризирован режиссером Фритцем Лангом в фильме 1929 года 'Женщина на Луне'. Позже он был принят NASA для миссий 'Аполлон'.</p>
             </div>
             <div>
                 <h3 style="color: #1e40af; font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Как пользоваться</h3>
-                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>ذ£رپر‚ذ°ذ½ذ¾ذ²ذ¸ر‚ذµ ر†ذµذ»ذµذ²رƒرژ ذ´ذ°ر‚رƒ ذ¸ ذ²ر€ذµذ¼رڈ.</li><li>ذ—ذ°ذ؟رƒرپر‚ذ¸ر‚ذµ ذ¾ر±ر€ذ°ر‚ذ½ر‹ذ¹ ذ¾ر‚رپر‡ذµر‚.</li><li>ذکذ½رپر‚ر€رƒذ¼ذµذ½ر‚ ذ¾ذ؟ذ¾ذ²ذµرپر‚ذ¸ر‚ ذ²ذ°رپ, ذ؛ذ¾ذ³ذ´ذ° ذ²ر€ذµذ¼رڈ ذ¸رپر‚ذµر‡ذµر‚.</li></ul>
+                <ul style="line-height: 1.7; color: #4b5563; padding-left: 1.25rem;"><li>Установите целевую дату и время.</li><li>Запустите оѱратный отсчет.</li><li>Инструмент оповестит вас, когда время истечет.</li></ul>
             </div>
         </div>
         <pre style="display:none">Pro Tip Section</pre>
         <div style="margin-top:2rem;padding:1.5rem;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-radius:12px;border-left:6px solid #0284c7;">
             <p style="margin:0;font-weight:700;color:#0369a1;font-size:1.1rem;">🚀 Pro Tip:</p>
-            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"ذکرپذ؟ذ¾ذ»رŒذ·رƒذ¹ر‚ذµ 'T-Minus' ذ´ذ»رڈ ذ·ذ°ذ؟رƒرپذ؛ذ° ذ؛ر€رƒذ؟ذ½ر‹ر… ذ؟ر€ذ¾ذµذ؛ر‚ذ¾ذ²."</p>
+            <p style="margin:0.75rem 0 0 0;color:#075985;line-height:1.6;font-style:italic;">"Используйте 'T-Minus' для запуска крупных проектов."</p>
         </div>
         <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #e5e7eb;text-align:center;">
             <h4 style="color:#6b7280;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1.5rem;">Больше бесплатных инструментов</h4>
-            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секуندوмер</a> <a href="pomodoro-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.75rem;"><a href="timer-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Таймер задач</a> <a href="stopwatch-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Секундомер</a> <a href="pomodoro-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Помодоро</a> <a href="unit-converter-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Конвертер единиц</a> <a href="weather-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Погода</a> <a href="world-clock-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Мировые часы</a> <a href="calendar-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Календарь</a> <a href="clipboard-manager-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Буфер обмена</a> <a href="countdown-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Обратный отсчет</a> <a href="currency-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Валюта</a> <a href="focus-music-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Музыка Фокус</a> <a href="habit-tracker-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Привычки</a> <a href="meeting-planner-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Встречи</a> <a href="notes-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Заметки</a> <a href="password-generator-ru.html" style="text-decoration:none;padding:0.5rem 1rem;background:#f3f4f6;color:#374151;border-radius:20px;font-size:0.85rem;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#185a9d';this.style.color='#fff'" onmouseout="this.style.background='#f3f4f6';this.style.color='#374151'">Пароли</a></div>
         </div>
     </section>
     
@@ -619,5 +713,12 @@
   }
 })();
 </script>
+
+
+
+
+<!-- th-pwa:begin -->
+<script src="/assets/js/install.js" defer data-th-tool="countdown" data-th-scheme="/manifests/countdown-ru.json"></script>
+<!-- th-pwa:end -->
 </body>
 </html>

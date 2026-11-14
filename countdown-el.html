@@ -38,8 +38,17 @@
   .read-guide{ display:inline-flex; align-self:flex-start; justify-content:center; min-width:132px; max-width:220px; padding:0.45rem 0.9rem; border-radius:10px; background:#0d6efd; color:#fff; text-decoration:none; font-weight:700; white-space:nowrap; box-shadow:0 2px 6px rgba(13,110,253,0.12); line-height:1; margin-top:0.45rem; }
   @media (max-width:900px){ .read-guide{ min-width:120px; } }
   .countdown-section { margin-bottom:1.2em; }
-  .countdown-section .inputs { display:flex; gap:0.5rem; align-items:center; }
-  .countdown-section input[type="number"] { width:110px; display:inline-block; text-align:center; }
+  /* flex-shrink let the three fields narrow on phones (110px -> 91px at a
+     360px viewport), which clipped the seconds hint: "Sekunden" became
+     "Sekunde", "Δευτερόλεπτα" lost its last two letters. The fields now keep
+     their width and the row wraps instead. */
+  .countdown-section .inputs { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
+  .countdown-section input[type="number"] { width:110px; flex:0 0 110px; display:inline-block; text-align:center; }
+  /* Greek "Δευτερόλεπτα" is the longest seconds hint on the site: at 16px it
+     needs about 99px inside a field that offers 84px, so it rendered as
+     "Δευτερόλεπ". Shrinking only this hint keeps it whole at every width the
+     card is shown at, without changing the field size. */
+  #seconds::placeholder { font-size: 0.75em; }
   .countdown-section .btn { margin-right:0.4em; min-width:90px; margin-bottom:0.3em; }
   #display { font-size:2.1em; margin-top:1em; font-weight:700; color:#185a9d; text-align:center; }
   .help-section { margin-bottom:0.8em; font-size:1em; color:#2b2b2b; }
@@ -69,10 +78,10 @@
     {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "خ‘خ½د„خ¯دƒد„دپخ؟د†خ· خœخ­د„دپخ·دƒخ·",
+    "name": "Αντίστροφη Μέτρηση",
     "applicationCategory": "ProductivityApplication",
     "operatingSystem": "Web",
-    "description": "خ•دپخ³خ±خ»خµخ¯خ؟ د€خ؟د… خ¼خµد„دپخ¬خµخ¹ khخ½ dخ¹خ¬دپخ؛خµخ¹خ± خ¼خ­د‡دپخ¹ خ­خ½خ± خ³خµخ³خ؟خ½دŒد‚.",
+    "description": "Εργαλείο που μετράει khν dιάρκεια μέχρι ένα γεγονός.",
     "offers": {
         "@type": "Offer",
         "price": "0",
@@ -91,6 +100,16 @@
   <link rel="alternate" hreflang="ru" href="https://timerhaven.com/countdown-ru.html">
   <link rel="alternate" hreflang="en" href="https://timerhaven.com/countdown-en.html">
   <link rel="alternate" hreflang="x-default" href="https://timerhaven.com/countdown-en.html">
+
+
+
+
+<!-- th-pwa:begin -->
+  <link rel="manifest" href="/manifests/countdown-el.json">
+  <meta name="theme-color" content="#185a9d">
+  <link rel="apple-touch-icon" href="/assets/icons/app-192.png">
+  <link rel="stylesheet" href="/assets/css/install.css">
+  <!-- th-pwa:end -->
 </head>
 <body>
     <script>try{ localStorage.setItem('timerhavenLang','el'); }catch(e){}</script>
@@ -150,7 +169,7 @@
       readGuide.textContent = t['howto-article-btn'] || readGuide.textContent;
       // set href robustly: prefer full path provided in translations, fallback to known Greek guide path
       const linkVal = t['howto-article-link'];
-      readGuide.href = (linkVal && (linkVal.startsWith('/') · linkVal : ('/' + linkVal))) || '/el/countdown/countdown-index.html';
+      readGuide.href = (linkVal && (linkVal.startsWith('/') ? linkVal : ('/' + linkVal))) || '/el/countdown/countdown-index.html';
     }
     const help = document.getElementById('tool-help'); if (help) help.textContent = t['tool-help'] || '';
     const hrs = document.getElementById('hours'); const mins = document.getElementById('minutes'); const secs = document.getElementById('seconds');
@@ -247,9 +266,9 @@
         const h = parseInt(document.getElementById('hours').value,10);
         const m = parseInt(document.getElementById('minutes').value,10);
         const s = parseInt(document.getElementById('seconds').value,10);
-        const hours = isNaN(h) · 0 : h;
-        const minutes = isNaN(m) · 0 : m;
-        const seconds = isNaN(s) · 0 : s;
+        const hours = isNaN(h) ? 0 : h;
+        const minutes = isNaN(m) ? 0 : m;
+        const seconds = isNaN(s) ? 0 : s;
         totalSeconds = hours*3600 + minutes*60 + seconds;
         updateDisplay();
         if (totalSeconds <= 0) return;
@@ -367,5 +386,12 @@
   }
 })();
 </script>
+
+
+
+
+<!-- th-pwa:begin -->
+<script src="/assets/js/install.js" defer data-th-tool="countdown" data-th-scheme="/manifests/countdown-el.json"></script>
+<!-- th-pwa:end -->
 </body>
 </html>
