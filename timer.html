@@ -92,7 +92,15 @@
 
   <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
   <script src="/assets/js/consent.js" defer></script>
-  <link rel="canonical" href="https://timerhaven.com/timer-en.html" /></head>
+  <link rel="canonical" href="https://timerhaven.com/timer-en.html" />
+
+<!-- th-pwa:begin -->
+  <link rel="manifest" href="/manifests/timer-en.json">
+  <meta name="theme-color" content="#185a9d">
+  <link rel="apple-touch-icon" href="/assets/icons/app-192.png">
+  <link rel="stylesheet" href="/assets/css/install.css">
+  <!-- th-pwa:end -->
+</head>
 <body>
     <div class="page-wrap">
     <div class="top-row">
@@ -311,6 +319,11 @@
   }
 })();
 </script>
+
+
+<!-- th-pwa:begin -->
+<script src="/assets/js/install.js" defer data-th-tool="timer" data-th-scheme="/manifests/timer-en.json"></script>
+<!-- th-pwa:end -->
 </body>
 </html>
 

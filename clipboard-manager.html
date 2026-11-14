@@ -137,7 +137,15 @@
 
   <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
   <script src="/assets/js/consent.js" defer></script>
-  <link rel="canonical" href="https://timerhaven.com/clipboard-manager-en.html" /></head>
+  <link rel="canonical" href="https://timerhaven.com/clipboard-manager-en.html" />
+
+<!-- th-pwa:begin -->
+  <link rel="manifest" href="/manifests/clipboard-manager-en.json">
+  <meta name="theme-color" content="#185a9d">
+  <link rel="apple-touch-icon" href="/assets/icons/app-192.png">
+  <link rel="stylesheet" href="/assets/css/install.css">
+  <!-- th-pwa:end -->
+</head>
 <body>
     <div class="main-container" id="page-main">
     <div class="center-row">
@@ -471,6 +479,11 @@
   }
 })();
 </script>
+
+
+<!-- th-pwa:begin -->
+<script src="/assets/js/install.js" defer data-th-tool="clipboard-manager" data-th-scheme="/manifests/clipboard-manager-en.json"></script>
+<!-- th-pwa:end -->
 </body>
 </html>
 

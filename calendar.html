@@ -4,9 +4,7 @@
   <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
   <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
 
-    <link rel="manifest" href="calendar.webmanifest">
-
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
   <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Calendar — TimerHaven</title>
@@ -251,7 +249,15 @@
 
   <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
   <script src="/assets/js/consent.js" defer></script>
-  <link rel="canonical" href="https://timerhaven.com/calendar-en.html" /></head>
+  <link rel="canonical" href="https://timerhaven.com/calendar-en.html" />
+
+<!-- th-pwa:begin -->
+  <link rel="manifest" href="/manifests/calendar-en.json">
+  <meta name="theme-color" content="#185a9d">
+  <link rel="apple-touch-icon" href="/assets/icons/app-192.png">
+  <link rel="stylesheet" href="/assets/css/install.css">
+  <!-- th-pwa:end -->
+</head>
 <body>
     <main class="main-container" id="main">
     
@@ -669,6 +675,11 @@
   }
 })();
 </script>
+
+
+<!-- th-pwa:begin -->
+<script src="/assets/js/install.js" defer data-th-tool="calendar" data-th-scheme="/manifests/calendar-en.json"></script>
+<!-- th-pwa:end -->
 </body>
 </html>
 

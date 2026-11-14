@@ -1,0 +1,184 @@
+/* Install / pin affordance shared by every TimerHaven page. */
+
+.th-install-pill {
+  position: fixed;
+  left: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 2147482999;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100vw - 96px);
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #185a9d, #43cea2);
+  color: #fff;
+  font: 600 14px/1.2 "Montserrat", Arial, sans-serif;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(24, 90, 157, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.th-install-pill[hidden] {
+  display: none;
+}
+
+.th-install-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(24, 90, 157, 0.42);
+}
+
+.th-install-pill:active {
+  transform: translateY(0);
+}
+
+.th-install-pill__icon {
+  display: inline-flex;
+}
+
+.th-install-pill__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.th-install-sheet[hidden] {
+  display: none;
+}
+
+.th-install-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483001;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.th-install-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 24, 39, 0.55);
+}
+
+.th-install-sheet__panel {
+  position: relative;
+  width: min(560px, 100%);
+  padding: 26px 24px calc(26px + env(safe-area-inset-bottom, 0px));
+  border-radius: 20px 20px 0 0;
+  background: #fff;
+  color: #1c2733;
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.25);
+  font-family: "Montserrat", Arial, sans-serif;
+  animation: th-install-rise 0.22s ease-out;
+}
+
+@keyframes th-install-rise {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .th-install-panel,
+  .th-install-sheet__panel {
+    animation: none;
+  }
+  .th-install-pill {
+    transition: none;
+  }
+}
+
+.th-install-sheet__title {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  color: #185a9d;
+}
+
+.th-install-sheet__intro {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #445;
+}
+
+.th-install-sheet__step {
+  margin: 0 0 10px;
+  padding-left: 26px;
+  position: relative;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #334;
+}
+
+.th-install-sheet__step::before {
+  content: "\2192";
+  position: absolute;
+  left: 4px;
+  color: #43cea2;
+  font-weight: 700;
+}
+
+/* Google Play link on the shared install sheet. Deliberately secondary: the
+   primary action above is still install / pin, this is the other route for
+   people who would rather have the Android app. */
+.th-install-sheet__store {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 18px 0 0;
+  padding: 12px;
+  border: 1px solid #cdd8e6;
+  border-radius: 12px;
+  background: #f5f8fc;
+  color: #185a9d;
+  font: 600 14px/1 "Montserrat", Arial, sans-serif;
+  text-align: center;
+  text-decoration: none;
+}
+
+.th-install-sheet__store:hover,
+.th-install-sheet__store:focus-visible {
+  background: #e9f1fa;
+  color: #12467c;
+  text-decoration: none;
+}
+
+.th-install-sheet__close {
+  margin-top: 8px;
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 12px;
+  background: #185a9d;
+  color: #fff;
+  font: 600 15px/1 "Montserrat", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.th-install-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 2147483002;
+  max-width: min(420px, calc(100vw - 40px));
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #17342b;
+  color: #fff;
+  font: 500 14px/1.4 "Montserrat", Arial, sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  transition: opacity 0.4s ease;
+}
+
+.th-install-toast.is-leaving {
+  opacity: 0;
+}
