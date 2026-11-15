@@ -1,0 +1,220 @@
+name: Store listing drift
+
+# Fails when the copy in store.config.json and the copy the App Store is
+# actually serving disagree — for example after someone edits the listing in
+# App Store Connect, or after a translation is committed but never pushed.
+# Runs daily, on demand, and on every pull request into main. The daily and
+# on-demand runs fail on drift; a pull request only reports it, because a PR
+# that edits the listing copy is expected to differ from the store until that
+# copy is pushed, and that should not block the merge.
+#
+# When a daily or on-demand run finds drift it also opens one issue titled
+# "Store listing drift detected" (and comments on that same issue instead of
+# filing another). The next run that matches store.config.json closes it again.
+#
+# Credentials the runner needs
+# ---------------------------
+# None. Unlike the Play check, the App Store side reads Apple's public lookup
+# API, which needs no key: it returns the app name and description each
+# storefront serves. Nothing here can write to the store, so there is no secret
+# to configure and no risk of a token with publish rights living in CI.
+#
+# What it cannot see: Apple does not expose the subtitle or the keywords through
+# any public API. Those two fields are named in the report as unverified rather
+# than counted as a match, so the gap is visible instead of assumed.
+on:
+  schedule:
+    # Daily at 06:37 UTC, off the hour and offset from the Play check.
+    - cron: "37 6 * * *"
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  # Needed to open, comment on and close the drift issue.
+  issues: write
+
+concurrency:
+  # Superseded pushes to the same branch cancel their own earlier run, while
+  # the daily schedule and other pull requests keep their own groups.
+  group: store-listing-drift-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  drift:
+    name: store.config.json vs live App Store
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # The check compares all seven storefronts against the live listings. It
+      # exits 0 on a match, 1 on drift and 2 when it could not run (network or a
+      # broken store.config.json), so the status is captured here and acted on
+      # after the summary is written.
+      - id: check
+        name: Compare store.config.json with the live listings
+        run: |
+          set +e
+          python tools/check_store_listings.py --json > "$RUNNER_TEMP/drift.json"
+          status=$?
+          set -e
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          # Advisory on pull requests, blocking everywhere else.
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then level=warning; else level=error; fi
+          if [ "$status" -eq 2 ]; then
+            echo "::$level title=Drift check could not run::No listing was compared. See the job log for the App Store lookup failure."
+          fi
+
+      - name: Write the drift summary
+        if: always() && steps.check.outcome != 'skipped'
+        run: |
+          # The report is rendered once and reused: on the console, in the job
+          # summary, and (for a failing run) as the body of the drift issue.
+          python - "$RUNNER_TEMP/drift.json" > "$RUNNER_TEMP/drift.md" <<'PY'
+          import json
+          import os
+          import sys
+
+          # The JSON report lists every differing line; the summary stops at
+          # this many per field so a full rewrite does not bury the table.
+          LIMIT = 10
+          ADVISORY = os.environ.get("GITHUB_EVENT_NAME") == "pull_request"
+
+
+          def load(path):
+              try:
+                  with open(path, encoding="utf-8") as handle:
+                      return json.load(handle)
+              except (OSError, ValueError):
+                  return None
+
+
+          data = load(sys.argv[1])
+          print("### Store listing drift\n")
+          if data is None:
+              print("The check produced no readable report; see the job log.")
+              raise SystemExit(0)
+          if "error" in data:
+              print("**Check could not run:** %s" % data.get("message", data["error"]))
+              raise SystemExit(0)
+
+          unverified = data.get("unverified") or []
+          listings = data.get("listings") or []
+          drifted = data.get("drifted") or []
+          checked = data.get("checked", len(listings))
+          if not drifted:
+              print("All %d listings match store.config.json." % checked)
+              if unverified:
+                  print("\nNot verifiable through a public API: %s." % ", ".join(unverified))
+              raise SystemExit(0)
+
+          print("**%d of %d listings drifted:** %s\n"
+                % (len(drifted), checked, ", ".join(drifted)))
+          if ADVISORY:
+              print("This is a pull request, so the drift is reported only: it "
+                    "does not fail the check. Push the listing and the next "
+                    "run will compare clean.\n")
+          print("| Locale | Storefront | Field | Repo | Live | Lines |")
+          print("|---|---|---|--:|--:|--:|")
+          for entry in listings:
+              for field in entry.get("fields") or []:
+                  count = "same lines" if field.get("same_lines") else str(field.get("differing_lines", 0))
+                  print("| %s | %s | %s | %d | %d | %s |" % (
+                      entry.get("locale", "?"),
+                      entry.get("storefront", "?"),
+                      field.get("label", field.get("field", "?")),
+                      field.get("repo_length", 0),
+                      field.get("live_length", 0),
+                      count))
+          print()
+
+          for entry in listings:
+              fields = entry.get("fields") or []
+              if not fields:
+                  continue
+              print("<details><summary>%s (%s): %d drifting field%s</summary>\n" % (
+                  entry.get("locale", "?"),
+                  entry.get("storefront", "?"),
+                  len(fields),
+                  "" if len(fields) == 1 else "s"))
+              for field in fields:
+                  print("**%s**\n" % field.get("label", field.get("field", "?")))
+                  if field.get("same_lines"):
+                      print("Same lines, different text.\n")
+                      continue
+                  print("```diff")
+                  for item in (field.get("lines") or [])[:LIMIT]:
+                      print("- line %d: %s" % (item["line"], item["repo"]))
+                      print("+ line %d: %s" % (item["line"], item["live"]))
+                  print("```\n")
+                  missing = field.get("differing_lines", 0) - LIMIT
+                  if missing > 0:
+                      print("%d more differing line%s not shown.\n"
+                            % (missing, "" if missing == 1 else "s"))
+              print("</details>\n")
+          if unverified:
+              print("Not verifiable through a public API: %s.\n" % ", ".join(unverified))
+          PY
+          cat "$RUNNER_TEMP/drift.md"
+          cat "$RUNNER_TEMP/drift.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report drift
+        if: steps.check.outputs.status != '0'
+        env:
+          STATUS: ${{ steps.check.outputs.status }}
+        run: |
+          # Pull requests are advisory: annotate and pass, so an intentional copy
+          # edit is visible without blocking the merge. Every other event fails.
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then level=warning; code=0; else level=error; code=1; fi
+          if [ "$STATUS" = "2" ]; then
+            echo "::$level title=Drift check could not run::No listing was compared, so this run says nothing about drift; see the step above."
+            exit $code
+          fi
+          locales=$(python -c 'import json, sys; print(", ".join((json.load(open(sys.argv[1], encoding="utf-8")).get("drifted") or [])))' "$RUNNER_TEMP/drift.json" 2>/dev/null || true)
+          echo "::$level title=Store listing drift::store.config.json and the live App Store listing disagree${locales:+ for $locales}. See the job summary for the differing lines."
+          exit $code
+
+      # Pull requests already surface the warning in their own UI, so the issue
+      # is only for runs nobody is necessarily watching.
+      - name: Raise or resolve the drift issue
+        if: always() && github.event_name != 'pull_request' && steps.check.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STATUS: ${{ steps.check.outputs.status }}
+        run: |
+          title="Store listing drift detected"
+          existing=$(gh issue list --state open --limit 100 --json number,title \
+            --jq "[.[] | select(.title == \"$title\")][0].number // empty")
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+
+          if [ "$STATUS" = "0" ]; then
+            if [ -n "$existing" ]; then
+              gh issue comment "$existing" --body "Listings match store.config.json again as of $run_url."
+              gh issue close "$existing"
+              echo "Closed issue #$existing: the listings match again."
+            else
+              echo "No drift and no open issue; nothing to do."
+            fi
+            exit 0
+          fi
+
+          body="$RUNNER_TEMP/drift.md"
+          {
+            printf '\n---\n'
+            printf 'Detected by the store listing drift check on %s.\n' "$(date -u +'%Y-%m-%d %H:%M UTC')"
+            printf 'Workflow run: %s\n' "$run_url"
+            printf 'Push the copy with `eas metadata:push` (see RELEASE.md), or edit the store by hand, then this issue closes itself on the next matching run.\n'
+          } >> "$body"
+
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file "$body"
+            echo "Added a comment to issue #$existing."
+          else
+            gh issue create --title "$title" --body-file "$body"
+          fi
