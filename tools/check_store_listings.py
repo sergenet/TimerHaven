@@ -20,7 +20,9 @@ text), capped at 12 lines per field so a full rewrite stays readable. Pass
 cap) so a script or CI summary can consume it.
 
 Exit status is 0 when every locale matches, 1 when anything has drifted, and 2
-when no Play credentials are configured.
+when the check could not run at all: no token, or Play refused the request.
+This script is what .github/workflows/store-listings-drift.yml runs daily, so
+the distinction matters: a rejected token must not look like drift.
 """
 import argparse
 import io
@@ -74,6 +76,27 @@ def read_expected(folder, filename):
     path = os.path.join(META, folder, filename)
     with io.open(path, encoding="utf-8") as handle:
         return handle.read().strip()
+
+
+def describe_http_error(error):
+    """Turn a Play API failure into one line that says what went wrong."""
+    detail = ""
+    try:
+        payload = json.loads(error.read() or b"{}")
+        detail = (payload.get("error") or {}).get("message", "")
+    except (ValueError, OSError, AttributeError):
+        detail = ""
+    message = "Play rejected the request: HTTP %d %s" % (error.code, error.reason)
+    return message + (" - " + detail if detail else "")
+
+
+def report_unavailable(args, code, message):
+    """Exit 2: nothing was compared, so this is not a drift result."""
+    if args.json:
+        print(json.dumps({"error": code, "message": message}, ensure_ascii=False))
+    else:
+        print("error: " + message, file=sys.stderr)
+    return 2
 
 # A whole-description rewrite would otherwise bury the report, so list the
 # differing lines and say how many were left out.
@@ -179,14 +202,18 @@ def main(argv=None):
 
     token = os.environ.get("PLAY_ACCESS_TOKEN") or os.environ.get("TH_TOKEN")
     if not token:
-        message = "set PLAY_ACCESS_TOKEN (see the docstring for the gcloud command)"
-        if args.json:
-            print(json.dumps({"error": "missing_token", "message": message}, ensure_ascii=False))
-        else:
-            print("error: " + message, file=sys.stderr)
-        return 2
+        return report_unavailable(
+            args,
+            "missing_token",
+            "set PLAY_ACCESS_TOKEN (see the docstring for the gcloud command)",
+        )
 
-    results = check_listings(token)
+    try:
+        results = check_listings(token)
+    except urllib.error.HTTPError as error:
+        return report_unavailable(args, "play_rejected", describe_http_error(error))
+    except urllib.error.URLError as error:
+        return report_unavailable(args, "play_unreachable", "cannot reach the Play API: %s" % error.reason)
     drifted = [entry["locale"] for entry in results if entry["status"] == "DRIFT"]
 
     if args.json:

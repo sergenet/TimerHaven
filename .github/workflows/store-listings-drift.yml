@@ -1,0 +1,166 @@
+name: Store listing drift
+
+# Fails when the copy in fastlane/metadata/android and the copy Google Play is
+# actually serving disagree — for example after someone edits a listing in the
+# Play Console, or after a translation is committed but never published.
+#
+# Credentials the runner needs
+# ---------------------------
+# One repository secret:
+#
+#   PLAY_SERVICE_ACCOUNT_JSON  the JSON key of a Google Cloud service account
+#
+# That service account must be invited in Play Console (Users and permissions)
+# for this app with at least read access — "View app information and download
+# bulk reports" is enough. The account already used to publish the listings
+# qualifies, so reusing its key is fine; no new service account is required.
+# The key is exchanged for a short-lived token scoped to
+#
+#   https://www.googleapis.com/auth/androidpublisher
+#
+# which is the same token `gcloud auth print-access-token` produces by hand for
+# tools/check_store_listings.py. Nothing in this workflow uploads or commits a
+# Play edit, so read access cannot change the store listing.
+#
+# For a keyless setup, replace the auth step with google-github-actions/auth
+# workload identity federation (workload_identity_provider + service_account)
+# and keep the same access_token / access_token_scopes settings.
+on:
+  schedule:
+    # Daily at 06:17 UTC, off the hour to avoid the cron rush.
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: store-listing-drift
+  cancel-in-progress: false
+
+jobs:
+  drift:
+    name: fastlane vs live Play
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - id: auth
+        name: Mint a Play Developer API token
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/androidpublisher
+
+      # The check opens a read-only Play edit, reads all seven listings and
+      # deletes the edit again. It exits 0 on a match, 1 on drift and 2 when it
+      # has no credentials, so the status is captured here and acted on after
+      # the summary is written.
+      - id: check
+        name: Compare fastlane with the live listings
+        env:
+          PLAY_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+        run: |
+          set +e
+          python tools/check_store_listings.py --json > "$RUNNER_TEMP/drift.json"
+          status=$?
+          set -e
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          if [ "$status" -eq 2 ]; then
+            echo "::error title=Drift check could not run::No listing was compared. Check PLAY_SERVICE_ACCOUNT_JSON and the service account's access to the app in Play Console."
+          fi
+
+      - name: Write the drift summary
+        if: always() && steps.check.outcome != 'skipped'
+        run: |
+          python - "$RUNNER_TEMP/drift.json" <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          import sys
+
+          # The JSON report lists every differing line; the summary stops at
+          # this many per field so a full rewrite does not bury the table.
+          LIMIT = 10
+
+
+          def load(path):
+              try:
+                  with open(path, encoding="utf-8") as handle:
+                      return json.load(handle)
+              except (OSError, ValueError):
+                  return None
+
+
+          data = load(sys.argv[1])
+          print("### Store listing drift\n")
+          if data is None:
+              print("The check produced no readable report; see the job log.")
+              raise SystemExit(0)
+          if "error" in data:
+              print("**Check could not run:** %s" % data.get("message", data["error"]))
+              raise SystemExit(0)
+
+          listings = data.get("listings") or []
+          drifted = data.get("drifted") or []
+          checked = data.get("checked", len(listings))
+          if not drifted:
+              print("All %d listings match fastlane." % checked)
+              raise SystemExit(0)
+
+          print("**%d of %d listings drifted:** %s\n"
+                % (len(drifted), checked, ", ".join(drifted)))
+          print("| Locale | Field | Repo | Live | Lines |")
+          print("|---|---|--:|--:|--:|")
+          for entry in listings:
+              for field in entry.get("fields") or []:
+                  count = "same lines" if field.get("same_lines") else str(field.get("differing_lines", 0))
+                  print("| %s | %s | %d | %d | %s |" % (
+                      entry.get("locale", "?"),
+                      field.get("label", field.get("field", "?")),
+                      field.get("repo_length", 0),
+                      field.get("live_length", 0),
+                      count))
+          print()
+
+          for entry in listings:
+              fields = entry.get("fields") or []
+              if not fields:
+                  continue
+              print("<details><summary>%s: %d drifting field%s</summary>\n" % (
+                  entry.get("locale", "?"),
+                  len(fields),
+                  "" if len(fields) == 1 else "s"))
+              for field in fields:
+                  print("**%s**\n" % field.get("label", field.get("field", "?")))
+                  if field.get("same_lines"):
+                      print("Same lines, different text.\n")
+                      continue
+                  print("```diff")
+                  for item in (field.get("lines") or [])[:LIMIT]:
+                      print("- line %d: %s" % (item["line"], item["repo"]))
+                      print("+ line %d: %s" % (item["line"], item["live"]))
+                  print("```\n")
+                  missing = field.get("differing_lines", 0) - LIMIT
+                  if missing > 0:
+                      print("%d more differing line%s not shown.\n"
+                            % (missing, "" if missing == 1 else "s"))
+              print("</details>\n")
+          PY
+
+      - name: Fail on drift
+        if: steps.check.outputs.status != '0'
+        env:
+          STATUS: ${{ steps.check.outputs.status }}
+        run: |
+          if [ "$STATUS" = "2" ]; then
+            echo "::error title=Drift check could not run::No listing was compared, so this run says nothing about drift; see the step above."
+            exit 1
+          fi
+          locales=$(python -c 'import json, sys; print(", ".join((json.load(open(sys.argv[1], encoding="utf-8")).get("drifted") or [])))' "$RUNNER_TEMP/drift.json" 2>/dev/null || true)
+          echo "::error title=Store listing drift::fastlane and the live Play listing disagree${locales:+ for $locales}. See the job summary for the differing lines."
+          exit 1
