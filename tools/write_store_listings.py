@@ -18,7 +18,7 @@ LISTINGS = {
     "de": {
         "title": "TimerHaven: Timer & Fokus",
         "short": "Pomodoro, Countdown, Weltzeit, Notizen u. mehr: 15 kostenlose Tools in 1 App.",
-        "full": """TimerHaven bündelt 15 Produktivitätswerkzeuge in einer App – ohne Konto, ohne Abo.
+        "full": """TimerHaven (Timer Haven) bündelt 15 Produktivitätswerkzeuge in einer App – ohne Konto, ohne Abo.
 
 POMODORO & TIMER
 • Pomodoro-Timer mit einstellbaren Arbeits- und Pausenintervallen
@@ -53,7 +53,7 @@ TimerHaven ist privat by design: keine Anmeldung, kein Profil, keine Weitergabe 
     "el": {
         "title": "TimerHaven: Χρονόμετρα",
         "short": "Pomodoro, αντίστροφη μέτρηση, παγκόσμιο ρολόι, σημειώσεις: 15 δωρεάν εργαλεία.",
-        "full": """Το TimerHaven συγκεντρώνει 15 εργαλεία παραγωγικότητας σε μία εφαρμογή — χωρίς λογαριασμό και χωρίς συνδρομή.
+        "full": """Το TimerHaven (Timer Haven) συγκεντρώνει 15 εργαλεία παραγωγικότητας σε μία εφαρμογή — χωρίς λογαριασμό και χωρίς συνδρομή.
 
 POMODORO ΚΑΙ ΧΡΟΝΟΜΕΤΡΑ
 • Χρονόμετρο Pomodoro με προσαρμόσιμα διαστήματα εργασίας και διαλείμματος
@@ -88,7 +88,7 @@ POMODORO ΚΑΙ ΧΡΟΝΟΜΕΤΡΑ
     "es": {
         "title": "TimerHaven: Temporizadores",
         "short": "Pomodoro, cuenta atrás, reloj mundial, notas y más: 15 herramientas gratis.",
-        "full": """TimerHaven reúne 15 herramientas de productividad en una sola app, sin cuenta y sin suscripción.
+        "full": """TimerHaven (Timer Haven) reúne 15 herramientas de productividad en una sola app, sin cuenta y sin suscripción.
 
 POMODORO Y TEMPORIZADORES
 • Temporizador Pomodoro con intervalos de trabajo y descanso personalizables
@@ -123,7 +123,7 @@ TimerHaven es privado por diseño: sin registro, sin perfil y sin compartir tus 
     "fr": {
         "title": "TimerHaven : minuteurs",
         "short": "Pomodoro, compte à rebours, horloge mondiale, notes : 15 outils gratuits.",
-        "full": """TimerHaven réunit 15 outils de productivité dans une seule application, sans compte ni abonnement.
+        "full": """TimerHaven (Timer Haven) réunit 15 outils de productivité dans une seule application, sans compte ni abonnement.
 
 POMODORO ET MINUTEURS
 • Minuteur Pomodoro avec durées de travail et de pause personnalisables
@@ -158,7 +158,7 @@ TimerHaven respecte votre vie privée : pas d'inscription, pas de profil, vos no
     "ru": {
         "title": "TimerHaven: таймеры",
         "short": "Pomodoro, таймер, мировое время, заметки и ещё 11 инструментов — бесплатно.",
-        "full": """TimerHaven собирает 15 инструментов продуктивности в одном приложении — без аккаунта и подписки.
+        "full": """TimerHaven (Timer Haven) собирает 15 инструментов продуктивности в одном приложении — без аккаунта и подписки.
 
 POMODORO И ТАЙМЕРЫ
 • Таймер Pomodoro с настраиваемыми интервалами работы и отдыха
@@ -193,7 +193,7 @@ TimerHaven уважает приватность: без регистрации,
     "ar": {
         "title": "TimerHaven: مؤقتات",
         "short": "بومودورو وعد تنازلي وساعة عالمية وملاحظات و11 أداة أخرى مجانًا.",
-        "full": """يجمع TimerHaven خمس عشرة أداة إنتاجية في تطبيق واحد، دون حساب أو اشتراك.
+        "full": """يجمع TimerHaven (Timer Haven) خمس عشرة أداة إنتاجية في تطبيق واحد، دون حساب أو اشتراك.
 
 بومودورو والمؤقتات
 • مؤقت بومودورو بمدد عمل وراحة قابلة للتعديل
