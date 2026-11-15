@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the Play Store listing copy for the six site languages.
+"""Write the Play Store listing copy for the six site languages and the en-US default.
 
 Layout matches the fastlane convention so the files can be pasted into the Play
 Console (or uploaded with supply) without reformatting:
@@ -224,6 +224,33 @@ TimerHaven уважает приватность: без регистрации,
 كل الأدوات مجانية. يعتمد التطبيق على الإعلانات، وشراء واحد يزيلها نهائيًا.
 
 يحترم TimerHaven خصوصيتك: دون تسجيل أو ملف شخصي، وتبقى ملاحظاتك لديك.""",
+    },
+    "en-US": {
+        "title": "TimerHaven — Pomodoro & Focus",
+        "short": "Privacy-first, Pomodoro, Stopwatch, Countdown, and Global Weather.",
+        "full": """🚀 TimerHaven (Timer Haven) is your ultimate productivity toolkit, specially designed to help you stay on top of your tasks, work smarter, and live a more organized life!
+
+With a single app, you get powerful tools for time management, productivity, and organization — all in one place. Whether you're planning your day, tracking your tasks, or staying focused with the Pomodoro method, TimerHaven has everything you need.
+
+Key Features Include:
+✅ World Clock – Easily compare time across multiple time zones. Ideal for international meetings.
+✅ Countdown Timer – Stay on top of deadlines and events with visual countdown timers.
+✅ Pomodoro Timer – Boost productivity with timed work intervals and breaks.
+✅ Stopwatch – Measure time and improve efficiency for workouts, tasks, and more.
+✅ Task Timer – Track work sessions, focus on specific tasks, and schedule breaks.
+✅ Habit Tracker – Build and log daily habits for a more balanced routine.
+✅ Focus Music – Stay in the zone with calming music designed for productivity.
+✅ Calendar & Meeting Planner – Plan meetings, deadlines, and events across time zones.
+✅ Currency & Unit Converter – Convert currencies, weights, lengths, and more with live exchange rates.
+✅ Password Generator – Create strong, secure passwords in seconds.
+
+Why TimerHaven?
+💡 All-in-One Solution: Say goodbye to juggling multiple apps — TimerHaven gives you all the productivity tools you need in one place.
+🌍 Multilingual Support: Available in English, French, Spanish, German, Arabic, and more for global accessibility.
+🔒 Privacy-First: All tools run locally — your data is never shared or sold.
+📱 Free for All: All features are free and easy to use.
+
+⚡ Download TimerHaven today and start your productivity journey!""",
     },
 }
 
