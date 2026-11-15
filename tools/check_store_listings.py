@@ -15,11 +15,14 @@ with. Mint a short-lived token and pass it in:
     python tools/check_store_listings.py
 
 Each drifting locale lists every line that differs (repo text against live
-text), capped at 12 lines per field so a full rewrite stays readable.
+text), capped at 12 lines per field so a full rewrite stays readable. Pass
+--json for the same findings as one JSON document (every differing line, no
+cap) so a script or CI summary can consume it.
 
 Exit status is 0 when every locale matches, 1 when anything has drifted, and 2
 when no Play credentials are configured.
 """
+import argparse
 import io
 import json
 import os
@@ -78,8 +81,8 @@ MAX_DIFF_LINES = 12
 LINE_WIDTH = 100
 
 
-def describe_differences(label, expected, actual):
-    """Return report lines for every line that differs between the two texts."""
+def diff_lines(expected, actual):
+    """Return every line that differs, as dicts with 1-based line numbers."""
     expected_lines = expected.splitlines()
     actual_lines = actual.splitlines()
     differing = []
@@ -87,52 +90,123 @@ def describe_differences(label, expected, actual):
         left = expected_lines[index] if index < len(expected_lines) else "<missing>"
         right = actual_lines[index] if index < len(actual_lines) else "<missing>"
         if left != right:
-            differing.append((index + 1, left, right))
-
-    if not differing:
-        return ["%s: same lines, text differs (%d vs %d chars)" % (label, len(expected), len(actual))]
-
-    lines = ["%s: %d differing line%s" % (label, len(differing), "" if len(differing) == 1 else "s")]
-    for number, left, right in differing[:MAX_DIFF_LINES]:
-        lines.append("  line %d repo: %s" % (number, left[:LINE_WIDTH]))
-        lines.append("  line %d live: %s" % (number, right[:LINE_WIDTH]))
-    if len(differing) > MAX_DIFF_LINES:
-        lines.append("  ... and %d more differing lines" % (len(differing) - MAX_DIFF_LINES))
-    return lines
+            differing.append({"line": index + 1, "repo": left, "live": right})
+    return differing
 
 
-def main():
-    token = os.environ.get("PLAY_ACCESS_TOKEN") or os.environ.get("TH_TOKEN")
-    if not token:
-        print("error: set PLAY_ACCESS_TOKEN (see the docstring for the gcloud command)", file=sys.stderr)
-        return 2
-
+def check_listings(token):
+    """Compare every locale against the live listing and return the findings."""
     _, edit = call(token, BASE + "/edits", method="POST", body={})
     edit_id = edit["id"]
-    drifted = []
+    results = []
     try:
         for folder, locale in LOCALES.items():
             _, listing = call(token, BASE + "/edits/" + edit_id + "/listings/" + locale)
-            problems = []
+            fields = []
             for api_key, label, filename in FIELDS:
                 expected = read_expected(folder, filename)
                 actual = listing.get(api_key, "").strip()
-                if expected != actual:
-                    problems.extend(describe_differences(label, expected, actual))
-            status = "MATCH" if not problems else "DRIFT"
-            print("%-6s %-6s %s" % (locale, folder, status))
-            if problems:
-                drifted.append(locale)
-                for problem in problems:
-                    print("       " + problem)
+                if expected == actual:
+                    continue
+                differing = diff_lines(expected, actual)
+                fields.append(
+                    {
+                        "field": api_key,
+                        "label": label,
+                        "repo_length": len(expected),
+                        "live_length": len(actual),
+                        "differing_lines": len(differing),
+                        "same_lines": not differing,
+                        "lines": differing,
+                    }
+                )
+            results.append(
+                {
+                    "locale": locale,
+                    "folder": folder,
+                    "status": "DRIFT" if fields else "MATCH",
+                    "fields": fields,
+                }
+            )
     finally:
         call(token, BASE + "/edits/" + edit_id, method="DELETE")
+    return results
 
+
+def describe_field(field):
+    """Render one drifting field for the console report."""
+    if field["same_lines"]:
+        return [
+            "%s: same lines, text differs (%d vs %d chars)"
+            % (field["label"], field["repo_length"], field["live_length"])
+        ]
+    lines = [
+        "%s: %d differing line%s"
+        % (field["label"], field["differing_lines"], "" if field["differing_lines"] == 1 else "s")
+    ]
+    for item in field["lines"][:MAX_DIFF_LINES]:
+        lines.append("  line %d repo: %s" % (item["line"], item["repo"][:LINE_WIDTH]))
+        lines.append("  line %d live: %s" % (item["line"], item["live"][:LINE_WIDTH]))
+    if field["differing_lines"] > MAX_DIFF_LINES:
+        lines.append("  ... and %d more differing lines" % (field["differing_lines"] - MAX_DIFF_LINES))
+    return lines
+
+
+def print_report(results):
+    for entry in results:
+        print("%-6s %-6s %s" % (entry["locale"], entry["folder"], entry["status"]))
+        for field in entry["fields"]:
+            for line in describe_field(field):
+                print("       " + line)
+
+    drifted = [entry["locale"] for entry in results if entry["status"] == "DRIFT"]
     if drifted:
-        print("\n%d of %d listings drifted from fastlane: %s" % (len(drifted), len(LOCALES), ", ".join(drifted)))
-        return 1
-    print("\nall %d listings match fastlane" % len(LOCALES))
-    return 0
+        print("\n%d of %d listings drifted from fastlane: %s" % (len(drifted), len(results), ", ".join(drifted)))
+    else:
+        print("\nall %d listings match fastlane" % len(results))
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(
+        description="Compare the fastlane store listings with what is live on Google Play."
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="print the findings as a JSON document instead of the console report",
+    )
+    args = parser.parse_args(argv)
+
+    token = os.environ.get("PLAY_ACCESS_TOKEN") or os.environ.get("TH_TOKEN")
+    if not token:
+        message = "set PLAY_ACCESS_TOKEN (see the docstring for the gcloud command)"
+        if args.json:
+            print(json.dumps({"error": "missing_token", "message": message}, ensure_ascii=False))
+        else:
+            print("error: " + message, file=sys.stderr)
+        return 2
+
+    results = check_listings(token)
+    drifted = [entry["locale"] for entry in results if entry["status"] == "DRIFT"]
+
+    if args.json:
+        print(
+            json.dumps(
+                {
+                    "package": PACKAGE,
+                    "checked": len(results),
+                    "match": not drifted,
+                    "drifted": drifted,
+                    "listings": results,
+                },
+                ensure_ascii=False,
+                indent=1,
+            )
+        )
+    else:
+        print_report(results)
+
+    return 1 if drifted else 0
 
 
 if __name__ == "__main__":
