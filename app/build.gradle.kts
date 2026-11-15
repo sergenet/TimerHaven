@@ -168,3 +168,28 @@ tasks.register<Copy>("syncWebAssets") {
 // tasks.named("preBuild") {
 //     dependsOn("syncWebAssets")
 // }
+
+// Release guard: a release bundle is what gets uploaded to Play, so refuse to
+// build one when the live listing has drifted from the fastlane copy.
+val checkStoreListings by tasks.registering(Exec::class) {
+    group = "verification"
+    description = "Compares the fastlane store listings with the live Play listings."
+    workingDir = rootProject.projectDir
+    commandLine(System.getenv("PYTHON") ?: "python", "tools/check_store_listings.py")
+    // Exit 2 means "no Play credentials", which is a skip rather than a drift.
+    isIgnoreExitValue = true
+    doLast {
+        when (executionResult.get().exitValue) {
+            0 -> Unit
+            2 -> logger.warn("checkStoreListings skipped: set PLAY_ACCESS_TOKEN to verify the listing before uploading.")
+            else -> throw GradleException(
+                "Store listing drift: fastlane and the live Play listing disagree. " +
+                    "Run 'python tools/check_store_listings.py' for the differing fields."
+            )
+        }
+    }
+}
+
+tasks.matching { it.name == "bundleRelease" || it.name == "assembleRelease" }.configureEach {
+    dependsOn(checkStoreListings)
+}
