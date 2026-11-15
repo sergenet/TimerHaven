@@ -14,7 +14,11 @@ with. Mint a short-lived token and pass it in:
         --account=play-publisher-sa@timerhaven-translation.iam.gserviceaccount.com)
     python tools/check_store_listings.py
 
-Exit status is 0 when every locale matches and 1 when anything has drifted.
+Each drifting locale lists every line that differs (repo text against live
+text), capped at 12 lines per field so a full rewrite stays readable.
+
+Exit status is 0 when every locale matches, 1 when anything has drifted, and 2
+when no Play credentials are configured.
 """
 import io
 import json
@@ -68,17 +72,33 @@ def read_expected(folder, filename):
     with io.open(path, encoding="utf-8") as handle:
         return handle.read().strip()
 
+# A whole-description rewrite would otherwise bury the report, so list the
+# differing lines and say how many were left out.
+MAX_DIFF_LINES = 12
+LINE_WIDTH = 100
 
-def first_difference(expected, actual):
-    """Return a short description of where two texts diverge."""
+
+def describe_differences(label, expected, actual):
+    """Return report lines for every line that differs between the two texts."""
     expected_lines = expected.splitlines()
     actual_lines = actual.splitlines()
+    differing = []
     for index in range(max(len(expected_lines), len(actual_lines))):
         left = expected_lines[index] if index < len(expected_lines) else "<missing>"
         right = actual_lines[index] if index < len(actual_lines) else "<missing>"
         if left != right:
-            return "line %d: repo %r != live %r" % (index + 1, left[:80], right[:80])
-    return "identical lines but lengths differ (%d vs %d chars)" % (len(expected), len(actual))
+            differing.append((index + 1, left, right))
+
+    if not differing:
+        return ["%s: same lines, text differs (%d vs %d chars)" % (label, len(expected), len(actual))]
+
+    lines = ["%s: %d differing line%s" % (label, len(differing), "" if len(differing) == 1 else "s")]
+    for number, left, right in differing[:MAX_DIFF_LINES]:
+        lines.append("  line %d repo: %s" % (number, left[:LINE_WIDTH]))
+        lines.append("  line %d live: %s" % (number, right[:LINE_WIDTH]))
+    if len(differing) > MAX_DIFF_LINES:
+        lines.append("  ... and %d more differing lines" % (len(differing) - MAX_DIFF_LINES))
+    return lines
 
 
 def main():
@@ -98,7 +118,7 @@ def main():
                 expected = read_expected(folder, filename)
                 actual = listing.get(api_key, "").strip()
                 if expected != actual:
-                    problems.append("%s: %s" % (label, first_difference(expected, actual)))
+                    problems.extend(describe_differences(label, expected, actual))
             status = "MATCH" if not problems else "DRIFT"
             print("%-6s %-6s %s" % (locale, folder, status))
             if problems:
