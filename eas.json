@@ -1,7 +1,7 @@
 {
   "cli": {
     "version": ">= 16.28.0",
-    "appVersionSource": "remote"
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
@@ -13,15 +13,17 @@
     },
     "production": {
       "autoIncrement": true,
-      "cache": {
-        "key": "v1-pod-fix"
-      },
       "ios": {
-        "image": "latest"
+        "image": "macos-tahoe-26.4-xcode-26.4",
+        "credentialsSource": "local"
       }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "ascAppId": "6756510490"
+      }
+    }
   }
 }
