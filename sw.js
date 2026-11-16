@@ -4,7 +4,7 @@
 // handler below prefers the cache, and the browser only reinstalls when this
 // file's bytes change. That is what hid the Play Store link - install.js was
 // updated on the server while every returning visitor kept the old copy.
-const CACHE = "timerhaven-v4";
+const CACHE = "timerhaven-v5";
 const OFFLINE_URL = "/offline.html";
 const PRECACHE = [
   "/",

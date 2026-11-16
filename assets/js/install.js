@@ -108,9 +108,58 @@
     }
   };
 
+  // Desktop visitors install an app window rather than a home-screen icon, so
+  // the wording for computers lives apart from the mobile copy above.
+  var DESKTOP = {
+    en: {
+      title: "Install {name} on your computer",
+      intro: "It opens in its own window, straight into {name}, without browser tabs. Then pin it wherever you keep your apps.",
+      step: "Chrome or Edge: menu \u22ee \u2192 \u201cInstall app\u201d. Safari on Mac: File \u2192 \u201cAdd to Dock\u201d. Right-click the new icon to pin it to the taskbar, desktop or Dock.",
+      done: "{name} installed. Pin it from your taskbar, desktop or Dock."
+    },
+    de: {
+      title: "{name} auf deinem Computer installieren",
+      intro: "Es \u00f6ffnet sich in einem eigenen Fenster, direkt in {name}, ohne Browser-Tabs. Anschlie\u00dfend kannst du es anheften, wo du deine Apps ablegst.",
+      step: "Chrome oder Edge: Men\u00fc \u22ee \u2192 \u201eApp installieren\u201c. Safari am Mac: Datei \u2192 \u201eZum Dock hinzuf\u00fcgen\u201c. Rechtsklick auf das neue Symbol, um es an Taskleiste, Desktop oder Dock anzuheften.",
+      done: "{name} ist installiert. Hefte es \u00fcber Taskleiste, Desktop oder Dock an."
+    },
+    el: {
+      title: "\u0395\u03b3\u03ba\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7 \u03c4\u03bf\u03c5 {name} \u03c3\u03c4\u03bf\u03bd \u03c5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ae \u03c3\u03b1\u03c2",
+      intro: "\u0391\u03bd\u03bf\u03af\u03b3\u03b5\u03b9 \u03c3\u03b5 \u03b4\u03b9\u03ba\u03cc \u03c4\u03bf\u03c5 \u03c0\u03b1\u03c1\u03ac\u03b8\u03c5\u03c1\u03bf, \u03b1\u03c0\u03b5\u03c5\u03b8\u03b5\u03af\u03b1\u03c2 \u03c3\u03c4\u03bf {name}, \u03c7\u03c9\u03c1\u03af\u03c2 \u03ba\u03b1\u03c1\u03c4\u03ad\u03bb\u03b5\u03c2. \u03a3\u03c4\u03b7 \u03c3\u03c5\u03bd\u03ad\u03c7\u03b5\u03b9\u03b1 \u03ba\u03b1\u03c1\u03c6\u03b9\u03c4\u03c3\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b5\u03ba\u03b5\u03af \u03c0\u03bf\u03c5 \u03ba\u03c1\u03b1\u03c4\u03ac\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03b5\u03c6\u03b1\u03c1\u03bc\u03bf\u03b3\u03ad\u03c2 \u03c3\u03b1\u03c2.",
+      step: "Chrome \u03ae Edge: \u03bc\u03b5\u03bd\u03bf\u03cd \u22ee \u2192 \u00ab\u0395\u03b3\u03ba\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7 \u03b5\u03c6\u03b1\u03c1\u03bc\u03bf\u03b3\u03ae\u03c2\u00bb. Safari \u03c3\u03b5 Mac: \u0391\u03c1\u03c7\u03b5\u03af\u03bf \u2192 \u00ab\u03a0\u03c1\u03bf\u03c3\u03b8\u03ae\u03ba\u03b7 \u03c3\u03c4\u03bf Dock\u00bb. \u039a\u03ac\u03bd\u03c4\u03b5 \u03b4\u03b5\u03be\u03af \u03ba\u03bb\u03b9\u03ba \u03c3\u03c4\u03bf \u03bd\u03ad\u03bf \u03b5\u03b9\u03ba\u03bf\u03bd\u03af\u03b4\u03b9\u03bf \u03b3\u03b9\u03b1 \u03ba\u03b1\u03c1\u03c6\u03af\u03c4\u03c3\u03c9\u03bc\u03b1 \u03c3\u03c4\u03b7 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae \u03b5\u03c1\u03b3\u03b1\u03c3\u03b9\u03ce\u03bd, \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03c6\u03ac\u03bd\u03b5\u03b9\u03b1 \u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1\u03c2 \u03ae \u03c4\u03bf Dock.",
+      done: "\u03a4\u03bf {name} \u03b5\u03b3\u03ba\u03b1\u03c4\u03b1\u03c3\u03c4\u03ac\u03b8\u03b7\u03ba\u03b5. \u039a\u03b1\u03c1\u03c6\u03b9\u03c4\u03c3\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b1\u03c0\u03cc \u03c4\u03b7 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae \u03b5\u03c1\u03b3\u03b1\u03c3\u03b9\u03ce\u03bd, \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03c6\u03ac\u03bd\u03b5\u03b9\u03b1 \u03b5\u03c1\u03b3\u03b1\u03c3\u03af\u03b1\u03c2 \u03ae \u03c4\u03bf Dock."
+    },
+    es: {
+      title: "Instalar {name} en tu ordenador",
+      intro: "Se abre en su propia ventana, directamente en {name}, sin pesta\u00f1as. Luego f\u00edjalo donde guardes tus aplicaciones.",
+      step: "Chrome o Edge: men\u00fa \u22ee \u2192 \u00abInstalar aplicaci\u00f3n\u00bb. Safari en Mac: Archivo \u2192 \u00abA\u00f1adir al Dock\u00bb. Haz clic derecho en el nuevo icono para fijarlo a la barra de tareas, el escritorio o el Dock.",
+      done: "{name} se instal\u00f3. F\u00edjalo desde la barra de tareas, el escritorio o el Dock."
+    },
+    fr: {
+      title: "Installer {name} sur votre ordinateur",
+      intro: "Il s'ouvre dans sa propre fen\u00eatre, directement sur {name}, sans onglets. \u00c9pinglez-le ensuite l\u00e0 o\u00f9 vous rangez vos applications.",
+      step: "Chrome ou Edge\u00a0: menu \u22ee \u2192 \u00ab\u00a0Installer l'application\u00a0\u00bb. Safari sur Mac\u00a0: Fichier \u2192 \u00ab\u00a0Ajouter au Dock\u00a0\u00bb. Faites un clic droit sur la nouvelle ic\u00f4ne pour l'\u00e9pingler \u00e0 la barre des t\u00e2ches, au bureau ou au Dock.",
+      done: "{name} est install\u00e9. \u00c9pinglez-le depuis la barre des t\u00e2ches, le bureau ou le Dock."
+    },
+    ru: {
+      title: "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c {name} \u043d\u0430 \u043a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440",
+      intro: "\u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u043e\u0442\u043a\u0440\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u0432 \u043e\u0442\u0434\u0435\u043b\u044c\u043d\u043e\u043c \u043e\u043a\u043d\u0435, \u0441\u0440\u0430\u0437\u0443 \u0432 {name}, \u0431\u0435\u0437 \u0432\u043a\u043b\u0430\u0434\u043e\u043a \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430. \u0417\u0430\u0442\u0435\u043c \u0437\u0430\u043a\u0440\u0435\u043f\u0438\u0442\u0435 \u0435\u0433\u043e \u0442\u0430\u043c, \u0433\u0434\u0435 \u0445\u0440\u0430\u043d\u0438\u0442\u0435 \u0441\u0432\u043e\u0438 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f.",
+      step: "Chrome \u0438\u043b\u0438 Edge: \u043c\u0435\u043d\u044e \u22ee \u2192 \u00ab\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435\u00bb. Safari \u043d\u0430 Mac: \u0424\u0430\u0439\u043b \u2192 \u00ab\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 Dock\u00bb. \u0429\u0451\u043b\u043a\u043d\u0438\u0442\u0435 \u043f\u0440\u0430\u0432\u043e\u0439 \u043a\u043d\u043e\u043f\u043a\u043e\u0439 \u043f\u043e \u043d\u043e\u0432\u043e\u043c\u0443 \u0437\u043d\u0430\u0447\u043a\u0443, \u0447\u0442\u043e\u0431\u044b \u0437\u0430\u043a\u0440\u0435\u043f\u0438\u0442\u044c \u0435\u0433\u043e \u043d\u0430 \u043f\u0430\u043d\u0435\u043b\u0438 \u0437\u0430\u0434\u0430\u0447, \u0440\u0430\u0431\u043e\u0447\u0435\u043c \u0441\u0442\u043e\u043b\u0435 \u0438\u043b\u0438 \u0432 Dock.",
+      done: "{name} \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e. \u0417\u0430\u043a\u0440\u0435\u043f\u0438\u0442\u0435 \u0435\u0433\u043e \u043d\u0430 \u043f\u0430\u043d\u0435\u043b\u0438 \u0437\u0430\u0434\u0430\u0447, \u0440\u0430\u0431\u043e\u0447\u0435\u043c \u0441\u0442\u043e\u043b\u0435 \u0438\u043b\u0438 \u0432 Dock."
+    },
+    ar: {
+      title: "\u062a\u062b\u0628\u064a\u062a {name} \u0639\u0644\u0649 \u062c\u0647\u0627\u0632 \u0627\u0644\u0643\u0645\u0628\u064a\u0648\u062a\u0631",
+      intro: "\u064a\u0641\u062a\u062d \u0641\u064a \u0646\u0627\u0641\u0630\u0629 \u062e\u0627\u0635\u0629 \u0628\u0647\u060c \u0645\u0628\u0627\u0634\u0631\u0629\u064b \u0639\u0644\u0649 {name}\u060c \u062f\u0648\u0646 \u0639\u0644\u0627\u0645\u0627\u062a \u062a\u0628\u0648\u064a\u0628. \u062b\u0645 \u062b\u0628\u0651\u062a\u0647 \u062d\u064a\u062b \u062a\u062d\u0641\u0638 \u062a\u0637\u0628\u064a\u0642\u0627\u062a\u0643.",
+      step: "Chrome \u0623\u0648 Edge: \u0627\u0644\u0642\u0627\u0626\u0645\u0629 \u22ee \u2190 \u00ab\u062a\u062b\u0628\u064a\u062a \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u00bb. Safari \u0639\u0644\u0649 Mac: \u0645\u0644\u0641 \u2190 \u00ab\u0625\u0636\u0627\u0641\u0629 \u0625\u0644\u0649 Dock\u00bb. \u0627\u0646\u0642\u0631 \u0628\u0632\u0631 \u0627\u0644\u0641\u0623\u0631\u0629 \u0627\u0644\u0623\u064a\u0645\u0646 \u0639\u0644\u0649 \u0627\u0644\u0623\u064a\u0642\u0648\u0646\u0629 \u0627\u0644\u062c\u062f\u064a\u062f\u0629 \u0644\u062a\u062b\u0628\u064a\u062a\u0647\u0627 \u0641\u064a \u0634\u0631\u064a\u0637 \u0627\u0644\u0645\u0647\u0627\u0645 \u0623\u0648 \u0633\u0637\u062d \u0627\u0644\u0645\u0643\u062a\u0628 \u0623\u0648 Dock.",
+      done: "\u062a\u0645 \u062a\u062b\u0628\u064a\u062a {name}. \u062b\u0628\u0651\u062a\u0647 \u0645\u0646 \u0634\u0631\u064a\u0637 \u0627\u0644\u0645\u0647\u0627\u0645 \u0623\u0648 \u0633\u0637\u062d \u0627\u0644\u0645\u0643\u062a\u0628 \u0623\u0648 Dock."
+    }
+  };
+
   var tool = (script && script.getAttribute("data-th-tool")) || "home";
   var htmlLang = (document.documentElement.lang || "en").slice(0, 2).toLowerCase();
   var t = I18N[htmlLang] || I18N.en;
+  var d = DESKTOP[htmlLang] || DESKTOP.en;
+  var desktop = isDesktop();
   var appName = "TimerHaven";
   var shortName = "TimerHaven";
   var promptEvent = null;
@@ -154,6 +203,13 @@
     );
   }
 
+  // Desktop browsers install into their own app window; phones and tablets add a
+  // home-screen icon. iPadOS reports itself as a Mac, so isIos() has to win first.
+  function isDesktop() {
+    if (isIos()) return false;
+    return !/Android|Mobile|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
   function registerServiceWorker() {
     if (!("serviceWorker" in navigator)) return;
     window.addEventListener("load", function () {
@@ -190,20 +246,33 @@
       '<div class="th-install-sheet__panel" role="document">' +
       '<h2 class="th-install-sheet__title"></h2>' +
       '<p class="th-install-sheet__intro"></p>' +
+      '<p class="th-install-sheet__step" data-step="desktop"></p>' +
       '<p class="th-install-sheet__step" data-step="ios"></p>' +
       '<p class="th-install-sheet__step" data-step="chrome"></p>' +
       '<p class="th-install-sheet__step" data-step="android"></p>' +
       '<a class="th-install-sheet__store" data-th-store rel="noopener" target="_blank"></a>' +
       '<button type="button" class="th-install-sheet__close" data-th-close></button>' +
       "</div>";
-    sheet.querySelector(".th-install-sheet__title").textContent = fill(t.title);
-    sheet.querySelector(".th-install-sheet__intro").textContent = fill(t.intro);
+    var copy = desktop ? d : t;
+    sheet.querySelector(".th-install-sheet__title").textContent = fill(copy.title);
+    sheet.querySelector(".th-install-sheet__intro").textContent = fill(copy.intro);
     sheet.querySelector('[data-step="ios"]').textContent = t.ios;
     sheet.querySelector('[data-step="chrome"]').textContent = t.chrome;
     sheet.querySelector('[data-step="android"]').textContent = t.android;
+    var desktopStep = sheet.querySelector('[data-step="desktop"]');
+    desktopStep.textContent = d.step;
+    if (desktop) {
+      // A computer has no home screen, and the Play link is for phones.
+      ["ios", "chrome", "android"].forEach(function (step) {
+        var el = sheet.querySelector('[data-step="' + step + '"]');
+        if (el) el.remove();
+      });
+    } else {
+      desktopStep.remove();
+    }
     sheet.querySelector(".th-install-sheet__close").textContent = t.close;
     var store = sheet.querySelector("[data-th-store]");
-    if (isIos()) {
+    if (isIos() || desktop) {
       // No App Store build exists yet, so the link would be a dead end there.
       store.remove();
     } else {
@@ -303,7 +372,7 @@
         /* private mode: nothing to remember */
       }
       hidePill();
-      toast(fill(t.done));
+      toast(fill(desktop ? d.done : t.done));
     });
   }
 
