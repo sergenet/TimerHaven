@@ -184,7 +184,8 @@
 
   <script>
     // -- Translations (restored) --
-    const apiKey = "5f484bfa921ef56c9c279660";
+    // Rates come from TimerHaven's own endpoint so the provider key stays server-side.
+    var RATES_ENDPOINT = (location.protocol === 'file:') ? 'https://timerhaven.com/api/rates.php' : 'api/rates.php';
     const currencyList = ["USD","EUR","GBP","JPY","AUD","CAD","CHF","CNY","SEK","NZD","MXN","SGD","HKD","NOK","KRW","TRY","INR","RUB","BRL","ZAR"];
 
     const currencyTranslations = {
@@ -412,7 +413,7 @@
 
       document.getElementById('result').innerText = t['fetching'] || ((lang === "ar") ? "جارِ جلب السعر..." : "Fetching rate...");
 
-      fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${fromCur}/${toCur}/${amountVal}`)
+      fetch(RATES_ENDPOINT + '?from=' + encodeURIComponent(fromCur) + '&to=' + encodeURIComponent(toCur) + '&amount=' + encodeURIComponent(amountVal))
         .then(r => r.json())
         .then(data => {
           if (data && typeof data.conversion_result !== 'undefined') {
