@@ -48,7 +48,17 @@ Options -Indexes
 
   # Exclude api folder from further processing (so Passenger doesn't capture it)
   RewriteRule ^api/ - [L]
-</IfModule># DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGINPassengerAppRoot "/home/sergbcqk/TimerHavenWeatherProxy"PassengerBaseURI "/"PassengerNodejs "/home/sergbcqk/nodevenv/TimerHavenWeatherProxy/18/bin/node"PassengerAppType nodePassengerStartupFile server.js# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END# Preserve the specific tool redirects
+</IfModule>
+
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/sergbcqk/TimerHavenWeatherProxy"
+PassengerBaseURI "/"
+PassengerNodejs "/home/sergbcqk/nodevenv/TimerHavenWeatherProxy/18/bin/node"
+PassengerAppType node
+PassengerStartupFile server.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+
+# Preserve the specific tool redirects
 Redirect 301 /world-clock.html https://timerhaven.com/world-clock-en.html
 Redirect 301 /weather.html https://timerhaven.com/weather-en.html
 Redirect 301 /unit-converter.html https://timerhaven.com/unit-converter-en.html

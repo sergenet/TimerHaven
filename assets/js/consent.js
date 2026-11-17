@@ -1,14 +1,19 @@
-﻿// Centralized consent.js for TimerHaven
+﻿// Centralized consent.js for TimerHaven with Google Consent Mode v2
+// - Implements Google Consent Mode v2 (analytics_storage, ad_storage, ad_user_data, ad_personalization)
+// - Loads GA4 (G-R1F6Y45MW2) immediately with denied defaults for cookieless measurement & traffic modeling
+// - Loads AdSense (ca-pub-0467059729557007) and updates consent to granted upon user approval
 // - Shows consent banner (Accept / Decline / Manage)
 // - Exposes window.timerhavenConsentGiven(), window.timerhavenLoadAdsAfterConsent(cb), window.timerhavenRevokeConsent()
-// - Loads AdSense + GA only after consent and guards against double-load.
 
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'timerhavenConsent';
+  var GA_ID = 'G-R1F6Y45MW2';
+  var AD_CLIENT = 'ca-pub-0467059729557007';
   var QUEUE = [];
   var ADS_LOADED_FLAG = '__timerhaven_ads_loaded';
+  var ANALYTICS_LOADED_FLAG = '__timerhaven_analytics_loaded';
 
   // Utility helpers
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }
@@ -69,14 +74,6 @@
   }
 
   // Fill every <ins class="adsbygoogle"> on the page.
-  //
-  // The ad units are plain markup in the HTML with no inline push() call: a
-  // push that runs before the AdSense library has loaded is simply lost, and a
-  // push in the markup would also fire before consent. Filling them here means
-  // an ad request can only ever happen after the loader this function appends
-  // has actually executed, which is by definition after consent.
-  // AdSense pairs each queued push with the next <ins> in document order, so
-  // one push per unit, in order, is the correct contract.
   function fillAdUnits() {
     try {
       var units = document.querySelectorAll('ins.adsbygoogle');
@@ -91,18 +88,60 @@
   }
   window.timerhavenFillAdUnits = fillAdUnits;
 
-  // Load AdSense + GA (idempotent)
-  function loadAdsAndAnalytics() {
+  // --- Google Consent Mode v2 & Analytics ---
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ window.dataLayer.push(arguments); }
+  window.gtag = window.gtag || gtag;
+
+  // Establish default consent state before tags load
+  if (isGranted()) {
+    gtag('consent', 'default', {
+      analytics_storage: 'granted',
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
+  } else {
+    gtag('consent', 'default', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  }
+
+  function loadAnalytics() {
+    if (window[ANALYTICS_LOADED_FLAG]) return;
+    window[ANALYTICS_LOADED_FLAG] = true;
+
+    try {
+      if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+        var g = document.createElement('script');
+        g.async = true;
+        g.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
+        document.head.appendChild(g);
+      }
+      gtag('js', new Date());
+      gtag('config', GA_ID, {
+        anonymize_ip: true
+      });
+    } catch (e) {
+      console.warn('loadAnalytics error', e);
+    }
+  }
+
+  // Load AdSense (only after explicit consent)
+  function loadAdSense() {
     try {
       if (window[ADS_LOADED_FLAG]) { fillAdUnits(); return; }
       window[ADS_LOADED_FLAG] = true;
 
-      // AdSense
       var existing = document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]');
       if (!existing) {
         var s = document.createElement('script');
         s.async = true;
-        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0467059729557007';
+        s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + encodeURIComponent(AD_CLIENT);
         s.crossOrigin = 'anonymous';
         s.onload = fillAdUnits;
         s.onerror = function () { console.warn('AdSense loader failed to load'); };
@@ -111,41 +150,40 @@
         fillAdUnits();
       }
 
-      // gtag
-      if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
-        var g = document.createElement('script');
-        g.async = true;
-        g.src = 'https://www.googletagmanager.com/gtag/js?id=G-R1F6Y45MW2';
-        document.head.appendChild(g);
-      }
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      window.gtag = window.gtag || gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-R1F6Y45MW2');
-
-      // The loader can also finish before the unit markup is parsed (units sit
-      // lower in the body), so retry once the document has settled.
       if (document.readyState !== 'complete') {
         window.addEventListener('load', fillAdUnits);
       }
     } catch (e) {
-      console.warn('loadAdsAndAnalytics error', e);
+      console.warn('loadAdSense error', e);
     }
   }
+
+  // Load analytics immediately on script evaluation so cookieless measurement operates
+  loadAnalytics();
 
   // consent accept/decline handlers
   function acceptConsent() {
     setStored('granted');
     hideBanner();
+    gtag('consent', 'update', {
+      analytics_storage: 'granted',
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
     runQueue();
-    loadAdsAndAnalytics();
+    loadAdSense();
   }
 
   function declineConsent() {
     setStored('denied');
     hideBanner();
+    gtag('consent', 'update', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
     QUEUE = [];
   }
 
@@ -207,8 +245,8 @@
     try {
       if (isGranted()) {
         runQueue();
-        loadAdsAndAnalytics();
-      } else {
+        loadAdSense();
+      } else if (!isDenied()) {
         showBanner();
       }
     } catch (e) { console.warn(e); }
@@ -218,6 +256,7 @@
   window.timerhavenConsentGiven = timerhavenConsentGiven;
   window.timerhavenLoadAdsAfterConsent = timerhavenLoadAdsAfterConsent;
   window.timerhavenRevokeConsent = timerhavenRevokeConsent;
+  window.timerhavenFillAdUnits = fillAdUnits;
 
   // Expose helper to programmatically accept for testing
   window.timerhavenAcceptForTesting = acceptConsent;
