@@ -158,8 +158,10 @@
     }
   }
 
-  // Load analytics immediately on script evaluation so cookieless measurement operates
-  loadAnalytics();
+  // Only load analytics & ads if explicit consent was granted
+  if (isGranted()) {
+    loadAnalytics();
+  }
 
   // consent accept/decline handlers
   function acceptConsent() {
@@ -172,6 +174,7 @@
       ad_personalization: 'granted'
     });
     runQueue();
+    loadAnalytics();
     loadAdSense();
   }
 
