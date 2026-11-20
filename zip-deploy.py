@@ -190,11 +190,12 @@ def target_files():
             out.append(Path(extra))
             seen.add(extra)
 
-    # Installable-web-app assets. None of these appear in the sitemap, but every
-    # page links a manifest, a service worker and the install script, so they have
+    # Installable-web-app assets and root assets (tool toolbar, styling).
+    # None of these appear in the sitemap, but pages link them, so they have
     # to ship alongside the pages that reference them.
     for pattern in (
-        "sw.js",
+        "*.js",
+        "*.css",
         "manifest.json",
         "manifests/*.json",
         "assets/js/*.js",
@@ -204,6 +205,8 @@ def target_files():
     ):
         for path in sorted(BASE.glob(pattern)):
             rel = path.relative_to(BASE).as_posix()
+            if rel.startswith("."):  # skip hidden files like .eleventy.js
+                continue
             if rel not in seen:
                 out.append(Path(rel))
                 seen.add(rel)
