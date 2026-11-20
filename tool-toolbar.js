@@ -7,6 +7,14 @@
 
   // Initialize only after DOM ready, and bail out quickly if no .tool-card on the page
   function init() {
+    // Ensure Apple Smart App Banner tag exists in head
+    if (!document.querySelector('meta[name="apple-itunes-app"]')) {
+      const appleMeta = document.createElement('meta');
+      appleMeta.name = 'apple-itunes-app';
+      appleMeta.content = 'app-id=6756510490';
+      document.head.appendChild(appleMeta);
+    }
+
     if (!document.querySelector('.tool-card')) {
       // No tool cards on this page — nothing to do.
       return;
@@ -214,8 +222,35 @@
       btnHow.textContent = 'How‑to';
       btnHow.style.cursor = 'pointer';
 
+      const btnApp = document.createElement('a');
+      btnApp.className = 'btn get-app';
+      btnApp.target = '_blank';
+      btnApp.rel = 'noopener noreferrer';
+      btnApp.style.textDecoration = 'none';
+      btnApp.style.cursor = 'pointer';
+      btnApp.style.display = 'inline-flex';
+      btnApp.style.alignItems = 'center';
+      btnApp.style.gap = '4px';
+
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      const isAndroid = /Android/.test(navigator.userAgent);
+      if (isIOS) {
+        btnApp.href = 'https://apps.apple.com/app/id6756510490';
+        btnApp.innerHTML = '📱 iOS App';
+        btnApp.title = 'Get TimerHaven on the Apple App Store';
+      } else if (isAndroid) {
+        btnApp.href = 'https://play.google.com/store/apps/details?id=com.sergenet.TimerHavenApp';
+        btnApp.innerHTML = '📱 Android App';
+        btnApp.title = 'Get TimerHaven on Google Play';
+      } else {
+        btnApp.href = 'https://apps.apple.com/app/id6756510490';
+        btnApp.innerHTML = '📱 Mobile App';
+        btnApp.title = 'Get TimerHaven on iOS & Android';
+      }
+
       toolbar.appendChild(btnTips);
       toolbar.appendChild(btnHow);
+      toolbar.appendChild(btnApp);
 
       // insert toolbar at top of card-content if exists, otherwise at top of card
       const content = card.querySelector('.card-content') || card;
