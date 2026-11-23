@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preload" as="image" href="/assets/images/pomodoro-timer-share-image.webp" fetchpriority="high" media="(max-width: 768px)">
+  <link rel="icon" type="image/png" href="/assets/images/social-share-image.webp" />
+
+  <meta charset="UTF-8">
+  <title>Alarm Clock — Set Online Alarms with Sound & Snooze | TimerHaven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-itunes-app" content="app-id=6756510490">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <meta name="description"
+    content="Free online alarm clock with customizable sound alerts, snooze options, recurring daily schedules, and background notifications. Distraction-free, reliable, and private.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/mobile-enhancements.css">
+  <style>
+    body {
+      background: #f4f7fb;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-display: swap;
+      color: #333;
+    }
+
+    .main-container {
+      max-width: 1200px;
+      margin: 2em auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 90vh;
+      padding: 0 16px;
+    }
+
+    .center-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2em;
+      width: 100%;
+    }
+
+    .article-card,
+    .tool-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 14px rgba(24, 90, 157, 0.08);
+      border: 1px solid #eef3f9;
+      padding: 2em 1.5em;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    .article-card {
+      min-width: 260px;
+      max-width: 340px;
+      flex: 1 1 320px;
+    }
+
+    .tool-card {
+      min-width: 320px;
+      max-width: 540px;
+      flex: 2 1 500px;
+    }
+
+    /* Live Digital Clock */
+    .live-clock-banner {
+      background: linear-gradient(135deg, #185a9d 0%, #43cea2 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(24, 90, 157, 0.2);
+    }
+    .live-clock-time {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+    .live-clock-date {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-top: 0.35rem;
+      font-weight: 500;
+    }
+
+    /* Alarm Card Design */
+    .alarm-form-section {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.25rem;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 1.5rem;
+    }
+
+    .time-picker-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .time-input-box {
+      font-size: 2rem;
+      font-weight: 700;
+      width: 75px;
+      text-align: center;
+      border-radius: 10px;
+      border: 2px solid #cbd5e1;
+      padding: 6px;
+      background: #fff;
+      color: #1e293b;
+    }
+    .time-input-box:focus {
+      border-color: #185a9d;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(24, 90, 157, 0.15);
+    }
+
+    .time-colon {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    .ampm-toggle-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: 2px solid #cbd5e1;
+      background: #fff;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ampm-toggle-btn.active {
+      background: #185a9d;
+      color: #fff;
+      border-color: #185a9d;
+    }
+
+    .days-picker-row {
+      display: flex;
+      gap: 6px;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .day-pill {
+      flex: 1;
+      padding: 6px 0;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: #64748b;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .day-pill.active {
+      background: #43cea2;
+      border-color: #43cea2;
+      color: #fff;
+    }
+
+    .preset-btn-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .preset-chip {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      background: #e2e8f0;
+      color: #475569;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .preset-chip:hover {
+      background: #cbd5e1;
+    }
+
+    /* Alarms List */
+    .alarms-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .alarm-item-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.2rem;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s;
+    }
+    .alarm-item-card.disabled {
+      opacity: 0.55;
+      background: #f8fafc;
+    }
+    .alarm-item-time {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: 1px;
+    }
+    .alarm-item-meta {
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .alarm-item-countdown {
+      display: inline-block;
+      font-size: 0.75rem;
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+
+    /* Pro Plan Banner */
+    .pro-upsell-box {
+      background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+      border: 2px dashed #94a3b8;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-top: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pro-upsell-box:hover {
+      border-color: #185a9d;
+      background: #f0f7ff;
+    }
+
+    /* Ringing Alert Modal */
+    .ringing-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .ringing-modal-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      animation: pulse-ring 1.5s infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+      70% { transform: scale(1.02); box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+    .ringing-icon {
+      font-size: 4rem;
+      color: #ef4444;
+      animation: shake 0.6s infinite alternate;
+    }
+    @keyframes shake {
+      from { transform: rotate(-15deg); }
+      to { transform: rotate(15deg); }
+    }
+
+    @media (max-width: 800px) {
+      .main-container { padding: 0 8px; }
+      .center-row { flex-direction: column; align-items: center; }
+      .article-card { display: none !important; }
+      .tool-card { width: 100%; max-width: 100%; }
+    }
+  </style>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Alarm Clock — Set Online Alarms with Sound & Snooze | TimerHaven">
+  <meta property="og:description" content="Set multiple daily alarms, customize gentle chime or digital alerts, and never miss a wake-up or focus interval. Free, reliable, and private.">
+  <meta property="og:image" content="https://timerhaven.com/images/social-banner.webp">
+  <meta property="og:url" content="https://timerhaven.com/alarm.html">
+  <meta property="og:site_name" content="TimerHaven">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alarm Clock — TimerHaven">
+  <meta name="twitter:description" content="Set multiple daily alarms, customize sound alerts, and never miss a wake-up or focus interval.">
+  <meta name="twitter:image" content="https://timerhaven.com/images/social-banner.webp">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TimerHaven Alarm Clock",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web, iOS, Android",
+    "description": "Online alarm clock with customizable sound alerts, snooze options, recurring daily schedules, and background notifications.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script src="/assets/js/app-interface.js" defer></script>
+  <script src="/assets/js/consent.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/consent.css" media="print" onload="this.media='all'">
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="center-row">
+      <!-- Article 1 (Desktop side panel) -->
+      <div class="article-card">
+        <div>
+          <div class="th-ad-slot" data-ad-placement="in-article" style="margin:12px auto;max-width:300px;text-align:center;">
+            <span class="th-ad-label" style="display:block;font-size:10px;text-transform:uppercase;opacity:.55;margin-bottom:4px">Advertisement</span>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-0467059729557007" data-ad-slot="2835722251" data-ad-format="auto" data-full-width-responsive="true"></ins>
+          </div>
+          <h2 style="color:#185a9d; font-size: 1.25rem;"><i class="fa fa-bell"></i> How to Use Alarm Clock</h2>
+          <ol style="padding-left: 1.2rem; font-size: 0.95rem; line-height: 1.6; color: #475569;">
+            <li><b>Set Time:</b> Choose your target hour, minute, and AM/PM.</li>
+            <li><b>Pick Days:</b> Select once, weekdays, or daily repetition.</li>
+            <li><b>Customize Sound:</b> Test and pick from gentle chimes, digital beeps, or radar alerts.</li>
+            <li><b>Keep Tab Open:</b> Alarms ring reliably even if you switch tabs or lock your device on the mobile app.</li>
+          </ol>
+
+          <hr style="border-color: #e2e8f0; margin: 1.2rem 0;">
+
+          <h3 style="font-size: 1.1rem; color: #185a9d;"><i class="fa fa-lightbulb"></i> Morning Flow Tip</h3>
+          <p style="font-size: 0.9rem; line-height: 1.6; color: #475569;">
+            Avoid harsh sudden noises that spike cortisol. Use our <em>Gentle Chimes</em> or <em>Morning Melody</em> to wake up smoothly and transition immediately into your first 25-minute Pomodoro block.
+          </p>
+        </div>
+      </div>
+
+      <!-- Main Tool Card -->
+      <div class="tool-card">
+        <a href="index.html" class="btn btn-outline-secondary btn-sm mb-3" style="border-radius: 20px;"><i class="fa fa-arrow-left"></i> Back to Main Menu</a>
+        
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 style="font-size: 1.6rem; font-weight: 700; color: #185a9d; margin: 0;"><i class="fa fa-bell text-warning"></i> Alarm Clock</h2>
+          <span class="badge bg-success-subtle text-success border border-success px-2 py-1" style="font-size: 0.8rem;"><i class="fa fa-shield-alt"></i> Private & Offline</span>
+        </div>
+
+        <!-- Live Clock Banner -->
+        <div class="live-clock-banner">
+          <div class="live-clock-time" id="liveClockDisplay">--:--:-- --</div>
+          <div class="live-clock-date" id="liveDateDisplay">Loading current time...</div>
+        </div>
+
+        <!-- Set Alarm Form -->
+        <div class="alarm-form-section">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">Set New Alarm</span>
+            <div class="preset-btn-row mb-0">
+              <button type="button" class="preset-chip" onclick="setQuickAlarm(5)">+5m</button>
+              <button type="button" class="preset-chip" onclick="setQuickAlarm(15)">+15m</button>
+              <button type="button" class="preset-chip" onclick="setQuickAlarm(30)">+30m</button>
+              <button type="button" class="preset-chip" onclick="setQuickAlarm(60)">+1h</button>
+            </div>
+          </div>
+
+          <!-- Time Picker Input -->
+          <div class="time-picker-row">
+            <input type="number" id="alarmHour" class="time-input-box" min="1" max="12" value="07" aria-label="Hour">
+            <span class="time-colon">:</span>
+            <input type="number" id="alarmMinute" class="time-input-box" min="0" max="59" value="00" aria-label="Minute">
+            <button type="button" id="ampmBtn" class="ampm-toggle-btn active" onclick="toggleAmPm()">AM</button>
+          </div>
+
+          <!-- Label -->
+          <div class="mb-3">
+            <label for="alarmLabel" class="form-label mb-1" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Alarm Label:</label>
+            <input type="text" id="alarmLabel" class="form-control" placeholder="e.g. Morning Wake-Up, Deep Work, Meeting" value="Wake Up" style="border-radius: 8px;">
+          </div>
+
+          <!-- Repeat Days -->
+          <div class="mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span style="font-size: 0.85rem; font-weight: 600; color: #475569;">Repeat Days:</span>
+              <div>
+                <button type="button" class="btn btn-link p-0 text-decoration-none" style="font-size: 0.78rem;" onclick="setDayPreset('once')">Once</button> |
+                <button type="button" class="btn btn-link p-0 text-decoration-none" style="font-size: 0.78rem;" onclick="setDayPreset('weekdays')">Weekdays</button> |
+                <button type="button" class="btn btn-link p-0 text-decoration-none" style="font-size: 0.78rem;" onclick="setDayPreset('all')">Daily</button>
+              </div>
+            </div>
+            <div class="days-picker-row" id="daysPicker">
+              <button type="button" class="day-pill" data-day="0">Sun</button>
+              <button type="button" class="day-pill active" data-day="1">Mon</button>
+              <button type="button" class="day-pill active" data-day="2">Tue</button>
+              <button type="button" class="day-pill active" data-day="3">Wed</button>
+              <button type="button" class="day-pill active" data-day="4">Thu</button>
+              <button type="button" class="day-pill active" data-day="5">Fri</button>
+              <button type="button" class="day-pill" data-day="6">Sat</button>
+            </div>
+          </div>
+
+          <!-- Sound & Snooze Row -->
+          <div class="row g-2 mb-3">
+            <div class="col-7">
+              <label for="alarmSound" class="form-label mb-1" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Alarm Sound:</label>
+              <div class="input-group">
+                <select id="alarmSound" class="form-select" style="border-radius: 8px 0 0 8px; font-size: 0.88rem;">
+                  <option value="chimes" selected>🔔 Gentle Chimes</option>
+                  <option value="beep">⏰ Digital Beep</option>
+                  <option value="melody">🎵 Morning Melody</option>
+                  <option value="radar">⚡ Energetic Radar</option>
+                  <option value="pro" disabled>⭐ Binaural Brainwaves (Pro)</option>
+                  <option value="pro" disabled>⭐ Lo-Fi Sunrise (Pro)</option>
+                </select>
+                <button type="button" class="btn btn-outline-secondary" onclick="testSoundPreview()" title="Test Sound" style="border-radius: 0 8px 8px 0;"><i class="fa fa-volume-high"></i></button>
+              </div>
+            </div>
+            <div class="col-5">
+              <label for="alarmSnooze" class="form-label mb-1" style="font-size: 0.85rem; font-weight: 600; color: #475569;">Snooze:</label>
+              <select id="alarmSnooze" class="form-select" style="border-radius: 8px; font-size: 0.88rem;">
+                <option value="5" selected>5 minutes</option>
+                <option value="10">10 minutes</option>
+                <option value="15">15 minutes</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary w-100 py-2" id="saveAlarmBtn" onclick="saveNewAlarm()" style="font-weight: 700; border-radius: 10px; background: #185a9d;">
+            <i class="fa fa-plus-circle me-1"></i> Set Alarm
+          </button>
+        </div>
+
+        <!-- Alarms List -->
+        <div class="d-flex justify-content-between align-items-center">
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #1e293b; margin: 0;">Your Alarms (<span id="alarmCountBadge">0</span>)</h3>
+          <span style="font-size: 0.8rem; color: #64748b;" id="freeLimitBadge">Free Plan: 1 active alarm</span>
+        </div>
+
+        <div class="alarms-list" id="alarmsContainer">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Pro Upsell Card (The Tester's Motivation Trigger) -->
+        <div class="pro-upsell-box" onclick="openProModal()">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="text-start">
+              <div style="font-weight: 700; color: #185a9d; font-size: 0.95rem;">
+                <i class="fa fa-crown text-warning me-1"></i> Upgrade to TimerHaven Pro
+              </div>
+              <div style="font-size: 0.82rem; color: #64748b;">
+                Unlock Unlimited Alarms, Brain Puzzle Dismiss, Binaural Sounds & Streak Charts.
+              </div>
+            </div>
+            <button class="btn btn-sm btn-primary px-3" style="border-radius: 20px; font-weight: 700;">Explore Pro</button>
+          </div>
+        </div>
+
+        <!-- FAQs -->
+        <details class="faq-section mt-4" style="background: #f8fafc; border-radius: 10px; padding: 1rem; border: 1px solid #e2e8f0;">
+          <summary style="font-weight: 700; cursor: pointer; color: #1e293b;">Frequently Asked Questions</summary>
+          <ul style="padding-left: 1.2rem; margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6; color: #475569;">
+            <li><b>Will the alarm sound if my screen locks?</b> On our native iOS and Android mobile app, background alerts and haptic notifications fire even when your screen is locked. On desktop web, keep the browser tab open.</li>
+            <li><b>Can I customize different alarms for weekends?</b> Yes! Use the day picker pills above to create separate weekday and weekend wake-up times.</li>
+            <li><b>Are my alarms saved when I close the page?</b> Yes, all configured alarms are securely stored on your local device.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ringing Modal Overlay -->
+  <div class="ringing-overlay" id="ringingOverlay">
+    <div class="ringing-modal-card">
+      <div class="ringing-icon mb-3"><i class="fa fa-bell"></i></div>
+      <h2 style="font-size: 2.2rem; font-weight: 700; color: #0f172a;" id="ringTimeDisplay">07:00 AM</h2>
+      <p style="font-size: 1.25rem; font-weight: 600; color: #ef4444; margin-bottom: 2rem;" id="ringLabelDisplay">Wake Up!</p>
+      
+      <div class="d-grid gap-2">
+        <button type="button" class="btn btn-danger btn-lg py-3" style="font-weight: 700; border-radius: 12px; font-size: 1.2rem;" onclick="dismissAlarm()">
+          <i class="fa fa-check me-2"></i> Dismiss Alarm
+        </button>
+        <button type="button" class="btn btn-outline-secondary py-2" style="font-weight: 600; border-radius: 12px;" onclick="snoozeActiveAlarm()">
+          <i class="fa fa-clock me-1"></i> Snooze (<span id="snoozeMinutesText">5</span> min)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pro Upgrade Modal -->
+  <div class="modal fade" id="proModal" tabindex="-1" aria-labelledby="proModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 20px; overflow: hidden; border: none; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+        <div class="modal-header text-white" style="background: linear-gradient(135deg, #185a9d 0%, #43cea2 100%); padding: 1.5rem;">
+          <div>
+            <h5 class="modal-title fw-bold" id="proModalLabel"><i class="fa fa-crown text-warning me-2"></i> TimerHaven Pro</h5>
+            <p class="mb-0 small opacity-90">Supercharge your daily focus and routine mastery.</p>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <p class="text-muted small mb-3">Upgrade from our free tier to unlock power tools designed for heavy sleepers, students, and deep-work professionals:</p>
+          
+          <ul class="list-unstyled mb-4" style="line-height: 2;">
+            <li><i class="fa fa-check-circle text-success me-2"></i> <strong>Unlimited Active Alarms</strong> (vs 1 on Free plan)</li>
+            <li><i class="fa fa-check-circle text-success me-2"></i> <strong>Math Puzzle Dismiss Mode</strong> (guaranteed wake-up)</li>
+            <li><i class="fa fa-check-circle text-success me-2"></i> <strong>15+ HD Focus Soundscapes</strong> (Binaural beats & Lo-Fi)</li>
+            <li><i class="fa fa-check-circle text-success me-2"></i> <strong>Weekly Focus Analytics & Heatmaps</strong></li>
+            <li><i class="fa fa-check-circle text-success me-2"></i> <strong>AMOLED Pitch Black Theme</strong> & Custom App Icons</li>
+            <li><i class="fa fa-check-circle text-success me-2"></i> <strong>Cloud Backup</strong> & multi-device sync</li>
+          </ul>
+
+          <div class="p-3 rounded-3 text-center mb-3" style="background: #f1f5f9; border: 1px solid #cbd5e1;">
+            <div class="text-muted small fw-bold text-uppercase">Early Supporter Access</div>
+            <div style="font-size: 1.8rem; font-weight: 800; color: #185a9d;">$1.99 <span style="font-size: 0.9rem; font-weight: 500; color: #64748b;">/ month</span> <span style="font-size: 1rem; color: #94a3b8; font-weight: 400;">or</span> $14.99 <span style="font-size: 0.9rem; font-weight: 500; color: #64748b;">lifetime</span></div>
+            <div class="small text-success fw-bold"><i class="fa fa-tag me-1"></i> 100% Ad-Free & Guaranteed Updates</div>
+          </div>
+
+          <a href="/support.html" class="btn btn-primary w-100 py-3 fw-bold" style="border-radius: 12px; background: linear-gradient(135deg, #185a9d 0%, #43cea2 100%); border: none;">
+            Get TimerHaven Pro
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO Content Section -->
+  <section class="seo-content mt-5" dir="ltr" style="max-width: 900px; margin: 2rem auto; padding: 2.5rem; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); font-family: sans-serif; text-align: left;">
+    <h2 style="color: #185a9d; font-size: 1.75rem; font-weight: 700; margin-bottom: 1.25rem; border-bottom: 3px solid #f0f7ff; padding-bottom: 0.5rem;">The Ultimate Distraction-Free Online Alarm Clock</h2>
+    <p style="line-height: 1.8; color: #4b5563; font-size: 1.05rem;">
+      TimerHaven's <strong>Online Alarm Clock</strong> is designed for individuals who demand punctuality without intrusive advertising, noisy paywalls, or privacy-invasive tracking. Whether you need a gentle morning wake-up call, a scheduled medication reminder, or a firm stopping alarm for your deep work sessions, our alarm clock delivers rock-solid reliability right in your browser and on mobile.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+      <div>
+        <h3 style="color: #1e40af; font-size: 1.15rem; font-weight: 600;">Custom Sound Synthesis</h3>
+        <p style="color: #4b5563; line-height: 1.6; font-size: 0.95rem;">
+          Using the modern Web Audio API, our alarms generate pure, pleasant harmonic tones directly inside your device with zero audio file buffering delays.
+        </p>
+      </div>
+      <div>
+        <h3 style="color: #1e40af; font-size: 1.15rem; font-weight: 600;">Full Mobile Synchronization</h3>
+        <p style="color: #4b5563; line-height: 1.6; font-size: 0.95rem;">
+          TimerHaven pairs seamlessly with our iOS and Android apps, bridging directly into device haptic motors and native notification channels so you never miss an alert.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Footer -->
+  <nav class="th-page-nav" aria-label="Home / Back" style="max-width:1100px;margin:2rem auto 8px;padding:8px 16px 0;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="/" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:1px solid currentColor;text-decoration:none;font-size:14px;opacity:.85">&#8962; Home</a>
+    <a href="/pomodoro.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:1px solid currentColor;text-decoration:none;font-size:14px;opacity:.85">&#9201; Pomodoro</a>
+    <a href="/timer.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:1px solid currentColor;text-decoration:none;font-size:14px;opacity:.85">&#9200; Task Timer</a>
+    <a href="/stopwatch.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;border:1px solid currentColor;text-decoration:none;font-size:14px;opacity:.85">&#9202; Stopwatch</a>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/tool-toolbar.js"></script>
+
+  <script>
+    // --- Audio Context Synthesis Engine ---
+    let audioCtx = null;
+    let alarmSoundInterval = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type, duration, gainValue = 0.3) {
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(gainValue, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {
+        console.error('Audio play error:', e);
+      }
+    }
+
+    function playSoundSequence(soundType) {
+      if (soundType === 'chimes') {
+        playTone(523.25, 'sine', 0.6, 0.4); // C5
+        setTimeout(() => playTone(659.25, 'sine', 0.6, 0.4), 160); // E5
+        setTimeout(() => playTone(783.99, 'sine', 0.8, 0.4), 320); // G5
+        setTimeout(() => playTone(1046.50, 'sine', 1.2, 0.35), 480); // C6
+      } else if (soundType === 'beep') {
+        playTone(1000, 'square', 0.15, 0.3);
+        setTimeout(() => playTone(1000, 'square', 0.15, 0.3), 200);
+        setTimeout(() => playTone(1000, 'square', 0.15, 0.3), 400);
+      } else if (soundType === 'melody') {
+        playTone(440, 'triangle', 0.3, 0.4); // A4
+        setTimeout(() => playTone(554.37, 'triangle', 0.3, 0.4), 180); // C#5
+        setTimeout(() => playTone(659.25, 'triangle', 0.5, 0.4), 360); // E5
+      } else if (soundType === 'radar') {
+        playTone(880, 'sawtooth', 0.18, 0.35);
+        setTimeout(() => playTone(1320, 'sawtooth', 0.22, 0.35), 180);
+      }
+    }
+
+    function testSoundPreview() {
+      const type = document.getElementById('alarmSound').value;
+      playSoundSequence(type);
+    }
+
+    // --- State & Storage ---
+    const STORAGE_KEY = 'timerhaven_alarms_v1';
+    let alarms = [];
+    let activeRingingAlarm = null;
+
+    function loadAlarms() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        alarms = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        alarms = [];
+      }
+      renderAlarmsList();
+    }
+
+    function saveAlarms() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(alarms));
+      } catch (e) {}
+      renderAlarmsList();
+    }
+
+    // --- UI Clock Update Loop ---
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const hours12 = String(hours % 12 || 12).padStart(2, '0');
+
+      const timeStr = `${hours12}:${minutes}:${seconds} ${ampm}`;
+      document.getElementById('liveClockDisplay').textContent = timeStr;
+
+      const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+      document.getElementById('liveDateDisplay').textContent = now.toLocaleDateString(undefined, options);
+
+      // Check Alarms
+      checkAlarmsTrigger(now);
+      updateCountdowns(now);
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // --- Time Picker & Day Selectors ---
+    let currentAmPm = 'AM';
+    function toggleAmPm() {
+      currentAmPm = currentAmPm === 'AM' ? 'PM' : 'AM';
+      const btn = document.getElementById('ampmBtn');
+      btn.textContent = currentAmPm;
+    }
+
+    function setQuickAlarm(minutesToAdd) {
+      const target = new Date(Date.now() + minutesToAdd * 60000);
+      let h = target.getHours();
+      const m = target.getMinutes();
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+
+      document.getElementById('alarmHour').value = String(h).padStart(2, '0');
+      document.getElementById('alarmMinute').value = String(m).padStart(2, '0');
+      currentAmPm = ampm;
+      document.getElementById('ampmBtn').textContent = ampm;
+    }
+
+    // Day Pills
+    document.querySelectorAll('.day-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        pill.classList.toggle('active');
+      });
+    });
+
+    function setDayPreset(mode) {
+      document.querySelectorAll('.day-pill').forEach(pill => {
+        const day = parseInt(pill.getAttribute('data-day'), 10);
+        if (mode === 'all') {
+          pill.classList.add('active');
+        } else if (mode === 'weekdays') {
+          if (day >= 1 && day <= 5) pill.classList.add('active');
+          else pill.classList.remove('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+    }
+
+    function getSelectedDays() {
+      const active = [];
+      document.querySelectorAll('.day-pill.active').forEach(p => {
+        active.push(parseInt(p.getAttribute('data-day'), 10));
+      });
+      return active;
+    }
+
+    // --- Save & Manage Alarms ---
+    function saveNewAlarm() {
+      // Free plan allows 1 active alarm
+      const activeCount = alarms.filter(a => a.enabled).length;
+      if (activeCount >= 1) {
+        openProModal();
+        return;
+      }
+
+      let hour = parseInt(document.getElementById('alarmHour').value, 10);
+      let minute = parseInt(document.getElementById('alarmMinute').value, 10);
+      if (isNaN(hour) || hour < 1 || hour > 12) hour = 7;
+      if (isNaN(minute) || minute < 0 || minute > 59) minute = 0;
+
+      // Convert to 24h
+      let hour24 = hour;
+      if (currentAmPm === 'PM' && hour !== 12) hour24 += 12;
+      if (currentAmPm === 'AM' && hour === 12) hour24 = 0;
+
+      const label = document.getElementById('alarmLabel').value.trim() || 'Alarm';
+      const days = getSelectedDays();
+      const sound = document.getElementById('alarmSound').value;
+      const snoozeMin = parseInt(document.getElementById('alarmSnooze').value, 10) || 5;
+
+      const newAlarm = {
+        id: 'alarm_' + Date.now(),
+        hour24: hour24,
+        minute: minute,
+        hour12: hour,
+        ampm: currentAmPm,
+        label: label,
+        days: days, // array of 0-6
+        sound: sound,
+        snoozeMin: snoozeMin,
+        enabled: true,
+        lastTriggeredDate: null
+      };
+
+      alarms.push(newAlarm);
+      saveAlarms();
+    }
+
+    function toggleAlarm(id) {
+      const item = alarms.find(a => a.id === id);
+      if (item) {
+        item.enabled = !item.enabled;
+        saveAlarms();
+      }
+    }
+
+    function deleteAlarm(id) {
+      alarms = alarms.filter(a => a.id !== id);
+      saveAlarms();
+    }
+
+    // --- Render Alarms List ---
+    function renderAlarmsList() {
+      const container = document.getElementById('alarmsContainer');
+      document.getElementById('alarmCountBadge').textContent = alarms.length;
+
+      if (alarms.length === 0) {
+        container.innerHTML = `
+          <div class="text-center p-4 border rounded-3 text-muted" style="background:#f8fafc;">
+            <i class="fa fa-bell-slash mb-2" style="font-size: 1.8rem; color:#cbd5e1;"></i>
+            <p class="mb-0 fw-semibold">No alarms scheduled.</p>
+            <small>Set a time above to get started.</small>
+          </div>
+        `;
+        return;
+      }
+
+      const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      container.innerHTML = alarms.map(a => {
+        const timeDisplay = `${String(a.hour12).padStart(2, '0')}:${String(a.minute).padStart(2, '0')} ${a.ampm}`;
+        let daysText = 'Once';
+        if (a.days && a.days.length === 7) daysText = 'Every Day';
+        else if (a.days && a.days.length === 5 && !a.days.includes(0) && !a.days.includes(6)) daysText = 'Weekdays';
+        else if (a.days && a.days.length > 0) daysText = a.days.map(d => dayNames[d]).join(', ');
+
+        return `
+          <div class="alarm-item-card ${a.enabled ? '' : 'disabled'}" id="${a.id}">
+            <div>
+              <div class="alarm-item-time">${timeDisplay} <span class="alarm-item-countdown" id="cd_${a.id}">calculating...</span></div>
+              <div class="alarm-item-meta"><i class="fa fa-tag me-1"></i>${escapeHtml(a.label)} • <i class="fa fa-repeat me-1"></i>${daysText}</div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <div class="form-check form-switch m-0">
+                <input class="form-check-input" type="checkbox" style="cursor:pointer; width:2.5em; height:1.3em;" ${a.enabled ? 'checked' : ''} onchange="toggleAlarm('${a.id}')">
+              </div>
+              <button class="btn btn-outline-danger btn-sm" onclick="deleteAlarm('${a.id}')" title="Delete Alarm" style="border-radius:8px;">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+    }
+
+    // --- Countdown Calculations ---
+    function updateCountdowns(now) {
+      alarms.forEach(a => {
+        const el = document.getElementById(`cd_${a.id}`);
+        if (!el) return;
+        if (!a.enabled) {
+          el.textContent = 'Off';
+          el.style.background = '#e2e8f0';
+          el.style.color = '#64748b';
+          return;
+        }
+
+        let diffMs = getNextAlarmTime(a, now) - now.getTime();
+        if (diffMs <= 0) diffMs = 0;
+        const totalMinutes = Math.floor(diffMs / 60000);
+        const hours = Math.floor(totalMinutes / 60);
+        const mins = totalMinutes % 60;
+        
+        el.textContent = `In ${hours}h ${mins}m`;
+        el.style.background = '#dbeafe';
+        el.style.color = '#1d4ed8';
+      });
+    }
+
+    function getNextAlarmTime(a, now) {
+      const target = new Date(now.getFullYear(), now.getMonth(), now.getDate(), a.hour24, a.minute, 0, 0);
+      if (target <= now) {
+        target.setDate(target.getDate() + 1);
+      }
+      if (a.days && a.days.length > 0 && a.days.length < 7) {
+        while (!a.days.includes(target.getDay())) {
+          target.setDate(target.getDate() + 1);
+        }
+      }
+      return target.getTime();
+    }
+
+    // --- Alarm Trigger & Audio Loop ---
+    function checkAlarmsTrigger(now) {
+      if (activeRingingAlarm) return; // already ringing
+
+      const curH = now.getHours();
+      const curM = now.getMinutes();
+      const curS = now.getSeconds();
+      const curDay = now.getDay();
+      const todayDateStr = now.toISOString().slice(0, 10);
+
+      alarms.forEach(a => {
+        if (!a.enabled) return;
+        if (a.hour24 === curH && a.minute === curM && curS < 2) {
+          if (a.days && a.days.length > 0 && !a.days.includes(curDay)) return;
+          if (a.lastTriggeredDate === todayDateStr) return;
+
+          a.lastTriggeredDate = todayDateStr;
+          triggerAlarmRing(a);
+        }
+      });
+    }
+
+    function triggerAlarmRing(alarm) {
+      activeRingingAlarm = alarm;
+      const overlay = document.getElementById('ringingOverlay');
+      const timeStr = `${String(alarm.hour12).padStart(2, '0')}:${String(alarm.minute).padStart(2, '0')} ${alarm.ampm}`;
+      document.getElementById('ringTimeDisplay').textContent = timeStr;
+      document.getElementById('ringLabelDisplay').textContent = alarm.label || 'Alarm!';
+      document.getElementById('snoozeMinutesText').textContent = alarm.snoozeMin || 5;
+      overlay.style.display = 'flex';
+
+      // Start continuous audio pulse
+      playSoundSequence(alarm.sound || 'chimes');
+      alarmSoundInterval = setInterval(() => {
+        playSoundSequence(alarm.sound || 'chimes');
+      }, 1500);
+
+      // Trigger Mobile App Native Bridge Notifications
+      if (window.TimerHavenApp) {
+        window.TimerHavenApp.notifyTimerEnd(alarm.label || 'TimerHaven Alarm', `Time's up! (${timeStr})`);
+        window.TimerHavenApp.triggerHaptic('warning');
+      }
+    }
+
+    function dismissAlarm() {
+      if (alarmSoundInterval) clearInterval(alarmSoundInterval);
+      alarmSoundInterval = null;
+      document.getElementById('ringingOverlay').style.display = 'none';
+      activeRingingAlarm = null;
+    }
+
+    function snoozeActiveAlarm() {
+      if (!activeRingingAlarm) return;
+      const snoozeMins = activeRingingAlarm.snoozeMin || 5;
+      dismissAlarm();
+
+      // Schedule one-time snooze alarm
+      const snoozeTarget = new Date(Date.now() + snoozeMins * 60000);
+      let h = snoozeTarget.getHours();
+      let m = snoozeTarget.getMinutes();
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      let h12 = h % 12 || 12;
+
+      const snoozed = {
+        id: 'snooze_' + Date.now(),
+        hour24: h,
+        minute: m,
+        hour12: h12,
+        ampm: ampm,
+        label: `[Snooze] ${activeRingingAlarm.label}`,
+        days: [],
+        sound: activeRingingAlarm.sound,
+        snoozeMin: 5,
+        enabled: true,
+        lastTriggeredDate: null
+      };
+
+      alarms.push(snoozed);
+      saveAlarms();
+    }
+
+    // --- Pro Modal Trigger ---
+    let proModalInstance = null;
+    function openProModal() {
+      if (!proModalInstance) {
+        proModalInstance = new bootstrap.Modal(document.getElementById('proModal'));
+      }
+      proModalInstance.show();
+    }
+
+    // Initialize
+    loadAlarms();
+  </script>
+</body>
+</html>
