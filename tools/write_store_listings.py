@@ -61,8 +61,9 @@ Pomodoro, countdown, stopwatch, task timer, calendar, habits, meeting planner, f
 
 Free, with every feature included.""",
         "keywords": [
-            "pomodoro", "timer", "countdown", "stopwatch", "world clock",
-            "habit tracker", "notes", "focus", "study",
+            "pomodoro", "countdown", "stopwatch", "interval", "study",
+            "adhd", "productivity", "flow", "habit", "clock",
+            "alarm", "task", "lap", "rest",
         ],
         "supportUrl": "https://timerhaven.com/contact.html",
         "marketingUrl": "https://timerhaven.com",
@@ -160,39 +161,39 @@ Gratis, con todas las funciones incluidas.""",
     "fr-FR": {
         "title": "TimerHaven : minuteurs",
         "subtitle": "15 outils, sans compte",
-        "description": """TimerHaven réunit 15 outils de productivité dans une seule application : sans compte, sans publicité et sans abonnement.
+        "description": """TimerHaven réunit 15 outils de productivité dans une seule application — sans compte, sans publicité, sans abonnement.
 
 POMODORO ET MINUTEURS
-• Minuteur Pomodoro avec durées de travail et de pause réglables
+• Minuteur Pomodoro avec intervalles de travail et de pause réglables
 • Compte à rebours pour la cuisine, les examens et les échéances
-• Chronomètre avec temps intermédiaires
-• Minuteur de tâches pour des blocs de concentration
+• Chronomètre avec temps au tour
+• Minuteur de tâches pour les sessions de travail concentré
 
 ORGANISATION ET CONCENTRATION
 • Calendrier avec une note pour chaque jour
-• Suivi des habitudes pour vos routines
+• Suivi des habitudes pour votre routine quotidienne
 • Planificateur de réunions sur plusieurs fuseaux horaires
-• Musique de concentration
-• Notes enregistrées au fil de la frappe
+• Musique de concentration pour le travail en profondeur
+• Prise de notes enregistrée au fur et à mesure de la saisie
 
 AU QUOTIDIEN
-• Horloge mondiale de nombreuses villes
+• Horloge mondiale pour de nombreuses villes
 • Convertisseur de devises
 • Convertisseur d'unités
 • Générateur de mots de passe
 • Historique du presse-papiers
-• Météo de votre position
+• Météo pour votre position
 
 FONCTIONNE HORS LIGNE
-Tous les outils tournent sur votre appareil : minuteurs, notes et habitudes continuent de fonctionner sans connexion.
+Tous les outils fonctionnent sur votre appareil — minuteurs, notes et habitudes restent utilisables sans connexion.
 
-PRIVÉE PAR CONCEPTION
-Pas d'inscription, pas de profil. Vos notes, habitudes et calendrier restent sur votre appareil et rien n'est suivi.
+CONÇU POUR LA CONFIDENTIALITÉ
+Aucune inscription, aucun profil. Vos notes, habitudes et calendrier restent sur votre appareil ; rien n'est suivi.
 
-QUINZE OUTILS, UNE APP
+QUINZE OUTILS, UNE APPLICATION
 Pomodoro, compte à rebours, chronomètre, minuteur de tâches, calendrier, habitudes, planificateur de réunions, musique, notes, horloge mondiale, devises, unités, mots de passe, presse-papiers, météo.
 
-Gratuit, toutes les fonctions incluses.""",
+Gratuit, avec toutes les fonctionnalités incluses.""",
         "keywords": [
             "pomodoro", "minuteur", "compte à rebours", "chronomètre",
             "horloge mondiale", "habitudes", "notes",
@@ -204,23 +205,23 @@ Gratuit, toutes les fonctions incluses.""",
     "ru": {
         "title": "TimerHaven: таймеры",
         "subtitle": "15 инструментов без аккаунта",
-        "description": """TimerHaven собирает 15 инструментов продуктивности в одном приложении — без аккаунта, рекламы и подписки.
+        "description": """TimerHaven объединяет 15 инструментов продуктивности в одном приложении — без учетной записи, без рекламы и без подписки.
 
-POMODORO И ТАЙМЕРЫ
-• Таймер Pomodoro с настраиваемыми интервалами работы и отдыха
-• Таймер обратного отсчёта для кухни, экзаменов и дедлайнов
+ПОМОДОРО И ТАЙМЕРЫ
+• Таймер Помодоро с настройкой интервалов работы и отдыха
+• Таймер обратного отсчета для кухни, экзаменов и дедлайнов
 • Секундомер с кругами
-• Таймер задач для блоков концентрации
+• Таймер задач для сфокусированной работы
 
 ПЛАНИРОВАНИЕ И ФОКУС
 • Календарь с заметкой на каждый день
-• Трекер привычек для ежедневных ритуалов
-• Планировщик встреч в разных часовых поясах
-• Музыка для концентрации
-• Заметки, которые сохраняются по ходу ввода
+• Трекер привычек для ежедневной рутины
+• Планировщик встреч для разных часовых поясов
+• Фоновая музыка для глубокой концентрации
+• Заметки, которые сохраняются сразу при вводе
 
 НА КАЖДЫЙ ДЕНЬ
-• Мировое время для многих городов
+• Мировое время для множества городов
 • Конвертер валют
 • Конвертер единиц
 • Генератор паролей
@@ -228,15 +229,15 @@ POMODORO И ТАЙМЕРЫ
 • Погода для вашего местоположения
 
 РАБОТАЕТ ОФЛАЙН
-Все инструменты работают на устройстве, поэтому таймеры, заметки и привычки доступны и без соединения.
+Все инструменты запускаются на вашем устройстве, поэтому таймеры, заметки и привычки работают без интернета.
 
-ПРИВАТНОСТЬ ПО ЗАМЫСЛУ
-Без регистрации и профиля. Заметки, привычки и календарь остаются на вашем устройстве, и ничего не отслеживается.
+КОНФИДЕНЦИАЛЬНОСТЬ
+Без регистрации и профилей. Ваши заметки, привычки и календарь остаются только на вашем устройстве, ничего не отслеживается.
 
-ПЯТНАДЦАТЬ ИНСТРУМЕНТОВ, ОДНО ПРИЛОЖЕНИЕ
-Pomodoro, обратный отсчёт, секундомер, таймер задач, календарь, привычки, планировщик встреч, музыка, заметки, мировое время, валюты, единицы, пароли, буфер обмена, погода.
+15 ИНСТРУМЕНТОВ В ОДНОМ ПРИЛОЖЕНИИ
+Помодоро, обратный отсчет, секундомер, таймер задач, календарь, привычки, планировщик встреч, музыка, заметки, мировое время, валюты, единицы, пароли, буфер обмена, погода.
 
-Бесплатно, все функции включены.""",
+Бесплатно, со всеми включенными функциями.""",
         "keywords": [
             "помодоро", "таймер", "секундомер", "мировое время",
             "привычки", "заметки", "фокус",

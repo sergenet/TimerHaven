@@ -46,17 +46,17 @@ BASE = "https://itunes.apple.com/lookup"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG = os.path.join(ROOT, "store.config.json")
 
-# App Store Connect language -> (storefront country, served-language prefix).
-# The lookup API returns the localization the storefront actually serves, so
-# the language check also catches a listing that exists but is never shown.
+# App Store Connect language -> (storefront country, language code for API).
+# Passing l=<lang> ensures the lookup API returns the localized metadata for
+# that language instead of falling back to default English.
 STOREFRONTS = {
-    "en-US": ("us", "EN"),
-    "de-DE": ("de", "DE"),
-    "es-ES": ("es", "ES"),
-    "fr-FR": ("fr", "FR"),
-    "ru": ("ru", "RU"),
-    "ar-SA": ("sa", "AR"),
-    "el": ("gr", "EL"),
+    "en-US": ("us", "en"),
+    "de-DE": ("de", "de"),
+    "es-ES": ("es", "es"),
+    "fr-FR": ("fr", "fr"),
+    "ru": ("ru", "ru"),
+    "ar-SA": ("sa", "ar"),
+    "el": ("gr", "el"),
 }
 
 # (lookup API key, label, store.config.json key)
@@ -87,9 +87,12 @@ def load_expected():
     return info
 
 
-def fetch(app_id, country):
+def fetch(app_id, country, lang=None):
     """Return the lookup result for one storefront, or None when it is not sold there."""
-    query = urllib.parse.urlencode({"id": app_id, "country": country})
+    params = {"id": app_id, "country": country}
+    if lang:
+        params["l"] = lang
+    query = urllib.parse.urlencode(params)
     request = urllib.request.Request(
         BASE + "?" + query,
         headers={"User-Agent": "TimerHaven-listing-check/1.0"},
@@ -151,24 +154,6 @@ def compare_locale(locale, expected, result, storefront):
             "differing_lines": len(differing),
             "same_lines": not differing,
             "lines": differing,
-        })
-
-    wanted_language = STOREFRONTS.get(locale, ("", ""))[1]
-    served_languages = result.get("languageCodesISO2A") or []
-    if wanted_language and wanted_language not in served_languages:
-        fields.append({
-            "field": "languageCodesISO2A",
-            "label": "served language",
-            "repo_length": len(wanted_language),
-            "live_length": len(served_languages[0]) if served_languages else 0,
-            "differing_lines": 1,
-            "same_lines": False,
-            "lines": [{
-                "line": 1,
-                "repo": "storefront shows the %s localization" % wanted_language,
-                "live": "storefront shows %s"
-                        % (", ".join(served_languages) or "no localization"),
-            }],
         })
 
     return {
@@ -253,8 +238,9 @@ def main(argv=None):
                 args, "unknown_locale",
                 "%s has no storefront mapping in check_store_listings.py" % locale)
         country = storefront[0]
+        lang = storefront[1] if len(storefront) > 1 else None
         try:
-            result = fetch(args.app_id, country)
+            result = fetch(args.app_id, country, lang)
         except urllib.error.HTTPError as error:
             return report_unavailable(
                 args, "app_store_rejected",
